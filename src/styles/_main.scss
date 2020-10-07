@@ -1,0 +1,74 @@
+.top-tab-nav {
+    background: var(--color-background);
+    width:100%;
+    position: fixed;
+    height: 160px;
+    top: 0;
+    left:0;
+    right:0;
+    z-index: 1;
+}
+.section-middle {
+    background: var(--color-background-secondary);
+}
+.lg-mg-lf {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.menu li{
+    float:left;
+    list-style-type: none;
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--color-primary);
+    padding:12px;
+}
+.nav-bar div {
+    padding: 12px;
+}
+.location-text {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--color-boldlevelcolor);
+    padding: 12px;
+}
+.nav-content {
+    height:48px;
+    margin:16px 0 16px 0;
+}
+.search-input {
+    border:0;
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    background-image: url('/assets/images/ico_search.png');
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-position: left 10px center;
+    background-size: 24px 24px;
+    width:100%;
+    height:48px;
+    padding-left: 40px;
+}
+.search-input:focus {
+    outline: 0;
+    border:0;
+    border:1px solid var(--color-primary);
+}
+.signup-panel {
+    margin-top:40px;
+    margin-bottom: 20px;
+    background: var(--color-pending);
+    padding:30px;
+    border:0;
+}
+.middle-list-content {
+    background: var(--color-background-secondary);
+}
