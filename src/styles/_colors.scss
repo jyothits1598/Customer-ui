@@ -1,0 +1,25 @@
+:root{
+    --color-primary: #353FA8;
+    --color-background: white;
+    --color-background-secondary : #F2F2F2;
+    --color-background-tertiary : #f9f9f9;
+   
+    --color-typography-primary: #000000;
+    --color-typography-secondary: #6b6b6b;
+    --color-typography-tertiary: #B3B3B3;
+    
+    --color-lines-primary : #dddddd;
+    
+    --color-success : #72CC00;
+    --color-success-light : #E2FFBC;
+
+    --color-failure : #FF1212;
+    --color-failure-light : #FF1212;
+
+    --color-pending : #FFBF42;
+
+    --color-boldlevelcolor : #1a1a1a;
+}
+
+$color-typography-primary : var(--color-typography-primary);
+$color-lines-primary : var(--color-lines-primary);
