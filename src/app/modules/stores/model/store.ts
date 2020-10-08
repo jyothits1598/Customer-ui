@@ -9,8 +9,8 @@ export interface Store {
     facebookUrl: string,
 }
 
-export function readStore(data: any): Store {
-    let store: Store = {
+export function ReadStore(data: any): Store {
+    return {
         id: data.store_id,
         name: data.store_name,
         cuisine: data.cuisine_name,
@@ -20,5 +20,4 @@ export function readStore(data: any): Store {
         googleUrl: data.google_business_url,
         facebookUrl: data.facebook_url,
     };
-    return store;
 }

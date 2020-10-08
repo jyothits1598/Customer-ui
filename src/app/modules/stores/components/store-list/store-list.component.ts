@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Pagination, StorePagination } from 'src/app/shared/classes/pagination';
+import { InfiniteScrollDirective } from 'src/app/shared/directives/infinite-scroll.directive';
+import { Store } from '../../model/store';
 import { StoresDataService } from '../../services/stores-data.service';
 
 @Component({
@@ -7,11 +10,17 @@ import { StoresDataService } from '../../services/stores-data.service';
   styleUrls: ['./store-list.component.scss']
 })
 export class StoreListComponent implements OnInit {
-
-  constructor(private storeData: StoresDataService) { }
-
+  stores: Array<Store> = [];
+  pagination: StorePagination;
+  
+  @ViewChild('infiniteScroll', {read: InfiniteScrollDirective}) infiniteScroll: InfiniteScrollDirective;
+  
+  constructor(private storeData: StoresDataService,
+  ) {
+    this.pagination = new StorePagination(this.storeData.allStores.bind(storeData), this.stores);
+  }
   ngOnInit(): void {
-    this.storeData.allStores().subscribe(console.log);
+    this.pagination.getNext();
   }
 
 }

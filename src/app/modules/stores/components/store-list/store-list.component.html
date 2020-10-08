@@ -1,1 +1,6 @@
-<p>store-list works!</p>
+<ul>
+    <li *ngFor="let store of stores" style="margin: 50px 0px;">{{store|json}}</li>
+    <div *ngIf="pagination.isLoading">Loading....</div>
+</ul>
+<div infiniteScroll #infiniteScroll="infiniteScroll" (scrolled)="pagination.getNext()"></div>
+
