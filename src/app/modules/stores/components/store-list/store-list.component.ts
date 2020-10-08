@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StoresDataService } from '../../services/stores-data.service';
 
 @Component({
   selector: 'app-store-list',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StoreListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private storeData: StoresDataService) { }
 
   ngOnInit(): void {
+    this.storeData.allStores().subscribe(console.log);
   }
 
 }

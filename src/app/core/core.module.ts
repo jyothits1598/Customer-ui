@@ -6,6 +6,8 @@ import { CoreComponent } from './core.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { NavbarModule } from '../modules/navbar/navbar.module';
 import { HomeModule } from '../modules/home/home.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpHeaderInterceptor } from './interceptors/http-header';
 
 
 @NgModule({
@@ -16,6 +18,13 @@ import { HomeModule } from '../modules/home/home.module';
     NavbarModule,
     HomeModule
   ],
-  exports: [CoreComponent]
+  exports: [CoreComponent],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+        useClass: HttpHeaderInterceptor,
+        multi: true
+    }
+  ]
 })
 export class CoreModule { }
