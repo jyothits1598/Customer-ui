@@ -1,7 +1,10 @@
+import { ReadAvailability, TimeAvailability } from '../../time-availability/model/time-availability';
+
 export interface Store {
     id: number,
     name: string,
     cuisine: string,
+    openingHours: Array<TimeAvailability>
     logo: string,
     address: string,
     description: string,
@@ -14,6 +17,7 @@ export function ReadStore(data: any): Store {
         id: data.store_id,
         name: data.store_name,
         cuisine: data.cuisine_name,
+        openingHours: ReadAvailability(data.opening_hours),
         logo: data.store_logo,
         address: data.store_address,
         description: data.description,

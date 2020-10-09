@@ -1,0 +1,4 @@
+<span *ngIf="openTimings; else closed">Open {{openTimings.startTime}}-{{openTimings.endTime}}</span>
+<ng-template #closed>
+    <span>Closed</span>
+</ng-template>

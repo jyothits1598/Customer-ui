@@ -9,12 +9,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class NavbarComponent implements OnInit {
 
   constructor(
-    private _modalService: NgbModal
   ) { }
-
-  get modalService(): NgbModal {
-    return this._modalService;
-  }
   
   ngOnInit(): void {
   }

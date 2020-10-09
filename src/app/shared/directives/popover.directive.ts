@@ -19,13 +19,28 @@ export class PopoverDirective {
     private hostElement: ElementRef,
     private vCRef: ViewContainerRef) { }
 
+  // showOverLay() {
+  //   let config = new OverlayConfig();
+  //   config.hasBackdrop = true;
+  //   config.positionStrategy = this.overlay.position().flexibleConnectedTo(this.hostElement.nativeElement).withPositions([{
+  //     originX : 'start',
+  //     originY : 'bottom',
+  //     overlayX: 'center',
+  //     overlayY: 'top',
+  //   }]).withPush(false);
+  //   let overLayRef = this.overlay.create(config);
+
+  //   let tempPortal = new TemplatePortal(this.template, this.vCRef);
+  //   overLayRef.attach(tempPortal);
+  // }
+
   showOverLay() {
     let config = new OverlayConfig();
     config.hasBackdrop = true;
     config.positionStrategy = this.overlay.position().flexibleConnectedTo(this.hostElement.nativeElement).withPositions([{
-      originX : 'start',
-      originY : 'bottom',
-      overlayX: 'start',
+      originX: 'center',
+      originY: 'bottom',
+      overlayX: 'center',
       overlayY: 'top',
     }]).withPush(false);
     let overLayRef = this.overlay.create(config);
@@ -33,7 +48,6 @@ export class PopoverDirective {
     let tempPortal = new TemplatePortal(this.template, this.vCRef);
     overLayRef.attach(tempPortal);
   }
-
 
 
 }

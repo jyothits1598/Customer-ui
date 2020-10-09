@@ -1,69 +1,20 @@
-<ul>
-    <li *ngFor="let store of stores" style="margin: 50px 0px;">{{store|json}}</li>
-    <div *ngIf="pagination.isLoading">Loading....</div>
-</ul>
-<div infiniteScroll #infiniteScroll="infiniteScroll" (scrolled)="pagination.getNext()"></div>
+<div popover [template]="content">sample popover origin</div>
+
+<ng-template #content>
+    <span style="width: 200px; background-color: white;">Sample popover template</span>
+</ng-template>
 
 <div class="store-list-bg">
     <div class="container">
         <!-- <div class="lg-mg-lf"> -->
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 col-xl-4">
-                   <div class="store-cards">
-                       <div class="store-cards store-cards--header">
-                            <table>
-                                <tr>
-                                    <td valign="middle" > 
-                                        <img src="../../../../../assets/images/Rectangle 4.png" class="profile-image" />
-                                    </td>
-                                    <td style="padding-left: 8px;width:100%"> 
-                                        <table style="margin-bottom: 3px;">
-                                            <tr>
-                                                <td> <div class="store-name"> The Lamb Shop Spring Hill </div> </td>
-                                            </tr>
-                                        </table>
-                                        <span class="sub-name float-left" > 225m away </span>
-                                        <span class="sub-name float-right" > Open 9:00AM - 11:00PM  <img src="../../../../../assets/images/ico_circle_filled_small.png"></span>
-                                    </td>
-                                </tr>
-                            </table>
-                       </div>
-                       <div class="well main-form"> 
-                            <div class="store-image">
-                                <img src="../../../../../assets/images/Rectangle 274.png">
-                            </div>
-                       </div>
-                       <div class="content-card">
-                          <div class="row">
-                              <div class="col-md-12">
-                                <span>
-                                    <img src="../../../../../assets/images/ico_social_facebook_small.png">
-                                    <span class="user-facebook"> <b> Steve Anderson </b> and 125k others </span>
-                                </span>
-                                <span style="padding-left: 10px;">
-                                    <span class="user-facebook"> 4.5 &nbsp;<img src="../../../../../assets/images/ico_star_small.png"></span>
-                                </span>
-                            </div>
-                          </div>
-                       </div>
-                       <div class="chating-card">
-                           <div class="d-flex justify-content-between chating-card--chat">
-                                <span>
-                                    <ul class="chat-icons">
-                                        <li> <img src="../../../../../assets/images/heart.png"> </li>
-                                        <li> <img src="../../../../../assets/images/chat.png"> </li>
-                                        <li> <img src="../../../../../assets/images/share.png"> </li>
-                                    </ul>
-                                </span> 
-                                <span>
-                                    <p class="comment-text"><span> 9 </span> comments </p>
-                                </span>
-                           </div>
-                       </div>
-                   </div>
-                   <br><br>
-                </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 col-xl-4">
+                <app-store-card [store]="store" *ngFor="let store of stores"></app-store-card>
+                <div *ngIf="pagination.isLoading">Loading....</div>
+                <div infiniteScroll #infiniteScroll="infiniteScroll" (scrolled)="pagination.getNext()"></div>
+                <br><br>
             </div>
+        </div>
         <!-- </div> -->
     </div>
 </div>
