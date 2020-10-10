@@ -1,0 +1,97 @@
+.store-search {
+    position: relative;
+
+    &__input {
+        border: 0;
+        font-family: DM Sans;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 24px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: left 10px center;
+        background-size: 24px 24px;
+        width: 100%;
+        height: 64px;
+        padding-left: 40px;
+
+        // &:focus ~ .store-search__back-icon {
+        //     opacity: 1;
+        //     cursor: pointer;
+        // }
+
+        // &:focus ~ .store-search__search-icon {
+        //     opacity: 0;
+        // }
+    }
+
+    &__input:focus {
+        border: 0;
+        outline: 0;
+        width: 100%;
+        font-size: 16px;
+        background: var(--color-background-tertiary);
+        padding-left: 45px;
+        line-height: 24px;
+        font-style: normal;
+        font-weight: normal;
+        color: var(--color-boldlevelcolor);
+        height: 64px;
+    }
+
+    &__icon{
+        top: 16px;
+        left: 0px;
+        position: absolute;
+    }
+
+    // &__back-icon {
+    //     opacity: 0;
+    //     top: 16px;
+    //     left: 0px;
+    //     position: absolute;
+    // }
+
+    // &__search-icon {
+    //     opacity: 1;
+    //     top: 16px;
+    //     left: 0px;
+    //     position: absolute;
+    // }
+}
+
+.input-border {
+    border: 0;
+    outline: 0;
+    width: 100%;
+    font-size: 16px;
+    background: var(--color-background-tertiary);
+    padding-left: 45px;
+    line-height: 24px;
+    font-style: normal;
+    font-weight: normal;
+    color: var(--color-boldlevelcolor);
+    height: 64px;
+}
+
+.store-search-input {
+    border: 0;
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    background-image: url("/assets/images/ico_search.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left 10px center;
+    background-size: 24px 24px;
+    width: 100%;
+    height: 64px;
+    padding-left: 40px;
+}
+
+.store-search-input:focus {
+    background-image: url("/assets/images/ico_arrow_left.png");
+}

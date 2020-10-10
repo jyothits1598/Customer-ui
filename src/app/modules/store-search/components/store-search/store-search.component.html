@@ -1,0 +1,40 @@
+<div class="search-stores-popup" id="search_list">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- <div class="store-search" style="margin-bottom:16px;">
+                    <input type="text" class="store-search__input" placeholder="What would you like to eat?">
+                    <img src="/assets/images/ico_arrow_left.png" class="store-search__back-icon" (click)="handleClick()">
+                    <img src="/assets/images/ico_search.png" class="store-search__search-icon">
+                    <div class="store-search-background">this is the background</div>
+                </div> -->
+                <div class="auto-fill">
+                    <incremental-search [apiFunction]="apiFunction" [accessorFunction]="accessor">
+                        <!-- (onSelect)="handleSelection($event)"> -->
+                        <!-- <input #itemSearch placeholder="Start typing name, location, keyword or cuisine"
+                            class="form-control form-input search" /> -->
+                        <div class="store-search" style="margin-bottom:16px;">
+                            <input type="text" (focus)="searchActivated = true" (blur)="searchActivated = false"
+                                #itemSearch class="store-search__input" placeholder="What would you like to eat?">
+                            <img *ngIf="searchActivated; else searchIcon" src="/assets/images/ico_arrow_left.png" class="store-search__icon"
+                                (click)="handleClick()">
+                                <ng-template #searchIcon>
+                                    <img src="/assets/images/ico_search.png" class="store-search__icon">
+                                </ng-template>
+                        </div>
+                        <ng-template #itemTemplate let-option="option">
+                            <li (click)="itemSearch.value = option.store_name" class="auto-fill__list__item">
+                                {{option.store_name}}
+                            </li>
+                        </ng-template>
+                        <ng-template #noItemsTemplate>
+                            <li class="auto-fill__list__item">
+                                No stores found
+                            </li>
+                        </ng-template>
+                    </incremental-search>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
