@@ -7,7 +7,13 @@ const routes: Routes = [
   { path: 'store-details', component: StoreDetailsComponent},
   {
     path: '',
-    component: LayoutComponent
+    component: LayoutComponent,
+    children: [
+      {
+        path: 'restaurants',
+        loadChildren: () => import('src/app/modules/home/home.module').then(m => m.HomeModule)
+      }
+    ]
   }
 ];
 

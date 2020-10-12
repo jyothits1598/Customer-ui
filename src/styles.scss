@@ -4,7 +4,7 @@
 @import "./styles/base";
 @import "./styles/main";
 @import "./styles/cards";
-// @import '~@angular/cdk/overlay-prebuilt.css';
+@import '~@angular/cdk/overlay-prebuilt.css';
 .modal-content {
     border: 0 !important;
     border-radius: 0 !important;

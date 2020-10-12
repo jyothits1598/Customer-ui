@@ -5,7 +5,7 @@
                 <div style="line-height: 48px;">
                     <img src="./../../../../../assets/svg/Logo.svg">
                 </div>
-                <div class="location-text" (click)="modalService.open(searchModal, { top: true, size: 'sm' });">
+                <div class="location-text">
                     All food nearby
                     <span style="cursor: pointer;"><b class="location"> Tarragindi </b> &nbsp;<img src="../../../../../assets/images/ico_dropdown.png" ></span>
                 </div>
@@ -19,14 +19,18 @@
             </div>
         </div>
         <div class="col-md-12">
-            <input type="search" class="search-input" (click)="showsearchstoreList()" placeholder="What would you like to eat?" >
+            <!-- <input type="search" class="search-input" (click)="showsearchstoreList()" placeholder="What would you like to eat?" > -->
+            
         </div>
     </div>        
 </div>
 
+<ng-template #sample>
+    <div >sample</div>
+</ng-template>
 
 <!--------------------------- popup search items ------------------->
-<div class="search-stores-popup" id="search_list" style="display:none"> 
+<!-- <div class="search-stores-popup" id="search_list" style="display:none"> 
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -44,10 +48,10 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!--------------------------- popup search items end ------------------->
 
-<ng-template #searchModal let-modal>
+<ng-template #searchModal>
     <div class="modal-body" style="padding: 0;">
         <div class="row">
             <div class="col-md-12">

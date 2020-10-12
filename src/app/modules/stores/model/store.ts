@@ -1,7 +1,10 @@
+import { ReadAvailability, TimeAvailability } from '../../time-availability/model/time-availability';
+
 export interface Store {
     id: number,
     name: string,
     cuisine: string,
+    openingHours: Array<TimeAvailability>
     logo: string,
     address: string,
     description: string,
@@ -9,16 +12,16 @@ export interface Store {
     facebookUrl: string,
 }
 
-export function readStore(data: any): Store {
-    let store: Store = {
+export function ReadStore(data: any): Store {
+    return {
         id: data.store_id,
         name: data.store_name,
         cuisine: data.cuisine_name,
+        openingHours: ReadAvailability(data.opening_hours),
         logo: data.store_logo,
         address: data.store_address,
         description: data.description,
         googleUrl: data.google_business_url,
         facebookUrl: data.facebook_url,
     };
-    return store;
 }
