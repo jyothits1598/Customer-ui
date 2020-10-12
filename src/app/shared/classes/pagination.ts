@@ -1,60 +1,59 @@
-import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { finalize, map, tap } from 'rxjs/operators';
 import { ReadStore, Store } from 'src/app/modules/stores/model/store';
+import { StoreFilter } from 'src/app/modules/stores/model/StoreFilter';
 import { inherits } from 'util';
-
-// export class Pagination<T>{
-//     currentPage: number;
-//     paginationSource: (query: string) => Observable<any>;
-//     collection: Array<T>;
-//     nextPageQuery: string;
-//     constructor(source: (string) => Observable<any>, collection: Array<T>) {
-//         this.paginationSource = source;
-//         this.collection = collection;
-//         this.paginationSource(null).subscribe(
-//             (resp)=>{
-//                 this.nextPageQuery = resp
-//             }
-//         );
-//     }
-// }DDDD
 
 export class Pagination<T>{
     currentPage: number;
-    collection: Array<T>;
-    source: (query: string) => Observable<any>;
-    nextPageQuery: string;
-    getNext() { };
+    data: Array<T> = [];
+    source: (...args: any[]) => Observable<any>;
+    getNext(): Observable<Array<T>> { return of([]) };
     onEnd: () => void;
     hasEnded = false;
     isLoading: boolean = false;
+    currentPage: number = 1;
 
-    setPaginationData(data) {
-        this.nextPageQuery = data.next_page_url;
+    setPaginationData(resp) {
+        this.currentPage += 1;
+        if(!resp.data.next_page_url) this.hasEnded = true;
     }
-    constructor(source: (string) => Observable<any>, collection: Array<T>) {
+    constructor(source) {
         this.source = source;
-        this.collection = collection;
     }
 }
 
 export class StorePagination extends Pagination<Store>{
-    constructor(source: (string) => Observable<any>, collection: Array<Store>) {
-        super(source, collection);
+    storeFilter: StoreFilter;
+
+    constructor(source: (any) => Observable<any>, filter) {
+        super(source);
+        this.storeFilter = filter;
     }
 
-    getNext() {
+    getNext(): Observable<Array<Store>> {
+        this.storeFilter.page = this.currentPage;
         if (!this.hasEnded) {
             this.isLoading = true;
-            this.source(this.nextPageQuery).pipe(finalize(() => this.isLoading = false)).subscribe(
-                (response) => {
-                    this.setPaginationData(response);
+            console.log('this is the filter', this.storeFilter)
+            return this.source(this.storeFilter).pipe(
+                finalize(() => this.isLoading = false),
+                tap(resp => { this.setPaginationData(resp) }),
+                map((resp: any) => {
                     let newStores = [];
-                    response.data.stores.forEach(store => newStores.push(ReadStore(store)))
-                    this.collection.splice(this.collection.length, 0, ...newStores)
-                    if (this.currentPage == null) { };
-                }
-            )
-        }
+                    resp.data.stores.forEach(store => newStores.push(ReadStore(store)));
+                    return newStores;
+                })
+            );
+            //     (response) => {
+            //         this.setPaginationData(response);
+            //         let newStores = [];
+            //         response.forEach(store => newStores.push(ReadStore(store)));
+            //         // this.data.splice(this.collection.length, 0, ...newStores)
+            //         // this.collection.splice(this.collection.length, 0, ...newStores)
+            //         if (this.currentPage == null) { };
+            //     }
+            // )
+        } else return of([])
     }
 }
