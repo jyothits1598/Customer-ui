@@ -13,7 +13,7 @@ export class RestApiService {
   hostURL = API_URL_LINK;
 
   constructor(
-    private http: HttpClient,
+    private http: HttpClient
   ) { }
 
   get(url): Observable<any> {

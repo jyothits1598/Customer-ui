@@ -1,6 +1,6 @@
 import { Component, OnInit, ContentChild, ElementRef, AfterViewInit, EmbeddedViewRef, ViewContainerRef, Renderer2, ViewChild, Input, TemplateRef, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Template } from '@angular/compiler/src/render3/r3_ast';
-import { fromEvent } from 'rxjs/internal/observable/fromEvent';
+import { fromEvent } from 'rxjs';
 import { tap, map, distinctUntilChanged, debounce, switchMap, finalize } from 'rxjs/operators';
 import { interval, Observable, Subscription } from 'rxjs';
 import { OverlayRef, Overlay, OverlayConfig } from '@angular/cdk/overlay';

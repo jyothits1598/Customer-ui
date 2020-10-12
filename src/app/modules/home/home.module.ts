@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './pages/home/home.component';
 import { StoresModule } from '../stores/stores.module';
 import { RouterModule, Routes } from '@angular/router';
-import { StoreListComponent } from '../stores/components/store-list/store-list.component';
-import { StoreSearchModule } from '../store-search/store-search.module';
+import { NearbyStoresComponent } from '../stores/pages/nearby-stores/nearby-stores.component';
 
 const routes: Routes = [
   {
@@ -13,10 +12,9 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: StoreListComponent
+        component: NearbyStoresComponent
       }
     ],
-
   }
 ]
 
@@ -24,9 +22,8 @@ const routes: Routes = [
   declarations: [HomeComponent],
   imports: [
     CommonModule,
+    RouterModule.forChild(routes),
     StoresModule,
-    StoreSearchModule,
-    RouterModule.forChild(routes)
   ],
   exports: [HomeComponent]
 })

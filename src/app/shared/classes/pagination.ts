@@ -52,7 +52,7 @@ export class StorePagination extends Pagination<Store>{
                     let newStores = [];
                     response.data.stores.forEach(store => newStores.push(ReadStore(store)))
                     this.collection.splice(this.collection.length, 0, ...newStores)
-                    if (this.currentPage == null) { console.log('stream has ended') };
+                    if (this.currentPage == null) { };
                 }
             )
         }
