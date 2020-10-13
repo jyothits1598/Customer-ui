@@ -5,8 +5,8 @@
                 <app-store-card [store]="store"></app-store-card>
             </div>
             <br><br>
-            <div infiniteScroll #infiniteScroll="infiniteScroll" (scrolled)="handleScrolled()"></div>
-            <div *ngIf="pagination.isLoading">Loading....</div>
         </div>
+        <div *ngIf="pagination.isLoading">Loading....</div>
+        <div *ngIf="!pagination.hasEnded" infiniteScroll #infiniteScroll="infiniteScroll" (scrolled)="handleScrolled()"></div>
     </div>
 </div>
