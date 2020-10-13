@@ -12,6 +12,11 @@ const routes: Routes = [
       {
         path: 'restaurants',
         loadChildren: () => import('src/app/modules/home/home.module').then(m => m.HomeModule)
+      },
+      {
+        path: '**',
+        redirectTo: 'restaurants',
+        pathMatch: 'full'
       }
     ]
   }

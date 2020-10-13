@@ -14,9 +14,6 @@ export class StoreSearchComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  handleClick() {
-
-  }
 
   apiFunction = (term: string) => {
     return this.restApiService.get(`api/stores/search?name=${term}`).pipe(map(
@@ -25,4 +22,12 @@ export class StoreSearchComponent implements OnInit {
   };
 
   accessor: (any) => string = (store) => store.store_name;
+
+  modalSearch(){
+    document.getElementById('search_list').style.display = 'block';
+  }
+
+  handleClick(){
+    document.getElementById('search_list').style.display = 'none';
+  }
 }

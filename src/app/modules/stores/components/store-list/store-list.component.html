@@ -1,14 +1,12 @@
 <div class="store-list-bg">
     <div class="container">
-        <!-- <div class="lg-mg-lf"> -->
         <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 col-xl-4">
-                <app-store-card [store]="store" *ngFor="let store of stores"></app-store-card>
-                <div *ngIf="pagination.isLoading">Loading....</div>
-                <div infiniteScroll #infiniteScroll="infiniteScroll" (scrolled)="pagination.getNext()"></div>
-                <br><br>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 col-xl-4" style="margin-bottom:30px;" *ngFor="let store of stores">
+                <app-store-card [store]="store"></app-store-card>
             </div>
+            <div *ngIf="pagination.isLoading">Loading....</div>
+            <div infiniteScroll #infiniteScroll="infiniteScroll" (scrolled)="pagination.getNext()"></div>
+            <br><br>
         </div>
-        <!-- </div> -->
     </div>
 </div>
