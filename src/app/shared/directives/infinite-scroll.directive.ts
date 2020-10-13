@@ -1,4 +1,4 @@
-import { Directive, ElementRef, EventEmitter, OnDestroy, Renderer2, ViewContainerRef } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, OnDestroy, Output, Renderer2, ViewContainerRef } from '@angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
 
 @Directive({
@@ -7,12 +7,12 @@ import { Observable, Subject, Subscription } from 'rxjs';
 })
 export class InfiniteScrollDirective implements OnDestroy {
   intersectionObserver: IntersectionObserver;
-  scrolled = new EventEmitter<any>();
+  @Output() scrolled = new EventEmitter<boolean>();
   intersectionSubject$ = new Subject<any>();
   subs: Subscription;
 
   config = {
-    root: null, // avoiding 'root' or setting it to 'null' sets it to default value: viewport
+    root: null, 
     rootMargin: '0px',
     threshold: 0
   }
@@ -22,7 +22,7 @@ export class InfiniteScrollDirective implements OnDestroy {
     this.intersectionObserver = new IntersectionObserver(this.handleIntersection.bind(this), this.config);
     this.intersectionObserver.observe(this.hostElement.nativeElement);
     this.subs = this.intersectionSubject$.subscribe(
-      () => this.scrolled.emit(true)
+      () => { console.log('emmited value'); this.scrolled.emit(true) }
     );
   }
   ngOnDestroy(): void {

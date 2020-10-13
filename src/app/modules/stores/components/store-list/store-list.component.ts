@@ -14,18 +14,28 @@ export class StoreListComponent implements OnInit {
   stores: Array<Store> = [];
   pagination: StorePagination;
   _filter: StoreFilter
-  @Input() set filter(f: StoreFilter){
-    console.log('got a store filter', f)
+
+  @Input() set filter(f: StoreFilter) {
+    this._filter = f;
   };
-  @ViewChild('infiniteScroll', {read: InfiniteScrollDirective}) infiniteScroll: InfiniteScrollDirective;
-  
+
+  @ViewChild('infiniteScroll', { read: InfiniteScrollDirective }) infiniteScroll: InfiniteScrollDirective;
+
   constructor(private storeData: StoresDataService,
   ) {
   }
+
   ngOnInit(): void {
-    console.log('contructor of store list')
-    this.pagination = new StorePagination(this.storeData.allStores.bind(this.storeData), this.stores);
-    this.pagination.getNext();
+    this.pagination = new StorePagination(this.storeData.allStores.bind(this.storeData), this._filter);
+    this.pagination.getNext().subscribe(stores => this.appendStores(stores));
+  }
+
+  appendStores(stores){
+    this.stores.splice(this.stores.length, 0, ...stores)
+  }
+
+  handleScrolled(){
+    this.pagination.getNext().subscribe(stores => this.appendStores(stores))
   }
 
 }
