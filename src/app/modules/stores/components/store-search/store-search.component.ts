@@ -25,7 +25,7 @@ export class StoreSearchComponent implements OnInit {
     //   (resp: any) => resp.data.stores
     // ))
     let filter = { name: term }
-    return this.storeData.allStores(name);
+    return this.storeData.allStores(name).pipe(map((resp : any) => resp.data.stores));
   };
 
   accessor: (any) => string = (store) => store.store_name;
