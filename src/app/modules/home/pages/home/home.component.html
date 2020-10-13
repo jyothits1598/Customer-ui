@@ -1,5 +1,3 @@
-
-
 <div style="background: #fff;margin-top: 80px;">
     <div class="container">
         <div class="row">
@@ -8,28 +6,36 @@
                     <div class="std-heading-3" style="margin-bottom: 30px;">
                         Sign up and get 5% off all food for 30 days
                     </div>
-                    <input type="button" class="std-button std-button--primary" value="Sign up now" >
+                    <input type="button" class="std-button std-button--primary" value="Sign up now">
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<store-search></store-search>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="store-search" style="margin-bottom:16px;">
+                <!-- <input type="text" class="store-search__input" placeholder="What would you like to eat?"
+                    (click)="modalSearch()"> -->
+                    <span routerLink="/search">What would you like to eat?</span>
+                <img src="/assets/images/ico_search.png" class="store-search__icon">
+            </div>
+        </div>
+    </div>
+</div>
 
-<section class="table-responsive text-center" style="margin-top:1rem"> 
-    <ul class="resnt-menu-top-tabs u-margin-bottom-medium" >
+<section class="table-responsive text-center" style="margin-top:1rem">
+    <ul class="resnt-menu-top-tabs u-margin-bottom-medium">
         <li class="resnt-menu-top-tabs__item">
-            <button class="resnt-menu-top-tabs__button tabs-menu" 
-           > Nearby </button>
+            <button class="resnt-menu-top-tabs__button tabs-menu"> Nearby </button>
         </li>
         <li class="resnt-menu-top-tabs__item">
-            <button class="resnt-menu-top-tabs__button tabs-menu" routerLink=""
-                > Reviews </button>
+            <button class="resnt-menu-top-tabs__button tabs-menu" routerLink=""> Reviews </button>
         </li>
         <li class="resnt-menu-top-tabs__item">
-            <button class="resnt-menu-top-tabs__button tabs-menu" routerLink=""
-                > Likes
+            <button class="resnt-menu-top-tabs__button tabs-menu" routerLink=""> Likes
             </button>
         </li>
     </ul>

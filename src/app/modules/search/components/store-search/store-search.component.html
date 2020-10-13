@@ -1,0 +1,72 @@
+<!-- <div class="search-stores-popup">
+    
+</div> -->
+
+<!-- <div class="search-stores-popup1" style="display:none" id="search_list" >  -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-between nav-content">
+                <div style="line-height: 48px;">
+                    <img src="./../../../../../assets/svg/Logo.svg">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="input-container" style="margin-bottom:16px;">
+                <div class="auto-fill">
+                    <incremental-search [apiFunction]="apiFunction" [accessorFunction]="accessor">
+                        <div class="store-search" style="margin-bottom:16px;">
+                            <input type="text" (focus)="searchActivated = true" (blur)="searchActivated = false"
+                                #itemSearch class="store-search__input" placeholder="What would you like to eat?">
+                            <img src="/assets/images/ico_arrow_left.png" class="store-search__icon"
+                                style="cursor: pointer;">
+                            <!-- <ng-template #searchIcon *ngIf="searchActivated">
+                                        <img src="/assets/images/ico_search.png" class="store-search__icon">
+                                    </ng-template> -->
+                        </div>
+                        <ng-template #defaultTemplate>
+                            <li *ngIf="itemSearch.value" class="auto-fill__list__item" (click)="searchTerm.emit(itemSearch.value)">
+                                <table>
+                                    <tr>
+                                        <td valign="middle" style="padding: 12px;">
+                                            <img src="../../../../assets/images/ico_search_plane.png">
+                                        </td>
+                                        <td style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;">
+                                            <div class="paragraph"> Search for "{{itemSearch.value}}" </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </li>
+                        </ng-template>
+                        <ng-template #itemTemplate let-option="option">
+                            <li (click)="itemSearch.value = option.store_name" class="auto-fill__list__item">
+                                <table>
+                                    <tr>
+                                        <td valign="middle" style="padding: 12px;">
+                                            <img src="../../../../assets/images/ico_search_plane.png">
+                                        </td>
+                                        <td style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;">
+                                            <div class="paragraph"> {{option.store_name}} </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </li>
+                        </ng-template>
+                        <ng-template #noItemsTemplate>
+                            <li class="auto-fill__list__item">
+                                <table style="width:100%;box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);">
+                                    <tr>
+                                        <td style="width:100%;padding: 12px;">
+                                            <div class="paragraph"> No stores found </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </li>
+                        </ng-template>
+                    </incremental-search>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
