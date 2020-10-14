@@ -14,11 +14,4 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  showsearchstoreList(){
-    document.getElementById('search_list').style.display = 'block';
-  }
-
-  backsearch() {
-    document.getElementById('search_list').style.display = 'none';
-  }
 }
