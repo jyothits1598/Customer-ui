@@ -33,7 +33,7 @@ export class StorePagination extends Pagination<Store>{
 
     getNext(): Observable<Array<Store>> {
         this.storeFilter.page = this.currentPage;
-        if (!this.hasEnded) {
+        if (!this.hasEnded && !this.isLoading) {
             this.isLoading = true;
             console.log('this is the filter', this.storeFilter)
             return this.source(this.storeFilter).pipe(
@@ -41,7 +41,7 @@ export class StorePagination extends Pagination<Store>{
                 tap(resp => { this.setPaginationData(resp) }),
                 map((resp: any) => {
                     let newStores = [];
-                    resp.data.stores.forEach(store => newStores.push(ReadStore(store)));
+                    if(resp.data.stores) resp.data.stores.forEach(store => newStores.push(ReadStore(store)));
                     return newStores;
                 })
             );

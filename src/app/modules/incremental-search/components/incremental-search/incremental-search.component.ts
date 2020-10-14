@@ -25,6 +25,7 @@ export class IncrementalSearchComponent implements AfterViewInit, OnDestroy {
     this.closeOverlay();
     this.onSelect.emit(item);
   }
+
   ngAfterViewInit(): void {
     this.focusSubs = fromEvent(this.searchBox.nativeElement, 'focus').pipe(
       tap(() => {
@@ -54,6 +55,7 @@ export class IncrementalSearchComponent implements AfterViewInit, OnDestroy {
   @ContentChild('itemSearch', { read: ElementRef }) searchBox: ElementRef;
   @ContentChild('itemTemplate', { read: TemplateRef }) itemTemplate: TemplateRef<any>;
   @ContentChild('noItemsTemplate', { read: TemplateRef }) noItemsTemplate: TemplateRef<any>;
+  @ContentChild('defaultTemplate', { read: TemplateRef }) defaultTemplate: TemplateRef<any>;
 
   searchData: Array<any> = [];
   overlayRef: OverlayRef;

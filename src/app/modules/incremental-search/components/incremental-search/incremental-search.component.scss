@@ -19,7 +19,7 @@
     &__list {
         list-style-type: none;
         cursor: pointer;
-        position: absolute;
+        // position: absolute;
         left: 0;
         background: #fff;
         z-index: 10;
@@ -37,5 +37,28 @@
                 background-color: var(--color-background-tertiary);
             }
         }
-    }     
+    }
+
+    // &__list {
+    //     list-style-type: none;
+    //     cursor: pointer;
+    //     position: absolute;
+    //     left: 0;
+    //     background: #fff;
+    //     z-index: 10;
+    //     width: max-content;
+    //     // border: 1px solid var(--color-lines-primary);
+    //     max-height: 300px;
+    //     overflow-y: auto;
+    //     z-index: 999999;
+    //     &__item {
+    //         padding: 1rem;
+    //         border-bottom: 1px solid var(--color-lines-primary);
+            
+    //         &:hover{
+    //             cursor: pointer;
+    //             background-color: var(--color-background-tertiary);
+    //         }
+    //     }
+    // }     
 }

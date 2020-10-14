@@ -21,7 +21,13 @@ export class StoresDataService {
     let result = '';
     if (filter) {
       if (filter.name) result += ('name=' + filter.name);
-      if (filter.page) result += ('page=' + filter.page);
+      // if (filter.page) result += ('page=' + filter.page);
+      if (filter.page) {
+        if (result) {
+          result += '&'
+        }
+        result += ('page=' + filter.page)
+      }
     }
     return result ? ('?' + result) : result;
   }
