@@ -10,12 +10,12 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
-        path: 'restaurants',
+        path: '',
         loadChildren: () => import('src/app/modules/home/home.module').then(m => m.HomeModule)
       },
       {
         path: '**',
-        redirectTo: 'restaurants',
+        redirectTo: '',
         pathMatch: 'full'
       }
     ]
