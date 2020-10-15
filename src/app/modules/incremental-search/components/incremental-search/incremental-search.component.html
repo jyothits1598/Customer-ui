@@ -5,7 +5,7 @@
         alt="Loading...">
     <ng-template #overlayTemplate>
         <div>
-            <ul class="auto-fill__list" (click)="closeOverlay()">
+            <ul class="auto-fill__list" (click)="closeOverlay()" style="margin-bottom: 0 !important;width:100%;z-index: 1;">
                 <ng-container [ngTemplateOutlet]="defaultTemplate">
 
                 </ng-container>
