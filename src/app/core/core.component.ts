@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { ModalService } from './services/modal.service';
 
 @Component({
   selector: 'app-core',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoreComponent implements OnInit {
 
-  constructor() { }
+  constructor(private modalService: ModalService,
+    private vCRef: ViewContainerRef) {
+    modalService.registerViewContainer(this.vCRef);
+  }
 
   ngOnInit(): void {
   }
