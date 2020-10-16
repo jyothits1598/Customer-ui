@@ -1,5 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ModalService } from 'src/app/core/services/modal.service';
+import { LocationSearchComponent } from '../location-search/location-search.component';
 
 @Component({
   selector: 'location-selector',
@@ -12,8 +13,8 @@ export class LocationSelectorComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  showSelectorModal(template: TemplateRef<any>) {
-    this.modalService.openTemplateModal(template);
+  showSelectorModal(temp: TemplateRef<any>) {
+    this.modalService.openTemplateModal(temp)
   }
 
 }

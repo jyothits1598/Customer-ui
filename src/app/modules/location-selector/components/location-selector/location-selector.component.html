@@ -1,21 +1,5 @@
 <span style="cursor: pointer;" (click)="showSelectorModal(searchModal)"><b class="location"> Tarragindi </b> &nbsp;<img src="../../../../../assets/images/ico_dropdown.png" ></span>
 
 <ng-template #searchModal let-modal>
-    <div class="modal-body" style="padding: 0;">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="input-container">
-                    <img src="../../../../../assets/images/ico_arrow_left.png" class="input-img-top" (click)="modal.dismiss()">
-                    <input type="text" class="input-search-border"  placeholder="enter address or suburb" >
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-               <div class="locate">
-                    <span> <img src="../../../../../assets/images/ico_navigation.png"><span style="padding-left:10px"> Use my current location </span>  </span>
-               </div>
-            </div>
-        </div>
-    </div>
+    <location-search (location)="handleLocation($event)"></location-search>
 </ng-template>
