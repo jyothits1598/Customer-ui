@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { API_URL_LINK } from 'src/environments/environment';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -13,8 +12,9 @@ export class RestApiService {
   hostURL = API_URL_LINK;
 
   constructor(
-    private http: HttpClient
-  ) { }
+    private http: HttpClient,
+  ) {
+   }
 
   get(url): Observable<any> {
     return this.http.get(API_URL_LINK + url).pipe(take(1));

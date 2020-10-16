@@ -22,9 +22,15 @@ import { HttpHeaderInterceptor } from './interceptors/http-header';
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-        useClass: HttpHeaderInterceptor,
-        multi: true
+      useClass: HttpHeaderInterceptor,
+      multi: true
+    },
+    {
+      provide: Window,
+      useValue: window
     }
   ]
 })
 export class CoreModule { }
+
+

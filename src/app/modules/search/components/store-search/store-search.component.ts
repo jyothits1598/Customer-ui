@@ -29,7 +29,7 @@ export class StoreSearchComponent implements AfterViewInit {
     return this.storeData.allStores(filter).pipe(map((resp: any) => resp.data.stores || []));
   };
 
-  accessor: (any) => string = (store) => store.store_name;
+  accessor: (any) => string = (store) => store.store_name + store.cuisine_name;
 
   modalSearch() {
     document.getElementById('search_list').style.display = 'block';
