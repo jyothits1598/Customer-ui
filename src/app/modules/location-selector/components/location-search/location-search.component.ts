@@ -22,10 +22,15 @@ export class LocationSearchComponent implements AfterViewInit {
   @ViewChild('randomDiv', { read: ElementRef }) randomDiv: ElementRef;
   @Output() location = new EventEmitter<any>();
 
-
+  userLocation(){
+    this.googleLocation.getUserLocation().subscribe(
+      (loc)=>{console.log('user location', loc)},
+      (error)=>{console.log(error)}
+    )
+  }
 
   private getPlaceAutocomplete(name: string) {
-    
+
   }
 
   // var service = new google.maps.places.AutocompleteService();
