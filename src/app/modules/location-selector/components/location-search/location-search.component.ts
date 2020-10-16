@@ -15,7 +15,7 @@ export class LocationSearchComponent implements AfterViewInit {
   constructor(private googleLocation: GoogleLocationService) { }
 
   ngAfterViewInit(): void {
-    this.googleLocation.getSuggestions("bang").subscribe(console.log);
+    // this.googleLocation.getSuggestions("bang").subscribe(console.log);
   }
 
   @ViewChild('locationSearchInput', { read: ElementRef }) locationInput: ElementRef;
