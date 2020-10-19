@@ -14,8 +14,8 @@
                     <incremental-search [apiFunction]="apiFunction" [accessorFunction]="accessor">
                         <div class="store-search" style="margin-bottom:16px;">
                             <input type="text" (focus)="searchActivated = true" (blur)="searchActivated = false"
-                                #itemSearch class="store-search__input" placeholder="What would you like to eat?">
-                            <img src="/assets/images/ico_arrow_left.png" class="store-search__icon"
+                                #itemSearch class="store-search__input" placeholder="Search by cuisine or restaurant">
+                            <img src="assets/images/ico_arrow_left.png" class="store-search__icon"
                                 style="cursor: pointer;" routerLink="/" style="outline:0;">
                             <!-- <ng-template #searchIcon *ngIf="searchActivated">
                                         <img src="/assets/images/ico_search.png" class="store-search__icon">
@@ -26,7 +26,7 @@
                                 <table>
                                     <tr>
                                         <td valign="middle" style="padding: 12px;">
-                                            <img src="../../../../assets/images/ico_search_plane.png">
+                                            <img src="assets/images/ico_search_plane.png">
                                         </td>
                                         <td style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;">
                                             <div class="paragraph"> Search for "{{itemSearch.value}}" </div>
@@ -40,7 +40,7 @@
                                 <table>
                                     <tr>
                                         <td valign="middle" style="padding: 12px;">
-                                            <img src="../../../../assets/images/ico_search_plane.png">
+                                            <img src="assets/images/ico_search_plane.png">
                                         </td>
                                         <td style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;">
                                             <div class="paragraph"> {{option.store_name}} </div>
@@ -54,7 +54,7 @@
                                 <table>
                                     <tr>
                                         <td valign="middle" style="padding: 24px;">
-                                            <!-- <img src="../../../../assets/images/ico_search_plane.png"> -->
+                                            <!-- <img src=assets/images/ico_search_plane.png"> -->
                                         </td>
                                         <td style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%">
                                             <div class="paragraph" style="text-align: center;"> No stores found </div>

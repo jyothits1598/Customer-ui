@@ -13,8 +13,8 @@ export class LocationSelectorComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  showSelectorModal(temp: TemplateRef<any>) {
-    this.modalService.openTemplateModal(temp)
-  }
+  // showSelectorModal(temp: TemplateRef<any>) {
+  //   this.modalService.openTemplateModal(temp)
+  // }
 
 }
