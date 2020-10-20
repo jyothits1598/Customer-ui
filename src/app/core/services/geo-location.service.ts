@@ -1,6 +1,10 @@
 import { Injectable, NgZone } from '@angular/core';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { UserLocation } from '../model/user-location';
+import { StorageService } from './storage.service';
+
+const locationHistoryIdentifier: string = 'locationHistory'
+const currentlocationIdentifier: string = 'currentLocation'
 
 @Injectable({
   providedIn: 'root'
@@ -8,11 +12,15 @@ import { UserLocation } from '../model/user-location';
 export class GeoLocationService {
   autocomplete: google.maps.places.AutocompleteService;
   geocoder = new google.maps.Geocoder();
+  locationHistory: Array<UserLocation>;
 
-  userLocation$ = new BehaviorSubject<any>(null);
+  userLocation$;
   constructor(private window: Window,
-    private ngZone: NgZone) {
+    private storage: StorageService) {
     this.autocomplete = new google.maps.places.AutocompleteService();
+    this.locationHistory = this.storage.get(locationHistoryIdentifier) || [];
+    let currentLocation = this.storage.get(currentlocationIdentifier);
+    this.userLocation$ = new BehaviorSubject<any>(currentLocation);
   }
 
   getUserLocation(): Observable<UserLocation> {
@@ -25,7 +33,6 @@ export class GeoLocationService {
           }
 
           this.geocoder.geocode(req, (res) => {
-            console.log(res)
             observer.next({ latLng: { lat: location.coords.latitude, lng: location.coords.longitude }, address: { locality: this.getLocalityName(res[0]), fullAddress: res[0].formatted_address } })
           })
         },
@@ -52,7 +59,6 @@ export class GeoLocationService {
   }
 
   getPlaceDetail(data: any) {
-    console.log('inside get place detail', data)
     return new Observable(observer => {
 
       let req: google.maps.GeocoderRequest = {
@@ -79,7 +85,14 @@ export class GeoLocationService {
     return "";
   }
 
-  setLocation(location: UserLocation) {
+  setLocation(location: UserLocation, saveToHistory: boolean = false) {
+
+    if (saveToHistory) {
+      this.locationHistory.unshift(location);
+      this.storage.store(locationHistoryIdentifier, this.locationHistory);
+    }
+
+    this.storage.store(currentlocationIdentifier, location);
     this.userLocation$.next(location);
   }
 }

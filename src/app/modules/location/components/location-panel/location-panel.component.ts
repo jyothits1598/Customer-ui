@@ -16,8 +16,17 @@ export class LocationPanelComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  handleLocation(location: UserLocation) {
-    if (location) this.geoLocation.setLocation(location);
+  handleCurrentLocation(location: UserLocation) {
+    if (location) {
+      this.geoLocation.setLocation(location);
+    }
+    this.modalRef.dismiss();
+  }
+
+  handleSearchedLocation(location: UserLocation) {
+    if (location) {
+      this.geoLocation.setLocation(location, true);
+    }
     this.modalRef.dismiss();
   }
 

@@ -11,4 +11,10 @@ export class StorageService {
     let dataStr = JSON.stringify(data);
     localStorage.setItem(key, dataStr);
   }
+
+  get(key: string) {
+    let data = localStorage.getItem(key);
+    if (data) return JSON.parse(data);
+    else return null;
+  }
 }

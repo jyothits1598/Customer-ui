@@ -36,7 +36,7 @@
                             </li>
                         </ng-template>
                         <ng-template #itemTemplate let-option="option">
-                            <li (click)="itemSearch.value = option.store_name" class="auto-fill__list__item">
+                            <li (click)="itemSearch.value = option.store_name; searchTerm.emit(itemSearch.value)" class="auto-fill__list__item">
                                 <table>
                                     <tr>
                                         <td valign="middle" style="padding: 12px;">
