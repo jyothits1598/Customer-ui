@@ -37,9 +37,9 @@ export class LocationSearchComponent implements AfterViewInit, OnDestroy {
         (val: any) => {
           this.suggestions = val;
           console.log('this is the autocomplete suggestions', val)
-          setTimeout(() => {
-            this.changeDetector.detectChanges();
-          }, 0);
+          // setTimeout(() => {
+          //   this.changeDetector.detectChanges();
+          // }, 0);
         }
       )
 

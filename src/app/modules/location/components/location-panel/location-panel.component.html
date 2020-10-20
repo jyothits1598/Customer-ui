@@ -6,6 +6,11 @@
     </div>
     <div class="row">
         <div class="col-md-12">
+            <div *ngFor="let loc of locationHistory">{{loc.address.locality}}--{{loc.address.fullAddress}}</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <user-current-location (currentLocation)="handleCurrentLocation($event)"></user-current-location>
         </div>
     </div>

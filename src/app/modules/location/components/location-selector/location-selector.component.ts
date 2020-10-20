@@ -17,9 +17,9 @@ export class LocationSelectorComponent implements OnInit {
   compModal: ComponentModalRef;
   location;
   ngOnInit(): void {
-    this.geoLocationService.userLocation$.subscribe((location) => {
+    this.geoLocationService.userLocation().subscribe((location) => {
       this.location = location;
-      this.changeDetector.detectChanges();
+      // this.changeDetector.detectChanges();
     })
   }
 

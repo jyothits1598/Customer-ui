@@ -9,11 +9,12 @@ import { GeoLocationService } from 'src/app/core/services/geo-location.service';
   styleUrls: ['./location-panel.component.scss']
 })
 export class LocationPanelComponent implements OnInit {
-
+  locationHistory: Array<UserLocation>;
   constructor(private modalRef: ComponentModalRef,
     private geoLocation: GeoLocationService) { }
 
   ngOnInit(): void {
+    this.locationHistory = this.geoLocation.locationHistory;
   }
 
   handleCurrentLocation(location: UserLocation) {

@@ -1,6 +1,6 @@
 export interface StoreFilter{
     page?: number,
     name?: string,
-    location?: {lat: number, long: number},
+    location?: {lat: number, lng: number},
     distance?: number,
 }
