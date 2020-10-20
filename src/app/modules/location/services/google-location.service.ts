@@ -41,11 +41,11 @@ export class GoogleLocationService {
             geocoder.geocode(req, (res) => { console.log('response from reverse goe code', res) })
           },
           (error) => {
-            observer.error()
+            observer.error('Could not get current location')
           },
 
           options)
-      }
+      }else observer.error('Platform does not support locations')
     })
   }
 }
