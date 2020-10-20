@@ -20,6 +20,7 @@ export class StoresDataService {
   filterToQuery(filter: StoreFilter): string {
     let result = '';
     if (filter) {
+      console.log(filter);
       if (filter.name) result += ('name=' + filter.name);
       // if (filter.page) result += ('page=' + filter.page);
       if (filter.page) {

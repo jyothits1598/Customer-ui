@@ -8,9 +8,10 @@ import { Store } from '../../model/store';
 })
 export class StoreCardComponent implements OnInit {
   @Input() store: Store;
+  
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
   }
 
 }
