@@ -96,3 +96,119 @@
     padding-left:8px;
     cursor: pointer;
 }
+// forms
+.m-star {
+    color:var(--color-failure);
+}
+.error-mez {
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    color:var(--color-failure);
+    margin-top:4px !important;
+}
+.label-inputs {
+    color:var(--color-boldlevelcolor);
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 4px;
+}
+.form-input {
+    border:2px solid var(--color-background-secondary);
+    border-radius: 0 !important;
+    height:48px;
+    box-sizing: border-box;
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color:var(--color-boldlevelcolor);
+    padding:12px 16px;
+    width:100%;
+    &:placeholder{
+      color: var(--color-typography-tertiary);
+    }
+    &:focus {
+        outline:0 !important;
+        border:2px solid var(--color-primary);
+        border-radius: 0 !important;
+    }
+    &--select-input {
+        background: var(--color-background-secondary);
+    }
+    &--text-area {
+        height:96px !important;
+    }
+}
+.form-group--margin {
+    margin-bottom: 24px!important;
+}
+
+/* All buttons styles */
+.std-button {
+    border-radius: 0;
+    border: none;
+    outline: none !important;
+    font-size: 16px;
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: bold;
+    margin: 0 auto;
+    display: inline-block;
+    padding: 12px 16px;
+
+    &--primary {
+        color: var(--color-background);
+        background: var(--color-primary);
+    }
+    &--primary:hover {
+        color: var(--color-background);
+    }
+    &--transparency {
+        color: var(--color-primary);
+        background: #fafafa;
+    }
+    &--transparency:hover {
+        color: var(--color-primary);
+    }
+    &--transparency1 {
+        color: var(--color-primary);
+        background: #fafafa;
+        width:100%;
+    }
+    &--transparency1:hover {
+        color: var(--color-primary);
+    }
+    &--blue {
+        color: var(--color-background);
+        background: var(--color-primary);
+        width:100%;
+    }
+    &--blue:hover {
+        color: var(--color-background);
+    }
+    &--plane {
+        color: var(--color-primary);
+        background: var(--color-background);
+    }
+    &--redtransparency {
+        color: var(--color-failure);
+        background: var(--color-background-secondary);
+    }
+    &--redtransparency:hover {
+        color: var(--color-failure);
+    }
+    &--green {
+        color: var(--color-background);
+        background: var(--color-success);
+    }
+    &--green:hover {
+        color: var(--color-background);
+    }
+}
