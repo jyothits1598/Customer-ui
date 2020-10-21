@@ -17,16 +17,9 @@ export class LocationPanelComponent implements OnInit {
     this.locationHistory = this.geoLocation.locationHistory;
   }
 
-  handleCurrentLocation(location: UserLocation) {
+  handleLocation(location: UserLocation, saveToHistory: boolean = false) {
     if (location) {
-      this.geoLocation.setLocation(location);
-    }
-    this.modalRef.dismiss();
-  }
-
-  handleSearchedLocation(location: UserLocation) {
-    if (location) {
-      this.geoLocation.setLocation(location, true);
+      this.geoLocation.setLocation(location, saveToHistory);
     }
     this.modalRef.dismiss();
   }

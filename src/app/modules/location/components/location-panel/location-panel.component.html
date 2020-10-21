@@ -1,26 +1,27 @@
 <div class="modal-body custom-body">
     <div class="row">
         <div class="col-md-12">
-            <location-search (searchedLocation)="handleSearchedLocation($event)"></location-search>
+            <location-search (searchedLocation)="handleLocation($event, true)"></location-search>
         </div>
         <div class="col-md-12">
-            <user-current-location (currentLocation)="handleCurrentLocation($event)"></user-current-location>
+            <user-current-location (currentLocation)="handleLocation($event)"></user-current-location>
         </div>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="locationHistory && locationHistory.length">
         <div class="col-md-12">
             <div class="placeholder-header">
                 Recent locations
             </div>
             <div *ngFor="let loc of locationHistory" style="padding:0 10px">
-                <table>
+                <table (click)="handleLocation(loc)">
                     <tr>
                         <td valign="middle" style="padding-right: 10px;">
-                            <img src="assets/images/ico_history.png" >
+                            <img src="assets/images/ico_history.png">
                         </td>
                         <td style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;padding: 5px 0px;">
                             <div class="paragraph"> {{loc.address.locality}} </div>
-                            <div style="color: #808080;font-size: 14px;line-height: 20px;"> {{loc.address.fullAddress}} </div>
+                            <div style="color: #808080;font-size: 14px;line-height: 20px;"> {{loc.address.fullAddress}}
+                            </div>
                         </td>
                     </tr>
                 </table>

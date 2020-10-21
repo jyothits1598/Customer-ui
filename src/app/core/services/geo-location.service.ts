@@ -18,7 +18,12 @@ export class GeoLocationService {
   constructor(private storage: StorageService,
   ) {
     this.locationHistory = this.storage.get(locationHistoryIdentifier) || [];
-    let currentLocation = this.storage.get(currentlocationIdentifier);
+    let locat = this.storage.get(currentlocationIdentifier);
+
+    let currentLocation = this.storage.get(currentlocationIdentifier) || {
+      address: { locality: "Bangalore", fullAddress: "Bengaluru, Karnataka, India" },
+      latLng: { lat: 12.9715987, lng: 77.5945627 }
+    };
     this.userLocation$ = new BehaviorSubject<any>(currentLocation);
   }
 
@@ -32,7 +37,10 @@ export class GeoLocationService {
       let index = this.locationHistory.findIndex((pastLocation) => {
         return pastLocation.address.locality === location.address.locality
       });
-      if (index === -1) this.locationHistory.unshift(location);
+      if (index === -1) {
+        this.locationHistory.unshift(location);
+        if (this.locationHistory.length > 4) this.locationHistory.pop();
+      }
       else this.locationHistory[index] = location;
 
       this.storage.store(locationHistoryIdentifier, this.locationHistory);
