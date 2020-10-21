@@ -22,12 +22,17 @@ export class StoresDataService {
     if (filter) {
       console.log(filter);
       if (filter.name) result += ('name=' + filter.name);
-      // if (filter.page) result += ('page=' + filter.page);
       if (filter.page) {
         if (result) {
           result += '&'
         }
         result += ('page=' + filter.page)
+      }
+      if (filter.location) {
+        if (result) {
+          result += '&';
+        }
+        result += (`lat=${filter.location.lat}&lng=${filter.location.lng}&distance=20000`)
       }
     }
     return result ? ('?' + result) : result;

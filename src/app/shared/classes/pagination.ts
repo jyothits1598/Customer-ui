@@ -2,7 +2,6 @@ import { Observable, of } from 'rxjs';
 import { finalize, map, tap } from 'rxjs/operators';
 import { ReadStore, Store } from 'src/app/modules/stores/model/store';
 import { StoreFilter } from 'src/app/modules/stores/model/StoreFilter';
-import { inherits } from 'util';
 
 export class Pagination<T>{
     currentPage: number;
@@ -35,7 +34,6 @@ export class StorePagination extends Pagination<Store>{
         this.storeFilter.page = this.currentPage;
         if (!this.hasEnded && !this.isLoading) {
             this.isLoading = true;
-            console.log('this is the filter', this.storeFilter)
             return this.source(this.storeFilter).pipe(
                 finalize(() => this.isLoading = false),
                 tap(resp => { this.setPaginationData(resp) }),
@@ -45,15 +43,6 @@ export class StorePagination extends Pagination<Store>{
                     return newStores;
                 })
             );
-            //     (response) => {
-            //         this.setPaginationData(response);
-            //         let newStores = [];
-            //         response.forEach(store => newStores.push(ReadStore(store)));
-            //         // this.data.splice(this.collection.length, 0, ...newStores)
-            //         // this.collection.splice(this.collection.length, 0, ...newStores)
-            //         if (this.currentPage == null) { };
-            //     }
-            // )
         } else return of([])
     }
 }

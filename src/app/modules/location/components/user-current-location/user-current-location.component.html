@@ -1,0 +1,8 @@
+<div *ngIf="!locationError; else error" class="locate" (click)="handleLocReq()">
+    <img [src]="locationLoading? '/assets/images/loader.gif' : '/assets/images/ico_navigation.png'">
+    <span style="padding-left:10px"> Use my current location </span>
+</div>
+
+<ng-template #error>
+    <div>Location Error</div>
+</ng-template>
