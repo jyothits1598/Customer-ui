@@ -6,6 +6,7 @@ import { fromEvent, interval, Observable, Subscription } from 'rxjs';
 import { debounce, distinctUntilChanged, finalize, map, switchMap, tap } from 'rxjs/operators';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { UserLocation } from 'src/app/core/model/user-location';
+import { GoogleLocationService } from '../../services/google-location.service';
 
 @Component({
   selector: 'location-search',
@@ -21,8 +22,7 @@ export class LocationSearchComponent implements AfterViewInit, OnDestroy {
 
   keyboardSubs: Subscription;
 
-  constructor(public geoLocation: GeoLocationService,
-    private changeDetector: ChangeDetectorRef
+  constructor(public googleLocation: GoogleLocationService,
   ) { }
 
   ngAfterViewInit(): void {
@@ -33,7 +33,7 @@ export class LocationSearchComponent implements AfterViewInit, OnDestroy {
         this.suggestionsLoading = true;
       }),
       debounce(() => interval(1000)),
-      switchMap((val: string) => { return this.geoLocation.getSuggestions(val).pipe(finalize(() => this.suggestionsLoading = false)) })).subscribe(
+      switchMap((val: string) => { return this.googleLocation.getSuggestions(val).pipe(finalize(() => this.suggestionsLoading = false)) })).subscribe(
         (val: any) => {
           this.suggestions = val;
           console.log('this is the autocomplete suggestions', val)
@@ -46,7 +46,7 @@ export class LocationSearchComponent implements AfterViewInit, OnDestroy {
   }
 
   onLocSelect(data) {
-    this.geoLocation.getPlaceDetail(data).subscribe(
+    this.googleLocation.getPlaceDetail(data).subscribe(
       (searchedLocation: UserLocation) => this.searchedLocation.emit(searchedLocation)
     )
   }

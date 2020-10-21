@@ -12,14 +12,12 @@ import { LocationSearchComponent } from '../location-search/location-search.comp
 })
 export class LocationSelectorComponent implements OnInit {
   constructor(private modalService: ModalService,
-    private geoLocationService: GeoLocationService,
-    private changeDetector: ChangeDetectorRef) { }
+    private geoLocationService: GeoLocationService) { }
   compModal: ComponentModalRef;
   location;
   ngOnInit(): void {
     this.geoLocationService.userLocation().subscribe((location) => {
       this.location = location;
-      // this.changeDetector.detectChanges();
     })
   }
 
