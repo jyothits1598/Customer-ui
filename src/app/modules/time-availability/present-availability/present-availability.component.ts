@@ -17,9 +17,6 @@ export class PresentAvailabilityComponent implements OnInit {
     if (availability) {
       this._availability = availability;
     }
-    // availability.forEach(element => {
-    //   this.checkAvailability(element)
-    // });
     for (const a in availability) {
       if (this.checkAvailability(availability[a])) this.openTimings = availability[a];
     }
@@ -36,6 +33,8 @@ export class PresentAvailabilityComponent implements OnInit {
   }
 
   checkAvailability(availability: TimeAvailability): boolean {
+    if (availability.markedAsClose) return false;
+    
     let day;
     switch (availability.day) {
       case 'sunday':
