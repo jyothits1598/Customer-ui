@@ -18,6 +18,14 @@ const routes: Routes = [
         loadChildren: () => import('src/app/modules/search/search.module').then(m => m.SearchModule)
       },
       {
+        path: 'signup',
+        loadChildren: () => import('src/app/modules/signup/signup.module').then(m => m.SignupModule)
+      },
+      {
+        path: 'login',
+        loadChildren: () => import('src/app/modules/login/login.module').then(m => m.LoginModule)
+      },
+      {
         path: '**',
         redirectTo: '',
         pathMatch: 'full'

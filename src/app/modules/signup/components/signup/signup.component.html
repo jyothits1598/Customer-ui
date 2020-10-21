@@ -1,0 +1,97 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div style="margin-top:100px">
+                <div class="margins-center">
+                    <h1 class="signup-header">  Create your free account </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="margins-center" style="margin-top:40px">
+                <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" >
+                   <div class="row">
+                       <div class="col-md-6">
+                            <div class="form-group form-group--margin">
+                                <div class="label-inputs"> First name <b class="m-star">*</b> </div>
+                                <input type="text" class="form-input" placeholder="e.g. John" formControlName="firstName" [ngClass]="{ 'is-invalid': (submitted || f.firstName.touched) && f.firstName.errors }" >
+                                <div *ngIf="(submitted || f.firstName.touched) && f.firstName.errors " class="error-mez">
+                                    <div *ngIf="f.firstName.errors.required">First name is required</div>
+                                </div>
+                            </div>
+                       </div>
+                       <div class="col-md-6">
+                            <div class="form-group form-group--margin">
+                                <div class="label-inputs"> Last name <b class="m-star">*</b> </div>
+                                <input type="text" class="form-input" placeholder="e.g. Cena" formControlName="lastName" [ngClass]="{ 'is-invalid': (submitted || f.lastName.touched) && f.lastName.errors }">
+                                <div *ngIf="(submitted || f.lastName.touched) && f.lastName.errors" class="error-mez">
+                                    <div *ngIf="f.lastName.errors.required">Last name is required</div>
+                                </div>
+                            </div>
+                        </div>
+                   </div>
+                   <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group form-group--margin">
+                                <div class="label-inputs"> Email <b class="m-star">*</b> </div>
+                                <input type="text" class="form-input" placeholder="e.g. name@gmail.com" formControlName="customerEmail" [ngClass]="{ 'is-invalid': (submitted || f.customerEmail.touched) && f.customerEmail.errors }" >
+                                <div *ngIf="(submitted || f.customerEmail.touched) && f.customerEmail.errors " class="error-mez">
+                                    <div *ngIf="f.customerEmail.errors.required">Email is required</div>
+                                    <div *ngIf="f.customerEmail.errors.email"> Please enter a valid email address </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group form-group--margin">
+                                <div class="label-inputs"> Mobile <b class="m-star">*</b> </div>
+                                <input class="form-input" placeholder="e.g. 0412345678" formControlName="signupmobile" [ngClass]="{ 'is-invalid': (submitted || f.signupmobile.touched) && f.signupmobile.errors }" minlength="10" maxlength="10" (keypress)="keyPress($event)" >
+                                <div *ngIf="(submitted || f.signupmobile.touched) && f.signupmobile.errors" class="error-mez">
+                                    <div *ngIf="f.signupmobile.errors.required"> Please enter mobile number </div>
+                                    <div *ngIf="f.signupmobile.errors.pattern"> Please enter a valid mobile number</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group form-group--margin">
+                            <div class="label-inputs"> Password <b class="m-star">*</b> </div>
+                            <input type="password" id="password" class="form-input custom-password-eye"  formControlName="password" placeholder="Must be at least 8 characters" [ngClass]="{ 'is-invalid': (submitted || f.password.touched) && f.password.errors }">
+                            <span toggle="#password" class="fa fa-eye-slash field-icon toggle-password"></span>
+                            <div *ngIf="(submitted || f.password.touched) && f.password.errors" class="error-mez">
+                                <div *ngIf="f.password.errors.required">Please enter password</div>
+                                    <div *ngIf="f.password.errors.minlength">Password must be at least 8 characters</div>
+                                    <div *ngIf="f.password.errors?.invalidPassword">
+                                        Valid password must be 8 or more characters, lowercase & Uppercase letter
+                                    </div>
+                            </div>
+                            <div id="pswd_info">
+                                <div class="popup-header"> Password must contain: </div>
+                                <ul class="list-type">
+                                    <li id="length" class="invalid sub-content"> &nbsp; 8 characters </li>
+                                    <li id="small" class="invalid sub-content"> &nbsp; Lowercase letter </li>
+                                    <li id="capital" class="invalid sub-content"> &nbsp; Uppercase letter </li>
+                                </ul>
+                                <p class="pwd-description"> Strong passwords are longer, avoid words or sequences, 
+                                    and mix random letters, numbers and symbols.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" style="margin-top:10px;">
+                                <input type="submit" class="std-button std-button--blue" value="Sign up" >
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

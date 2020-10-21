@@ -8,7 +8,7 @@ import { TimeAvailability } from '../model/time-availability';
 })
 export class PresentAvailabilityComponent implements OnInit {
   _availability: Array<TimeAvailability>;
-  openTimings: TimeAvailability = null;
+  openTimings: TimeAvailability;
 
   now = new Date();
 
@@ -16,12 +16,14 @@ export class PresentAvailabilityComponent implements OnInit {
   @Input() set availability(availability: Array<TimeAvailability>) {
     if (availability) {
       this._availability = availability;
+console.log(this._availability);
     }
     // availability.forEach(element => {
     //   this.checkAvailability(element)
     // });
     for (const a in availability) {
       if (this.checkAvailability(availability[a])) this.openTimings = availability[a];
+console.log(this.checkAvailability(availability[a]));
     }
   }
 

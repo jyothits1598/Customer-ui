@@ -45,6 +45,7 @@ export function ReadAvailability(availabilityBackend: any): Array<TimeAvailabili
             endTime: availabilityBackend[a].end_time,
             markedAsClose: (availabilityBackend[a].marked_as_closed ? true : false)
         };
+	
         result.push(newAvai)
     }
     // result.sort(TimeAvailabilityComp);
