@@ -1,22 +1,28 @@
 <div class="row">
     <div class="col-md-12">
         <div class="input-container">
-            <img src="../../../../../assets/images/ico_arrow_left.png" class="input-img-top" (click)="searchedLocation.emit(null)">
+            <img src="assets/images/ico_arrow_left.png" class="input-img-top" (click)="searchedLocation.emit(null)">
             <input type="text" class="input-search-border" #searchInput placeholder="enter address or suburb">
         </div>
     </div>
 </div>
-<div *ngIf="!suggestionsLoading; else loading" class="row">
-    <ul class="col-md-12">
-        <li *ngFor="let suggestion of suggestions" (click)="onLocSelect(suggestion)">
-            {{suggestion.structured_formatting.main_text}}---
-            {{suggestion.structured_formatting.secondary_text}}</li>
-    </ul>
+<div *ngIf="!suggestionsLoading; else loading">
+    <div *ngFor="let suggestion of suggestions" (click)="onLocSelect(suggestion)" style="padding:0 10px">
+        <table style="cursor: pointer;">
+            <tr>
+                <td valign="middle" style="padding-right: 10px;">
+                    <img src="assets/images/ico_place.png">
+                </td>
+                <td style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;padding: 5px 0px;">
+                    <div class="paragraph"> {{suggestion.structured_formatting.main_text}} </div>
+                    <div style="color: #808080;font-size: 14px;line-height: 20px;"> {{suggestion.structured_formatting.secondary_text}} </div>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
 <ng-template #loading>
-    <div class="row">
-        <div class="col-md-12">
-            location loading...
-        </div>
+    <div class="text-center">
+        location loading...
     </div>
 </ng-template>

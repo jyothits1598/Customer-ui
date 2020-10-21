@@ -113,7 +113,6 @@ body {
     list-style: none;
     padding: 0px;
     width: 100%;
-
     &__item{
         display: inline-block;
     }
@@ -123,9 +122,18 @@ body {
         border: none;
         outline: none !important;
         &__active{
+            position: relative;
+        }
+        &__active:after{
             border-bottom: 4px solid var(--color-primary);
+            content: '';
+            position: absolute;
+            bottom: 0px;
+            left: 25%;
+            width: 50%;
         }
     }
+    
 }
 .signup-header {
     font-family: DM Sans;
