@@ -1,0 +1,1 @@
+export const URL_signup = 'api/customer/signup';

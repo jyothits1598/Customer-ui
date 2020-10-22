@@ -14,10 +14,14 @@ export class RestApiService {
   constructor(
     private http: HttpClient,
   ) {
-   }
+  }
 
   get(url): Observable<any> {
     return this.http.get(API_URL_LINK + url).pipe(take(1));
+  }
+
+  post(url, data): Observable<any> {
+    return this.http.post((API_URL_LINK + url), data).pipe(take(1));
   }
 
 }
