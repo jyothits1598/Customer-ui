@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,11 +9,11 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  isLoggedin$: Observable<boolean>;
+  constructor(private authService: AuthService) { }
 
-  constructor(
-  ) { }
-  
   ngOnInit(): void {
+    this.isLoggedin$ = this.authService.isLoggedIn();
   }
 
 }

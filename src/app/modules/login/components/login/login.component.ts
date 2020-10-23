@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { URL_login } from 'src/api/authentication';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
 import { CustomValidators } from 'src/app/modules/helpers/validators';
 
@@ -13,7 +15,8 @@ import { CustomValidators } from 'src/app/modules/helpers/validators';
 export class LoginComponent implements OnInit {
   loggingIn: boolean = false;
   backendErrorMessage: string;
-  constructor(private restApiService: RestApiService) { }
+  constructor(private authService: AuthService,
+    private router: Router) { }
 
   ngOnInit(): void {
 
@@ -33,14 +36,13 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    // this.loginForm.setErrors()
     console.log('called login ', this.loginForm.value);
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
     }
     this.loggingIn = true;
-    this.restApiService.post(URL_login, this.loginForm.value).pipe(finalize(() => this.loggingIn = false)).subscribe(
-      (s) => { console.log("successfully logged in", s) },
+    this.authService.login(this.loginForm.value).pipe(finalize(() => this.loggingIn = false)).subscribe(
+      (s) => { this.router.navigate(['/']) },
       (e) => { this.handleErrors(e) }
     )
   }

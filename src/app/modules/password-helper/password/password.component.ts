@@ -47,8 +47,8 @@ export class PasswordComponent implements AfterContentInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._focusUnListner();
-    this._blurUnListner();
+    if (this._focusUnListner) this._focusUnListner();
+    if (this._blurUnListner) this._blurUnListner();
   }
 
   debug() {
