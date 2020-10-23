@@ -95,8 +95,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group" style="margin-top:10px;">
-                                <input [disabled]="submitting" type="submit" class="std-button std-button--blue"
-                                    value="Sign up">
+                                <button [disabled]="submitting" type="submit" class="std-button std-button--blue">
+                                    <span *ngIf="!submitting; else subTemp">Sign up</span> </button>
                             </div>
                         </div>
                     </div>
@@ -109,4 +109,8 @@
 <ng-template #regComplete>
     Welcome!
     Your registration is complete.
+</ng-template>
+
+<ng-template #subTemp>
+    Submitting...
 </ng-template>

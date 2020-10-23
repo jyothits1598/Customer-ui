@@ -1,0 +1,7 @@
+<p *ngIf="verifying; else content">Verifying...</p>
+
+
+<ng-template #content>
+    <p *ngIf="verified">Account Verified</p>
+    <p *ngIf="verifyingError">Account could not be verified - {{verifyingError}}</p>
+</ng-template>

@@ -1,20 +1,28 @@
 <div class="container">
     <div class="row">
+        <div class="col-md-12" *ngIf="backendErrorMessage">{{backendErrorMessage | json}}</div>
         <div class="col-md-12">
-            <form>
+            <form [formGroup]="loginForm" (ngSubmit)="login()">
                 <div class="signin-card">
                     <h3 class="std-heading-3 text-center"> menuzapp login </h3><br>
                     <div class="form-group form-group--margin">
-                        <input type="text" class="form-input" placeholder="Email">
-
+                        <input formControlName="email" type="text" class="form-input" placeholder="Email">
                     </div>
+                    <ng-container *ngIf="loginForm.controls.email.invalid && loginForm.controls.email.touched">
+                        <div>{{returnErrors('email')}}</div>
+                    </ng-container>
                     <app-password>
                         <div class="form-group form-group--margin">
-                            <input passwordInput type="password" class="form-input" placeholder="Password">
+                            <input formControlName="password" passwordInput type="password" class="form-input"
+                                placeholder="Password">
                         </div>
                     </app-password>
+                    <ng-container *ngIf="loginForm.controls.password.invalid && loginForm.controls.password.touched">
+                        <div>{{returnErrors('password')}}.</div>
+                    </ng-container>
                     <div class="form-group" style="margin-top:10px;">
-                        <input type="submit" class="std-button std-button--blue" value="Sign in">
+                        <button [disabled]="loggingIn" type="submit" class="std-button std-button--blue"><span
+                                *ngIf="!loggingIn; else inProgressTemp">Sign in</span> </button>
                     </div>
                 </div>
             </form>
@@ -22,3 +30,8 @@
     </div>
 
 </div>
+
+<ng-template #inProgressTemp>
+    <span>Signing in...</span>
+
+</ng-template>

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl, FormC
 import { finalize } from 'rxjs/operators';
 import { URL_signup } from 'src/api/authentication';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
+import { APP_LINK } from 'src/environments/environment';
 declare let $: any;
 
 @Component({
@@ -90,7 +91,7 @@ export class SignupComponent implements OnInit {
       email: this.registerForm.value.customerEmail,
       password: this.registerForm.value.password,
       mobile_number: this.registerForm.value.signupmobile,
-      next_url: "http://localhost:4200/email-verify",
+      next_url: APP_LINK + 'verify',
       login_link: "http://localhost:4200/login",
       contactus_link: "http://localhost:4200/login"
     };

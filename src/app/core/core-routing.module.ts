@@ -4,7 +4,8 @@ import { StoreDetailsComponent } from '../modules/stores/components/store-detail
 import { LayoutComponent } from './pages/layout/layout.component';
 
 const routes: Routes = [
-  { path: 'store-details', component: StoreDetailsComponent},
+  { path: 'store-details', component: StoreDetailsComponent },
+  { path: 'verify', loadChildren: () => import('src/app/modules/user-verification/user-verification.module').then(m => m.UserVerificationModule) },
   {
     path: '',
     component: LayoutComponent,
