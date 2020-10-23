@@ -270,3 +270,7 @@
         box-shadow: 0 2.5em 0 0;
     }
 }
+
+input.ng-invalid.ng-touched.error-highlight {
+    border: 1px solid red;
+}

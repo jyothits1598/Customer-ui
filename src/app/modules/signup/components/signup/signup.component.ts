@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl, FormC
 import { finalize } from 'rxjs/operators';
 import { URL_signup } from 'src/api/authentication';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
+import { CustomValidators } from 'src/app/modules/helpers/validators';
 import { APP_LINK } from 'src/environments/environment';
 declare let $: any;
 
@@ -15,18 +16,28 @@ export class SignupComponent implements OnInit {
   registerForm: FormGroup;
 
   submitting: boolean = false;
-  submissionError: boolean = false;
+  submissionError: string;
   submissionComplete: boolean = false;
 
   constructor(private restApiService: RestApiService) { }
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
-      firstName: new FormControl('', [Validators.required]),
-      lastName: new FormControl('', [Validators.required]),
-      customerEmail: new FormControl(null, [Validators.required, Validators.email]),
-      signupmobile: new FormControl('', [Validators.required, Validators.pattern("^((\\+61-?)|0)?[0-9]{10}$")]),
-      password: new FormControl('', [Validators.required, this.patternValidator()])
+      firstName: new FormControl('', CustomValidators.required('First name is Required.')),
+      lastName: new FormControl('', CustomValidators.required('Last name is Required.')),
+      customerEmail: new FormControl(null, [
+        CustomValidators.required('Email is required.'),
+        CustomValidators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+          'Email is incorrect')
+      ]),
+      signupmobile: new FormControl('', [
+        CustomValidators.required('Mobile number is Required.'),
+        CustomValidators.pattern(/[0-9]{10}/, 'Mobile number in incorrect')
+      ]),
+      password: new FormControl('', [
+        CustomValidators.required('Password is Required.'),
+        CustomValidators.pattern(/^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/, 'Please enter a more secure password')
+      ])
     });
 
     //password configure
@@ -79,7 +90,12 @@ export class SignupComponent implements OnInit {
 
   get f() { return this.registerForm.controls; }
 
+  getErrors(controlName: string) {
+    return Object.values(this.registerForm.controls[controlName].errors)[0];
+  }
+
   onSubmit() {
+    this.submissionError = null;
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
       return;
@@ -95,22 +111,30 @@ export class SignupComponent implements OnInit {
       login_link: "http://localhost:4200/login",
       contactus_link: "http://localhost:4200/login"
     };
-    this.submitting = true;
+
     this.restApiService.post(URL_signup, data).pipe(finalize(() => this.submitting = false)).subscribe(
-      (sucess) => { this.submissionComplete = true; },
-      (error) => { console.log(error) }
+      () => { this.submissionComplete = true; },
+      (resp) => {
+        if (resp.error?.error_msg) this.submissionError = resp.error.error_msg;
+        else this.submissionError = 'An error has occured. Please try again later';
+      }
     )
   }
 
-  patternValidator(): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } => {
-      if (!control.value) {
-        return null;
-      }
-      // const regex = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
-      const regex = new RegExp('^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])');
-      const valid = regex.test(control.value);
-      return valid ? null : { invalidPassword: true };
-    };
+  handleError(error: any) {
+    console.log('encountered an error', error);
+
   }
+
+  // patternValidator(): ValidatorFn {
+  //   return (control: AbstractControl): { [key: string]: any } => {
+  //     if (!control.value) {
+  //       return null;
+  //     }
+  //     // const regex = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
+  //     const regex = new RegExp('^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$');
+  //     const valid = regex.test(control.value);
+  //     return valid ? null : { invalidPassword: true };
+  //   };
+  // }
 }

@@ -57,13 +57,23 @@ export class AuthService {
     ))
   }
 
+  logout(){
+    this._accessToken.next(null);
+    this._loggedUser.next(null);
+
+    this.storeageService.remove('authToken')
+    this.storeageService.remove('user')
+    this.storeageService.remove('authTokenExpiry')
+  }
+
   handleLoginResp(data: any) {
     let user = ReadUserDetails(data.user_details);
+    let token = 'Bearer ' + data.access_token;
     this._loggedUser.next(user);
-    this._accessToken.next(data.access_token);
+    this._accessToken.next(token);
 
     //save into storage
-    this.storeageService.store('authToken', data.access_token);
+    this.storeageService.store('authToken', token);
     this.storeageService.store('authTokenExpiry', data.expires_at);
     this.storeageService.store('user', user);
   }

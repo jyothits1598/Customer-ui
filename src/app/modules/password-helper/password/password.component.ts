@@ -45,6 +45,12 @@ export class PasswordComponent implements AfterContentInit, OnDestroy {
   validateUpperCase() {
     return this.inputHtmlElement.value.match(/[A-Z]/);
   }
+  validateDigit() {
+    return this.inputHtmlElement.value.match(/[1-9]/);
+  }
+  ValidateSpecialChar(){
+    return this.inputHtmlElement.value.match(/\W/)
+  }
 
   ngOnDestroy(): void {
     if (this._focusUnListner) this._focusUnListner();

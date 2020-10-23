@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log('called login ', this.loginForm.value);
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
     }

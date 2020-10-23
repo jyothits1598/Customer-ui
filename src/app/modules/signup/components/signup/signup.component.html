@@ -9,6 +9,7 @@
         </div>
     </div>
     <div class="row">
+        <div *ngIf="submissionError" class="col-md-12">{{submissionError}}</div>
         <div class="col-md-12">
             <div *ngIf="!submissionComplete; else regComplete" class="margins-center" style="margin-top:40px">
                 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
@@ -16,10 +17,10 @@
                         <div class="col-md-6">
                             <div class="form-group form-group--margin">
                                 <div class="label-inputs"> First name <b class="m-star">*</b> </div>
-                                <input type="text" class="form-input" placeholder="e.g. John"
+                                <input type="text" class="form-input error-highlight" placeholder="e.g. John"
                                     formControlName="firstName">
                                 <div *ngIf="f.firstName.touched && f.firstName.errors " class="error-mez">
-                                    <div *ngIf="f.firstName.errors.required">First name is required</div>
+                                    <div>First name is required.</div>
                                 </div>
                             </div>
                         </div>
@@ -29,7 +30,7 @@
                                 <input type="text" class="form-input" placeholder="e.g. Cena"
                                     formControlName="lastName">
                                 <div *ngIf="f.lastName.touched && f.lastName.errors" class="error-mez">
-                                    <div *ngIf="f.lastName.errors.required">Last name is required</div>
+                                    <div>Last name is required.</div>
                                 </div>
                             </div>
                         </div>
@@ -41,8 +42,7 @@
                                 <input type="text" class="form-input" placeholder="e.g. name@gmail.com"
                                     formControlName="customerEmail">
                                 <div *ngIf="f.customerEmail.touched && f.customerEmail.errors " class="error-mez">
-                                    <div *ngIf="f.customerEmail.errors.required">Email is required</div>
-                                    <div *ngIf="f.customerEmail.errors.email"> Please enter a valid email address </div>
+                                    <div> {{getErrors('customerEmail')}} </div>
                                 </div>
                             </div>
                         </div>
@@ -54,8 +54,7 @@
                                 <input class="form-input" placeholder="e.g. 0412345678" formControlName="signupmobile"
                                     minlength="10" maxlength="10">
                                 <div *ngIf="f.signupmobile.touched && f.signupmobile.errors" class="error-mez">
-                                    <div *ngIf="f.signupmobile.errors.required"> Please enter mobile number </div>
-                                    <div *ngIf="f.signupmobile.errors.pattern"> Please enter a valid mobile number</div>
+                                    <div> {{getErrors('signupmobile')}}</div>
                                 </div>
                             </div>
                         </div>
@@ -70,12 +69,9 @@
                                         placeholder="Must be at least 8 characters">
                                 </app-password>
                                 <span toggle="#password" class="fa fa-eye-slash field-icon toggle-password"></span>
-                                <div *ngIf="(f.password.touched) && f.password.errors" class="error-mez">
-                                    <div *ngIf="f.password.errors.required">Please enter password</div>
-                                    <div *ngIf="f.password.errors.minlength">Password must be at least 8 characters
-                                    </div>
-                                    <div *ngIf="f.password.errors?.invalidPassword">
-                                        Valid password must be 8 or more characters, lowercase & Uppercase letter
+                                <div *ngIf="f.password.touched && f.password.errors" class="error-mez">
+                                    <div>
+                                        {{getErrors('password')}}
                                     </div>
                                 </div>
                                 <!-- <div id="pswd_info">
