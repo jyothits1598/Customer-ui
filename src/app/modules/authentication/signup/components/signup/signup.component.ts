@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl, FormC
 import { finalize } from 'rxjs/operators';
 import { URL_signup } from 'src/api/authentication';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
-import { CustomValidators } from 'src/app/modules/helpers/validators';
+import { CustomValidators } from 'src/app/helpers/validators';
 import { APP_LINK } from 'src/environments/environment';
 declare let $: any;
 

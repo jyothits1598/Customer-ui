@@ -5,7 +5,7 @@ import { finalize } from 'rxjs/operators';
 import { URL_login } from 'src/api/authentication';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
-import { CustomValidators } from 'src/app/modules/helpers/validators';
+import { CustomValidators } from 'src/app/helpers/validators';
 
 @Component({
   selector: 'app-login',
