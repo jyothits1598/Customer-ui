@@ -7,3 +7,5 @@ export const environment = {
 
 /* UAT server */
 export const API_URL_LINK = 'https://uat.api.menuzapp.com/';
+
+export const APP_LINK = 'http://uat.api.menuzapp.com/';

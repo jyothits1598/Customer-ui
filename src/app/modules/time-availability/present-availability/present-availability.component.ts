@@ -16,11 +16,9 @@ export class PresentAvailabilityComponent implements OnInit {
   @Input() set availability(availability: Array<TimeAvailability>) {
     if (availability) {
       this._availability = availability;
-console.log(this._availability);
     }
     for (const a in availability) {
       if (this.checkAvailability(availability[a])) this.openTimings = availability[a];
-console.log(this.checkAvailability(availability[a]));
     }
   }
 
@@ -36,7 +34,7 @@ console.log(this.checkAvailability(availability[a]));
 
   checkAvailability(availability: TimeAvailability): boolean {
     if (availability.markedAsClose) return false;
-    
+
     let day;
     switch (availability.day) {
       case 'sunday':

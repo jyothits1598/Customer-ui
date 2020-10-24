@@ -4,7 +4,9 @@ import { StoreDetailsComponent } from '../modules/stores/components/store-detail
 import { LayoutComponent } from './pages/layout/layout.component';
 
 const routes: Routes = [
-  { path: 'store-details', component: StoreDetailsComponent},
+  { path: 'store-details', component: StoreDetailsComponent },
+  { path: 'verify', loadChildren: () => import('src/app/modules/authentication/user-verification/user-verification.module').then(m => m.UserVerificationModule) },
+  { path: 'forgot-password', loadChildren: () => import('src/app/modules/authentication/forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule) },
   {
     path: '',
     component: LayoutComponent,
@@ -19,11 +21,11 @@ const routes: Routes = [
       },
       {
         path: 'signup',
-        loadChildren: () => import('src/app/modules/signup/signup.module').then(m => m.SignupModule)
+        loadChildren: () => import('src/app/modules/authentication/signup/signup.module').then(m => m.SignupModule)
       },
       {
-        path: 'login',
-        loadChildren: () => import('src/app/modules/login/login.module').then(m => m.LoginModule)
+        path: 'signin',
+        loadChildren: () => import('src/app/modules/authentication/login/login.module').then(m => m.LoginModule)
       },
       {
         path: '**',
