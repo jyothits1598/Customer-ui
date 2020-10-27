@@ -8,10 +8,12 @@ import { NavbarModule } from '../modules/navbar/navbar.module';
 import { HomeModule } from '../modules/home/home.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpHeaderInterceptor } from './interceptors/http-header';
+import { SnackBarComponent } from './components/snack-bar/snack-bar/snack-bar.component';
+import { SnackBarContainerComponent } from './components/snack-bar/snack-bar-container/snack-bar-container.component';
 
 
 @NgModule({
-  declarations: [CoreComponent, LayoutComponent],
+  declarations: [CoreComponent, LayoutComponent, SnackBarComponent, SnackBarContainerComponent],
   imports: [
     CommonModule,
     CoreRoutingModule,

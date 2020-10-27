@@ -46,7 +46,7 @@ export class ForgotPasswordComponent implements OnInit {
       URL_forgotPassword,
       {
         email: this.form.controls.email.value,
-        next_url: APP_LINK + 'newpassword'
+        next_url: APP_LINK + 'reset-password'
       }
     ).pipe(finalize(() => this.sending = false)).subscribe(
       (resp) => {

@@ -6,9 +6,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { TimeAvailabilityModule } from '../time-availability/time-availability.module';
 import { NearbyStoresComponent } from './pages/nearby-stores/nearby-stores.component';
 import { IncrementalSearchModule } from '../incremental-search/incremental-search.module';
+import { StoreHeartComponent } from './components/store-heart/store-heart.component';
 
 @NgModule({
-  declarations: [StoreListComponent, StoreCardComponent, NearbyStoresComponent],
+  declarations: [StoreListComponent, StoreCardComponent, NearbyStoresComponent, StoreHeartComponent],
   imports: [
     CommonModule,
     SharedModule,

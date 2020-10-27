@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'store-details', component: StoreDetailsComponent },
   { path: 'verify', loadChildren: () => import('src/app/modules/authentication/user-verification/user-verification.module').then(m => m.UserVerificationModule) },
   { path: 'forgot-password', loadChildren: () => import('src/app/modules/authentication/forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule) },
+  { path: 'reset-password', loadChildren: () => import('src/app/modules/authentication/reset-password/reset-password.module').then(m => m.ResetPasswordModule) },
   {
     path: '',
     component: LayoutComponent,

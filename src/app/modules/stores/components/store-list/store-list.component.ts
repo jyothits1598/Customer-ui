@@ -18,7 +18,6 @@ export class StoreListComponent implements OnInit {
   @Input() set filter(f: StoreFilter) {
     this._filter = f;
     this.stores = [];
-    console.log('inside store list setter and here is the filter', f);
     this.pagination = new StorePagination(this.storeData.allStores.bind(this.storeData), this._filter);
     this.pagination.getNext().subscribe(stores => this.appendStores(stores));
   };
