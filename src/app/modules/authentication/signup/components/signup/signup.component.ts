@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { URL_signup } from 'src/api/authentication';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
 import { CustomValidators } from 'src/app/helpers/validators';
 import { APP_LINK } from 'src/environments/environment';
-declare let $: any;
 
 @Component({
   selector: 'app-signup',
@@ -19,7 +19,7 @@ export class SignupComponent implements OnInit {
   submissionError: string;
   submissionComplete: boolean = false;
 
-  constructor(private restApiService: RestApiService) { }
+  constructor(private restApiService: RestApiService,private router: Router) { }
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({

@@ -5,7 +5,8 @@
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1;
+    z-index: 1; padding: 12px;
+    // height:64px;
 }
 .section-middle {
     background: var(--color-background-secondary);
@@ -19,7 +20,7 @@
     font-size: 14px;
     line-height: 20px;
     color: var(--color-primary);
-    padding: 12px;
+    // padding: 12px;
 }
 .nav-bar div {
     padding: 12px;
@@ -28,9 +29,13 @@
     font-style: normal;
     font-weight: bold;
     font-size: 14px;
-    line-height: 20px;
+    line-height: 45px;
     color: var(--color-boldlevelcolor);
-    padding: 12px;
+}
+.bck {
+    background: var(--color-background-tertiary);
+    border-radius: 24px;
+    padding: 8px 16px;
 }
 .nav-content {
     height: 48px;
@@ -152,7 +157,7 @@
 
 /* All buttons styles */
 .std-button {
-    border-radius: 0;
+    border-radius: 6px;
     border: none;
     outline: none !important;
     font-size: 16px;
@@ -172,7 +177,8 @@
     }
     &--transparency {
         color: var(--color-primary);
-        background: #fafafa;
+        background: var(--color-background);
+        margin-left:10px;
     }
     &--transparency:hover {
         color: var(--color-primary);
@@ -181,6 +187,7 @@
         color: var(--color-primary);
         background: #fafafa;
         width: 100%;
+        
     }
     &--transparency1:hover {
         color: var(--color-primary);
@@ -272,5 +279,5 @@
 }
 
 input.ng-invalid.ng-touched.error-highlight {
-    border: 1px solid red;
+    border: 2px solid var(--color-failure);
 }

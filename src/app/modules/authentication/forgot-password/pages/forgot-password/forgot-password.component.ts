@@ -29,6 +29,12 @@ export class ForgotPasswordComponent implements OnInit {
     ])
   })
 
+  get f() { return this.form.controls; }
+
+  getErrors(controlName: string) {
+    return Object.values(this.form.controls[controlName].errors)[0];
+  }
+
   submit() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();

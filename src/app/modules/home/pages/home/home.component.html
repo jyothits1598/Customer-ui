@@ -10,21 +10,24 @@
         </div>
     </div>
 </div>
-
-<div style="background: #fff;">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="signup-panel">
-                    <div class="std-heading-3" style="margin-bottom: 30px;">
-                        Sign up and get 5% off all food for 30 days
+<div *ngIf="isLoggedin$ | async; else bckYellow"></div>
+<ng-template #bckYellow>
+    <div style="background: #fff;" >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="signup-panel">
+                        <div class="std-heading-3" style="margin-bottom: 30px;">
+                            Sign up and get 5% off all food for 30 days
+                        </div>
+                        <input type="button" class="std-button std-button--primary" value="Sign up" routerLink="/signup">
+                        <input type="button" class="std-button std-button--transparency" value="Login" routerLink="/signin">
                     </div>
-                    <input type="button" class="std-button std-button--primary" value="Sign up now" routerLink="/signup">
                 </div>
             </div>
         </div>
     </div>
-</div>
+</ng-template>
 
 <section class="table-responsive text-center" style="margin-top:1rem">
     <ul class="resnt-menu-top-tabs u-margin-bottom-medium" style="margin-bottom:0">

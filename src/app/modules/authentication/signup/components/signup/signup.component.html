@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <div style="margin-top:100px">
                 <div class="margins-center">
-                    <h1 class="signup-header"> Create your free account </h1>
+                   <h1 class="signup-header" > Create your free account </h1>
                 </div>
             </div>
         </div>
@@ -11,7 +11,7 @@
     <div class="row">
         <div *ngIf="submissionError" class="col-md-12">{{submissionError}}</div>
         <div class="col-md-12">
-            <div *ngIf="!submissionComplete; else regComplete" class="margins-center" style="margin-top:40px">
+            <div *ngIf="!submissionComplete" class="margins-center" style="margin-top:40px">
                 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
                     <div class="row">
                         <div class="col-md-6">
@@ -27,7 +27,7 @@
                         <div class="col-md-6">
                             <div class="form-group form-group--margin">
                                 <div class="label-inputs"> Last name <b class="m-star">*</b> </div>
-                                <input type="text" class="form-input" placeholder="e.g. Cena"
+                                <input type="text" class="form-input error-highlight" placeholder="e.g. Cena"
                                     formControlName="lastName">
                                 <div *ngIf="f.lastName.touched && f.lastName.errors" class="error-mez">
                                     <div>Last name is required.</div>
@@ -39,7 +39,7 @@
                         <div class="col-md-12">
                             <div class="form-group form-group--margin">
                                 <div class="label-inputs"> Email <b class="m-star">*</b> </div>
-                                <input type="text" class="form-input" placeholder="e.g. name@gmail.com"
+                                <input type="text" class="form-input error-highlight" placeholder="e.g. name@gmail.com"
                                     formControlName="customerEmail">
                                 <div *ngIf="f.customerEmail.touched && f.customerEmail.errors " class="error-mez">
                                     <div> {{getErrors('customerEmail')}} </div>
@@ -51,7 +51,7 @@
                         <div class="col-md-12">
                             <div class="form-group form-group--margin">
                                 <div class="label-inputs"> Mobile <b class="m-star">*</b> </div>
-                                <input class="form-input" placeholder="e.g. 0412345678" formControlName="signupmobile"
+                                <input class="form-input error-highlight" placeholder="e.g. 0412345678" formControlName="signupmobile"
                                     minlength="10" maxlength="10">
                                 <div *ngIf="f.signupmobile.touched && f.signupmobile.errors" class="error-mez">
                                     <div> {{getErrors('signupmobile')}}</div>
@@ -65,10 +65,10 @@
                                 <div class="label-inputs"> Password <b class="m-star">*</b> </div>
                                 <app-password [showHint]="true">
                                     <input passwordInput type="password" id="password"
-                                        class="form-input custom-password-eye" formControlName="password"
+                                        class="form-input error-highlight" formControlName="password"
                                         placeholder="Must be at least 8 characters">
                                 </app-password>
-                                <span toggle="#password" class="fa fa-eye-slash field-icon toggle-password"></span>
+                                <!-- <span toggle="#password" class="fa fa-eye-slash field-icon toggle-password"></span> -->
                                 <div *ngIf="f.password.touched && f.password.errors" class="error-mez">
                                     <div>
                                         {{getErrors('password')}}
