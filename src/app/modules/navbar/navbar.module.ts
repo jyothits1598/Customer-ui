@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { LocationModule } from '../location/location-selector.module';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -10,8 +11,9 @@ import { LocationModule } from '../location/location-selector.module';
   declarations: [NavbarComponent],
   imports: [
     CommonModule,
+    RouterModule,
     SharedModule,
-    LocationModule
+    LocationModule,
   ],
   exports: [NavbarComponent]
 })
