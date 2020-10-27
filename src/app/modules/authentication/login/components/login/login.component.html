@@ -6,20 +6,20 @@
                 <div class="signin-card">
                     <h3 class="std-heading-3 text-center"> menuzapp login </h3><br>
                     <div class="form-group form-group--margin">
-                        <input formControlName="email" type="text" class="form-input" placeholder="Email">
+                        <input formControlName="email" type="text" class="form-input error-highlight" placeholder="Email">
+                        <ng-container *ngIf="loginForm.controls.email.invalid && loginForm.controls.email.touched">
+                            <div class="error-mez" >{{returnErrors('email')}}</div>
+                        </ng-container>
                     </div>
-                    <ng-container *ngIf="loginForm.controls.email.invalid && loginForm.controls.email.touched">
-                        <div>{{returnErrors('email')}}</div>
-                    </ng-container>
                     <app-password>
                         <div class="form-group form-group--margin">
-                            <input formControlName="password" passwordInput type="password" class="form-input"
+                            <input formControlName="password" passwordInput type="password" class="form-input error-highlight"
                                 placeholder="Password">
+                            <ng-container *ngIf="loginForm.controls.password.invalid && loginForm.controls.password.touched" >
+                                <div class="error-mez" >{{returnErrors('password')}}.</div>
+                            </ng-container>
                         </div>
                     </app-password>
-                    <ng-container *ngIf="loginForm.controls.password.invalid && loginForm.controls.password.touched">
-                        <div>{{returnErrors('password')}}.</div>
-                    </ng-container>
                     <div class="form-group" style="margin-top:10px;">
                         <button [disabled]="loggingIn" type="submit" class="std-button std-button--blue"><span
                                 *ngIf="!loggingIn; else inProgressTemp">Sign in</span> </button>
@@ -29,9 +29,7 @@
         </div>
     </div>
 </div>
-
-<button *ngIf="showButton" [@ab]="animationState" style="border: 0; padding: 10px;" (click)="showButton = false">Animated</button>
-
+<p style="text-align: center;color:#353FA8;font-weight:bold"><a routerLink="/forgot-password" style="text-decoration: none;"> Forgot password </a> </p>
 <ng-template #inProgressTemp>
     <span>Signing in...</span>
 

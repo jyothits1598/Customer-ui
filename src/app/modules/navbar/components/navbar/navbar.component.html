@@ -1,75 +1,49 @@
-<div class="container">
+<!-- <div class="container">
     <div class="row">
         <div class="col-md-12">
             <div class="d-flex justify-content-between nav-content">
                 <div style="outline: 0;cursor: pointer;line-height: 48px;">
-                    <img class="only-big" src="assets/svg/Logo_w.svg">
-                    <img class="only-small" src="assets/images/Logo - Icon only.png">
+                    <a routerLink="/" style="text-decoration: none;cursor: pointer;"> 
+                    <img class="only-big" src="assets/svg/Logo_w.svg" >
+                    <img class="only-small" src="assets/images/Logo - Icon only.png"> </a>
                 </div>
                 <div class="location-text">
-                    <!-- <span style="cursor: pointer;"><b class="location"> Tarragindi </b> &nbsp;<img src="../../../../../assets/images/ico_dropdown.png" ></span> -->
                     <location-selector></location-selector>
                 </div>
                 <div class="only-small"></div>
-                <div class="d-none d-lg-block">
-                    <ul *ngIf="isLoggedin$ | async; else signIn" class="menu">
+                <div class="d-none d-lg-block" >
+                    <ul class="menu">
                         <li> Favourites </li>
                         <li> Notifications </li>
                         <li> Settings </li>
-                        <li (click)="logout()"> logout </li>
-                        <!-- <li style="background:#353FA8;color:#fff;padding: 10px;cursor: pointer;" routerLink="/login"> Login </li> -->
+                        <li (click)="logout()" style="cursor:pointer;background:#353FA8;color:#fff;padding: 10px" *ngIf="isLoggedin$ | async"> Logout </li>
                     </ul>
                 </div>
-
-                <ng-template #signIn>
+            </div>
+        </div>
+    </div>
+</div> -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-between">
+                <div class="location-text">
+                    <span style="margin-right:16px"> <img src="assets/images/ico_menu.png">  </span>
+                    <span class="bck"> <location-selector></location-selector> </span>
+                </div>
+                <div style="outline: 0;cursor: pointer;line-height: 48px;">
+                    <a href="/" style="text-decoration: none;cursor: pointer;"> 
+                    <img src="assets/svg/Logo_w.svg"> </a>
+                </div>
+                <div class="d-none d-lg-block" >
                     <ul class="menu">
-                        <!-- <li (click)="routeToLogin()"> Sign In </li> -->
-                        <li routerLink="/signin"> Sign In </li>
-                        <!-- <li style="background:#353FA8;color:#fff;padding: 10px;cursor: pointer;" routerLink="/login"> Login </li> -->
+                        <li> <img src="assets/images/ico_home.png" > </li>
+                        <li> <img src="assets/images/ico_heart.png" > </li>
+                        <li> <img src="assets/images/ico_bell_active.png" > </li>
+                        <li (click)="logout()" style="cursor:pointer;background:#353FA8;color:#fff;padding: 10px" *ngIf="isLoggedin$ | async"> Logout </li>
                     </ul>
-                </ng-template>
-            </div>
-        </div>
-    </div>
-</div>
-<!--------------------------- popup search items ------------------->
-<!-- <div class="search-stores-popup" id="search_list" style="display:none"> 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="d-flex justify-content-between nav-content">
-                    <div style="line-height: 48px;">
-                        <img src="./../../../../../assets/svg/Logo.svg">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="input-container" style="margin-bottom:16px;">
-                    <img src="../../../../../assets/images/ico_arrow_left.png" class="input-img" (click)="backsearch()" >
-                    <input type="text" class="input-border" >
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!--------------------------- popup search items end ------------------->
-
-<!-- <ng-template #searchModal>
-    <div class="modal-body" style="padding: 0;">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="input-container">
-                    <img src="../../../../../assets/images/ico_arrow_left.png" class="input-img-top">
-                    <input type="text" class="input-search-border"  placeholder="enter address or suburb" >
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-               <div class="locate">
-                    <span> <img src="../../../../../assets/images/ico_navigation.png"><span style="padding-left:10px"> Use my current location </span>  </span>
-               </div>
-            </div>
-        </div>
-    </div>
-</ng-template> -->

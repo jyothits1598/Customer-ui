@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+  isLoggedin$: Observable<boolean>;
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.isLoggedin$ = this.authService.isLoggedIn();
   }
 
 }

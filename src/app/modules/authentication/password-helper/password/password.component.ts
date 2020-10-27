@@ -57,8 +57,4 @@ export class PasswordComponent implements AfterContentInit, OnDestroy {
     if (this._blurUnListner) this._blurUnListner();
   }
 
-  debug() {
-    console.log('clickced');
-  }
-
 }
