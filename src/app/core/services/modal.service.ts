@@ -1,7 +1,7 @@
 import { ComponentFactoryResolver, Injectable, Injector, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { ComponentPortal, ComponentType, PortalInjector, TemplatePortal } from '@angular/cdk/portal';
-import { ComponentModalRef, ModalRef } from '../model/modal';
+import { ComponentModalRef, ModalConfig, ModalRef } from '../model/modal';
 import { Component } from '@angular/compiler/src/core';
 
 @Injectable({
@@ -18,12 +18,12 @@ export class ModalService {
     private resolver: ComponentFactoryResolver,
     private injector: Injector) { }
 
-  openTemplateModal(template: TemplateRef<any>) {
-    let config = new OverlayConfig();
-    config.hasBackdrop = true;
-    config.positionStrategy = this.overlay.position().global().centerHorizontally().top('75px');
+  openTemplateModal(template: TemplateRef<any>, config: ModalConfig = null) {
+    let overlayConfig = new OverlayConfig();
+    overlayConfig.hasBackdrop = true;
+    overlayConfig.positionStrategy = config?.yPosition ? this.overlay.position().global().centerHorizontally().top(config.yPosition) : this.overlay.position().global().centerHorizontally().centerVertically();
 
-    let overLayRef = this.overlay.create(config);
+    let overLayRef = this.overlay.create(overlayConfig);
     let modalRef = new ModalRef(overLayRef);
     let tempPortal = new TemplatePortal(template, this._viewContainerRef, { $implicit: modalRef });
     overLayRef.attach(tempPortal);
@@ -31,13 +31,12 @@ export class ModalService {
     return modalRef;
   }
 
-  openComponentModal(component) {
-    let config = new OverlayConfig();
-    config.hasBackdrop = true;
-    config.positionStrategy = this.overlay.position().global().centerHorizontally().top('75px');
-    // let componentFactory = this.resolver.resolveComponentFactory(component);
-    // componentFactory.
-    let overLayRef = this.overlay.create(config);
+  openComponentModal(component: any, config: ModalConfig = null) {
+    let modalConfig = new OverlayConfig();
+    modalConfig.hasBackdrop = true;
+    modalConfig.positionStrategy = config?.yPosition ? this.overlay.position().global().centerHorizontally().top(config.yPosition) : this.overlay.position().global().centerHorizontally().centerVertically();
+
+    let overLayRef = this.overlay.create(modalConfig);
 
     let modalRef = new ComponentModalRef(overLayRef, null);
     let compPortal = new ComponentPortal(component, null, this.createInjector(modalRef, this.injector));

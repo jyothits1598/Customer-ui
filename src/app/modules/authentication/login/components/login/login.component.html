@@ -28,8 +28,9 @@
             </form>
         </div>
     </div>
-
 </div>
+
+<button *ngIf="showButton" [@ab]="animationState" style="border: 0; padding: 10px;" (click)="showButton = false">Animated</button>
 
 <ng-template #inProgressTemp>
     <span>Signing in...</span>

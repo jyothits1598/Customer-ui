@@ -10,7 +10,7 @@ export class HttpHeaderInterceptor implements HttpInterceptor {
   token: string;
 
   constructor(private authService: AuthService) {
-    this.authService.isLoggedIn().subscribe(isLoggedIn => {
+    this.authService.isLoggedIn$().subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn
       if (isLoggedIn) this.token = this.authService.token;
     });
