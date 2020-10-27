@@ -10,6 +10,7 @@ export interface Store {
     description: string,
     googleUrl: string,
     facebookUrl: string,
+    isFavourite: boolean,
 }
 
 export function ReadStore(data: any): Store {
@@ -23,5 +24,6 @@ export function ReadStore(data: any): Store {
         description: data.description,
         googleUrl: data.google_business_url,
         facebookUrl: data.facebook_url,
+        isFavourite : false
     };
 }

@@ -25,7 +25,7 @@ export class HttpHeaderInterceptor implements HttpInterceptor {
   getHeaders(): HttpHeaders {
     if (this.isLoggedIn) return new HttpHeaders({
       'Access-Control-Allow-Origin': '*',
-      'Autherization': this.token
+      'Authorization': this.token
     })
     else return new HttpHeaders({
       'Access-Control-Allow-Origin': '*',
