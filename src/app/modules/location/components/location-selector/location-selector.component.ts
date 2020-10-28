@@ -22,7 +22,7 @@ export class LocationSelectorComponent implements OnInit {
   }
 
   showSelectorModal() {
-    this.modalService.openComponentModal(LocationPanelComponent);
+    this.modalService.openComponentModal(LocationPanelComponent, {yPosition: '75px'});
   }
 
 }

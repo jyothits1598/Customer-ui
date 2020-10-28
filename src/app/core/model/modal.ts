@@ -13,10 +13,15 @@ export class ModalRef {
     }
 }
 
-export class ComponentModalRef extends ModalRef{
+export class ComponentModalRef extends ModalRef {
     instance: any;
-    constructor(overLayRef: OverlayRef, instance: any){
+    constructor(overLayRef: OverlayRef, instance: any) {
         super(overLayRef);
         this.instance = instance;
     }
+}
+
+export interface ModalConfig {
+    yPosition?: string,
+    isDismissable?: boolean
 }

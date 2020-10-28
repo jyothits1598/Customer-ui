@@ -22,8 +22,12 @@ export class AuthService {
     return this._accessToken.value;
   }
 
-  isLoggedIn() {
+  isLoggedIn$() {
     return this._accessToken.asObservable().pipe(map(token => !!token))
+  }
+
+  get isLoggedIn(): boolean {
+    return !!this._accessToken.value;
   }
 
   initializeAuth() {
@@ -57,7 +61,7 @@ export class AuthService {
     ))
   }
 
-  logout(){
+  logout() {
     this._accessToken.next(null);
     this._loggedUser.next(null);
 

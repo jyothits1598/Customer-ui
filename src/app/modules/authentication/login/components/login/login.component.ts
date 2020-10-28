@@ -6,15 +6,41 @@ import { URL_login } from 'src/api/authentication';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
 import { CustomValidators } from 'src/app/helpers/validators';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  animations: [
+    trigger('ab', [
+      // ...
+      state('a', style({
+        backgroundColor: 'pink'
+      })),
+      state('b', style({
+        backgroundColor: 'red'
+      })),
+      // transition('a => b', [
+      //   animate('1s')
+      // ]),
+      // transition('b => a', [
+      //   animate('0.5s')
+      // ]),
+      transition('a => void', [
+        animate('0.5s')
+      ]),
+    ]),
+  ],
 })
 export class LoginComponent implements OnInit {
   loggingIn: boolean = false;
   backendErrorMessage: string;
+
+  animationState = 'a';
+  showButton = true;
+
   constructor(private authService: AuthService,
     private router: Router) { }
 

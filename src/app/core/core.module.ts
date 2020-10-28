@@ -10,10 +10,12 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpHeaderInterceptor } from './interceptors/http-header';
 import { SnackBarComponent } from './components/snack-bar/snack-bar/snack-bar.component';
 import { SnackBarContainerComponent } from './components/snack-bar/snack-bar-container/snack-bar-container.component';
+import { LoginPromptComponent } from './components/login-prompt/login-prompt.component';
+import { HttpAuthErrorInterceptor } from './interceptors/http-auth-error.interceptor';
 
 
 @NgModule({
-  declarations: [CoreComponent, LayoutComponent, SnackBarComponent, SnackBarContainerComponent],
+  declarations: [CoreComponent, LayoutComponent, SnackBarComponent, SnackBarContainerComponent, LoginPromptComponent],
   imports: [
     CommonModule,
     CoreRoutingModule,
@@ -25,6 +27,11 @@ import { SnackBarContainerComponent } from './components/snack-bar/snack-bar-con
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpHeaderInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpAuthErrorInterceptor,
       multi: true
     },
     {
