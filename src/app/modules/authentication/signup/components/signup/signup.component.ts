@@ -101,6 +101,7 @@ export class SignupComponent implements OnInit {
       return;
     }
 
+    this.submitting = true;
     let data: any = {
       first_name: this.registerForm.value.firstName,
       last_name: this.registerForm.value.lastName,
