@@ -7,9 +7,10 @@ import { TimeAvailabilityModule } from '../time-availability/time-availability.m
 import { NearbyStoresComponent } from './pages/nearby-stores/nearby-stores.component';
 import { IncrementalSearchModule } from '../incremental-search/incremental-search.module';
 import { StoreHeartComponent } from './components/store-heart/store-heart.component';
+import { StoreFavouritesComponent } from './components/store-favourites/store-favourites.component';
 
 @NgModule({
-  declarations: [StoreListComponent, StoreCardComponent, NearbyStoresComponent, StoreHeartComponent],
+  declarations: [StoreListComponent, StoreCardComponent, NearbyStoresComponent, StoreHeartComponent, StoreFavouritesComponent],
   imports: [
     CommonModule,
     SharedModule,

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { StoreDetailsComponent } from '../modules/stores/components/store-details/store-details.component';
+import { StoreFavouritesComponent } from '../modules/stores/components/store-favourites/store-favourites.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 
 const routes: Routes = [
@@ -23,14 +24,9 @@ const routes: Routes = [
         path: 'search',
         loadChildren: () => import('src/app/modules/search/search.module').then(m => m.SearchModule)
       },
-      // {
-      //   path: 'signup',
-      //   loadChildren: () => import('src/app/modules/authentication/signup/signup.module').then(m => m.SignupModule)
-      // },
-      // {
-      //   path: 'signin',
-      //   loadChildren: () => import('src/app/modules/authentication/login/login.module').then(m => m.LoginModule)
-      // },
+      {
+        path: 'favourites', component: StoreFavouritesComponent
+      },
       {
         path: '**',
         redirectTo: '',
