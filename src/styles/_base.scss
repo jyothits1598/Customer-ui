@@ -16,66 +16,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background: #fff;
 }
-.std-button {
-  border-radius: 0;
-  border: none;
-  outline: none !important;
-  font-size: 16px;
-  font-family: DM Sans;
-  font-style: normal;
-  font-weight: bold;
-  margin: 0 auto;
-  padding: 12px 16px;
 
-  &--primary {
-      color: var(--color-background);
-      background: var(--color-primary);
-  }
-  &--primary:hover {
-      color: var(--color-background);
-  }
-  &--transparency {
-      color: var(--color-primary);
-      background: #fafafa;
-  }
-  &--transparency:hover {
-      color: var(--color-primary);
-  }
-  &--transparency1 {
-      color: var(--color-primary);
-      background: #fafafa;
-      width:100%;
-  }
-  &--transparency1:hover {
-      color: var(--color-primary);
-  }
-  &--blue {
-      color: var(--color-background);
-      background: var(--color-primary);
-      width:100%;
-  }
-  &--blue:hover {
-      color: var(--color-background);
-  }
-  &--plane {
-      color: var(--color-primary);
-      background: var(--color-background);
-  }
-  &--redtransparency {
-      color: var(--color-failure);
-      background: var(--color-background-secondary);
-  }
-  &--redtransparency:hover {
-      color: var(--color-failure);
-  }
-  &--green {
-      color: var(--color-background);
-      background: var(--color-success);
-  }
-  &--green:hover {
-      color: var(--color-background);
-  }
-}
 .std-heading-3 {
   font-family: DM Sans;
   font-style: normal;

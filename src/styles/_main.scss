@@ -186,8 +186,7 @@
     &--transparency1 {
         color: var(--color-primary);
         background: #fafafa;
-        width: 100%;
-        
+        margin-left:10px;
     }
     &--transparency1:hover {
         color: var(--color-primary);
@@ -280,4 +279,23 @@
 
 input.ng-invalid.ng-touched.error-highlight {
     border: 2px solid var(--color-failure);
+}
+.navbar-simple {
+    text-align: center;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    margin-bottom: 24px;
+}
+.card-center {
+    background: #FFFFFF;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    margin: 0 auto 25px;     
+    max-width: 430px;
+    padding: 32px;
+}
+.signin-card {
+    margin: 0 auto 25px;     
+    max-width: 312px;
+    padding-top: 40px;
 }

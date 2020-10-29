@@ -7,6 +7,7 @@ export interface Store {
     openingHours: Array<TimeAvailability>
     logo: string,
     address: string,
+    distance:string;
     description: string,
     googleUrl: string,
     facebookUrl: string,
@@ -21,6 +22,7 @@ export function ReadStore(data: any): Store {
         openingHours: ReadAvailability(data.opening_hours),
         logo: data.store_logo,
         address: data.store_address,
+        distance: data.distance,
         description: data.description,
         googleUrl: data.google_business_url,
         facebookUrl: data.facebook_url,

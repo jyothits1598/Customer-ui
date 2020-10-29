@@ -23,19 +23,19 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
-      firstName: new FormControl('', CustomValidators.required('First name is Required.')),
-      lastName: new FormControl('', CustomValidators.required('Last name is Required.')),
+      firstName: new FormControl('', CustomValidators.required('First name is required.')),
+      lastName: new FormControl('', CustomValidators.required('Last name is required.')),
       customerEmail: new FormControl(null, [
         CustomValidators.required('Email is required.'),
         CustomValidators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
           'Email is incorrect')
       ]),
       signupmobile: new FormControl('', [
-        CustomValidators.required('Mobile number is Required.'),
+        CustomValidators.required('Mobile number is required.'),
         CustomValidators.pattern(/[0-9]{10}/, 'Mobile number in incorrect')
       ]),
       password: new FormControl('', [
-        CustomValidators.required('Password is Required.'),
+        CustomValidators.required('Password is required.'),
         CustomValidators.pattern(/^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/, 'Please enter a more secure password')
       ])
     });

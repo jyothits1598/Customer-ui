@@ -1,3 +1,6 @@
+<nav class="navbar-simple">
+    <img src="assets/svg/Logo_w.svg" routerLink="/" style="text-decoration: none;cursor: pointer;outline:none">
+</nav>
 <div class="container">
     <div class="row">
         <div class="col-md-12" *ngIf="backendErrorMessage">{{backendErrorMessage | json}}</div>
@@ -29,7 +32,7 @@
         </div>
     </div>
 </div>
-<p style="text-align: center;color:#353FA8;font-weight:bold"><a routerLink="/forgot-password" style="text-decoration: none;"> Forgot password </a> </p>
+<p class="text-center"><a routerLink="/forgot-password" style="color:#353FA8;text-decoration: none;font-weight:bold"> Forgot password </a></p>
 <ng-template #inProgressTemp>
     <span>Signing in...</span>
 
