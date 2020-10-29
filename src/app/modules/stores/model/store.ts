@@ -26,6 +26,6 @@ export function ReadStore(data: any): Store {
         description: data.description,
         googleUrl: data.google_business_url,
         facebookUrl: data.facebook_url,
-        isFavourite : false
+        isFavourite : data.is_favourite ? true : false
     };
 }

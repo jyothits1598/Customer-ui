@@ -22,7 +22,7 @@ export class InfiniteScrollDirective implements OnDestroy {
     this.intersectionObserver = new IntersectionObserver(this.handleIntersection.bind(this), this.config);
     this.intersectionObserver.observe(this.hostElement.nativeElement);
     this.subs = this.intersectionSubject$.subscribe(
-      () => { console.log('emmited value'); this.scrolled.emit(true) }
+      () => { this.scrolled.emit(true) }
     );
   }
   ngOnDestroy(): void {

@@ -64,6 +64,7 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
+      return;
     }
     this.loggingIn = true;
     this.authService.login(this.loginForm.value).pipe(finalize(() => this.loggingIn = false)).subscribe(
@@ -73,7 +74,6 @@ export class LoginComponent implements OnInit {
   }
 
   handleErrors(error: any) {
-    console.log('inside handle errors', error);
     if (error.error) {
       if (error.error.email) {
         this.loginForm.controls.email.setErrors({ 'backend': error.error.email });
