@@ -8,7 +8,7 @@
             <br><br>
         </div>
         <div *ngIf="pagination.isLoading">Loading....</div>
-        <div *ngIf="!pagination.hasEnded" infiniteScroll #infiniteScroll="infiniteScroll" (scrolled)="handleScrolled()">
+        <div *ngIf="!pagination.hasEnded" [ngStyle]="{'display':  pagination.isLoading? 'none' : 'block' }" infiniteScroll #infiniteScroll="infiniteScroll" (scrolled)="handleScrolled()">
         </div>
         <div *ngIf="pagination.hasEnded && stores.length == 0">No Stores found</div>
     </div>
