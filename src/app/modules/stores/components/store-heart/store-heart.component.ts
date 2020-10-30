@@ -14,7 +14,7 @@ import { StoresDataService } from '../../services/stores-data.service';
   styleUrls: ['./store-heart.component.scss'],
 })
 export class StoreHeartComponent implements OnInit {
-  @Input() store: Store;
+  @Input() store: { id: number, isFavourite: boolean };
   isFavourite: boolean;
   loading: boolean = false;
   constructor(private storeData: StoresDataService,

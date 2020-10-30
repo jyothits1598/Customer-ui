@@ -1,0 +1,102 @@
+<ng-container *ngIf="storeDetail">
+    <div class="store-deatails-nav">
+        <div class="container overflow-container">
+            <div class="navbar-inside">
+                <div class="back-icon">
+                    <img src="../../../../../assets/images/ico_arrow_left.png">
+                </div>
+                <div class="menu-title std-heading-5">
+                    {{storeDetail.name}}
+                </div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <div class="store-wallpaper">
+        <div class="container overflow-container">
+            <div class="col-md-12">
+                <div class="wal-image">
+                    <img [src]="storeDetail.logo">
+                </div>
+                <div class="wallpaper-card">
+                    <table>
+                        <tr>
+                            <td valign="middle">
+                                <img src="../../../../../assets/images/Rectangle 4.png" class="profile-image" />
+                            </td>
+                            <td style="padding-left: 8px;width:100%">
+                                <span class="sub-name"> 225m away </span> &nbsp; <span class="sub-name"> <present-availability [availability]="storeDetail.openingHours"></present-availability> <img src="../../../../../assets/images/ico_circle_filled_small.png"> </span>
+                                <table style="margin-bottom: 3px;">
+                                    <tr>
+                                        <td>
+                                            <div class="store-name"> {{storeDetail.name}} </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    <div style="margin-top:12px;margin-bottom: 28px;">
+                        <span>
+                            <img src="../../../../../assets/images/ico_social_facebook_small.png">
+                            <span class="user-facebook"> <b> Steve Anderson </b> and 125k others </span>
+                        </span>
+                        <span style="padding-left: 10px;">
+                            <span class="user-facebook"> 4.5 &nbsp;<img
+                                    src="../../../../../assets/images/ico_star_small.png"></span>
+                        </span>
+                    </div>
+                    <div class="address-content" style="margin-bottom: 60px;">
+                        {{storeDetail.address}} &nbsp; <span style="color: #353FA8;font-weight: bold;cursor:pointer;">
+                            More info <img src="../../../../../assets/images/ico_right-arrow.png"></span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>
+                            <ul class="chat-icons">
+                                <li> <img src="../../../../../assets/images/heart.png"> </li>
+                                <li> <img src="../../../../../assets/images/chat.png"> </li>
+                                <li> <img src="../../../../../assets/images/share.png"> </li>
+                            </ul>
+                        </span>
+                        <span>
+                            <p class="comment-text"><span> 9 </span> comments </p>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="nav-tab-menu">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <section class="table-responsive" style="margin-top:1rem">
+                        <ul class="resnt-menu-top-tabs u-margin-bottom-medium">
+                            <li class="resnt-menu-top-tabs__item" *ngFor="let category of storeDetail.categories; let i = index">
+                                <a class="resnt-menu-top-tabs__button tabs-menu"
+                                    (click)="handleTabClick(i)"
+                                    [ngStyle]="{'border-bottom':category.name === selectedTab ? '1px solid red' : '' }">
+                                    {{category.name}} </a>
+                            </li>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" label-li">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="catergory-list">
+                        <div #categorySections [id]="category.name" *ngFor="let category of storeDetail.categories">
+                            <store-category [storeCategory]="category"></store-category>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<div *ngIf="loading">Loading...</div>
