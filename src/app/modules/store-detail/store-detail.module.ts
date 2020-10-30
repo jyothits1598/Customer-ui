@@ -6,10 +6,11 @@ import { StoreDetailDataService } from './services/store-detail-data.service';
 import { StoreCategoryComponent } from './components/store-category/store-category.component';
 import { StoreItemCardComponent } from './components/store-item-card/store-item-card.component';
 import { TimeAvailabilityModule } from '../time-availability/time-availability.module';
+import { StoreHeartModule } from '../store-heart/store-heart.module';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':id',
     component: StoreDetailComponent
   }
 ]
@@ -19,7 +20,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    TimeAvailabilityModule
+    TimeAvailabilityModule, 
+    StoreHeartModule
   ],
   providers: [StoreDetailDataService]
 })

@@ -8,7 +8,7 @@ export class StoreDetailDataService {
 
   constructor(private restApiService: RestApiService) { }
 
-  storeDetail(){
-    return this.restApiService.get(URL_StoreDetails(462)).pipe(map(data => ReadStoreDetail(data)));
+  storeDetail(storeId: number){
+    return this.restApiService.get(URL_StoreDetails(storeId)).pipe(map(data => ReadStoreDetail(data)));
   }
 }

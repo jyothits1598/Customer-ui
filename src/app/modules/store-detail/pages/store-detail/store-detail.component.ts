@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { StoreDetail } from 'src/app/modules/store-detail/model/store-detail';
 import { StoreDetailDataService } from '../../services/store-detail-data.service';
@@ -9,6 +10,8 @@ import { StoreDetailDataService } from '../../services/store-detail-data.service
   styleUrls: ['./store-detail.component.scss']
 })
 export class StoreDetailComponent implements OnInit {
+  storeId: number;
+
   intersectionObserver: IntersectionObserver;
   storeDetail: StoreDetail;
   loading: boolean = true;
@@ -17,10 +20,30 @@ export class StoreDetailComponent implements OnInit {
 
 
   @ViewChildren('categorySections') sections: QueryList<ElementRef>;
-  constructor(private storeDetailServ: StoreDetailDataService) { }
+  constructor(private storeDetailServ: StoreDetailDataService,
+    private route: ActivatedRoute) {
+
+  }
 
   ngOnInit(): void {
-    this.storeDetailServ.storeDetail().pipe(finalize(() => this.loading = false)).subscribe(storeDetail => {
+
+    this.route.params.subscribe((param) => {
+      let id = parseInt(param.id);
+      if (id) {
+        this.storeId = id;
+        this.loadStore();
+      }
+    });
+    // this.storeDetailServ.storeDetail().pipe(finalize(() => this.loading = false)).subscribe(storeDetail => {
+    //   this.storeDetail = storeDetail;
+    //   this.initiateObservation();
+    // });
+  }
+
+  loadStore() {
+    this.loading = true;
+    this.storeDetail = null;
+    this.storeDetailServ.storeDetail(this.storeId).pipe(finalize(() => this.loading = false)).subscribe(storeDetail => {
       this.storeDetail = storeDetail;
       this.initiateObservation();
     });
@@ -32,16 +55,18 @@ export class StoreDetailComponent implements OnInit {
       rootMargin: '0px',
       threshold: 0.25
     }
-    this.selectedTab = this.storeDetail.categories[0].name;
-    setTimeout(() => {
-      this.intersectionObserver = new IntersectionObserver((e) => {
-        if (e[0].isIntersecting) this.selectedTab = e[0].target.id;
-      }, config);
-      this.sections.forEach(ne => this.intersectionObserver.observe(ne.nativeElement))
-    }, 0);
+    if (this.storeDetail.categories.length > 0) {
+      this.selectedTab = this.storeDetail.categories[0].name;
+      setTimeout(() => {
+        this.intersectionObserver = new IntersectionObserver((e) => {
+          if (e[0].isIntersecting) this.selectedTab = e[0].target.id;
+        }, config);
+        this.sections.forEach(ne => this.intersectionObserver.observe(ne.nativeElement))
+      }, 0);
+    }
   }
 
-  handleTabClick(index: number){
-    this.sections.toArray()[index].nativeElement.scrollIntoView({behavior: "smooth"});
+  handleTabClick(index: number) {
+    this.sections.toArray()[index].nativeElement.scrollIntoView({ behavior: "smooth" });
   }
 }

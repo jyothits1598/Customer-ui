@@ -8,12 +8,14 @@ import { NearbyStoresComponent } from './pages/nearby-stores/nearby-stores.compo
 import { IncrementalSearchModule } from '../incremental-search/incremental-search.module';
 import { StoreFavouritesComponent } from './components/store-favourites/store-favourites.component';
 import { StoreHeartModule } from '../store-heart/store-heart.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [StoreListComponent, StoreCardComponent, NearbyStoresComponent, StoreFavouritesComponent],
   imports: [
     CommonModule,
     SharedModule,
+    RouterModule,
     TimeAvailabilityModule,
     IncrementalSearchModule,
     StoreHeartModule
