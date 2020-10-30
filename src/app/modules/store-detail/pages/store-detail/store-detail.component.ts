@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { finalize } from 'rxjs/operators';
-import { StoreDetail } from 'src/app/modules/favourite-stores/model/store-detail';
+import { StoreDetail } from 'src/app/modules/store-detail/model/store-detail';
 import { StoreDetailDataService } from '../../services/store-detail-data.service';
 
 @Component({

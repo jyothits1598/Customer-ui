@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { StoreItem } from 'src/app/modules/favourite-stores/model/store-detail';
+import { StoreItem } from 'src/app/modules/store-detail/model/store-detail';
 
 @Component({
   selector: 'store-item-card',

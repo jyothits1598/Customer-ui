@@ -24,11 +24,11 @@ const routes: Routes = [
         path: 'search',
         loadChildren: () => import('src/app/modules/search/search.module').then(m => m.SearchModule)
       },
-      {
-        path: 'favourites', 
-        loadChildren: () => import('src/app/modules/favourite-stores/favourite-stores.module').then(m => m.FavouriteStoresModule)
+      // {
+      //   path: 'favourites', 
+      //   loadChildren: () => import('src/app/modules/favourite-stores/favourite-stores.module').then(m => m.FavouriteStoresModule)
 
-      },
+      // },
       {
         path: '**',
         redirectTo: '',
