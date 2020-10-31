@@ -1,7 +1,7 @@
 <div class="store-cards store-cards--shadow">
     <div class="store-cards store-cards--header" title="{{ store.name }}">
         <table>
-            <tr>
+            <tr [routerLink]="'/restaurants/'+store.id">
                 <td valign="middle">
                     <img src="assets/images/Rectangle 4.png" class="profile-image" />
                 </td>
@@ -22,7 +22,7 @@
     </div>
     <div class="well main-form">
         <div class="store-image">
-            <img [src]="store.logo">
+            <img *ngIf="store.logo" [src]="store.logo">
         </div>
     </div>
     <div class="content-card">

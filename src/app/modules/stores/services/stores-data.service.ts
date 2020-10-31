@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { URL_AllFavourites, URL_DeleteFavourite, URL_SetFavourite } from 'src/api/store-data';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
 import { Pagination, StorePagination } from 'src/app/shared/classes/pagination';
-import { Store } from '../model/store';
+import { ReadStore, Store } from '../model/store';
 import { StoreFilter } from '../model/StoreFilter';
 
 @Injectable({
@@ -25,12 +25,17 @@ export class StoresDataService {
     });
     else return this.restApiService.patch(URL_DeleteFavourite, {
       store_id: storeId,
-      is_favourite : 0
+      is_favourite: 0
     })
   }
 
-  allFavourites(): Observable<Array<Store>>{
-    return this.restApiService.get(URL_AllFavourites);
+  allFavourites(): Observable<Array<Store>> {
+    return this.restApiService.get(URL_AllFavourites).pipe(map(resp => {
+      console.log('got resp allFavourites', resp)
+      let stores = [];
+      resp.data.forEach(s => stores.push(ReadStore(s)));
+      return stores;
+    }));
   }
 
   filterToQuery(filter: StoreFilter): string {

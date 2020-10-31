@@ -20,7 +20,7 @@ import { RouterModule } from '@angular/router';
     IncrementalSearchModule,
     StoreHeartModule
   ],
-  exports: [NearbyStoresComponent, StoreListComponent],
+  exports: [NearbyStoresComponent, StoreListComponent, StoreCardComponent],
   providers: []
 })
 export class StoresModule { }

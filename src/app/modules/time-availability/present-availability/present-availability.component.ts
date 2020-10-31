@@ -18,6 +18,7 @@ export class PresentAvailabilityComponent implements OnInit {
       this._availability = availability;
     }
     for (const a in availability) {
+      console.log('checking availability, ', availability[a], this.checkAvailability(availability[a]));
       if (this.checkAvailability(availability[a])) this.openTimings = availability[a];
     }
   }
@@ -36,7 +37,7 @@ export class PresentAvailabilityComponent implements OnInit {
     if (availability.markedAsClose) return false;
 
     let day;
-    switch (availability.day) {
+    switch (availability.day.toLowerCase()) {
       case 'sunday':
         day = 0;
         break;
@@ -62,8 +63,8 @@ export class PresentAvailabilityComponent implements OnInit {
 
     if (day == this.now.getDay()) {
       let end = new Date();
-
       end.setHours(this.gethours(availability.endTime), parseInt(availability.endTime.substr(3, 2)));
+      console.log('inside present day ', end, this.now);
       if (this.now < end) {
         let start = new Date();
         start.setHours(this.gethours(availability.startTime), parseInt(availability.startTime.substr(3, 2)))

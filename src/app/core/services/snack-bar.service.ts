@@ -11,15 +11,16 @@ export class SnackBarService {
   snackbars$ = this.snackbars.asObservable();
   constructor() { }
 
-  Success(type: SnackBarType, message: string) {
+  success(message: string) {
     this.snackbars.next({
-      type: type,
+      type: SnackBarType.success,
       message: message
     })
   }
-  Error(type: SnackBarType, message: string) {
+
+  error(message: string) {
     this.snackbars.next({
-      type: type,
+      type: SnackBarType.error,
       message: message
     })
   }

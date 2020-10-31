@@ -76,13 +76,13 @@ export class SignupComponent implements OnInit {
       // () => { this.submissionComplete = true; },
       (resp) => {
         this.submissionComplete = true;
-        this.snackBar.Success(SnackBarType.success, resp.data);
+        this.snackBar.success(resp.data);
       },
       (resp) => {
-        if (resp.error?.error_msg) this.snackBar.Error(SnackBarType.error, resp.error?.error_msg);
+        if (resp.error?.error_msg) this.snackBar.error(resp.error?.error_msg);
         else 
         // this.submissionError = 'An error has occured. Please try again later';
-        this.snackBar.Error(SnackBarType.error, 'An error has occured. Please try again later');
+        this.snackBar.error('An error has occured. Please try again later');
       }
     )
   }
