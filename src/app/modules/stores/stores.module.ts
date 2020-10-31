@@ -6,16 +6,19 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { TimeAvailabilityModule } from '../time-availability/time-availability.module';
 import { NearbyStoresComponent } from './pages/nearby-stores/nearby-stores.component';
 import { IncrementalSearchModule } from '../incremental-search/incremental-search.module';
-import { StoreHeartComponent } from './components/store-heart/store-heart.component';
 import { StoreFavouritesComponent } from './components/store-favourites/store-favourites.component';
+import { StoreHeartModule } from '../store-heart/store-heart.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [StoreListComponent, StoreCardComponent, NearbyStoresComponent, StoreHeartComponent, StoreFavouritesComponent],
+  declarations: [StoreListComponent, StoreCardComponent, NearbyStoresComponent, StoreFavouritesComponent],
   imports: [
     CommonModule,
     SharedModule,
+    RouterModule,
     TimeAvailabilityModule,
-    IncrementalSearchModule
+    IncrementalSearchModule,
+    StoreHeartModule
   ],
   exports: [NearbyStoresComponent, StoreListComponent],
   providers: []

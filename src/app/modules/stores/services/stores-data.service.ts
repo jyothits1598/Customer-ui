@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
-import { URL_DeleteFavourite, URL_SetFavourite } from 'src/api/store-data';
+import { URL_AllFavourites, URL_DeleteFavourite, URL_SetFavourite } from 'src/api/store-data';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
 import { Pagination, StorePagination } from 'src/app/shared/classes/pagination';
 import { Store } from '../model/store';
@@ -27,6 +27,10 @@ export class StoresDataService {
       store_id: storeId,
       is_favourite : 0
     })
+  }
+
+  allFavourites(): Observable<Array<Store>>{
+    return this.restApiService.get(URL_AllFavourites);
   }
 
   filterToQuery(filter: StoreFilter): string {

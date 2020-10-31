@@ -56,9 +56,9 @@
         <div class="d-flex justify-content-between chating-card--chat">
             <span>
                 <ul class="chat-icons">
-                    <li title="favourites"> <store-heart [store]="store"></store-heart> </li>
-                    <li title="chat"> <img src="assets/images/chat.png"> </li>
-                    <li title="share" > <img src="assets/images/share.png"> </li>
+                    <li> <store-heart [store]="{id: store.id, isFavourite: store.isFavourite}"></store-heart> </li>
+                    <li> <img src="assets/images/chat.png"> </li>
+                    <li> <img src="assets/images/share.png"> </li>
                 </ul>
             </span>
             <span>

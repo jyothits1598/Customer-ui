@@ -1,7 +1,7 @@
 <div class="store-list-bg">
     <div class="container">
         <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 col-xl-4" *ngFor="let store of stores"
+            <div [routerLink]="'/restaurants/'+store.id" class="col-lg-4 col-md-6 col-sm-6 col-xs-12 col-xl-4" *ngFor="let store of stores"
                 style="margin-bottom: 30px;">
                 <app-store-card [store]="store"></app-store-card>
             </div>
