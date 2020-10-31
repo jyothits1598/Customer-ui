@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { URL_login } from 'src/api/authentication';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -42,10 +42,11 @@ export class LoginComponent implements OnInit {
   showButton = true;
 
   constructor(private authService: AuthService,
-    private router: Router) { }
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-
+    console.log('this is the params, ', this.route.snapshot.queryParams.redirect);
   }
 
   loginForm: FormGroup = new FormGroup({
@@ -68,7 +69,7 @@ export class LoginComponent implements OnInit {
     }
     this.loggingIn = true;
     this.authService.login(this.loginForm.value).pipe(finalize(() => this.loggingIn = false)).subscribe(
-      (s) => { this.router.navigate(['/']) },
+      (s) => { this.route.snapshot.queryParams.redirect ? this.router.navigate([this.route.snapshot.queryParams.redirect]) : this.router.navigate(['/']) },
       (e) => { this.handleErrors(e) }
     )
   }

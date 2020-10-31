@@ -1,1 +1,5 @@
-<p>favourite-stores works!</p>
+<ng-container *ngIf="stores">
+    <app-store-card *ngFor="let store of stores" [store]=store></app-store-card>
+</ng-container>
+
+<div *ngIf="loading">Loading...</div>

@@ -1,30 +1,31 @@
 <div class="store-cards store-cards--shadow">
-    <div  [routerLink]="'/restaurants/'+store.id" style="cursor:pointer;outline:0;" title="{{ store.name }}">
-        <div class="store-cards store-cards--header" >
-            <table>
-                <tr>
-                    <td valign="middle">
-                        <img src="assets/images/Rectangle 4.png" class="profile-image" />
-                    </td>
-                    <td style="padding-left: 8px;width:100%">
-                        <table style="margin-bottom: 3px;">
-                            <tr>
-                                <td>
-                                    <div class="store-name"> {{ store.name | slice:0:28 }}{{store.name.length > 28 ? '. . .' : ''}}
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                        <span class="sub-name float-left"> {{ store.distance | number:'1.0-0'}}KM away </span>
-                    <present-availability [availability]="store.openingHours"></present-availability>
-                    </td>
-                </tr>
-            </table>
+    <div class="store-cards store-cards--header" title="{{ store.name }}">
+        <table>
+            <tr [routerLink]="'/restaurants/'+store.id">
+                <td valign="middle">
+                    <img src="assets/images/Rectangle 4.png" class="profile-image" />
+                </td>
+                <td style="padding-left: 8px;width:100%">
+                    <table style="margin-bottom: 3px;">
+                        <tr>
+                            <td>
+                                <div class="store-name"> {{ store.name | slice:0:28 }}{{store.name.length > 28 ? '. . .' : ''}}
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <span class="sub-name float-left"> {{ store.distance | number:'1.0-0'}}KM away </span>
+                   <present-availability [availability]="store.openingHours"></present-availability>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="well main-form">
+        <div class="store-image">
+            <img *ngIf="store.logo" [src]="store.logo">
         </div>
-        <div class="well main-form">
-            <div class="store-image">
-                <img [src]="store.logo">
-            </div>
+        <div class="store-image">
+            <img [src]="store.logo">
         </div>
         <div class="content-card">
             <div class="row">

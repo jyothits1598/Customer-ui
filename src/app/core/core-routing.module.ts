@@ -4,11 +4,8 @@ import { LayoutComponent } from './pages/layout/layout.component';
 
 const routes: Routes = [
   { path: 'restaurants', loadChildren: () => import('src/app/modules/store-detail/store-detail.module').then(m => m.StoreDetailModule) },
-  { path: 'verify', loadChildren: () => import('src/app/modules/authentication/user-verification/user-verification.module').then(m => m.UserVerificationModule) },
-  { path: 'forgot-password', loadChildren: () => import('src/app/modules/authentication/forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule) },
-  { path: 'reset-password', loadChildren: () => import('src/app/modules/authentication/reset-password/reset-password.module').then(m => m.ResetPasswordModule) },
-  { path: 'signup', loadChildren: () => import('src/app/modules/authentication/signup/signup.module').then(m => m.SignupModule) },
-  { path: 'signin', loadChildren: () => import('src/app/modules/authentication/login/login.module').then(m => m.LoginModule)
+  {
+    path: 'auth', loadChildren: () => import('src/app/modules/authentication/authentication.module').then(m => m.AuthenticationModule)
   },
   {
     path: '',
@@ -22,11 +19,11 @@ const routes: Routes = [
         path: 'search',
         loadChildren: () => import('src/app/modules/search/search.module').then(m => m.SearchModule)
       },
-      // {
-      //   path: 'favourites', 
-      //   loadChildren: () => import('src/app/modules/favourite-stores/favourite-stores.module').then(m => m.FavouriteStoresModule)
+      {
+        path: 'favourites', 
+        loadChildren: () => import('src/app/modules/favourite-stores/favourite-stores.module').then(m => m.FavouriteStoresModule)
 
-      // },
+      },
       {
         path: '**',
         redirectTo: '',
