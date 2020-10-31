@@ -37,8 +37,8 @@
                 </div>
                 <div class="d-none d-lg-block" >
                     <ul class="menu">
-                        <li routerLink="/" style="cursor: pointer;"> <img src="assets/images/ico_home.png" > </li>
-                        <li routerLink="/favourites" style="cursor: pointer;"> <img src="assets/images/ico_heart.png" > </li>
+                        <li routerLink="/" style="cursor: pointer;outline:none"> <img src="assets/images/ico_home.png" > </li>
+                        <li routerLink="/favourites" style="cursor: pointer;outline:none"> <img src="assets/images/ico_heart.png" > </li>
                         <li> <img src="assets/images/ico_bell_active.png" > </li>
                         <li (click)="logout()" style="cursor:pointer;background:#353FA8;color:#fff;padding: 10px;border-radius: 8px;" *ngIf="isLoggedin$ | async"> Logout </li>
                     </ul>

@@ -8,9 +8,13 @@ import { SnackBar } from 'src/app/core/model/snack-bar';
 })
 export class SnackBarComponent implements OnInit {
 @Input() snackBar: SnackBar
+  // errorMessage = false;
+  // successMessage: string;
+
   constructor() { }
 
   ngOnInit(): void {
+    // this.successMessage = this.snackBar.message;
   }
 
 }

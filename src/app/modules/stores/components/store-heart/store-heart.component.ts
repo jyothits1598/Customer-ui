@@ -35,9 +35,9 @@ export class StoreHeartComponent implements OnInit {
     this.storeData.setFavourite(this.store.id, !this.isFavourite).pipe(finalize(() => this.loading = false)).subscribe(
       (resp) => {
         this.isFavourite = !this.isFavourite;
-        this.snackBar.show(SnackBarType.success, resp.data);
+        this.snackBar.Success(SnackBarType.success, resp.data);
       },
-      (resp) => this.snackBar.show(SnackBarType.error, resp.error?.error_msg)
+      (resp) => this.snackBar.Error(SnackBarType.error, resp.error?.error_msg)
     );
   }
 

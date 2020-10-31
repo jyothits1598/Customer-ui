@@ -9,7 +9,11 @@
     border-radius: 0 !important;
     top: 25px !important;
 }
-
+.loader{
+    background: url('assets/images/loader.gif') 
+                50% 50% no-repeat #fff0;
+    
+  } 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     .wallpaper-card {

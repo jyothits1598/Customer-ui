@@ -24,12 +24,12 @@ export class StoreListComponent implements OnInit {
 
   @ViewChild('infiniteScroll', { read: InfiniteScrollDirective }) infiniteScroll: InfiniteScrollDirective;
 
-  constructor(private storeData: StoresDataService,
+  constructor(private storeData: StoresDataService
   ) {
+    
   }
 
   ngOnInit(): void {
-
   }
 
   appendStores(stores) {

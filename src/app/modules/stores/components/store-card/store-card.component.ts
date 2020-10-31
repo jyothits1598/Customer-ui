@@ -12,6 +12,7 @@ export class StoreCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void { 
+    
   }
 
 }

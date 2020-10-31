@@ -1,0 +1,28 @@
+.alert-mez {
+    position: fixed; 
+    bottom: 32px;
+    left:32px;
+    z-index: 1;
+}
+.success-mez {
+    padding:16px;
+    background:var(--color-success);
+    color:var(--color-background);
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+}
+.failure-mez {
+    padding:16px;
+    background:var(--color-failure);
+    color:var(--color-background);
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+}

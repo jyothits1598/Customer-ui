@@ -1,5 +1,5 @@
-<div class="store-cards store-cards--shadow" title="{{ store.name }}">
-    <div class="store-cards store-cards--header">
+<div class="store-cards store-cards--shadow">
+    <div class="store-cards store-cards--header" title="{{ store.name }}">
         <table>
             <tr>
                 <td valign="middle">
@@ -14,7 +14,7 @@
                             </td>
                         </tr>
                     </table>
-                    <span class="sub-name float-left"> {{ store.distance }}away </span>
+                    <span class="sub-name float-left"> {{ store.distance | number:'1.0-0'}}KM away </span>
                    <present-availability [availability]="store.openingHours"></present-availability>
                 </td>
             </tr>
@@ -56,9 +56,9 @@
         <div class="d-flex justify-content-between chating-card--chat">
             <span>
                 <ul class="chat-icons">
-                    <li> <store-heart [store]="store"></store-heart> </li>
-                    <li> <img src="assets/images/chat.png"> </li>
-                    <li> <img src="assets/images/share.png"> </li>
+                    <li title="favourites"> <store-heart [store]="store"></store-heart> </li>
+                    <li title="chat"> <img src="assets/images/chat.png"> </li>
+                    <li title="share" > <img src="assets/images/share.png"> </li>
                 </ul>
             </span>
             <span>
@@ -67,3 +67,5 @@
         </div>
     </div>
 </div>
+
+  

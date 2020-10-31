@@ -4,8 +4,10 @@ import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { URL_signup } from 'src/api/authentication';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
+import { SnackBarService } from 'src/app/core/services/snack-bar.service';
 import { CustomValidators } from 'src/app/helpers/validators';
 import { APP_LINK } from 'src/environments/environment';
+import { SnackBarType } from 'src/app/core/model/snack-bar';
 
 @Component({
   selector: 'app-signup',
@@ -19,7 +21,10 @@ export class SignupComponent implements OnInit {
   submissionError: string;
   submissionComplete: boolean = false;
 
-  constructor(private restApiService: RestApiService,private router: Router) { }
+  constructor(
+    private restApiService: RestApiService,
+    private router: Router,
+    private snackBar: SnackBarService) { }
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
@@ -40,53 +45,7 @@ export class SignupComponent implements OnInit {
       ])
     });
 
-    //password configure
-    // $('input[type=password]').keyup(function () {
-    //   var password = $(this).val();
-    //   if (password.length < 8) {
-    //     $('#length').removeClass('valid').addClass('invalid');
-    //   } else {
-    //     $('#length').removeClass('invalid').addClass('valid');
-    //   }
-    //   if (password.match(/[a-z]/)) {
-    //     $('#small').removeClass('invalid').addClass('valid');
-    //   } else {
-    //     $('#small').removeClass('valid').addClass('invalid');
-    //   }
-    //   if (password.match(/[A-Z]/)) {
-    //     $('#capital').removeClass('invalid').addClass('valid');
-    //   } else {
-    //     $('#capital').removeClass('valid').addClass('invalid');
-    //   }
-    // }).focus(function () {
-    //   $('#pswd_info').show();
-    // })
-    //   .blur(function () {
-    //     $('#pswd_info').hide();
-    //   });
-
-    // eye icon
-    // $(".toggle-password").click(function () {
-    //   $(this).toggleClass("fa-eye fa-eye-slash");
-    //   var input = $($(this).attr("toggle"));
-    //   if (input.attr("type") == "password") {
-    //     input.attr("type", "text");
-    //   } else {
-    //     input.attr("type", "password");
-    //   }
-    // });
-
   }
-
-  //only number will be add
-  // keyPress(event: any) {
-  //   const pattern = /[0-9\+\-\ ]/;
-
-  //   let inputChar = String.fromCharCode(event.charCode);
-  //   if (event.keyCode != 8 && !pattern.test(inputChar)) {
-  //     event.preventDefault();
-  //   }
-  // }
 
   get f() { return this.registerForm.controls; }
 
@@ -114,17 +73,22 @@ export class SignupComponent implements OnInit {
     };
 
     this.restApiService.post(URL_signup, data).pipe(finalize(() => this.submitting = false)).subscribe(
-      () => { this.submissionComplete = true; },
+      // () => { this.submissionComplete = true; },
       (resp) => {
-        if (resp.error?.error_msg) this.submissionError = resp.error.error_msg;
-        else this.submissionError = 'An error has occured. Please try again later';
+        this.submissionComplete = true;
+        this.snackBar.Success(SnackBarType.success, resp.data);
+      },
+      (resp) => {
+        if (resp.error?.error_msg) this.snackBar.Error(SnackBarType.error, resp.error?.error_msg);
+        else 
+        // this.submissionError = 'An error has occured. Please try again later';
+        this.snackBar.Error(SnackBarType.error, 'An error has occured. Please try again later');
       }
     )
   }
 
   handleError(error: any) {
     console.log('encountered an error', error);
-
   }
 
   // patternValidator(): ValidatorFn {
