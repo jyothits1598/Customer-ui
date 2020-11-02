@@ -22,7 +22,6 @@ const routes: Routes = [
       {
         path: 'favourites', 
         loadChildren: () => import('src/app/modules/favourite-stores/favourite-stores.module').then(m => m.FavouriteStoresModule)
-
       },
       {
         path: '**',
