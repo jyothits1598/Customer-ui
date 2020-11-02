@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
   isLoggedin$: Observable<boolean>;
-  constructor(private authService: AuthService,private router: Router) { }
+  constructor(private authService: AuthService,private window: Window) { }
 
   ngOnInit(): void {
     this.isLoggedin$ = this.authService.isLoggedIn$();
@@ -19,6 +19,7 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+    this.window.location.reload();
   }
 
 }
