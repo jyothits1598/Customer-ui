@@ -74,7 +74,7 @@
                         <ul class="resnt-menu-top-tabs u-margin-bottom-medium">
                             <li class="resnt-menu-top-tabs__item" *ngFor="let category of storeDetail.categories; let i = index">
                                 <a class="resnt-menu-top-tabs__button tabs-menu"
-                                    (click)="handleTabClick(i)"
+                                    (click)="selectedTab = category.name ;handleTabClick(i)"
                                     [ngStyle]="{'border-bottom':category.name === selectedTab ? '1px solid red' : '' }">
                                     {{category.name}} </a>
                             </li>
