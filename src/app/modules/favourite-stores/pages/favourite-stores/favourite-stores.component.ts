@@ -18,7 +18,8 @@ export class FavouriteStoresComponent implements OnInit {
 
   ngOnInit(): void {
     this.storeData.allFavourites().pipe(finalize(() => this.loading = false)).subscribe(
-      strs => {console.log('fav stores, ', strs);this.stores = strs},
+      strs => {
+        console.log('fav stores, ', strs);this.stores = strs},
       () => this.error = true
     );
   }
