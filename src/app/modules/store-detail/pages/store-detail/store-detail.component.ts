@@ -59,11 +59,10 @@ export class StoreDetailComponent implements OnInit {
       this.selectedTab = this.storeDetail.categories[0].name;
       setTimeout(() => {
         this.intersectionObserver = new IntersectionObserver((e) => {
+          console.log('intersected ', e)
           for (let i = 0; i < e.length; i++) {
             if (e[i].isIntersecting) { this.selectedTab = e[i].target.id; return; }
           }
-          let index = this.storeDetail.categories.findIndex((c) => c.name === e[0].target.id);
-          if(index > 0) this.selectedTab = this.storeDetail.categories[(index-1)].name;
         }, config);
 
         this.sections.forEach(ne => this.intersectionObserver.observe(ne.nativeElement))
