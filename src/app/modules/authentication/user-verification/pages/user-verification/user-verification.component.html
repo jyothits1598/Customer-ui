@@ -1,7 +1,15 @@
-<p *ngIf="verifying; else content">Verifying...</p>
-
-
+<br><br>
+<p class="text-center" *ngIf="verifying; else content">Verifying...</p>
 <ng-template #content>
-    <p *ngIf="verified">Account Verified</p>
-    <p *ngIf="verifyingError">Account could not be verified - {{verifyingError}}</p>
+    <div class="signin-card" >
+        <div *ngIf="verified">
+            <h3>Thank you, your email has been verified</h3>
+            <p> Please log in to continue. </p>
+            <input type="button" class="std-button std-button--primary" value="Login" routerLink="/auth/signin">
+        </div>
+        <div *ngIf="verifyingError">
+            <p> Account could not be verified - {{verifyingError}}</p>
+            <input type="button" class="std-button std-button--primary" value="Signup" routerLink="/auth/signup">
+        </div>
+    </div>
 </ng-template>

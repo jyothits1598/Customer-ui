@@ -77,6 +77,7 @@ export class SignupComponent implements OnInit {
       (resp) => {
         this.submissionComplete = true;
         this.snackBar.success(resp.data);
+        this.router.navigateByUrl('/');
       },
       (resp) => {
         if (resp.error?.error_msg) this.snackBar.error(resp.error?.error_msg);

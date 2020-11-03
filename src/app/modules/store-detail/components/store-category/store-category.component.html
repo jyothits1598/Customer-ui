@@ -2,9 +2,7 @@
     {{storeCategory.name}}
 </div>
 <div class="row">
-    <div class="col-md-6 col-sm-12 col-xs-12 col-lg-4 col-xl-4" style="margin-bottom:16px">
-        <div class="card small-cat-cards">
-            <store-item-card *ngFor="let item of storeCategory.items" [storeItem]="item"></store-item-card>
-        </div>
+    <div class="col-md-6 col-sm-12 col-xs-12 col-lg-4 col-xl-4" style="margin-bottom:16px" *ngFor="let item of storeCategory.items">
+        <store-item-card  [storeItem]="item"></store-item-card>
     </div>
 </div>

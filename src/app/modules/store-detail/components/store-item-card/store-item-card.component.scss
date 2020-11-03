@@ -1,0 +1,22 @@
+.col-img img{
+    width:112px;
+    height:112px;
+}
+.small-cat-cards {
+    background: var(--color-background);
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    width:100%;
+}
+.img-custom {
+    border-radius: 0 8px 8px 0;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+.flexbox-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+.wrapper {
+    flex-flow: column;
+}

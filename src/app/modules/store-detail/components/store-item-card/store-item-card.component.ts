@@ -12,5 +12,7 @@ export class StoreItemCardComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  click() {
+    alert('click success');
+  }
 }

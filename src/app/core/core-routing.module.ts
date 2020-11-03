@@ -8,6 +8,9 @@ const routes: Routes = [
     path: 'auth', loadChildren: () => import('src/app/modules/authentication/authentication.module').then(m => m.AuthenticationModule)
   },
   {
+    path: 'verify', loadChildren: () => import('src/app/modules/authentication/user-verification/user-verification.module').then(m => m.UserVerificationModule)
+  },
+  {
     path: '',
     component: LayoutComponent,
     children: [
