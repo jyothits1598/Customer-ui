@@ -46,7 +46,7 @@
 }
 .label-li {
     background: var(--color-background-secondary);
-    position: relative;
+    position: initial;
     z-index: -1;
 }
 .address-content {
@@ -61,27 +61,10 @@
     padding-top: 32px;
     padding-bottom: 32px;
 }
-.small-cat-cards {
-    background: var(--color-background);
-    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    width:100%;
+.broder-tab {
+    border-bottom: 4px solid var(--color-primary);
+    position: absolute;
+    bottom: 0px;
+    left: 25%;
+    width: 50%;
 }
-.col-img img{
-    width:112px;
-    height:112px;  
-}
-.small-cat-cards img{
-    height:100%;
-}
-.img-custom {
-    border-radius: 0 8px 8px 0;
-}
-.flexbox-container {
-    display: flex;
-    flex-wrap: wrap;
-  }
-.wrapper {
-    flex-flow: column;
-}
-  

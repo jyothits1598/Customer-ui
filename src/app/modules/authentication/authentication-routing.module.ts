@@ -8,9 +8,6 @@ const routes: Routes = [
     canActivate: [NotSignedInGuard],
     children: [
       {
-        path: 'verify', loadChildren: () => import('src/app/modules/authentication/user-verification/user-verification.module').then(m => m.UserVerificationModule)
-      },
-      {
         path: 'forgot-password', loadChildren: () => import('src/app/modules/authentication/forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule)
       },
       {
