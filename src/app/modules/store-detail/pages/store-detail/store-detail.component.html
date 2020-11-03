@@ -25,7 +25,10 @@
                                 <img src="assets/images/Rectangle 4.png" class="profile-image" />
                             </td>
                             <td style="padding-left: 8px;width:100%">
-                                <span class="sub-name"> 225m away </span> &nbsp; <span class="sub-name"> <present-availability [availability]="storeDetail.openingHours"></present-availability> <img src="assets/images/ico_circle_filled_small.png"> </span>
+                                <span class="sub-name"> 225m away </span> &nbsp; <span class="sub-name">
+                                    <present-availability [availability]="storeDetail.openingHours">
+                                    </present-availability> <img src="assets/images/ico_circle_filled_small.png">
+                                </span>
                                 <table style="margin-bottom: 3px;">
                                     <tr>
                                         <td>
@@ -42,8 +45,7 @@
                             <span class="user-facebook"> <b> Steve Anderson </b> and 125k others </span>
                         </span>
                         <span style="padding-left: 10px;">
-                            <span class="user-facebook"> 4.5 &nbsp;<img
-                                    src="assets/images/ico_star_small.png"></span>
+                            <span class="user-facebook"> 4.5 &nbsp;<img src="assets/images/ico_star_small.png"></span>
                         </span>
                     </div>
                     <div class="address-content" style="margin-bottom: 60px;">
@@ -53,8 +55,10 @@
                     <div class="d-flex justify-content-between">
                         <span>
                             <ul class="chat-icons">
-                                <li> <store-heart [store]="{id: storeDetail.id, isFavourite: true}"></store-heart> </li>
-                                <li> <img src="assets/images/chat.png"> </li>
+                                <li>
+                                    <store-heart [store]="{id: storeDetail.id, isFavourite: true}"></store-heart>
+                                </li>
+                                <li routerLink="." [queryParams]="{}"> <img src="assets/images/chat.png"> </li>
                                 <li> <img src="assets/images/share.png"> </li>
                             </ul>
                         </span>
@@ -72,9 +76,10 @@
                 <div class="col-md-12">
                     <section class="table-responsive" style="margin-top:1rem">
                         <ul class="resnt-menu-top-tabs u-margin-bottom-medium">
-                            <li class="resnt-menu-top-tabs__item" *ngFor="let category of storeDetail.categories; let i = index">
-                                <a class="resnt-menu-top-tabs__button tabs-menu"
-                                    (click)="selectedTab = category.name ;handleTabClick(i)"
+                            <li class="resnt-menu-top-tabs__item"
+                                *ngFor="let category of storeDetail.categories; let i = index">
+                                <a class="resnt-menu-top-tabs__button tabs-menu" routerLink="."
+                                    [queryParams]="{ i: 148}" (click)="handleTabClick(i); selectedTab=category.name"
                                     [ngStyle]="{'border-bottom':category.name === selectedTab ? '1px solid red' : '' }">
                                     {{category.name}} </a>
                             </li>
@@ -100,3 +105,5 @@
 </ng-container>
 
 <div *ngIf="loading" style="text-align: center;">Loading...</div>
+
+<item-detail-container *ngIf="showItemDetail" [item]="selectedItem"></item-detail-container>

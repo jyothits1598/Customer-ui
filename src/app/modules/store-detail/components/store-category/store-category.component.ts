@@ -9,7 +9,7 @@ import { StoreCategory } from 'src/app/modules/store-detail/model/store-detail';
 export class StoreCategoryComponent implements OnInit {
   @Input() storeCategory: StoreCategory;
   constructor() { }
-
+  
   ngOnInit(): void {
   }
 
