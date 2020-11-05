@@ -151,3 +151,14 @@
         left:10%;
     }
   }
+  .signup-panel {
+    // background: var(--color-pending);
+    padding: 24px 30px 24px 30px;
+    // border-radius: 8px;
+    background-image: url('assets/images/banner-tsp.png');
+    background-position: left;
+    background-repeat: no-repeat;
+}
+.cover-bg {
+    background: var(--color-pending);
+}

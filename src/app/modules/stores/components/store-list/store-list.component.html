@@ -1,15 +1,13 @@
-<div class="store-list-bg">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 col-xl-4" *ngFor="let store of stores"
-                style="margin-bottom: 30px;">
-                <app-store-card [store]="store"></app-store-card>
-            </div>
-            <br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 col-xl-4" *ngFor="let store of stores"
+            style="margin-bottom: 24px;padding-left: 12px;padding-right:12px;">
+            <app-store-card [store]="store"></app-store-card>
         </div>
-        <div *ngIf="pagination.isLoading">Loading....</div>
-        <div *ngIf="!pagination.hasEnded" [ngStyle]="{'display':  pagination.isLoading? 'none' : 'block' }" infiniteScroll #infiniteScroll="infiniteScroll" (scrolled)="handleScrolled()">
-        </div>
-        <div *ngIf="pagination.hasEnded && stores.length == 0">No Stores found</div>
+        <br><br>
     </div>
+    <div *ngIf="pagination.isLoading">Loading....</div>
+    <div *ngIf="!pagination.hasEnded" [ngStyle]="{'display':  pagination.isLoading? 'none' : 'block' }" infiniteScroll #infiniteScroll="infiniteScroll" (scrolled)="handleScrolled()">
+    </div>
+    <div *ngIf="pagination.hasEnded && stores.length == 0">No Stores found</div>
 </div>
