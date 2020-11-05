@@ -1,0 +1,20 @@
+<h4>{{modifier.name}}</h4>
+<p *ngIf="modifier.minSelection > 0; else optionalChoice">Select {{modifier.minSelection}} to {{modifier.maxSelection}}
+</p>
+<p *ngIf="modifier.minSelection > 0; else optional" [style.color]="getColor()">Required</p>
+<div *ngFor="let option of modifier.options; let i = index">
+    <label>{{option.name}}</label>
+    <input type="checkbox" [formControl]="optionControls.at(i)" (change)="handleChange()">
+</div>
+
+<ng-template #optional>
+    <div>optional</div>
+</ng-template>
+
+<ng-template #optionalChoice>
+    Choose up to {{modifier.maxSelection}}
+</ng-template>
+<!-- <button (click)="optionControls.markAllAsTouched()">mark as touched</button> -->
+<!-- <button (click)="this.setupAccessor()">show control</button> -->
+<!-- <input type="text" [formControl]="testControl">
+<div>{{testControl.value | json}}</div> -->

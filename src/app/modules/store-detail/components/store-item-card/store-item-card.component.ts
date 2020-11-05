@@ -9,10 +9,8 @@ import { StoreItem } from 'src/app/modules/store-detail/model/store-detail';
 export class StoreItemCardComponent implements OnInit {
   @Input() storeItem: StoreItem
   constructor() { }
-
+  
   ngOnInit(): void {
   }
-  click() {
-    alert('click success');
-  }
+
 }

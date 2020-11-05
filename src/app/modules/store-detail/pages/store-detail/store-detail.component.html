@@ -1,3 +1,5 @@
+<store-item-detail *ngIf="selecteditemId" [item]="{itemId: selecteditemId, storeId: storeId}"></store-item-detail>
+
 <ng-container *ngIf="storeDetail">
     <div class="store-deatails-nav">
         <div class="container overflow-container">
@@ -25,7 +27,10 @@
                                 <img src="assets/images/Rectangle 4.png" class="profile-image" />
                             </td>
                             <td style="padding-left: 8px;width:100%">
-                                <span class="sub-name"> 225m away <span style="padding-top:5px"> <present-availability [availability]="storeDetail.openingHours"></present-availability> </span> </span> 
+                                <span class="sub-name"> 225m away <span style="padding-top:5px">
+                                        <present-availability [availability]="storeDetail.openingHours">
+                                        </present-availability>
+                                    </span> </span>
                                 <table style="margin-bottom: 3px;">
                                     <tr>
                                         <td>
@@ -58,7 +63,9 @@
                     <div class="d-flex justify-content-between">
                         <span>
                             <ul class="chat-icons">
-                                <li> <store-heart [store]="{id: storeDetail.id, isFavourite: true}"></store-heart> </li>
+                                <li>
+                                    <store-heart [store]="{id: storeDetail.id, isFavourite: true}"></store-heart>
+                                </li>
                                 <li> <img src="assets/images/chat.png"> </li>
                                 <li> <img src="assets/images/share.png"> </li>
                             </ul>
@@ -72,37 +79,7 @@
         </div>
     </div>
     <!-- tabs -->
-    <div class="nav-tab-menu">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <section class="table-responsive" style="margin-top:1rem">
-                        <ul class="resnt-menu-top-tabs u-margin-bottom-medium">
-                            <li class="resnt-menu-top-tabs__item" *ngFor="let category of storeDetail.categories; let i = index">
-                                <a class="resnt-menu-top-tabs__button tabs-menu"
-                                    (click)="selectedTab = category.name ;handleTabClick(i)"
-                                    [ngStyle]="{'border-bottom':category.name === selectedTab ? '1px solid red' : '' }">
-                                    {{category.name}} </a>
-                            </li>
-                        </ul>
-                    </section>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="label-li">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="catergory-list">
-                        <div #categorySections [id]="category.name" *ngFor="let category of storeDetail.categories">
-                            <store-category [storeCategory]="category"></store-category>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <store-category [categories]="storeDetail.categories"></store-category>
 </ng-container>
 
 <div *ngIf="loading" style="text-align: center;">Loading...</div>

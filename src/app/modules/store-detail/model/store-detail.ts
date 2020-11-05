@@ -25,12 +25,13 @@ export interface StoreItem {
     id: number,
     name: string,
     basePrice: number,
-    image: string
+    image: string,
+    storeId: number
 }
 
 export function ReadStoreDetail(resp: any): StoreDetail {
     let data = resp.data;
-    let categories = ReadStoreCategories(data.category_details);
+    let categories = ReadStoreCategories(resp.store_id, data.category_details);
 
     return {
         id: data.store_id,
@@ -48,18 +49,18 @@ export function ReadStoreDetail(resp: any): StoreDetail {
     };
 }
 
-export function ReadStoreCategories(catData: any): Array<StoreCategory> {
+export function ReadStoreCategories(storeId: number, catData: any): Array<StoreCategory> {
     let cats: Array<StoreCategory> = [];
     catData.forEach((c) => {
-        cats.push({ id: c.category_id, name: c.category_name, items: ReadStoreItems(c.item_details) })
+        cats.push({ id: c.category_id, name: c.category_name, items: ReadStoreItems(storeId, c.item_details) })
     })
     return cats;
 }
 
-export function ReadStoreItems(data: any): Array<StoreItem> {
+export function ReadStoreItems(storeId: number, data: any): Array<StoreItem> {
     let items: Array<StoreItem> = [];
     data.forEach((i) => {
-        items.push({ id: i.item_id, name: i.item_name, basePrice: i.item_base_price, image: i.item_image, })
+        items.push({ id: i.item_id, name: i.item_name, basePrice: i.item_base_price, image: i.item_image, storeId: storeId })
     })
     return items;
 }
