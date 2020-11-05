@@ -1,5 +1,5 @@
 
-<div class="container" style="margin-top:20px">
+<!-- <div class="container" style="margin-top:20px">
     <div class="row">
         <div class="col-md-12">
             <div class="store-search" style="margin-bottom:32px;cursor: pointer;">
@@ -9,33 +9,32 @@
             </div>
         </div>
     </div>
-</div>
-<div *ngIf="isLoggedin$ | async; else bckYellow"></div>
+</div> -->
+<div style="margin-top:48px;" *ngIf="isLoggedin$ | async; else bckYellow"></div>
 <ng-template #bckYellow>
-    <div style="background: #fff;" >
+    <div class="cover-bg" style="margin-top:48px;" >
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="signup-panel">
-                        <div class="std-heading-3" style="margin-bottom: 20px;">
-                            Sign up and get 5% off all food for 30 days
+                        <div class="std-heading-3" style="margin-bottom: 16px;">
+                            Sign up and get 5% off <br> all food for 30 days
                         </div>
                         <input type="button" class="std-button std-button--primary" value="Sign up" routerLink="/auth/signup">
-                        <input type="button" class="std-button std-button--transparency" value="Login" routerLink="/auth/signin">
+                        <input type="button" class="std-button std-button--transparency" value="Log in" routerLink="/auth/signin">
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </ng-template>
-
-<section class="table-responsive text-center" style="margin-top:1rem">
+<section class="table-responsive text-center sticky-navbar">
     <ul class="resnt-menu-top-tabs u-margin-bottom-medium" style="margin-bottom:0">
-        <li class="resnt-menu-top-tabs__item">
+        <li class="resnt-menu-top-tabs__item custom-border">
             <button class="resnt-menu-top-tabs__button tabs-menu resnt-menu-top-tabs__button__active"> Nearby </button>
         </li>
-        <li class="resnt-menu-top-tabs__item">
-            <button class="resnt-menu-top-tabs__button tabs-menu" routerLink=""> Reviews </button>
+        <li class="resnt-menu-top-tabs__item custom-border">
+            <button class="resnt-menu-top-tabs__button tabs-menu resnt-menu-top-tabs__button__border" routerLink=""> Reviews </button>
         </li>
         <li class="resnt-menu-top-tabs__item">
             <button class="resnt-menu-top-tabs__button tabs-menu" routerLink=""> Likes
@@ -43,4 +42,6 @@
         </li>
     </ul>
 </section>
-<router-outlet></router-outlet>
+<div class="store-list-bg">
+    <router-outlet></router-outlet>
+</div>
