@@ -1,15 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ItemDetailContainerComponent } from './components/item-detail-container/item-detail-container.component';
-import { StoreItemDetailComponent } from './components/store-item-detail/store-item-detail.component';
+import { StoreItemDetailComponent } from './pages/store-item-detail/store-item-detail.component';
+import { StoreItemModifierComponent } from './components/store-item-modifier/store-item-modifier.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 
 
 @NgModule({
-  declarations: [ItemDetailContainerComponent, StoreItemDetailComponent],
+  declarations: [StoreItemDetailComponent, StoreItemModifierComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
-  exports: [ItemDetailContainerComponent]
+  exports: [StoreItemDetailComponent]
 })
 export class StoreItemDetailModule { }

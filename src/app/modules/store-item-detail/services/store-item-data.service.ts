@@ -12,10 +12,15 @@ export class StoreItemDataService {
 
   constructor(private restApiService: RestApiService) { }
 
-  itemDetail(item: StoreItem) {
-    return this.restApiService.get(URL_StoreItemDetail(item.storeId, item.id)).pipe(map((resp: any) => {
-      let result: StoreItemDetail = <StoreItemDetail>{ ...item };
-      result.modifiers = ReadItemModifiers(resp.data);
+  itemDetail(storeId: number, itemId: number) {
+    return this.restApiService.get(URL_StoreItemDetail(storeId, itemId)).pipe(map((resp: any) => {
+      let data = resp.data[0];
+      let result: StoreItemDetail = <StoreItemDetail>{};
+      result.id = data.item_id;
+      result.name = data.item_name;
+      result.image = data.item_image;
+      result.basePrice = data.item_base_price;
+      result.modifiers = ReadItemModifiers(data.modifiers_details);
       return result;
     }));
   }

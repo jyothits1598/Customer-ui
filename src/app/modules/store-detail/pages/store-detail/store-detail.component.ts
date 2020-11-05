@@ -12,23 +12,17 @@ import { StoreDetailDataService } from '../../services/store-detail-data.service
 })
 export class StoreDetailComponent implements OnInit, OnDestroy {
   storeId: number;
-  selectedItem: StoreItem;
-  showItemDetail: boolean = false;
+  selecteditemId: number;
 
-  intersectionObserver: IntersectionObserver;
   storeDetail: StoreDetail;
   loading: boolean = true;
   error: boolean = false;
-  selectedTab: string;
 
   routeParamsSubs;
   routeQueryparamsSubs;
 
-  @ViewChildren('categorySections') sections: QueryList<ElementRef>;
   constructor(private storeDetailServ: StoreDetailDataService,
-    private route: ActivatedRoute) {
-
-  }
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
 
@@ -41,7 +35,7 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
     });
 
     this.routeQueryparamsSubs = this.route.queryParams.subscribe((qParams) => {
-      this.showItemDetail = qParams.i;    
+      this.selecteditemId = +qParams.i;
     })
   }
 
@@ -50,32 +44,7 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
     this.storeDetail = null;
     this.storeDetailServ.storeDetail(this.storeId).pipe(finalize(() => this.loading = false)).subscribe(storeDetail => {
       this.storeDetail = storeDetail;
-      this.initiateObservation();
     });
-  }
-
-  initiateObservation() {
-    let config = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.25
-    }
-    if (this.storeDetail.categories.length > 0) {
-      this.selectedTab = this.storeDetail.categories[0].name;
-      setTimeout(() => {
-        this.intersectionObserver = new IntersectionObserver((e) => {
-          for (let i = 0; i < e.length; i++) {
-            if (e[i].isIntersecting) { this.selectedTab = e[i].target.id; return; }
-          }
-        }, config);
-
-        this.sections.forEach(ne => this.intersectionObserver.observe(ne.nativeElement))
-      }, 0);
-    }
-  }
-
-  handleTabClick(index: number) {
-    this.sections.toArray()[index].nativeElement.scrollIntoView();
   }
 
   ngOnDestroy(): void {
