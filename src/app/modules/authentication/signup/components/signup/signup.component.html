@@ -1,7 +1,7 @@
 <nav class="navbar-simple">
     <img src="assets/svg/Logo_w.svg" routerLink="/" style="text-decoration: none;cursor: pointer;outline:none">
 </nav>
-<div class="container">
+<div class="container" style="display:none">
     <div class="row">
         <div *ngIf="submissionError" class="col-md-12">{{submissionError}}</div>
         <div class="col-md-12">
@@ -105,7 +105,7 @@
         </div>
     </div>
 </div>
-<br><br><br>
+
 <ng-template #regComplete>
     Welcome!
     Your registration is complete.
@@ -114,3 +114,108 @@
 <ng-template #subTemp>
     Submitting...
 </ng-template>
+
+
+
+<!-- new design -->
+<div class="container-fluid" >
+    <div class="row">
+        <div class="col-md-12">
+            <div class="margins-center text-center">
+                <!-- first sinup page -->
+                <div >
+                    <h3 class="std-heading-4"> Sign up </h3>
+                    <div class="paragraph14" style="margin-bottom: 24px;">
+                        Sign up and get 5% off all food for 30 days
+                    </div>
+                    <button class="std-button std-button--transparency1" style="margin-bottom: 16px;">
+                        <img src="assets/images/ico_account_btn.png" >&nbsp; Use mobile / email
+                    </button>
+                    <img src="assets/images/divider_or.png" style="margin-bottom: 16px;width:100%">
+                    <button class="std-button std-button--transparency1" style="margin-bottom: 16px;color:#1a1a1a;">
+                        <img src="assets/images/google.png" >&nbsp; Continue with Google
+                    </button>
+                    <button class="std-button std-button--facebook" style="margin-bottom: 16px;">
+                        <img src="assets/images/ico_facebook.png" >&nbsp; Continue with Facebook
+                    </button>
+                    <button class="std-button std-button--apple" style="margin-bottom: 24px;">
+                        <img src="assets/images/ico_apple.png" >&nbsp; Continue with Apple
+                    </button>
+                    <div class="paragraph14" style="margin-bottom: 24px;">
+                        Already have an account?<b style="color:#353FA8;cursor: pointer;" routerLink="/auth/signin"> Log in</b> 
+                    </div>
+                </div>
+                <!-- first signup page end -->
+
+                <!-- second signup page -->
+                <div style="display: none;">
+                    <h3 class="std-heading-4"> Sign up with mobile </h3>
+                    <div class="paragraph14" style="margin-bottom: 24px;">
+                        We’ll send a verification code to your number
+                    </div>
+                    <div class="form-group form-group--margin">
+                        <div class="label-inputs"> <span class="float-left"> Mobile </span><span class="float-right" style="color: #353FA8;;cursor: pointer;"> Use email </span>  </div>
+                        <input type="text" class="form-input error-highlight" placeholder="e.g. name@gmail.com"
+                            formControlName="">
+                    </div>
+                    <div class="form-group form-group--margin">
+                        <div class="label-inputs"> <span class="float-left"> Password </span></div>
+                        <input type="text" class="form-input error-highlight" placeholder="Password"
+                            formControlName="">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 pad-ing-right" style="margin-bottom: 24px;">
+                            <input type="text" class="form-input error-highlight" placeholder="Enter code"
+                            formControlName="">
+                        </div>
+                        <div class="col-md-6 pad-ing-left" style="margin-bottom: 24px;">
+                            <input type="button" class="btn std-button std-button--blue" value="Send code" >
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 24px;">
+                        <input type="button" class="btn std-button std-button--blue" value="Next" >
+                    </div>
+                    <div class="paragraph14 paragraph14__f12">
+                        By creating a menuzapp account you're agreeing to our <b style="color:#353FA8;cursor: pointer;"> Privacy Policy </b> and <b style="color:#353FA8;cursor: pointer;"> Terms of Service </b> 
+                    </div>
+                </div>
+                <!-- end second signup page -->
+
+
+                <!-- profile page -->
+                <div style="display: none;">
+                    <h3 class="std-heading-4"> Complete your profile </h3>
+                    <div class="paragraph14" style="margin-bottom: 24px;">
+                        Add a photo so restaurant staff can recognise you
+                    </div>
+                    <div class="profile-image-signup" style="margin-bottom: 16px;">
+                        <!-- default image -->
+                        <img src="assets/images/add_image.png" >
+                        <!-- default image end -->
+                        <!-- uplaod image -->
+                        <img class="upload-image" src="assets/images/empty_store_image.png" style="display: none;">
+                        <!-- uplaod image end  -->
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 pad-ing-right" style="margin-bottom: 24px;">
+                            <div class="label-inputs"> <span class="float-left"> First name </span></div>
+                            <input type="text" class="form-input error-highlight" placeholder="First name"
+                            formControlName="">
+                        </div>
+                        <div class="col-md-6 pad-ing-left" style="margin-bottom: 24px;">
+                            <div class="label-inputs"> <span class="float-left"> Last name </span></div>
+                            <input type="text" class="form-input error-highlight" placeholder="Last name"
+                            formControlName="">
+                        </div>
+                    </div>
+                    <div class="form-group" >
+                        <input type="button" class="btn std-button std-button--blue" value="Continue" >
+                    </div>
+                </div>
+                <!-- profile page end -->
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end new design -->

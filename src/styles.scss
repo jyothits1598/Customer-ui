@@ -89,6 +89,12 @@
         position: absolute;
         left:10%;
     }
+    .pad-ing-left {
+        padding-left:4px;
+    }
+    .pad-ing-right {
+        padding-right: 4px;
+    }
   }
    
   /* Large devices (desktops, 992px and up) */
@@ -120,6 +126,12 @@
         position: absolute;
         left:10%;
     }
+    .pad-ing-left {
+        padding-left:4px;
+    }
+    .pad-ing-right {
+        padding-right: 4px;
+    }
   }
   /* Extra large devices (large desktops, 1200px and up) */
   @media (min-width: 1400px) {  
@@ -149,6 +161,12 @@
     .custom-body {
         position: absolute;
         left:10%;
+    }
+    .pad-ing-left {
+        padding-left:4px;
+    }
+    .pad-ing-right {
+        padding-right: 4px;
     }
   }
   .signup-panel {
