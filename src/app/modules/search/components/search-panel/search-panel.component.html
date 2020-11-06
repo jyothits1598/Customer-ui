@@ -1,0 +1,11 @@
+<div style="background-color: white; width: 320px">
+    <ul>
+        <li *ngIf="searchTerm && searchTerm.length > 3" (click)="handleClick()" routerLink="/search" [queryParams]="{q:searchTerm}">
+            Search for {{searchTerm}}</li>
+        <li (click)="handleClick()" *ngFor="let result of results" routerLink="/search"
+            [queryParams]="{q:result.store_name}">
+            {{result.store_name}}</li>
+    </ul>
+
+    <div *ngIf="results && results.length === 0">No results</div>
+</div>
