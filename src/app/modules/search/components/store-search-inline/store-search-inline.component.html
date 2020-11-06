@@ -1,0 +1,14 @@
+<!-- <input (focus)="handleFocus()" (blur)="handleBlur()" style="border: none;" type="text" placeholder="Search"> -->
+<div class="location-text" style="outline: none;cursor: pointer;margin-left:20px" #searchContainer>
+    <span class="bck" style="color:#808080">
+        <!-- <span style="padding-right:50px;font-style: normal;
+            font-weight: normal;"> Search </span>  -->
+
+        <input style="border: none;" type="text" placeholder="Search" (focus)="openComponentPopover(searchData)" #searchInput>
+        <img style="width: 24px;" [src]="loading? 'assets/images/loader.gif' : 'assets/images/ico_search_plane.png'">
+    </span>
+</div>
+
+<span *ngIf="overlayOpen"
+    style="position: fixed; top: 0; bottom: 0; left: 0;right: 0; background-color: #81818169; z-index: -1;"
+    (click)="closePopover()"></span>

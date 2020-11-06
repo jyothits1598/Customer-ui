@@ -4,11 +4,12 @@ import { StoreItemDetailComponent } from './pages/store-item-detail/store-item-d
 import { StoreItemModifierComponent } from './components/store-item-modifier/store-item-modifier.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ItemModiferSelectorRadioComponent } from './components/item-modifer-selector-radio/item-modifer-selector-radio.component';
 
 
 
 @NgModule({
-  declarations: [StoreItemDetailComponent, StoreItemModifierComponent],
+  declarations: [StoreItemDetailComponent, StoreItemModifierComponent, ItemModiferSelectorRadioComponent],
   imports: [
     CommonModule,
     RouterModule,

@@ -21,6 +21,14 @@ export class NavbarComponent implements OnInit {
     this.isLoggedin$ = this.authService.isLoggedIn$();
   }
 
+  handleFocus(){
+    console.log('focused');
+  }
+
+  handleBlur(){
+    console.log('blurred');
+  }
+
   logout() {
     // this.router.navigateByUrl('/');
     this.authService.logout();

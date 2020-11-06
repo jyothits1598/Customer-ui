@@ -5,6 +5,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { LocationModule } from '../location/location-selector.module';
 import { RouterModule } from '@angular/router';
 import { ModalModule } from 'ngb-modal';
+import { SearchModule } from '../search/search.module';
 
 
 @NgModule({
@@ -12,9 +13,9 @@ import { ModalModule } from 'ngb-modal';
   imports: [
     CommonModule,
     RouterModule,
-    SharedModule,
     LocationModule,
-    ModalModule
+    ModalModule,
+    SearchModule
   ],
   exports: [NavbarComponent]
 })

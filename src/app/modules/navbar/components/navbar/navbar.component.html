@@ -4,29 +4,29 @@
             <div class="col-md-12">
                 <div class="d-flex justify-content-between">
                     <div class="location-text">
-                        <span class="bck"> <location-selector></location-selector> </span>
+                        <span class="bck">
+                            <location-selector></location-selector>
+                        </span>
                     </div>
                     <div style="outline: 0;cursor: pointer;line-height: 48px;">
-                        <a href="/" style="text-decoration: none;cursor: pointer;"> 
-                        <img src="assets/svg/Logo_w.svg"> </a>
+                        <a href="/" style="text-decoration: none;cursor: pointer;">
+                            <img src="assets/svg/Logo_w.svg"> </a>
                     </div>
-                    <div class="d-none d-lg-block" >
+                    <div class="d-none d-lg-block">
                         <ul class="menu">
-                            <li routerLink="/" style="cursor: pointer;outline:none"> <img src="assets/images/ico_home.png"> </li>
-                            <li *ngIf="isLoggedin$ | async" routerLink="/favourites" style="cursor: pointer;outline:none"> <img src="assets/images/ico_heart.png" > </li>
-                            <li routerLink="/" style="cursor: pointer;outline:none"> <img src="assets/images/ico_account.png" > </li>
-                            <li *ngIf="isLoggedin$ | async" style="cursor: pointer;outline:none" > <img src="assets/images/ico_bell_active.png" > </li>
-                            <li (click)="logout()" *ngIf="isLoggedin$ | async" style="cursor: pointer;outline:none"> 
-                                <img src="assets/images/ico_menu_big.png" > 
+                            <li routerLink="/" style="cursor: pointer;outline:none"> <img
+                                    src="assets/images/ico_home.png"> </li>
+                            <li *ngIf="isLoggedin$ | async" routerLink="/favourites"
+                                style="cursor: pointer;outline:none"> <img src="assets/images/ico_heart.png"> </li>
+                            <li routerLink="/" style="cursor: pointer;outline:none"> <img
+                                    src="assets/images/ico_account.png"> </li>
+                            <li *ngIf="isLoggedin$ | async" style="cursor: pointer;outline:none"> <img
+                                    src="assets/images/ico_bell_active.png"> </li>
+                            <li (click)="logout()" *ngIf="isLoggedin$ | async" style="cursor: pointer;outline:none">
+                                <img src="assets/images/ico_menu_big.png">
                             </li>
                             <li>
-                                <div class="location-text" routerLink="/search" style="outline: none;cursor: pointer;margin-left:20px">
-                                    <span class="bck" style="color:#808080"> 
-                                        <span style="padding-right:50px;font-style: normal;
-                                        font-weight: normal;"> Search </span> 
-                                        <img src="assets/images/ico_search_plane.png" >
-                                    </span>
-                                </div>
+                                <app-store-search-inline></app-store-search-inline>
                             </li>
                         </ul>
                     </div>

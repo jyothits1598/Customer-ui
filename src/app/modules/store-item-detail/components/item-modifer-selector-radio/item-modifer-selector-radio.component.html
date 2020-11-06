@@ -1,0 +1,8 @@
+<div [style.color]="getColor()">Required</div>
+<div>
+    <ng-container *ngFor="let option of modifier.options; let i = index">
+        <label [name]="modifier.name+i">{{option.name}}</label>
+        <input type="radio" [name]="modifier.name" [id]="modifier.name+i" [formControl]="optionControl"
+            [value]="option.id" (change)="handleChange()">
+    </ng-container>
+</div>

@@ -16,14 +16,10 @@ export class StoreItemDetailComponent implements OnChanges {
   loading: boolean = true;
 
   selectedOptions: FormArray;
+  sC: boolean = true;
 
   constructor(private storeItemData: StoreItemDataService) { }
-
-  show() {
-    console.log(this.selectedOptions.value);
-    this.selectedOptions.markAllAsTouched();
-  }
-
+  
   ngOnChanges(): void {
     this.storeItemData.itemDetail(this.item.storeId, this.item.itemId).pipe(finalize(() => this.loading = false)).subscribe(detail => {
       this.itemDetail = detail;

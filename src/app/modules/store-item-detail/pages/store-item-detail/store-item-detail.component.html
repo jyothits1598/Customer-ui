@@ -1,11 +1,13 @@
 <div routerLink="." [queryParams]="{}">Close</div>
 <ng-container *ngIf="itemDetail">
     <h2>{{itemDetail.name}}</h2>
-    <div *ngFor="let modifier of itemDetail.modifiers; let i = index">
-        <store-item-modifier [formControl]="selectedOptions.at(i)" [modifier]="modifier"></store-item-modifier>
-    </div>
+    <ng-container *ngFor="let modifier of itemDetail.modifiers; let i = index">
+        <div [ngSwitch]="modifier.minSelection == 1 && modifier.maxSelection == 1">
+            <store-item-modifier *ngSwitchCase="false" [formControl]="selectedOptions.at(i)" [modifier]="modifier">
+            </store-item-modifier>
+            <item-modifer-selector-radio *ngSwitchCase="true" [modifier]="modifier"
+                [formControl]="selectedOptions.at(i)"></item-modifer-selector-radio>
+        </div>
+    </ng-container>
 </ng-container>
-
-<!-- <button (click)="show()">Shows</button> -->
-<!-- <div *ngIf="selectedOptions">{{selectedOptions.valid | json}}</div> -->
 <p *ngIf="loading">Loading...</p>

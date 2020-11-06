@@ -23,8 +23,6 @@ export class StoreItemModifierComponent implements OnChanges, ControlValueAccess
   @Input() modifier: ItemModifier;
   selections = [];
   optionControls: FormArray;
-  testControl = new FormControl();
-  disabledControls: Array<AbstractControl> = [];
   disabledExcess: boolean = false;
 
   constructor(@Self() public controlDir: NgControl) {
@@ -47,7 +45,6 @@ export class StoreItemModifierComponent implements OnChanges, ControlValueAccess
     this.optionControls = new FormArray(controls, [this.minNumberValidator(this.modifier.minSelection)]);
     // this.optionControls.setValidators(this.minMaxNumberValidator(this.modifier.minSelection, this.modifier.maxSelection));
     this.setupAccessor();
-
   }
 
   handleChange() {
@@ -56,10 +53,10 @@ export class StoreItemModifierComponent implements OnChanges, ControlValueAccess
       .filter(value => value);
     this.onChange(this.selections);
 
-    this.formDisable();
+    this.enableDisableForm();
   }
 
-  formDisable() {
+  enableDisableForm() {
     if (this.selections.length === this.modifier.maxSelection) {
       this.optionControls.controls.forEach(c => { if (!c.value) { c.disable(); this.disabledExcess = true; } })
     } else {

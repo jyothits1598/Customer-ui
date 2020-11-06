@@ -3,8 +3,8 @@
 </p>
 <p *ngIf="modifier.minSelection > 0; else optional" [style.color]="getColor()">Required</p>
 <div *ngFor="let option of modifier.options; let i = index">
-    <label>{{option.name}}</label>
-    <input type="checkbox" [formControl]="optionControls.at(i)" (change)="handleChange()">
+    <label [for]="modifier.name+i">{{option.name}}</label>
+    <input type="checkbox" [id]="modifier.name+i" [formControl]="optionControls.at(i)" (change)="handleChange()">
 </div>
 
 <ng-template #optional>
