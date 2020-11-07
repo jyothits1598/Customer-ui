@@ -7,7 +7,8 @@ import { RestApiService } from 'src/app/core/services/rest-api.service';
 import { SnackBarService } from 'src/app/core/services/snack-bar.service';
 import { CustomValidators } from 'src/app/helpers/validators';
 import { APP_LINK } from 'src/environments/environment';
-import { SnackBarType } from 'src/app/core/model/snack-bar';
+
+
 
 @Component({
   selector: 'app-signup',
@@ -44,7 +45,6 @@ export class SignupComponent implements OnInit {
         CustomValidators.pattern(/^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/, 'Please enter a more secure password')
       ])
     });
-
   }
 
   get f() { return this.registerForm.controls; }
@@ -81,11 +81,15 @@ export class SignupComponent implements OnInit {
       },
       (resp) => {
         if (resp.error?.error_msg) this.snackBar.error(resp.error?.error_msg);
-        else 
-        // this.submissionError = 'An error has occured. Please try again later';
-        this.snackBar.error('An error has occured. Please try again later');
+        else
+          // this.submissionError = 'An error has occured. Please try again later';
+          this.snackBar.error('An error has occured. Please try again later');
       }
     )
+  }
+
+  handleFacebookSignin() {
+
   }
 
   handleError(error: any) {

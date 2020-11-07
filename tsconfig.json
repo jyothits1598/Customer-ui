@@ -2,7 +2,12 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "types": ["googlemaps"],
+    "types": [
+      "googlemaps",
+      "gapi",
+      "gapi.auth2"
+    ],
+    "typeRoots": [ "../node_modules/@types" ],
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,

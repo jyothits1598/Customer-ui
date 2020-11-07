@@ -3,7 +3,12 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": []
+    "types": [
+      "googlemaps",
+      "gapi",
+      "gapi.auth2"
+    ],
+    "typeRoots": [ "../node_modules/@types" ],
   },
   "files": [
     "src/main.ts",
