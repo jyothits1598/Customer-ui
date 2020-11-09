@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { SampleComponent } from './components/sample/sample.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 
 const routes: Routes = [
+  { path: 'sample', component: SampleComponent },
   { path: 'restaurants', loadChildren: () => import('src/app/modules/store-detail/store-detail.module').then(m => m.StoreDetailModule) },
   {
     path: 'auth', loadChildren: () => import('src/app/modules/authentication/authentication.module').then(m => m.AuthenticationModule)

@@ -11,15 +11,16 @@ import { SnackBarComponent } from './components/snack-bar/snack-bar/snack-bar.co
 import { SnackBarContainerComponent } from './components/snack-bar/snack-bar-container/snack-bar-container.component';
 import { LoginPromptComponent } from './components/login-prompt/login-prompt.component';
 import { HttpAuthErrorInterceptor } from './interceptors/http-auth-error.interceptor';
+import { SampleComponent } from './components/sample/sample.component';
 
 
 @NgModule({
-  declarations: [CoreComponent, LayoutComponent, SnackBarComponent, SnackBarContainerComponent, LoginPromptComponent],
+  declarations: [CoreComponent, LayoutComponent, SnackBarComponent, SnackBarContainerComponent, LoginPromptComponent, SampleComponent],
   imports: [
     CommonModule,
     CoreRoutingModule,
     NavbarModule,
-    HomeModule
+    HomeModule,
   ],
   exports: [CoreComponent],
   providers: [
@@ -36,7 +37,7 @@ import { HttpAuthErrorInterceptor } from './interceptors/http-auth-error.interce
     {
       provide: Window,
       useValue: window
-    }
+    },
   ]
 })
 export class CoreModule { }

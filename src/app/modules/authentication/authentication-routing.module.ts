@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NotSignedInGuard } from './guards/not-signed-in.guard';
+import { AuthParentComponent } from './pages/auth-parent/auth-parent.component';
+
 
 const routes: Routes = [
   {
     path: '',
+    component: AuthParentComponent,
     canActivate: [NotSignedInGuard],
     children: [
       {
