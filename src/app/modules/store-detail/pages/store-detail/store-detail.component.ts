@@ -4,6 +4,7 @@ import { filter, finalize } from 'rxjs/operators';
 import { ModalService } from 'src/app/core/services/modal.service';
 import { StoreDetail, StoreItem } from 'src/app/modules/store-detail/model/store-detail';
 import { StoreDetailDataService } from '../../services/store-detail-data.service';
+import * as $ from 'jquery' 
 
 @Component({
   selector: 'app-store-detail',
@@ -37,6 +38,15 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
     this.routeQueryparamsSubs = this.route.queryParams.subscribe((qParams) => {
       this.selecteditemId = +qParams.i;
     })
+
+    $(window).scroll(function(){
+      if ($(this).scrollTop() > 50) {
+         $('.fixed-shadow').addClass('newClass');
+      } else {
+         $('.fixed-shadow').removeClass('newClass');
+      }
+  });
+  
   }
 
   loadStore() {

@@ -1,20 +1,23 @@
-<div class="card small-cat-cards" title="{{ storeItem.name }}" style="cursor: pointer;" routerLink="."
-    [queryParams]="{i: storeItem.id}">
-    <div class="row">
-        <div class="col">
-            <div class="card-block" style="padding: 16px;">
-                <div class="flexbox-container">
-                    <div class="wrapper">
-                        <div class="paragraph" style="margin-bottom:34px">
-                            {{ storeItem.name | slice:0:20 }}{{storeItem.name.length > 20 ? '. .' : ''}}
+<div title="{{ storeItem.name }}" style="cursor: pointer;outline:0;" routerLink="."
+[queryParams]="{i: storeItem.id}">
+    <div class="col-md-12 card small-cat-cards">
+        <div class="row">
+            <div class="col" style="padding: 0;">
+                <div class="card-block" style="padding: 16px;">
+                    <div class="flexbox-container">
+                        <div class="wrapper">
+                            <div class="paragraph">
+                                {{ storeItem.name }} 
+                                <!-- {{ storeItem.name | slice:0:20 }}{{storeItem.name.length > 20 ? '. .' : ''}} -->
+                            </div>
+                            <div class="std-heading-5"> ${{storeItem.basePrice}} </div>
                         </div>
-                        <div class="std-heading-5"> ${{storeItem.basePrice}} </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-auto col-img">
-            <img [src]="storeItem.image" class="img-fluid img-custom">
+            <div class="col-auto col-img" style="padding: 0;">
+                <img [src]="storeItem.image" class="img-fluid img-custom">
+            </div>
         </div>
     </div>
 </div>

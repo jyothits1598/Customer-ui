@@ -1,85 +1,82 @@
-<store-item-detail *ngIf="selecteditemId" [item]="{itemId: selecteditemId, storeId: storeId}"></store-item-detail>
+<div *ngIf="selecteditemId" class="store-item-popup">
+    <store-item-detail  [item]="{itemId: selecteditemId, storeId: storeId}"></store-item-detail>
+</div>
 
-<ng-container *ngIf="storeDetail">
-    <!-- <div class="store-deatails-nav">
-        <div class="container overflow-container">
-            <div class="navbar-inside">
-                <div class="back-icon">
-                    <img src="assets/images/ico_arrow_left.png" routerLink="/" style="cursor: pointer;outline:none">
-                </div>
-                <div class="menu-title std-heading-5">
-                    {{storeDetail.name}}
-                </div>
-                <div></div>
-            </div>
-        </div>
-    </div> -->
-    <div class="store-wallpaper">
-        <div class="container overflow-container">
-            <div class="col-md-12">
-                <div class="wal-image">
-                    <img [src]="storeDetail.logo">
-                </div>
-                <div class="wallpaper-card">
-                    <table>
-                        <tr>
-                            <td valign="middle">
-                                <img src="assets/images/Rectangle 4.png" class="profile-image" />
-                            </td>
-                            <td style="padding-left: 8px;width:100%">
-                                <span class="sub-name"> 225m away <span style="padding-top:5px">
-                                        <present-availability [availability]="storeDetail.openingHours">
-                                        </present-availability>
-                                    </span> </span>
-                                <table style="margin-bottom: 3px;">
-                                    <tr>
-                                        <td>
-                                            <div class="store-name"> {{storeDetail.name}} </div>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
-                    <div style="margin-top:12px;margin-bottom: 28px;">
-                        <span>
-                            <img src="assets/images/ico_social_facebook_small.png">
-                            <span class="user-facebook"> <b> Steve Anderson </b> and 125k others </span>
-                        </span>
-                        <span style="padding-left: 10px;">
-                            <span class="user-facebook"> 4.5 &nbsp;
-                                <img src="assets/images/ico_star_small.png">
-                                <img src="assets/images/ico_star_small.png">
-                                <img src="assets/images/ico_star_small.png">
-                                <img src="assets/images/ico_star_small.png">
-                                <img src="assets/images/ico_star_small.png">
-                            </span>
-                        </span>
-                    </div>
-                    <div class="address-content" style="margin-bottom: 60px;">
-                        {{storeDetail.address}} &nbsp; <span style="color: #353FA8;font-weight: bold;cursor:pointer;">
-                            More info <img src="assets/images/ico_right-arrow.png"></span>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <span>
-                            <ul class="chat-icons">
-                                <li>
-                                    <store-heart [store]="{id: storeDetail.id, isFavourite: true}"></store-heart>
-                                </li>
-                                <li> <img src="assets/images/chat.png"> </li>
-                                <li> <img src="assets/images/share.png"> </li>
-                            </ul>
-                        </span>
-                        <span>
-                            <p class="comment-text"><span> 9 </span> comments </p>
-                        </span>
-                    </div>
+
+<div class="main-panel">
+    <ng-container *ngIf="storeDetail">
+        <div class="main-content" >
+            <div class="fixed-shadow">
+                <div class="margins-left">
+                   <span>  <img src="assets/images/ico_arrow_left.png" routerLink="/" style="cursor: pointer;outline:0;"> &nbsp; {{storeDetail.name}} </span> 
                 </div>
             </div>
+            <div class="wal-image">
+                <img [src]="storeDetail.logo">
+            </div>
+            <div class="wallpaper-card">
+                <table>
+                    <tr>
+                        <td valign="middle">
+                            <img src="assets/images/Rectangle 4.png" class="profile-log-detail" />
+                        </td>
+                        <td style="padding-left: 8px;width:100%">
+                            <div class="sub-name"> 
+                                <span style="float:left !important;"> 225m away &nbsp;
+                                    <present-availability [availability]="storeDetail.openingHours">
+                                    </present-availability>
+                                </span> 
+                            </div><br>
+                            <div class="std-heading-3"> {{storeDetail.name}} </div>
+                        </td>
+                    </tr>
+                </table>
+                <div style="margin-top:12px;margin-bottom: 28px;">
+                    <span>
+                        <img src="assets/images/ico_social_facebook_small.png">
+                        <span class="user-facebook"> <b> Steve Anderson </b> and 125k others </span>
+                    </span>
+                    <span style="padding-left: 10px;">
+                        <span class="user-facebook"> 4.5 &nbsp;
+                            <img src="assets/images/ico_star_small.png">
+                            <img src="assets/images/ico_star_small.png">
+                            <img src="assets/images/ico_star_small.png">
+                            <img src="assets/images/ico_star_small.png">
+                            <img src="assets/images/ico_star_half_small.png">
+                        </span>
+                    </span>
+                </div>
+                <div class="address-content" >
+                    {{storeDetail.address}} &nbsp; <span style="color: #353FA8;font-weight: bold;cursor:pointer;">
+                        <!-- More info <img src="assets/images/ico_right-arrow.png"> -->
+                    </span>
+                </div>
+                <!-- <div class="d-flex justify-content-between">
+                    <span>
+                        <ul class="chat-icons">
+                            <li>
+                                <store-heart [store]="{id: storeDetail.id, isFavourite: true}"></store-heart>
+                            </li>
+                            <li> <img src="assets/images/chat.png"> </li>
+                            <li> <img src="assets/images/share.png"> </li>
+                        </ul>
+                    </span>
+                    <span>
+                        <p class="comment-text"><span> 9 </span> comments </p>
+                    </span>
+                </div> -->
+            </div>
+            <!----------------------------- items cards -------------------------->
+                <store-category [categories]="storeDetail.categories"></store-category>
+            <!----------------------------- items cards end ---------------------->
         </div>
-    </div>
-    <!-- tabs -->
-    <store-category [categories]="storeDetail.categories"></store-category>
-</ng-container>
-
-<div *ngIf="loading" style="text-align: center;">Loading...</div>
+        <div class="right-content">
+            <div class="empty-cart">
+                <img src="assets/images/empty_cart.png">
+                <p class="paragraph" style="margin-top:34px">
+                    Add some items to your order to get started
+                </p>
+            </div>
+        </div>
+    </ng-container>
+</div>

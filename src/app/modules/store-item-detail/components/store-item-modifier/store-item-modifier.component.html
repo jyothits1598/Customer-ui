@@ -1,10 +1,32 @@
-<h4>{{modifier.name}}</h4>
-<p *ngIf="modifier.minSelection > 0; else optionalChoice">Select {{modifier.minSelection}} to {{modifier.maxSelection}}
-</p>
-<p *ngIf="modifier.minSelection > 0; else optional" [style.color]="getColor()">Required</p>
-<div *ngFor="let option of modifier.options; let i = index">
-    <label [for]="modifier.name+i">{{option.name}}</label>
-    <input type="checkbox" [id]="modifier.name+i" [formControl]="optionControls.at(i)" (change)="handleChange()">
+<div style="margin-bottom:30px">
+    <div class="d-flex justify-content-between" style="margin-bottom:20px;">
+        <div class="std-heading-4">
+            {{modifier.name}} <br>
+            <span class="small-content" *ngIf="modifier.minSelection > 0; else optionalChoice"> 
+                Select {{modifier.minSelection}} to {{modifier.maxSelection}}
+            </span>
+        </div>
+        <div *ngIf="modifier.minSelection > 0; else optional" [style.color]="getColor()" >
+            <span class="required" > Required </span>
+        </div>
+    </div>
+    <table style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;" *ngFor="let option of modifier.options; let i = index">
+        <tr>
+            <td> 
+                <div class="form-check" >
+                    <label class="form-check-label lable-text">
+                    <input type="checkbox" class="form-check-input" [id]="modifier.name+i" [formControl]="optionControls.at(i)" (change)="handleChange()">
+                        <span [for]="modifier.name+i"> {{option.name}} </span>
+                    </label>
+                </div>
+            </td>
+            <td align="right"> 
+                <span class="small-content small-content__price" > 
+                    +${{option.price}}
+                </span>
+            </td>
+        </tr>
+    </table>
 </div>
 
 <ng-template #optional>
