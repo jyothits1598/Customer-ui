@@ -8,6 +8,7 @@ import { SocialSignUpComponent } from './components/social-sign-up/social-sign-u
 import { EmailMobSignupComponent } from './components/email-mob-signup/email-mob-signup.component';
 import { SendCodeComponent } from './components/send-code/send-code.component';
 import { BasicProfileComponent } from './components/basic-profile/basic-profile.component';
+import { SocialAuthModule } from '../social-auth/social-auth.module';
 
 const routes: Routes = [
   {
@@ -19,7 +20,7 @@ const routes: Routes = [
     component: EmailMobSignupComponent
   },
   {
-    path: 'profile', 
+    path: 'profile',
     component: BasicProfileComponent
   }
 ]
@@ -31,7 +32,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     FormsModule,
-    PasswordHelperModule
+    PasswordHelperModule,
+    SocialAuthModule
   ]
 })
 export class SignupModule { }

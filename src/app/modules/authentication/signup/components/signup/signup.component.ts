@@ -22,10 +22,7 @@ export class SignupComponent implements OnInit {
   submissionError: string;
   submissionComplete: boolean = false;
 
-  constructor(
-    private restApiService: RestApiService,
-    private router: Router,
-    private snackBar: SnackBarService) { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     // this.registerForm = new FormGroup({
@@ -88,8 +85,8 @@ export class SignupComponent implements OnInit {
   //   )
   // }
 
-  handleFacebookSignin() {
-
+  handleSocialSignIn() {
+    this.router.navigateByUrl('/');
   }
 
   // handleError(error: any) {

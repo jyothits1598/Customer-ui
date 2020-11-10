@@ -28,12 +28,12 @@ import { SignupService } from './signup/services/signup.service';
       useValue: {
         autoLogin: false,
         providers: [
-          // {
-          //   id: GoogleLoginProvider.PROVIDER_ID,
-          //   provider: new GoogleLoginProvider(
-          //     'clientId'
-          //   ),
-          // },
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '369468801567-ncm9je96ikkbhf210j82ptf7uj7jttnj.apps.googleusercontent.com'
+            ),
+          },
           {
             id: FacebookLoginProvider.PROVIDER_ID,
             provider: new FacebookLoginProvider('400251424602161'),
