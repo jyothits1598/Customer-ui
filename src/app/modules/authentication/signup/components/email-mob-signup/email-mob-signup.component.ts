@@ -52,7 +52,7 @@ export class EmailMobSignupComponent {
     // prepare data
     data.email = data.identity;
     data.emailVerificationCode = data.code;
-    delete data.email;
+    delete data.identity;
     delete data.code;
 
     this.signupService.emailSignup(data).pipe(finalize(() => this.loading = false)).subscribe(

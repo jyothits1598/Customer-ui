@@ -1,60 +1,12 @@
-<!-- 
-<div class="container">
-    <div class="row">
-
-        <div class="col-md-12">
-            <form [formGroup]="loginForm" (ngSubmit)="login()">
-                <div class="signin-card">
-                    <h3 class="std-heading-3 text-center"> menuzapp login </h3><br>
-                    <div class="failure-mez" *ngIf="backendErrorMessage">{{ backendErrorMessage }}</div>
-                    <div class="form-group form-group--margin">
-                        <input formControlName="email" type="text" class="form-input error-highlight"
-                            placeholder="Email">
-                        <ng-container *ngIf="loginForm.controls.email.invalid && loginForm.controls.email.touched">
-                            <div class="error-mez">{{returnErrors('email')}}</div>
-                        </ng-container>
-                    </div>
-                    <app-password>
-                        <div class="form-group form-group--margin">
-                            <input formControlName="password" passwordInput type="password"
-                                class="form-input error-highlight" placeholder="Password">
-                            <ng-container
-                                *ngIf="loginForm.controls.password.invalid && loginForm.controls.password.touched">
-                                <div class="error-mez">{{returnErrors('password')}}.</div>
-                            </ng-container>
-                        </div>
-                    </app-password>
-                    <div class="form-group" style="margin-top:10px;">
-                        <button [disabled]="loggingIn" type="submit" class="std-button std-button--blue"><span
-                                *ngIf="!loggingIn; else inProgressTemp">Sign in</span> </button>
-                    </div>
-                </div>
-            </form>
-            <!-- <social-sign-in (signedIn)="afterSignin()"></social-sign-in> -->
-            <social-auth (signedIn)="afterSignin()"></social-auth>
-        </div>
-    </div>
-</div>
-<p class="text-center"><a routerLink="/auth/forgot-password"
-        style="color:#353FA8;text-decoration: none;font-weight:bold"> Forgot password </a></p>
-<br>
-<p class="text-center"><a routerLink="/auth/signup" style="color:#353FA8;text-decoration: none;font-weight:bold">
-        Register an account </a></p>
-<ng-template #inProgressTemp>
-    <span>Signing in...</span>
-
-</ng-template> -->
-
-<!-- new design -->
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <div class="margins-center">
                 <!-- first sinup page -->
                 <form [formGroup]="loginForm" (ngSubmit)="login()">
-                    <h3 class="std-heading-4 text-center"> Sign in </h3>
+                    <h3 class="std-heading-4 text-center"> Welcome back </h3>
                     <div class="failure-mez" *ngIf="backendErrorMessage">{{ backendErrorMessage }}</div>
-                    <div class="form-group form-group--margin">
+                    <div class="form-group form-group--margin" style="margin-top:24px">
                         <div class="label-inputs"> <span class="float-left"> Email </span><span class="float-right"
                             style="color: #353FA8;;cursor: pointer;"> Log in with mobile </span> </div>
                         <input formControlName="email" type="text" class="form-input error-highlight" placeholder="Email">
@@ -83,38 +35,19 @@
                     </p>
                     <img src="assets/images/divider_or.png" style="margin-bottom: 16px;width:100%">
                     
-                    <button class="std-button std-button--transparency1" style="margin-bottom: 16px;color:#1a1a1a;">
-                        <img src="assets/images/google.png">&nbsp; Continue with Google
-                    </button>
-                    <button class="std-button std-button--facebook" style="margin-bottom: 16px;">
-                        <img src="assets/images/ico_facebook.png">&nbsp; Continue with Facebook
-                    </button>
-                    <button class="std-button std-button--apple" style="margin-bottom: 24px;">
-                        <img src="assets/images/ico_apple.png">&nbsp; Continue with Apple
-                    </button>
+                    <social-auth (signedIn)="afterSignin()"></social-auth>
 
                     <div class="paragraph14 text-center" style="margin-bottom: 24px;">
                         Already have an account?<b style="color:#353FA8;cursor: pointer;outline: 0;" routerLink="/auth/signup"> Sign up </b>
                     </div>
                 </form>
-                <!-- first signup page end -->
-
-                <!-- second signup page -->
-
-                <!-- end second signup page -->
-
-
-                <!-- profile page -->
                 
-                <!-- profile page end -->
-
             </div>
         </div>
     </div>
 </div>
-<!-- end new design -->
+
 
 <ng-template #inProgressTemp>
     <span>Signing in...</span>
-
-</ng-template> 
+</ng-template>
