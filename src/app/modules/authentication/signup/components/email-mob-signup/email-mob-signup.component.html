@@ -1,11 +1,11 @@
-<div class="margins-center text-center">
+<div class="margins-center">
     <form [formGroup]="registrationForm" (ngSubmit)="signup()">
         <!-- <h3 class="std-heading-4"> Sign up with mobile </h3>
         <div class="paragraph14" style="margin-bottom: 24px;">
             We’ll send a verification code to your number
         </div> -->
-        <h3 class="std-heading-4"> Sign up with email </h3>
-        <div class="paragraph14" style="margin-bottom: 24px;">
+        <h3 class="std-heading-4 text-center"> Sign up with email </h3>
+        <div class="paragraph14 text-center" style="margin-bottom: 24px;">
             We’ll send a verification code to your email
         </div>
 
@@ -50,7 +50,7 @@
             <button type="submit" class="btn std-button std-button--blue"
                 [disabled]="loading">{{loading? 'Sigining up...' : 'Next'}}</button>
         </div>
-        <div class="paragraph14 paragraph14__f12">
+        <div class="paragraph14 paragraph14__f12 text-center">
             By creating a menuzapp account you're agreeing to our <b style="color:#353FA8;cursor: pointer;">
                 Privacy Policy </b> and <b style="color:#353FA8;cursor: pointer;"> Terms of Service </b>
         </div>

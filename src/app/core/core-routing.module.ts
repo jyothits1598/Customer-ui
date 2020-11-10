@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { UnderConstructionComponent } from '../modules/authentication/under-construction/under-construction.component';
 import { SampleComponent } from './components/sample/sample.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 
@@ -11,6 +12,9 @@ const routes: Routes = [
   },
   {
     path: 'verify', loadChildren: () => import('src/app/modules/authentication/user-verification/user-verification.module').then(m => m.UserVerificationModule)
+  },
+  {
+    path: 'under-construction', component: UnderConstructionComponent
   },
   {
     path: '',
