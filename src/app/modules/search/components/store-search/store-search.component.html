@@ -10,9 +10,6 @@
                                 #itemSearch class="store-search__input" placeholder="Search by cuisine or restaurant">
                             <img src="assets/images/ico_arrow_left.png" class="store-search__icon"
                                 style="cursor: pointer;" routerLink="/" style="outline:0;">
-                            <!-- <ng-template #searchIcon *ngIf="searchActivated">
-                                        <img src="/assets/images/ico_search.png" class="store-search__icon">
-                                    </ng-template> -->
                         </div>
                         <ng-template #defaultTemplate>
                             <li *ngIf="itemSearch.value" class="auto-fill__list__item" (click)="searchTerm.emit(itemSearch.value)" >

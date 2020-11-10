@@ -10,7 +10,7 @@ export interface ItemModifier {
     minSelection: number;
     maxSelection: number;
     freeSelection: number;
-    options: Array<ModifierOption>
+    options: Array<ModifierOption>;
 }
 
 export interface ModifierOption {
@@ -31,6 +31,7 @@ export function ReadItemModifiers(data: any): Array<ItemModifier> {
             options: ReadModifierOptions(m.options)
         })
     });
+    console.log(name);
     return result;
 }
 
