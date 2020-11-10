@@ -1,4 +1,4 @@
-<div class="container" style="display:none">
+<!-- <div class="container" style="display:none">
     <div class="row">
         <div *ngIf="submissionError" class="col-md-12">{{submissionError}}</div>
         <div class="col-md-12">
@@ -67,23 +67,12 @@
                                         class="form-input error-highlight" formControlName="password"
                                         placeholder="Must be at least 8 characters">
                                 </app-password>
-                                <!-- <span toggle="#password" class="fa fa-eye-slash field-icon toggle-password"></span> -->
                                 <div *ngIf="f.password.touched && f.password.errors" class="error-mez">
                                     <div>
                                         {{getErrors('password')}}
                                     </div>
                                 </div>
-                                <!-- <div id="pswd_info">
-                                    <div class="popup-header"> Password must contain: </div>
-                                    <ul class="list-type">
-                                        <li id="length" class="invalid sub-content"> &nbsp; 8 characters </li>
-                                        <li id="small" class="invalid sub-content"> &nbsp; Lowercase letter </li>
-                                        <li id="capital" class="invalid sub-content"> &nbsp; Uppercase letter </li>
-                                    </ul>
-                                    <p class="pwd-description"> Strong passwords are longer, avoid words or sequences,
-                                        and mix random letters, numbers and symbols.
-                                    </p>
-                                </div> -->
+                                
                             </div>
                         </div>
                     </div>
@@ -92,19 +81,20 @@
                             <div class="form-group" style="margin-top:10px;">
                                 <button [disabled]="submitting" type="submit" class="std-button std-button--blue">
                                     <span *ngIf="!submitting; else subTemp">Sign up</span> </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <br>
-                    <p class="text-center" style="font-weight:bold"> Already have an account? <a
+                        <br>
+                        <p class="text-center" style="font-weight:bold"> Already have an account? <a
                             routerLink="/auth/signin" style="color:#353FA8;text-decoration: none;"> Login </a></p>
-                </form>
+                        </form>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</div>
+        </div> -->
+<!-- <span toggle="#password" class="fa fa-eye-slash field-icon toggle-password"></span> -->
 
-<ng-template #regComplete>
+<!-- <ng-template #regComplete>
     Welcome!
     Your registration is complete.
 </ng-template>
@@ -112,7 +102,7 @@
 <ng-template #subTemp>
     Submitting...
 </ng-template>
-
+ -->
 
 
 <!-- new design -->
@@ -145,7 +135,7 @@
 
 
                 <!-- profile page -->
-                
+
                 <!-- profile page end -->
 
             </div>

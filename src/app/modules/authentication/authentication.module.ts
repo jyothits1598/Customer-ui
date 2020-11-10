@@ -12,6 +12,7 @@ import {
 } from 'angularx-social-login';
 import { SocialAuthHelperService } from './services/social-auth-helper.service';
 import { AuthParentComponent } from './pages/auth-parent/auth-parent.component';
+import { SignupService } from './signup/services/signup.service';
 
 @NgModule({
   declarations: [AuthParentComponent],
@@ -40,7 +41,8 @@ import { AuthParentComponent } from './pages/auth-parent/auth-parent.component';
         ],
       } as SocialAuthServiceConfig,
     },
-    SocialAuthHelperService
+    SocialAuthHelperService,
+    SignupService
   ]
 })
 export class AuthenticationModule { }

@@ -44,8 +44,9 @@ export class EmailMobSignupComponent {
   }
 
   signup() {
-    this.loading = true;
     if (this.registrationForm.invalid) { this.registrationForm.markAllAsTouched(); return; }
+
+    this.loading = true;
     let data = { ...this.registrationForm.value };
 
     // prepare data
@@ -55,8 +56,9 @@ export class EmailMobSignupComponent {
     delete data.code;
 
     this.signupService.emailSignup(data).pipe(finalize(() => this.loading = false)).subscribe(
-      () => {
-        this.router.navigate(['../'])
+      (resp) => {
+        this.snackBar.success(resp.data);
+        this.router.navigate(['../profile'], { relativeTo: this.activatedRoute });
       },
       (resp) => { this.handleError(resp.error) }
     )

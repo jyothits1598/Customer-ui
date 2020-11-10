@@ -3,24 +3,26 @@
 </nav>
 <div class="container">
     <div class="row">
-        
+
         <div class="col-md-12">
             <form [formGroup]="loginForm" (ngSubmit)="login()">
                 <div class="signin-card">
                     <h3 class="std-heading-3 text-center"> menuzapp login </h3><br>
                     <div class="failure-mez" *ngIf="backendErrorMessage">{{ backendErrorMessage }}</div>
                     <div class="form-group form-group--margin">
-                        <input formControlName="email" type="text" class="form-input error-highlight" placeholder="Email">
+                        <input formControlName="email" type="text" class="form-input error-highlight"
+                            placeholder="Email">
                         <ng-container *ngIf="loginForm.controls.email.invalid && loginForm.controls.email.touched">
-                            <div class="error-mez" >{{returnErrors('email')}}</div>
+                            <div class="error-mez">{{returnErrors('email')}}</div>
                         </ng-container>
                     </div>
                     <app-password>
                         <div class="form-group form-group--margin">
-                            <input formControlName="password" passwordInput type="password" class="form-input error-highlight"
-                                placeholder="Password">
-                            <ng-container *ngIf="loginForm.controls.password.invalid && loginForm.controls.password.touched" >
-                                <div class="error-mez" >{{returnErrors('password')}}.</div>
+                            <input formControlName="password" passwordInput type="password"
+                                class="form-input error-highlight" placeholder="Password">
+                            <ng-container
+                                *ngIf="loginForm.controls.password.invalid && loginForm.controls.password.touched">
+                                <div class="error-mez">{{returnErrors('password')}}.</div>
                             </ng-container>
                         </div>
                     </app-password>
@@ -30,12 +32,15 @@
                     </div>
                 </div>
             </form>
+            <social-sign-in (signedIn)="afterSignin()"></social-sign-in>
         </div>
     </div>
 </div>
-<p class="text-center"><a routerLink="/auth/forgot-password" style="color:#353FA8;text-decoration: none;font-weight:bold"> Forgot password </a></p>
+<p class="text-center"><a routerLink="/auth/forgot-password"
+        style="color:#353FA8;text-decoration: none;font-weight:bold"> Forgot password </a></p>
 <br>
-<p class="text-center"><a routerLink="/auth/signup" style="color:#353FA8;text-decoration: none;font-weight:bold"> Register an account </a></p>
+<p class="text-center"><a routerLink="/auth/signup" style="color:#353FA8;text-decoration: none;font-weight:bold">
+        Register an account </a></p>
 <ng-template #inProgressTemp>
     <span>Signing in...</span>
 

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { URL_login } from 'src/api/authentication';
+import { URL_FacebookLogin, URL_login } from 'src/api/authentication';
+import { SocialAuthHelperService } from 'src/app/modules/authentication/services/social-auth-helper.service';
 import { ReadUserDetails, User } from '../model/user';
 import { RestApiService } from './rest-api.service';
 import { StorageService } from './storage.service';
@@ -57,6 +58,18 @@ export class AuthService {
 
   login(data: { email: string, password: string }) {
     return this.restApiService.post(URL_login, data).pipe(tap(
+      (resp) => this.handleLoginResp(resp)
+    ))
+  }
+
+  facebookSignin(data: { email: string, firstName: string, lastName: string, token: string }) {
+    console.log('calling facebook sign in', data);
+    let d: any = {};
+    d.first_name = data.firstName;
+    d.last_name = data.lastName;
+    d.email = data.email;
+    d.facebook_token = data.token;
+    return this.restApiService.post(URL_FacebookLogin, d).pipe(tap(
       (resp) => this.handleLoginResp(resp)
     ))
   }
