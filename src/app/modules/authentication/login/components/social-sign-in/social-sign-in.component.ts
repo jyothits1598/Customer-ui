@@ -24,22 +24,22 @@ export class SocialSignInComponent implements OnInit {
 
   facebookSignin() {
     this.facebookLoading = true;
-    this.socialAuth.facebookSignIn().subscribe(
-      (facebookResp) => {
-        this.authService.facebookSignin(facebookResp).pipe(
-          catchError((errResp) => {
-            console.log('there is an error');
-            if (errResp.error?.email[0] === "Couldn't find your Menuzapp account") return this.signupService.facebookSignup(facebookResp);
-            else throwError(errResp)
-          })
-        ).pipe(finalize(() => this.facebookLoading = false)).subscribe(
-          (s) => {
-            this.signedIn.emit(true);
-          },
-          (e) => { console.log('final login resp', e) }
-        )
-      }
-    )
+    // this.socialAuth.facebookSignIn().subscribe(
+    //   (facebookResp) => {
+    //     this.authService.facebookSignin(facebookResp).pipe(
+    //       catchError((errResp) => {
+    //         console.log('there is an error');
+    //         if (errResp.error?.email[0] === "Couldn't find your Menuzapp account") return this.signupService.facebookSignup(facebookResp);
+    //         else throwError(errResp)
+    //       })
+    //     ).pipe(finalize(() => this.facebookLoading = false)).subscribe(
+    //       (s) => {
+    //         this.signedIn.emit(true);
+    //       },
+    //       (e) => { console.log('final login resp', e) }
+    //     )
+    //   }
+    // )
   }
 
 }

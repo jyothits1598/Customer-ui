@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PasswordHelperModule } from '../password-helper/password-helper.module';
 import { SocialSignInComponent } from './components/social-sign-in/social-sign-in.component';
+import { SocialAuthModule } from '../social-auth/social-auth.module';
 
 const routes: Routes = [
   {
@@ -20,7 +21,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     FormsModule,
-    PasswordHelperModule
+    PasswordHelperModule,
+    SocialAuthModule
   ]
 })
 export class LoginModule { }

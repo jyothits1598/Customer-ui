@@ -1,20 +1,25 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { SnackBar } from 'src/app/core/model/snack-bar';
+import { SnackBar, SnackBarType } from 'src/app/core/model/snack-bar';
 
 @Component({
   selector: 'snack-bar',
   templateUrl: './snack-bar.component.html',
   styleUrls: ['./snack-bar.component.scss']
 })
-export class SnackBarComponent implements OnInit {
-@Input() snackBar: SnackBar
-  // errorMessage = false;
-  // successMessage: string;
+export class SnackBarComponent {
+  @Input() snackBar: SnackBar
 
   constructor() { }
 
-  ngOnInit(): void {
-    // this.successMessage = this.snackBar.message;
+  getClass() {
+    switch (this.snackBar.type) {
+      case SnackBarType.success:
+        return 'success-mez'
+      case SnackBarType.error:
+        return 'failure-mez'
+      default:
+        break;
+    }
   }
 
 }

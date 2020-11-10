@@ -74,6 +74,18 @@ export class AuthService {
     ))
   }
 
+  socialSignIn(user: { email: string, token: string }, type: 'google' | 'facebook') {
+    let data = {
+      email: user.email,
+      social_auth_token: user.token,
+      social_login_type: type
+    }
+    return this.restApiService.post('/api/customer/v1/social-auth', data).pipe(tap(
+      (resp) => this.handleLoginResp(resp)
+    ))
+
+  }
+
   logout() {
     this._accessToken.next(null);
     this._loggedUser.next(null);
