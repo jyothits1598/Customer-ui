@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PasswordHelperModule } from '../password-helper/password-helper.module';
+import { SocialSignInComponent } from './components/social-sign-in/social-sign-in.component';
 
 const routes: Routes = [
   {
@@ -13,7 +14,7 @@ const routes: Routes = [
 ]
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, SocialSignInComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

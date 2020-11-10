@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { finalize } from 'rxjs/operators';
+import { catchError, finalize, switchMap } from 'rxjs/operators';
 import { URL_login } from 'src/api/authentication';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
 import { CustomValidators } from 'src/app/helpers/validators';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { SocialAuthHelperService } from '../../../services/social-auth-helper.service';
+import { SignupService } from '../../../signup/services/signup.service';
+import { throwError } from 'rxjs';
 
 
 @Component({
@@ -69,9 +72,15 @@ export class LoginComponent implements OnInit {
     }
     this.loggingIn = true;
     this.authService.login(this.loginForm.value).pipe(finalize(() => this.loggingIn = false)).subscribe(
-      (s) => { this.route.snapshot.queryParams.redirect ? this.router.navigate([this.route.snapshot.queryParams.redirect]) : this.router.navigate(['/']) },
+      (s) => { this.afterSignin() },
       (e) => { this.handleErrors(e) }
     )
+  }
+
+  afterSignin() {
+    this.route.snapshot.queryParams.redirect ?
+      this.router.navigate([this.route.snapshot.queryParams.redirect])
+      : this.router.navigate(['/'])
   }
 
   handleErrors(error: any) {

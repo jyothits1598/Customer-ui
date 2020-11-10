@@ -1,7 +1,8 @@
 <button class="std-button std-button--transparency1" style="margin-bottom: 16px;color:#1a1a1a;">
     <img src="assets/images/google.png">&nbsp; Continue with Google
 </button>
-<button (click)="handleFacebook()" class="std-button std-button--facebook" style="margin-bottom: 16px;">
+<button [disabled]="facebookLoading" (click)="facebookSignin()" class="std-button std-button--facebook"
+    style="margin-bottom: 16px;">
     <img src="assets/images/ico_facebook.png">&nbsp; Continue with Facebook
 </button>
 <button class="std-button std-button--apple" style="margin-bottom: 24px;">

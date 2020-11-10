@@ -12,6 +12,7 @@ import { SnackBarContainerComponent } from './components/snack-bar/snack-bar-con
 import { LoginPromptComponent } from './components/login-prompt/login-prompt.component';
 import { HttpAuthErrorInterceptor } from './interceptors/http-auth-error.interceptor';
 import { SampleComponent } from './components/sample/sample.component';
+import { IsAuthenticatedGuard } from './guards/is-authenticated.guard';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { SampleComponent } from './components/sample/sample.component';
       provide: Window,
       useValue: window
     },
+    IsAuthenticatedGuard
   ]
 })
 export class CoreModule { }
