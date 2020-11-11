@@ -19,7 +19,7 @@ export class SignupService {
   }
 
   facebookSignup(data: { email: string, firstName: string, lastName: string, token: string }) {
-    console.log('calling facebook sign up', data);
+    // console.log('calling facebook sign up', data);
     let d: any = {};
     d.first_name = data.firstName;
     d.last_name = data.lastName;
