@@ -11,6 +11,7 @@ export const environment = {
 export const API_URL_LINK = 'http://54.252.119.115:8000/';
 
 export const APP_LINK = 'http://localhost:4200/';
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

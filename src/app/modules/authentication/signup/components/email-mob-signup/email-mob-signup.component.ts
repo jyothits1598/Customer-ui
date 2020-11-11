@@ -20,7 +20,7 @@ export class EmailMobSignupComponent {
   registrationForm: FormGroup = new FormGroup({
     identity: new FormControl(null, [
       CustomValidators.required('Email is required.'),
-      CustomValidators.email('Email is incorrect')
+      CustomValidators.email('Email is invalid')
     ]),
     password: new FormControl(null, [
       CustomValidators.required('Password is required.'),
