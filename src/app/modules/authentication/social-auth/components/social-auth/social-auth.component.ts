@@ -28,9 +28,9 @@ export class SocialAuthComponent implements OnDestroy {
   }
 
   facebookSignin() {
-    this.facebookLoading = true;
     this.reqSubs = this.socialAuthHelper.facebookSignIn().pipe(
       switchMap((fbResp) => {
+        this.facebookLoading = true;
         return this.authService.socialSignIn(fbResp, 'facebook');
       }),
       finalize(() => this.facebookLoading = false)
@@ -41,9 +41,9 @@ export class SocialAuthComponent implements OnDestroy {
   }
 
   googleSignin() {
-    this.googleLoading = true;
     this.reqSubs = this.socialAuthHelper.googleSignIn().pipe(
       switchMap((fbResp) => {
+        this.googleLoading = true;
         return this.authService.socialSignIn(fbResp, 'google');
       }),
       finalize(() => this.googleLoading = false)

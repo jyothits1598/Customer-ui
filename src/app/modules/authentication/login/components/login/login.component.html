@@ -8,19 +8,21 @@
                     <div class="failure-mez" *ngIf="backendErrorMessage">{{ backendErrorMessage }}</div>
                     <div class="form-group form-group--margin" style="margin-top:24px">
                         <div class="label-inputs"> <span class="float-left"> Email </span><span class="float-right"
-                            style="color: #353FA8;;cursor: pointer;"> Log in with mobile </span> </div>
-                        <input formControlName="email" type="text" class="form-input error-highlight" placeholder="Email">
+                                style="color: #353FA8;;cursor: pointer;"> Log in with mobile </span> </div>
+                        <input formControlName="email" type="text" class="form-input error-highlight"
+                            placeholder="Email">
                         <ng-container *ngIf="loginForm.controls.email.invalid && loginForm.controls.email.touched">
-                            <div class="error-mez" >{{returnErrors('email')}}</div>
+                            <div class="error-mez">{{returnErrors('email')}}</div>
                         </ng-container>
                     </div>
                     <app-password>
                         <div class="form-group form-group--margin">
                             <div class="label-inputs"> <span class="float-left"> Password </span></div>
-                            <input formControlName="password" passwordInput type="password" class="form-input error-highlight"
-                                placeholder="Password">
-                            <ng-container *ngIf="loginForm.controls.password.invalid && loginForm.controls.password.touched" >
-                                <div class="error-mez" >{{returnErrors('password')}}.</div>
+                            <input formControlName="password" passwordInput type="password"
+                                class="form-input error-highlight" placeholder="Password">
+                            <ng-container
+                                *ngIf="loginForm.controls.password.invalid && loginForm.controls.password.touched">
+                                <div class="error-mez">{{returnErrors('password')}}.</div>
                             </ng-container>
                         </div>
                     </app-password>
@@ -28,20 +30,33 @@
                         <button [disabled]="loggingIn" type="submit" class="std-button std-button--blue"><span
                                 *ngIf="!loggingIn; else inProgressTemp">Log in</span> </button>
                     </div>
-                    <p class="text-center">
-                        <a routerLink="/auth/forgot-password" style="color:#353FA8;text-decoration: none;font-weight:bold"> 
-                            Forgot password 
-                        </a>
-                    </p>
-                    <img src="assets/images/divider_or.png" style="margin-bottom: 16px;width:100%">
-                    
-                    <social-auth (signedIn)="afterSignin()"></social-auth>
-
-                    <div class="paragraph14 text-center" style="margin-bottom: 24px;">
-                        Already have an account?<b style="color:#353FA8;cursor: pointer;outline: 0;" routerLink="/auth/signup"> Sign up </b>
-                    </div>
                 </form>
-                
+                <p class="text-center">
+                    <a routerLink="/auth/forgot-password" style="color:#353FA8;text-decoration: none;font-weight:bold">
+                        Forgot password
+                    </a>
+                </p>
+                <img src="assets/images/divider_or.png" style="margin-bottom: 16px;width:100%">
+
+                <social-auth (signedIn)="afterSignin()"></social-auth>
+
+
+                <div class="paragraph14 text-center" style="margin-bottom: 24px;">
+                    Already have an account?<b style="color:#353FA8;cursor: pointer;outline: 0;"
+                        routerLink="/auth/signup"> Sign up </b>
+                </div>
+
+                <!-- first signup page end -->
+
+                <!-- second signup page -->
+
+                <!-- end second signup page -->
+
+
+                <!-- profile page -->
+
+                <!-- profile page end -->
+
             </div>
         </div>
     </div>
@@ -50,4 +65,5 @@
 
 <ng-template #inProgressTemp>
     <span>Signing in...</span>
+
 </ng-template>

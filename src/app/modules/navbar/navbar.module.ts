@@ -6,10 +6,11 @@ import { LocationModule } from '../location/location-selector.module';
 import { RouterModule } from '@angular/router';
 import { ModalModule } from 'ngb-modal';
 import { SearchModule } from '../search/search.module';
+import { SignedInOptionsComponent } from './components/signed-in-options/signed-in-options.component';
 
 
 @NgModule({
-  declarations: [NavbarComponent],
+  declarations: [NavbarComponent, SignedInOptionsComponent],
   imports: [
     CommonModule,
     RouterModule,
