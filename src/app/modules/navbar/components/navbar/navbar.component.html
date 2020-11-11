@@ -20,11 +20,11 @@
                                 style="cursor: pointer;outline:none"> <img src="assets/images/ico_heart.png"> </li>
                             <li routerLink="/" style="cursor: pointer;outline:none"> <img
                                     src="assets/images/ico_account.png"> </li>
-                            <li *ngIf="isLoggedin$ | async" style="cursor: pointer;outline:none"> <img
-                                    src="assets/images/ico_bell_active.png"> </li>
-                            <li (click)="logout()" *ngIf="isLoggedin$ | async" style="cursor: pointer;outline:none">
-                                <img src="assets/images/ico_menu_big.png">
-                            </li>
+                            <ng-container *ngIf="isLoggedin$ | async">
+                                <li style="cursor: pointer;outline:none"> <img src="assets/images/ico_bell_active.png">
+                                </li>
+                                <signed-in-options></signed-in-options>
+                            </ng-container>
                             <li>
                                 <app-store-search-inline></app-store-search-inline>
                             </li>

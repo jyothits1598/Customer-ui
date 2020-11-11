@@ -21,3 +21,9 @@ export class ComponentPopoverRef<T> extends PopoverRef {
         this.instance = instance;
     }
 }
+
+export interface PopoverConfig {
+    xPos?: 'start' | 'center' | 'end',
+    yPos?: 'top' | 'bottom';
+    onDismiss?: () => void;
+}

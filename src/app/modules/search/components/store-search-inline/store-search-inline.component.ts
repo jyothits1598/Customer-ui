@@ -53,7 +53,6 @@ export class StoreSearchInlineComponent implements AfterViewInit {
 
     let config = new OverlayConfig();
     config.hasBackdrop = false;
-    config.panelClass = 'sample-panel-panel';
     config.positionStrategy = this.overlay.position().flexibleConnectedTo(this.searchContainer.nativeElement).withPositions([{
       originX: 'end',
       originY: 'bottom',

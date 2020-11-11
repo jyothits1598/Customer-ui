@@ -1,7 +1,8 @@
-import { ChangeDetectorRef, Component, OnInit, TemplateRef } from '@angular/core';
+import { ElementRef } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentModalRef } from 'src/app/core/model/modal';
 import { GeoLocationService } from 'src/app/core/services/geo-location.service';
-import { ModalService } from 'src/app/core/services/modal.service';
+import { PopoverService } from 'src/app/core/services/popover.service';
 import { LocationPanelComponent } from '../location-panel/location-panel.component';
 import { LocationSearchComponent } from '../location-search/location-search.component';
 
@@ -11,8 +12,8 @@ import { LocationSearchComponent } from '../location-search/location-search.comp
   styleUrls: ['./location-selector.component.scss']
 })
 export class LocationSelectorComponent implements OnInit {
-  constructor(private modalService: ModalService,
-    private geoLocationService: GeoLocationService) { }
+  @ViewChild('popOrigin', { read: ElementRef }) popOrigin: ElementRef;
+  constructor(private geoLocationService: GeoLocationService, private popOverService: PopoverService) { }
   compModal: ComponentModalRef;
   location;
   ngOnInit(): void {
@@ -22,7 +23,7 @@ export class LocationSelectorComponent implements OnInit {
   }
 
   showSelectorModal() {
-    this.modalService.openComponentModal(LocationPanelComponent, {yPosition: '75px'});
+    this.popOverService.openComponentPopover(this.popOrigin, LocationPanelComponent, { xPos: 'start', yPos: 'bottom' })
   }
 
 }

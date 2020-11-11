@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ComponentModalRef } from 'src/app/core/model/modal';
+import { ComponentPopoverRef } from 'src/app/core/model/popover';
 import { UserLocation } from 'src/app/core/model/user-location';
 import { GeoLocationService } from 'src/app/core/services/geo-location.service';
 
@@ -10,7 +11,7 @@ import { GeoLocationService } from 'src/app/core/services/geo-location.service';
 })
 export class LocationPanelComponent implements OnInit {
   locationHistory: Array<UserLocation>;
-  constructor(private modalRef: ComponentModalRef,
+  constructor(private modalRef: ComponentPopoverRef<LocationPanelComponent>,
     private geoLocation: GeoLocationService) { }
 
   ngOnInit(): void {

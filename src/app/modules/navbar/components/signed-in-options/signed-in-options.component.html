@@ -1,0 +1,12 @@
+<li style="cursor: pointer;outline:none" #lineIcon (click)="showPopover(profTemp)">
+    <img src="assets/images/ico_menu_big.png">
+</li>
+
+<ng-template #profTemp>
+    <ul style="background-color: aliceblue;">
+        <li>Profile</li>
+        <li>Settings</li>
+        <li>Security</li>
+        <li (click)="logout()">Logout</li>
+    </ul>
+</ng-template>
