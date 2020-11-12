@@ -42,12 +42,16 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
     $(window).scroll(function(){
       if ($(this).scrollTop() > 50) {
          $('.fixed-shadow').addClass('newClass');
+         $('.fixed-name-scroll').show();
       } else {
          $('.fixed-shadow').removeClass('newClass');
+         $('.fixed-name-scroll').hide();
       }
   });
   
   }
+
+  
 
   loadStore() {
     this.loading = true;

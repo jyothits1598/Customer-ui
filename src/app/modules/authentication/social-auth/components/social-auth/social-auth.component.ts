@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output, ɵConsole } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { finalize, switchMap } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -18,10 +19,31 @@ export class SocialAuthComponent implements OnDestroy {
 
   reqSubs: Subscription;
 
+  signup_url:string = "/auth/signup";
+  signin_url:string = "/auth/signin";
+
+  signup_active:boolean = false;
+  signin_active:boolean = false;
+
   @Output() signedIn = new EventEmitter<boolean>();
   constructor(private socialAuthHelper: SocialAuthHelperService,
     private authService: AuthService,
-    private snackBar: SnackBarService) { }
+    private snackBar: SnackBarService,
+    private router: Router) {
+      this.router.events.subscribe(
+        (event: any) => {
+          if (event instanceof NavigationEnd) {
+            this.signup_active = false;
+            this.signin_active = false;
+            if(this.router.url && this.router.url.indexOf(this.signup_url) > -1){
+              this.signup_active = true;
+            }else if(this.router.url && this.router.url.indexOf(this.signin_url) > -1){
+              this.signin_active = true;
+            }
+          }
+        }
+      );
+  }
 
   get inProgress(): boolean {
     return this.facebookLoading || this.googleLoading;

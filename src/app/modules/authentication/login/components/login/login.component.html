@@ -15,18 +15,18 @@
                             <div class="error-mez">{{returnErrors('email')}}</div>
                         </ng-container>
                     </div>
-                    <app-password>
-                        <div class="form-group form-group--margin">
-                            <div class="label-inputs"> <span class="float-left"> Password </span></div>
-                            <input formControlName="password" passwordInput type="password"
-                                class="form-input error-highlight" placeholder="Password">
-                            <ng-container
-                                *ngIf="loginForm.controls.password.invalid && loginForm.controls.password.touched">
-                                <div class="error-mez">{{returnErrors('password')}}.</div>
-                            </ng-container>
+                    <div class="form-group" style="margin-bottom: 24px;">
+                        <div class="label-inputs"> <span class="float-left"> Password </span></div>
+                        <app-password>
+                        <input formControlName="password" passwordInput type="password"
+                            class="form-input error-highlight custom-padd" placeholder="Password">
+                        </app-password>
+                        <div
+                        *ngIf="loginForm.controls.password.invalid && loginForm.controls.password.touched">
+                            <div class="error-mez">{{returnErrors('password')}}.</div>
                         </div>
-                    </app-password>
-                    <div class="form-group" style="margin-top:10px;">
+                    </div>
+                    <div class="form-group">
                         <button [disabled]="loggingIn" type="submit" class="std-button std-button--blue"><span
                                 *ngIf="!loggingIn; else inProgressTemp">Log in</span> </button>
                     </div>
@@ -42,7 +42,7 @@
 
 
                 <div class="paragraph14 text-center" style="margin-bottom: 24px;">
-                    Already have an account?<b style="color:#353FA8;cursor: pointer;outline: 0;"
+                    Don't have an account?<b style="color:#353FA8;cursor: pointer;outline: 0;"
                         routerLink="/auth/signup"> Sign up </b>
                 </div>
 

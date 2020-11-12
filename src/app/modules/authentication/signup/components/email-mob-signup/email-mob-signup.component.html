@@ -25,8 +25,8 @@
         <div class="form-group form-group--margin">
             <div class="label-inputs"> <span class="float-left"> Password </span></div>
             <app-password [showHint]="true">
-                <input passwordInput type="text" class="form-input error-highlight" placeholder="Password"
-                    formControlName="password">
+                <input passwordInput type="password" class="form-input error-highlight custom-padd" placeholder="Password"
+                    formControlName="password" >
             </app-password>
             <div *ngIf="controls.password.touched && controls.password.errors" class="error-mez">
                 <div> {{getErrors('password')}} </div>
