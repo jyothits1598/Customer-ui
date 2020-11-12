@@ -1,0 +1,20 @@
+.profile-popup {
+    background: var(--color-background);
+    border-radius: 8px;
+    color: var(--color-primary);
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    width: 200px;
+}
+.profile-popup li{
+    list-style-type: none;
+    padding: 16px;
+    cursor: pointer;
+    &:hover {
+        background: var(--color-background-secondary);
+        border-radius: 8px;
+    }
+}
