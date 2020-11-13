@@ -11,6 +11,7 @@ export const environment = {
 export const API_URL_LINK = 'https://uat.api.menuzapp.com/';
 
 export const APP_LINK = 'http://localhost:4200/';
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

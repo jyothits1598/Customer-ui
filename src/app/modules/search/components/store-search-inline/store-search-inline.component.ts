@@ -52,7 +52,8 @@ export class StoreSearchInlineComponent implements AfterViewInit {
     if (this.overlayOpen) return;
 
     let config = new OverlayConfig();
-    config.hasBackdrop = false;
+    config.hasBackdrop = true;
+    config.backdropClass = '';
     config.positionStrategy = this.overlay.position().flexibleConnectedTo(this.searchContainer.nativeElement).withPositions([{
       originX: 'end',
       originY: 'bottom',
@@ -62,6 +63,7 @@ export class StoreSearchInlineComponent implements AfterViewInit {
 
     let overlayRef = this.overlay.create(config);
     this.popoverRef = new ComponentPopoverRef<SearchPanelComponent>(overlayRef, null);
+    overlayRef.backdropClick().subscribe(()=>this.popoverRef.dismiss());
     let compPortal = new ComponentPortal(SearchPanelComponent, null, this.createInjector(this.popoverRef, this.injector));
     this.popoverRef.instance = overlayRef.attach(compPortal).instance;
     this.popoverRef.onDismiss = () => { this.overlayOpen = false; }

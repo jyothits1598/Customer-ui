@@ -36,7 +36,8 @@ import { SignupService } from './signup/services/signup.service';
           },
           {
             id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('1047824149014745'),
+            provider: new FacebookLoginProvider('674234386615039'),
+            // provider: new FacebookLoginProvider('1047824149014745'),
           },
         ],
       } as SocialAuthServiceConfig,

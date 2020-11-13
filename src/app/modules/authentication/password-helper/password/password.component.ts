@@ -31,9 +31,9 @@ export class PasswordComponent implements AfterContentInit, OnDestroy {
   ngOnInit(): void {
   }
 
-  togglePasswordVisisbility() {
-    this.inputHtmlElement.type === 'password' ? this.inputHtmlElement.type = 'text' : this.inputHtmlElement.type = 'password';
-  }
+  // togglePasswordVisisbility() {
+  //   this.inputHtmlElement.type === 'password' ? this.inputHtmlElement.type = 'text' : this.inputHtmlElement.type = 'password';
+  // }
 
   //validation functions
   validateLength() {

@@ -1,12 +1,12 @@
-<li style="cursor: pointer;outline:none" #lineIcon (click)="showPopover(profTemp)">
+<li style="cursor: pointer;outline:none" #lineIcon (click)="showPopover(profTemp)" title="Settings">
     <img src="assets/images/ico_menu_big.png">
 </li>
 
 <ng-template #profTemp>
-    <ul style="background-color: aliceblue;">
-        <li>Profile</li>
-        <li>Settings</li>
-        <li>Security</li>
-        <li (click)="logout()">Logout</li>
+    <ul class="profile-popup" >
+        <li> <img src="assets/images/profile/profile_user.png"> <span style="padding-left:16px;"> Profile </span> </li>
+        <li> <img src="assets/images/profile/ico_setting.png"> <span style="padding-left:16px;"> Settings </span> </li>
+        <li> <img src="assets/images/profile/ico_key.png"> <span style="padding-left:16px;"> Security </span> </li>
+        <li (click)="logout()"> <img src="assets/images/profile/log-out.png"> <span style="padding-left:16px;"> Logout </span> </li>
     </ul>
 </ng-template>
