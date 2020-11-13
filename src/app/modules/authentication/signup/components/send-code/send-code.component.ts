@@ -9,7 +9,10 @@ import { SignupService } from '../../services/signup.service';
   styleUrls: ['./send-code.component.scss']
 })
 export class SendCodeComponent {
-  @Input() data: { type: 'email' | 'mobile', identity: string };
+  @Input() data: {
+    type: 'email' | 'mobile',
+    identity: string
+  };
   @Output() error = new EventEmitter<string>();
 
   loading: boolean = false;

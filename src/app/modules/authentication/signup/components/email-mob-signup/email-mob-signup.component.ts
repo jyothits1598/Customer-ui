@@ -27,7 +27,7 @@ export class EmailMobSignupComponent {
       CustomValidators.required('Password is required.'),
       CustomValidators.pattern(/^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/, 'Please enter a more secure password.')
     ]),
-    code: new FormControl(null, [
+    verificationCode: new FormControl(null, [
       CustomValidators.required('Code is required.'),
     ])
   })
@@ -53,9 +53,8 @@ export class EmailMobSignupComponent {
 
     // prepare data
     data.email = data.identity;
-    data.emailVerificationCode = data.code;
+    data.type = 'email';
     delete data.identity;
-    delete data.code;
 
     this.signupService.emailSignup(data).pipe(finalize(() => this.loading = false)).subscribe(
       (resp) => {

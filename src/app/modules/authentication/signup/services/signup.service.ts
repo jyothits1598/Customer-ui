@@ -11,12 +11,23 @@ export class SignupService {
 
   sendCode(identity: string, type: 'email' | 'mobile' = 'email') {
     return this.restApiService.post(URL_SendCode, {
-      'email': identity
+      email: identity,
+      type: type === 'email' ? 'email' : 'mobile_number'
     });
   }
 
-  emailSignup(data: any) {
-    return this.restApiService.post(URL_Signup, data);
+  emailSignup(data: { email?: string, mobile?: string, password: string, type: 'mobile' | 'email', verificationCode: string }) {
+    let d: any = {}
+
+    if (data.type === 'mobile') d.mobile_number = data.mobile;
+    else d.email = data.email;
+
+    d.type = data.type === 'mobile' ? 'mobile_number' : 'email';
+
+    d.password = data.password;
+    d.verificationCode = data.verificationCode
+
+    return this.restApiService.post(URL_Signup, d);
   }
 
   updateProfile(data: { firstName: string, lastName: string, profileImage?: string }) {
