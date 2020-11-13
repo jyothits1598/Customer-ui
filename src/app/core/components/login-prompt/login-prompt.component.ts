@@ -26,7 +26,7 @@ export class LoginPromptComponent implements OnInit {
 
   logoutWithReload() {
     this.authService.logout();
-    this.window.location.reload();
+    if (this.authService.isLoggedIn) this.window.location.reload();
   }
 
 }
