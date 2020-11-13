@@ -8,6 +8,9 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
   declarations: [FileUploadComponent],
   imports: [
     CommonModule
+  ],
+  exports: [
+    FileUploadComponent
   ]
 })
 export class FileUploadModule { }

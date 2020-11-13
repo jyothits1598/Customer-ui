@@ -34,4 +34,11 @@ export class RestApiService {
     );
   }
 
+  put(url, data): Observable<any> {
+    return this.http.put((API_URL_LINK + url), data).pipe(
+      take(1),
+      catchError((httpError) => throwError(httpError.error))
+    );
+  }
+
 }

@@ -16,6 +16,7 @@ export class NearbyStoresComponent implements OnInit, OnDestroy {
   constructor(private geoLocation: GeoLocationService,
     private changeDetector: ChangeDetectorRef) {
     this.locationSubs = this.geoLocation.userLocation().subscribe((value: UserLocation) => {
+      console.log('inside location subscription');
       this.filter = {
         location: value.latLng
       }

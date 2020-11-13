@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { URL_FacebookSignup, URL_SendCode, URL_Signup } from 'src/api/authentication';
+import { URL_ProfileData, URL_ProfileImageUpload } from 'src/api/profile';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
 
 @Injectable()
@@ -18,14 +19,21 @@ export class SignupService {
     return this.restApiService.post(URL_Signup, data);
   }
 
-  facebookSignup(data: { email: string, firstName: string, lastName: string, token: string }) {
-    // console.log('calling facebook sign up', data);
-    let d: any = {};
+  updateProfile(data: { firstName: string, lastName: string, profileImage?: string }) {
+    let d: any = {}
     d.first_name = data.firstName;
     d.last_name = data.lastName;
-    d.email = data.email;
-    d.facebook_token = data.token;
+    if (data.profileImage) d.profile_image = data.profileImage;
 
-    return this.restApiService.post(URL_FacebookSignup, d);
+    return this.restApiService.put(
+      URL_ProfileData, d
+    );
+  }
+
+  uplaodProfileImage(file: File) {
+
+    let formData = new FormData();
+    formData.append('profile_image', file);
+    return this.restApiService.post(URL_ProfileImageUpload, formData).pipe(map((resp) => resp.data))
   }
 }

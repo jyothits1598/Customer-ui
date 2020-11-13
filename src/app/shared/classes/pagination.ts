@@ -1,5 +1,5 @@
 import { Observable, of } from 'rxjs';
-import { finalize, map, tap } from 'rxjs/operators';
+import { catchError, finalize, map, tap } from 'rxjs/operators';
 import { ReadStore, Store } from 'src/app/modules/stores/model/store';
 import { StoreFilter } from 'src/app/modules/stores/model/StoreFilter';
 
@@ -12,10 +12,12 @@ export class Pagination<T>{
     hasEnded = false;
     isLoading: boolean = false;
     currentPage: number = 1;
+    //to fix repeated loading in the home screen upon errors
+    hasErrors: boolean = false;
 
     setPaginationData(resp) {
         this.currentPage += 1;
-        if(!resp.data.next_page_url) this.hasEnded = true;
+        if (!resp.data.next_page_url) this.hasEnded = true;
     }
     constructor(source) {
         this.source = source;
@@ -32,14 +34,15 @@ export class StorePagination extends Pagination<Store>{
 
     getNext(): Observable<Array<Store>> {
         this.storeFilter.page = this.currentPage;
-        if (!this.hasEnded && !this.isLoading) {
+        if (!this.hasEnded && !this.isLoading && !this.hasErrors) {
             this.isLoading = true;
             return this.source(this.storeFilter).pipe(
                 finalize(() => this.isLoading = false),
                 tap(resp => { this.setPaginationData(resp) }),
+                catchError((error) => { this.hasErrors = true; return error }),
                 map((resp: any) => {
                     let newStores = [];
-                    if(resp.data.stores) resp.data.stores.forEach(store => newStores.push(ReadStore(store)));
+                    if (resp.data.stores) resp.data.stores.forEach(store => newStores.push(ReadStore(store)));
                     return newStores;
                 })
             );

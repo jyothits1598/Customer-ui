@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { SnackBarService } from 'src/app/core/services/snack-bar.service';
 import { CustomValidators } from 'src/app/helpers/validators';
 import { SignupService } from '../../services/signup.service';
@@ -33,7 +34,8 @@ export class EmailMobSignupComponent {
   constructor(private signupService: SignupService,
     private snackBar: SnackBarService,
     private router: Router,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService) { }
 
   get controls(): { [key: string]: AbstractControl; } {
     return this.registrationForm.controls;
@@ -57,7 +59,7 @@ export class EmailMobSignupComponent {
 
     this.signupService.emailSignup(data).pipe(finalize(() => this.loading = false)).subscribe(
       (resp) => {
-        this.snackBar.success(resp.data);
+        this.authService.handleLoginResp(resp);
         this.router.navigate(['../profile'], { relativeTo: this.activatedRoute });
       },
       (resp) => { this.handleError(resp.error) }

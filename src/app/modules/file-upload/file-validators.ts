@@ -2,12 +2,12 @@ import { Observable } from 'rxjs';
 
 export class FileValidators {
 
-    static extentionValidator(formats: Array<string>): (file: File) => string | null {
+    static typeValidator(formats: Array<string>): (file: File) => string | null {
         return (file: File) => {
             const fileFormats = formats;
             const fileExt = file.name.substring(file.name.lastIndexOf('.'));
             if (fileFormats.find((fmt => fmt === fileExt))) return null;
-            else return 'valid file type - [ ' + fileFormats.toString() + ' ]';
+            else return 'This file type is not supported.';
         }
     }
 }

@@ -8,19 +8,25 @@ const routes: Routes = [
   {
     path: '',
     component: AuthParentComponent,
-    canActivate: [NotSignedInGuard],
     children: [
       {
-        path: 'forgot-password', loadChildren: () => import('src/app/modules/authentication/forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule)
+        path: 'forgot-password',
+        canActivate: [NotSignedInGuard],
+        loadChildren: () => import('src/app/modules/authentication/forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule)
       },
       {
-        path: 'reset-password', loadChildren: () => import('src/app/modules/authentication/reset-password/reset-password.module').then(m => m.ResetPasswordModule)
+        path: 'reset-password',
+        canActivate: [NotSignedInGuard],
+        loadChildren: () => import('src/app/modules/authentication/reset-password/reset-password.module').then(m => m.ResetPasswordModule)
       },
       {
-        path: 'signup', loadChildren: () => import('src/app/modules/authentication/signup/signup.module').then(m => m.SignupModule)
+        path: 'signup',
+        loadChildren: () => import('src/app/modules/authentication/signup/signup.module').then(m => m.SignupModule)
       },
       {
-        path: 'signin', loadChildren: () => import('src/app/modules/authentication/login/login.module').then(m => m.LoginModule)
+        path: 'signin',
+        canActivate: [NotSignedInGuard],
+        loadChildren: () => import('src/app/modules/authentication/login/login.module').then(m => m.LoginModule)
       },
     ]
   }

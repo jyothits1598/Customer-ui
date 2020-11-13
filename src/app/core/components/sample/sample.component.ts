@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SnackBarType } from '../../model/snack-bar';
-// declare var gapi: any;
+import { ExternalLibraries, LibraryLoaderService } from '../../services/library-loader.service';
 @Component({
   selector: 'app-sample',
   templateUrl: './sample.component.html',
@@ -8,19 +8,30 @@ import { SnackBarType } from '../../model/snack-bar';
 })
 export class SampleComponent implements OnInit {
 
-  constructor() {
+  constructor(private libLoad: LibraryLoaderService) {
   }
   ngOnInit(): void {
-    gapi.load('auth2', () => {
-      console.log('auth loaded');
-      let auth: gapi.auth2.GoogleAuth = gapi.auth2.init({
-        client_id: '369468801567-ncm9je96ikkbhf210j82ptf7uj7jttnj.apps.googleusercontent.com'
-      })
+    this.libLoad.loadLibrary(ExternalLibraries.GoogleLogin).subscribe(
+      () => {
+        gapi.load('auth2', () => {
 
-      auth.then((resp) => {
-        auth.signIn().then((success) => console.log('success', success.getId()), (error) => console.log(error));
-      })
-    });
+          let auth = gapi.auth2.init(
+            { client_id: '369468801567-ncm9je96ikkbhf210j82ptf7uj7jttnj.apps.googleusercontent.com' }
+          )
+          gapi.signin2.render('my-signin2', {
+
+            'scope': 'profile email',
+            'longtitle': true,
+            'theme': 'light',
+          });
+
+        })
+        // let auth = gapi.auth2.init(
+        //   { client_id: '369468801567-ncm9je96ikkbhf210j82ptf7uj7jttnj.apps.googleusercontent.com' }
+        // )
+        // console.log('auth recieved, ', auth);
+      }
+    )
   }
 
 }
