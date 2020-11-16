@@ -41,11 +41,11 @@ export function ReadAvailability(availabilityBackend: any): Array<TimeAvailabili
         let newAvai = <TimeAvailability>{
             id: availabilityBackend[a].menu_timings_id,
             day: availabilityBackend[a].days,
-            startTime: availabilityBackend[a].start_time,
-            endTime: availabilityBackend[a].end_time,
+            //padding if time is not in format
+            startTime: availabilityBackend[a].start_time.length === 6 ? ('0' + availabilityBackend[a].start_time) : availabilityBackend[a].start_time,
+            endTime: availabilityBackend[a].end_time.length === 6 ? ('0' + availabilityBackend[a].end_time) : availabilityBackend[a].end_time,
             markedAsClose: (availabilityBackend[a].marked_as_closed ? true : false)
         };
-	
         result.push(newAvai)
     }
     // result.sort(TimeAvailabilityComp);
