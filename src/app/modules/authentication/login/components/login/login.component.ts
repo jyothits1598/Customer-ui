@@ -44,22 +44,38 @@ export class LoginComponent implements OnInit {
   animationState = 'a';
   showButton = true;
 
+  get activeType(): 'mobile' | 'email' {
+    return this.loginForm.controls.email.enabled ? 'email' : 'mobile';
+  }
+
   constructor(private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    console.log('this is the params, ', this.route.snapshot.queryParams.redirect);
+    this.loginForm.controls.mobile.disable();
   }
 
   loginForm: FormGroup = new FormGroup({
     email: new FormControl('', [
       CustomValidators.required('Please enter a registered email.'),
-      CustomValidators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-        'Please enter a valid email.')
+      CustomValidators.email('Please enter a valid email.')
+    ]),
+    mobile: new FormControl('', [
+      CustomValidators.required('Please enter a registered mobile number.')
     ]),
     password: new FormControl('', CustomValidators.required('Please enter a password.'))
-  })
+  });
+
+  toggleType() {
+    if (this.loginForm.controls.email.enabled) {
+      this.loginForm.controls.email.disable();
+      this.loginForm.controls.mobile.enable();
+    } else {
+      this.loginForm.controls.email.enable();
+      this.loginForm.controls.mobile.disable();
+    }
+  }
 
   returnErrors(controlName: string) {
     return Object.values(this.loginForm.controls[controlName].errors)[0];
@@ -71,7 +87,10 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.loggingIn = true;
-    this.authService.login(this.loginForm.value).pipe(finalize(() => this.loggingIn = false)).subscribe(
+    let data = { ...this.loginForm.value };
+    data.type = this.activeType;
+
+    this.authService.login(data).pipe(finalize(() => this.loggingIn = false)).subscribe(
       (s) => { this.afterSignin() },
       (e) => { this.handleErrors(e) }
     )

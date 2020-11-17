@@ -9,11 +9,14 @@ export class SignupService {
 
   constructor(private restApiService: RestApiService) { }
 
-  sendCode(identity: string, type: 'email' | 'mobile' = 'email') {
-    return this.restApiService.post(URL_SendCode, {
-      email: identity,
+  sendCode(value: string, type: 'email' | 'mobile' = 'email') {
+    let data: any = {
       type: type === 'email' ? 'email' : 'mobile_number'
-    });
+    };
+    if (type === 'email') data.email = value
+    else data.mobile_number = value;
+
+    return this.restApiService.post(URL_SendCode, data);
   }
 
   emailSignup(data: { email?: string, mobile?: string, password: string, type: 'mobile' | 'email', verificationCode: string }) {
