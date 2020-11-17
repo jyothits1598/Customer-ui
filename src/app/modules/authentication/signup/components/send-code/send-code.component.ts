@@ -11,7 +11,7 @@ import { SignupService } from '../../services/signup.service';
 export class SendCodeComponent {
   @Input() data: {
     type: 'email' | 'mobile',
-    identity: string
+    value: string
   };
   @Output() error = new EventEmitter<string>();
 
@@ -22,9 +22,9 @@ export class SendCodeComponent {
     private snackBar: SnackBarService) { }
 
   sendCode() {
-    if (!this.data.identity) return;
+    if (!this.data.value) return;
     this.loading = true;
-    this.signupService.sendCode(this.data.identity, this.data.type).pipe(finalize(() => this.loading = false)).subscribe(
+    this.signupService.sendCode(this.data.value, this.data.type).pipe(finalize(() => this.loading = false)).subscribe(
       (resp) => { this.snackBar.success(resp.data); this.sent = true; },
       (errResp) => this.error.emit(errResp.error.error_msg[0])
     )

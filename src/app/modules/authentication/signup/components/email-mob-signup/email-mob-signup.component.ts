@@ -13,15 +13,16 @@ import { SignupService } from '../../services/signup.service';
   styleUrls: ['./email-mob-signup.component.scss']
 })
 export class EmailMobSignupComponent {
-  inputType: string = 'email';
   errorMessage;
-
   loading: boolean = false;
 
   registrationForm: FormGroup = new FormGroup({
-    identity: new FormControl(null, [
+    email: new FormControl(null, [
       CustomValidators.required('Email is required.'),
-      CustomValidators.email('Email is invalid')
+      CustomValidators.email('Email is invalid.')
+    ]),
+    mobile: new FormControl(null, [
+      CustomValidators.required('Mobile number is required.')
     ]),
     password: new FormControl(null, [
       CustomValidators.required('Password is required.'),
@@ -41,20 +42,31 @@ export class EmailMobSignupComponent {
     return this.registrationForm.controls;
   }
 
+  get activeType() {
+    return this.registrationForm.controls.email.disabled ? 'mobile' : 'email';
+  }
+
+  toggleType() {
+    if (this.controls.email.disabled) {
+      this.controls.email.enable();
+      this.controls.mobile.disable();
+    } else {
+      this.controls.email.disable();
+      this.controls.mobile.enable();
+    }
+  }
+
   getErrors(controlName: string) {
     return Object.values(this.registrationForm.controls[controlName].errors)[0];
   }
 
   signup() {
     if (this.registrationForm.invalid) { this.registrationForm.markAllAsTouched(); return; }
-
     this.loading = true;
-    let data = { ...this.registrationForm.value };
 
     // prepare data
-    data.email = data.identity;
-    data.type = 'email';
-    delete data.identity;
+    let data = { ...this.registrationForm.value };
+    data.type = this.activeType;
 
     this.signupService.emailSignup(data).pipe(finalize(() => this.loading = false)).subscribe(
       (resp) => {
@@ -66,7 +78,7 @@ export class EmailMobSignupComponent {
   }
 
   handleError(error) {
-    if (error.emailVerificationCode) this.controls.code.setErrors({ backend: error.emailVerificationCode[0] })
+    if (error.verificationCode) this.controls.verificationCode.setErrors({ backend: error.verificationCode[0] })
   }
 
 

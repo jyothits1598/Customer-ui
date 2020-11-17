@@ -56,8 +56,15 @@ export class AuthService {
     this.storeageService.remove('authTokenExpiry')
   }
 
-  login(data: { email: string, password: string }) {
-    return this.restApiService.post(URL_login, data).pipe(tap(
+  login(data: { email?: string, mobile?: string, type: 'email' | 'mobile', password: string }) {
+    let reqData: any = {
+      type: (data.type === 'email') ? 'email' : 'mobile_number',
+      password: data.password
+    };
+    if (data.type === 'email') reqData.email = data.email;
+    else reqData.mobile_number = data.mobile;
+
+    return this.restApiService.post(URL_login, reqData).pipe(tap(
       (resp) => this.handleLoginResp(resp)
     ))
   }
