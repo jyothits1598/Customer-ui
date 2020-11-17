@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -26,7 +26,8 @@ export class EmailMobSignupComponent {
     ]),
     password: new FormControl(null, [
       CustomValidators.required('Password is required.'),
-      CustomValidators.pattern(/^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/, 'Please enter a more secure password.')
+      // CustomValidators.pattern(/^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/, 'Please enter a more secure password.')
+      CustomValidators.pattern(/^.*(?=.{6,})(?=.*[a-z])(?=.*[A-Z]).*$/, 'Please enter a valid password of 6+ characters and atleast one digit, one capital')
     ]),
     verificationCode: new FormControl(null, [
       CustomValidators.required('Code is required.'),
