@@ -41,7 +41,7 @@ export class GoogleLocationService {
   getSuggestions(name: string) {
     let request: google.maps.places.AutocompletionRequest = {
       input: name,
-      componentRestrictions: { country: ['AU', 'IN'] },
+      componentRestrictions: { country: ['AU','IN'] },
       types: ['geocode']
     }
     if (name) {
