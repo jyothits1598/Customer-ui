@@ -5,12 +5,12 @@ import { SignupComponent } from './components/signup/signup.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { PasswordHelperModule } from '../password-helper/password-helper.module';
 import { EmailMobSignupComponent } from './components/email-mob-signup/email-mob-signup.component';
-import { SendCodeComponent } from './components/send-code/send-code.component';
 import { BasicProfileComponent } from './components/basic-profile/basic-profile.component';
 import { SocialAuthModule } from '../social-auth/social-auth.module';
 import { NotSignedInGuard } from '../guards/not-signed-in.guard';
 import { IsAuthenticatedGuard } from 'src/app/core/guards/is-authenticated.guard';
 import { FileUploadModule } from '../../file-upload/file-upload.module';
+import { VerificationCodeModule } from '../verification-code/verification-code.module';
 
 const routes: Routes = [
   {
@@ -31,7 +31,7 @@ const routes: Routes = [
 ]
 
 @NgModule({
-  declarations: [SignupComponent, EmailMobSignupComponent, SendCodeComponent, BasicProfileComponent],
+  declarations: [SignupComponent, EmailMobSignupComponent, BasicProfileComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -39,7 +39,8 @@ const routes: Routes = [
     FormsModule,
     PasswordHelperModule,
     SocialAuthModule,
-    FileUploadModule
+    FileUploadModule,
+    VerificationCodeModule
   ]
 })
 export class SignupModule { }

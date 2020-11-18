@@ -6,8 +6,8 @@
                 Select {{modifier.minSelection}} to {{modifier.maxSelection}}
             </span>
         </div>
-        <div *ngIf="modifier.minSelection > 0; else optional" [style.color]="getColor()" >
-            <span class="required" > Required </span>
+        <div *ngIf="modifier.minSelection > 0; else optional">
+            <span class="required" [ngStyle]="{background: optionControls.invalid ? '#FFBF42' : '#c4ffc4'}"> Required </span>
         </div>
     </div>
     <table style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;" *ngFor="let option of modifier.options; let i = index">

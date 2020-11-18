@@ -23,6 +23,10 @@ export class AuthService {
     return this._accessToken.value;
   }
 
+  get loggedUser(): User {
+   return this._loggedUser.value;
+  }
+
   isLoggedIn$() {
     return this._accessToken.asObservable().pipe(map(token => !!token))
   }
