@@ -2,10 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
-import { URL_forgotPassword } from 'src/api/authentication';
-import { RestApiService } from 'src/app/core/services/rest-api.service';
 import { CustomValidators } from 'src/app/helpers/validators';
-import { APP_LINK } from 'src/environments/environment';
 import { SignupService } from '../../../signup/services/signup.service';
 
 @Component({
@@ -85,19 +82,15 @@ export class ForgotPasswordComponent implements OnInit {
     let data = { ...this.form.value };
     data.type = this.activeType;
     this.signupService.newPassword(data).pipe(finalize(() => this.loading = false)).subscribe(
-      () => this.router.navigate(['../success'], {relativeTo: this.route}),
+      () => this.router.navigate(['../success'], { relativeTo: this.route }),
       (resp) => this.handleErrors(resp)
     )
   }
 
   handleErrors(data: any) {
-    if (data.error?.email) {
-      this.form.controls.email.setErrors({ backend: data.error.email })
-      return;
-    }
-    if (data.error?.error_msg) {
-      this.backendErrorMsg = data.error.error_msg;
-    }
+    if (data.error?.email) this.form.controls.email.setErrors({ backend: data.error.email })
+    if (data.error.verificationCode) this.form.controls.verificationCode.setErrors({ backend: data.error.verificationCode })
+    if (data.error?.error_msg) this.backendErrorMsg = data.error.error_msg;
   }
 
 }

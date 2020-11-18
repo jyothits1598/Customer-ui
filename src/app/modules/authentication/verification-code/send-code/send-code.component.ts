@@ -11,7 +11,7 @@ import { SignupService } from 'src/app/modules/authentication/signup/services/si
 export class SendCodeComponent {
   @Input() data: {
     type: 'email' | 'mobile',
-    value: string, 
+    value: string,
     purpose: 'signup' | 'forgotPassword'
   };
   @Output() error = new EventEmitter<string>();
@@ -27,8 +27,15 @@ export class SendCodeComponent {
     this.loading = true;
     this.signupService.sendCode(this.data.value, this.data.type, this.data.purpose).pipe(finalize(() => this.loading = false)).subscribe(
       (resp) => { this.snackBar.success(resp.data); this.sent = true; },
-      (errResp) => this.error.emit(errResp.error.error_msg[0])
+      (errResp) => this.handleError(errResp)
     )
+  }
+
+  handleError(errorResp: any) {
+    // if (errorResp.error.error_msg) { this.error.emit(errorResp.error.error_msg[0]); return; };
+    // if (errorResp.error.email) { this.error.emit() }
+
+    this.error.emit(errorResp);
   }
 
 }

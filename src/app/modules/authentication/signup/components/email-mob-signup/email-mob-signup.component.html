@@ -68,7 +68,7 @@
                 <send-code
                     (click)="activeType === 'email' ? controls.email.markAsTouched() : controls.mobile.markAsTouched()"
                     [data]="{purpose: 'signup', type: activeType, value: activeType === 'email'? registrationForm.value.email : registrationForm.value.mobile}"
-                    (error)="errorMessage = $event">
+                    (error)="handleError($event)">
                 </send-code>
             </div>
         </div>

@@ -74,12 +74,14 @@ export class EmailMobSignupComponent {
         this.authService.handleLoginResp(resp);
         this.router.navigate(['../profile'], { relativeTo: this.activatedRoute });
       },
-      (resp) => { this.handleError(resp.error) }
+      (resp) => { this.handleError(resp) }
     )
   }
 
-  handleError(error) {
-    if (error.verificationCode) this.controls.verificationCode.setErrors({ backend: error.verificationCode[0] })
+  handleError(errorResp) {
+    if(errorResp.error.error_msg) this.errorMessage = errorResp.error.error_msg[0];
+    if (errorResp.error.verificationCode) this.controls.verificationCode.setErrors({ backend: errorResp.verificationCode[0] });
+    if (errorResp.error.email) this.controls.email.setErrors({ backend: errorResp.email[0] })
   }
 
 
