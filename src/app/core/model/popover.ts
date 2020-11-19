@@ -26,4 +26,6 @@ export interface PopoverConfig {
     xPos?: 'start' | 'center' | 'end',
     yPos?: 'top' | 'bottom';
     onDismiss?: () => void;
+    hasBackdrop?: true | false;
+    darkBackground?: true | false;
 }

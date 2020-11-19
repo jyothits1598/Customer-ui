@@ -4,7 +4,7 @@ import { filter, finalize } from 'rxjs/operators';
 import { ModalService } from 'src/app/core/services/modal.service';
 import { StoreDetail, StoreItem } from 'src/app/modules/store-detail/model/store-detail';
 import { StoreDetailDataService } from '../../services/store-detail-data.service';
-import * as $ from 'jquery' 
+import * as $ from 'jquery'
 
 @Component({
   selector: 'app-store-detail',
@@ -39,24 +39,25 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
       this.selecteditemId = +qParams.i;
     })
 
-    $(window).scroll(function(){
+    $(window).scroll(function () {
       if ($(this).scrollTop() > 50) {
-         $('.fixed-shadow').addClass('newClass');
-         $('.fixed-name-scroll').show();
+        $('.fixed-shadow').addClass('newClass');
+        $('.fixed-name-scroll').show();
       } else {
-         $('.fixed-shadow').removeClass('newClass');
-         $('.fixed-name-scroll').hide();
+        $('.fixed-shadow').removeClass('newClass');
+        $('.fixed-name-scroll').hide();
       }
-  });
-  
+    });
+
   }
 
-  
+
 
   loadStore() {
     this.loading = true;
     this.storeDetail = null;
     this.storeDetailServ.storeDetail(this.storeId).pipe(finalize(() => this.loading = false)).subscribe(storeDetail => {
+      storeDetail.categories = storeDetail.categories.sort((c1, c2) => c1.id - c2.id);
       this.storeDetail = storeDetail;
     });
   }

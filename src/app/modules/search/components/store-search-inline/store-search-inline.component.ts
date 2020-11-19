@@ -1,9 +1,10 @@
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
-import { AfterViewInit, Component, ElementRef, Injector, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Injector, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { fromEvent, interval } from 'rxjs';
 import { debounce, distinctUntilChanged, finalize, map, switchMap, tap } from 'rxjs/operators';
 import { ComponentPopoverRef, PopoverRef } from 'src/app/core/model/popover';
+import { PopoverService } from 'src/app/core/services/popover.service';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
 import { SearchPanelComponent } from '../search-panel/search-panel.component';
 
@@ -12,63 +13,46 @@ import { SearchPanelComponent } from '../search-panel/search-panel.component';
   templateUrl: './store-search-inline.component.html',
   styleUrls: ['./store-search-inline.component.scss']
 })
-export class StoreSearchInlineComponent implements AfterViewInit {
+export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   @ViewChild('searchInput', { read: ElementRef }) searchInput: ElementRef
-  @ViewChild('searchContainer', { read: ElementRef }) searchContainer: ElementRef
+  @ViewChild('searchContainer', { read: ElementRef }) searchContainer: ElementRef;
+  @ViewChild('panelTemplate', { read: TemplateRef }) panelTemplate: TemplateRef<any>;
+
   keyupSubs: any;
   loading: boolean;
   searchData: any;
+  searchTerm: string;
   overlayOpen: boolean;
-  // createdComponent: SearchPanelComponent;
-  // overlayRef: OverlayRef;
+  popoverRef: PopoverRef
 
-  popoverRef: ComponentPopoverRef<SearchPanelComponent>;
 
-  constructor(private restApiService: RestApiService, private overlay: Overlay,
-    private vCRef: ViewContainerRef, private injector: Injector) { }
+  constructor(
+    private restApiService: RestApiService,
+    private popoverService: PopoverService) { }
 
   ngAfterViewInit(): void {
     this.keyupSubs = fromEvent(this.searchInput.nativeElement, 'keyup')
       .pipe(
         map((event: any) => event.target.value),
         distinctUntilChanged(),
+        debounce(() => interval(500)),
         tap((term) => {
           this.loading = true;
-          if (this.overlayOpen) this.popoverRef.instance.searchTerm = term;
+          this.searchTerm = term;
         }),
-        debounce(() => interval(1000)),
         switchMap((val) => this.restApiService.get(`api/stores/search?name=${val}`).pipe(finalize(() => this.loading = false))),
         map(resp => resp.data.stores || [])
-        // ).subscribe(res => this.searchData = res);
-      ).subscribe(res => { this.showResults(res); this.searchData = res });
+      ).subscribe(res => { this.showResults(); this.searchData = res });
   }
 
-  showResults(results) {
-    if (this.overlayOpen) this.popoverRef.instance.results = results;
-    else this.openComponentPopover(results)
+  showResults() {
+    if (!this.overlayOpen) this.openComponentPopover();
   }
 
   openComponentPopover(results = null) {
     if (this.overlayOpen) return;
-
-    let config = new OverlayConfig();
-    config.hasBackdrop = true;
-    config.backdropClass = '';
-    config.positionStrategy = this.overlay.position().flexibleConnectedTo(this.searchContainer.nativeElement).withPositions([{
-      originX: 'end',
-      originY: 'bottom',
-      overlayX: 'end',
-      overlayY: 'top',
-    }]).withPush(false);
-
-    let overlayRef = this.overlay.create(config);
-    this.popoverRef = new ComponentPopoverRef<SearchPanelComponent>(overlayRef, null);
-    overlayRef.backdropClick().subscribe(()=>this.popoverRef.dismiss());
-    let compPortal = new ComponentPortal(SearchPanelComponent, null, this.createInjector(this.popoverRef, this.injector));
-    this.popoverRef.instance = overlayRef.attach(compPortal).instance;
-    this.popoverRef.onDismiss = () => { this.overlayOpen = false; }
+    this.popoverRef = this.popoverService.openTemplatePopover(this.searchContainer, this.panelTemplate, { xPos: 'end', yPos: 'bottom', onDismiss: () => { this.overlayOpen = false } },)
     this.overlayOpen = true;
-    this.popoverRef.instance.results = results;
   }
 
   closePopover() {
@@ -79,6 +63,18 @@ export class StoreSearchInlineComponent implements AfterViewInit {
   createInjector(popoverRef: PopoverRef, injector: Injector) {
     const tokens = new WeakMap([[PopoverRef, popoverRef]]);
     return new PortalInjector(injector, tokens);
+  }
+
+  onSearchItemSelect(name: string) {
+    this.closePopover();
+    if(name){
+      this.searchInput.nativeElement.value = name;
+      this.searchTerm = name;
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.keyupSubs.unsubscribe();
   }
 }
 

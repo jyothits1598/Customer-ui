@@ -12,7 +12,7 @@ import { SignupService } from '../../services/signup.service';
   templateUrl: './email-mob-signup.component.html',
   styleUrls: ['./email-mob-signup.component.scss']
 })
-export class EmailMobSignupComponent {
+export class EmailMobSignupComponent implements OnInit {
   errorMessage;
   loading: boolean = false;
 
@@ -38,6 +38,9 @@ export class EmailMobSignupComponent {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private authService: AuthService) { }
+  ngOnInit(): void {
+    this.registrationForm.controls.mobile.disable();
+  }
 
   get controls(): { [key: string]: AbstractControl; } {
     return this.registrationForm.controls;
@@ -62,7 +65,7 @@ export class EmailMobSignupComponent {
   }
 
   signup() {
-    if (this.registrationForm.invalid) { this.registrationForm.markAllAsTouched(); return; }
+    if (this.registrationForm.invalid) { this.registrationForm.markAllAsTouched(); console.log('form is invalid', this.registrationForm.errors); return; }
     this.loading = true;
 
     // prepare data
@@ -79,9 +82,9 @@ export class EmailMobSignupComponent {
   }
 
   handleError(errorResp) {
-    if(errorResp.error.error_msg) this.errorMessage = errorResp.error.error_msg[0];
+    if (errorResp.error.error_msg) this.errorMessage = errorResp.error.error_msg[0];
     if (errorResp.error.verificationCode) this.controls.verificationCode.setErrors({ backend: errorResp.verificationCode[0] });
-    if (errorResp.error.email) this.controls.email.setErrors({ backend: errorResp.email[0] })
+    if (errorResp.error.email) this.controls.email.setErrors({ backend: errorResp.error.email[0] })
   }
 
 

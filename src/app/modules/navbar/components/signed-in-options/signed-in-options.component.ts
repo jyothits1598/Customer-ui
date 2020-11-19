@@ -16,7 +16,7 @@ export class SignedInOptionsComponent implements OnInit {
   }
 
   showPopover(template: TemplateRef<any>) {
-    this.popover.openTemplatePopover(this.icon, template, { xPos: 'end', yPos: 'bottom' });
+    this.popover.openTemplatePopover(this.icon, template, { xPos: 'end', yPos: 'bottom', darkBackground: true });
   }
 
   logout() {

@@ -1,42 +1,44 @@
 <div class="modal-body custom-body-search">
-<ul style="list-style-type: none;cursor: pointer;">
-   <li *ngIf="searchTerm && searchTerm.length > 3" (click)="handleClick()" routerLink="/search" [queryParams]="{q:searchTerm}" style="outline: 0;">
-        <table>
-            <tr>
-                <td valign="middle" style="padding: 12px;">
-                    <img src="assets/images/ico_search_plane.png">
-                </td>
-                <td style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;">
-                    <div class="paragraph" > Search for "{{searchTerm}}" </div>
-                </td>
-            </tr>
-        </table>
-   </li>
-   <li (click)="handleClick()" *ngFor="let result of results" routerLink="/search" [queryParams]="{q:result.store_name}">
-    <table>
-        <tr>
-            <td valign="middle" style="padding: 12px;">
-                <img src="assets/images/ico_search_plane.png">
-            </td>
-            <td style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;">
-                <div class="paragraph" > {{result.store_name}} &nbsp; </div>
-            </td>
-        </tr>
-    </table>
-    </li>
-    <li *ngIf="results && results.length === 0">
-        <table>
-            <tr>
-                <td valign="middle" style="padding: 12px;">
-                    <img src="assets/images/ico_search_plane.png">
-                </td>
-                <td style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);">
-                    <div class="paragraph" > No results </div>
-                </td>
-            </tr>
-        </table>
-    </li>
-</ul>
+    <ul style="list-style-type: none;cursor: pointer;">
+        <li *ngIf="searchTerm" (click)="selectedItem.emit(null)" routerLink="/search" [queryParams]="{q:searchTerm}"
+            style="outline: 0;">
+            <table>
+                <tr>
+                    <td valign="middle" style="padding: 12px;">
+                        <img src="assets/images/ico_search_plane.png">
+                    </td>
+                    <td style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;">
+                        <div class="paragraph"> Search for "{{searchTerm}}" </div>
+                    </td>
+                </tr>
+            </table>
+        </li>
+        <li (click)="selectedItem.emit(result.store_name)" *ngFor="let result of results" routerLink="/search"
+            [queryParams]="{q:result.store_name}">
+            <table>
+                <tr>
+                    <td valign="middle" style="padding: 12px;">
+                        <img src="assets/images/ico_search_plane.png">
+                    </td>
+                    <td style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;">
+                        <div class="paragraph"> {{result.store_name}} &nbsp; </div>
+                    </td>
+                </tr>
+            </table>
+        </li>
+        <li *ngIf="results && results.length === 0">
+            <table>
+                <tr>
+                    <td valign="middle" style="padding: 12px;">
+                        <img src="assets/images/ico_search_plane.png">
+                    </td>
+                    <td style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);">
+                        <div class="paragraph"> No results </div>
+                    </td>
+                </tr>
+            </table>
+        </li>
+    </ul>
     <!-- <ul>
         <li>
             Search for {{searchTerm}}</li>
