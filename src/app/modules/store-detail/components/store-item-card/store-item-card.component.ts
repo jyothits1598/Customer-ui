@@ -9,7 +9,6 @@ import { StoreItem } from 'src/app/modules/store-detail/model/store-detail';
 export class StoreItemCardComponent implements OnInit {
   @Input() storeItem: StoreItem
   
-  // image: string = 'assets/images/Area.png';
 
   constructor() { }
   

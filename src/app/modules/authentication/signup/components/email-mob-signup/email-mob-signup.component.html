@@ -58,8 +58,8 @@
         </div>
         <div class="row">
             <div class="col-md-6 pad-ing-right" style="margin-bottom: 24px;">
-                <input type="text" class="form-input error-highlight" placeholder="Enter code"
-                    formControlName="verificationCode">
+                <input type="number" class="form-input error-highlight" placeholder="Enter code"
+                    formControlName="verificationCode" minlength="6" maxlength="6" >
                 <div *ngIf="controls.verificationCode.touched && controls.verificationCode.errors" class="error-mez">
                     <div> {{getErrors('verificationCode')}} </div>
                 </div>

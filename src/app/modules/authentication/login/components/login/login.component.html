@@ -6,7 +6,6 @@
                 <form [formGroup]="loginForm" (ngSubmit)="login()">
                     <h3 class="std-heading-4 text-center"> Welcome back </h3>
                     <div class="failure-mez" *ngIf="backendErrorMessage">{{ backendErrorMessage }}</div>
-
                     <ng-container *ngIf="activeType === 'email'; else mobileLogin">
                         <div class="form-group form-group--margin" style="margin-top:24px">
                             <div class="label-inputs"> <span class="float-left"> Email </span><span class="float-right"
@@ -49,11 +48,11 @@
                                 *ngIf="!loggingIn; else inProgressTemp">Log in</span> </button>
                     </div>
                 </form>
-                <p class="text-center">
+                <div class="text-center" style="margin-bottom:24px">
                     <a routerLink="/auth/forgot-password" style="color:#353FA8;text-decoration: none;font-weight:bold">
                         Forgot password
                     </a>
-                </p>
+                </div>
                 <img src="assets/images/divider_or.png" style="margin-bottom: 16px;width:100%">
 
                 <social-auth (signedIn)="afterSignin()"></social-auth>

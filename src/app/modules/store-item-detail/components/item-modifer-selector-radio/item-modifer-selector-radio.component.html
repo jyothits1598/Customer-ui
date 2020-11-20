@@ -1,8 +1,35 @@
-<div [style.color]="getColor()">Required</div>
-<div>
-    <ng-container *ngFor="let option of modifier.options; let i = index">
-        <label [name]="modifier.name+i">{{option.name}}</label>
-        <input type="radio" [name]="modifier.name" [id]="modifier.name+i" [formControl]="optionControl"
-            [value]="option.id" (change)="handleChange()">
-    </ng-container>
-</div>
+<!-- <div [style.color]="getColor()">Required</div> -->
+
+    <div class="d-flex justify-content-between" style="margin-bottom:20px;">
+        <div class="std-heading-4">
+            {{modifier.name}} <br>
+            <span class="small-content"> 
+                Select {{modifier.minSelection}} to {{modifier.maxSelection}}
+            </span>
+        </div>
+        <div>
+            <span class="required" [ngStyle]="{background: optionControl.invalid ? '#FFBF42' : '#c4ffc4'}" > Required </span>
+        </div>
+    </div>
+    <table style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;" *ngFor="let option of modifier.options; let i = index">
+        <tr>
+            <td> 
+                <div class="form-radio">
+                    <label class="form-check-label lable-text">
+                        <input type="radio" [name]="modifier.name" [id]="modifier.name+i" [formControl]="optionControl"
+                        [value]="option.id" (change)="handleChange()"> &nbsp; 
+                        <span [name]="modifier.name+i"> {{option.name}} </span>
+                    </label>
+                </div>
+            </td>
+        </tr>
+    </table>
+        <!-- <div style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;" *ngFor="let option of modifier.options; let i = index">
+            <label class="radio">
+                <input type="radio" [name]="modifier.name" [id]="modifier.name+i" [formControl]="optionControl"
+                [value]="option.id" (change)="handleChange()">
+                <span [name]="modifier.name+i"> {{option.name}} </span>
+            </label>
+        </div>
+     -->
+

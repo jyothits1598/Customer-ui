@@ -41,11 +41,11 @@ export class ItemModiferSelectorRadioComponent implements OnChanges, ControlValu
     return this.optionControl.valid ? null : { invalid: true }
   }
 
-  getColor() {
-    if (this.optionControl.touched && this.optionControl.invalid) return 'red';
-    if (this.optionControl.invalid) return 'blue';
-    return 'green';
-  }
+  // getColor() {
+  //   if (this.optionControl.touched && this.optionControl.invalid) return 'red';
+  //   if (this.optionControl.invalid) return 'blue';
+  //   return 'green';
+  // }
   writeValue(obj: any): void { }
 
   registerOnChange(fn: any): void {

@@ -47,6 +47,7 @@ export class EmailMobSignupComponent {
     return this.registrationForm.controls.email.disabled ? 'mobile' : 'email';
   }
 
+
   toggleType() {
     if (this.controls.email.disabled) {
       this.controls.email.enable();
