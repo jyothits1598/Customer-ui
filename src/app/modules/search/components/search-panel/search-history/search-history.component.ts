@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { StorageService } from 'src/app/core/services/storage.service';
 
 @Component({
@@ -7,18 +7,24 @@ import { StorageService } from 'src/app/core/services/storage.service';
   styleUrls: ['./search-history.component.scss']
 })
 export class SearchHistoryComponent implements OnInit {
+  @Output() selectedItem = new EventEmitter<string>();
+
   storageKey = 'searchHistory'
   searchHistory: Array<string>;
 
   constructor(private storage: StorageService) { }
 
   ngOnInit(): void {
-    this.searchHistory = this.storage.get(this.storageKey) || ['search item 1', 'search item 2'];
+    this.searchHistory = this.storage.get(this.storageKey) || [];
   }
 
   addItem(searchTerm: string) {
-    this.searchHistory.push(searchTerm);
-    this.storage.store(this.storageKey, this.searchHistory);
+    if (!this.searchHistory.includes(searchTerm)) {
+      if (this.searchHistory.length < 3) this.searchHistory.unshift(searchTerm);
+      else this.searchHistory = [searchTerm, ...this.searchHistory.splice(1, 2)]
+      this.storage.store(this.storageKey, this.searchHistory);
+    }
+
   }
 
 }

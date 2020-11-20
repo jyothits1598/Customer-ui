@@ -1,8 +1,8 @@
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
 import { AfterViewInit, Component, ElementRef, Injector, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
-import { fromEvent, interval } from 'rxjs';
-import { debounce, distinctUntilChanged, finalize, map, switchMap, tap } from 'rxjs/operators';
+import { fromEvent, interval, of } from 'rxjs';
+import { debounce, distinctUntilChanged, filter, finalize, map, switchMap, tap } from 'rxjs/operators';
 import { ComponentPopoverRef, PopoverRef } from 'src/app/core/model/popover';
 import { PopoverService } from 'src/app/core/services/popover.service';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
@@ -35,14 +35,14 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
       .pipe(
         map((event: any) => event.target.value),
         distinctUntilChanged(),
-        debounce(() => interval(500)),
         tap((term) => {
-          this.loading = true;
+          if (term) this.loading = true;
           this.searchTerm = term;
         }),
-        switchMap((val) => this.restApiService.get(`api/stores/search?name=${val}`).pipe(finalize(() => this.loading = false))),
-        map(resp => resp.data.stores || [])
-      ).subscribe(res => { this.showResults(); this.searchData = res });
+        filter((val) => val),
+        debounce(() => interval(500)),
+        switchMap((val) => this.restApiService.get(`api/stores/search?name=${val}`).pipe(finalize(() => this.loading = false), map(resp => resp.data.stores || []))),
+      ).subscribe(res => { this.searchData = res; this.showResults(); });
   }
 
   showResults() {
@@ -67,7 +67,7 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
 
   onSearchItemSelect(name: string) {
     this.closePopover();
-    if(name){
+    if (name) {
       this.searchInput.nativeElement.value = name;
       this.searchTerm = name;
     }
