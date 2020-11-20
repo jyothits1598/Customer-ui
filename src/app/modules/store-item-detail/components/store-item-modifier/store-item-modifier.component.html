@@ -30,11 +30,13 @@
 </div>
 
 <ng-template #optional>
-    <div>optional</div>
+    <div>
+        <span class="required" style="background: #fafafa"> Optional </span>
+    </div>
 </ng-template>
 
 <ng-template #optionalChoice>
-    Choose up to {{modifier.maxSelection}}
+    <span class="small-content"> Select 1 to {{modifier.maxSelection}} </span>
 </ng-template>
 <!-- <button (click)="optionControls.markAllAsTouched()">mark as touched</button> -->
 <!-- <button (click)="this.setupAccessor()">show control</button> -->
