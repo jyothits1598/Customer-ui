@@ -1,6 +1,7 @@
 import { OverlayRef } from '@angular/cdk/overlay';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ComponentPopoverRef, PopoverRef } from 'src/app/core/model/popover';
+import { StorageService } from 'src/app/core/services/storage.service';
 
 @Component({
   selector: 'search-panel',
@@ -13,10 +14,12 @@ export class SearchPanelComponent implements OnInit {
   @Output() selectedItem = new EventEmitter<string>()
   constructor() { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    
+  }
 
   handleClick() {
-    
+
   }
 
 }
