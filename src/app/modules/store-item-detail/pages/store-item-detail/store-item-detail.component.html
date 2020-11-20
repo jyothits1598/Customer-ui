@@ -25,7 +25,7 @@
                     <img [src]="itemDetail.image" class="img-fluid">
                 </div>
                 <ng-container *ngFor="let modifier of itemDetail.modifiers; let i = index">
-                    <div [ngSwitch]="modifier.minSelection == 1 && modifier.maxSelection == 1">
+                    <div [ngSwitch]="modifier.minSelection === 1 && modifier.maxSelection === 1">
                         <store-item-modifier *ngSwitchCase="false" [formControl]="selectedOptions.at(i)"
                             [modifier]="modifier">
                         </store-item-modifier>

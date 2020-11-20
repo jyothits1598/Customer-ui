@@ -29,9 +29,9 @@ export class StoresDataService {
     })
   }
 
-  allFavourites(): Observable<Array<Store>> {
-    return this.restApiService.get(URL_AllFavourites).pipe(map(resp => {
-      console.log('got resp allFavourites', resp)
+  allFavourites(filter: StoreFilter): Observable<Array<Store>> {
+    console.log('inside all favourites', this.filterToQuery(filter));
+    return this.restApiService.get(URL_AllFavourites + this.filterToQuery(filter)).pipe(map(resp => {
       let stores: Array<Store> = [];
       resp.data.forEach(s => {
         let store = ReadStore(s);

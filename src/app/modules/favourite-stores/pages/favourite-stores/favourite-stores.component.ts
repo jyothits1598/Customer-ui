@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { finalize } from 'rxjs/operators';
+import { finalize, switchMap, tap } from 'rxjs/operators';
+import { GeoLocationService } from 'src/app/core/services/geo-location.service';
 import { Store } from 'src/app/modules/stores/model/store';
 import { StoresDataService } from 'src/app/modules/stores/services/stores-data.service';
 
@@ -11,17 +12,30 @@ import { StoresDataService } from 'src/app/modules/stores/services/stores-data.s
 export class FavouriteStoresComponent implements OnInit {
 
   stores: Array<Store>;
-  loading: boolean = true;
+  loading: boolean = false;
   error: boolean = false;
 
-  constructor(private storeData: StoresDataService) { }
+  constructor(private storeData: StoresDataService,
+    private locationService: GeoLocationService) { }
 
   ngOnInit(): void {
-    this.storeData.allFavourites().pipe(finalize(() => this.loading = false)).subscribe(
-      strs => {
-        console.log('fav stores, ', strs);this.stores = strs},
-      () => this.error = true
-    );
+    this.locationService.userLocation().pipe(
+      tap(() => this.loading = true),
+      switchMap(location => this.storeData.allFavourites({ location: location.latLng })),
+    ).subscribe(
+      stores => {
+        this.stores = stores;
+        this.loading = false;
+      }
+
+    )
+
+    // this.storeData.allFavourites().pipe(finalize(() => this.loading = false)).subscribe(
+    //   strs => {
+    //     console.log('fav stores, ', strs); this.stores = strs
+    //   },
+    //   () => this.error = true
+    // );
   }
 
 }

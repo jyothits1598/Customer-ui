@@ -19,6 +19,7 @@ export class PopoverService {
   openTemplatePopover(origin: ElementRef, template: TemplateRef<any>, config: PopoverConfig = null) {
     let overlayConfig = new OverlayConfig();
     overlayConfig.hasBackdrop = true;
+    if(!config?.darkBackground) overlayConfig.backdropClass = "";
     overlayConfig.positionStrategy = this.overlay.position().flexibleConnectedTo(origin.nativeElement).withPositions(this.generatePositions(config));
 
     let overLayRef = this.overlay.create(overlayConfig);
@@ -27,7 +28,6 @@ export class PopoverService {
     overLayRef.backdropClick().subscribe(e => { popoverRef.dismiss() });
     let tempPortal = new TemplatePortal(template, this._viewContainerRef, { $implicit: popoverRef });
     overLayRef.attach(tempPortal);
-
     return popoverRef;
   }
 

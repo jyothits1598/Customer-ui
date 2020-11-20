@@ -10,17 +10,14 @@ import { StoreFilter } from '../../model/StoreFilter';
   styleUrls: ['./nearby-stores.component.scss']
 })
 export class NearbyStoresComponent implements OnInit, OnDestroy {
-  locationSubs: Subscription
+  locationSubs: Subscription;
   filter: StoreFilter = {};
 
-  constructor(private geoLocation: GeoLocationService,
-    private changeDetector: ChangeDetectorRef) {
+  constructor(private geoLocation: GeoLocationService) {
     this.locationSubs = this.geoLocation.userLocation().subscribe((value: UserLocation) => {
-      console.log('inside location subscription');
       this.filter = {
         location: value.latLng
       }
-      console.log('inside nearbystores', this.filter, value);
     });
   }
 
