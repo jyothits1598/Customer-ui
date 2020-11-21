@@ -1,0 +1,17 @@
+<ng-container *ngIf="searchHistory.length > 0">
+    <p>History</p>
+    <ul style="list-style-type: none;cursor: pointer;">
+        <li *ngFor="let item of searchHistory" (click)="selectedItem.emit(item)" routerLink="/search" [queryParams]="{q:item}">
+            <table>
+                <tr>
+                    <td valign=" middle" style="padding: 12px;">
+            <img src="assets/images/ico_search_plane.png">
+            </td>
+            <td style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;">
+                <div class="paragraph"> {{item}} </div>
+            </td>
+            </tr>
+            </table>
+        </li>
+    </ul>
+</ng-container>

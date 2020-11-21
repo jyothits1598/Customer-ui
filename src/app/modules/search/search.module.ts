@@ -7,6 +7,7 @@ import { StoreSearchComponent } from './components/store-search/store-search.com
 import { IncrementalSearchModule } from '../incremental-search/incremental-search.module';
 import { StoreSearchInlineComponent } from './components/store-search-inline/store-search-inline.component';
 import { SearchPanelComponent } from './components/search-panel/search-panel.component';
+import { SearchHistoryComponent } from './components/search-panel/search-history/search-history.component';
 
 const routes: Routes = [
   {
@@ -17,7 +18,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [SearchComponent, StoreSearchComponent, StoreSearchInlineComponent, SearchPanelComponent],
+  declarations: [SearchComponent, StoreSearchComponent, StoreSearchInlineComponent, SearchPanelComponent, SearchHistoryComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

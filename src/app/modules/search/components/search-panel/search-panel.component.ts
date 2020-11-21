@@ -1,6 +1,5 @@
-import { OverlayRef } from '@angular/cdk/overlay';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ComponentPopoverRef, PopoverRef } from 'src/app/core/model/popover';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { SearchHistoryComponent } from './search-history/search-history.component';
 
 @Component({
   selector: 'search-panel',
@@ -10,13 +9,16 @@ import { ComponentPopoverRef, PopoverRef } from 'src/app/core/model/popover';
 export class SearchPanelComponent implements OnInit {
   @Input() results: Array<string>;
   @Input() searchTerm: string;
-  @Output() selectedItem = new EventEmitter<string>()
+  @Output() selectedItem = new EventEmitter<string>();
+
+  @ViewChild('sHistory', { read: SearchHistoryComponent }) historyComp: SearchHistoryComponent
   constructor() { }
 
   ngOnInit(): void { }
 
-  handleClick() {
-    
+  handleClick(term: string) {
+    this.selectedItem.emit(term);
+    if(term) this.historyComp.addItem(term);
   }
 
 }

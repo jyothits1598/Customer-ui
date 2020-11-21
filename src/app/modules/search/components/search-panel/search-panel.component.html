@@ -1,6 +1,6 @@
 <div class="modal-body custom-body-search">
     <ul style="list-style-type: none;cursor: pointer;">
-        <li *ngIf="searchTerm" (click)="selectedItem.emit(null)" routerLink="/search" [queryParams]="{q:searchTerm}"
+        <li *ngIf="searchTerm" (click)="handleClick(searchTerm)" routerLink="/search" [queryParams]="{q:searchTerm}"
             style="outline: 0;">
             <table>
                 <tr>
@@ -13,19 +13,21 @@
                 </tr>
             </table>
         </li>
-        <li (click)="selectedItem.emit(result.store_name)" *ngFor="let result of results" routerLink="/search"
-            [queryParams]="{q:result.store_name}" style="outline: 0;">
-            <table>
-                <tr>
-                    <td valign="middle" style="padding: 12px;">
-                        <img src="assets/images/ico_search_plane.png">
-                    </td>
-                    <td style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;">
-                        <div class="paragraph"> {{result.store_name}} &nbsp; </div>
-                    </td>
-                </tr>
-            </table>
-        </li>
+        <ng-container *ngIf="searchTerm">
+            <li (click)="handleClick(result.store_name)" *ngFor="let result of results" routerLink="/search"
+                [queryParams]="{q:result.store_name}" style="outline: 0;">
+                <table>
+                    <tr>
+                        <td valign="middle" style="padding: 12px;">
+                            <img src="assets/images/ico_search_plane.png">
+                        </td>
+                        <td style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;">
+                            <div class="paragraph"> {{result.store_name}} &nbsp; </div>
+                        </td>
+                    </tr>
+                </table>
+            </li>
+        </ng-container>
         <li *ngIf="results && results.length === 0">
             <table>
                 <tr>
@@ -39,6 +41,7 @@
             </table>
         </li>
     </ul>
+    <search-history [style.display]="searchTerm? 'none': ''" (selectedItem)="selectedItem.emit($event)" #sHistory></search-history>
     <!-- <ul>
         <li>
             Search for {{searchTerm}}</li>
