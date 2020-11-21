@@ -21,8 +21,8 @@ export class SignedInOptionsComponent implements OnInit {
 
   logout() {
     // this.router.navigateByUrl('/');
-    this.authService.logout();
     this.window.location.reload();
+    this.authService.logout();
   }
 
 }

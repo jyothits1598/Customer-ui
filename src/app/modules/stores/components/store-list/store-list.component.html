@@ -6,6 +6,7 @@
         </div>
         <br><br>
     </div>
+    <br><br>
     <div *ngIf="pagination.isLoading">Loading....</div>
     <div *ngIf="!pagination.hasEnded" [ngStyle]="{'display':  pagination.isLoading? 'none' : 'block' }" infiniteScroll #infiniteScroll="infiniteScroll" (scrolled)="handleScrolled()">
     </div>

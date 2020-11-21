@@ -26,11 +26,11 @@ export class EmailMobSignupComponent implements OnInit {
     ]),
     password: new FormControl(null, [
       CustomValidators.required('Password is required.'),
-      // CustomValidators.pattern(/^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/, 'Please enter a more secure password.')
-      CustomValidators.pattern(/^.*(?=.{6,})(?=.*[a-z])(?=.*[A-Z]).*$/, 'Please enter a valid password of 6+ characters and atleast one digit, one capital')
+      CustomValidators.pattern(/^.*(?=.{6,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/, 'Please enter a valid password of 6+ characters and atleast one digit, one capital & special character')
+      // CustomValidators.pattern(/^.*(?=.{6,})(?=.*[a-z])(?=.*[A-Z]).*$/, 'Please enter a valid password of 6+ characters and atleast one digit, one capital')
     ]),
     verificationCode: new FormControl(null, [
-      CustomValidators.required('Code is required.'),
+      CustomValidators.required('Code is required'),
     ])
   })
   constructor(private signupService: SignupService,
@@ -50,6 +50,7 @@ export class EmailMobSignupComponent implements OnInit {
     return this.registrationForm.controls.email.disabled ? 'mobile' : 'email';
   }
 
+  
 
   toggleType() {
     if (this.controls.email.disabled) {
@@ -84,7 +85,7 @@ export class EmailMobSignupComponent implements OnInit {
 
   handleError(errorResp) {
     if (errorResp.error.error_msg) this.errorMessage = errorResp.error.error_msg[0];
-    if (errorResp.error.verificationCode) this.controls.verificationCode.setErrors({ backend: errorResp.verificationCode[0] });
+    if (errorResp.error.verificationCode) this.controls.verificationCode.setErrors({ backend: errorResp.error.verificationCode[0] });
     if (errorResp.error.email) this.controls.email.setErrors({ backend: errorResp.error.email[0] })
   }
 

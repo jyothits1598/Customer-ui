@@ -14,7 +14,7 @@
             </table>
         </li>
         <li (click)="selectedItem.emit(result.store_name)" *ngFor="let result of results" routerLink="/search"
-            [queryParams]="{q:result.store_name}">
+            [queryParams]="{q:result.store_name}" style="outline: 0;">
             <table>
                 <tr>
                     <td valign="middle" style="padding: 12px;">

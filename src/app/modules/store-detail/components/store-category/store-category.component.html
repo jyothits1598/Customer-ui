@@ -3,7 +3,7 @@
         <table class="table-responsive">
            <tr>
                <td *ngFor="let category of categories; let i = index" style="font-size:14px;font-style: normal;font-weight: 500;white-space: nowrap;"> 
-                    <button class="resnt-menu-top-tabs__button tabs-menu" (click)="handleTabClick(i); selectedTab=category.name" [ngStyle]="category.name === selectedTab ? {'background': '#353FA8', 'border-radius': '16px', 'color': '#fff', 'padding': '8px 16px'} : {} " > 
+                    <button class="resnt-menu-top-tabs__button tabs-menu first" (click)="handleTabClick(i); selectedTab=category.name" [ngStyle]="category.name === selectedTab ? {'background': '#353FA8', 'border-radius': '16px', 'color': '#fff', 'padding': '8px 16px'} : {} " > 
                         {{category.name}} 
                     </button>
                 </td>
@@ -19,11 +19,11 @@
                     <div class="col-md-12">
                         <div class="catergory-list">
                             <div #categorySections [id]="category.name" *ngFor="let category of categories">
-                                <div class="std-heading-4" style="margin-bottom: 32px;margin-top:16px;">
+                                <div class="std-heading-4 first" style="margin-bottom: 32px;margin-top:16px;">
                                     {{category.name}}
                                 </div>
                                 <div class="row" >
-                                    <div class="col-md-6 col-sm-12 col-xs-12 col-lg-4 col-xl-6" style="margin-bottom: 16px;padding-left: 12px;padding-right:12px;"
+                                    <div class="col-sm-6 col-lg-6 col-xl-4" style="margin-bottom: 16px;padding-left: 12px;padding-right:12px;"
                                         *ngFor="let item of category.items">
                                         <store-item-card [storeItem]="item"></store-item-card>
                                     </div>

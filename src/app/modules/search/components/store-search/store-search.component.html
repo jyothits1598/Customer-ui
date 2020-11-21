@@ -12,7 +12,7 @@
                                 style="cursor: pointer;" routerLink="/" style="outline:0;">
                         </div>
                         <ng-template #defaultTemplate>
-                            <li *ngIf="itemSearch.value" class="auto-fill__list__item" (click)="searchTerm.emit(itemSearch.value)" >
+                            <li *ngIf="itemSearch.value" class="auto-fill__list__item" (click)="searchTerm.emit(itemSearch.value)" style="outline: 0;">
                                 <table>
                                     <tr>
                                         <td valign="middle" style="padding: 12px;">
@@ -26,7 +26,7 @@
                             </li>
                         </ng-template>
                         <ng-template #itemTemplate let-option="option">
-                            <li (click)="itemSearch.value = option.store_name; searchTerm.emit(itemSearch.value)" class="auto-fill__list__item">
+                            <li (click)="itemSearch.value = option.store_name; searchTerm.emit(itemSearch.value)" class="auto-fill__list__item" style="outline: 0;">
                                 <table>
                                     <tr>
                                         <td valign="middle" style="padding: 12px;">
