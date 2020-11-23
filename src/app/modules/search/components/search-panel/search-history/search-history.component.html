@@ -1,7 +1,7 @@
 <ng-container *ngIf="searchHistory.length > 0">
-    <p>History</p>
+    <div class="history"> Recent searches </div>
     <ul style="list-style-type: none;cursor: pointer;">
-        <li *ngFor="let item of searchHistory" (click)="selectedItem.emit(item)" routerLink="/search" [queryParams]="{q:item}">
+        <li *ngFor="let item of searchHistory" (click)="selectedItem.emit(item)" routerLink="/search" [queryParams]="{q:item}" style="outline:0">
             <table>
                 <tr>
                     <td valign=" middle" style="padding: 12px;">
