@@ -6,11 +6,10 @@
 <div class="main-panel">
     <ng-container *ngIf="storeDetail">
         <div class="main-content">
-            <div class="fixed-shadow">
+            <div class="fixed-shadow" #topBar [class.newClass]="scrolledDown">
                 <div class="margins-left">
                     <span> <img src="assets/images/ico_arrow_left.png" routerLink="/"
-                            style="cursor: pointer;outline:0;"> &nbsp; <span class="fixed-name-scroll"
-                            style="display: none;"> {{storeDetail.name}}</span> </span>
+                            style="cursor: pointer;outline:0;"> &nbsp; <span *ngIf="scrolledDown" class="fixed-name-scroll"> {{storeDetail.name}}</span> </span>
                 </div>
             </div>
             <div class="wal-image">

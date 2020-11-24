@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { filter, finalize } from 'rxjs/operators';
 import { ModalService } from 'src/app/core/services/modal.service';
@@ -14,6 +14,12 @@ import * as $ from 'jquery'
 export class StoreDetailComponent implements OnInit, OnDestroy {
   storeId: number;
   selecteditemId: number;
+  scrolledDown: boolean;
+
+  @HostListener('window:scroll') onScroll(e: Event): void {
+    if (window.scrollY > 50 && !this.scrolledDown) this.scrolledDown = true;
+    else if (window.scrollY < 50 && this.scrolledDown) this.scrolledDown = false;
+  }
 
   storeDetail: StoreDetail;
   loading: boolean = true;
@@ -23,7 +29,7 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
   routeQueryparamsSubs;
 
   constructor(private storeDetailServ: StoreDetailDataService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute, private window: Window) { }
 
   ngOnInit(): void {
 
@@ -39,15 +45,15 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
       this.selecteditemId = +qParams.i;
     })
 
-    $(window).scroll(function () {
-      if ($(this).scrollTop() > 50) {
-        $('.fixed-shadow').addClass('newClass');
-        $('.fixed-name-scroll').show();
-      } else {
-        $('.fixed-shadow').removeClass('newClass');
-        $('.fixed-name-scroll').hide();
-      }
-    });
+    // $(window).scroll(function () {
+    //   if ($(this).scrollTop() > 50) {
+    //     $('.fixed-shadow').addClass('newClass');
+    //     $('.fixed-name-scroll').show();
+    //   } else {
+    //     $('.fixed-shadow').removeClass('newClass');
+    //     $('.fixed-name-scroll').hide();
+    //   }
+    // });
 
   }
 
