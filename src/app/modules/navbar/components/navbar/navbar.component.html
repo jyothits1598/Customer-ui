@@ -1,6 +1,15 @@
 <div class="top-bar">
     <div class="container">
         <!-- Centered link -->
+
+        <!----------------------- mobile screen --------------------->
+        <div class="d-block d-sm-none" style="margin: auto;width: 50%;text-align: center;">
+            <div class="bck">
+                <location-selector></location-selector>
+            </div>
+        </div>
+        <!----------------------- mobile screen end --------------------->
+
         <div class="topnav-centered">
             <a routerLink="/" style="outline: 0;cursor: pointer;">
                 <img class="only-big" src="assets/svg/logo_white.svg"> 
@@ -8,7 +17,7 @@
             </a>
         </div>
         <!-- Left-aligned links (default) -->
-        <div class="topnav-left">
+        <div class="topnav-left d-none d-lg-block">
             <div class="bck">
                 <location-selector></location-selector>
             </div>
@@ -35,8 +44,7 @@
     </div>
 </div>
 
-  
- 
+
 <style>   
     .topnav {
       position: relative;

@@ -38,6 +38,8 @@
     position: absolute;
     transform: translateX(-50%);
     left: 50%;
+    top: 0;
+    bottom: 0;
 }
 .modal-body {
     max-height: calc(100vh - 48px);
@@ -45,6 +47,10 @@
 }
 .footer-btn {
     padding: 8px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 .store-item-popup {

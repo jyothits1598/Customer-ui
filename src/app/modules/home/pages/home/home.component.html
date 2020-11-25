@@ -28,19 +28,27 @@
         </div>
     </div>
 </ng-template>
-<section class="table-responsive text-center sticky-navbar">
-    <ul class="resnt-menu-top-tabs u-margin-bottom-medium" style="margin-bottom:0">
-        <li class="resnt-menu-top-tabs__item custom-border">
-            <button class="resnt-menu-top-tabs__button tabs-menu resnt-menu-top-tabs__button__active"> Nearby </button>
-        </li>
-        <li class="resnt-menu-top-tabs__item custom-border">
-            <button class="resnt-menu-top-tabs__button tabs-menu resnt-menu-top-tabs__button__border" routerLink=""> Reviews </button>
-        </li>
-        <li class="resnt-menu-top-tabs__item">
-            <button class="resnt-menu-top-tabs__button tabs-menu" routerLink=""> Likes
-            </button>
-        </li>
-    </ul>
+<section class="table-responsive sticky-navbar">
+    <!-- mobile store search -->
+    <div class="search-store-mobile d-block d-sm-none">
+        <img style="width: 24px;" src="assets/images/navbar/ico_search_blue.png">&nbsp;
+        <input class="input-transparent" style="border: none;outline: 0;" type="text" placeholder="What would you like to eat?">
+    </div>
+    <!-- mobile store search end -->
+    <div class="text-center">
+        <ul class="resnt-menu-top-tabs u-margin-bottom-medium" style="margin-bottom:0">
+            <li class="resnt-menu-top-tabs__item custom-border">
+                <button class="resnt-menu-top-tabs__button tabs-menu resnt-menu-top-tabs__button__active"> Nearby </button>
+            </li>
+            <li class="resnt-menu-top-tabs__item custom-border">
+                <button class="resnt-menu-top-tabs__button tabs-menu resnt-menu-top-tabs__button__border" routerLink=""> Reviews </button>
+            </li>
+            <li class="resnt-menu-top-tabs__item">
+                <button class="resnt-menu-top-tabs__button tabs-menu" routerLink=""> Likes
+                </button>
+            </li>
+        </ul>
+    </div>
 </section>
 <div class="store-list-bg">
     <router-outlet></router-outlet>
