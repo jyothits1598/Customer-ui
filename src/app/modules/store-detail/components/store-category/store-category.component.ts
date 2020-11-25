@@ -29,7 +29,7 @@ export class StoreCategoryComponent implements OnInit {
     let config = {
       root: null,
       rootMargin: '0px',
-      threshold: 0.25
+      threshold: 0.75
     }
     if (this.categories.length > 0) {
 

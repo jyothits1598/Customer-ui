@@ -16,7 +16,7 @@ export class PopoverRef {
 
 export class ComponentPopoverRef<T> extends PopoverRef {
     instance: T;
-    constructor(overLayRef: OverlayRef, instance: any) {
+    constructor(overLayRef: OverlayRef, instance: T) {
         super(overLayRef);
         this.instance = instance;
     }
