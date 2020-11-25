@@ -1,5 +1,6 @@
 .top-tab-nav {
-    background: var(--color-background);
+    background: var(--color-primary);
+    color: var(--color-background);
     width: 100%;
     position: fixed;
     top: 0;
@@ -7,6 +8,8 @@
     right: 0;
     z-index: 1;
     height:48px;
+    line-height: 48px;
+    padding: 4px;
 }
 .section-middle {
     background: var(--color-background-secondary);
@@ -21,27 +24,41 @@
     line-height: 20px;
     color: var(--color-primary);
     // padding: 12px;
-    &:hover {
-        // background: var(--color-background-tertiary) !important;
-        border-radius: 50%;
-        color: var(--color-primary);
-    }
+    // &:hover {
+    //     background: var(--color-inside-bg) !important;
+    //     border-radius: 50%;
+    // }
 }
+.menu li .a1:hover {
+    background: var(--color-inside-bg) !important;
+    border-radius: 50%;
+ }
 
-.nav-bar div {
-    padding: 12px;
-}
-.location-text {
+.bck {
+    // background: var(--color-inside-bg);
+    border-radius: 24px;
+    padding: 8px 16px;
+    font-family: DM Sans;
     font-style: normal;
     font-weight: bold;
     font-size: 14px;
-    line-height: 45px;
-    color: var(--color-boldlevelcolor);
+    line-height: 20px;
+    cursor: pointer;
 }
-.bck {
-    background: var(--color-background-tertiary);
+.bck:hover {
+    background: var(--color-inside-bg);
+}
+.store-search-home-input {
+    background: var(--color-inside-bg);
     border-radius: 24px;
-    padding: 10px 16px;
+    padding: 8px 16px;
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    cursor: pointer;
+    color:var(--color-background);
 }
 .nav-content {
     height: 48px;
@@ -172,7 +189,7 @@
     font-weight: bold;
     margin: 0 auto;
     display: inline-block;
-    padding: 8px 16px;
+    padding: 10px 16px;
 
     &--primary {
         color: var(--color-background);
@@ -307,9 +324,10 @@ input.ng-invalid.ng-touched.error-highlight {
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
     padding: 8px;
     // margin-bottom: 24px;
+    background: var(--color-primary);
 }
 .card-center {
-    background: #FFFFFF;
+    background: var(--color-background);
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
     border-radius: 16px;
     margin: 0 auto 25px;     

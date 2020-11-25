@@ -1,74 +1,36 @@
 <div class="top-bar">
     <div class="container">
-        <div class="row">
-            
-            <!-- <div class="col-md-12" style="display:none">
-                <div class="d-flex justify-content-between">
-                    <div class="location-text">
-                        <span class="bck">
-                            <location-selector></location-selector>
-                        </span>
-                    </div>
-                    <div style="outline: 0;cursor: pointer;padding-top:5px" routerLink="/">
-                            <img class="only-big" src="assets/svg/Logo_w.svg"> <img class="only-small" src="assets/images/Logo - Icon only.png"> 
-                    </div>
-                    <div class="d-none d-lg-block">
-                        <ul class="menu">
-                            <li routerLink="/" style="cursor: pointer;outline:none"> <img
-                                    src="assets/images/ico_home.png"> </li>
-                            <li *ngIf="isLoggedin$ | async" routerLink="/favourites"
-                                style="cursor: pointer;outline:none"> <img src="assets/images/ico_heart.png"> </li>
-                            <li routerLink="/" style="cursor: pointer;outline:none"> <img
-                                    src="assets/images/ico_account.png"> </li>
-                            <ng-container *ngIf="isLoggedin$ | async">
-                                <li style="cursor: pointer;outline:none"> <img src="assets/images/ico_bell_active.png">
-                                </li>
-                                <signed-in-options></signed-in-options>
-                            </ng-container>
-                            <li>
-                                <app-store-search-inline></app-store-search-inline>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div> -->
-
-            <div class="col-md-12">
-                    <!-- Centered link -->
-                    <div class="topnav-centered">
-                      <a routerLink="/" style="outline: 0;cursor: pointer;">
-                        <img class="only-big" src="assets/svg/Logo_w.svg"> 
-                        <img class="only-small" src="assets/images/Logo - Icon only.png"> 
-                    </a>
-                    </div>
-                    <!-- Left-aligned links (default) -->
-                    <span class="location-text">
-                        <span class="bck">
-                            <location-selector></location-selector>
-                        </span>
-                    </span>
-                    <!-- Right-aligned links -->
-                    <div class="topnav-right d-none d-lg-block">
-                        <ul class="menu">
-                            <li routerLink="/" style="cursor: pointer;outline:none"> <img
-                                    src="assets/images/profile/ico_home.png" style="padding-top: 3px;"> </li>
-                            <li *ngIf="isLoggedin$ | async" routerLink="/favourites"
-                                style="cursor: pointer;outline:none"> <img src="assets/images/profile/ico_heart.png" style="padding-top: 3px;"> </li>
-                            <li routerLink="/" style="cursor: pointer;outline:none"> <img
-                                    src="assets/images/profile/ico_account.png" style="padding-top: 3px;"> </li>
-                            <ng-container *ngIf="isLoggedin$ | async">
-                                <li style="cursor: pointer;outline:none"> <img src="assets/images/profile/ico_bell.png" style="padding-top: 3px;">
-                                </li>
-                                <signed-in-options></signed-in-options>
-                            </ng-container>
-                            <li>
-                                <app-store-search-inline></app-store-search-inline>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                  
+        <!-- Centered link -->
+        <div class="topnav-centered">
+            <a routerLink="/" style="outline: 0;cursor: pointer;">
+                <img class="only-big" src="assets/svg/logo_white.svg"> 
+                <!-- <img class="only-small" src="assets/images/profile/logo_white.png">  -->
+            </a>
+        </div>
+        <!-- Left-aligned links (default) -->
+        <div class="topnav-left">
+            <div class="bck">
+                <location-selector></location-selector>
             </div>
+        </div>
+        <!-- Right-aligned links -->
+        <div class="topnav-right d-none d-lg-block">
+            <ul class="menu">
+                <li routerLink="/" style="cursor: pointer;outline:none"> <img class="a1" 
+                        src="assets/images/navbar/ico_home.png"> </li>
+                <li *ngIf="isLoggedin$ | async" routerLink="/favourites"
+                    style="cursor: pointer;outline:none"> <img class="a1" src="assets/images/navbar/ico_heart.png" > </li>
+                <li routerLink="/" style="cursor: pointer;outline:none"> <img class="a1"
+                        src="assets/images/navbar/ico_account.png"> </li>
+                <li routerLink="/" *ngIf="isLoggedin$ | async" style="cursor: pointer;outline:none"> <img
+                    src="assets/images/navbar/ico_bell.png" class="a1"> </li>
+                <li *ngIf="isLoggedin$ | async" style="cursor: pointer;outline:none;margin-right: 5px;"> 
+                    <signed-in-options></signed-in-options>
+                </li>
+                <li>
+                    <app-store-search-inline></app-store-search-inline>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
@@ -89,5 +51,8 @@
     }   
     .topnav-right {
       float: right;
-    }    
-    </style>
+    }  
+    .topnav-left {
+      float: left;
+    }  
+</style>
