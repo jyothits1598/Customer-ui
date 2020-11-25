@@ -35,7 +35,6 @@ export class StoreCategoryComponent implements OnInit {
 
       setTimeout(() => {
         this.intersectionObserver = new IntersectionObserver((e) => {
-          console.log('recieved an intersection', e);
           for (let i = 0; i < e.length; i++) {
             if (e[i].isIntersecting) { this.selectedTab = e[i].target.id; return; }
           }
