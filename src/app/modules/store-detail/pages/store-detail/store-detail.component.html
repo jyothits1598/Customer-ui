@@ -8,15 +8,46 @@
         <div class="main-content">
             <div class="fixed-shadow" #topBar [class.newClass]="scrolledDown">
                 <div class="margins-left">
-                    <span> <img src="assets/images/ico_arrow_left.png" routerLink="/"
-                            style="cursor: pointer;outline:0;"> &nbsp; <span *ngIf="scrolledDown" class="fixed-name-scroll"> {{storeDetail.name}}</span> </span>
+                    <span style="float:left"> 
+                        <table>
+                            <tr>
+                                <td> 
+                                    <img src="assets/images/ico_arrow_left_white.png" routerLink="/"
+                                    style="cursor: pointer;outline:0;">
+                                </td>
+                                <td align="bottom">
+                                    <span class="fixed-name-scroll" *ngIf="scrolledDown"
+                            style="display: none;">&nbsp; {{storeDetail.name}}</span>
+                                </td>
+                            </tr>
+                        </table>
+                        
+                        <!-- <img src="assets/images/ico_arrow_left_white.png" routerLink="/"
+                            style="cursor: pointer;outline:0;"> &nbsp; <span class="fixed-name-scroll"
+                            style="display: none;"> {{storeDetail.name}}</span>  -->
+                    </span>
+                    <span style="float:right">
+                        <ul class="menu">
+                            <li style="cursor: pointer;outline:none"> <img
+                                src="assets/images/navbar/ico_heart_trp.png"> 
+                            </li>
+                            <li style="cursor: pointer;outline:none;margin-left:16px"> <img
+                                    src="assets/images/navbar/ico_share.png"> 
+                            </li>
+                            <li style="cursor: pointer;outline:none;margin-left:16px"> <img
+                                src="assets/images/navbar/ico_navigation.png"> 
+                            </li>
+                        </ul>
+                    </span>        
+                    <!-- <span> <img src="assets/images/ico_arrow_left.png" routerLink="/"
+                            style="cursor: pointer;outline:0;"> &nbsp; <span *ngIf="scrolledDown" class="fixed-name-scroll"> {{storeDetail.name}}</span> </span> -->
                 </div>
             </div>
             <div class="wal-image">
                 <img [src]="storeDetail.logo">
             </div>
             <div class="wallpaper-card">
-                <table>
+                <table class="d-none d-sm-block">
                     <tr>
                         <td valign="middle">
                             <img src="assets/images/Rectangle 4.png" class="profile-log-detail" />
@@ -32,6 +63,20 @@
                         </td>
                     </tr>
                 </table>
+                <div class="d-block d-sm-none">
+                    <div style="position: absolute;top:-76px;left:0;z-index: 1;">
+                        <img src="assets/images/Rectangle 4.png" class="profile-log-detail" />
+                    </div>
+                    <div style="position: relative;top:10px;">
+                        <div class="std-heading-4 first"> {{storeDetail.name}} </div>
+                        <div class="sub-name">
+                            <span style="float:left !important;"> 225m away &nbsp;
+                                <present-availability [availability]="storeDetail.openingHours">
+                                </present-availability>
+                            </span>
+                        </div>
+                    </div><br>
+                </div>
                 <div style="margin-top:12px;">
                     <span>
                         <img src="assets/images/ico_social_facebook_small.png">
@@ -48,6 +93,7 @@
                     </span>
                 </div>
                 <div class="address-content" style="margin-top: 20px;">
+                    <hr class="d-block d-sm-none">
                     {{storeDetail.address}} &nbsp; <span style="color: #353FA8;font-weight: bold;cursor:pointer;">
                         <!-- More info <img src="assets/images/ico_right-arrow.png"> -->
                     </span>
@@ -71,7 +117,7 @@
             <store-category [categories]="storeDetail.categories"></store-category>
             <!----------------------------- items cards end ---------------------->
         </div>
-        <div class="right-content">
+        <div class="right-content" style="z-index: 99999;">
             <div class="empty-cart">
                 <img src="assets/images/empty_cart.png">
                 <p class="paragraph" style="margin-top:34px">

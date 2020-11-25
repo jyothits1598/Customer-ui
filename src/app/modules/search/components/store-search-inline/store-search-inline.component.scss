@@ -1,0 +1,15 @@
+.input-transparent {
+    background: transparent;
+    color:var(--color-background);
+}
+.input-transparent::placeholder {
+    color:var(--color-background);
+    opacity: 0.5;
+}
+.input-transparent:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color:var(--color-background);
+}
+   
+.input-transparent::-ms-input-placeholder { /* Microsoft Edge */
+    color:var(--color-background);
+}
