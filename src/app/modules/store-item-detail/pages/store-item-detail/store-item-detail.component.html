@@ -1,5 +1,5 @@
 <div class="store-item-popup">
-    <div class="detail-items-popup">
+    <div @slideIn class="detail-items-popup" *ngIf="show">
         <div class="ico-close-nav">
             <div class="d-flex justify-content-between">
                 <div class="close-icon">
@@ -15,7 +15,7 @@
                 </ul>
             </div>
         </div>
-        <div class="modal-body" style="height:80%;overflow-y:auto">
+        <div class="modal-body" [style.max-height]="loading? '600px': 'calc(90vh - 108px)'">
             <p *ngIf="loading">Loading...</p>
             <ng-container *ngIf="itemDetail">
                 <div class="std-heading-3">
@@ -37,7 +37,7 @@
             <br><br>
         </div>
         <div class="footer-btn">
-            <button type="button" class="btn std-button std-button--blue ">
+            <button type="button" class="btn std-button std-button--blue">
                 Add to cart
             </button>
         </div>
