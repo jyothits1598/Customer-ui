@@ -60,7 +60,7 @@ export function ReadStoreCategories(storeId: number, catData: any): Array<StoreC
 export function ReadStoreItems(storeId: number, data: any): Array<StoreItem> {
     let items: Array<StoreItem> = [];
     data.forEach((i) => {
-        items.push({ id: i.item_id, name: i.item_name, basePrice: i.item_base_price, image: i.item_image, storeId: storeId })
+        items.push({ id: i.item_id, name: i.item_name, basePrice: i.item_base_price, image: "", storeId: storeId })
     })
     return items;
 }

@@ -31,7 +31,6 @@ export function ReadItemModifiers(data: any): Array<ItemModifier> {
             options: ReadModifierOptions(m.options)
         })
     });
-    console.log(name);
     return result;
 }
 
