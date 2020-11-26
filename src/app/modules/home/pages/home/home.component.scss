@@ -7,3 +7,21 @@
     background: var(--color-background);
     // box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
 }
+.search-store-mobile {
+    background: #FAFAFA;
+    border-radius: 24px;
+    padding: 6px;
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    cursor: pointer;
+    margin: 20px 12px;
+    // color:var(--color-background);
+}
+.input-transparent {
+    background: transparent;
+    color:var(--color-boldlevelcolor);
+    font-size: 16px;
+}

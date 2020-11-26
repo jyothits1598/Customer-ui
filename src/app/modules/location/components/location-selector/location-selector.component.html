@@ -1,8 +1,23 @@
 <span style="cursor: pointer;" (click)="showSelectorModal()" #popOrigin>
-    <img src="assets/images/navbar/ico_place_small.png"> &nbsp;
+    <!-- <img src="assets/images/navbar/ico_place_small.png"> &nbsp;
     <b>
-        <span style="font-size:14px">{{location? location.address.locality: 'location not set'}}</span>
-    </b> &nbsp;<img src="assets/images/navbar/ico_down_small.png"></span>
+        <span style="font-size:16px;">{{location? location.address.locality: 'location not set'}}</span>
+    </b> &nbsp;<img src="assets/images/navbar/ico_down_small.png"> -->
+    <table style="margin-left: auto;
+    margin-right: auto;">
+        <tr>
+            <td>
+                <img src="assets/images/navbar/ico_place_small.png">
+            </td>
+            <td>
+                <b><span style="font-size:14px;">&nbsp; {{location? location.address.locality: 'location not set'}}</span></b>
+            </td>
+            <td>
+                <img src="assets/images/navbar/ico_down_small.png">
+            </td>
+        </tr>
+    </table>
+</span>
 
 <!-- <ng-template #locationPanel>
     <location-panel></location-panel>
