@@ -8,20 +8,21 @@
     // box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
 }
 .search-store-mobile {
-    background: #FAFAFA;
-    border-radius: 24px;
-    padding: 6px;
-    font-family: DM Sans;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 24px;
-    cursor: pointer;
+    position:relative;
     margin: 20px 12px;
-    // color:var(--color-background);
+    border-radius: 24px;
 }
 .input-transparent {
-    background: transparent;
-    color:var(--color-boldlevelcolor);
-    font-size: 16px;
+    height:40px;
+    // margin:0;
+    width: 100%;
+    border:0;
+    background: #FAFAFA;
+    border-radius: 24px;
+    padding: 4px 30px 4px 40px;
+}
+.img-input{
+    position:absolute;
+    left:5px;
+    top:4px
 }
