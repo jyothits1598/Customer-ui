@@ -1,0 +1,16 @@
+<ul class="menu">
+    <li routerLink="/" style="cursor: pointer;outline:none"> <img class="a1" src="assets/images/navbar/ico_home.png">
+    </li>
+    <li routerLink="/" style="cursor: pointer;outline:none"> <img class="a1" src="assets/images/navbar/ico_account.png">
+    </li>
+    <ng-container *ngIf="isLoggedin$ | async">
+        <li routerLink="/favourites" style="cursor: pointer;outline:none"> <img class="a1"
+                src="assets/images/navbar/ico_heart.png"> </li>
+
+        <li routerLink="/" style="cursor: pointer;outline:none"> <img src="assets/images/navbar/ico_bell.png"
+                class="a1"> </li>
+        <li style="cursor: pointer;outline:none;margin-right: 5px;">
+            <signed-in-options></signed-in-options>
+        </li>
+    </ng-container>
+</ul>

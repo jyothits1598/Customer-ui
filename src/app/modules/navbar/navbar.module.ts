@@ -7,10 +7,11 @@ import { RouterModule } from '@angular/router';
 import { ModalModule } from 'ngb-modal';
 import { SearchModule } from '../search/search.module';
 import { SignedInOptionsComponent } from './components/signed-in-options/signed-in-options.component';
+import { NavbarIconsComponent } from './components/navbar-icons/navbar-icons.component';
 
 
 @NgModule({
-  declarations: [NavbarComponent, SignedInOptionsComponent],
+  declarations: [NavbarComponent, SignedInOptionsComponent, NavbarIconsComponent],
   imports: [
     CommonModule,
     RouterModule,

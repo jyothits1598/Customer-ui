@@ -12,7 +12,7 @@
 
         <div class="topnav-centered">
             <a routerLink="/" style="outline: 0;cursor: pointer;">
-                <img class="only-big" src="assets/svg/logo_white.svg"> 
+                <img class="only-big" src="assets/svg/logo_white.svg">
                 <!-- <img class="only-small" src="assets/images/profile/logo_white.png">  -->
             </a>
         </div>
@@ -23,44 +23,34 @@
             </div>
         </div>
         <!-- Right-aligned links -->
-        <div class="topnav-right d-none d-lg-block">
-            <ul class="menu">
-                <li routerLink="/" style="cursor: pointer;outline:none"> <img class="a1" 
-                        src="assets/images/navbar/ico_home.png"> </li>
-                <li *ngIf="isLoggedin$ | async" routerLink="/favourites"
-                    style="cursor: pointer;outline:none"> <img class="a1" src="assets/images/navbar/ico_heart.png" > </li>
-                <li routerLink="/" style="cursor: pointer;outline:none"> <img class="a1"
-                        src="assets/images/navbar/ico_account.png"> </li>
-                <li routerLink="/" *ngIf="isLoggedin$ | async" style="cursor: pointer;outline:none"> <img
-                    src="assets/images/navbar/ico_bell.png" class="a1"> </li>
-                <li *ngIf="isLoggedin$ | async" style="cursor: pointer;outline:none;margin-right: 5px;"> 
-                    <signed-in-options></signed-in-options>
-                </li>
-                <li>
-                    <app-store-search-inline></app-store-search-inline>
-                </li>
-            </ul>
+        <!-- <div class="topnav-right d-none d-lg-block"> -->
+        <div style="display: flex; float: right;">
+            <navbar-icons></navbar-icons>
+            <app-store-search-inline></app-store-search-inline>
         </div>
     </div>
 </div>
 
 
-<style>   
+<style>
     .topnav {
-      position: relative;
-      overflow: hidden;
+        position: relative;
+        overflow: hidden;
     }
+
     .topnav-centered a {
-      float: none;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }   
+        float: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
     .topnav-right {
-      float: right;
-    }  
+        float: right;
+    }
+
     .topnav-left {
-      float: left;
-    }  
+        float: left;
+    }
 </style>

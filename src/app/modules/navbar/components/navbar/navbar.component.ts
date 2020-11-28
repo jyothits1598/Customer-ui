@@ -12,7 +12,6 @@ import { PopoverService } from 'src/app/core/services/popover.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  @ViewChild('lineIcon', { read: ElementRef }) icon: ElementRef;
   isLoggedin$: Observable<boolean>;
   constructor(private authService: AuthService) { }
 
