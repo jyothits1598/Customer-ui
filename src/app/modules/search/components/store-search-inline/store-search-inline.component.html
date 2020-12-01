@@ -1,9 +1,11 @@
 <!-- <input (focus)="handleFocus()" (blur)="handleBlur()" style="border: none;" type="text" placeholder="Search"> -->
 <div style="outline: none;cursor: pointer;" #searchContainer>
-    <div class="store-search-home-input">
-        <input class="input-transparent" style="border: none;outline: 0;" type="text" placeholder="Search"
-            (focus)="openComponentPopover(searchData)" #searchInput>
-        <img style="width: 24px;" [src]="loading? 'assets/images/loader.gif' : 'assets/images/navbar/ico_search.png'">
+    <div class="above-bg">
+        <div class="store-search-home-input small-input-responsive">
+            <input class="input-transparent" style="border: none;outline: 0;" type="text" placeholder="Search"
+                (focus)="openComponentPopover(searchData)" #searchInput>
+            <img style="width: 24px;" [src]="loading? 'assets/images/loader.gif' : 'assets/images/navbar/ico_search.png'">
+        </div>
     </div>
 </div>
 
