@@ -1,10 +1,11 @@
 <!-- <input (focus)="handleFocus()" (blur)="handleBlur()" style="border: none;" type="text" placeholder="Search"> -->
-<div style="outline: none;cursor: pointer;" #searchContainer>
-    <div class="above-bg">
+<div style="outline: none;cursor: pointer;">
+    <div class="above-bg" #searchContainer>
         <div class="store-search-home-input small-input-responsive">
             <input class="input-transparent" style="border: none;outline: 0;" type="text" placeholder="Search"
                 (focus)="openComponentPopover(searchData)" #searchInput>
-            <img style="width: 24px;" [src]="loading? 'assets/images/loader.gif' : 'assets/images/navbar/ico_search.png'">
+            <img style="width: 24px;"
+                [src]="loading? 'assets/images/loader.gif' : 'assets/images/navbar/ico_search.png'">
         </div>
     </div>
 </div>
@@ -14,6 +15,9 @@
     </search-panel>
 </ng-template>
 
+<button *ngIf="isMobile && overlayOpen" type="button"  style="position: fixed; left: 10px; top: 10px" (click)="closePopover()">
+    <img src="assets/images/ico_arrow_left.png" alt="">
+</button>
 <!-- <span *ngIf="overlayOpen"
     style="position: fixed; top: 0; bottom: 0; left: 0;right: 0; background-color: #81818169; z-index: -1;"
     (click)="closePopover()"></span> -->

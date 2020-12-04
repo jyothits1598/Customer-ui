@@ -18,8 +18,8 @@ export class PopoverService {
 
   openTemplatePopover(origin: ElementRef, template: TemplateRef<any>, config: PopoverConfig = null) {
     let overlayConfig = new OverlayConfig();
-    overlayConfig.hasBackdrop = true;
-    if(!config?.darkBackground) overlayConfig.backdropClass = "";
+    overlayConfig.hasBackdrop = config.hasBackdrop === false ? false : true;
+    if (!config?.darkBackground) overlayConfig.backdropClass = "";
     overlayConfig.positionStrategy = this.overlay.position().flexibleConnectedTo(origin.nativeElement).withPositions(this.generatePositions(config));
 
     let overLayRef = this.overlay.create(overlayConfig);

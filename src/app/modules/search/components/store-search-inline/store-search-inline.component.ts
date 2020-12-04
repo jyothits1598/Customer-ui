@@ -3,7 +3,8 @@ import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
 import { AfterViewInit, Component, ElementRef, Injector, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { fromEvent, interval, of } from 'rxjs';
 import { debounce, distinctUntilChanged, filter, finalize, map, switchMap, tap } from 'rxjs/operators';
-import { ComponentPopoverRef, PopoverRef } from 'src/app/core/model/popover';
+import { ComponentPopoverRef, PopoverConfig, PopoverRef } from 'src/app/core/model/popover';
+import { LayoutService } from 'src/app/core/services/layout.service';
 import { PopoverService } from 'src/app/core/services/popover.service';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
 import { SearchPanelComponent } from '../search-panel/search-panel.component';
@@ -24,13 +25,16 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   searchTerm: string;
   overlayOpen: boolean;
   popoverRef: PopoverRef
-
+  isMobile: boolean;
 
   constructor(
     private restApiService: RestApiService,
-    private popoverService: PopoverService) { }
+    private popoverService: PopoverService,
+    private layoutService: LayoutService) { this.isMobile = this.layoutService.isMobile; }
 
   ngAfterViewInit(): void {
+
+
     this.keyupSubs = fromEvent(this.searchInput.nativeElement, 'keyup')
       .pipe(
         map((event: any) => event.target.value),
@@ -50,8 +54,18 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   }
 
   openComponentPopover(results = null) {
+    console.log('this is the comp pop', this.searchData);
+    // if(!this.searchData?.length) return;
+    let popoverConfig: PopoverConfig = {
+      xPos: this.layoutService.isMobile ? 'center' : 'end',
+      yPos: 'bottom',
+      onDismiss: () => { this.overlayOpen = false }
+    }
+    // hasBackdrop ?: true | false;
+    // darkBackground ?: true | false;
+    console.log('open component popover', this.searchContainer);
     if (this.overlayOpen) return;
-    this.popoverRef = this.popoverService.openTemplatePopover(this.searchContainer, this.panelTemplate, { xPos: 'end', yPos: 'bottom', onDismiss: () => { this.overlayOpen = false } },)
+    this.popoverRef = this.popoverService.openTemplatePopover(this.searchContainer, this.panelTemplate, popoverConfig)
     this.overlayOpen = true;
   }
 

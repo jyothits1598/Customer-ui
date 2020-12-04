@@ -1,5 +1,5 @@
 <div class="modal-body custom-body-search">
-    <ul style="list-style-type: none;cursor: pointer;">
+    <ul style="list-style-type: none;cursor: pointer; margin-bottom: 0;">
         <li *ngIf="searchTerm" (click)="handleClick(searchTerm)" routerLink="/search" [queryParams]="{q:searchTerm}"
             style="outline: 0;">
             <table>
