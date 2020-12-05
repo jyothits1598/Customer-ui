@@ -35,30 +35,30 @@ export class PresentAvailabilityComponent implements OnInit {
   checkAvailability(availability: TimeAvailability): boolean {
     if (availability.markedAsClose) return false;
 
-    let day;
-    switch (availability.day.toLowerCase()) {
-      case 'sunday':
-        day = 0;
-        break;
-      case 'monday':
-        day = 1;
-        break;
-      case 'tuesday':
-        day = 2;
-        break;
-      case 'wednesday':
-        day = 3;
-        break;
-      case 'thursday':
-        day = 4;
-        break;
-      case 'friday':
-        day = 5;
-        break;
-      case 'saturday':
-        day = 6;
-        break;
-    }
+    let day = this.weakDayToNumber(availability.day);
+    // switch (availability.day.toLowerCase()) {
+    //   case 'sunday':
+    //     day = 0;
+    //     break;
+    //   case 'monday':
+    //     day = 1;
+    //     break;
+    //   case 'tuesday':
+    //     day = 2;
+    //     break;
+    //   case 'wednesday':
+    //     day = 3;
+    //     break;
+    //   case 'thursday':
+    //     day = 4;
+    //     break;
+    //   case 'friday':
+    //     day = 5;
+    //     break;
+    //   case 'saturday':
+    //     day = 6;
+    //     break;
+    // }
 
     if (day == this.now.getDay()) {
       let end = new Date();
@@ -70,6 +70,25 @@ export class PresentAvailabilityComponent implements OnInit {
         if (this.now > start) return true;
       }
       return false;
+    }
+  }
+
+  weakDayToNumber(day: string) {
+    switch (day.toLowerCase()) {
+      case 'sunday':
+        return 0;
+      case 'monday':
+        return 1;
+      case 'tuesday':
+        return 2;
+      case 'wednesday':
+        return 3;
+      case 'thursday':
+        return 4;
+      case 'friday':
+        return 5;
+      case 'saturday':
+        return 6;
     }
   }
 
