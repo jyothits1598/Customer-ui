@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { filter, finalize } from 'rxjs/operators';
 import { ModalService } from 'src/app/core/services/modal.service';
@@ -11,15 +11,16 @@ import * as $ from 'jquery'
   templateUrl: './store-detail.component.html',
   styleUrls: ['./store-detail.component.scss']
 })
-export class StoreDetailComponent implements OnInit, OnDestroy {
+export class StoreDetailComponent implements OnInit, AfterViewInit, OnDestroy {
   storeId: number;
   selecteditemId: number;
   scrolledDown: boolean;
 
-  @HostListener('window:scroll') onScroll(e: Event): void {
-    if (window.scrollY > 50 && !this.scrolledDown) this.scrolledDown = true;
-    else if (window.scrollY < 50 && this.scrolledDown) this.scrolledDown = false;
-  }
+  // @HostListener('window:scroll') onScroll(e: Event) {
+  //   console.log('widow scroll down', e)
+  //   if (window.scrollY > 50 && !this.scrolledDown) this.scrolledDown = true;
+  //   else if (window.scrollY < 50 && this.scrolledDown) this.scrolledDown = false;
+  // }
 
   storeDetail: StoreDetail;
   loading: boolean = true;
@@ -28,8 +29,16 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
   routeParamsSubs;
   routeQueryparamsSubs;
 
+  @ViewChild('observationElement', { read: ElementRef }) obsElement: ElementRef;
   constructor(private storeDetailServ: StoreDetailDataService,
     private route: ActivatedRoute, private window: Window) { }
+  ngAfterViewInit(): void {
+    let obs = new IntersectionObserver((entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
+      if (entries[0].isIntersecting) this.scrolledDown = false;
+      else this.scrolledDown = true;
+    });
+    obs.observe(this.obsElement.nativeElement);
+  }
 
   ngOnInit(): void {
 
@@ -45,19 +54,7 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
       this.selecteditemId = +qParams.i;
     })
 
-    // $(window).scroll(function () {
-    //   if ($(this).scrollTop() > 50) {
-    //     $('.fixed-shadow').addClass('newClass');
-    //     $('.fixed-name-scroll').show();
-    //   } else {
-    //     $('.fixed-shadow').removeClass('newClass');
-    //     $('.fixed-name-scroll').hide();
-    //   }
-    // });
-
   }
-
-
 
   loadStore() {
     this.loading = true;

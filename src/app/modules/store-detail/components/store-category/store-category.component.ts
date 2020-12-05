@@ -9,7 +9,6 @@ import { StoreCategory } from 'src/app/modules/store-detail/model/store-detail';
 export class StoreCategoryComponent implements OnInit, AfterViewInit {
   @Input() categories: Array<StoreCategory>;
   @ViewChildren('categorySections') sections: QueryList<ElementRef>;
-  @ViewChild('intersectionDiv', { read: ElementRef }) intersectionDiv: ElementRef;
 
   intersectionObserver: IntersectionObserver;
   selectedTab: string;
@@ -45,9 +44,10 @@ export class StoreCategoryComponent implements OnInit, AfterViewInit {
   }
 
   handleInterSection(e: IntersectionObserverEntry[], observer: IntersectionObserver) {
-    console.log('intersection read ', e[0].isIntersecting, e[0].target);
+    console.log('new intersection ', e, e[0].isIntersecting, e[0].target);
     for (let i = 0; i < e.length; i++) {
       if (e[i].isIntersecting) { this.selectedTab = e[i].target.id; return; }
     }
   }
+
 }
