@@ -4,41 +4,41 @@
 
 
 <div class="main-panel" id="main-panel">
+    <div style="width: 100%; height: 48px; position: absolute;" #observationElement></div>
     <ng-container *ngIf="storeDetail">
         <div class="main-content">
             <div class="fixed-shadow" #topBar [class.newClass]="scrolledDown">
                 <div class="margins-left">
-                    <span style="float:left"> 
+                    <span style="float:left">
                         <table>
                             <tr>
-                                <td> 
+                                <td>
                                     <img src="assets/images/ico_arrow_left_white.png" routerLink="/"
-                                    style="cursor: pointer;outline:0;">
+                                        style="cursor: pointer;outline:0;">
                                 </td>
                                 <td align="bottom">
-                                    <span class="fixed-name-scroll" *ngIf="scrolledDown"
-                            style="display: none;">&nbsp; {{storeDetail.name}}</span>
+                                    <span *ngIf="scrolledDown" style="display: inline-block; animation: fadeInUp .2s">&nbsp;
+                                        {{storeDetail.name}}</span>
                                 </td>
                             </tr>
                         </table>
-                        
+
                         <!-- <img src="assets/images/ico_arrow_left_white.png" routerLink="/"
                             style="cursor: pointer;outline:0;"> &nbsp; <span class="fixed-name-scroll"
                             style="display: none;"> {{storeDetail.name}}</span>  -->
                     </span>
                     <span style="float:right">
                         <ul class="menu">
-                            <li style="cursor: pointer;outline:none"> <img
-                                src="assets/images/navbar/ico_heart_trp.png"> 
+                            <li style="cursor: pointer;outline:none"> <img src="assets/images/navbar/ico_heart_trp.png">
                             </li>
                             <li style="cursor: pointer;outline:none;margin-left:16px"> <img
-                                    src="assets/images/navbar/ico_share.png"> 
+                                    src="assets/images/navbar/ico_share.png">
                             </li>
                             <li style="cursor: pointer;outline:none;margin-left:16px"> <img
-                                src="assets/images/navbar/ico_navigation.png"> 
+                                    src="assets/images/navbar/ico_navigation.png">
                             </li>
                         </ul>
-                    </span>        
+                    </span>
                     <!-- <span> <img src="assets/images/ico_arrow_left.png" routerLink="/"
                             style="cursor: pointer;outline:0;"> &nbsp; <span *ngIf="scrolledDown" class="fixed-name-scroll"> {{storeDetail.name}}</span> </span> -->
                 </div>

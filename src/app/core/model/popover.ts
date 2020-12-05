@@ -28,4 +28,5 @@ export interface PopoverConfig {
     onDismiss?: () => void;
     hasBackdrop?: true | false;
     darkBackground?: true | false;
+    outSideClick?: true | false;
 }

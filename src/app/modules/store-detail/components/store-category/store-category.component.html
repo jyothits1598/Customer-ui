@@ -1,32 +1,34 @@
-<div class="detail-items sticky-navbar">
-    <div class="container">
-        <table class="table-responsive">
-           <tr>
-               <td *ngFor="let category of categories; let i = index" style="font-size:14px;font-style: normal;font-weight: 500;white-space: nowrap;"> 
-                    <button class="resnt-menu-top-tabs__button tabs-menu first" (click)="handleTabClick(i); selectedTab=category.name" [ngStyle]="category.name === selectedTab ? {'background': '#353FA8', 'border-radius': '18px', 'color': '#fff', 'padding': '8px 16px'} : {} " > 
-                        {{category.name}} 
-                    </button>
-                </td>
-           </tr>
-        </table>
-    </div>
-</div>
 <div style="background: #f2f2f2;">
+    <div class="detail-items sticky-navbar">
+        <div class="container">
+            <table class="table-responsive">
+                <tr>
+                    <td *ngFor="let category of categories; let i = index"
+                        style="font-size:14px;font-style: normal;font-weight: 500;white-space: nowrap;">
+                        <button class="resnt-menu-top-tabs__button tabs-menu first"
+                            (click)="handleTabClick(i); selectedTab=category.name"
+                            [ngStyle]="category.name === selectedTab ? {'background': '#353FA8', 'border-radius': '18px', 'color': '#fff', 'padding': '8px 16px'} : {} ">
+                            {{category.name}}
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
     <div class="detail-items">
         <div class="container">
-            <div class="label-li" >
+            <div class="label-li">
                 <div class="row">
                     <div class="col-md-12">
-                        <div #intersectionDiv>
-                            <div #categorySections [id]="category.name" *ngFor="let category of categories">
-                                <div class="std-heading-4 first" style="margin-bottom: 16px;margin-top:16px;">
-                                    {{category.name}}
-                                </div>
-                                <div class="row" >
-                                    <div class="col-sm-6 col-lg-6 col-xl-4" style="margin-bottom: 16px;padding-left: 12px;padding-right:12px;"
-                                        *ngFor="let item of category.items">
-                                        <store-item-card [storeItem]="item"></store-item-card>
-                                    </div>
+                        <div #categorySections [id]="category.name" *ngFor="let category of categories;">
+                            <div class="std-heading-4 first" style="margin-bottom: 16px;margin-top:16px;">
+                                {{category.name}}
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-lg-6 col-xl-4"
+                                    style="margin-bottom: 16px;padding-left: 12px;padding-right:12px;"
+                                    *ngFor="let item of category.items">
+                                    <store-item-card [storeItem]="item"></store-item-card>
                                 </div>
                             </div>
                         </div>

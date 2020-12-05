@@ -34,6 +34,7 @@ export class LocationSelectorComponent implements OnInit {
   }
 
   showSelectorModal() {
+    
     this.layoutService.isMobile ? this.modalService.openComponentModal(LocationPanelComponent) : this.popOverService.openComponentPopover(this.popOrigin, LocationPanelComponent, { xPos: 'start', yPos: 'bottom' });
     // this.popOverService.openComponentPopover(this.popOrigin, LocationPanelComponent, { xPos: 'start', yPos: 'bottom' });
   }

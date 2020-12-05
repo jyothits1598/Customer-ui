@@ -9,7 +9,7 @@
     line-height: 24px;
     width: 200px;
 }
-.profile-popup li{
+.profile-popup li {
     list-style-type: none;
     padding: 16px;
     cursor: pointer;
@@ -18,49 +18,60 @@
         border-radius: 8px;
     }
 }
+
 @media only screen and (max-width: 600px) {
     .img-display-desktop {
-        display:none;
+        display: none;
     }
     .img-display-mobile {
-        display:block;
+        display: block;
+    }
+
+    .profile-popup {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        margin-bottom: 56px;
+        border-radius: 0;
     }
 }
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {   
+@media only screen and (min-width: 600px) {
     .img-display-desktop {
-        display:block;
+        display: block;
     }
     .img-display-mobile {
-        display:none;
+        display: none;
     }
-    
-  }
-  /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
-  @media (min-width: 768px) {  
+}
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+@media (min-width: 768px) {
     .img-display-mobile {
-        display:none;
+        display: none;
     }
     .img-display-desktop {
-        display:block;
+        display: block;
     }
-  }
-   
-  /* Large devices (desktops, 992px and up) */
-  @media (min-width: 992px) { 
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
     .img-display-mobile {
-        display:none;
+        display: none;
     }
     .img-display-desktop {
-        display:block;
+        display: block;
     }
-  }
-  /* Extra large devices (large desktops, 1200px and up) */
-  @media (min-width: 1400px) {  
+}
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1400px) {
     .img-display-mobile {
-        display:none;
+        display: none;
     }
     .img-display-desktop {
-        display:block;
+        display: block;
     }
 }
