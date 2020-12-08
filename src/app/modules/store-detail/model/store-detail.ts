@@ -6,6 +6,7 @@ export interface StoreDetail {
     // cuisine: string,
     openingHours: Array<TimeAvailability>
     logo: string,
+    storeImage: string;
     address: string,
     // distance: string,
     // description: string,
@@ -39,6 +40,7 @@ export function ReadStoreDetail(resp: any): StoreDetail {
         // cuisine: data.cuisine_name,
         openingHours: ReadAvailability(data.opening_hours),
         logo: data.store_logo,
+        storeImage: data.store_image,
         address: data.store_address,
         // distance: data.distance,
         // description: data.description,

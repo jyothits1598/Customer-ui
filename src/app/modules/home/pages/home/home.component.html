@@ -12,17 +12,16 @@
 </div> -->
 <div style="margin-top:48px;" *ngIf="isLoggedin$ | async; else bckYellow"></div>
 <ng-template #bckYellow>
-    <div class="cover-bg" >
+    <div class="cover-bg">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="signup-panel">
-                        <div class="std-heading-3" style="margin-bottom: 16px;">
-                            Sign up and get 5% off <br> all food for 30 days
-                        </div>
-                        <input type="button" class="std-button std-button--primary" value="Sign up" routerLink="/auth/signup">
-                        <input type="button" class="std-button std-button--transparency" value="Log in" routerLink="/auth/signin">
-                    </div>
+            <div class="signup-panel">
+                <div class="std-heading-3" style="margin-bottom: 16px;">
+                    Sign up and get $10 off <br> your first order*
+                </div>
+                <input type="button" class="std-button std-button--primary" value="Sign up" routerLink="/auth/signup">
+                <input type="button" class="std-button std-button--transparency" value="Log in" routerLink="/auth/signin">
+                <div style="margin-top:8px;margin-bottom:4px;font-size:12px;font-style: normal;font-weight: normal;">
+                    *New members only. $30 minimum order
                 </div>
             </div>
         </div>

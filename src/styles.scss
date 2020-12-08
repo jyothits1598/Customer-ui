@@ -44,6 +44,9 @@
     .store-list-bg-fv {
         padding: 110px 0;
     }
+    .fixed-shadow {
+        width:100%;
+    }
   }
   /* Small devices (portrait tablets and large phones, 600px and up) */
   @media only screen and (min-width: 600px) {
@@ -70,6 +73,9 @@
     }
     .store-list-bg-fv {
         padding: 110px 0;
+    }
+    .fixed-shadow {
+        width:100%;
     }
   }
   /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
@@ -115,6 +121,9 @@
     }
     .store-list-bg-fv {
         padding: 50px 0;
+    }
+    .fixed-shadow {
+        width:80%;
     }
   }
    
@@ -165,6 +174,9 @@
     .store-list-bg-fv {
         padding: 50px 0;
     }
+    .fixed-shadow {
+        width:80%;
+    }
   }
   /* Extra large devices (large desktops, 1200px and up) */
   @media (min-width: 1400px) {  
@@ -213,10 +225,13 @@
     .store-list-bg-fv {
         padding: 50px 0;
     }
+    .fixed-shadow {
+        width:80%;
+    }
   }
   .signup-panel {
     // background: var(--color-pending);
-    padding: 24px 30px 24px 30px;
+    padding: 24px 30px 0 30px;
     // border-radius: 8px;
     background-image: url('assets/images/banner-tsp.png');
     background-position: left;
