@@ -5,9 +5,9 @@
                 <tr>
                     <td *ngFor="let category of categories; let i = index"
                         style="font-size:14px;font-style: normal;font-weight: 500;white-space: nowrap;">
-                        <button class="resnt-menu-top-tabs__button tabs-menu first"
-                            (click)="handleTabClick(i); selectedTab=category.name"
-                            [ngStyle]="category.name === selectedTab ? {'background': '#353FA8', 'border-radius': '18px', 'color': '#fff', 'padding': '8px 16px'} : {} ">
+                        <button class="pill-button tabs-menu first"
+                            [ngStyle]="category === currentCategory ? {'background': '#353FA8', 'color': '#fff'} : {} "
+                            (click)="handleTabClick(i); currentCategory=category">
                             {{category.name}}
                         </button>
                     </td>
@@ -20,7 +20,8 @@
             <div class="label-li">
                 <div class="row">
                     <div class="col-md-12">
-                        <div #categorySections [id]="category.name" *ngFor="let category of categories;">
+                        <div #categorySections [attr.data-category-index]="i"
+                            *ngFor="let category of categories;let i = index">
                             <div class="std-heading-4 first" style="margin-bottom: 16px;margin-top:16px;">
                                 {{category.name}}
                             </div>

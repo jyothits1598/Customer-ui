@@ -11,7 +11,7 @@ export class StoreCategoryComponent implements OnInit, AfterViewInit {
   @ViewChildren('categorySections') sections: QueryList<ElementRef>;
 
   intersectionObserver: IntersectionObserver;
-  selectedTab: string;
+  currentCategory: StoreCategory;
 
   constructor() { }
 
@@ -20,7 +20,7 @@ export class StoreCategoryComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.selectedTab = this.categories[0].name;
+    this.currentCategory = this.categories[0];
   }
 
 
@@ -34,20 +34,45 @@ export class StoreCategoryComponent implements OnInit, AfterViewInit {
       rootMargin: '0px 0px 0px 0px',
       threshold: 0.75
     }
-    // if (this.categories.length > 0) {
-    // setTimeout(() => {
     this.intersectionObserver = new IntersectionObserver(this.handleInterSection.bind(this), config);
 
     this.sections.forEach(ne => this.intersectionObserver.observe(ne.nativeElement))
-    // }, 0);
-    // }
   }
 
   handleInterSection(e: IntersectionObserverEntry[], observer: IntersectionObserver) {
-    console.log('new intersection ', e, e[0].isIntersecting, e[0].target);
-    for (let i = 0; i < e.length; i++) {
-      if (e[i].isIntersecting) { this.selectedTab = e[i].target.id; return; }
+    if (this.atBottom(e[0])) {
+      if (e[0].isIntersecting) this.currentCategory = this.categories[this.getCategoryIndex((<HTMLElement>e[0].target))];
+      else this.currentCategory = this.categories[this.getCategoryIndex((<HTMLElement>e[0].target)) - 1]
     }
+
   }
+
+  getCategoryIndex(element: HTMLElement) {
+    return parseInt(element.dataset.categoryIndex);
+  }
+
+  atBottom(e: IntersectionObserverEntry) {
+    return e.boundingClientRect.top == e.intersectionRect.top;
+  }
+
+  // atTop(e: IntersectionObserverEntry) {
+  //   return e.boundingClientRect.top < e.intersectionRect.top;
+  // }
+
+  // if(this.atTop(e[0])){
+  //   if(e[0].isIntersecting) console.log('entered from top')
+  //   else console.log('leaving from top')
+  // }else{
+  //   if(e[0].isIntersecting) console.log('entered from bottom')
+  //   else console.log('leaving from bottom')
+  // } 
+  // for (let i = 0; i < e.length; i++) {
+  //   if (e[i].isIntersecting) { this.currentCategory =  this.categories[this.getCategoryIndex((<HTMLElement>e[0].target))];return; }
+  // }
+
+  //   if(e[0].isIntersecting && this.atBottom(e[0])) this.currentCategory = this.categories[this.getCategoryIndex((<HTMLElement>e[0].target))];
+  //     else {
+  //   if (this.atBottom(e[0])) this.currentCategory = this.categories[this.getCategoryIndex((<HTMLElement>e[0].target)) - 1]
+  // }
 
 }
