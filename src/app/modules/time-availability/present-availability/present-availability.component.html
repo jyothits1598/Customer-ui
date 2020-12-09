@@ -11,11 +11,11 @@
     </table>
 </span>
 <ng-template #closed>
-    <span class="sub-name float-right"> 
+    <span class="sub-name float-right">
         <table>
             <tr>
                 <td style="padding-top:1px;padding-right: 6px;">
-                    Closed
+                    <next-availability [availability]="_availability"></next-availability>
                 </td>
                 <td>
                     <img src="assets/images/ico_status_overdue.png" width="12px" height="12px">

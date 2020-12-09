@@ -28,15 +28,14 @@ export class PresentAvailabilityComponent implements OnInit {
 
   gethours(time: string) {
     let hours = parseInt(time.substr(0, 2));
-    if (time.substr(5, 2) == 'PM' && hours !== 12) {
-      return hours + 12;
-    } else return hours;
+    hours = hours % 12;
+    return time.substr(5, 2) === 'AM' ? hours : hours + 12;
   }
 
   checkAvailability(availability: TimeAvailability): boolean {
     if (availability.markedAsClose) return false;
 
-    let day = this.weakDayToNumber(availability.day);
+    let day = this.weekDayToNumber(availability.day);
     // switch (availability.day.toLowerCase()) {
     //   case 'sunday':
     //     day = 0;
@@ -74,7 +73,7 @@ export class PresentAvailabilityComponent implements OnInit {
     }
   }
 
-  weakDayToNumber(day: string) {
+  weekDayToNumber(day: string) {
     switch (day.toLowerCase()) {
       case 'sunday':
         return 0;
