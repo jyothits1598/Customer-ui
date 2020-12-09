@@ -48,7 +48,7 @@ export function ReadAvailability(availabilityBackend: any): Array<TimeAvailabili
         };
         result.push(newAvai)
     }
-    // result.sort(TimeAvailabilityComp);
+    result.sort(TimeAvailabilityComp);
     return result;
 }
 
