@@ -38,7 +38,7 @@ export function TimeAvailabilityComp(first: TimeAvailability, second: TimeAvaila
 export function ReadAvailability(availabilityBackend: any): Array<TimeAvailability> {
     let result: Array<TimeAvailability> = []
     for (let i = 0; i < availabilityBackend.length; i++) {
-        if (availabilityBackend[i].marked_as_closed) continue;
+        // if (availabilityBackend[i].marked_as_closed) continue;
         let a = availabilityBackend[i];
         let newAvai = <TimeAvailability>{
             id: a.menu_timings_id,

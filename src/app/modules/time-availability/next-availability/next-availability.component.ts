@@ -19,7 +19,7 @@ export class NextAvailabilityComponent implements OnInit {
   ngOnInit(): void {
     if (this.availability.length) {
       for (let i = 0; i < this.availability.length; i++) {
-
+        if (this.availability[i].markedAsClose) continue;
         let todayDay = this.now.getDay();
         if (todayDay === this.weekDayToNumber(this.availability[i].day)) {
           let endTime = new Date();
