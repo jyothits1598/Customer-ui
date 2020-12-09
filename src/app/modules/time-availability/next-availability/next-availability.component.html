@@ -1,6 +1,19 @@
 <ng-container *ngIf="nextAvailability; else defaultMsg">
-    Opens {{nextAvailability.day}} {{nextAvailability.startTime}} - {{nextAvailability.endTime}}
+    Opens 
+    <span [ngSwitch]="dayDiff">
+        <ng-container *ngSwitchCase="0">
+            today
+        </ng-container>
+        <ng-container *ngSwitchCase="1">
+            tomorrow
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+            {{nextAvailability.day}}
+        </ng-container>
+    </span>
+    {{nextAvailability.startTime}}
 </ng-container>
+
 
 
 <ng-template #defaultMsg>
