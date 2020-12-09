@@ -4,7 +4,8 @@
             <table>
                 <tr>
                     <td valign="middle">
-                        <img src="assets/images/Rectangle 4.png" class="profile-image" />
+                        <img [src]="store.logo || 'assets/svg/null_logo.svg'" class="profile-image">
+                        <!-- <img src="assets/images/Rectangle 4.png" class="profile-image" /> -->
                     </td>
                     <td style="padding-left: 8px;width:100%">
                         <table style="margin-bottom: 3px;">
@@ -24,7 +25,7 @@
         </div>
         <div class="well main-form">
             <div class="store-image">
-                <img *ngIf="store.logo" [src]="store.logo">
+                <img [src]="store.storeImage || 'assets/images/Area.png' ">
             </div>
         </div>
         <div class="content-card">
