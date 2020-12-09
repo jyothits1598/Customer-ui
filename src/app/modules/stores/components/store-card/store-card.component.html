@@ -1,6 +1,6 @@
 <div class="store-cards store-cards--shadow">
-    <div  [routerLink]="'/restaurants/'+store.id" style="cursor:pointer;outline:0;" >
-        <div class="store-cards store-cards--header" >
+    <div [routerLink]="'/restaurants/'+store.id" style="cursor:pointer;outline:0;">
+        <div class="store-cards store-cards--header">
             <table>
                 <tr>
                     <td valign="middle">
@@ -11,14 +11,14 @@
                         <table style="margin-bottom: 3px;">
                             <tr>
                                 <td>
-                                    <div class="store-name first"> 
-                                    {{ store.name | slice:0:30 }}{{store.name.length > 30 ? '. . .' : ''}}
+                                    <div class="store-name first">
+                                        {{ store.name | slice:0:30 }}{{store.name.length > 30 ? '. . .' : ''}}
                                     </div>
                                 </td>
                             </tr>
                         </table>
-                        <span class="sub-name float-left"> {{ store.distance | number:'1.0-0'}}KM away </span>
-                    <present-availability [availability]="store.openingHours"></present-availability>
+                        <span class="sub-name float-left"> {{ store.distance }} away </span>
+                        <present-availability [availability]="store.openingHours"></present-availability>
                     </td>
                 </tr>
             </table>
@@ -70,16 +70,16 @@
         <div class="d-flex justify-content-between chating-card--chat">
             <span>
                 <ul class="chat-icons">
-                    <li> <store-heart [store]="{id: store.id, isFavourite: store.isFavourite}"></store-heart> </li>
+                    <li>
+                        <store-heart [store]="{id: store.id, isFavourite: store.isFavourite}"></store-heart>
+                    </li>
                     <li> <img src="assets/images/share.png"> </li>
                     <li> <img src="assets/images/ico_navigation_black.png"> </li>
                 </ul>
             </span>
             <!-- <span>
                 <p class="comment-text"><span> 9 </span> comments </p>
-            </span> --> 
+            </span> -->
         </div>
     </div>
 </div>
-
-  

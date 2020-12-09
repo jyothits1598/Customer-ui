@@ -1,1 +1,8 @@
-<p>next-availability works!</p>
+<ng-container *ngIf="nextAvailability; else defaultMsg">
+    Opens {{nextAvailability.day}} {{nextAvailability.startTime}} - {{nextAvailability.endTime}}
+</ng-container>
+
+
+<ng-template #defaultMsg>
+    <span>Opening hours not availabile</span>
+</ng-template>
