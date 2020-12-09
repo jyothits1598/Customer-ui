@@ -8,6 +8,7 @@ import { StoreItemCardComponent } from './components/store-item-card/store-item-
 import { TimeAvailabilityModule } from '../time-availability/time-availability.module';
 import { StoreHeartModule } from '../store-heart/store-heart.module';
 import { StoreItemDetailModule } from '../store-item-detail/store-item-detail.module';
+import { LazyImageDirective } from './directives/lazy-image.directive';
 
 const routes: Routes = [
   {
@@ -17,7 +18,7 @@ const routes: Routes = [
 ]
 
 @NgModule({
-  declarations: [StoreDetailComponent, StoreCategoryComponent, StoreItemCardComponent],
+  declarations: [StoreDetailComponent, StoreCategoryComponent, StoreItemCardComponent, LazyImageDirective],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

@@ -27,9 +27,20 @@ export class PresentAvailabilityComponent implements OnInit {
 
   gethours(time: string) {
     let hours = parseInt(time.substr(0, 2));
-    if (time.substr(5, 2) == 'PM' && hours !== 12) {
-      return hours + 12;
-    } else return hours;
+    // if (time.substr(5, 2) == 'PM' && hours !== 12) {
+    //   return hours + 12;
+    // } else {
+    //   if(hours)
+    //   return hours;
+    // }
+
+    if (time.substr(5, 2) === 'PM') {
+      if (hours === 12) return 12;
+      else return hours + 12;
+    } else {
+      if (hours === 12) return 0;
+      else return ;
+    }
   }
 
   checkAvailability(availability: TimeAvailability): boolean {
