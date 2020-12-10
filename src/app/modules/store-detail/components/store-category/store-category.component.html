@@ -1,5 +1,5 @@
 <div style="background: #f2f2f2;">
-    <div class="detail-items sticky-navbar">
+    <div class="detail-items sticky-navbar" [class.sticky-navbar__visible]="scrolledDown">
         <div class="container">
             <table class="table-responsive">
                 <tr>
@@ -7,7 +7,7 @@
                         style="font-size:14px;font-style: normal;font-weight: 500;white-space: nowrap;">
                         <button class="pill-button tabs-menu first"
                             [ngStyle]="category === currentCategory ? {'background': '#353FA8', 'color': '#fff'} : {} "
-                            (click)="handleTabClick(i); currentCategory=category">
+                            (click)="handleTabClick(i)">
                             {{category.name}}
                         </button>
                     </td>

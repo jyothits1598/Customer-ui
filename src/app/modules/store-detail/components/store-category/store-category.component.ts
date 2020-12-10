@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, QueryList, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
 import { StoreCategory } from 'src/app/modules/store-detail/model/store-detail';
 
 @Component({
@@ -8,10 +8,12 @@ import { StoreCategory } from 'src/app/modules/store-detail/model/store-detail';
 })
 export class StoreCategoryComponent implements OnInit, AfterViewInit {
   @Input() categories: Array<StoreCategory>;
+  @Input() scrolledDown: boolean;
   @ViewChildren('categorySections') sections: QueryList<ElementRef>;
 
   intersectionObserver: IntersectionObserver;
   currentCategory: StoreCategory;
+  pauseObservation: boolean;
 
   constructor() { }
 
@@ -25,7 +27,12 @@ export class StoreCategoryComponent implements OnInit, AfterViewInit {
 
 
   handleTabClick(index: number) {
-    this.sections.toArray()[index].nativeElement.scrollIntoView({});
+    this.pauseObservation = true;
+    this.currentCategory = this.categories[index];
+    this.sections.toArray()[index].nativeElement.scrollIntoView(false);
+    setTimeout(() => {
+      this.pauseObservation = false;
+    }, 500);
   }
 
   initiateObservation() {
@@ -40,7 +47,7 @@ export class StoreCategoryComponent implements OnInit, AfterViewInit {
   }
 
   handleInterSection(e: IntersectionObserverEntry[], observer: IntersectionObserver) {
-    if (this.atBottom(e[0])) {
+    if (!this.pauseObservation && this.atBottom(e[0])) {
       if (e[0].isIntersecting) this.currentCategory = this.categories[this.getCategoryIndex((<HTMLElement>e[0].target))];
       else this.currentCategory = this.categories[this.getCategoryIndex((<HTMLElement>e[0].target)) - 1]
     }
