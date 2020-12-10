@@ -18,7 +18,6 @@ export class GeoLocationService {
   constructor(private storage: StorageService,
   ) {
     this.locationHistory = this.storage.get(locationHistoryIdentifier) || [];
-    let locat = this.storage.get(currentlocationIdentifier);
 
     let currentLocation = this.storage.get(currentlocationIdentifier) || {
       address: { locality: "Brisbane", fullAddress: "Brisbane QLD, Australia" },

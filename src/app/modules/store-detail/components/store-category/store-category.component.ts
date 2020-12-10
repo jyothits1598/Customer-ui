@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, QueryList, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
 import { StoreCategory } from 'src/app/modules/store-detail/model/store-detail';
 
 @Component({
@@ -8,21 +8,17 @@ import { StoreCategory } from 'src/app/modules/store-detail/model/store-detail';
 })
 export class StoreCategoryComponent implements OnInit, AfterViewInit {
   @Input() categories: Array<StoreCategory>;
+  @Input() scrolledDown: boolean;
   @ViewChildren('categorySections') sections: QueryList<ElementRef>;
-  @ViewChild('observationElement', { read: ElementRef }) obsElement: ElementRef;
 
   intersectionObserver: IntersectionObserver;
   currentCategory: StoreCategory;
-  scrolledDown: boolean;
+  pauseObservation: boolean;
+
   constructor() { }
 
 ngAfterViewInit(): void {
   this.initiateObservation();
-    let obs = new IntersectionObserver((entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
-      if (entries[0].isIntersecting) this.scrolledDown = false;
-      else this.scrolledDown = true;
-    });
-    obs.observe(this.obsElement.nativeElement);
   }
   ngOnInit(): void {
     this.currentCategory = this.categories[0];
@@ -30,7 +26,12 @@ ngAfterViewInit(): void {
 
 
   handleTabClick(index: number) {
-    this.sections.toArray()[index].nativeElement.scrollIntoView({});
+    this.pauseObservation = true;
+    this.currentCategory = this.categories[index];
+    this.sections.toArray()[index].nativeElement.scrollIntoView(false);
+    setTimeout(() => {
+      this.pauseObservation = false;
+    }, 500);
   }
 
   initiateObservation() {
@@ -45,7 +46,7 @@ ngAfterViewInit(): void {
   }
 
   handleInterSection(e: IntersectionObserverEntry[], observer: IntersectionObserver) {
-    if (this.atBottom(e[0])) {
+    if (!this.pauseObservation && this.atBottom(e[0])) {
       if (e[0].isIntersecting) this.currentCategory = this.categories[this.getCategoryIndex((<HTMLElement>e[0].target))];
       else this.currentCategory = this.categories[this.getCategoryIndex((<HTMLElement>e[0].target)) - 1]
     }

@@ -37,14 +37,16 @@ export function TimeAvailabilityComp(first: TimeAvailability, second: TimeAvaila
 
 export function ReadAvailability(availabilityBackend: any): Array<TimeAvailability> {
     let result: Array<TimeAvailability> = []
-    for (const a in availabilityBackend) {
+    for (let i = 0; i < availabilityBackend.length; i++) {
+        // if (availabilityBackend[i].marked_as_closed) continue;
+        let a = availabilityBackend[i];
         let newAvai = <TimeAvailability>{
-            id: availabilityBackend[a].menu_timings_id,
-            day: availabilityBackend[a].days,
+            id: a.menu_timings_id,
+            day: a.days,
             //padding if time is not in format
-            startTime: availabilityBackend[a].start_time.length === 6 ? (availabilityBackend[a].start_time) : availabilityBackend[a].start_time,
-            endTime: availabilityBackend[a].end_time.length === 6 ? (availabilityBackend[a].end_time) : availabilityBackend[a].end_time,
-            markedAsClose: (availabilityBackend[a].marked_as_closed ? true : false)
+            startTime: a.start_time.length === 6 ? ('0' + a.start_time) : a.start_time,
+            endTime: a.end_time.length === 6 ? ('0' + a.end_time) : a.end_time,
+            markedAsClose: (a.marked_as_closed ? true : false)
         };
         result.push(newAvai)
     }
