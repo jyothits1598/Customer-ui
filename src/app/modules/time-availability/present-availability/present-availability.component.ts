@@ -14,7 +14,6 @@ export class PresentAvailabilityComponent implements OnInit {
 
   constructor() { }
   @Input() set availability(availability: Array<TimeAvailability>) {
-    console.log(availability);
     if (availability) {
       this._availability = availability;
     }

@@ -9,16 +9,21 @@ import { StoreCategory } from 'src/app/modules/store-detail/model/store-detail';
 export class StoreCategoryComponent implements OnInit, AfterViewInit {
   @Input() categories: Array<StoreCategory>;
   @ViewChildren('categorySections') sections: QueryList<ElementRef>;
+  @ViewChild('observationElement', { read: ElementRef }) obsElement: ElementRef;
 
   intersectionObserver: IntersectionObserver;
   currentCategory: StoreCategory;
-
+  scrolledDown: boolean;
   constructor() { }
 
-  ngAfterViewInit(): void {
-    this.initiateObservation();
+ngAfterViewInit(): void {
+  this.initiateObservation();
+    let obs = new IntersectionObserver((entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
+      if (entries[0].isIntersecting) this.scrolledDown = false;
+      else this.scrolledDown = true;
+    });
+    obs.observe(this.obsElement.nativeElement);
   }
-
   ngOnInit(): void {
     this.currentCategory = this.categories[0];
   }

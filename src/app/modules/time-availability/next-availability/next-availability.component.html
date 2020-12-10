@@ -1,5 +1,5 @@
 <ng-container *ngIf="nextAvailability; else defaultMsg">
-    Opens {{nextAvailability.day}} {{nextAvailability.startTime}} - {{nextAvailability.endTime}}
+    Closed - Opens {{ nextAvailability.startTime }} <span style="text-transform: capitalize;"> {{nextAvailability.day | slice:0:3}} </span>
 </ng-container>
 
 
