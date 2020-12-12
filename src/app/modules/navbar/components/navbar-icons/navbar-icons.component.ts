@@ -13,6 +13,7 @@ export class NavbarIconsComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedin$ = this.authService.isLoggedIn$();
+    console.log(this.isLoggedin$);
   }
 
 }

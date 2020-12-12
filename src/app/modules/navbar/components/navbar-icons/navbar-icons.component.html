@@ -3,11 +3,13 @@
         <img class="a1 img-display-desktop" src="assets/images/navbar/ico_home.png">
         <img class="img-display-mobile" src="assets/images/profile/ico_home.png">
     </li>
-    <li class="auto-width" routerLink="/" style="cursor: pointer;outline:none"> 
-        <img class="a1 img-display-desktop" src="assets/images/navbar/ico_account.png">
-        <img class="img-display-mobile" src="assets/images/profile/ico_account.png">
-    </li>
-    <ng-container *ngIf="isLoggedin$ | async">
+    <ng-template #block>
+        <li class="auto-width" routerLink="/auth/signup" style="cursor: pointer;outline:none">  
+            <img class="a1 img-display-desktop" src="assets/images/navbar/ico_account.png">
+            <img class="img-display-mobile" src="assets/images/profile/ico_account.png">
+        </li>
+    </ng-template>
+    <ng-container *ngIf="isLoggedin$ | async; else block">
         <li class="auto-width" routerLink="/favourites" style="cursor: pointer;outline:none"> 
             <img class="a1 img-display-desktop" src="assets/images/navbar/ico_heart.png"> 
             <img class="img-display-mobile" src="assets/images/profile/ico_heart.png"> 

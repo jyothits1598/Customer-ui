@@ -1,6 +1,9 @@
 <ng-container *ngIf="nextAvailability; else defaultMsg">
     Closed - Opens {{nextAvailability.startTime}}
-    <span [ngSwitch]="dayDiff">
+    <span style="text-transform: capitalize;"> 
+        {{nextAvailability.day | slice:0:3}}
+    </span>
+    <!-- <span [ngSwitch]="dayDiff">
         <ng-container *ngSwitchCase="0">
             today
         </ng-container>
@@ -13,7 +16,7 @@
             </span>
         </ng-container>
     </span>
-    
+     -->
 </ng-container>
 
 
