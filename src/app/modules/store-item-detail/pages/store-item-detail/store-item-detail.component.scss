@@ -43,9 +43,6 @@
 }
 
 .modal-body {
-    // min-height: 400px;
-    // max-height: calc(90vh - 108px);
-    min-height: 600px;
     overflow-y: auto;
     transition: max-height .1s;
 }

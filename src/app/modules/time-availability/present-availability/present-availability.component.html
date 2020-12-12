@@ -1,11 +1,11 @@
 <span class="sub-name float-right" *ngIf="openTimings; else closed">
     <table>
         <tr>
-            <td style="padding-top:1px;padding-right: 6px;">
+            <td style="padding-top:1px;padding-right: 4px;">
                 Open {{openTimings.startTime}}-{{openTimings.endTime}}
             </td>
             <td>
-                <img src="assets/images/ico_circle_filled_small.png" width="12px" height="12px">
+                <img src="assets/images/ico_circle_filled_small.png" >
             </td>
         </tr>
     </table>
@@ -14,11 +14,11 @@
     <span class="sub-name float-right">
         <table>
             <tr>
-                <td style="padding-top:1px;padding-right: 6px;">
+                <td style="padding-top:1px;padding-right:4px;">
                     <next-availability [availability]="_availability"></next-availability>
                 </td>
                 <td>
-                    <img src="assets/images/ico_status_overdue.png" width="12px" height="12px">
+                    <img src="assets/images/ico_status_overdue.png" width="16px" height="16px">
                 </td>
             </tr>
         </table>

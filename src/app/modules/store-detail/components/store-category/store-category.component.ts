@@ -17,10 +17,9 @@ export class StoreCategoryComponent implements OnInit, AfterViewInit {
 
   constructor() { }
 
-  ngAfterViewInit(): void {
-    this.initiateObservation();
+ngAfterViewInit(): void {
+  this.initiateObservation();
   }
-
   ngOnInit(): void {
     this.currentCategory = this.categories[0];
   }

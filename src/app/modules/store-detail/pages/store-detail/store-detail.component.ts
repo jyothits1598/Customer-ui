@@ -4,7 +4,6 @@ import { filter, finalize, map, mergeMap } from 'rxjs/operators';
 import { ModalService } from 'src/app/core/services/modal.service';
 import { StoreDetail, StoreItem } from 'src/app/modules/store-detail/model/store-detail';
 import { StoreDetailDataService } from '../../services/store-detail-data.service';
-import * as $ from 'jquery'
 import { GeoLocationService } from 'src/app/core/services/geo-location.service';
 import { combineLatest, CombineLatestSubscriber } from 'rxjs/internal/observable/combineLatest';
 import { forkJoin, zip } from 'rxjs';
