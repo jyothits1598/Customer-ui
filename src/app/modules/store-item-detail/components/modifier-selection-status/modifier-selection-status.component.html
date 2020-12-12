@@ -1,1 +1,7 @@
-<p>modifier-selection-status works!</p>
+<div [@selectionState]="animationState" class="required">
+    <img src="assets/images/ico_check_small.png" class="required__icon--success">
+    <img src="assets/images/ico_check_small.png" class="required__icon--success">
+    <span class="required__text">Required</span>
+</div>
+{{status | json}}
+<!-- [ngStyle]="{background: status.valid ? '#FFBF42' : '#E2FFBC'}" -->

@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 export enum ExternalLibraries {
-  GoogleLogin = 'https://apis.google.com/js/platform.js'
+  GoogleLogin = 'https://apis.google.com/js/platform.js',
+  AppleLogin = 'https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js'
 }
 
 @Injectable({

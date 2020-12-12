@@ -5,7 +5,8 @@
     "types": [
       "googlemaps",
       "gapi",
-      "gapi.auth2"
+      "gapi.auth2",
+      "apple-signin-api"
     ],
     "typeRoots": [ "../node_modules/@types" ],
     "baseUrl": "./",
