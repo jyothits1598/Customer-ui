@@ -2,43 +2,45 @@
     <div class="d-flex justify-content-between" style="margin-bottom:20px;">
         <div class="std-heading-4">
             {{modifier.name}} <br>
-            <span class="small-content" *ngIf="modifier.minSelection > 0; else optionalChoice"> 
+            <span class="small-content" *ngIf="modifier.minSelection > 0; else optionalChoice">
                 Choose {{modifier.minSelection}} to {{modifier.maxSelection}}
             </span>
         </div>
         <div *ngIf="modifier.minSelection > 0; else optional">
-            <span class="required" [ngStyle]="{background: optionControls.invalid ? '#FFBF42' : '#E2FFBC'}"> <img [src]="optionControls.invalid ? '' : 'assets/images/ico_check_small.png'"> Required </span>
+            <modifier-selection-status [status]="{valid: optionControl.valid, touched: optionControl.touched}"></modifier-selection-status>
         </div>
     </div>
-    <table style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;" *ngFor="let option of modifier.options; let i = index">
-        <tr>
-            <td> 
-                <div class="form-check" >
-                    <label class="form-check-label lable-text">
-                    <input type="checkbox" class="form-check-input" [id]="modifier.name+i" [formControl]="optionControls.at(i)" (change)="handleChange()">
-                        <span [for]="modifier.name+i"> {{option.name}} </span>
-                    </label>
-                </div>
-            </td>
-            <td align="right"> 
-                <span class="small-content small-content__price" > 
-                    +${{option.price}}
-                </span>
-            </td>
-        </tr>
-    </table>
-</div>
+    <table style=" box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;"
+                *ngFor="let option of modifier.options; let i = index">
+                <tr>
+                    <td>
+                        <div class="form-check">
+                            <label class="form-check-label lable-text">
+                                <input type="checkbox" class="form-check-input" [id]="modifier.name+i"
+                                    [formControl]="optionControls.at(i)" (change)="handleChange()">
+                                <span [for]="modifier.name+i"> {{option.name}} </span>
+                            </label>
+                        </div>
+                    </td>
+                    <td align="right">
+                        <span class="small-content small-content__price">
+                            +${{option.price}}
+                        </span>
+                    </td>
+                </tr>
+                </table>
+        </div>
 
-<ng-template #optional>
-    <div>
-        <span class="required" style="background: #fafafa"> Optional </span>
-    </div>
-</ng-template>
+        <ng-template #optional>
+            <div>
+                <span class="required" style="background: #fafafa"> Optional </span>
+            </div>
+        </ng-template>
 
-<ng-template #optionalChoice>
-    <span class="small-content"> Choose 1 to {{modifier.maxSelection}} </span>
-</ng-template>
-<!-- <button (click)="optionControls.markAllAsTouched()">mark as touched</button> -->
-<!-- <button (click)="this.setupAccessor()">show control</button> -->
-<!-- <input type="text" [formControl]="testControl">
+        <ng-template #optionalChoice>
+            <span class="small-content"> Choose 1 to {{modifier.maxSelection}} </span>
+        </ng-template>
+        <!-- <button (click)="optionControls.markAllAsTouched()">mark as touched</button> -->
+        <!-- <button (click)="this.setupAccessor()">show control</button> -->
+        <!-- <input type="text" [formControl]="testControl">
 <div>{{testControl.value | json}}</div> -->

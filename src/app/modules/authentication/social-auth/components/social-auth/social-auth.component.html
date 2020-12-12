@@ -1,15 +1,17 @@
 <div [style.filter]="inProgress ? 'opacity(0.5)': ''">
-    <button [disabled]="inProgress" class="std-button std-button--transparency1"
-        (click)="googleSignin()" style="margin-bottom: 16px;color:#1a1a1a;">
-        <img src="assets/images/google.png">&nbsp; <span *ngIf="signup_active" > Continue </span><span *ngIf="signin_active" > Log in </span>with Google
+    <button [disabled]="inProgress" class="std-button std-button--transparency1" (click)="googleSignin()"
+        style="margin-bottom: 16px;color:#1a1a1a;">
+        <img src="assets/images/google.png">&nbsp; <span> {{ isLogin? 'Log In ' : 'Continue '}}
+        </span>with Google
         <img src="assets/images/loader.gif" *ngIf="googleLoading" style="width: 24px;">
     </button>
-    <button [disabled]="inProgress" (click)="facebookSignin()"
-        class="std-button std-button--facebook" style="margin-bottom: 16px;">
-        <img src="assets/images/ico_facebook.png">&nbsp; <span *ngIf="signup_active" > Continue </span><span *ngIf="signin_active" > Log in </span>with Facebook
+    <button [disabled]="inProgress" (click)="facebookSignin()" class="std-button std-button--facebook"
+        style="margin-bottom: 16px;">
+        <img src="assets/images/ico_facebook.png">&nbsp; <span> {{ isLogin? 'Log In ' : 'Continue '}} </span>with
+        Facebook
         <img src="assets/images/loader.gif" *ngIf="facebookLoading" style="width: 24px;">
     </button>
-    <button class="std-button std-button--apple" style="margin-bottom: 24px;">
-        <img src="assets/images/ico_apple.png">&nbsp; <span *ngIf="signup_active" > Continue </span><span *ngIf="signin_active" > Log in </span>with Apple
+    <button class="std-button std-button--apple" style="margin-bottom: 24px;" (click)="appleSignIn()">
+        <img src="assets/images/ico_apple.png">&nbsp; <span> {{ isLogin? 'Log In ' : 'Continue '}} </span>with Apple
     </button>
 </div>

@@ -65,7 +65,6 @@ export class StoreDetailComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.routeQueryparamsSubs = this.route.queryParams.subscribe((qParams) => {
       this.selecteditemId = +qParams.i;
-      console.log('')
     })
 
     // this.geoLoc.userLocation().subscribe((loc) => { console.log(loc) })

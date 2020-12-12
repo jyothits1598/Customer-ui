@@ -46,7 +46,7 @@ export class StoreCategoryComponent implements OnInit, AfterViewInit {
     this.sections.forEach(ne => this.intersectionObserver.observe(ne.nativeElement))
   }
 
-  handleInterSection(e: IntersectionObserverEntry[], observer: IntersectionObserver) {
+  handleInterSection(e: IntersectionObserverEntry[]) {
     if (!this.pauseObservation && this.atBottom(e[0])) {
       if (e[0].isIntersecting) this.currentCategory = this.categories[this.getCategoryIndex((<HTMLElement>e[0].target))];
       else this.currentCategory = this.categories[this.getCategoryIndex((<HTMLElement>e[0].target)) - 1]
@@ -59,7 +59,7 @@ export class StoreCategoryComponent implements OnInit, AfterViewInit {
   }
 
   atBottom(e: IntersectionObserverEntry) {
-    return e.boundingClientRect.top == e.intersectionRect.top;
+    return e.boundingClientRect.top === e.intersectionRect.top;
   }
 
   // atTop(e: IntersectionObserverEntry) {
