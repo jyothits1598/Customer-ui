@@ -36,10 +36,7 @@ export class StoreItemModifierComponent implements OnChanges, ControlValueAccess
 
   }
 
-  debug() {
-    console.log(this.controlDir);
-  }
-
+  
   ngOnChanges(changes: SimpleChanges): void {
     let controls: Array<FormControl> = this.modifier.options.map(opt => { return new FormControl(false) });
     this.optionControls = new FormArray(controls, [this.minNumberValidator(this.modifier.minSelection)]);
@@ -112,7 +109,7 @@ export class StoreItemModifierComponent implements OnChanges, ControlValueAccess
   }
 
   markAsTouched() {
-    console.log('mark as touched called');
+    // console.log('mark as touched called');
     this.optionControls.markAllAsTouched();
   }
 }
