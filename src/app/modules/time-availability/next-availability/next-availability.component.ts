@@ -17,6 +17,7 @@ export class NextAvailabilityComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log('oninit', this.availability);
     if (this.availability.length) {
       for (let i = 0; i < this.availability.length; i++) {
         if (this.availability[i].markedAsClose) continue;
@@ -24,11 +25,16 @@ export class NextAvailabilityComponent implements OnInit {
         if (todayDay === this.weekDayToNumber(this.availability[i].day)) {
           let endTime = new Date();
           endTime.setHours(this.gethours(this.availability[i].endTime), parseInt(this.availability[i].endTime.substr(3, 2)), 0);
+
           if (endTime > this.now) { this.nextAvailability = this.availability[i]; break; }
         }
         if (todayDay < this.weekDayToNumber(this.availability[i].day)) { this.nextAvailability = this.availability[i]; break; }
       }
-      if (!this.nextAvailability) this.nextAvailability = this.availability[0];
+
+      if (!this.nextAvailability) {
+        console.log('finally assining first', this.availability);
+        this.nextAvailability = this.availability[0];
+      }
     }
   }
 

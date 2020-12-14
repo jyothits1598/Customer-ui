@@ -10,17 +10,17 @@ export interface TimeAvailability {
 
 export function TimeAvailabilityComp(first: TimeAvailability, second: TimeAvailability) {
     const dayValue = {
-        monday: 1
+        sunday: 0
+        , monday: 1
         , tuesday: 2
         , wednesday: 3
         , thursday: 4
         , friday: 5
         , saturday: 6
-        , sunday: 7
     }
 
     //are first and second different days
-    if (dayValue[first.day] - dayValue[second.day]) return dayValue[first.day] - dayValue[second.day];
+    if (dayValue[first.day] - dayValue[second.day]) return dayValue[second.day] - dayValue[first.day];
 
     //compare start-times
     let firstSTime = new Date('1/1/0001 ' + first.startTime.substr(0, 5) + ':00 ' + first.startTime.substr(5, 2)).getTime();
@@ -44,7 +44,7 @@ export function ReadAvailability(availabilityBackend: any): Array<TimeAvailabili
             id: a.menu_timings_id,
             day: a.days,
             //padding if time is not in format
-            startTime: a.start_time.length === 6 ? ('0' + a.start_time) : a.start_time,
+            startTime: a.start_time.length === 6 ? ('0' + a.start_time).toLowerCase() : a.start_time.toLowerCase(),
             endTime: a.end_time.length === 6 ? ('0' + a.end_time) : a.end_time,
             markedAsClose: (a.marked_as_closed ? true : false)
         };

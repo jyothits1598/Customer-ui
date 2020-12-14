@@ -50,7 +50,7 @@ export class EmailMobSignupComponent implements OnInit {
     return this.registrationForm.controls.email.disabled ? 'mobile' : 'email';
   }
 
-  
+
 
   toggleType() {
     if (this.controls.email.disabled) {
@@ -77,7 +77,7 @@ export class EmailMobSignupComponent implements OnInit {
     this.signupService.emailSignup(data).pipe(finalize(() => this.loading = false)).subscribe(
       (resp) => {
         this.authService.handleLoginResp(resp);
-        this.router.navigate(['../profile'], { relativeTo: this.activatedRoute });
+        this.router.navigate(['/profile'], { relativeTo: this.activatedRoute, queryParams: { new: true } });
       },
       (resp) => { this.handleError(resp) }
     )
