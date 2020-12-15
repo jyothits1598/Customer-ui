@@ -17,7 +17,6 @@ export class NextAvailabilityComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log('oninit', this.availability);
     if (this.availability.length) {
       for (let i = 0; i < this.availability.length; i++) {
         if (this.availability[i].markedAsClose) continue;
@@ -32,7 +31,6 @@ export class NextAvailabilityComponent implements OnInit {
       }
 
       if (!this.nextAvailability) {
-        console.log('finally assining first', this.availability);
         this.nextAvailability = this.availability[0];
       }
     }

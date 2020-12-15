@@ -73,6 +73,9 @@ export class SocialAuthComponent implements OnInit, OnDestroy {
 
   appleSignIn() {
     AppleID.auth.signIn();
+    window.addEventListener('AppleIDSignInOnSuccess', (event) => {
+      console.log('Got a sign in message: ' + JSON.stringify(event));
+    })
   }
 
   loadLibraries() {
@@ -81,10 +84,10 @@ export class SocialAuthComponent implements OnInit, OnDestroy {
         this.appleLoading = false;
         AppleID.auth.init(
           {
-            clientId: 'menuzapp.com.client',
+            clientId: 'menuapp.com',
             scope: 'email name',
-            redirectURI: 'https://example-app.com/redirect',
-            usePopup: true,
+            redirectURI: 'https://uat.api.menuzapp.com/apple-signin',
+            usePopup:  true,
             state: 'EN'
           }
         )
