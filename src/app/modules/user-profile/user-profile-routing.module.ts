@@ -1,14 +1,23 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { IsAuthenticatedGuard } from 'src/app/core/guards/is-authenticated.guard';
-import { BasicProfileComponent } from './components/basic-profile/basic-profile.component';
+import { BasicProfileComponent } from './pages/basic-profile/basic-profile.component';
 import { UserBasicDetailsComponent } from './components/user-basic-details/user-basic-details.component';
+import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
+import { UserSecurityComponent } from './pages/user-security/user-security.component';
 
 const routes: Routes = [
   {
     path: '',
-    canActivate: [IsAuthenticatedGuard],
     component: BasicProfileComponent
+  },
+  {
+    path: 'settings',
+    component: UserSettingsComponent
+  },
+  {
+    path: 'security',
+    component: UserSecurityComponent
   }
 ];
 
