@@ -51,6 +51,10 @@ export class NextAvailabilityComponent implements OnInit {
     }
   }
 
+  formatTime(t: string){
+    return t.replace(/^0+/, '');
+  }
+  
   gethours(time: string) {
     let hours = parseInt(time.substr(0, 2));
     hours = hours % 12;

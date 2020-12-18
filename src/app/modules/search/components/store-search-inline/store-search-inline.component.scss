@@ -23,11 +23,19 @@
             cursor: pointer;
             color:#1a1a1a;
             background: #fafafa;
+            z-index: 1;
         }
         .input-transparent {
             background: transparent;
             color:#1a1a1a;
-            width: 80%;
+            padding-left: 30px !important;
+        }
+        .input-image {
+            position: absolute;
+            left:10px !important;
+            width:24px;
+            height:24px;
+            top:10px;
         }
         .input-transparent::placeholder {
             color:#1a1a1a;
@@ -69,7 +77,6 @@
         cursor: pointer;
         color: var(--color-background);
     }
-  
   }
   /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
   @media (min-width: 768px) {  
@@ -160,4 +167,18 @@
         cursor: pointer;
         color: var(--color-background);
     }
+}
+.input-transparent {
+    width: 100%;
+    padding-right: 30px;
+}
+.store-search-home-input {
+    position: relative;
+}
+.input-image {
+    position: absolute;
+    right:10px;
+    width:24px;
+    height:24px;
+    top:8px;
 }

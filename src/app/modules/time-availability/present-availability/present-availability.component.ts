@@ -72,6 +72,10 @@ export class PresentAvailabilityComponent implements OnInit {
     }
   }
 
+  formatTime(t: string){
+    return t.replace(/^0+/, '');
+  }
+
   weekDayToNumber(day: string) {
     switch (day.toLowerCase()) {
       case 'sunday':
