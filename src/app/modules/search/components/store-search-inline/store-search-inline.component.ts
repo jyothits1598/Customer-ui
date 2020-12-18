@@ -30,7 +30,7 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   constructor(
     private restApiService: RestApiService,
     private popoverService: PopoverService,
-    private layoutService: LayoutService) { this.isMobile = this.layoutService.isMobile; }
+    private layoutService: LayoutService) { console.log('inside consructor of search, ', this.layoutService.isMobile); this.isMobile = this.layoutService.isMobile; }
 
   ngAfterViewInit(): void {
 
@@ -54,7 +54,6 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   }
 
   openComponentPopover(results = null) {
-    console.log('this is the comp pop', this.searchData);
     // if(!this.searchData?.length) return;
     let popoverConfig: PopoverConfig = {
       xPos: this.layoutService.isMobile ? 'center' : 'end',
@@ -63,7 +62,6 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
     }
     // hasBackdrop ?: true | false;
     // darkBackground ?: true | false;
-    console.log('open component popover', this.searchContainer);
     if (this.overlayOpen) return;
     this.popoverRef = this.popoverService.openTemplatePopover(this.searchContainer, this.panelTemplate, popoverConfig)
     this.overlayOpen = true;

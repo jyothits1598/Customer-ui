@@ -1,5 +1,3 @@
-
-
 /* Extra small devices (phones, 600px and down) */
     @media only screen and (max-width: 600px) {
         .above-bg {
@@ -52,18 +50,40 @@
   @media only screen and (min-width: 600px) {
     .input-transparent {
         background: transparent;
-        color:var(--color-background);
+        color: #1a1a1a;
+        width: 80%;
     }
     .input-transparent::placeholder {
-        color:var(--color-background);
+        color: #1a1a1a;
         opacity: 0.5;
     }
-    .input-transparent:-ms-input-placeholder { /* Internet Explorer 10-11 */
-        color:var(--color-background);
+    .input-transparent:-ms-input-placeholder {
+        /* Internet Explorer 10-11 */
+        color: #1a1a1a;
     }
-       
-    .input-transparent::-ms-input-placeholder { /* Microsoft Edge */
-        color:var(--color-background);
+    .input-transparent::-ms-input-placeholder {
+        /* Microsoft Edge */
+        color: #1a1a1a;
+    }
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .input-transparent {
+        background: transparent;
+        color: var(--color-background);
+    }
+    .input-transparent::placeholder {
+        color: var(--color-background);
+        opacity: 0.5;
+    }
+    .input-transparent:-ms-input-placeholder {
+        /* Internet Explorer 10-11 */
+        color: var(--color-background);
+    }
+
+    .input-transparent::-ms-input-placeholder {
+        /* Microsoft Edge */
+        color: var(--color-background);
     }
     .store-search-home-input {
         background: var(--color-inside-bg);
@@ -82,18 +102,20 @@
   @media (min-width: 768px) {  
     .input-transparent {
         background: transparent;
-        color:var(--color-background);
+        color: var(--color-background);
     }
     .input-transparent::placeholder {
-        color:var(--color-background);
+        color: var(--color-background);
         opacity: 0.5;
     }
-    .input-transparent:-ms-input-placeholder { /* Internet Explorer 10-11 */
-        color:var(--color-background);
+    .input-transparent:-ms-input-placeholder {
+        /* Internet Explorer 10-11 */
+        color: var(--color-background);
     }
-       
-    .input-transparent::-ms-input-placeholder { /* Microsoft Edge */
-        color:var(--color-background);
+
+    .input-transparent::-ms-input-placeholder {
+        /* Microsoft Edge */
+        color: var(--color-background);
     }
     .store-search-home-input {
         background: var(--color-inside-bg);
@@ -107,23 +129,25 @@
         cursor: pointer;
         color: var(--color-background);
     }
-  }
-   
-  /* Large devices (desktops, 992px and up) */
-  @media (min-width: 992px) { 
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
     .input-transparent {
         background: transparent;
-        color:var(--color-background);
+        color: var(--color-background);
     }
     .input-transparent::placeholder {
-        color:var(--color-background);
+        color: var(--color-background);
         opacity: 0.5;
     }
-    .input-transparent:-ms-input-placeholder { /* Internet Explorer 10-11 */
-        color:var(--color-background);
-    }       
-    .input-transparent::-ms-input-placeholder { /* Microsoft Edge */
-        color:var(--color-background);
+    .input-transparent:-ms-input-placeholder {
+        /* Internet Explorer 10-11 */
+        color: var(--color-background);
+    }
+    .input-transparent::-ms-input-placeholder {
+        /* Microsoft Edge */
+        color: var(--color-background);
     }
     .store-search-home-input {
         background: var(--color-inside-bg);
@@ -137,23 +161,25 @@
         cursor: pointer;
         color: var(--color-background);
     }
-  }
-  /* Extra large devices (large desktops, 1200px and up) */
-  @media (min-width: 1400px) {  
+}
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1400px) {
     .input-transparent {
         background: transparent;
-        color:var(--color-background);
+        color: var(--color-background);
     }
     .input-transparent::placeholder {
-        color:var(--color-background);
+        color: var(--color-background);
         opacity: 0.5;
     }
-    .input-transparent:-ms-input-placeholder { /* Internet Explorer 10-11 */
-        color:var(--color-background);
+    .input-transparent:-ms-input-placeholder {
+        /* Internet Explorer 10-11 */
+        color: var(--color-background);
     }
-       
-    .input-transparent::-ms-input-placeholder { /* Microsoft Edge */
-        color:var(--color-background);
+
+    .input-transparent::-ms-input-placeholder {
+        /* Microsoft Edge */
+        color: var(--color-background);
     }
     .store-search-home-input {
         background: var(--color-inside-bg);

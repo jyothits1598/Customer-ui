@@ -1,4 +1,4 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { animate, query, state, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 
@@ -10,15 +10,24 @@ import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges }
     trigger('selectionState',
       [
         state('unTouched', style({
-          backgroundColor: 'grey'
+          backgroundColor: 'rgb(255, 191, 66)',
         })),
         state('valid', style({
-          backgroundColor: 'green'
+          backgroundColor: '#c0ffc8'
         })),
+        // state('valid', query()),
         state('inValid', style({
-          backgroundColor: 'red'
+          backgroundColor: 'red',
+          color: 'white'
         })),
-        transition('unTouched => valid', animate('1s'))
+        // transition('* => *', [
+        //   animate('.5s'),
+        //   query('.required__icon--success',
+        //     [
+        //       animate('.5s', style({ width: '20px' }))
+        //     ])
+        // ],
+        // )
       ])
   ]
 })
@@ -34,8 +43,9 @@ export class ModifierSelectionStatusComponent implements OnChanges {
   }
 
   get getState() {
+    if(this.status.valid) return 'valid';
     if (!this.status.touched) return 'unTouched';
-    return this.status.valid ? 'valid' : 'inValid';
+    return 'inValid'
   }
 
   ngOnInit(): void {

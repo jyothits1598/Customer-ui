@@ -6,4 +6,16 @@
     color: #1a1a1a;
     padding: 4px 8px;
     border-radius: 12px;
+    position: relative;
+
+    &__icon--success {
+        // width: 0px;
+    }
+
+    &__icon--failure {
+        // height: 0px;
+    }
+
+    &__text {
+    }
 }

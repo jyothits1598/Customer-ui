@@ -29,13 +29,12 @@ export class StoreItemModifierComponent implements OnChanges, ControlValueAccess
     this.controlDir.valueAccessor = this;
   }
 
+
   setupAccessor() {
     this.controlDir.control.validator = () => this.optionControls.valid ? null : { invalid: true };
     this.controlDir.control.markAsTouched = () => this.optionControls.markAsTouched();
     this.controlDir.control.updateValueAndValidity();
-
   }
-
   
   ngOnChanges(changes: SimpleChanges): void {
     let controls: Array<FormControl> = this.modifier.options.map(opt => { return new FormControl(false) });
@@ -109,7 +108,6 @@ export class StoreItemModifierComponent implements OnChanges, ControlValueAccess
   }
 
   markAsTouched() {
-    // console.log('mark as touched called');
     this.optionControls.markAllAsTouched();
   }
 }

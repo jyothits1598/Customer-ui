@@ -42,7 +42,7 @@ export class StorePagination extends Pagination<Store>{
                 catchError((error) => { this.hasErrors = true; return error }),
                 map((resp: any) => {
                     let newStores = [];
-                    if (resp.data.stores) resp.data.stores.forEach(store => newStores.push(ReadStore(store)));
+                    if (resp.data.stores) resp.data.stores.forEach(store => { newStores.push(ReadStore(store)) });
                     return newStores;
                 })
             );
