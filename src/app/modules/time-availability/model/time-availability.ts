@@ -44,7 +44,7 @@ export function ReadAvailability(availabilityBackend: any): Array<TimeAvailabili
             id: a.menu_timings_id,
             day: a.days,
             //padding if time is not in format
-            startTime: a.start_time.length === 6 ? ('0' + a.start_time).toLowerCase() : a.start_time.toLowerCase(),
+            startTime: a.start_time.length === 6 ? ('0' + a.start_time) : a.start_time,
             endTime: a.end_time.length === 6 ? ('0' + a.end_time) : a.end_time,
             markedAsClose: (a.marked_as_closed ? true : false)
         };
