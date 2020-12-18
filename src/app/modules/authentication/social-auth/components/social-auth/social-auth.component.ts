@@ -86,9 +86,9 @@ export class SocialAuthComponent implements OnInit, OnDestroy {
           {
             clientId: 'menuapp.com',
             scope: 'email name',
-            redirectURI: 'https://uat.api.menuzapp.com/apple-signin',
-            usePopup:  true,
-            state: 'EN'
+            redirectURI: 'https://uat.menuzapp.com/apple-signin',
+            usePopup: true,
+            state: '{url: "localhost:4200/apple-confirmation", code: "fasdf"}',
           }
         )
       }
