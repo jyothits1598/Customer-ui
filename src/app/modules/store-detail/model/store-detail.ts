@@ -8,7 +8,7 @@ export interface StoreDetail {
     logo: string,
     storeImage: string;
     address: string,
-    // distance: string,
+    distance: string,
     // description: string,
     googleUrl: string,
     facebookUrl: string,
@@ -42,7 +42,7 @@ export function ReadStoreDetail(resp: any): StoreDetail {
         logo: data.store_logo,
         storeImage: data.store_image,
         address: data.store_address,
-        // distance: data.distance,
+        distance: data.distance,
         // description: data.description,
         googleUrl: data.google_business_url,
         facebookUrl: data.facebook_url,

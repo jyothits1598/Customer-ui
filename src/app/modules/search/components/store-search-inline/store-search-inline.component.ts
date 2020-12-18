@@ -89,4 +89,3 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
     this.keyupSubs.unsubscribe();
   }
 }
-

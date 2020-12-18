@@ -1,10 +1,10 @@
 <!-- <input (focus)="handleFocus()" (blur)="handleBlur()" style="border: none;" type="text" placeholder="Search"> -->
 <div style="outline: none;cursor: pointer;">
     <div class="above-bg" #searchContainer>
-        <div class="store-search-home-input small-input-responsive">
-            <input class="input-transparent" style="border: none;outline: 0;" type="text"
-                placeholder="What would you like to eat?" (focus)="openComponentPopover(searchData)" #searchInput>
-            <img style="width: 24px;"
+        <div class="store-search-home-input">
+                <input class="input-transparent basu" style="border: none;outline: 0;" type="text" [placeholder]="isMobile ? 'What would you like to eat?' : 'Search'"
+                (focus)="openComponentPopover(searchData)" #searchInput>
+            <img class="input-image" 
                 [src]="loading? 'assets/images/loader.gif' : 'assets/images/navbar/ico_search.png'">
         </div>
     </div>

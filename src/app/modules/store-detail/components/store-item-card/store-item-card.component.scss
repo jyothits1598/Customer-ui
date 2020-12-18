@@ -24,3 +24,6 @@
 .wrapper {
     flex-flow: column;
 }
+body.modal-open {
+    overflow: hidden;
+}
