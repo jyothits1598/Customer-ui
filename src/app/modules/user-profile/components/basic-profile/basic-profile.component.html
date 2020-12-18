@@ -12,12 +12,12 @@
     </file-upload> -->
     <file-upload [accept]="validFileFormats" [validators]="fileValidators" (file)="handleFileUpload($event)"
         (error)="handleFileError($event)">
-        <div class="profile-image-signup text-center" style="margin-bottom: 16px;cursor: pointer;">
+        <span class="profile-image-signup text-center" style="margin-bottom: 16px;cursor: pointer;">
             <img class="upload-image" *ngIf="!imageLoading; else imageLoader"
                 [src]="this.profileForm.controls.profileImage.value ? this.profileForm.controls.profileImage.value : 'assets/images/add_image.png'">
             <!-- <img class="upload-image" src="assets/images/empty_store_image.png"> -->
             <!-- uplaod image end  -->
-        </div>
+        </span>
         <ng-template #imageLoader>
             <img src="assets/images/loader.gif" *ngIf="imageLoading" style="width: 20px;">
         </ng-template>
