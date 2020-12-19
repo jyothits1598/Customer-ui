@@ -15,7 +15,7 @@ import { SignupService } from '../../services/signup.service';
 export class EmailMobSignupComponent implements OnInit {
   errorMessage;
   loading: boolean = false;
-
+ 
   registrationForm: FormGroup = new FormGroup({
     email: new FormControl(null, [
       CustomValidators.required('Email is required.'),
@@ -26,7 +26,8 @@ export class EmailMobSignupComponent implements OnInit {
     ]),
     password: new FormControl(null, [
       CustomValidators.required('Password is required.'),
-      CustomValidators.pattern(/^.*(?=.{6,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/, 'Please enter a valid password of 6+ characters and atleast one digit, one capital & special character')
+      CustomValidators.pattern(/^.*(?=.{6,}).*$/, 'Please enter a valid password of 6 characters only')
+      // CustomValidators.pattern(/^.*(?=.{6,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/, 'Please enter a valid password of 6+ characters and atleast one digit, one capital & special character')
       // CustomValidators.pattern(/^.*(?=.{6,})(?=.*[a-z])(?=.*[A-Z]).*$/, 'Please enter a valid password of 6+ characters and atleast one digit, one capital')
     ]),
     verificationCode: new FormControl(null, [
@@ -39,7 +40,7 @@ export class EmailMobSignupComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private authService: AuthService) { }
   ngOnInit(): void {
-    this.registrationForm.controls.mobile.disable();
+    this.registrationForm.controls.email.disable();
   }
 
   get controls(): { [key: string]: AbstractControl; } {
@@ -47,7 +48,7 @@ export class EmailMobSignupComponent implements OnInit {
   }
 
   get activeType() {
-    return this.registrationForm.controls.email.disabled ? 'mobile' : 'email';
+    return this.registrationForm.controls.mobile.disabled ? 'email' : 'mobile';
   }
 
 

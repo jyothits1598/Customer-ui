@@ -9,7 +9,7 @@ export class CustomValidators {
 
     static pattern(regExp: RegExp, errorMsg: string): ValidatorFn {
         return (control: AbstractControl): { [key: string]: any } => {
-            const valid = regExp.test(control.value);
+            const valid = regExp.test(control.value && control.value.replace(/\s/g, ''));
             return valid ? null : { pattern: errorMsg }
         };
     }

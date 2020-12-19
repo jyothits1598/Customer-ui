@@ -4,7 +4,7 @@
         <div class="paragraph14" style="margin-bottom: 24px;">
             We’ll send a verification code to your number
         </div> -->
-        <ng-container *ngIf="activeType === 'email'; else mobileInput">
+        <ng-template #emailInput>
             <h3 class="std-heading-4 text-center"> Sign up with email </h3>
             <div class="paragraph14 text-center" style="margin-bottom: 24px;">
                 We’ll send a verification code to your email
@@ -23,9 +23,9 @@
                     <div> {{getErrors('email')}} </div>
                 </div>
             </div>
-        </ng-container>
+        </ng-template>
 
-        <ng-template #mobileInput>
+        <ng-container *ngIf="activeType === 'mobile'; else emailInput">
             <h3 class="std-heading-4 text-center"> Sign up with mobile </h3>
             <div class="paragraph14 text-center" style="margin-bottom: 24px;">
                 We’ll send a verification code to your number
@@ -44,13 +44,13 @@
                     <div> {{getErrors('mobile')}} </div>
                 </div>
             </div>
-        </ng-template>
+        </ng-container>
 
         <div class="form-group form-group--margin">
             <div class="label-inputs"> <span class="float-left"> Password </span></div>
             <app-password [showHint]="false">
                 <input passwordInput type="password" class="form-input error-highlight custom-padd"
-                    placeholder="Password" formControlName="password">
+                    placeholder="Password" formControlName="password" minlength="6" maxlength="6">
             </app-password>
             <div *ngIf="controls.password.touched && controls.password.errors" class="error-mez">
                 <div> {{getErrors('password')}} </div>
