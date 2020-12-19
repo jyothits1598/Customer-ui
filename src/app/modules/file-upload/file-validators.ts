@@ -12,17 +12,22 @@ export class FileValidators {
     }
 }
 
-export function ImageSizeValidator(file: File): Observable<boolean> {
-    return new Observable(observer => {
-        let reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = (e: any) => {
-            var img = new Image();
-            img.src = e.target.result;
-            img.onload = () => {
-                if (img.width > 500 || img.height > 500) observer.next(true);
-                else observer.error('Image too large');
-            }
-        }
-    });
+
+export class AsyncFileValidators {
+    static imageSizeValidator(minWidth: number, minHeight: number, maxWidth: number, maxHeight): (file: File) => Observable<boolean> {
+        return (file: File) =>
+            new Observable(observer => {
+                let reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = (e: any) => {
+                    var img = new Image();
+                    img.src = e.target.result;
+                    img.onload = () => {
+                        if (img.width > 500 || img.height > 500) { observer.next(true); observer.complete(); }
+                        else observer.error({ size: 'Does not meet size criteria' });
+                    }
+                }
+            });
+    }
 }
+

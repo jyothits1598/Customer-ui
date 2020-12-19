@@ -4,6 +4,7 @@ import { IsAuthenticatedGuard } from 'src/app/core/guards/is-authenticated.guard
 import { UserBasicDetailsComponent } from './components/user-basic-details/user-basic-details.component';
 import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
 import { UserSecurityComponent } from './pages/user-security/user-security.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { CurrentPasswordComponent } from './pages/user-security/current-password/current-password.component';
 import { MobileEmailComponent } from './pages/user-security/mobile-email/mobile-email.component';
 import { ChangePasswordComponent } from './pages/user-security/change-password/change-password.component';
@@ -13,6 +14,10 @@ Routes = [
   {
     path: '',
     component: UserBasicDetailsComponent,
+  },
+  {
+    path: 'basic',
+    component: UserProfileComponent
   },
   {
     path: 'settings',

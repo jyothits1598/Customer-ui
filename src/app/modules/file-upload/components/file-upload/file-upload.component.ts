@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
+import { combineLatest, forkJoin, merge, Observable } from 'rxjs';
 
 @Component({
   selector: 'file-upload',
@@ -18,7 +18,7 @@ export class FileUploadComponent {
   }
 
   @Input() validators: Array<(file: File) => string | null>;
-  @Input() asyncValidators: Array<(file: File) => string | null>;
+  @Input() asyncValidators: Array<(file: File) => Observable<boolean>>;
   @Input() accept: Array<string>;
   // @Input() uploadApiFunction: (file: File) => Observable<string>;
 
@@ -31,7 +31,7 @@ export class FileUploadComponent {
   }
 
   onFileChanged(event) {
-    /* File upload Required function */
+
     let fileToUpload = event.target.files[0];
     if (fileToUpload) {
       if (this.validators) {
@@ -44,6 +44,16 @@ export class FileUploadComponent {
         }
       }
 
+      if (this.asyncValidators && this.asyncValidators.length > 0) {
+        console.log('constructing async validators,', this.asyncValidators.map(v => v(fileToUpload)), fileToUpload);
+        forkJoin(this.asyncValidators.map(v => v(fileToUpload))).subscribe(
+          (res) => this.file.emit(fileToUpload),
+          (res) => this.error.emit(res)
+        )
+      } else {
+        this.file.emit(fileToUpload);
+      }
+
       // if (this.uploadApiFunction) {
       //   this.uploadApiFunction(fileToUpload).subscribe(
       //     (url) => this.url.emit(url)
@@ -51,7 +61,6 @@ export class FileUploadComponent {
       // }
       // else this.file.emit(fileToUpload);
       // this.fileInput.nativeElement.value = '';
-      this.file.emit(fileToUpload);
     }
     //   if (fileUptoLoad) {
     //     if (!this.dataService.validateFileExtension(this.fileUptoLoad.name)) {
