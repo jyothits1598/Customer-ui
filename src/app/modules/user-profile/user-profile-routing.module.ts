@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { IsAuthenticatedGuard } from 'src/app/core/guards/is-authenticated.guard';
-import { BasicProfileComponent } from './pages/basic-profile/basic-profile.component';
 import { UserBasicDetailsComponent } from './components/user-basic-details/user-basic-details.component';
 import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
 import { UserSecurityComponent } from './pages/user-security/user-security.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
+import { CurrentPasswordComponent } from './pages/user-security/current-password/current-password.component';
+import { MobileEmailComponent } from './pages/user-security/mobile-email/mobile-email.component';
+import { ChangePasswordComponent } from './pages/user-security/change-password/change-password.component';
 
-const routes: Routes = [
+const routes: 
+Routes = [
   {
     path: '',
-    component: BasicProfileComponent
+    component: UserBasicDetailsComponent,
   },
   {
     path: 'basic',
@@ -22,7 +25,19 @@ const routes: Routes = [
   },
   {
     path: 'security',
-    component: UserSecurityComponent
+    component: UserSecurityComponent,
+  },
+  {
+    path: 'current-password',
+    component: CurrentPasswordComponent
+  },
+  {
+    path: 'update-details',
+    component: MobileEmailComponent
+  },
+  {
+    path: 'change-password',
+    component: ChangePasswordComponent
   }
 ];
 

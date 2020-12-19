@@ -5,9 +5,9 @@
 
 <ng-template #profTemp>
     <ul class="profile-popup" >
-        <li routerLink="auth/signup/profile" style="outline:0;"> <img src="assets/images/profile/profile_user.png" > <span style="padding-left:16px;"> Profile </span> </li>
-        <li> <img src="assets/images/profile/ico_setting.png"> <span style="padding-left:16px;"> Settings </span> </li>
-        <li> <img src="assets/images/profile/ico_key.png"> <span style="padding-left:16px;"> Security </span> </li>
+        <li routerLink="profile" style="outline:0;"> <img src="assets/images/profile/profile_user.png" > <span style="padding-left:16px;"> Profile </span> </li>
+        <li routerLink="profile/settings"> <img src="assets/images/profile/ico_setting.png"> <span style="padding-left:16px;"> Settings </span> </li>
+        <li routerLink="profile/security"> <img src="assets/images/profile/ico_key.png"> <span style="padding-left:16px;"> Security </span> </li>
         <li (click)="logout()"> <img src="assets/images/profile/log-out.png"> <span style="padding-left:16px;"> Logout </span> </li>
     </ul>
 </ng-template>

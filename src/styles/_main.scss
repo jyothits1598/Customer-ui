@@ -338,3 +338,14 @@ input.ng-invalid.ng-touched.error-highlight {
     max-width: 312px;
     padding-top: 40px;
 }
+.security-card {
+    margin: 96px auto 25px;
+    max-width:350px;
+}
+.forgot {
+    margin-top:34px;
+    margin-bottom:34px;
+    cursor: pointer;
+    text-align: center;
+    color:var(--color-primary);
+}
