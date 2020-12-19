@@ -10,19 +10,22 @@
         <a type="button" class="btn std-button std-button--transparency1"> <img
                 src="../../../../../assets/images/ico_upload.png"> &nbsp; Import via CSV </a>
     </file-upload> -->
+    <div style="width:50%;
+    margin-left: auto;
+    margin-right: auto;">
     <file-upload [accept]="validFileFormats" [validators]="fileValidators" (file)="handleFileUpload($event)"
         (error)="handleFileError($event)">
-        <span class="profile-image-signup text-center" style="margin-bottom: 16px;cursor: pointer;">
-            <img class="upload-image" *ngIf="!imageLoading; else imageLoader"
-                [src]="this.profileForm.controls.profileImage.value ? this.profileForm.controls.profileImage.value : 'assets/images/add_image.png'">
-            <!-- <img class="upload-image" src="assets/images/empty_store_image.png"> -->
-            <!-- uplaod image end  -->
-        </span>
-        <ng-template #imageLoader>
-            <img src="assets/images/loader.gif" *ngIf="imageLoading" style="width: 20px;">
-        </ng-template>
+            <div class="profile-image-signup text-center" style="margin-bottom: 16px;cursor: pointer;">
+                <img class="upload-image" *ngIf="!imageLoading; else imageLoader"
+                    [src]="this.profileForm.controls.profileImage.value ? this.profileForm.controls.profileImage.value : 'assets/images/add_image.png'">
+                <!-- <img class="upload-image" src="assets/images/empty_store_image.png"> -->
+                <!-- uplaod image end  -->
+            </div>
+            <ng-template #imageLoader>
+                <img src="assets/images/loader.gif" *ngIf="imageLoading" style="width: 20px;">
+            </ng-template>
     </file-upload>
-
+</div>
 
     <div class="row">
         <div class="col-md-6 pad-ing-right" style="margin-bottom: 24px;">
