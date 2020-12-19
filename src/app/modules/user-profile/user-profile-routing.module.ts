@@ -5,11 +5,16 @@ import { BasicProfileComponent } from './pages/basic-profile/basic-profile.compo
 import { UserBasicDetailsComponent } from './components/user-basic-details/user-basic-details.component';
 import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
 import { UserSecurityComponent } from './pages/user-security/user-security.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 
 const routes: Routes = [
   {
     path: '',
     component: BasicProfileComponent
+  },
+  {
+    path: 'basic',
+    component: UserProfileComponent
   },
   {
     path: 'settings',
