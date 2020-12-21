@@ -20,7 +20,7 @@ export function TimeAvailabilityComp(first: TimeAvailability, second: TimeAvaila
     }
 
     //are first and second different days
-    if (dayValue[first.day] - dayValue[second.day]) return dayValue[second.day] - dayValue[first.day];
+    if (dayValue[first.day] - dayValue[second.day]) return dayValue[first.day] - dayValue[second.day];
 
     //compare start-times
     let firstSTime = new Date('1/1/0001 ' + first.startTime.substr(0, 5) + ':00 ' + first.startTime.substr(5, 2)).getTime();

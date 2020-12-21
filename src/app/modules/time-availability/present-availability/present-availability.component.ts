@@ -60,6 +60,8 @@ export class PresentAvailabilityComponent implements OnInit {
     // }
 
     if (day == this.now.getDay()) {
+      if (this.is24Hour(availability)) return true;
+
       let end = new Date();
       end.setHours(this.gethours(availability.endTime), parseInt(availability.endTime.substr(3, 2)));
       if (this.now < end) {
@@ -72,7 +74,12 @@ export class PresentAvailabilityComponent implements OnInit {
     }
   }
 
-  formatTime(t: string){
+  is24Hour(availability: TimeAvailability) {
+    if (availability.endTime === '12:00AM' && availability.startTime === '12:00AM') return true;
+    else return false;
+  }
+
+  formatTime(t: string) {
     return t.replace(/^0+/, '');
   }
 
