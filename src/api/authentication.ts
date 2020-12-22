@@ -8,4 +8,6 @@ export const URL_newPassword = 'api/customer/newpassword';
 export const URL_resetPassword = 'api/customer/newpassword';
 export const URL_SendCodeSignup = 'api/customer/v1/send-verification-code';
 export const URL_SendCodeForgotPassword = 'api/customer/forgotpassword';
+export const URL_SendCodeChange = 'api/customer/send-verification-code';
 export const URL_Signup = 'api/customer/v1/signup';
+export const URL_ConfirmPassword = 'api/customer/verify-password';

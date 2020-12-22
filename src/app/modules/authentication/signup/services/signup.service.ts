@@ -9,15 +9,15 @@ export class SignupService {
 
   constructor(private restApiService: RestApiService) { }
 
-  sendCode(value: string, type: 'email' | 'mobile' = 'email', purpose: 'signup' | 'forgotPassword') {
-    let data: any = {
-      type: type === 'email' ? 'email' : 'mobile_number'
-    };
-    if (type === 'email') data.email = value
-    else data.mobile_number = value;
+  // sendCode(value: string, type: 'email' | 'mobile' = 'email', purpose: 'signup' | 'forgotPassword') {
+  //   let data: any = {
+  //     type: type === 'email' ? 'email' : 'mobile_number'
+  //   };
+  //   if (type === 'email') data.email = value
+  //   else data.mobile_number = value;
 
-    return this.restApiService.post(purpose === 'signup' ? URL_SendCodeSignup : URL_SendCodeForgotPassword, data);
-  }
+  //   return this.restApiService.post(purpose === 'signup' ? URL_SendCodeSignup : URL_SendCodeForgotPassword, data);
+  // }
 
   newPassword(data: { email?: string, mobile?: string, type: 'email' | 'mobile', verificationCode: string, password: string }) {
     let reqData: any = {

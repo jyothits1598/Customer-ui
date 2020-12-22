@@ -11,15 +11,40 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
 import { UserProfileImageComponent } from './pages/user-profile/user-profile-image/user-profile-image.component';
 import { MobileEmailComponent } from './pages/user-security/mobile-email/mobile-email.component';
 import { ChangePasswordComponent } from './pages/user-security/change-password/change-password.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { RouterModule } from '@angular/router';
+import { PasswordHelperModule } from '../authentication/password-helper/password-helper.module';
+import { ChangeEmailComponent } from './pages/user-security/change-email/change-email.component';
+import { ChangeMobileComponent } from './pages/user-security/change-mobile/change-mobile.component';
+import { PasswordConfirmationGuard } from './guards/password-confirmation.guard';
+import { CurrentPasswordComponent } from './pages/user-security/current-password/current-password.component';
+import { VerificationCodeModule } from '../authentication/verification-code/verification-code.module';
 
 @NgModule({
-    declarations: [UserBasicDetailsComponent, BasicProfileComponent, UserSettingsComponent, UserSecurityComponent, MobileEmailComponent, ChangePasswordComponent, UserProfileComponent, UserProfileImageComponent],
-    imports: [
-      CommonModule,
-      UserProfileRoutingModule,
-      ReactiveFormsModule,
-      FormsModule,
-      FileUploadModule
-    ]
-  })
+  declarations: [
+    UserBasicDetailsComponent,
+    BasicProfileComponent,
+    UserSettingsComponent,
+    UserSecurityComponent,
+    MobileEmailComponent,
+    ChangePasswordComponent,
+    UserProfileComponent,
+    UserProfileImageComponent,
+    ChangeEmailComponent,
+    ChangeMobileComponent,
+    CurrentPasswordComponent
+  ],
+  imports: [
+    CommonModule,
+    UserProfileRoutingModule,
+    RouterModule,
+    SharedModule,
+    ReactiveFormsModule,
+    FormsModule,
+    FileUploadModule,
+    PasswordHelperModule,
+    VerificationCodeModule
+  ],
+  providers: [PasswordConfirmationGuard]
+})
 export class UserProfileModule { }

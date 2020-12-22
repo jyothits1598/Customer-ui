@@ -8,38 +8,55 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
 import { CurrentPasswordComponent } from './pages/user-security/current-password/current-password.component';
 import { MobileEmailComponent } from './pages/user-security/mobile-email/mobile-email.component';
 import { ChangePasswordComponent } from './pages/user-security/change-password/change-password.component';
+import { ChangeEmailComponent } from './pages/user-security/change-email/change-email.component';
+import { PasswordConfirmationGuard } from './guards/password-confirmation.guard';
+import { ChangeMobileComponent } from './pages/user-security/change-mobile/change-mobile.component';
 
-const routes: 
-Routes = [
-  {
-    path: '',
-    component: UserBasicDetailsComponent,
-  },
-  {
-    path: 'basic',
-    component: UserProfileComponent
-  },
-  {
-    path: 'settings',
-    component: UserSettingsComponent
-  },
-  {
-    path: 'security',
-    component: UserSecurityComponent,
-  },
-  {
-    path: 'current-password',
-    component: CurrentPasswordComponent
-  },
-  {
-    path: 'update-details',
-    component: MobileEmailComponent
-  },
-  {
-    path: 'change-password',
-    component: ChangePasswordComponent
-  }
-];
+const routes:
+  Routes = [
+    {
+      path: '',
+      component: UserBasicDetailsComponent,
+    },
+    {
+      path: 'basic',
+      component: UserProfileComponent
+    },
+    {
+      path: 'settings',
+      component: UserSettingsComponent
+    },
+    {
+      path: 'security',
+      children: [
+        { path: '', component: UserSecurityComponent },
+        {
+          path: 'current-password',
+          component: CurrentPasswordComponent
+        },
+        {
+          path: 'change-password',
+          component: ChangePasswordComponent
+        },
+        {
+          path: 'change-email',
+          // canActivate: [PasswordConfirmationGuard],
+          component: ChangeEmailComponent
+        },
+        {
+          path: 'change-mobile',
+          // canActivate: [PasswordConfirmationGuard],
+          component: ChangeMobileComponent
+        }
+      ]
+
+    },
+    {
+      path: 'update-details',
+      component: MobileEmailComponent
+    },
+
+  ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

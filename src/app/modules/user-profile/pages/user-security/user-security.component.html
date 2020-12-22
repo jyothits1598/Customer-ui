@@ -4,12 +4,20 @@
             <div class="label-inputs"> Mobile </div>
         </div>
         <div class="col-md-12">
-            <div class="d-flex justify-content-between">
-                <div class="color-text">
-                    Add mobile
+            <div class="d-flex justify-content-between" *ngIf="user.phoneNumber; else addEmail">
+                <div>
+                    {{user.phoneNumber}}
                 </div>
-                <img src="assets/images/ico_add.png" style="cursor: pointer;" >
+                <img src="assets/images/ico_edit.png" style="cursor: pointer;">
             </div>
+            <ng-template #addEmail>
+                <div class="d-flex justify-content-between" routerLink="./change-mobile">
+                    <div class="color-text">
+                        Add Phone
+                    </div>
+                    <img src="assets/images/ico_add.png" style="cursor: pointer;">
+                </div>
+            </ng-template>
         </div>
     </div>
     <div class="row mtop">
@@ -17,12 +25,20 @@
             <div class="label-inputs"> Email </div>
         </div>
         <div class="col-md-12">
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between" *ngIf="user.email; else addEmail">
                 <div>
-                    basu@gmail.com
+                    {{user.email}}
                 </div>
-                <img src="assets/images/ico_edit.png" style="cursor: pointer;" >
+                <img src="assets/images/ico_edit.png" style="cursor: pointer;" routerLink="./change-email">
             </div>
+            <ng-template #addEmail>
+                <div class="d-flex justify-content-between" routerLink="./change-email">
+                    <div class="color-text">
+                        Add Email
+                    </div>
+                    <img src="assets/images/ico_add.png" style="cursor: pointer;">
+                </div>
+            </ng-template>
         </div>
     </div>
     <div class="row mtop">
@@ -34,8 +50,11 @@
                 <div>
                     .......
                 </div>
-                <img src="assets/images/ico_edit.png" style="cursor: pointer;" >
+                <a routerLink="./change-password">
+                    <img src="assets/images/ico_edit.png" style="cursor: pointer;">
+                </a>
             </div>
         </div>
     </div>
+    <div>{{user | json}}</div>
 </div>

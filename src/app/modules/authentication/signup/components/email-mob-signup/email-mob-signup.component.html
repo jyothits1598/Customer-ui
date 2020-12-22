@@ -50,7 +50,7 @@
             <div class="label-inputs"> <span class="float-left"> Password </span></div>
             <app-password [showHint]="false">
                 <input passwordInput type="password" class="form-input error-highlight custom-padd"
-                    placeholder="Password" formControlName="password" minlength="6" maxlength="6">
+                    placeholder="Password" formControlName="password">
             </app-password>
             <div *ngIf="controls.password.touched && controls.password.errors" class="error-mez">
                 <div> {{getErrors('password')}} </div>
