@@ -4,5 +4,5 @@ export interface UserLocation {
 }
 
 export function UserLocationToQuery(loc: UserLocation) {
-    return `?lat=${loc.latLng.lng}&lng=${loc.latLng.lng}&distance=20000`;
+    return `?lat=${loc.latLng.lat}&lng=${loc.latLng.lng}&distance=20000`;
 }

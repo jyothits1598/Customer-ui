@@ -55,6 +55,7 @@ export class StoreDetailComponent implements OnInit, AfterViewInit, OnDestroy {
     this.routeParamsSubs = this.route.params.pipe(
       mergeMap((param) => this.geoLoc.userLocation().pipe(map(loc => { return { param: param.id, location: loc } })))
     ).subscribe((data) => {
+      console.log(data);
       let id = parseInt(data.param);
       if (id) {
         this.storeId = id;
