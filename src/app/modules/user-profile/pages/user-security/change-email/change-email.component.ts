@@ -45,7 +45,7 @@ export class ChangeEmailComponent implements OnInit {
     }
     this.loading = true;
     this.userProfileDataService.changeEmail(this.changeForm.value.email, this.changeForm.value.verificationCode).subscribe(
-      () => { this.authService.setEmail(this.changeForm.value.email); this.router.navigate(['../', this.route]) },
+      () => { this.authService.setEmail(this.changeForm.value.email); this.router.navigate(['../'], {relativeTo: this.route}) },
       (err) => { this.loading = false; this.handleError(err) }
     )
   }

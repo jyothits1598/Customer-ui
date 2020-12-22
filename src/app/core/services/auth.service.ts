@@ -30,12 +30,14 @@ export class AuthService {
   setPhoneNumber(phone: string) {
     let user = this.loggedUser;
     user.phoneNumber = phone;
+    this.storeageService.store('user', user);
     this._loggedUser.next(user);
   }
 
   setEmail(email: string) {
     let user = this.loggedUser;
     user.email = email;
+    this.storeageService.store('user', user);
     this._loggedUser.next(user);
   }
 

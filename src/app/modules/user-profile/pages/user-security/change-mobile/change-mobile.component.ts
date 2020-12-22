@@ -44,7 +44,7 @@ export class ChangeMobileComponent implements OnInit {
     }
     this.loading = true;
     this.userProfileDataService.changeMobile(this.changeForm.value.mobile, this.changeForm.value.verificationCode).subscribe(
-      () => { this.authService.setPhoneNumber(this.changeForm.value.mobile); this.router.navigate(['../', this.route]) },
+      () => { this.authService.setPhoneNumber(this.changeForm.value.mobile); this.router.navigate(['../'], { relativeTo: this.route }) },
       (err) => { this.loading = false; this.handleError(err) }
     )
   }

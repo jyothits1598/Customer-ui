@@ -32,7 +32,7 @@
     </form>
     <div class="col text-center" style="margin-top:24px;">
         <button (click)="toggleEdit()" class="std-button std-button--trans" style="margin-right:16px"> Cancel</button>
-        <button (click)="saveChanges()" class="std-button std-button--primary" [disabled]="!profileForm.dirty">Save <img *ngIf="saving" src="assets/images/loader.gif" alt=""></button>
+        <button (click)="saveChanges()" class="std-button std-button--primary" [disabled]="!profileForm.dirty">Save <img *ngIf="saving" src="assets/images/loader.gif" alt="" style="height: 24px;"></button>
     </div>
 </ng-template>
 </div>

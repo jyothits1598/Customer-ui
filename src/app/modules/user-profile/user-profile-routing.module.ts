@@ -11,12 +11,13 @@ import { ChangePasswordComponent } from './pages/user-security/change-password/c
 import { ChangeEmailComponent } from './pages/user-security/change-email/change-email.component';
 import { PasswordConfirmationGuard } from './guards/password-confirmation.guard';
 import { ChangeMobileComponent } from './pages/user-security/change-mobile/change-mobile.component';
+import { BasicProfileComponent } from './pages/basic-profile/basic-profile.component';
 
 const routes:
   Routes = [
     {
       path: '',
-      component: UserBasicDetailsComponent,
+      component: BasicProfileComponent,
     },
     {
       path: 'basic',
