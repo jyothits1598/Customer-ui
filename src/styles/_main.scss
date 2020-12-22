@@ -255,6 +255,14 @@
     &--apple:hover {
         color: var(--color-background);
     }
+    &--trans {
+        color: var(--color-primary);
+        background: var(--color-background-tertiary);
+        
+    }
+    &--trans:hover {
+        color: var(--color-primary);
+    }
 }
 
 .loader,

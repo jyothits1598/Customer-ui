@@ -1,32 +1,38 @@
+<div class="security-card">
 <ng-container *ngIf="profileData">
     <user-profile-image
         [profileImageUrl]="editMode ? profileForm.controls.profileImage.value : profileData.profileImage"
         [editMode]="editMode" (urlChange)="handleFileChange($event)"></user-profile-image>
-    <div *ngIf="!editMode; else editTemplate">
-        <div>
-            {{profileData.firstName}}-{{profileData.lastName}}
+    <div *ngIf="!editMode; else editTemplate" >
+        <div style="margin-top:34px;margin-bottom:26px;text-align: center;">
+            <div class="std-heading-5">
+                {{profileData.firstName}} {{profileData.lastName}}
+            </div> 
         </div>
-        <button (click)="toggleEdit()">Edit Profile</button>
+        <button (click)="toggleEdit()" class="std-button std-button--trans" style="margin-left: auto;margin-right: auto;display: block;">
+           <img src="assets/images/ico_edit.png"> Edit Profile
+        </button>
     </div>
 </ng-container>
 
 <ng-template #editTemplate>
     <form [formGroup]="profileForm">
-        <div>
-            <label>First Name</label>
-            <input formControlName="firstName" type="text">
+        <div style="margin-top:24px;margin-bottom: 16px;">
+            <label class="label-inputs">First Name</label>
+            <input formControlName="firstName" type="text" class="form-input error-highlight">
             <span *ngIf="profileForm.controls.firstName.touched && profileForm.controls.firstName.invalid">First name is
                 required.</span>
         </div>
         <div>
-            <label>Last Name</label>
-            <input formControlName="lastName" type="text">
+            <label class="label-inputs" >Last Name</label>
+            <input formControlName="lastName" type="text" class="form-input error-highlight">
             <span *ngIf="profileForm.controls.lastName.touched && profileForm.controls.lastName.invalid">Last name is
                 required.</span>
         </div>
     </form>
-    {{profileForm.dirty}}
-    <button (click)="toggleEdit()">Cancel</button>
-    <button (click)="saveChanges()" [disabled]="!profileForm.dirty">Save <img *ngIf="saving" src="assets/images/loader.gif" alt=""></button>
-    <button (click)="debug()">debug</button>
+    <div class="col text-center" style="margin-top:24px;">
+        <button (click)="toggleEdit()" class="std-button std-button--trans" style="margin-right:16px"> Cancel</button>
+        <button (click)="saveChanges()" class="std-button std-button--primary" [disabled]="!profileForm.dirty">Save <img *ngIf="saving" src="assets/images/loader.gif" alt=""></button>
+    </div>
 </ng-template>
+</div>

@@ -1,11 +1,14 @@
-<img [src]="profileImageUrl ? profileImageUrl : 'assets/images/add_image.png'" alt="profile image" style="width: 200px">
-<ng-container *ngIf="editMode">
-    <div>
-        should be of size 500px
-    </div>
-    <file-upload [accept]="validFileFormats" [asyncValidators]="asyncValidators" (file)="handleFileUpload($event)"
-        (error)="handleFileError($event)">
-        <button> Change <img *ngIf="uploading" src="assets/images/loader.gif" alt=""></button>
-    </file-upload>
-    <button (click)="urlChange.emit(null)">Remove</button>
-</ng-container>
+
+    <img [src]="profileImageUrl ? profileImageUrl : 'assets/images/add_image.png'" alt="profile image" style="width: 112px;margin-left: auto;margin-right: auto;display: block;">
+    <ng-container *ngIf="editMode">
+        <div class="text-center" style="margin-top:16px;margin-bottom:16px;font-size:12px">
+            JPG, PNG or GIF up to 5mb. <br> Minimum size 500 x 500 pixels.
+        </div>
+            <file-upload [accept]="validFileFormats" [asyncValidators]="asyncValidators" (file)="handleFileUpload($event)"
+            (error)="handleFileError($event)">
+            <div class="col text-center">
+                <button class="std-button std-button--trans" style="margin-right:16px;text-align: center;"> Change <img *ngIf="uploading" src="assets/images/loader.gif" alt=""></button>
+                <button (click)="urlChange.emit(null)" class="std-button std-button--trans">Remove</button>
+            </div>
+        </file-upload>
+        </ng-container>

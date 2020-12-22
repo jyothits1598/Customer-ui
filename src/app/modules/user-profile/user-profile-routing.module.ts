@@ -40,12 +40,12 @@ const routes:
         },
         {
           path: 'change-email',
-          // canActivate: [PasswordConfirmationGuard],
+          canActivate: [PasswordConfirmationGuard],
           component: ChangeEmailComponent
         },
         {
           path: 'change-mobile',
-          // canActivate: [PasswordConfirmationGuard],
+          canActivate: [PasswordConfirmationGuard],
           component: ChangeMobileComponent
         }
       ]
