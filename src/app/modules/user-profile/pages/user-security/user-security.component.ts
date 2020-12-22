@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/core/model/user';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-user-security',
@@ -6,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-security.component.scss']
 })
 export class UserSecurityComponent implements OnInit {
-
-  constructor() { }
+  user: User
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.user = this.authService.loggedUser
   }
 
 }

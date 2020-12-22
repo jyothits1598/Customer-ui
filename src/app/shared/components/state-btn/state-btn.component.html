@@ -1,0 +1,4 @@
+<button [disabled]="state === 'loading' || disabled" type="submit" class="btn std-button std-button--blue" #btn>
+    <span *ngIf="state!=='loading'" class="default-text">{{defaultText}}</span>
+    <img *ngIf="state==='loading'" class="loader-icon" src="assets/images/loader.gif" alt="" style="width: 24px;">
+</button>

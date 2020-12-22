@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { URL_ProfileData, URL_ProfileImageUpload } from 'src/api/profile';
+import { URL_changeEmailMobile, URL_ProfileChangePassword, URL_ProfileData, URL_ProfileImageUpload } from 'src/api/profile';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
+import { SnackBarService } from 'src/app/core/services/snack-bar.service';
 import { UserProfile } from '../model/UserProfile';
 
 @Injectable({
@@ -10,7 +11,7 @@ import { UserProfile } from '../model/UserProfile';
 })
 export class UserProfileDataService {
 
-  constructor(private restApiService: RestApiService) { }
+  constructor(private restApiService: RestApiService, private snackBar: SnackBarService) { }
 
   updateProfile(data: { firstName: string, lastName: string, profileImage?: string }) {
     let d: any = {}
@@ -41,5 +42,29 @@ export class UserProfileDataService {
         }
       }
     ))
+  }
+
+  changePassword(currentPassword: string, newPassword: string) {
+    return this.restApiService.patch(URL_ProfileChangePassword,
+      {
+        current_password: currentPassword,
+        new_password: newPassword
+      });
+  }
+
+  changeEmail(email: string, code: string) {
+    return this.restApiService.post(URL_changeEmailMobile, {
+      type: 'email',
+      email: email,
+      verificationCode: code
+    })
+  };
+
+  changeMobile(phoneNumber: string, code: string) {
+    return this.restApiService.post(URL_changeEmailMobile, {
+      type: 'mobile_number',
+      mobile_number: phoneNumber,
+      verificationCode: code
+    })
   }
 }

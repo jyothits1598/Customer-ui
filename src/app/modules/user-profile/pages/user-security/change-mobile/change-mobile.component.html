@@ -1,0 +1,33 @@
+<form [formGroup]="changeForm" (ngSubmit)="changeMobile()">
+    <h3 class="std-heading-4 text-center"> Sign up with mobile </h3>
+    <div class="paragraph14 text-center" style="margin-bottom: 24px;">
+        We’ll send a verification code to your mobile
+    </div>
+
+    <div *ngIf="errorMessage" style="color: red;">
+        {{errorMessage}}
+    </div>
+
+    <div class="form-group form-group--margin">
+        <input type="text" class="form-input error-highlight" placeholder="Phone number" formControlName="mobile">
+        <div *ngIf="changeForm.controls.mobile.touched && changeForm.controls.mobile.errors" class="error-mez">
+            <div> {{getErrors('mobile')}} </div>
+        </div>
+    </div>
+    <send-code (click)="changeForm.controls.mobile.markAsTouched()"
+        [data]="{purpose: 'change', type: 'mobile', value: (changeForm.controls.mobile.valid ? changeForm.controls.mobile.value : '')}"
+        (error)="handleError($event)">
+    </send-code>
+    <input type="number" class="form-input error-highlight" placeholder="Enter code" formControlName="verificationCode"
+        minlength="6" maxlength="6">
+    <div *ngIf="changeForm.controls.verificationCode.touched && changeForm.controls.verificationCode.errors"
+        class="error-mez">
+        <div> {{getErrors('verificationCode')}} </div>
+    </div>
+    <button type="submit">
+        <span *ngIf="!loading; else loadingTemp">Change</span>
+        <ng-template #loadingTemp>
+            <img src="assets/images/loader.gif" alt="" style="height: 24px;">
+        </ng-template>
+    </button>
+</form>

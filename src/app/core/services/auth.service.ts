@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { URL_FacebookLogin, URL_login } from 'src/api/authentication';
+import { URL_ConfirmPassword, URL_FacebookLogin, URL_login } from 'src/api/authentication';
 import { SocialAuthHelperService } from 'src/app/modules/authentication/services/social-auth-helper.service';
 import { ReadUserDetails, User } from '../model/user';
 import { RestApiService } from './rest-api.service';
@@ -24,7 +24,19 @@ export class AuthService {
   }
 
   get loggedUser(): User {
-   return this._loggedUser.value;
+    return this._loggedUser.value;
+  }
+
+  setPhoneNumber(phone: string) {
+    let user = this.loggedUser;
+    user.phoneNumber = phone;
+    this._loggedUser.next(user);
+  }
+
+  setEmail(email: string) {
+    let user = this.loggedUser;
+    user.email = email;
+    this._loggedUser.next(user);
   }
 
   isLoggedIn$() {
@@ -71,6 +83,12 @@ export class AuthService {
     return this.restApiService.post(URL_login, reqData).pipe(tap(
       (resp) => this.handleLoginResp(resp)
     ))
+  }
+
+  confirmPassword(password: string) {
+    return this.restApiService.post(URL_ConfirmPassword, {
+      password: password
+    });
   }
 
   facebookSignin(data: { email: string, firstName: string, lastName: string, token: string }) {
