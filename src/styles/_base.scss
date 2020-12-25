@@ -58,7 +58,7 @@ body {
     font-weight: normal;
     font-size: 14px;
     line-height: 20px;
-    text-transform: lowercase;
+    // text-transform: lowercase;
     color: var(--color-boldlevelcolor);
     &__f12 {
       font-size: 12px;
@@ -128,12 +128,19 @@ body {
   background: var(--color-background);
   padding:16px;
 }
+
+.margins-center-profile {
+  margin: 96px auto 25px;     
+  max-width: 432px;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  background: var(--color-background);
+  padding:16px;
+}
 input.custom-password-eye {
   padding-right:30px;
 }
-.profile-image-signup {
-  margin-top:104px
-}
+
 .upload-image{
   background-size: cover;
   height:100%;
