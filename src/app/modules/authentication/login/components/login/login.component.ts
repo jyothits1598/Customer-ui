@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
   showButton = true;
 
   get activeType(): 'mobile' | 'email' {
-    return this.loginForm.controls.email.enabled ? 'email' : 'mobile';
+    return this.loginForm.controls.mobile.enabled ? 'mobile' : 'email';
   }
 
   constructor(private authService: AuthService,
@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.loginForm.controls.mobile.disable();
+    this.loginForm.controls.email.disable();
   }
 
   loginForm: FormGroup = new FormGroup({
@@ -68,14 +68,15 @@ export class LoginComponent implements OnInit {
   });
 
   toggleType() {
-    if (this.loginForm.controls.email.enabled) {
-      this.loginForm.controls.email.disable();
-      this.loginForm.controls.mobile.enable();
-    } else {
-      this.loginForm.controls.email.enable();
+    if (this.loginForm.controls.mobile.enabled) {
       this.loginForm.controls.mobile.disable();
+      this.loginForm.controls.email.enable();
+    } else {
+      this.loginForm.controls.mobile.enable();
+      this.loginForm.controls.email.disable();
     }
   }
+  
 
   returnErrors(controlName: string) {
     return Object.values(this.loginForm.controls[controlName].errors)[0];

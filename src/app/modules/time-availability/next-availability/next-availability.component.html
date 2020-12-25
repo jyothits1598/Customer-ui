@@ -6,7 +6,7 @@
     </span> -->
     <span [ngSwitch]="dayDiff" class="text-capitalize">
         <ng-container *ngSwitchCase="0">
-            today
+            today {{formatTime(nextAvailability.startTime)}}
         </ng-container>
         <ng-container *ngSwitchCase="1">
             tomorrow
