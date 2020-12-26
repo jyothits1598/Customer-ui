@@ -8,8 +8,8 @@ export const environment = {
 
 
 /* Test server */
-//export const API_URL_LINK = 'https://uat.api.menuzapp.com/';
-export const API_URL_LINK = 'http://dev.menuzapp.com/api/ApiGateway/public/';
+export const API_URL_LINK = 'https://uat.api.menuzapp.com/';
+// export const API_URL_LINK = 'http://dev.menuzapp.com/api/ApiGateway/public/';
 
 export const APP_LINK = 'http://localhost:4200/';
 

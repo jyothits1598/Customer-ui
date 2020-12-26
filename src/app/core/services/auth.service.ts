@@ -111,7 +111,7 @@ export class AuthService {
       social_auth_token: user.token,
       social_login_type: type
     }
-    return this.restApiService.post('/api/customer/v1/social-auth', data).pipe(tap(
+    return this.restApiService.post('api/customer/v1/social-auth', data).pipe(tap(
       (resp) => this.handleLoginResp(resp)
     ))
 
