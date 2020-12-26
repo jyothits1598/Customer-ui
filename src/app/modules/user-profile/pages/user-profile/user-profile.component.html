@@ -1,13 +1,16 @@
 <div class="security-card">
 <ng-container *ngIf="profileData">
-    <user-profile-image
+    <!-- <user-profile-image
         [profileImageUrl]="editMode ? profileForm.controls.profileImage.value : profileData.profileImage"
-        [editMode]="editMode" (urlChange)="handleFileChange($event)"></user-profile-image>
+        [editMode]="editMode" (urlChange)="handleFileChange($event)"></user-profile-image> -->
+      <user-profile-image ></user-profile-image>
+
+      <!-- <ng-template #noProfile>{{ profileData.firstName.charAt(0)}}</ng-template> -->
     <div *ngIf="!editMode; else editTemplate" >
         <div style="margin-top:34px;margin-bottom:26px;text-align: center;">
             <div class="std-heading-5">
                 {{profileData.firstName}} {{profileData.lastName}}
-            </div> 
+            </div>
         </div>
         <button (click)="toggleEdit()" class="std-button std-button--trans" style="margin-left: auto;margin-right: auto;display: block;">
            <img src="assets/images/ico_edit.png"> Edit Profile
