@@ -9,6 +9,7 @@ import { TimeAvailabilityModule } from '../time-availability/time-availability.m
 import { StoreHeartModule } from '../store-heart/store-heart.module';
 import { StoreItemDetailModule } from '../store-item-detail/store-item-detail.module';
 import { LazyImageDirective } from './directives/lazy-image.directive';
+import { ShareModule } from '../share/share.module';
 
 const routes: Routes = [
   {
@@ -24,7 +25,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     TimeAvailabilityModule, 
     StoreHeartModule,
-    StoreItemDetailModule
+    StoreItemDetailModule,
+    ShareModule
   ],
   providers: [StoreDetailDataService]
 })
