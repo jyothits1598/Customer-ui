@@ -9,7 +9,7 @@
     <div *ngIf="!editMode; else editTemplate" >
         <div style="margin-top:34px;margin-bottom:26px;text-align: center;">
             <div class="std-heading-5">
-                {{profileData.firstName}} {{profileData.lastName}}
+                <span class="text-capitalize"> {{profileData.firstName}} {{profileData.lastName}} </span>
             </div>
         </div>
         <button (click)="toggleEdit()" class="std-button std-button--trans" style="margin-left: auto;margin-right: auto;display: block;">
@@ -19,23 +19,37 @@
 </ng-container>
 
 <ng-template #editTemplate>
+    <div class="profile-navbar">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="d-flex justify-content-between">
+                    <div class="profile-save-text" (click)="toggleEdit()">
+                        <img src="assets/images/ico_arrow_left_white.png" style="padding-right:5px;">Edit profile
+                    </div>
+                    <div class="profile-save-text" (click)="saveChanges()">
+                        <img *ngIf="saving" src="assets/images/ico_check_white.png" style="padding-right:8px;height: 24px;"> Save
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <form [formGroup]="profileForm">
         <div style="margin-top:24px;margin-bottom: 16px;">
             <label class="label-inputs">First Name</label>
             <input formControlName="firstName" type="text" class="form-input error-highlight">
-            <span *ngIf="profileForm.controls.firstName.touched && profileForm.controls.firstName.invalid">First name is
+            <span class="error-mez" *ngIf="profileForm.controls.firstName.touched && profileForm.controls.firstName.invalid">First name is
                 required.</span>
         </div>
         <div>
             <label class="label-inputs" >Last Name</label>
             <input formControlName="lastName" type="text" class="form-input error-highlight">
-            <span *ngIf="profileForm.controls.lastName.touched && profileForm.controls.lastName.invalid">Last name is
+            <span class="error-mez" *ngIf="profileForm.controls.lastName.touched && profileForm.controls.lastName.invalid">Last name is
                 required.</span>
         </div>
     </form>
-    <div class="col text-center" style="margin-top:24px;">
+    <!-- <div class="col text-center" style="margin-top:24px;">
         <button (click)="toggleEdit()" class="std-button std-button--trans" style="margin-right:16px"> Cancel</button>
         <button (click)="saveChanges()" class="std-button std-button--primary" [disabled]="!profileForm.dirty">Save <img *ngIf="saving" src="assets/images/loader.gif" alt="" style="height: 24px;"></button>
-    </div>
+    </div> -->
 </ng-template>
 </div>

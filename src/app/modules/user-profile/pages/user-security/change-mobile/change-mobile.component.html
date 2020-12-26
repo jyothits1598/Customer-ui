@@ -1,51 +1,61 @@
-<div class="security-card">
- 
-    <form [formGroup]="changeForm" (ngSubmit)="changeMobile()">
-        <h3 class="std-heading-4 text-center"> Verify mobile number </h3>
-        <div class="text-center" style="margin-bottom: 24px;">
-            You must verify your current number first
-        </div>
-
-        <div *ngIf="errorMessage" style="color: red;">
-            {{errorMessage}}
-        </div>
-
-        <div class="form-group form-group--margin">
-            <input type="text" class="form-input error-highlight" placeholder="Phone number" formControlName="mobile">
-            <div *ngIf="changeForm.controls.mobile.touched && changeForm.controls.mobile.errors" class="error-mez">
-                <div> {{getErrors('mobile')}} </div>
-            </div>
-        </div>
-        <div class="row form-group form-group--margin">
-            <div class="col-md-6">
-                <input type="number" class="form-input error-highlight" placeholder="Enter code" formControlName="verificationCode"
-                minlength="6" maxlength="6">
-            </div>
-            <div class="col-md-6">
-                <send-code (click)="changeForm.controls.mobile.markAsTouched()"
-                [data]="{purpose: 'change', type: 'mobile', value: (changeForm.controls.mobile.valid ? changeForm.controls.mobile.value : '')}"
-                (error)="handleError($event)">
-                </send-code>
-            </div>
-            <div class="col-md-12">
-                <div *ngIf="changeForm.controls.verificationCode.touched && changeForm.controls.verificationCode.errors"
-                class="error-mez">
-                    <div> {{getErrors('verificationCode')}} </div>
+<div class="edit-profile-page">
+    <div class="profile-navbar">
+        <div class="container">
+            <div class="d-flex justify-content-between">
+                <div class="profile-save-text" routerLink="/profile/security">
+                    <img src="assets/images/ico_arrow_left_white.png" style="padding-right:5px;"> Change email 
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group form-group--margin">
-                    <button type="submit" class="std-button std-button--blue">
-                        <span *ngIf="!loading; else loadingTemp"> Next </span>
-                        <ng-template #loadingTemp>
-                            <img src="assets/images/loader.gif" alt="" style="height: 24px;">
-                        </ng-template>
-                    </button>
+    </div>
+    <div class="security-card">
+        <form [formGroup]="changeForm" (ngSubmit)="changeMobile()">
+            <h3 class="std-heading-4 text-center"> Verify mobile number </h3>
+            <div class="text-center" style="margin-bottom: 24px;">
+                You must verify your current number first
+            </div>
+            <div *ngIf="errorMessage" id="hideMe" class="error-mez">
+                {{errorMessage}}
+            </div>
+            <div class="form-group form-group--margin">
+                <input type="number" class="form-input error-highlight" placeholder="Mobile number" formControlName="mobile" minlength="10" maxlength="10">
+                <div *ngIf="changeForm.controls.mobile.touched && changeForm.controls.mobile.errors" class="error-mez">
+                    <div> {{getErrors('mobile')}} </div>
                 </div>
             </div>
-        </div>
-    </form>
-   
+            <div class="row form-group form-group--margin">
+                <div class="col-md-6" style="margin-bottom: 16px;">
+                    <input type="number" class="form-input error-highlight" placeholder="Enter code" formControlName="verificationCode"
+                    minlength="6" maxlength="6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div *ngIf="changeForm.controls.verificationCode.touched && changeForm.controls.verificationCode.errors"
+                            class="error-mez">
+                                <div> {{getErrors('verificationCode')}} </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <send-code (click)="changeForm.controls.mobile.markAsTouched()"
+                    [data]="{purpose: 'change', type: 'mobile', value: (changeForm.controls.mobile.valid ? changeForm.controls.mobile.value : '')}"
+                    (error)="handleError($event)">
+                    </send-code>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group form-group--margin">
+                        <button type="submit" class="std-button std-button--blue">
+                            <span *ngIf="!loading; else loadingTemp"> Next </span>
+                            <ng-template #loadingTemp>
+                                <img src="assets/images/loader.gif" alt="" style="height: 24px;">
+                            </ng-template>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>

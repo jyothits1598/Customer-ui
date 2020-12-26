@@ -24,8 +24,8 @@
                             <div class="label-inputs"> <span class="float-left"> Mobile </span><span class="float-right"
                                     style="color: #353FA8;;cursor: pointer;" (click)="toggleType()"> Log in with Email
                                 </span> </div>
-                            <input formControlName="mobile" type="text" class="form-input error-highlight"
-                                placeholder="Mobile Number">
+                            <input formControlName="mobile" type="number" class="form-input error-highlight"
+                                placeholder="Mobile Number" minlength="10" maxlength="10">
                             <ng-container *ngIf="loginForm.controls.mobile.invalid && loginForm.controls.mobile.touched">
                                 <div class="error-mez">{{returnErrors('mobile')}}</div>
                             </ng-container>

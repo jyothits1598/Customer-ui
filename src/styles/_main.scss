@@ -188,7 +188,7 @@
     font-weight: bold;
     margin: 0 auto;
     display: inline-block;
-    padding: 10px 16px;
+    padding: 8px 16px;
 
     &--primary {
         color: var(--color-background);
@@ -356,4 +356,25 @@ input.ng-invalid.ng-touched.error-highlight {
     cursor: pointer;
     text-align: center;
     color:var(--color-primary);
+}
+.profile-save-text {
+    font-size: 14px;
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: bold;
+    color: var(--color-background);
+    cursor: pointer;
+    outline: 0;
+}
+.profile-navbar {
+    background: var(--color-primary);
+    color: var(--color-background);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    height: 48px;
+    line-height: 48px;
 }

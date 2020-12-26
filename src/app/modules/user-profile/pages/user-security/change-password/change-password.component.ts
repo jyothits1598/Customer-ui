@@ -43,11 +43,15 @@ export class ChangePasswordComponent implements OnInit {
 
     this.userProfileDataService.changePassword(this.passwordForm.value.currentPassword, this.passwordForm.value.newPassword).subscribe(
       () => {
-        this.snackBarService.success('Password Changed successfully.'),
+        this.snackBarService.success('Password changed successfully.'),
           this.router.navigate(['../'], {relativeTo: this.activatedRoute})
       },
-      (err) => { this.changeErrorMsg = err.error.error_msg[0]; this.loading = false; }
+      // (error) => { this.changeErrorMsg = error.error_msg[0]; this.loading = false; }
+      (err) => { this.loading = false; this.handleError(err) }
     )
   }
 
+  handleError(errorResp) {
+    if (errorResp.error.error_msg) this.changeErrorMsg = errorResp.error.error_msg[0];
+  }
 }
