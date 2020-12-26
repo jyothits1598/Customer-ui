@@ -26,7 +26,7 @@ export class ChangeMobileComponent implements OnInit {
 
   changeForm: FormGroup = new FormGroup({
     mobile: new FormControl(null, [
-      CustomValidators.required('Phone number is required.'),
+      CustomValidators.required('Mobile number is required.'),
     ]),
     verificationCode: new FormControl(null, [
       CustomValidators.required('Code is required'),
@@ -51,6 +51,7 @@ export class ChangeMobileComponent implements OnInit {
 
   handleError(errorResp) {
     if (errorResp.error.error_msg) this.errorMessage = errorResp.error.error_msg[0];
+    if (errorResp.error.mobile_number) this.errorMessage = errorResp.error.mobile_number[0];
     if (errorResp.error.verificationCode) this.changeForm.controls.verificationCode.setErrors({ backend: errorResp.error.verificationCode[0] });
     if (errorResp.error.mobile) this.changeForm.controls.mobile.setErrors({ backend: errorResp.error.mobile[0] })
   }

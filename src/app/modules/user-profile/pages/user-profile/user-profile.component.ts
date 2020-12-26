@@ -31,7 +31,7 @@ export class UserProfileComponent implements OnInit {
 
   toggleEdit() {
     if (!this.editMode) this.profileForm.patchValue(this.profileData);
-    console.log(this.profileForm.value);
+    // console.log(this.profileForm.value);
     this.editMode = !this.editMode;
   }
 

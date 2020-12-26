@@ -249,3 +249,21 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0; 
 }
 .first:first-letter {text-transform: capitalize} 
+
+.edit-profile-page {
+    position: fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    background:var(--color-background);
+    z-index: 99999;
+}
+.center-logo-profile {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    outline: 0;
+    cursor: pointer;
+}

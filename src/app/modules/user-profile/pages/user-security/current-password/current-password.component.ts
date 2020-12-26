@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CustomValidators } from 'src/app/helpers/validators';
 import { PasswordConfirmationGuard } from '../../../guards/password-confirmation.guard';
@@ -15,10 +15,24 @@ export class CurrentPasswordComponent implements OnInit {
   errorRespMsg: string = null;
   loading: boolean = false;
 
+  // current_url:string = "/current-password";
+  // current_url_status:boolean = false;
   passwordForm: FormGroup = new FormGroup({
     password: new FormControl(null, CustomValidators.required('Password is required.'))
   })
-  constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute, private passwordConfGuard: PasswordConfirmationGuard) { }
+  constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute, private passwordConfGuard: PasswordConfirmationGuard) { 
+    // this.router.events.subscribe(
+    //   (event: any) => {
+    //     if (event instanceof NavigationEnd) {
+    //       this.current_url_status = false;
+    //       if(this.router.url && this.router.url.indexOf(this.current_url) > -1){
+    //         this.current_url_status = true;
+    //         console.log(this.current_url_status);
+    //       }
+    //     }
+    //   }
+    // );
+  }
 
   ngOnInit(): void {
     this.redirectUrl = this.activatedRoute.snapshot.queryParams.redirect;
