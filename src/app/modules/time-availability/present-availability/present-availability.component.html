@@ -3,7 +3,7 @@
         <tr>
             <td style="padding-top:1px;padding-right: 4px;">
                 <ng-container *ngIf="fullDay; else opTime">
-                    24 Hours
+                    Open 24HRS
                 </ng-container>
                 <ng-template #opTime>
                     Open {{formatTime(openTimings.startTime)}}-{{formatTime(openTimings.endTime)}}

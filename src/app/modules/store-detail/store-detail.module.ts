@@ -10,6 +10,8 @@ import { StoreHeartModule } from '../store-heart/store-heart.module';
 import { StoreItemDetailModule } from '../store-item-detail/store-item-detail.module';
 import { LazyImageDirective } from './directives/lazy-image.directive';
 import { ShareModule } from '../share/share.module';
+import { FacebookLikeCountModule } from '../facebook-like-count/facebook-like-count.module';
+import { GoogleRatingModule } from '../google-rating/google-rating.module';
 
 const routes: Routes = [
   {
@@ -26,7 +28,9 @@ const routes: Routes = [
     TimeAvailabilityModule, 
     StoreHeartModule,
     StoreItemDetailModule,
-    ShareModule
+    ShareModule,
+    GoogleRatingModule,
+    FacebookLikeCountModule
   ],
   providers: [StoreDetailDataService]
 })
