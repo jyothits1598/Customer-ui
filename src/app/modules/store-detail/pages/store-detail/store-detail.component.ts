@@ -14,7 +14,7 @@ import { UserLocation } from 'src/app/core/model/user-location';
   templateUrl: './store-detail.component.html',
   styleUrls: ['./store-detail.component.scss']
 })
-export class StoreDetailComponent implements OnInit, AfterViewInit, OnDestroy {
+export class StoreDetailComponent implements OnInit, OnDestroy {
   storeId: number;
   selecteditemId: number;
   scrolledDown: boolean;
@@ -28,10 +28,13 @@ export class StoreDetailComponent implements OnInit, AfterViewInit, OnDestroy {
   routeQueryparamsSubs;
 
   @ViewChild('observationElement', { read: ElementRef }) obsElement: ElementRef;
+  @ViewChild('fbParent', { read: ElementRef }) fbParent: ElementRef;
   constructor(private storeDetailServ: StoreDetailDataService,
     private route: ActivatedRoute, private geoLoc: GeoLocationService) { }
 
-  ngAfterViewInit(): void {
+  renderLikeBtn(): void {
+    console.log('rendereing like', FB.XFBML, this.fbParent);
+    FB.XFBML.parse();
   }
 
   observeIntersection() {

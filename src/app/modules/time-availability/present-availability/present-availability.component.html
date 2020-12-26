@@ -2,7 +2,12 @@
     <table>
         <tr>
             <td style="padding-top:1px;padding-right: 4px;">
-                Open {{formatTime(openTimings.startTime)}}-{{formatTime(openTimings.endTime)}}
+                <ng-container *ngIf="fullDay; else opTime">
+                    24 Hours
+                </ng-container>
+                <ng-template #opTime>
+                    Open {{formatTime(openTimings.startTime)}}-{{formatTime(openTimings.endTime)}}
+                </ng-template>
             </td>
             <td>
                 <img src="assets/images/ico_circle_filled_small.png" >

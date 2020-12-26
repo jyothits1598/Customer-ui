@@ -17,7 +17,8 @@
                                         style="cursor: pointer;outline:0;">
                                 </td>
                                 <td align="bottom">
-                                    <span *ngIf="scrolledDown" style="display: inline-block; animation: fadeInDown .1s">&nbsp;
+                                    <span *ngIf="scrolledDown"
+                                        style="display: inline-block; animation: fadeInDown .1s">&nbsp;
                                         {{storeDetail.name}}</span>
                                 </td>
                             </tr>
@@ -78,24 +79,27 @@
                     </div><br>
                 </div>
                 <div style="margin-top:12px;">
-                    <span>
+                    <!-- <span>
                         <img src="assets/images/ico_social_facebook_small.png">
                         <span class="user-facebook"> <b> Steve Anderson </b> and 125k others </span>
-                    </span>
+                    </span> -->
+                    <div #fbParent>
+                        <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/"></div>
+                    </div>
                     <span style="padding-left: 10px;">
-                        <span class="user-facebook"> 
+                        <span class="user-facebook">
                             <!-- 4.0 &nbsp;
                             <img src="assets/images/ico_star_small.png">
                             <img src="assets/images/ico_star_small.png">
                             <img src="assets/images/ico_star_small.png">
-                            <img src="assets/images/ico_star_small.png"> -->
-                            <img src="assets/images/rating.png">
+                            <img src="assets/images/ico_star_small.png">
+                            <img src="assets/images/rating.png"> -->
                         </span>
                     </span>
                 </div>
                 <div class="address-content" style="margin-top: 16px;">
                     <hr class="d-block d-sm-none">
-                    {{storeDetail.address}} &nbsp; 
+                    {{storeDetail.address}} &nbsp;
                 </div>
                 <!-- <div class="d-flex justify-content-between">
                     <span>

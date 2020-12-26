@@ -6,7 +6,8 @@
       "googlemaps",
       "gapi",
       "gapi.auth2",
-      "apple-signin-api"
+      "apple-signin-api",
+      "facebook-js-sdk"
     ],
     "typeRoots": [ "../node_modules/@types" ],
     "baseUrl": "./",

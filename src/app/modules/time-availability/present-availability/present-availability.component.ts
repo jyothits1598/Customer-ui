@@ -9,7 +9,7 @@ import { TimeAvailability } from '../model/time-availability';
 export class PresentAvailabilityComponent implements OnInit {
   _availability: Array<TimeAvailability>;
   openTimings: TimeAvailability;
-
+  fullDay: boolean = false;
   now = new Date();
 
   constructor() { }
@@ -60,7 +60,7 @@ export class PresentAvailabilityComponent implements OnInit {
     // }
 
     if (day == this.now.getDay()) {
-      if (this.is24Hour(availability)) return true;
+      if (this.is24Hour(availability)) { this.fullDay = true; return true; };
 
       let end = new Date();
       end.setHours(this.gethours(availability.endTime), parseInt(availability.endTime.substr(3, 2)));

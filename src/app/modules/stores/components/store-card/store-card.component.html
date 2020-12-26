@@ -33,20 +33,22 @@
                 <div class="col-md-12">
                     <table>
                         <tr>
-                            <td>
+                            <!-- <td>
                                 <span>
                                     <img src="assets/images/ico_social_facebook_small.png">
                                     <span class="user-facebook"> <b> Steve Anderson </b> and 125k others </span>
                                 </span>
-                            </td>
-                            <td style="padding-left: 16px;">
+                            </td> -->
+                            <facebook-like-count [url]="store.facebookUrl"></facebook-like-count>
+                            <!-- <td style="padding-left: 16px;">
                                 <span class="user-facebook"> 4.0 </span>
                                 <img src="assets/images/ico_star_small.png">
                                 <img src="assets/images/ico_star_small.png">
                                 <img src="assets/images/ico_star_small.png">
                                 <img src="assets/images/ico_star_small.png">
                                 <img src="assets/images/ico_star_half_small.png">
-                            </td>
+                            </td> -->
+                            <google-rating [store]="store"></google-rating>
                         </tr>
                     </table>
                     <!-- <div class="description-chating">

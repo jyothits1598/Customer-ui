@@ -9,6 +9,8 @@ import { IncrementalSearchModule } from '../incremental-search/incremental-searc
 import { StoreFavouritesComponent } from './components/store-favourites/store-favourites.component';
 import { StoreHeartModule } from '../store-heart/store-heart.module';
 import { RouterModule } from '@angular/router';
+import { GoogleRatingModule } from '../google-rating/google-rating.module';
+import { FacebookLikeCountModule } from '../facebook-like-count/facebook-like-count.module';
 
 @NgModule({
   declarations: [StoreListComponent, StoreCardComponent, NearbyStoresComponent, StoreFavouritesComponent],
@@ -18,7 +20,9 @@ import { RouterModule } from '@angular/router';
     RouterModule,
     TimeAvailabilityModule,
     IncrementalSearchModule,
-    StoreHeartModule
+    StoreHeartModule,
+    GoogleRatingModule,
+    FacebookLikeCountModule
   ],
   exports: [NearbyStoresComponent, StoreListComponent, StoreCardComponent],
   providers: []
