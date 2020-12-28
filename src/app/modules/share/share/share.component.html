@@ -1,0 +1,9 @@
+<li style="cursor: pointer;outline:none;margin-left:16px">
+    <img src="assets/images/navbar/ico_share.png" (click)="showPopover(sharePanel)">
+</li>
+<li style="cursor: pointer;outline:none;margin-left:16px"> <img src="assets/images/navbar/ico_navigation.png">
+</li>
+
+<ng-template #sharePanel>
+    <div style="background-color: white;"><span (click)="fbShare()">Facebook</span></div>
+</ng-template>
