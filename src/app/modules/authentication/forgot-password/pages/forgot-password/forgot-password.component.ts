@@ -61,7 +61,6 @@ export class ForgotPasswordComponent implements OnInit {
   submit() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
-      console.log('form is invalid');
       return;
     }
 

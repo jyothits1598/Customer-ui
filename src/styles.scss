@@ -125,6 +125,10 @@
     .fixed-shadow {
         width:80%;
     }
+    .margins-center {
+        box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+        border-radius: 16px;
+    }
   }
    
   /* Large devices (desktops, 992px and up) */
@@ -177,6 +181,10 @@
     .fixed-shadow {
         width:80%;
     }
+    .margins-center {
+        box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+        border-radius: 16px;
+    }
   }
   /* Extra large devices (large desktops, 1200px and up) */
   @media (min-width: 1400px) {  
@@ -227,6 +235,10 @@
     }
     .fixed-shadow {
         width:80%;
+    }
+    .margins-center {
+        box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+        border-radius: 16px;
     }
   }
   .signup-panel {

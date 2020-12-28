@@ -10,7 +10,7 @@
                 We’ll send a verification code to your email
             </div>
 
-            <div *ngIf="errorMessage" class="error-mez">
+            <div *ngIf="errorMessage" class="error-mez" id="hideMe">
                 {{errorMessage}}
             </div>
 
@@ -57,14 +57,14 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6 pad-ing-right" style="margin-bottom: 24px;">
+            <div class="col-6 pad-ing-right" style="margin-bottom: 24px;">
                 <input type="number" class="form-input error-highlight" placeholder="Enter code"
                     formControlName="verificationCode" minlength="6" maxlength="6" >
                 <div *ngIf="controls.verificationCode.touched && controls.verificationCode.errors" class="error-mez">
                     <div> {{getErrors('verificationCode')}} </div>
                 </div>
             </div>
-            <div class="col-md-6 pad-ing-left" style="margin-bottom: 24px;">
+            <div class="col-6 pad-ing-left" style="margin-bottom: 24px;">
                 <send-code
                     (click)="activeType === 'email' ? controls.email.markAsTouched() : controls.mobile.markAsTouched()"
                     [data]="{purpose: 'signup', type: activeType, value: activeType === 'email'? registrationForm.value.email : registrationForm.value.mobile}"
