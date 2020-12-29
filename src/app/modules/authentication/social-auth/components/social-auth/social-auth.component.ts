@@ -2,7 +2,7 @@ import { applySourceSpanToExpressionIfNeeded } from '@angular/compiler/src/outpu
 import { Component, EventEmitter, OnDestroy, OnInit, Output, ɵConsole } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { finalize, switchMap } from 'rxjs/operators';
+import { finalize, switchMap, take } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ExternalLibraries, LibraryLoaderService } from 'src/app/core/services/library-loader.service';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
@@ -17,9 +17,10 @@ import { SocialAuthHelperService } from '../../../services/social-auth-helper.se
 export class SocialAuthComponent implements OnInit, OnDestroy {
   error: string;
 
+  loading = true;
   facebookLoading: boolean = false;
   googleLoading: boolean = false;
-  appleLoading: boolean = true;
+  appleLoading: boolean = false;
 
   reqSubs: Subscription;
 
@@ -37,13 +38,14 @@ export class SocialAuthComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.loadLibraries();
+    // this.loadLibraries();
     if (this.router.url && this.router.url.indexOf(this.signin_url) > -1) this.isLogin = true;
+    this.socialAuthHelper.hasLoaded.pipe(take(1)).subscribe(loaded => this.loading = false);
 
   }
 
   get inProgress(): boolean {
-    return this.facebookLoading || this.googleLoading;
+    return this.loading || this.facebookLoading || this.googleLoading;
   }
 
   facebookSignin() {
@@ -70,6 +72,25 @@ export class SocialAuthComponent implements OnInit, OnDestroy {
       () => { this.signedIn.emit(true) },
       (err) => this.handleError(err)
     )
+    // this.googleLoading = true;
+    // this.libraryLoaderService.loadLibrary(ExternalLibraries.GoogleLogin).subscribe(
+    //   () => gapi.load('auth2', (ld) => {
+    //     let auth = gapi.auth2.init({
+    //       client_id: '369468801567-ncm9je96ikkbhf210j82ptf7uj7jttnj.apps.googleusercontent.com',
+    //       scope: 'profile'
+    //     }).then((auth) => {
+    //       console.log('sign in then function, ', auth.signIn().then(
+    //         (log) => { console.log('login resp') }
+    //       ))
+    //     });
+
+    //     // gapi.auth2.authorize(null, ()=>{console.log('this is ')})
+
+
+
+    //   })
+    // )
+
   }
 
   appleSignIn() {
@@ -98,7 +119,7 @@ export class SocialAuthComponent implements OnInit, OnDestroy {
 
   handleError(err) {
     this.error = <string>(Object.values(err.error)[0]);
-    
+
   }
 
   ngOnDestroy(): void {

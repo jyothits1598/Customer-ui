@@ -15,15 +15,23 @@ export class SampleComponent implements OnInit {
       () => {
         gapi.load('auth2', () => {
 
-          let auth = gapi.auth2.init(
-            { client_id: '369468801567-ncm9je96ikkbhf210j82ptf7uj7jttnj.apps.googleusercontent.com' }
-          )
-          gapi.signin2.render('my-signin2', {
+          // let auth = gapi.auth2.init(
+          //   { client_id: '369468801567-ncm9je96ikkbhf210j82ptf7uj7jttnj.apps.googleusercontent.com' }
+          // )
+          // gapi.signin2.render('my-signin2', {
 
-            'scope': 'profile email',
-            'longtitle': true,
-            'theme': 'light',
-          });
+          //   'scope': 'profile email',
+          //   'longtitle': true,
+          //   'theme': 'light',
+          // });
+          let auth = gapi.auth2.init({
+            client_id: '369468801567-ncm9je96ikkbhf210j82ptf7uj7jttnj.apps.googleusercontent.com',
+            scope: 'profile'
+          }).then((auth) => {
+            console.log('sign in then function, ', auth.signIn().then(
+              (log) => { console.log('login resp') }
+            ))
+          })
 
         })
         // let auth = gapi.auth2.init(
