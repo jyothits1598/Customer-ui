@@ -9,7 +9,6 @@ import { UserSettingsComponent } from './pages/user-settings/user-settings.compo
 import { UserSecurityComponent } from './pages/user-security/user-security.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { UserProfileImageComponent } from './pages/user-profile/user-profile-image/user-profile-image.component';
-import { MobileEmailComponent } from './pages/user-security/mobile-email/mobile-email.component';
 import { ChangePasswordComponent } from './pages/user-security/change-password/change-password.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule } from '@angular/router';
@@ -26,7 +25,6 @@ import { VerificationCodeModule } from '../authentication/verification-code/veri
     BasicProfileComponent,
     UserSettingsComponent,
     UserSecurityComponent,
-    MobileEmailComponent,
     ChangePasswordComponent,
     UserProfileComponent,
     UserProfileImageComponent,

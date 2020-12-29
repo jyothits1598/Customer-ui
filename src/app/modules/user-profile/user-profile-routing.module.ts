@@ -6,7 +6,6 @@ import { UserSettingsComponent } from './pages/user-settings/user-settings.compo
 import { UserSecurityComponent } from './pages/user-security/user-security.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { CurrentPasswordComponent } from './pages/user-security/current-password/current-password.component';
-import { MobileEmailComponent } from './pages/user-security/mobile-email/mobile-email.component';
 import { ChangePasswordComponent } from './pages/user-security/change-password/change-password.component';
 import { ChangeEmailComponent } from './pages/user-security/change-email/change-email.component';
 import { PasswordConfirmationGuard } from './guards/password-confirmation.guard';
@@ -51,10 +50,6 @@ const routes:
         }
       ]
 
-    },
-    {
-      path: 'update-details',
-      component: MobileEmailComponent
     },
 
   ];
