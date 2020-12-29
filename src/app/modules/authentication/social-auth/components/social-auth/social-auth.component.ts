@@ -15,6 +15,7 @@ import { SocialAuthHelperService } from '../../../services/social-auth-helper.se
   styleUrls: ['./social-auth.component.scss']
 })
 export class SocialAuthComponent implements OnInit, OnDestroy {
+  error: string;
 
   facebookLoading: boolean = false;
   googleLoading: boolean = false;
@@ -54,7 +55,7 @@ export class SocialAuthComponent implements OnInit, OnDestroy {
       finalize(() => this.facebookLoading = false)
     ).subscribe(
       () => { this.signedIn.emit(true) },
-      () => this.handleError()
+      (err) => this.handleError(err)
     )
   }
 
@@ -67,7 +68,7 @@ export class SocialAuthComponent implements OnInit, OnDestroy {
       finalize(() => this.googleLoading = false)
     ).subscribe(
       () => { this.signedIn.emit(true) },
-      () => this.handleError()
+      (err) => this.handleError(err)
     )
   }
 
@@ -95,8 +96,9 @@ export class SocialAuthComponent implements OnInit, OnDestroy {
     )
   }
 
-  handleError() {
-    this.snackBar.error('There was an error. Please try again.')
+  handleError(err) {
+    this.error = <string>(Object.values(err.error)[0]);
+    
   }
 
   ngOnDestroy(): void {

@@ -5,26 +5,28 @@ import { Injectable, OnInit } from '@angular/core';
   providedIn: 'root'
 })
 export class LayoutService {
-  isMobile: boolean;
+  get isMobile(): boolean {
+    return this.window.document.documentElement.clientWidth < 500;
+  }
 
   matcher: MediaQueryList;
 
-  constructor(private mediaMatcher: MediaMatcher) {
-    this.matcher = this.mediaMatcher.matchMedia('(min-width: 500px)');
-    if (!this.matcher.matches) {
-      this.isMobile = true;
-    } else {
-      this.isMobile = false;
-    }
+  constructor(private window: Window) {
+    // this.matcher = this.mediaMatcher.matchMedia('(min-width: 500px)');
+    // if (!this.matcher.matches) {
+    //   this.isMobile = true;
+    // } else {
+    //   this.isMobile = false;
+    // }
 
-    this.matcher.addEventListener('change', (event) => {
-      if (!event.matches) {
-        this.isMobile = true;
-      }
-      else {
-        this.isMobile = false;
-      }
-    });
+    //   this.matcher.addEventListener('change', (event) => {
+    //     if (!event.matches) {
+    //       this.isMobile = true;
+    //     }
+    //     else {
+    //       this.isMobile = false;
+    //     }
+    //   });
   }
 
 }
