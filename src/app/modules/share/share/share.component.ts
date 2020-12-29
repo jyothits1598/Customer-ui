@@ -18,9 +18,9 @@ export class ShareComponent implements OnInit {
   constructor(private popoverService: PopoverService,
     private elementRef: ElementRef,
     private window: Window) { }
-  ngOnInit(): void {
-
-  }
+  
+    ngOnInit(): void {
+    }
 
   getUrl() {
 

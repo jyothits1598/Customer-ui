@@ -1,14 +1,19 @@
-<ul #popOrigin>
-    <li style="cursor: pointer;outline:none;margin-left:16px">
-        <img src="assets/images/navbar/ico_share.png" (click)="showPopover(sharePanel)">
-    </li>
-    <li style="cursor: pointer;outline:none;margin-left:16px"> <img src="assets/images/navbar/ico_navigation.png">
-    </li>
-</ul>
+<span #popOrigin>
+    <img src="assets/images/navbar/ico_share.png" (click)="showPopover(sharePanel)" style="cursor: pointer;outline:none;">
+</span>
 
 <ng-template #sharePanel>
-    <div style="background-color: white;"><span (click)="fbShare()">Facebook</span></div>
-    <div style="background-color: white;"><span (click)="twtShare()">Twitter</span></div>
-    <a [href]="'mailto:?body='+ shareUrl +'&subject=' + 'Check out this store  menuzapp'"
-        style="background-color: white;"><span>Email</span></a>
+    <div class="share-social" >
+        <span (click)="fbShare()" class="social-fb">
+            <img src="assets/images/ico_social_facebook_small.png"> Facebook
+        </span>
+
+        <span (click)="twtShare()" class="social-twt">
+            Twitter
+        </span>
+
+        <a class="social-gmail" [href]="'mailto:?body='+ shareUrl +'&subject=' + 'Check out this store  menuzapp'" style="cursor: pointer;text-decoration: none;">
+            <span>Email</span>
+        </a>
+    </div>
 </ng-template>

@@ -11,6 +11,7 @@ import { StoreHeartModule } from '../store-heart/store-heart.module';
 import { RouterModule } from '@angular/router';
 import { GoogleRatingModule } from '../google-rating/google-rating.module';
 import { FacebookLikeCountModule } from '../facebook-like-count/facebook-like-count.module';
+import { ShareModule } from '../share/share.module';
 
 @NgModule({
   declarations: [StoreListComponent, StoreCardComponent, NearbyStoresComponent, StoreFavouritesComponent],
@@ -22,7 +23,8 @@ import { FacebookLikeCountModule } from '../facebook-like-count/facebook-like-co
     IncrementalSearchModule,
     StoreHeartModule,
     GoogleRatingModule,
-    FacebookLikeCountModule
+    FacebookLikeCountModule,
+    ShareModule
   ],
   exports: [NearbyStoresComponent, StoreListComponent, StoreCardComponent],
   providers: []
