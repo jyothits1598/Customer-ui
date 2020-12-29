@@ -64,6 +64,9 @@ body {
       font-size: 12px;
       color: var(--color-typography-tertiary);
     }
+    &__bold {
+      font-weight: bold;
+    }
   }
 
 .resnt-menu-top-tabs{

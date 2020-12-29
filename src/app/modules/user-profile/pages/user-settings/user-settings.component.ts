@@ -6,10 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-settings.component.scss']
 })
 export class UserSettingsComponent implements OnInit {
-
+  
   constructor() { }
 
   ngOnInit(): void {
-  }
-
+    
+}
 }
