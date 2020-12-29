@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ElementRef, OnInit, TemplateRef } from '@angular/core';
+import { AfterContentInit, Component, ElementRef, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { windowTime } from 'rxjs/operators';
 import { PopoverService } from 'src/app/core/services/popover.service';
 
@@ -8,17 +8,26 @@ import { PopoverService } from 'src/app/core/services/popover.service';
   styleUrls: ['./share.component.scss']
 })
 export class ShareComponent implements OnInit {
+  @ViewChild('popOrigin', { read: ElementRef }) org: ElementRef;
   popRef = null;
+  @Input() url: string;
 
+  get shareUrl(): string {
+    return this.url ? this.url : this.window.location.href;
+  }
   constructor(private popoverService: PopoverService,
     private elementRef: ElementRef,
     private window: Window) { }
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+
+  }
+
+  getUrl() {
+
   }
 
   showPopover(temp: TemplateRef<any>) {
-    this.popRef = this.popoverService.openTemplatePopover(this.elementRef, temp, {
+    this.popRef = this.popoverService.openTemplatePopover(this.org, temp, {
       xPos: 'end',
       yPos: 'bottom',
       // onDismiss?: () => void;
@@ -29,12 +38,15 @@ export class ShareComponent implements OnInit {
   }
 
   fbShare() {
-    let url = this.window.location.href;
-    console.log('fb share url - ', url)
     FB.ui({
       method: 'share',
-      href: url
+      href: this.shareUrl
     })
+    // window.open(`https://www.facebook.com/sharer/sharer.php?u=#${this.url ? this.url : this.window.location.href}`);
+  }
+
+  twtShare() {
+    window.open(`http://twitter.com/share?text=Check out this store @ menuzapp&url=${this.shareUrl}&hashtags=menuzapp`);
   }
 
 }

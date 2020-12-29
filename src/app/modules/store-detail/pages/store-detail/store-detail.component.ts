@@ -88,7 +88,6 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.routeQueryparamsSubs.unsubscribe();
     this.routeParamsSubs.unsubscribe();
-
   }
 
 }

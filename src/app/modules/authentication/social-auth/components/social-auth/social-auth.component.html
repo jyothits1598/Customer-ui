@@ -1,4 +1,5 @@
 <div [style.filter]="inProgress ? 'opacity(0.5)': ''">
+    <div *ngIf="error" class="err-mez">{{error}}</div>
     <button [disabled]="inProgress" class="std-button std-button--transparency1" (click)="googleSignin()"
         style="margin-bottom: 16px;color:#1a1a1a;">
         <img src="assets/images/google.png">&nbsp; <span> {{ isLogin? 'Log In ' : 'Continue '}}
