@@ -9,7 +9,7 @@
             today {{formatTime(nextAvailability.startTime)}}
         </ng-container>
         <ng-container *ngSwitchCase="1">
-            tomorrow
+            tomorrow {{formatTime(nextAvailability.startTime)}}
         </ng-container>
         <ng-container *ngSwitchDefault>
             <span style="text-transform: capitalize;"> 
