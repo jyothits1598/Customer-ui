@@ -13,7 +13,7 @@ export class LibraryLoaderService {
 
   constructor() { }
 
-  loadLibrary(lib: ExternalLibraries) {
+  loadLibrary(lib: ExternalLibraries): Observable<any> {
     console.log('called load library using ', lib);
     return new Observable(observer => {
       let script = document.createElement('script');

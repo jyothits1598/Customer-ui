@@ -6,8 +6,11 @@ import { map, take, tap } from 'rxjs/operators';
 
 @Injectable()
 export class SocialAuthHelperService {
-
-  constructor(private authService: SocialAuthService) { }
+  hasLoaded: Observable<boolean>;
+  
+  constructor(private authService: SocialAuthService) {
+    this.hasLoaded = this.authService.initState;
+  }
 
   facebookSignIn(): Observable<{ email: string, token: string }> {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
