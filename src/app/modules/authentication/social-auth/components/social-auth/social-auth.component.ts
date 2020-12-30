@@ -40,7 +40,7 @@ export class SocialAuthComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // this.loadLibraries();
     if (this.router.url && this.router.url.indexOf(this.signin_url) > -1) this.isLogin = true;
-    this.socialAuthHelper.hasLoaded.pipe(take(1)).subscribe(loaded => this.loading = false);
+    this.socialAuthHelper.hasLoaded.pipe(take(1)).subscribe(loaded => {this.loading = false; console.log('reading init state of ngx login', loaded)}, (err)=>{console.log('error inside ngx init', err)});
 
   }
 

@@ -8,11 +8,16 @@ import { Store } from '../../model/store';
 })
 export class StoreCardComponent implements OnInit {
   @Input() store: Store;
-  
-  constructor() { }
 
-  ngOnInit(): void { 
-    
+  constructor(private window: Window) {
+  }
+
+  getShareUrl(): string {
+    return this.window.location.origin + '/restaurants/' + this.store.id;
+  }
+
+  ngOnInit(): void {
+
   }
 
 }

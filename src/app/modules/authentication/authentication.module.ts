@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Inject, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AuthenticationRoutingModule } from './authentication-routing.module';
@@ -13,6 +13,7 @@ import {
 import { SocialAuthHelperService } from './services/social-auth-helper.service';
 import { AuthParentComponent } from './pages/auth-parent/auth-parent.component';
 import { SignupService } from './signup/services/signup.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @NgModule({
   declarations: [AuthParentComponent],
@@ -27,6 +28,9 @@ import { SignupService } from './signup/services/signup.service';
       provide: 'SocialAuthServiceConfig',
       useValue: {
         autoLogin: false,
+        // onError: (error) => {
+        //   console.log('inside on error', SocialAuthHelperService);
+        // },
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,

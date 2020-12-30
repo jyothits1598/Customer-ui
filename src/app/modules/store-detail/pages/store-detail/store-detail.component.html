@@ -32,10 +32,10 @@
                         <ul class="menu">
                             <!-- <li style="cursor: pointer;outline:none"> <img src="assets/images/navbar/ico_heart_trp.png">
                             </li> -->
-                            <li style="cursor: pointer;outline:none;margin-left:16px"> 
+                            <li style="cursor: pointer;outline:none;margin-left:16px">
                                 <app-share></app-share>
                             </li>
-                            <li style="cursor: pointer;outline:none;margin-left:16px"> 
+                            <li style="cursor: pointer;outline:none;margin-left:16px">
                                 <img src="assets/images/navbar/ico_navigation.png">
                             </li>
                         </ul>
@@ -93,6 +93,8 @@
                 <div class="address-content" style="margin-top: 16px;">
                     <hr class="d-block d-sm-none">
                     {{storeDetail.address}} &nbsp;
+                    <a [href]="'https://www.google.com/maps/dir/?api=1&destination='+storeDetail.latLng.lat+','+storeDetail.latLng.lng"
+                        target="_blank">Directions</a>
                 </div>
                 <!-- <div class="d-flex justify-content-between">
                     <span>
