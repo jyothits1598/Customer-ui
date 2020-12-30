@@ -2,7 +2,7 @@
     <div class="profile-navbar">
         <div class="container">
             <span class="profile-save-text" routerLink="/profile/security">
-                <img src="assets/images/ico_arrow_left_white.png" style="padding-right:5px;"> Change email
+                <img src="assets/images/ico_arrow_left_white.png" style="padding-right:5px;"> Add mobile
             </span>
             <div class="center-logo-profile only-big" routerLink="/" >
                 <img src="assets/svg/logo_white.svg">
@@ -14,14 +14,15 @@
             <div class="row">
                 <div class="col-md-12">
                     <form [formGroup]="changeForm" (ngSubmit)="changeMobile()">
-                        <h3 class="std-heading-4 text-center"> Verify mobile number </h3>
+                        <h3 class="std-heading-4 text-center"> Enter new mobile number </h3>
                         <div class="text-center" style="margin-bottom: 24px;">
-                            You must verify your current number first
+                            We'll send a verification code to this number
                         </div>
                         <div *ngIf="errorMessage" id="hideMe" class="error-mez">
                             {{errorMessage}}
                         </div>
                         <div class="form-group form-group--margin">
+                          <label class="label-inputs"> Mobile</label>
                             <input type="number" class="form-input error-highlight" placeholder="Mobile number" formControlName="mobile" minlength="10" maxlength="10">
                             <div *ngIf="changeForm.controls.mobile.touched && changeForm.controls.mobile.errors" class="error-mez">
                                 <div> {{getErrors('mobile')}} </div>
@@ -63,5 +64,5 @@
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
 </div>

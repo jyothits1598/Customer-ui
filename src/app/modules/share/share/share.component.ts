@@ -11,6 +11,7 @@ export class ShareComponent implements OnInit {
   @ViewChild('popOrigin', { read: ElementRef }) org: ElementRef;
   popRef = null;
   @Input() url: string;
+  @Input() isIconBlack: boolean;
 
   get shareUrl(): string {
     return this.url ? this.url : this.window.location.href;
@@ -18,9 +19,9 @@ export class ShareComponent implements OnInit {
   constructor(private popoverService: PopoverService,
     private elementRef: ElementRef,
     private window: Window) { }
-  
-    ngOnInit(): void {
-    }
+
+  ngOnInit(): void {
+  }
 
   getUrl() {
 

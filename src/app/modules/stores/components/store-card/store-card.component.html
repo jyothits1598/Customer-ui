@@ -65,7 +65,9 @@
                     <li>
                         <store-heart [store]="{id: store.id, isFavourite: store.isFavourite}"></store-heart>
                     </li>
-                    <li> <app-share></app-share> </li>
+                    <li>
+                        <app-share [isIconBlack]="true" [url]="getShareUrl()"></app-share>
+                    </li>
                     <li> <img src="assets/images/ico_navigation_black.png" title="Direction"> </li>
                 </ul>
             </span>
