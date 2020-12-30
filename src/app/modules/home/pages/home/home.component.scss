@@ -1,8 +1,8 @@
 .sticky-navbar {
-    position: sticky;
-    position:-webkit-sticky;
+    position: relative;
+    // position:-webkit-sticky;
     width: 100%;
-    z-index: 1;
+    // z-index: 1;
     background: var(--color-background);
     // box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
 }
@@ -58,16 +58,16 @@
     .cover-bg {
         margin-top:48px;
     }
-    .sticky-navbar {
-        top:48px;
-    }
+    // .sticky-navbar {
+    //     top:48px;
+    // }
   }
   /* Extra large devices (large desktops, 1200px and up) */
   @media (min-width: 1400px) {  
     .cover-bg {
         margin-top:48px;
     }
-    .sticky-navbar {
-        top:48px;
-    }
+    // .sticky-navbar {
+    //     top:48px;
+    // }
   }

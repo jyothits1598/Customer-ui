@@ -13,6 +13,7 @@ export interface Store {
     googleUrl: string,
     facebookUrl: string,
     isFavourite: boolean,
+    latLng: { lat: number, lng: number }
 }
 
 export function ReadStore(data: any): Store {
@@ -28,6 +29,7 @@ export function ReadStore(data: any): Store {
         description: data.description,
         googleUrl: data.google_business_url,
         facebookUrl: data.facebook_url,
+        latLng: { lat: data.latitude, lng: data.longitude },
         isFavourite: data.is_favourite ? true : false
     };
 }
