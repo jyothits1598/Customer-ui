@@ -5,7 +5,7 @@
                 <span class="profile-save-text" routerLink="/">
                     <img src="assets/images/ico_arrow_left_white.png"> Settings
                 </span>
-                <div class="center-logo-profile" routerLink="/" >
+                <div class="center-logo-profile" routerLink="/">
                     <img src="assets/svg/logo_white.svg">
                 </div>
             </div>
@@ -26,25 +26,31 @@
             </div>
             <div>
                 <label style="margin-top:12px;cursor: pointer;">
-                    <input class="cb" type="radio" name="radius"/>
+                    <input class="cb" type="radio" name="radius" value="0" (change)="handleSel($event.target.value)" [checked]="!radius.value" />
                     <span> Suggested radius </span>
                 </label>
             </div>
             <div>
                 <label style="margin-top:12px;cursor: pointer;">
-                    <input class="cb" type="radio" name="radius"/>
+                    <input class="cb" type="radio" name="radius" value="1" (change)="handleSel($event.target.value)" [checked]="radius.value"/>
                     <span> Custom radius </span>
                 </label>
             </div>
-            <div>
-                <div class="paragraph14 paragraph14__bold" style="margin-top:16px;">
-                    Custom radius - 1km
+            <ng-container *ngIf="radius.value">
+                <div>
+                    <div class="paragraph14 paragraph14__bold" style="margin-top:16px;">
+                        Custom radius - 1km
+                    </div>
+                    <div class="chrome">
+                        <input min="1" max="10" step="1" type="range" class="slider" [formControl]="radius" />
+                    </div>
+                    <div>{{radius.value}}</div>
                 </div>
-                <div class="chrome">
-                    <input  min="0" max="100" type="range" class="slider"/>
-                 </div>
-            </div>
-            
+            </ng-container>
+            <button type="button" (click)="save()">
+                <span *ngIf="!loading">Save</span>
+                <img src="assets/images/loader.gif" alt="" *ngIf="loading">
+            </button>
         </div>
     </div>
 </div>

@@ -3,7 +3,8 @@ export interface User {
     firstName: string,
     lastName: string,
     email: string,
-    phoneNumber: string
+    phoneNumber: string,
+    customRadius: number | null;
 }
 
 export function ReadUserDetails(data: any): User {
@@ -12,6 +13,17 @@ export function ReadUserDetails(data: any): User {
         firstName: data.first_name,
         lastName: data.last_name,
         email: data.email,
-        phoneNumber: data.mobile_number
+        phoneNumber: data.mobile_number,
+        customRadius: data.custom_radius
+    }
+}
+
+export function UserToBackend(user: User) {
+    return {
+        customer_id: user.id,
+        first_name: user.firstName,
+        last_name: user.lastName,
+        email: user.email,
+        custom_radius: user.customRadius
     }
 }

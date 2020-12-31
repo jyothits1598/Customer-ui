@@ -26,9 +26,7 @@ export class StoreListComponent implements OnInit {
 
   constructor(
     private storeData: StoresDataService,
-  ) {
-    
-  }
+  ) { }
 
   ngOnInit(): void {
   }
