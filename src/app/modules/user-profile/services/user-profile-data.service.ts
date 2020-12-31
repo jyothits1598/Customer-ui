@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { URL_changeEmailMobile, URL_ProfileChangePassword, URL_ProfileData, URL_ProfileImageUpload } from 'src/api/profile';
+import { User, UserToBackend } from 'src/app/core/model/user';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
 import { SnackBarService } from 'src/app/core/services/snack-bar.service';
 import { UserProfile } from '../model/UserProfile';
@@ -59,6 +60,11 @@ export class UserProfileDataService {
       verificationCode: code
     })
   };
+
+  changeCustomRadius(user: User) {
+    let data = UserToBackend(user);
+    return this.restApiService.put(URL_ProfileData, data);
+  }
 
   changeMobile(phoneNumber: string, code: string) {
     return this.restApiService.post(URL_changeEmailMobile, {

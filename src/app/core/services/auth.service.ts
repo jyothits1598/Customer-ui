@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { URL_ConfirmPassword, URL_FacebookLogin, URL_login } from 'src/api/authentication';
 import { SocialAuthHelperService } from 'src/app/modules/authentication/services/social-auth-helper.service';
@@ -27,15 +27,26 @@ export class AuthService {
     return this._loggedUser.value;
   }
 
+  get loggedUser$(): Observable<User> {
+    return this._loggedUser.asObservable();
+  }
+
+  setCustomRadius(radius: number) {
+    let user = { ...this.loggedUser };
+    user.customRadius = radius;
+    this.storeageService.store('user', user);
+    this._loggedUser.next(user);
+  }
+
   setPhoneNumber(phone: string) {
-    let user = this.loggedUser;
+    let user = { ...this.loggedUser };
     user.phoneNumber = phone;
     this.storeageService.store('user', user);
     this._loggedUser.next(user);
   }
 
   setEmail(email: string) {
-    let user = this.loggedUser;
+    let user = { ...this.loggedUser };
     user.email = email;
     this.storeageService.store('user', user);
     this._loggedUser.next(user);
