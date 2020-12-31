@@ -1,8 +1,8 @@
 .sticky-navbar {
-    position: sticky;
-    position:-webkit-sticky;
+    position: relative;
+    // position:-webkit-sticky;
     width: 100%;
-    z-index: 1;
+    // z-index: 1;
     background: var(--color-background);
     // box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
 }
@@ -28,29 +28,29 @@
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     .cover-bg {
-        margin-top:100px;
+        margin-top:60px;
     }
-    .sticky-navbar {
-        top:100px;
-    }
+    // .sticky-navbar {
+    //     top:100px;
+    // }
   }
   /* Small devices (portrait tablets and large phones, 600px and up) */
   @media only screen and (min-width: 600px) {
-    .cover-bg {
-        margin-top:48px;
-    }
-    .sticky-navbar {
-        top:48px;
-    }
+    // .cover-bg {
+    //     margin-top:48px;
+    // }
+    // .sticky-navbar {
+    //     top:48px;
+    // }
   }
   /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
   @media (min-width: 768px) {  
-    .cover-bg {
-        margin-top:48px;
-    }
-    .sticky-navbar {
-        top:48px;
-    }
+    // .cover-bg {
+    //     margin-top:60px;
+    // }
+    // .sticky-navbar {
+    //     margin-top:60px;
+    // }
   }
    
   /* Large devices (desktops, 992px and up) */
@@ -58,16 +58,16 @@
     .cover-bg {
         margin-top:48px;
     }
-    .sticky-navbar {
-        top:48px;
-    }
+    // .sticky-navbar {
+    //     top:48px;
+    // }
   }
   /* Extra large devices (large desktops, 1200px and up) */
   @media (min-width: 1400px) {  
     .cover-bg {
         margin-top:48px;
     }
-    .sticky-navbar {
-        top:48px;
-    }
+    // .sticky-navbar {
+    //     top:48px;
+    // }
   }

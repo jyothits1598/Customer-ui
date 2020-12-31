@@ -36,7 +36,9 @@
                                 <app-share></app-share>
                             </li>
                             <li style="cursor: pointer;outline:none;margin-left:16px">
-                                <img src="assets/images/navbar/ico_navigation.png">
+                                <a [href]="'https://www.google.com/maps/dir/?api=1&destination='+storeDetail.latLng.lat+','+storeDetail.latLng.lng" target="_blank" style="text-decoration: none;">
+                                    <img src="assets/images/navbar/ico_navigation.png" title="Direction">
+                                </a>
                             </li>
                         </ul>
                     </span>
@@ -78,7 +80,7 @@
                         </div>
                     </div><br>
                 </div>
-                <div style="margin-top:12px;">
+                <div style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);padding: 8px 0 8px 0;">
                     <table>
                         <tr>
                             <td>
@@ -90,11 +92,9 @@
                         </tr>
                     </table>
                 </div>
-                <div class="address-content" style="margin-top: 16px;">
-                    <hr class="d-block d-sm-none">
-                    {{storeDetail.address}} &nbsp;
-                    <a [href]="'https://www.google.com/maps/dir/?api=1&destination='+storeDetail.latLng.lat+','+storeDetail.latLng.lng"
-                        target="_blank">Directions</a>
+                <div class="address-content">
+                    <!-- <hr class="d-block d-sm-none"> -->
+                    {{storeDetail.address}}                   
                 </div>
                 <!-- <div class="d-flex justify-content-between">
                     <span>
