@@ -88,6 +88,7 @@ export class EmailMobSignupComponent implements OnInit {
     if (errorResp.error.error_msg) this.errorMessage = errorResp.error.error_msg[0];
     if (errorResp.error.verificationCode) this.controls.verificationCode.setErrors({ backend: errorResp.error.verificationCode[0] });
     if (errorResp.error.email) this.controls.email.setErrors({ backend: errorResp.error.email[0] })
+    if (errorResp.error.mobile_number) this.errorMessage = errorResp.error.mobile_number[0];
   }
 
 

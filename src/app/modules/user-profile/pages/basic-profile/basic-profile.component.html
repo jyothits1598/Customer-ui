@@ -1,43 +1,53 @@
-
-<form (ngSubmit)="handleSubmit()" [formGroup]="profileForm" class="margins-center-profile">
-    <h3 class="std-heading-4 text-center"> Complete your profile </h3>
-    <div class="paragraph14 text-center" style="margin-bottom: 24px;">
-        Add a <strong>photo</strong> so restaurant staff can recognize you
+<div class="edit-profile-page">
+    <div class="profile-navbar">
+        <div class="container">
+            <div class="center-logo-profile" routerLink="/" >
+                <img src="assets/svg/logo_white.svg">
+            </div>
+        </div>
     </div>
-    <div *ngIf="backendErrorMessage && profileForm.invalid" class="error-mez">{{backendErrorMessage}}</div>
-    <div class="null-profile">
-        <file-upload [accept]="validFileFormats" [validators]="fileValidators" (file)="handleFileUpload($event)"
-            (error)="handleFileError($event)">
-                <div class="text-center" style="margin-bottom: 16px;cursor: pointer;">
-                    <img class="upload-image" *ngIf="!imageLoading; else imageLoader"
-                        [src]="this.profileForm.controls.profileImage.value ? this.profileForm.controls.profileImage.value : 'assets/images/add_image.png'">
-                    <!-- <img class="upload-image" src="assets/images/empty_store_image.png"> -->
-                    <!-- uplaod image end  -->
+    <form (ngSubmit)="handleSubmit()" [formGroup]="profileForm">
+        <div class="margins-center" style="margin-top:96px">
+            <h3 class="std-heading-4 text-center"> Complete your profile </h3>
+            <div class="paragraph14 text-center" style="margin-bottom: 24px;">
+                Add a <strong>photo</strong> so restaurant staff can recognize you
+            </div>
+            <div *ngIf="backendErrorMessage && profileForm.invalid" class="error-mez">{{backendErrorMessage}}</div>
+            <div class="null-profile">
+                <file-upload [accept]="validFileFormats" [validators]="fileValidators" (file)="handleFileUpload($event)"
+                    (error)="handleFileError($event)">
+                        <div class="text-center" style="margin-bottom: 16px;cursor: pointer;">
+                            <img class="upload-image" *ngIf="!imageLoading; else imageLoader"
+                                [src]="this.profileForm.controls.profileImage.value ? this.profileForm.controls.profileImage.value : 'assets/images/add_image.png'">
+                            <!-- <img class="upload-image" src="assets/images/empty_store_image.png"> -->
+                            <!-- uplaod image end  -->
+                        </div>
+                        <ng-template #imageLoader>
+                            <img src="assets/images/loader.gif" *ngIf="imageLoading" style="width: 20px;">
+                        </ng-template>
+                </file-upload>
+            </div>
+        
+            <div class="row">
+                <div class="col-6 pad-ing-right" style="margin-bottom: 24px;">
+                    <div class="label-inputs"> <span class="float-left"> First name </span><b class="m-star">*</b></div>
+                    <input type="text" class="form-input error-highlight" formControlName="firstName">
+                    <div *ngIf="profileForm.controls.firstName.invalid && profileForm.controls.firstName.touched"
+                        class="error-mez"> First name is required
+                    </div>
                 </div>
-                <ng-template #imageLoader>
-                    <img src="assets/images/loader.gif" *ngIf="imageLoading" style="width: 20px;">
-                </ng-template>
-        </file-upload>
-    </div>
-
-    <div class="row">
-        <div class="col-md-6 pad-ing-right" style="margin-bottom: 24px;">
-            <div class="label-inputs"> <span class="float-left"> First name </span></div>
-            <input type="text" class="form-input error-highlight" formControlName="firstName">
-            <div *ngIf="profileForm.controls.firstName.invalid && profileForm.controls.firstName.touched"
-                class="error-mez"> First name is required
+                <div class="col-6 pad-ing-left" style="margin-bottom: 24px;">
+                    <div class="label-inputs"> <span class="float-left"> Last name </span><b class="m-star">*</b></div>
+                    <input type="text" class="form-input error-highlight"  formControlName="lastName">
+                    <div *ngIf="profileForm.controls.lastName.invalid && profileForm.controls.lastName.touched"
+                        class="error-mez"> Last name is required
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="std-button std-button--blue"
+                    [disabled]="saving">{{saving? 'Saving...': 'Continue'}}</button>
             </div>
         </div>
-        <div class="col-md-6 pad-ing-left" style="margin-bottom: 24px;">
-            <div class="label-inputs"> <span class="float-left"> Last name </span></div>
-            <input type="text" class="form-input error-highlight"  formControlName="lastName">
-            <div *ngIf="profileForm.controls.lastName.invalid && profileForm.controls.lastName.touched"
-                class="error-mez"> Last name is required
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <button type="submit" class="btn std-button std-button--blue"
-            [disabled]="saving">{{saving? 'Saving...': 'Continue'}}</button>
-    </div>
-</form>
+    </form>
+</div>

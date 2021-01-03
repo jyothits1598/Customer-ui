@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PasswordHelperModule } from '../password-helper/password-helper.module';
 import { SocialSignInComponent } from './components/social-sign-in/social-sign-in.component';
 import { SocialAuthModule } from '../social-auth/social-auth.module';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 
 const routes: Routes = [
   {
@@ -22,7 +23,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     FormsModule,
     PasswordHelperModule,
-    SocialAuthModule
+    SocialAuthModule,
+    NgxIntlTelInputModule
   ]
 })
 export class LoginModule { }

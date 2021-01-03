@@ -90,6 +90,7 @@ export class ForgotPasswordComponent implements OnInit {
     if (data.error?.email) this.form.controls.email.setErrors({ backend: data.error.email })
     if (data.error.verificationCode) this.form.controls.verificationCode.setErrors({ backend: data.error.verificationCode })
     if (data.error?.error_msg) this.backendErrorMsg = data.error.error_msg;
+    if (data.error?.mobile_number) this.form.controls.mobile_number.setErrors({ backend: data.error.mobile_number })
   }
 
 }

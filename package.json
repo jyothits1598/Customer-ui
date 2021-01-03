@@ -29,8 +29,12 @@
     "angularx-social-login": "^3.3.1",
     "bootstrap": "^4.5.2",
     "font-awesome": "^4.7.0",
+    "google-libphonenumber": "^3.2.15",
+    "intl-tel-input": "^17.0.3",
     "jquery": "^3.5.1",
     "ngb-modal": "^2.0.3",
+    "ngx-bootstrap": "^6.2.0",
+    "ngx-intl-tel-input": "^3.0.5",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

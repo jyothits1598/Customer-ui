@@ -39,17 +39,16 @@
             <ng-container *ngIf="radius.value">
                 <div>
                     <div class="paragraph14 paragraph14__bold" style="margin-top:16px;">
-                        Custom radius - 1km
+                        Custom radius - {{radius.value}}km
                     </div>
                     <div class="chrome">
                         <input min="1" max="10" step="1" type="range" class="slider" [formControl]="radius" />
                     </div>
-                    <div>{{radius.value}}</div>
                 </div>
             </ng-container>
-            <button type="button" (click)="save()">
-                <span *ngIf="!loading">Save</span>
-                <img src="assets/images/loader.gif" alt="" *ngIf="loading">
+            <button type="button" (click)="save()" class="std-button std-button--primary float-right" style="margin-top:16px">
+                <span *ngIf="!loading" >Save</span>
+                <img src="assets/images/loader_white_24.gif" alt="" *ngIf="loading">
             </button>
         </div>
     </div>

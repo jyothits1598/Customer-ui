@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VerificationCodeModule } from '../verification-code/verification-code.module';
 import { ResetSuccessComponent } from './pages/reset-success/reset-success.component';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 
 const routes: Routes = [
   {
@@ -24,7 +25,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     FormsModule,
     RouterModule.forChild(routes),
-    VerificationCodeModule
+    VerificationCodeModule,
+    NgxIntlTelInputModule
   ]
 })
 export class ForgotPasswordModule { }

@@ -39,7 +39,7 @@
         display: none;
     }
     .store-list-bg {
-        padding: 32px 0;
+        padding: 16px 0;
     }
     .store-list-bg-fv {
         padding: 110px 0;
@@ -72,7 +72,7 @@
         display:none;
     }
     .store-list-bg {
-        padding: 32px 0;
+        padding: 16px 0;
     }
     .store-list-bg-fv {
         padding: 110px 0;
@@ -330,3 +330,7 @@ input[class="cb"]+span:before{
 // input[class="rd"]:checked+span:before{
 //   background: url('images/form/radio-on.png')no-repeat;
 // }
+.iti .iti__country-list {
+	overflow: hidden;
+}
+.iti.iti--allow-dropdown { width: 100% }

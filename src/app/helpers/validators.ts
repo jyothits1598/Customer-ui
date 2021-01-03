@@ -21,6 +21,11 @@ export class CustomValidators {
         };
     }
 
+    static mobileNumber(errorMsg: string) {
+        return (control: AbstractControl): { [key: string]: any } | null  => {
+            return control.value ? null : { required: errorMsg };
+        };
+    }     
 }
 
 

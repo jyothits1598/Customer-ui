@@ -115,7 +115,8 @@ export class LoginComponent implements OnInit {
         return;
       }
       if (error.error.error_msg) this.backendErrorMessage = error.error.error_msg;
-    }
+      if (error.error.mobile_number) this.backendErrorMessage = error.error.mobile_number;
+    } 
   }
 
 }
