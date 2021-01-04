@@ -11,7 +11,7 @@ import { NotSignedInGuard } from '../guards/not-signed-in.guard';
 import { IsAuthenticatedGuard } from 'src/app/core/guards/is-authenticated.guard';
 import { FileUploadModule } from '../../file-upload/file-upload.module';
 import { VerificationCodeModule } from '../verification-code/verification-code.module';
-import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { TelInputModule } from '../../tel-input/tel-input.module';
 
 const routes: Routes = [
   {
@@ -42,7 +42,7 @@ const routes: Routes = [
     SocialAuthModule,
     FileUploadModule,
     VerificationCodeModule,
-    NgxIntlTelInputModule
+    TelInputModule
   ]
 })
 export class SignupModule { }

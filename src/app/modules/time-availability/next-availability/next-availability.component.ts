@@ -31,7 +31,7 @@ export class NextAvailabilityComponent implements OnInit {
       }
 
       if (!this.nextAvailability) {
-        this.nextAvailability = this.availability[0];
+        this.nextAvailability = this.availability.find((a) => !a.markedAsClose);
       }
     }
   }
@@ -55,10 +55,10 @@ export class NextAvailabilityComponent implements OnInit {
     }
   }
 
-  formatTime(t: string){
+  formatTime(t: string) {
     return t.replace(/^0+/, '');
   }
-  
+
   gethours(time: string) {
     let hours = parseInt(time.substr(0, 2));
     hours = hours % 12;

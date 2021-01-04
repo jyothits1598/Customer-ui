@@ -47,13 +47,14 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <ngx-intl-tel-input [cssClass]="'form-input'" [enablePlaceholder]="true" [onlyCountries]="['in']" [preferredCountries]="['au']" [enableAutoCountrySelect]="true" [separateDialCode]="true" formControlName="mobile" [phoneValidation]="true" ></ngx-intl-tel-input>
+                        <!-- <ngx-intl-tel-input [cssClass]="'form-input'" [enablePlaceholder]="true" [onlyCountries]="['in']" [preferredCountries]="['au']" [enableAutoCountrySelect]="true" [separateDialCode]="true" formControlName="mobile" [phoneValidation]="true" ></ngx-intl-tel-input> -->
+                        <tel-input formControlName="mobile"></tel-input>
                     </div>
                 </div>
                 <!-- <input type="number" class="form-input error-highlight" placeholder="Mobile number"
                     formControlName="mobile" minlength="10" maxlength="10" > -->
                 
-                <div *ngIf="controls.mobile.touched && controls.mobile.errors" class="error-mez">
+                <div *ngIf="controls.mobile.touched && controls.mobile.invalid" class="error-mez">
                     <div> {{getErrors('mobile')}} </div>
                 </div>
                 

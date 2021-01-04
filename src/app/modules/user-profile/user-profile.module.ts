@@ -18,7 +18,7 @@ import { ChangeMobileComponent } from './pages/user-security/change-mobile/chang
 import { PasswordConfirmationGuard } from './guards/password-confirmation.guard';
 import { CurrentPasswordComponent } from './pages/user-security/current-password/current-password.component';
 import { VerificationCodeModule } from '../authentication/verification-code/verification-code.module';
-import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { TelInputModule } from '../tel-input/tel-input.module';
 
 @NgModule({
   declarations: [
@@ -43,7 +43,7 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
     FileUploadModule,
     PasswordHelperModule,
     VerificationCodeModule,
-    NgxIntlTelInputModule
+    TelInputModule
   ],
   providers: [PasswordConfirmationGuard]
 })

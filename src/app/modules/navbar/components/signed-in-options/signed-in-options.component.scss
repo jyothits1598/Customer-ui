@@ -18,7 +18,13 @@
         border-radius: 8px;
     }
 }
-
+.profile-header-resp {
+    color: var(--color-background);
+    background: var(--color-primary);
+    font-size:14px;
+    text-align: center;
+    padding: 10px;
+}
 @media only screen and (max-width: 600px) {
     .img-display-desktop {
         display: none;
@@ -37,6 +43,9 @@
         margin-bottom: 56px;
         border-radius: 0;
     }
+    .only-mobile {
+        display:block;
+    }
 }
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
@@ -46,6 +55,9 @@
     .img-display-mobile {
         display: none;
     }
+    .only-mobile {
+        display:none;
+    }
 }
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
 @media (min-width: 768px) {
@@ -54,6 +66,9 @@
     }
     .img-display-desktop {
         display: block;
+    }
+    .only-mobile {
+        display:none;
     }
 }
 
@@ -65,6 +80,9 @@
     .img-display-desktop {
         display: block;
     }
+    .only-mobile {
+        display:none;
+    }
 }
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1400px) {
@@ -73,5 +91,8 @@
     }
     .img-display-desktop {
         display: block;
+    }
+    .only-mobile {
+        display:none;
     }
 }

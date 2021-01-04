@@ -30,7 +30,7 @@ export class TelInputComponent implements OnInit, AfterViewInit, ControlValueAcc
 
     //updating validators
     let existingValidators: ValidatorFn = this.controlDir.control.validator;
-    let phoneValidator = (control: AbstractControl) => { return this.phoneControl.errors ? { invalid: "Please enter a valid phone number." } : null }
+    let phoneValidator = (control: AbstractControl) => { return this.phoneControl.errors ? { invalid: "Please enter a valid mobile number." } : null }
 
     this.controlDir.control.setValidators([existingValidators, phoneValidator]);
     this.controlDir.control.updateValueAndValidity();

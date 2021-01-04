@@ -26,13 +26,13 @@
               <div class="label-inputs"> Mobile </div>
           </div>
           <div class="col-md-12">
-              <div class="d-flex justify-content-between" *ngIf="user.phoneNumber; else addEmail">
+              <div class="d-flex justify-content-between" *ngIf="user.phoneNumber; else addMobile">
                   <div>
                       {{user.phoneNumber}}
                   </div>
                   <img src="assets/images/ico_edit.png" style="cursor: pointer;" routerLink="./change-mobile">
               </div>
-              <ng-template #addEmail>
+              <ng-template #addMobile>
                   <div class="d-flex justify-content-between">
                       <div class="color-text">
                           Add mobile

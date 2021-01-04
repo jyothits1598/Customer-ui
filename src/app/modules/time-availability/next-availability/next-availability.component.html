@@ -13,7 +13,7 @@
         </ng-container>
         <ng-container *ngSwitchDefault>
             <span style="text-transform: capitalize;"> 
-                {{nextAvailability.day}}
+                {{nextAvailability.day}} {{formatTime(nextAvailability.startTime)}}
             </span>
         </ng-container>
     </span>
