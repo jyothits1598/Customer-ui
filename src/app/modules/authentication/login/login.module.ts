@@ -7,6 +7,7 @@ import { PasswordHelperModule } from '../password-helper/password-helper.module'
 import { SocialSignInComponent } from './components/social-sign-in/social-sign-in.component';
 import { SocialAuthModule } from '../social-auth/social-auth.module';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { TelInputModule } from '../../tel-input/tel-input.module';
 
 const routes: Routes = [
   {
@@ -24,7 +25,8 @@ const routes: Routes = [
     FormsModule,
     PasswordHelperModule,
     SocialAuthModule,
-    NgxIntlTelInputModule
+    // NgxIntlTelInputModule
+    TelInputModule
   ]
 })
 export class LoginModule { }

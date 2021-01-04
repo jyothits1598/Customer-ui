@@ -8,8 +8,7 @@
                 <div class="label-inputs"> <span class="float-left"> Email </span><span class="float-right"
                         style="color: #353FA8;;cursor: pointer;" (click)="toggleType()"> Log in with mobile
                     </span> </div>
-                <input formControlName="email" type="text" class="form-input error-highlight"
-                    placeholder="Email">
+                <input formControlName="email" type="text" class="form-input error-highlight" placeholder="Email">
                 <ng-container *ngIf="loginForm.controls.email.invalid && loginForm.controls.email.touched">
                     <div class="error-mez">{{returnErrors('email')}}</div>
                 </ng-container>
@@ -22,20 +21,25 @@
                     <div class="col-md-12">
                         <div class="label-inputs">
                             <span class="float-left"> Mobile </span>
-                            <span class="float-right" style="color: #353FA8;;cursor: pointer;" (click)="toggleType()"> 
+                            <span class="float-right" style="color: #353FA8;;cursor: pointer;" (click)="toggleType()">
                                 Log in with Email
-                            </span> 
+                            </span>
                         </div>
                     </div>
                 </div>
                 <!-- <input formControlName="mobile" type="number" class="form-input error-highlight"
                     placeholder="Mobile Number" minlength="10" maxlength="10"> -->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <ngx-intl-tel-input [cssClass]="'form-input'" [enablePlaceholder]="true" [onlyCountries]="['in']" [preferredCountries]="['au']" [enableAutoCountrySelect]="true" [separateDialCode]="true" formControlName="mobile" [phoneValidation]="true" ></ngx-intl-tel-input>
-                        </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- <ngx-intl-tel-input #phone
+                            [cssClass]="loginForm.controls.mobile.errors ? 'form-input error-highlight ng-invalid' : 'form-input error-highlight'"
+                            [enablePlaceholder]="true" [onlyCountries]="['in']" [preferredCountries]="['au']"
+                            [enableAutoCountrySelect]="true" [separateDialCode]="true" formControlName="mobile"
+                            [phoneValidation]="true"></ngx-intl-tel-input> -->
+                        <tel-input formControlName="mobile"></tel-input>
                     </div>
-                    <ng-container *ngIf="loginForm.controls.mobile.invalid && loginForm.controls.mobile.touched">
+                </div>
+                <ng-container *ngIf="loginForm.controls.mobile.invalid && loginForm.controls.mobile.touched">
                     <div class="error-mez">{{returnErrors('mobile')}}</div>
                 </ng-container>
             </div>
@@ -68,8 +72,8 @@
 
 
     <div class="paragraph14 text-center" style="margin-bottom: 24px;">
-        Don't have an account?<b style="color:#353FA8;cursor: pointer;outline: 0;"
-            routerLink="/auth/signup"> Sign up </b>
+        Don't have an account?<b style="color:#353FA8;cursor: pointer;outline: 0;" routerLink="/auth/signup"> Sign up
+        </b>
     </div>
 
     <!-- first signup page end -->
