@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, finalize, switchMap } from 'rxjs/operators';
@@ -40,7 +40,7 @@ import { throwError } from 'rxjs';
 export class LoginComponent implements OnInit {
   loggingIn: boolean = false;
   backendErrorMessage: string;
-
+  // @ViewChild('phone', {read: })
   animationState = 'a';
   showButton = true;
 
@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
     mobile: new FormControl('', [
       CustomValidators.required('Please enter a registered mobile number.')
     ]),
-    password: new FormControl('', CustomValidators.required('Please enter a password.'))
+    password: new FormControl('')
   });
 
   toggleType() {
