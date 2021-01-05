@@ -17,29 +17,29 @@ export class UseridVerificationComponent implements OnInit {
   backendErrorMsg: string;
 
   get activeType(): 'email' | 'mobile' {
-    return this.form.controls.email.enabled ? 'email' : 'mobile';
+    return this.form.controls.mobile.enabled ? 'mobile' : 'email';
   }
 
   @Output() varificationData = new EventEmitter<{ type: 'email' | 'mobile', code: string, value: string }>();
 
   toggleType() {
-    if (this.form.controls.email.enabled) {
-      this.form.controls.mobile.enable();
-      this.form.controls.email.disable();
-    } else {
-      this.form.controls.mobile.disable();
+    if (this.form.controls.mobile.enabled) {
       this.form.controls.email.enable();
+      this.form.controls.mobile.disable();
+    } else {
+      this.form.controls.email.disable();
+      this.form.controls.mobile.enable();
     }
   }
 
   constructor(private forgotPassword: ForgotPasswordService) { }
 
   ngOnInit(): void {
-    this.form.controls.mobile.disable();
+    this.form.controls.email.disable();
   }
 
   get activeIdControl() {
-    return this.activeType === 'mobile' ? this.form.controls.mobile : this.form.controls.email;
+    return this.activeType === 'email' ? this.form.controls.email : this.form.controls.mobile;
   }
 
   form: FormGroup = new FormGroup({

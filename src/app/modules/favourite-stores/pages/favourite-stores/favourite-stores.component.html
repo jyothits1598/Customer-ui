@@ -1,4 +1,4 @@
-<div class="edit-profile-page" style="overflow-y: auto;position: relative;">
+<div class="edit-profile-page" style="overflow-y: auto;">
     <div class="profile-navbar">
         <div class="container">
             <div class="col-md-12 only-big">
@@ -30,17 +30,9 @@
             </li>
         </ul>
     </div>
-    
     <ng-container *ngIf="stores">
         <div style="background: #f2f2f2;padding-top:48px;">
             <div class="container">
-                <!-- <div class="row" >
-                    <div class="col-md-12">
-                        <div class="std-heading-3" style="padding-bottom:24px;padding-top:24px;">
-                            Favourites
-                        </div>
-                    </div>
-                </div> -->
                 <div class="row">
                     <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 col-xl-4" *ngFor="let store of stores" style="margin-bottom: 20px;">
                         <app-store-card  [store]=store></app-store-card>
