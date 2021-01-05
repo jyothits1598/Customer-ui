@@ -22,7 +22,7 @@ input[type=range]:focus {
     -webkit-appearance: none;
     width: 8px; /* 1 */
     height: 8px;
-    background:var(--color-primary);
+    background:var(--color-background);
     box-shadow: -100vw 0 0 100vw var(--color-primary);
     border-radius: 50%;
     cursor: pointer;
