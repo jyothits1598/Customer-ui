@@ -37,11 +37,11 @@
             <div class="form-group form-group--margin">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="label-inputs"> 
+                        <div class="label-inputs">
                             <span class="float-left"> Mobile </span>
-                            <span class="float-right" style="color: #353FA8;;cursor: pointer;" (click)="toggleType()"> 
-                                Use email 
-                            </span> 
+                            <span class="float-right" style="color: #353FA8;;cursor: pointer;" (click)="toggleType()">
+                                Use email
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -53,11 +53,11 @@
                 </div>
                 <!-- <input type="number" class="form-input error-highlight" placeholder="Mobile number"
                     formControlName="mobile" minlength="10" maxlength="10" > -->
-                
+
                 <div *ngIf="controls.mobile.touched && controls.mobile.invalid" class="error-mez">
                     <div> {{getErrors('mobile')}} </div>
                 </div>
-                
+
             </div>
         </ng-container>
 
@@ -74,7 +74,7 @@
         <div class="row">
             <div class="col-6 pad-ing-right" style="margin-bottom: 24px;">
                 <input type="number" class="form-input error-highlight" placeholder="Enter code"
-                    formControlName="verificationCode" minlength="6" maxlength="6" >
+                    formControlName="verificationCode" minlength="6" maxlength="6">
                 <div *ngIf="controls.verificationCode.touched && controls.verificationCode.errors" class="error-mez">
                     <div> {{getErrors('verificationCode')}} </div>
                 </div>
@@ -82,14 +82,14 @@
             <div class="col-6 pad-ing-left" style="margin-bottom: 24px;">
                 <send-code
                     (click)="activeType === 'email' ? controls.email.markAsTouched() : controls.mobile.markAsTouched()"
-                    [data]="{purpose: 'signup', type: activeType, value: activeType === 'email'? registrationForm.value.email : registrationForm.value.mobile}"
+                    [data]="activeIdControl.valid ? {purpose: 'signup', type: activeType, value: activeIdControl.value}: null"
                     (error)="handleError($event)">
                 </send-code>
             </div>
         </div>
         <div class="form-group" style="margin-bottom: 24px;">
-            <button type="submit" class="btn std-button std-button--blue"
-                [disabled]="loading">{{loading? 'Sigining up...' : 'Next'}}</button>
+            <button type="submit" class="btn std-button std-button--blue" [disabled]="loading">{{loading? 'Sigining
+                up...' : 'Next'}}</button>
         </div>
         <div class="paragraph14 paragraph14__f12 text-center">
             By creating a menuzapp account you're agreeing to our <b style="color:#353FA8;cursor: pointer;">
