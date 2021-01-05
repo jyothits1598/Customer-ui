@@ -14,6 +14,11 @@
 .section-middle {
     background: var(--color-background-secondary);
 }
+
+.m-star
+{
+  color:red;
+}
 .menu li {
     float: left;
     list-style-type: none;
@@ -258,7 +263,7 @@
     &--trans {
         color: var(--color-primary);
         background: var(--color-background-tertiary);
-        
+
     }
     &--trans:hover {
         color: var(--color-primary);
@@ -338,12 +343,12 @@ input.ng-invalid.ng-touched.error-highlight {
     background: var(--color-background);
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
     border-radius: 16px;
-    margin: 0 auto 25px;     
+    margin: 0 auto 25px;
     max-width: 430px;
     padding: 32px;
 }
 .signin-card {
-    margin: 0 auto 25px;     
+    margin: 0 auto 25px;
     max-width: 312px;
     padding-top: 40px;
 }

@@ -15,12 +15,14 @@ export class CurrentPasswordComponent implements OnInit {
   errorRespMsg: string = null;
   loading: boolean = false;
 
+  isEmail: boolean = false;
+
   // current_url:string = "/current-password";
   // current_url_status:boolean = false;
   passwordForm: FormGroup = new FormGroup({
     password: new FormControl(null, CustomValidators.required('Password is required.'))
   })
-  constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute, private passwordConfGuard: PasswordConfirmationGuard) { 
+  constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute, private passwordConfGuard: PasswordConfirmationGuard) {
     // this.router.events.subscribe(
     //   (event: any) => {
     //     if (event instanceof NavigationEnd) {
@@ -35,6 +37,8 @@ export class CurrentPasswordComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.router.url);
+    this.isEmail = this.router.url.includes('change-email')
     this.redirectUrl = this.activatedRoute.snapshot.queryParams.redirect;
   }
 

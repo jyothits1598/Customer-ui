@@ -26,14 +26,14 @@
 
     <div class="row">
         <div class="col-md-6 pad-ing-right" style="margin-bottom: 24px;">
-            <div class="label-inputs"> <span class="float-left"> First name </span></div>
+            <div class="label-inputs"> <span class="float-left"> First name <b class="m-star">*</b></span></div>
             <input type="text" class="form-input error-highlight" placeholder="First name" formControlName="firstName">
             <div *ngIf="profileForm.controls.firstName.invalid && profileForm.controls.firstName.touched"
                 class="error-mez"> First name is required
             </div>
         </div>
         <div class="col-md-6 pad-ing-left" style="margin-bottom: 24px;">
-            <div class="label-inputs"> <span class="float-left"> Last name </span></div>
+            <div class="label-inputs"> <span class="float-left"> Last name <b class="m-star">*</b></span></div>
             <input type="text" class="form-input error-highlight" placeholder="Last name" formControlName="lastName">
             <div *ngIf="profileForm.controls.lastName.invalid && profileForm.controls.lastName.touched"
                 class="error-mez"> Last name is required

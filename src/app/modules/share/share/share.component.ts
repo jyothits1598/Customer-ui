@@ -1,5 +1,6 @@
 import { AfterContentInit, Component, ElementRef, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { windowTime } from 'rxjs/operators';
+import { ModalService } from 'src/app/core/services/modal.service';
 import { PopoverService } from 'src/app/core/services/popover.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class ShareComponent implements OnInit {
     return this.url ? this.url : this.window.location.href;
   }
   constructor(private popoverService: PopoverService,
-    private elementRef: ElementRef,
+    private modalService: ModalService,
     private window: Window) { }
 
   ngOnInit(): void {
@@ -25,6 +26,10 @@ export class ShareComponent implements OnInit {
 
   getUrl() {
 
+  }
+
+  showModal(temp: TemplateRef<any>) {
+    this.modalService.openTemplateModal(temp);
   }
 
   showPopover(temp: TemplateRef<any>) {
