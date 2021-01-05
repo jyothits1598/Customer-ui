@@ -6,6 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VerificationCodeModule } from '../verification-code/verification-code.module';
 import { ResetSuccessComponent } from './pages/reset-success/reset-success.component';
 import { TelInputModule } from '../../tel-input/tel-input.module';
+import { UseridVerificationComponent } from './components/userid-verification/userid-verification.component';
+import { EnterPasswordComponent } from './components/userid-verification/enter-password/enter-password.component';
 
 const routes: Routes = [
   {
@@ -19,7 +21,7 @@ const routes: Routes = [
 ]
 
 @NgModule({
-  declarations: [ForgotPasswordComponent, ResetSuccessComponent],
+  declarations: [ForgotPasswordComponent, ResetSuccessComponent, UseridVerificationComponent, EnterPasswordComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
