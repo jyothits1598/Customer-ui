@@ -1,0 +1,63 @@
+<div class="forgotten-password-body">
+    <div *ngIf="backendErrorMsg" class="error-mez text-center" id="hideMe" style="margin-bottom: 16px;">
+        {{backendErrorMsg}}
+    </div>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+        <ng-container *ngIf="activeType === 'email'; else mobile">
+            <h3 class="std-heading-4 text-center"> Verify email address </h3>
+            <div class="paragraph14 text-center first">
+                You must verify your email address first
+            </div>
+            <div class="form-group form-group--margin" style="margin-top:24px;">
+                <input formControlName="email" type="text" class="form-input error-highlight" placeholder="Email">
+                <div class="error-mez" *ngIf="form.controls.email.invalid && form.controls.email.touched">
+                    {{getErrors('email')}}</div>
+            </div>
+        </ng-container>
+        <ng-template #mobile>
+            <h3 class=" std-heading-4 text-center"> Verify mobile number </h3>
+            <div class="paragraph14 text-center">
+                You must verify your mobile number first
+            </div>
+            <div class="form-group form-group--margin" style="margin-top:24px;">
+                <!-- <input formControlName="mobile" type="text" class="form-input error-highlight" placeholder="Mobile Number"> -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- <ngx-intl-tel-input [cssClass]="'form-input'" [enablePlaceholder]="true" [onlyCountries]="['in']" [preferredCountries]="['au']" [enableAutoCountrySelect]="true" [separateDialCode]="true" formControlName="mobile" [phoneValidation]="true" ></ngx-intl-tel-input> -->
+                        <tel-input formControlName="mobile"></tel-input>
+                    </div>
+                </div>
+                <div class="error-mez" *ngIf="form.controls.mobile.invalid && form.controls.mobile.touched">
+                    {{getErrors('mobile')}}</div>
+            </div>
+        </ng-template>
+        <div class="row">
+            <div class="col-6 pad-ing-right" style="margin-bottom: 24px;">
+                <input type="text" class="form-input error-highlight" placeholder="Enter code"
+                    formControlName="verificationCode">
+                <div *ngIf="form.controls.verificationCode.touched && form.controls.verificationCode.errors"
+                    class="error-mez">
+                    <div> {{getErrors('verificationCode')}} </div>
+                </div>
+            </div>
+            <div class="col-6 pad-ing-left" style="margin-bottom: 24px;">
+                <send-code (click)="form.controls.email.markAsTouched(); form.controls.mobile.markAsTouched();"
+                    [data]="activeIdControl.valid ? {purpose: 'forgotPassword', type: activeType, value: activeType === 'email'? form.value.email : form.value.mobile}: null"
+                    (error)="handleErrors($event)">
+                </send-code>
+            </div>
+        </div>
+        <!-- <div class="form-group form-group--margin" style="margin-top:24px;">
+            <input formControlName="password" type="password" class="form-input error-highlight" placeholder="Password">
+            <div class="error-mez" *ngIf="form.controls.password.invalid && form.controls.password.touched">
+                {{getErrors('password')}}</div>
+        </div> -->
+        <div (click)="toggleType()" class="paragraph14 text-center first"
+            style="margin-bottom: 24px;color:#353FA8;font-weight: bold;cursor: pointer;">
+            Use {{activeType === 'email' ? 'mobile' : 'email'}}
+        </div>
+        <button type="submit" value="Next" class="std-button std-button--blue" [disabled]="loading">{{loading?
+            'Submitting...':'Next'}}</button>
+
+    </form>
+</div>
