@@ -15,7 +15,7 @@ import { SignupService } from '../../services/signup.service';
 export class EmailMobSignupComponent implements OnInit {
   errorMessage;
   loading: boolean = false;
- 
+
   registrationForm: FormGroup = new FormGroup({
     email: new FormControl(null, [
       CustomValidators.required('Email is required.'),
@@ -51,6 +51,14 @@ export class EmailMobSignupComponent implements OnInit {
     return this.registrationForm.controls.mobile.disabled ? 'email' : 'mobile';
   }
 
+  get activeIdControl(): AbstractControl{
+    return this.activeType === 'email' ? this.registrationForm.controls.email : this.registrationForm.controls.mobile;
+  }
+
+
+  getCodeData() {
+    let result = { purpose: 'signup', type: this.activeType, value: this.activeType === 'email' ? this.registrationForm.value.email : this.registrationForm.value.mobile };
+  }
 
 
   toggleType() {
@@ -68,7 +76,7 @@ export class EmailMobSignupComponent implements OnInit {
   }
 
   signup() {
-    if (this.registrationForm.invalid) { this.registrationForm.markAllAsTouched(); console.log('form is invalid', this.registrationForm.errors); return; }
+    if (this.registrationForm.invalid) { this.registrationForm.markAllAsTouched(); return; }
     this.loading = true;
 
     // prepare data
