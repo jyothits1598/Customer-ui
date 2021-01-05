@@ -13,7 +13,7 @@ import { PopoverService } from 'src/app/core/services/popover.service';
 })
 export class NavbarComponent implements OnInit {
   isLoggedin$: Observable<boolean>;
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,private router: Router,) { }
 
   ngOnInit(): void {
     this.isLoggedin$ = this.authService.isLoggedIn$();

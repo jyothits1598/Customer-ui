@@ -37,7 +37,7 @@ export class CurrentPasswordComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.router.url);
+    // console.log(this.router.url);
     this.isEmail = this.router.url.includes('change-email')
     this.redirectUrl = this.activatedRoute.snapshot.queryParams.redirect;
   }

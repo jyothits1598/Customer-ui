@@ -34,7 +34,7 @@ export class ShareComponent implements OnInit {
 
   showPopover(temp: TemplateRef<any>) {
     this.popRef = this.popoverService.openTemplatePopover(this.org, temp, {
-      xPos: 'end',
+      xPos: 'center',
       yPos: 'bottom',
       // onDismiss?: () => void;
       hasBackdrop: true,
