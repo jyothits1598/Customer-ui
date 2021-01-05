@@ -17,7 +17,7 @@ export class ChangePasswordComponent implements OnInit {
 
   constructor(private userProfileDataService: UserProfileDataService,
     private snackBarService: SnackBarService,
-    private router: Router, 
+    private router: Router,
     private activatedRoute: ActivatedRoute) { }
 
   passwordForm: FormGroup = new FormGroup({

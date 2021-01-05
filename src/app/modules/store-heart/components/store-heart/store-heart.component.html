@@ -1,4 +1,4 @@
 <img *ngIf="loading; else heart" src="assets/images/loader.gif" style="width: 24px;">
 <ng-template #heart>
-    <img (click)="onFavClick()"  [src]="isFavourite? 'assets/images/ico_heart_on.png': 'assets/images/heart.png'" title="Favourite">
+    <img (click)="onFavClick()"  [src]="isFavourite? 'assets/images/ico_heart_on.png': 'assets/images/heart.png'"  style="width:20px;height:18px;"title="Favourite">
 </ng-template>
