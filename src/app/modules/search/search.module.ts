@@ -8,6 +8,7 @@ import { IncrementalSearchModule } from '../incremental-search/incremental-searc
 import { StoreSearchInlineComponent } from './components/store-search-inline/store-search-inline.component';
 import { SearchPanelComponent } from './components/search-panel/search-panel.component';
 import { SearchHistoryComponent } from './components/search-panel/search-history/search-history.component';
+import { SearchDataService } from './services/search-data.service';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
     StoresModule,
     IncrementalSearchModule
   ],
-  exports: [StoreSearchInlineComponent]
+  exports: [StoreSearchInlineComponent],
+  providers: [SearchDataService]
 })
 export class SearchModule { }
