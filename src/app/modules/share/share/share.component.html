@@ -1,19 +1,20 @@
 <span #popOrigin>
-    <img [src]="isIconBlack? 'assets/images/share.png' : 'assets/images/navbar/ico_share.png'" (click)="showPopover(sharePanel)" style="cursor: pointer;outline:none;width:20px;height:18px;" title="share">
+    <img [src]="isIconBlack? 'assets/images/share.png' : 'assets/images/navbar/ico_share.png'" (click)="showPopover(sharePanel)" style="cursor: pointer;outline:none;" title="share">
 </span>
 
 <ng-template #sharePanel>
     <div class="share-social" >
-        <span (click)="fbShare()" class="social-fb">
-            <img src="assets/images/ico_social_facebook_small.png"> Facebook
-        </span>
-
-        <!-- <span (click)="twtShare()" class="social-twt">
+        <div (click)="fbShare()" class="social-fb">
+            <!-- <img src="assets/images/share-fb.png" width="150px" height="48px">  -->
+            Facebook
+        </div>
+        <div (click)="twtShare()" class="social-twt">
             Twitter
-        </span> -->
-
-        <a class="social-gmail" [href]="'mailto:?body='+ shareUrl +'&subject=' + 'Check out this store  menuzapp'" style="cursor: pointer;text-decoration: none;">
-            <span>Email</span>
+        </div>
+        <a [href]="'mailto:?body='+ shareUrl +'&subject=' + 'Check out this store  menuzapp'" style="cursor: pointer;text-decoration: none;color:#fff">
+            <div class="social-gmail" >
+                Email
+            </div>
         </a>
     </div>
 </ng-template>

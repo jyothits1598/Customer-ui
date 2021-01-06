@@ -1,27 +1,49 @@
-<!-- <nav class="navbar-simple">
-    <img src="assets/images/ico_arrow_left.png" routerLink="/" style="cursor: pointer;outline:none">
-    <img src="assets/svg/Logo_w.svg" routerLink="/" style="text-decoration: none;cursor: pointer;outline:none">
-</nav> -->
-<ng-container *ngIf="stores">
-    <div class="store-list-bg-fv" style="background: #f2f2f2;">
+<div class="edit-profile-page" style="overflow-y: auto;">
+    <div class="profile-navbar">
         <div class="container">
-            <div class="row" >
-                <div class="col-md-12">
-                    <div class="std-heading-3" style="padding-bottom:24px;padding-top:24px;">
-                        Favourites
+            <div class="col-md-12 only-big">
+                <span class="profile-save-text" routerLink="/">
+                    <img src="assets/images/ico_arrow_left_white.png"> Favourites
+                </span>
+                <div class="center-logo-profile" routerLink="/">
+                    <img src="assets/svg/logo_white.svg">
+                </div>
+            </div>
+            <div class="col-md-12 only-small">
+                <span class="profile-save-text" routerLink="/">
+                    <img src="assets/images/ico_arrow_left_white.png">
+                </span>
+                <div class="center-logo-profile profile-save-text" style="cursor: text;">
+                    Favourites
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center" style="background: #fff;margin-top:48px;">
+        <ul class="resnt-menu-top-tabs u-margin-bottom-medium" style="margin-bottom:0">
+            <li class="resnt-menu-top-tabs__item custom-border">
+                <button class="resnt-menu-top-tabs__button tabs-menu resnt-menu-top-tabs__button__active"> Stores </button>
+            </li>
+            <li class="resnt-menu-top-tabs__item">
+                <button class="resnt-menu-top-tabs__button tabs-menu" routerLink=""> Meals
+                </button>
+            </li>
+        </ul>
+    </div>
+    <ng-container *ngIf="stores">
+        <div style="background: #f2f2f2;padding-top:48px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 col-xl-4" *ngFor="let store of stores" style="margin-bottom: 20px;">
+                        <app-store-card  [store]=store></app-store-card>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 col-xl-4" *ngFor="let store of stores" style="margin-bottom: 20px;">
-                    <app-store-card  [store]=store></app-store-card>
-                </div>
+            <div class="text-center">
+                <span *ngIf="stores?.length==0" style="text-align: center;"> No favourites </span>
             </div>
+            <br><br>
         </div>
-        <div class="text-center">
-            <span *ngIf="stores?.length==0" style="text-align: center;"> No favourites </span>
-        </div>
-        <br><br>
-    </div>
-</ng-container>
-<div *ngIf="loading" style="text-align: center;">Loading...</div>
+    </ng-container>
+    <div *ngIf="loading" style="text-align: center;">Loading...</div>
+</div>
