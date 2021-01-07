@@ -1,18 +1,14 @@
-<div class="modal-body custom-location-body">
-    <div class="row">
-        <div class="col-md-12">
-            <location-search (searchedLocation)="handleLocation($event, true)"></location-search>
-        </div>
-        <div class="col-md-12">
-            <user-current-location (currentLocation)="handleLocation($event)"></user-current-location>
-        </div>
+<div class="custom-location-body">
+    <location-search (searchedLocation)="handleLocation($event, true)"></location-search>
+    <div style="padding:8px;">
+        <user-current-location (currentLocation)="handleLocation($event)"></user-current-location>
     </div>
     <div class="row" *ngIf="locationHistory && locationHistory.length">
         <div class="col-md-12">
             <div class="placeholder-header">
                 Recent locations
             </div>
-            <div *ngFor="let loc of locationHistory" style="padding:0 10px;cursor: pointer;">
+            <div *ngFor="let loc of locationHistory" style="padding:0 0 0 10px;cursor: pointer;">
                 <table (click)="handleLocation(loc)">
                     <tr>
                         <td valign="middle" style="padding-right: 10px;">
