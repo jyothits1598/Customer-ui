@@ -29,7 +29,7 @@ export class GoogleLocationService {
           }
           this.geocoder.geocode(req, (res) => {
             this.ngZone.run(() => {
-              observer.next({ latLng: { lat: location.coords.latitude, lng: location.coords.longitude }, address: { locality: this.getLocalityName(res[0]), fullAddress: res[0].formatted_address } })
+              observer.next({ latLng: { lat: location.coords.latitude, lng: location.coords.longitude }, address: { locality: res[0].formatted_address, fullAddress: res[0].formatted_address } })
             })
           })
         },
@@ -79,8 +79,9 @@ export class GoogleLocationService {
   }
 
   getLocalityName(data: any): string {
+    let result = "";
     let addComps = data.address_components;
-
+    console.log('inside get locality name', data);
     for (let a = 0; a < addComps.length; a++) {
       if (addComps[a].types.includes('sublocality')) return addComps[a].long_name;
     }

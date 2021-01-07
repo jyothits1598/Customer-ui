@@ -3,6 +3,7 @@ import { ElementRef } from '@angular/core';
 import { ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentModalRef, ModalRef } from 'src/app/core/model/modal';
 import { PopoverRef } from 'src/app/core/model/popover';
+import { UserLocation } from 'src/app/core/model/user-location';
 import { GeoLocationService } from 'src/app/core/services/geo-location.service';
 import { LayoutService } from 'src/app/core/services/layout.service';
 import { ModalService } from 'src/app/core/services/modal.service';
@@ -26,15 +27,17 @@ export class LocationSelectorComponent implements OnInit {
     private modalService: ModalService) { }
 
   overlayRef: PopoverRef | ModalRef;
-  location;
+  location: UserLocation;
   ngOnInit(): void {
     this.geoLocationService.userLocation().subscribe((location) => {
       this.location = location;
+      if (this.location.address.locality.length > 22) this.location.address.locality = this.location.address.locality.slice(0, 22) + '...';
+      console.log(this.location)
     })
   }
 
   showSelectorModal() {
-    
+
     this.layoutService.isMobile ? this.modalService.openComponentModal(LocationPanelComponent) : this.popOverService.openComponentPopover(this.popOrigin, LocationPanelComponent, { xPos: 'start', yPos: 'bottom' });
     // this.popOverService.openComponentPopover(this.popOrigin, LocationPanelComponent, { xPos: 'start', yPos: 'bottom' });
   }

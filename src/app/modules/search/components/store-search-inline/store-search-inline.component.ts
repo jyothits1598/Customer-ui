@@ -1,6 +1,7 @@
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
 import { AfterViewInit, Component, ElementRef, Injector, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { fromEvent, interval, of } from 'rxjs';
 import { debounce, distinctUntilChanged, filter, finalize, map, switchMap, tap } from 'rxjs/operators';
 import { ComponentPopoverRef, PopoverConfig, PopoverRef } from 'src/app/core/model/popover';
@@ -33,7 +34,9 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
     private restApiService: RestApiService,
     private popoverService: PopoverService,
     private layoutService: LayoutService,
-    private searchDataServ: SearchDataService) { console.log('inside consructor of search, ', this.layoutService.isMobile); this.isMobile = this.layoutService.isMobile; }
+    private searchDataServ: SearchDataService,
+    private router: Router,
+    private route: ActivatedRoute) { console.log('inside consructor of search, ', this.layoutService.isMobile); this.isMobile = this.layoutService.isMobile; }
 
   ngAfterViewInit(): void {
     this.keyupSubs = fromEvent(this.searchInput.nativeElement, 'keyup')
@@ -77,9 +80,10 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
     this.overlayOpen = false;
   }
 
-  createInjector(popoverRef: PopoverRef, injector: Injector) {
-    const tokens = new WeakMap([[PopoverRef, popoverRef]]);
-    return new PortalInjector(injector, tokens);
+  handleEnter(value) {
+    if(value){
+      this.router.navigate(['/search'], {queryParams: {q: value}})
+    }
   }
 
   onSearchItemSelect(name: string) {
