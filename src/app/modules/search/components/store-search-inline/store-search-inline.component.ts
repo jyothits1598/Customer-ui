@@ -7,6 +7,8 @@ import { ComponentPopoverRef, PopoverConfig, PopoverRef } from 'src/app/core/mod
 import { LayoutService } from 'src/app/core/services/layout.service';
 import { PopoverService } from 'src/app/core/services/popover.service';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
+import { SearchDataService } from '../../services/search-data.service';
+import { SearchHistoryComponent } from '../search-panel/search-history/search-history.component';
 import { SearchPanelComponent } from '../search-panel/search-panel.component';
 
 @Component({
@@ -30,11 +32,10 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   constructor(
     private restApiService: RestApiService,
     private popoverService: PopoverService,
-    private layoutService: LayoutService) { console.log('inside consructor of search, ', this.layoutService.isMobile); this.isMobile = this.layoutService.isMobile; }
+    private layoutService: LayoutService,
+    private searchDataServ: SearchDataService) { console.log('inside consructor of search, ', this.layoutService.isMobile); this.isMobile = this.layoutService.isMobile; }
 
   ngAfterViewInit(): void {
-
-
     this.keyupSubs = fromEvent(this.searchInput.nativeElement, 'keyup')
       .pipe(
         map((event: any) => event.target.value),
@@ -50,7 +51,11 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   }
 
   showResults() {
-    if (!this.overlayOpen) this.openComponentPopover();
+    if (this.shouldOpen()) this.openComponentPopover();
+  }
+
+  shouldOpen() {
+    return !this.overlayOpen && (this.searchDataServ.getHistory().length > 0 || this.searchData?.length)
   }
 
   openComponentPopover(results = null) {

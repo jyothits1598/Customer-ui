@@ -3,10 +3,9 @@
     <div class="above-bg" #searchContainer>
         <div class="store-search-home-input">
                 <input class="input-transparent basu" style="border: none;outline: 0;" type="text" [placeholder]="isMobile ? 'What would you like to eat?' : 'Search'"
-                (focus)="openComponentPopover(searchData)" #searchInput>
-            <!-- <img class="input-image" 
-                [src]="loading? 'assets/images/loader_white_24.gif' : 'assets/images/navbar/ico_search.png'"> -->
-                <img class="input-image" [src]="isMobile? 'assets/images/navbar/ico_search_blue.png' : 'assets/images/navbar/ico_search.png' ">
+                (focus)="showResults()" #searchInput>
+            <img class="input-image" 
+                [src]="loading? 'assets/images/loader_white_24.gif' : 'assets/images/navbar/ico_search.png'">
         </div>
     </div>
 </div>
