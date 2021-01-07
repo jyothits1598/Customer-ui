@@ -2,7 +2,7 @@ import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
 import { AfterViewInit, Component, ElementRef, Injector, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { fromEvent, interval, of } from 'rxjs';
+import { fromEvent, interval, of, Subscription } from 'rxjs';
 import { debounce, distinctUntilChanged, filter, finalize, map, switchMap, tap } from 'rxjs/operators';
 import { ComponentPopoverRef, PopoverConfig, PopoverRef } from 'src/app/core/model/popover';
 import { LayoutService } from 'src/app/core/services/layout.service';
@@ -22,7 +22,7 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   @ViewChild('searchContainer', { read: ElementRef }) searchContainer: ElementRef;
   @ViewChild('panelTemplate', { read: TemplateRef }) panelTemplate: TemplateRef<any>;
 
-  keyupSubs: any;
+  keyupSubs: Subscription;
   loading: boolean;
   searchData: any;
   searchTerm: string;
@@ -36,9 +36,13 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
     private layoutService: LayoutService,
     private searchDataServ: SearchDataService,
     private router: Router,
-    private route: ActivatedRoute) { console.log('inside consructor of search, ', this.layoutService.isMobile); this.isMobile = this.layoutService.isMobile; }
+    private route: ActivatedRoute) { this.isMobile = this.layoutService.isMobile; }
 
   ngAfterViewInit(): void {
+    this.searchDataServ.registerSearchElement(this.searchInput);
+  }
+
+  onFocus() {
     this.keyupSubs = fromEvent(this.searchInput.nativeElement, 'keyup')
       .pipe(
         map((event: any) => event.target.value),
@@ -51,6 +55,15 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
         debounce(() => interval(500)),
         switchMap((val) => this.restApiService.get(`api/stores/search?name=${val}`).pipe(finalize(() => this.loading = false), map(resp => resp.data.stores || []))),
       ).subscribe(res => { this.searchData = res; this.showResults(); });
+
+    this.showResults();
+  }
+
+  onBlur() {
+    this.keyupSubs.unsubscribe();
+    setTimeout(() => {
+      this.closePopover();
+    }, 100);
   }
 
   showResults() {
@@ -62,7 +75,6 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   }
 
   openComponentPopover(results = null) {
-    // if(!this.searchData?.length) return;
     let popoverConfig: PopoverConfig = {
       xPos: this.layoutService.isMobile ? 'center' : 'end',
       yPos: 'bottom',
@@ -81,13 +93,14 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   }
 
   handleEnter(value) {
-    if(value){
-      this.router.navigate(['/search'], {queryParams: {q: value}})
+    this.searchInput.nativeElement.blur();
+    this.closePopover();
+    if (value) {
+      this.router.navigate(['/search'], { queryParams: { q: value } })
     }
   }
 
   onSearchItemSelect(name: string) {
-    this.closePopover();
     if (name) {
       this.searchInput.nativeElement.value = name;
       this.searchTerm = name;
@@ -95,6 +108,6 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.keyupSubs.unsubscribe();
+    if (this.keyupSubs) this.keyupSubs.unsubscribe();
   }
 }

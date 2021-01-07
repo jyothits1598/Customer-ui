@@ -1,14 +1,17 @@
-import { Injectable } from '@angular/core';
+import { ElementRef, Injectable } from '@angular/core';
+import { NativeElementInjectorDirective } from 'ngx-intl-tel-input';
 import { StorageService } from 'src/app/core/services/storage.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class SearchDataService {
   storageKey = 'searchHistory'
   searchHistory: Array<string>;
+  searchInputElem: ElementRef;
 
   constructor(private storageService: StorageService) {
     this.searchHistory = this.storageService.get(this.storageKey) || [];
-    console.log('this is the constructor', this.searchHistory);
   }
 
   getHistory() {
@@ -22,6 +25,14 @@ export class SearchDataService {
       this.storageService.store(this.storageKey, this.searchHistory);
     }
 
+  }
+
+  registerSearchElement(elem: ElementRef) {
+    this.searchInputElem = elem;
+  }
+
+  clearSearch() {
+    this.searchInputElem.nativeElement.value = '';
   }
 
 }

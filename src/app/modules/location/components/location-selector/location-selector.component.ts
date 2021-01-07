@@ -32,7 +32,6 @@ export class LocationSelectorComponent implements OnInit {
     this.geoLocationService.userLocation().subscribe((location) => {
       this.location = location;
       if (this.location.address.locality.length > 22) this.location.address.locality = this.location.address.locality.slice(0, 22) + '...';
-      console.log(this.location)
     })
   }
 

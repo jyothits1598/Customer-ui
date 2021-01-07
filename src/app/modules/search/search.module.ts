@@ -27,6 +27,6 @@ const routes: Routes = [
     IncrementalSearchModule
   ],
   exports: [StoreSearchInlineComponent],
-  providers: [SearchDataService]
+  // providers: [SearchDataService]
 })
 export class SearchModule { }

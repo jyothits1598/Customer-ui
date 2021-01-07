@@ -30,7 +30,6 @@ export class StoresDataService {
   }
 
   allFavourites(filter: StoreFilter): Observable<Array<Store>> {
-    console.log('inside all favourites', this.filterToQuery(filter));
     return this.restApiService.get(URL_AllFavourites + this.filterToQuery(filter)).pipe(map(resp => {
       let stores: Array<Store> = [];
       resp.data.forEach(s => {
@@ -59,7 +58,6 @@ export class StoresDataService {
         result += (`lat=${filter.location.lat}&lng=${filter.location.lng}&distance=${filter.distance ? filter.distance : 2000}`)
       }
     }
-    console.log('inside filter to query, ', filter, result);
     return result ? ('?' + result) : result;
   }
 
