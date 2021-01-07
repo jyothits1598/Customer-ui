@@ -50,6 +50,15 @@
     .top-tab-nav {
         position: relative;
     }
+    .spacing {
+        margin-bottom: 16px;
+        padding-left:16px;
+        padding-right:16px;
+    }
+    .mb-ctr {
+        display:block;
+        margin-top:-15px;
+     }
   }
   /* Small devices (portrait tablets and large phones, 600px and up) */
   @media only screen and (min-width: 600px) {
@@ -82,6 +91,15 @@
     }
     .top-tab-nav {
         position: relative;
+    }
+    .spacing {
+        margin-bottom: 16px;
+        padding-left:16px;
+        padding-right:16px;
+    }
+    .mb-ctr {
+       display:block;
+       margin-top:-15px;
     }
   }
   /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
@@ -138,6 +156,12 @@
     }
     .top-tab-nav {
         position: relative;
+    }
+    .spacing {
+        margin-bottom: 16px;
+    }
+    .mb-ctr {
+        display:none;
     }
   }
    
@@ -199,6 +223,14 @@
     .top-tab-nav {
         position: fixed;
     }
+    .spacing {
+        margin-bottom: 24px;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+    .mb-ctr {
+        display:none;
+    }
   }
   /* Extra large devices (large desktops, 1200px and up) */
   @media (min-width: 1400px) {  
@@ -257,6 +289,14 @@
     }
     .top-tab-nav {
         position: fixed;
+    }
+    .spacing {
+        margin-bottom: 24px;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+    .mb-ctr {
+        display:none;
     }
   }
   .signup-panel {
