@@ -31,7 +31,7 @@ export class EmailMobSignupComponent implements OnInit {
       // CustomValidators.pattern(/^.*(?=.{6,})(?=.*[a-z])(?=.*[A-Z]).*$/, 'Please enter a valid password of 6+ characters and atleast one digit, one capital')
     ]),
     verificationCode: new FormControl(null, [
-      CustomValidators.required('Code is required'),
+      CustomValidators.required('Please enter verification code'),
     ])
   })
   constructor(private signupService: SignupService,

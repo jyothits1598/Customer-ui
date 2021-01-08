@@ -30,7 +30,7 @@ export class ChangeEmailComponent implements OnInit {
       CustomValidators.email('Email is invalid.')
     ]),
     verificationCode: new FormControl(null, [
-      CustomValidators.required('Code is required'),
+      CustomValidators.required('Please enter verification code'),
     ])
   })
 

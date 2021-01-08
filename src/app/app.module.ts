@@ -5,11 +5,15 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PrivacyPolicyComponent } from 'src/app/modules/privacy-policy/privacy-policy.component';
+import { TermsServiceComponent } from 'src/app/modules/terms-service/terms-service.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    PrivacyPolicyComponent,
+    TermsServiceComponent,
   ],
   imports: [
     BrowserModule,
