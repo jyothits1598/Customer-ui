@@ -32,24 +32,25 @@ export class PopoverService {
     let overLayRef = this.overlay.create(overlayConfig);
     // overLayRef.backdropClick().subscribe(e => { popoverRef.dismiss() });
     let popoverRef = new PopoverRef(overLayRef);
-    if (config.onDismiss) {console.log('on dismiss present');popoverRef.onDismiss = config.onDismiss;}
+    if (config.onDismiss) { popoverRef.onDismiss = config.onDismiss; }
     let tempPortal = new TemplatePortal(template, this._viewContainerRef, { $implicit: popoverRef });
     overLayRef.attach(tempPortal);
-    
+
     if (true) {
       let unListen;
       setTimeout(() => {
-        unListen = this._renderer.listen('document', 'click', (e) => { console.log('callback for clicked, ', overLayRef.overlayElement.contains(e.target)); if(!overLayRef.overlayElement.contains(e.target)) popoverRef.dismiss(); })
+        unListen = this._renderer.listen('document', 'click', (e) => { if (!overLayRef.overlayElement.contains(e.target)) popoverRef.dismiss(); })
       }, 100);
 
       // add outside click 
-      if(popoverRef.onDismiss) {
+      if (popoverRef.onDismiss) {
         let onDisFun = popoverRef.onDismiss;
         popoverRef.onDismiss = () => {
-          console.log('calling on dismiss');
           onDisFun();
           unListen();
         }
+      } else {
+        popoverRef.onDismiss = () => { unListen() }
       }
     }
     return popoverRef;

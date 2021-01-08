@@ -46,9 +46,9 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   }
 
   onFocus() {
-    this.keyupSubs = this.searchControl.valueChanges
+    this.keyupSubs = fromEvent(this.searchInput.nativeElement, 'keyup')
       .pipe(
-        // map((event: any) => event.target.value),
+        map((event: any) => event.target.value),
         distinctUntilChanged(),
         tap((term) => {
           if (term) this.loading = true;
@@ -93,13 +93,12 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
     let popoverConfig: PopoverConfig = {
       xPos: this.layoutService.isMobile ? 'center' : 'end',
       yPos: 'bottom',
-      onDismiss: () => { this.overlayOpen = false; console.log('on dismiss called - inline search onfig') }
+      onDismiss: () => { this.overlayOpen = false; }
     }
     // hasBackdrop ?: true | false;
     // darkBackground ?: true | false;
     if (this.overlayOpen) return;
     this.popoverRef = this.popoverService.openTemplatePopover(this.searchContainer, this.panelTemplate, popoverConfig)
-    console.log('this is the popover ref', this.popoverRef)
     this.overlayOpen = true;
   }
 
