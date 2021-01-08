@@ -8,6 +8,7 @@ import { ResetSuccessComponent } from './pages/reset-success/reset-success.compo
 import { TelInputModule } from '../../tel-input/tel-input.module';
 import { UseridVerificationComponent } from './components/userid-verification/userid-verification.component';
 import { EnterPasswordComponent } from './components/userid-verification/enter-password/enter-password.component';
+import { PasswordHelperModule } from '../password-helper/password-helper.module';
 
 const routes: Routes = [
   {
@@ -28,7 +29,8 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forChild(routes),
     VerificationCodeModule,
-    TelInputModule
+    TelInputModule,
+    PasswordHelperModule
   ]
 })
 export class ForgotPasswordModule { }

@@ -56,7 +56,7 @@ export class StoresDataService {
         if (result) {
           result += '&';
         }
-        result += (`lat=${filter.location.lat}&lng=${filter.location.lng}&distance=${filter.distance ? filter.distance : 2000}`)
+        result += (`lat=${filter.location.lat}&lng=${filter.location.lng}&distance=${filter.distance ? filter.distance : 5}`)
       }
     }
     console.log('inside filter to query, ', filter, result);

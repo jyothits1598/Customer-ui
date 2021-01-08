@@ -123,15 +123,14 @@ body {
 }
 
 // signup forms
-.margins-center {
-  margin: 48px auto 25px;     
+.margins-center {     
   max-width: 432px;
-  // box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
-  // border-radius: 16px;
   background: var(--color-background);
   padding:16px;
 }
-
+.bx-shdw {
+  box-shadow: none !important;
+}
 .margins-center-profile {
   margin: 96px auto 25px;     
   max-width: 432px;
@@ -154,12 +153,12 @@ input.custom-password-eye {
   width:112px;
   height:112px;
 }
-.forgotten-password-body {
-  margin: 48px auto 25px;
-  max-width: 432px;
-  background: var(--color-background);
-  padding: 16px;
-}
+// .forgotten-password-body {
+//   margin: 48px auto 25px;
+//   max-width: 432px;
+//   background: var(--color-background);
+//   padding: 16px;
+// }
 .field-icon {
   float: right;
   left: -10px;

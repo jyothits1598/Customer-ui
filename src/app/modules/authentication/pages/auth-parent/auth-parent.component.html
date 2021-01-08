@@ -1,9 +1,10 @@
 <div class="nav-login" >
-    <div class="container-fluid">
-        <span class="profile-save-text only-small" routerLink="/">
+    <div class="container">
+        <span class="profile-save-text only-small" routerLink="/" *ngIf="!isforgot">
             <img src="assets/images/ico_arrow_left_white.png">
         </span>
-        <div class="center-logo-profile" routerLink="/" >
+        <span *ngIf="isforgot" routerLink="/" class="profile-save-text"> <img src="assets/images/ico_arrow_left_white.png"> &nbsp; Forgot password </span>
+        <div class="center-logo-profile" routerLink="/" *ngIf="!isforgot">
             <img src="assets/svg/logo_white.svg">
         </div>
     </div>

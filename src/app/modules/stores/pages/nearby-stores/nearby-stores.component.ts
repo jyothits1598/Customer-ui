@@ -18,7 +18,7 @@ export class NearbyStoresComponent implements OnInit, OnDestroy {
     this.locationSubs = this.geoLocation.userLocation().subscribe((value: UserLocation) => {
       this.filter = {
         location: value.latLng,
-        distance: this.authService.loggedUser?.customRadius ? this.authService.loggedUser.customRadius : 2000
+        distance: this.authService.loggedUser?.customRadius ? this.authService.loggedUser.customRadius : 5
       }
     });
   }

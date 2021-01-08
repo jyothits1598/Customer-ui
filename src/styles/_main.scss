@@ -352,10 +352,6 @@ input.ng-invalid.ng-touched.error-highlight {
     max-width: 312px;
     padding-top: 40px;
 }
-.security-card {
-    margin: 96px auto 25px;
-    max-width:350px;
-}
 .forgot {
     margin-top:34px;
     margin-bottom:34px;
@@ -376,7 +372,7 @@ input.ng-invalid.ng-touched.error-highlight {
     background: var(--color-primary);
     color: var(--color-background);
     width: 100%;
-    position: fixed;
+    position: relative;
     top: 0;
     left: 0;
     right: 0;

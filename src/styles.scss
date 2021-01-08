@@ -58,7 +58,26 @@
     .mb-ctr {
         display:block;
         margin-top:-15px;
-     }
+    }
+     .margins-center {
+        margin: 0 auto 25px;
+    }
+    .security-card {
+        margin-top:56px;
+        padding:16px;
+    }
+    .profile-radius {
+        margin: 0 auto 25px;
+        padding: 16px;
+    }
+    .security-card-user {
+        margin-top:8px;
+        padding:16px;
+    }
+    .security-card-pwd {
+        margin-top:24px;
+        padding:16px;
+    }
   }
   /* Small devices (portrait tablets and large phones, 600px and up) */
   @media only screen and (min-width: 600px) {
@@ -100,6 +119,25 @@
     .mb-ctr {
        display:block;
        margin-top:-15px;
+    }
+    .margins-center {
+        margin: 0 auto 25px;
+    }
+    .security-card {
+        margin-top:56px;
+        padding:16px;
+    }
+    .profile-radius {
+        margin: 0 auto 25px;
+        padding: 16px;
+    }
+    .security-card-user {
+        margin-top:8px;
+        padding:16px;
+    }
+    .security-card-pwd {
+        margin-top:24px;
+        padding:16px;
     }
   }
   /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
@@ -153,15 +191,35 @@
     .margins-center {
         box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
         border-radius: 16px;
+        margin: 48px auto 25px;
     }
     .top-tab-nav {
         position: relative;
     }
     .spacing {
         margin-bottom: 16px;
+        padding-left: 12px;
+        padding-right: 12px;
     }
     .mb-ctr {
         display:none;
+    }
+    .security-card {
+        margin: 72px auto 25px;
+        max-width:350px;
+    }
+    .profile-radius {
+        margin: 24px auto 25px;
+        max-width:350px;
+        padding: 16px;
+    }
+    .security-card-user {
+        margin: 72px auto 25px;
+        max-width:350px;
+    }
+    .security-card-pwd {
+        margin: 72px auto 25px;
+        max-width:350px;
     }
   }
    
@@ -219,6 +277,7 @@
     .margins-center {
         box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
         border-radius: 16px;
+        margin: 48px auto 25px;
     }
     .top-tab-nav {
         position: fixed;
@@ -230,6 +289,23 @@
     }
     .mb-ctr {
         display:none;
+    }
+    .security-card {
+        margin: 72px auto 25px;
+        max-width:350px;
+    }
+    .profile-radius {
+        margin: 24px auto 25px;
+        max-width:350px;
+        padding: 16px;
+    }
+    .security-card-user {
+        margin: 72px auto 25px;
+        max-width:350px;
+    }
+    .security-card-pwd {
+        margin: 72px auto 25px;
+        max-width:350px;
     }
   }
   /* Extra large devices (large desktops, 1200px and up) */
@@ -286,6 +362,7 @@
     .margins-center {
         box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
         border-radius: 16px;
+        margin: 48px auto 25px;
     }
     .top-tab-nav {
         position: fixed;
@@ -297,6 +374,19 @@
     }
     .mb-ctr {
         display:none;
+    }
+    .security-card {
+        margin: 72px auto 25px;
+        max-width:350px;
+    }
+    .profile-radius {
+        margin: 24px auto 25px;
+        padding: 16px;
+        max-width:350px;
+    }
+    .security-card-user {
+        margin: 72px auto 25px;
+        max-width:350px;
     }
   }
   .signup-panel {
@@ -323,7 +413,7 @@ input[type=number]::-webkit-outer-spin-button {
 .edit-profile-page {
     position: fixed;
     top:0;
-    bottom:0;
+    bottom:48px;
     left:0;
     right:0;
     background:var(--color-background);
