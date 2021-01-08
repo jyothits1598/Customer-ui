@@ -1,6 +1,6 @@
 import { ConnectedPosition, Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal, PortalInjector, TemplatePortal } from '@angular/cdk/portal';
-import { ElementRef, Injectable, Injector, TemplateRef, ViewContainerRef } from '@angular/core';
+import { ElementRef, Injectable, Injector, Renderer2, TemplateRef, ViewContainerRef } from '@angular/core';
 import { ComponentPopoverRef, PopoverConfig, PopoverRef } from '../model/popover';
 
 @Injectable({
@@ -8,27 +8,52 @@ import { ComponentPopoverRef, PopoverConfig, PopoverRef } from '../model/popover
 })
 export class PopoverService {
   _viewContainerRef: ViewContainerRef;
+  _renderer: Renderer2
 
-  registerViewContainer(viewContainerRef: ViewContainerRef) {
-    this._viewContainerRef = viewContainerRef
+  initialize(viewContainerRef: ViewContainerRef, renderer: Renderer2) {
+    this._viewContainerRef = viewContainerRef;
+    this._renderer = renderer;
   }
 
   constructor(private overlay: Overlay,
     private injector: Injector) { }
 
+  registerRenderer() {
+
+  }
+
   openTemplatePopover(origin: ElementRef, template: TemplateRef<any>, config: PopoverConfig = null) {
+    //set up overlay configuration
     let overlayConfig = new OverlayConfig();
-    overlayConfig.hasBackdrop = config.hasBackdrop === false ? false : true;
-    if (!config?.darkBackground) overlayConfig.backdropClass = "";
+    // overlayConfig.hasBackdrop = config.hasBackdrop === false ? false : true;
+    overlayConfig.hasBackdrop = false;
     overlayConfig.positionStrategy = this.overlay.position().flexibleConnectedTo(origin.nativeElement).withPositions(this.generatePositions(config));
 
     let overLayRef = this.overlay.create(overlayConfig);
+    // overLayRef.backdropClick().subscribe(e => { popoverRef.dismiss() });
     let popoverRef = new PopoverRef(overLayRef);
-    if (config.onDismiss) popoverRef.onDismiss = config.onDismiss;
-    overLayRef.backdropClick().subscribe(e => { popoverRef.dismiss() });
+    if (config.onDismiss) {console.log('on dismiss present');popoverRef.onDismiss = config.onDismiss;}
     let tempPortal = new TemplatePortal(template, this._viewContainerRef, { $implicit: popoverRef });
     overLayRef.attach(tempPortal);
+    
+    if (true) {
+      let unListen;
+      setTimeout(() => {
+        unListen = this._renderer.listen('document', 'click', (e) => { console.log('callback for clicked, ', overLayRef.overlayElement.contains(e.target)); if(!overLayRef.overlayElement.contains(e.target)) popoverRef.dismiss(); })
+      }, 100);
+
+      // add outside click 
+      if(popoverRef.onDismiss) {
+        let onDisFun = popoverRef.onDismiss;
+        popoverRef.onDismiss = () => {
+          console.log('calling on dismiss');
+          onDisFun();
+          unListen();
+        }
+      }
+    }
     return popoverRef;
+    // document.addEventListener('click', (event) => { console.log('called click event handler, ', overLayRef.overlayElement.contains(<HTMLElement>(event.target)), event.target) })
   }
 
   openComponentPopover(origin: ElementRef, component: any, config: PopoverConfig = null) {

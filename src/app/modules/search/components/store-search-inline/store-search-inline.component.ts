@@ -1,6 +1,7 @@
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
 import { AfterViewInit, Component, ElementRef, Injector, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { fromEvent, interval, of, Subscription } from 'rxjs';
 import { debounce, distinctUntilChanged, filter, finalize, map, switchMap, tap } from 'rxjs/operators';
@@ -21,6 +22,8 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   @ViewChild('searchInput', { read: ElementRef }) searchInput: ElementRef
   @ViewChild('searchContainer', { read: ElementRef }) searchContainer: ElementRef;
   @ViewChild('panelTemplate', { read: TemplateRef }) panelTemplate: TemplateRef<any>;
+
+  searchControl: FormControl = new FormControl(null);
 
   keyupSubs: Subscription;
   loading: boolean;
@@ -43,9 +46,9 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   }
 
   onFocus() {
-    this.keyupSubs = fromEvent(this.searchInput.nativeElement, 'keyup')
+    this.keyupSubs = this.searchControl.valueChanges
       .pipe(
-        map((event: any) => event.target.value),
+        // map((event: any) => event.target.value),
         distinctUntilChanged(),
         tap((term) => {
           if (term) this.loading = true;
@@ -55,6 +58,18 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
         debounce(() => interval(500)),
         switchMap((val) => this.restApiService.get(`api/stores/search?name=${val}`).pipe(finalize(() => this.loading = false), map(resp => resp.data.stores || []))),
       ).subscribe(res => { this.searchData = res; this.showResults(); });
+    // this.keyupSubs = fromEvent(this.searchInput.nativeElement, 'keyup')
+    //   .pipe(
+    //     map((event: any) => event.target.value),
+    //     distinctUntilChanged(),
+    //     tap((term) => {
+    //       if (term) this.loading = true;
+    //       this.searchTerm = term;
+    //     }),
+    //     filter((val) => val),
+    //     debounce(() => interval(500)),
+    //     switchMap((val) => this.restApiService.get(`api/stores/search?name=${val}`).pipe(finalize(() => this.loading = false), map(resp => resp.data.stores || []))),
+    //   ).subscribe(res => { this.searchData = res; this.showResults(); });
 
     this.showResults();
   }
@@ -78,12 +93,13 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
     let popoverConfig: PopoverConfig = {
       xPos: this.layoutService.isMobile ? 'center' : 'end',
       yPos: 'bottom',
-      onDismiss: () => { this.overlayOpen = false }
+      onDismiss: () => { this.overlayOpen = false; console.log('on dismiss called - inline search onfig') }
     }
     // hasBackdrop ?: true | false;
     // darkBackground ?: true | false;
     if (this.overlayOpen) return;
     this.popoverRef = this.popoverService.openTemplatePopover(this.searchContainer, this.panelTemplate, popoverConfig)
+    console.log('this is the popover ref', this.popoverRef)
     this.overlayOpen = true;
   }
 
@@ -104,6 +120,7 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
     if (name) {
       this.searchInput.nativeElement.value = name;
       this.searchTerm = name;
+      this.closePopover();
     }
   }
 

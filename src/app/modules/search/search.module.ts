@@ -9,6 +9,7 @@ import { StoreSearchInlineComponent } from './components/store-search-inline/sto
 import { SearchPanelComponent } from './components/search-panel/search-panel.component';
 import { SearchHistoryComponent } from './components/search-panel/search-history/search-history.component';
 import { SearchDataService } from './services/search-data.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -22,6 +23,7 @@ const routes: Routes = [
   declarations: [SearchComponent, StoreSearchComponent, StoreSearchInlineComponent, SearchPanelComponent, SearchHistoryComponent],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
     StoresModule,
     IncrementalSearchModule

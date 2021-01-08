@@ -2,9 +2,9 @@
 <div style="outline: none;cursor: pointer;">
     <div class="above-bg" #searchContainer>
         <div class="store-search-home-input">
-                <input class="input-transparent basu" style="border: none;outline: 0;" type="search" [placeholder]="isMobile ? 'What would you like to eat?' : 'Search'"
+                <input class="input-transparent basu" style="border: none;outline: 0;" type="search" [formControl]="searchControl" [placeholder]="isMobile ? 'What would you like to eat?' : 'Search'"
                 (focus)="onFocus()" #searchInput (keyup.enter)="handleEnter($event.target.value)" (keyup.escape)="closePopover()" (blur)="onBlur()">
-                <span style="position: absolute; right: 36px;" (click)="searchInput.value = ''">x</span>
+                <!-- <span style="position: absolute; right: 36px;" (click)="searchInput.value = ''">x</span> -->
             <img class="input-image" 
                 [src]="loading? 'assets/images/loader_white_24.gif' : 'assets/images/navbar/ico_search.png'">
         </div>
