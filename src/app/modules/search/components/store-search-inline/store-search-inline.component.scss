@@ -1,51 +1,53 @@
 /* Extra small devices (phones, 600px and down) */
-    @media only screen and (max-width: 600px) {
-        .above-bg {
-            position: absolute;
-            width: 100%;
-            top:0;
-            left:0;
-            right:0;
-            margin-top:48px;
-            background: #fff; 
-            padding: 10px;
-        }
-        .store-search-home-input {
-            border-radius: 24px;
-            padding: 8px 16px;
-            font-family: DM Sans;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 16px;
-            line-height: 24px;
-            cursor: pointer;
-            color:#1a1a1a;
-            background: #fafafa;
-            z-index: 1;
-        }
-        .input-transparent {
-            background: transparent;
-            color:#1a1a1a;
-            padding-left: 30px !important;
-        }
-        .input-image {
-            position: absolute;
-            left:10px !important;
-            width:24px;
-            height:24px;
-            top:10px;
-        }
-        .input-transparent::placeholder {
-            color:#1a1a1a;
-            opacity: 0.5;
-        }
-        .input-transparent:-ms-input-placeholder { /* Internet Explorer 10-11 */
-            color:#1a1a1a;
-        }           
-        .input-transparent::-ms-input-placeholder { /* Microsoft Edge */
-            color:#1a1a1a;
-        }
+@media only screen and (max-width: 600px) {
+    .above-bg {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin-top: 48px;
+        background: #fff;
+        padding: 10px;
     }
+    .store-search-home-input {
+        border-radius: 24px;
+        padding: 8px 16px;
+        font-family: DM Sans;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 24px;
+        cursor: pointer;
+        color: #1a1a1a;
+        background: #fafafa;
+        z-index: 1;
+    }
+    .input-transparent {
+        background: transparent;
+        color: #1a1a1a;
+        padding-left: 30px !important;
+    }
+    .input-image {
+        position: absolute;
+        left: 10px !important;
+        width: 24px;
+        height: 24px;
+        top: 10px;
+    }
+    .input-transparent::placeholder {
+        color: #1a1a1a;
+        opacity: 0.5;
+    }
+    .input-transparent:-ms-input-placeholder {
+        /* Internet Explorer 10-11 */
+        color: #1a1a1a;
+    }
+    .input-transparent::-ms-input-placeholder {
+        /* Microsoft Edge */
+        color: #1a1a1a;
+    }
+}
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
     .input-transparent {
@@ -77,9 +79,9 @@
         cursor: pointer;
         color: var(--color-background);
     }
-  }
-  /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
-  @media (min-width: 768px) {  
+}
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+@media (min-width: 768px) {
     .input-transparent {
         background: transparent;
         color: var(--color-background);
@@ -183,8 +185,27 @@
 }
 .input-image {
     position: absolute;
-    right:10px;
-    width:24px;
-    height:24px;
-    top:8px;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+    top: 8px;
 }
+
+.mobile-banner {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 48px;
+    right: 0;
+    background: var(--color-primary);
+
+    &__ico {
+        border: none;
+        background-color: transparent;
+    }
+}
+
+// input[type="search"]::-webkit-search-cancel-button {
+//     display: none;
+// }

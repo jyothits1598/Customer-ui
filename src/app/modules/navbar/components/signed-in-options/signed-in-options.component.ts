@@ -35,7 +35,7 @@ export class SignedInOptionsComponent implements OnInit, OnDestroy {
 
   showPopover(template: TemplateRef<any>) {
     if (this.popoverRef) return;
-    this.popoverRef = this.popover.openTemplatePopover(this.icon, template, { xPos: 'end', yPos: 'bottom', darkBackground: false, hasBackdrop: false });
+    this.popoverRef = this.popover.openTemplatePopover(this.icon, template, { xPos: 'end', yPos: 'bottom', hasBackdrop: false });
     this.setupListener();
   }
 

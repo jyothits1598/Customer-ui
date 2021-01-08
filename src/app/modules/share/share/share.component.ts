@@ -38,7 +38,6 @@ export class ShareComponent implements OnInit {
       yPos: 'bottom',
       // onDismiss?: () => void;
       hasBackdrop: true,
-      darkBackground: false,
       outSideClick: true
     });
   }

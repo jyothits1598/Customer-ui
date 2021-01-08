@@ -2,3 +2,19 @@
     list-style-type: none;
     padding: 10px;
 }
+// .search-ipt-panel {
+//     border-radius: 4px;
+//     padding:12px;
+//     width:376px;
+//     height: 48px;
+// }
+.border-box-input {
+    border:0;
+    outline: 0;
+    font-size:16px;
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: normal;
+    color: var(--color-boldlevelcolor);
+    width: 300px;
+}

@@ -1,7 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 col-xl-4" *ngFor="let store of stores"
-            style="margin-bottom: 24px;padding-left: 12px;padding-right:12px;">
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 col-xl-4 spacing" *ngFor="let store of stores" >
             <app-store-card [store]="store"></app-store-card>
         </div>
         <br><br>

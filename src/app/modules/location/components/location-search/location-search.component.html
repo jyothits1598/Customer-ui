@@ -1,13 +1,29 @@
-<div class="row">
-    <div class="col-md-12">
-        <div class="input-container">
-            <img src="assets/images/ico_arrow_left.png" class="input-img-top" (click)="searchedLocation.emit(null)">
-            <input type="text" class="input-search-border" #searchInput placeholder="Enter address or suburb">
-        </div>
-    </div>
+<!-- <div class="row">
+    <div class="col-md-12"> -->
+        <!-- <div class="input-container"> -->
+            <!-- <img src="assets/images/ico_arrow_left.png" class="input-img-top" (click)="searchedLocation.emit(null)"> -->
+            <!-- <input type="text" class="input-search-border" #searchInput placeholder="Enter address or suburb"> -->
+            <!-- <img src="assets/images/ico_arrow_left.png"> -->
+        <!-- </div> -->
+    <!-- </div>
+</div> -->
+<div style="border-bottom:1px solid #ccc;padding:8px;">
+    <table class="search-ipt-panel" >
+        <tr>
+            <td valign="middle" style="cursor: pointer;">
+                <img src="assets/images/ico_arrow_left.png" (click)="searchedLocation.emit(null)">
+            </td>
+            <td>
+                <input type="text" #searchInput placeholder="Enter address or suburb" class="border-box-input">
+            </td>
+            <td valign="middle">
+                <img [src]="suggestionsLoading? 'assets/images/loader_blue.gif' : '' " >
+            </td>
+        </tr>
+    </table>
 </div>
-<div *ngIf="!suggestionsLoading; else loading">
-    <div *ngFor="let suggestion of suggestions" (click)="onLocSelect(suggestion)" style="padding:0 10px">
+<div *ngIf="!suggestionsLoading">
+    <div *ngFor="let suggestion of suggestions" (click)="onLocSelect(suggestion)" style="padding:0 0 0 10px">
         <table style="cursor: pointer;">
             <tr>
                 <td valign="middle" style="padding-right: 10px;">
@@ -21,8 +37,3 @@
         </table>
     </div>
 </div>
-<ng-template #loading>
-    <div class="text-center">
-        location loading...
-    </div>
-</ng-template>

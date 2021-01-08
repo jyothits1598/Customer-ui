@@ -1,135 +1,25 @@
-<!-- <div class="container" style="display:none">
+<div class="margins-center text-center">
+    <!-- first sinup page -->
     <div class="row">
-        <div *ngIf="submissionError" class="col-md-12">{{submissionError}}</div>
         <div class="col-md-12">
-            <div *ngIf="!submissionComplete" class="margins-center" style="margin-top:40px">
-                <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="margins-center">
-                                <h1 class="signup-header"> Create your free account </h1>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group form-group--margin">
-                                <div class="label-inputs"> First name <b class="m-star">*</b> </div>
-                                <input type="text" class="form-input error-highlight" placeholder="e.g. John"
-                                    formControlName="firstName">
-                                <div *ngIf="f.firstName.touched && f.firstName.errors " class="error-mez">
-                                    <div>First name is required.</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group form-group--margin">
-                                <div class="label-inputs"> Last name <b class="m-star">*</b> </div>
-                                <input type="text" class="form-input error-highlight" placeholder="e.g. Cena"
-                                    formControlName="lastName">
-                                <div *ngIf="f.lastName.touched && f.lastName.errors" class="error-mez">
-                                    <div>Last name is required.</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group form-group--margin">
-                                <div class="label-inputs"> Email <b class="m-star">*</b> </div>
-                                <input type="text" class="form-input error-highlight" placeholder="e.g. name@gmail.com"
-                                    formControlName="customerEmail">
-                                <div *ngIf="f.customerEmail.touched && f.customerEmail.errors " class="error-mez">
-                                    <div> {{getErrors('customerEmail')}} </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group form-group--margin">
-                                <div class="label-inputs"> Mobile <b class="m-star">*</b> </div>
-                                <input class="form-input error-highlight" placeholder="e.g. 0412345678"
-                                    formControlName="signupmobile" minlength="10" maxlength="10">
-                                <div *ngIf="f.signupmobile.touched && f.signupmobile.errors" class="error-mez">
-                                    <div> {{getErrors('signupmobile')}}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group form-group--margin">
-                                <div class="label-inputs"> Password <b class="m-star">*</b> </div>
-                                <app-password [showHint]="true">
-                                    <input passwordInput type="password" id="password"
-                                        class="form-input error-highlight" formControlName="password"
-                                        placeholder="Must be at least 8 characters">
-                                </app-password>
-                                <div *ngIf="f.password.touched && f.password.errors" class="error-mez">
-                                    <div>
-                                        {{getErrors('password')}}
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group" style="margin-top:10px;">
-                                <button [disabled]="submitting" type="submit" class="std-button std-button--blue">
-                                    <span *ngIf="!submitting; else subTemp">Sign up</span> </button>
-                                </div>
-                            </div>
-                        </div>
-                        <br>
-                        <p class="text-center" style="font-weight:bold"> Already have an account? <a
-                            routerLink="/auth/signin" style="color:#353FA8;text-decoration: none;"> Login </a></p>
-                        </form>
-                    </div>
-                </div>
+            <h3 class="std-heading-4"> Sign up </h3>
+            <div class="paragraph14" style="margin-bottom: 24px;">
+                Sign up and get 5% off all food for 30 days
             </div>
-        </div> -->
-<!-- <span toggle="#password" class="fa fa-eye-slash field-icon toggle-password"></span> -->
-
-<!-- <ng-template #regComplete>
-    Welcome!
-    Your registration is complete.
-</ng-template>
-
-<ng-template #subTemp>
-    Submitting...
-</ng-template>
- -->
-
-
-<!-- new design -->
-
-            <div class="margins-center text-center">
-                <!-- first sinup page -->
-                <div>
-                    <h3 class="std-heading-4"> Sign up </h3>
-                    <div class="paragraph14" style="margin-bottom: 24px;">
-                        Sign up and get 5% off all food for 30 days
-                    </div>
-                    <button class="std-button std-button--transparency1" style="margin-bottom: 16px;"
-                        routerLink="./create">
-                        <img src="assets/images/profile/profile_user.png">&nbsp; Use mobile / email
-                    </button>
-                    <img src="assets/images/divider_or.png" style="margin-bottom: 16px;width:100%">
-                    <social-auth (signedIn)="handleSocialSignIn()"></social-auth>
-                    <div class="paragraph14" style="margin-bottom: 24px;">
-                        Already have an account?<b style="color:#353FA8;cursor: pointer;outline: 0;" routerLink="/auth/signin"> Log
-                            in</b>
-                    </div>
-                    <div class="paragraph14 paragraph14__f12 text-center">
-                creating a menuzapp account you're agreeing to our <b style="color:#353FA8;cursor: pointer;outline: 0;" routerLink="/privacy-policy">
-                            Privacy Policy </b> and <b style="color:#353FA8;cursor: pointer;outline: 0;" routerLink="/terms-service">Terms of Service </b>
-
-                    </div>
-                </div>
+            <button class="std-button std-button--transparency1" style="margin-bottom: 16px;"
+                routerLink="./create">
+                <img src="assets/images/profile/profile_user.png">&nbsp; Use mobile / email
+            </button>
+            <img src="assets/images/divider_or.png" style="margin-bottom: 16px;width:100%">
+            <social-auth (signedIn)="handleSocialSignIn()"></social-auth>
+            <div class="paragraph14" style="margin-bottom: 24px;">
+                Already have an account?<b style="color:#353FA8;cursor: pointer;outline: 0;" routerLink="/auth/signin"> Log
+                    in</b>
             </div>
-
-<!-- end new design -->
+            <div class="paragraph14 paragraph14__f12 text-center">
+                By creating a menuzapp account you're agreeing to our <span class="mb-ctr"><br></span><b  style="color:#353FA8;cursor: pointer;" routerLink="/privacy-policy">
+                    Privacy Policy </b> and <b style="color:#353FA8;cursor: pointer;" routerLink="/terms-service"> Terms of Service </b>
+            </div>
+        </div>
+    </div>
+</div>
