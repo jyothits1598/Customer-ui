@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { SearchComponent } from './pages/search/search.component';
 import { RouterModule, Routes } from '@angular/router';
 import { StoresModule } from '../stores/stores.module';
-import { StoreSearchComponent } from './components/store-search/store-search.component';
 import { IncrementalSearchModule } from '../incremental-search/incremental-search.module';
 import { StoreSearchInlineComponent } from './components/store-search-inline/store-search-inline.component';
 import { SearchPanelComponent } from './components/search-panel/search-panel.component';
 import { SearchHistoryComponent } from './components/search-panel/search-history/search-history.component';
 import { SearchDataService } from './services/search-data.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -19,14 +19,14 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [SearchComponent, StoreSearchComponent, StoreSearchInlineComponent, SearchPanelComponent, SearchHistoryComponent],
+  declarations: [SearchComponent, StoreSearchInlineComponent, SearchPanelComponent, SearchHistoryComponent],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
     StoresModule,
-    IncrementalSearchModule
   ],
   exports: [StoreSearchInlineComponent],
-  providers: [SearchDataService]
+  // providers: [SearchDataService]
 })
 export class SearchModule { }

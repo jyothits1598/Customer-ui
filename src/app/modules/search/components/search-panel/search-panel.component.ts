@@ -17,6 +17,7 @@ export class SearchPanelComponent implements OnInit {
   ngOnInit(): void { }
 
   handleClick(term: string) {
+    console.log('handle click inside seach pannel called', term);
     this.selectedItem.emit(term);
     if(term) this.searchDataServ.addItem(term);
   }

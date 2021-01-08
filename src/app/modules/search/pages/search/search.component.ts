@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { concatMap, filter, map, mergeMap } from 'rxjs/operators'
 import { GeoLocationService } from 'src/app/core/services/geo-location.service';
 import { StoreFilter } from 'src/app/modules/stores/model/StoreFilter';
+import { SearchDataService } from '../../services/search-data.service';
 
 @Component({
   selector: 'app-search',
@@ -15,7 +16,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   subs: Subscription;
   constructor(private router: Router,
     private route: ActivatedRoute,
-    private location: GeoLocationService) { }
+    private location: GeoLocationService,
+    private searchDataServ: SearchDataService) { }
 
   ngOnInit(): void {
     this.subs = this.route.queryParams.pipe(
@@ -26,11 +28,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     ).subscribe(val => this.storeFilter = val)
   }
 
-  handleTermSearch(term: string) {
-    this.router.navigate(["."], { relativeTo: this.route, queryParams: { q: term } });
-  }
-
   ngOnDestroy(): void {
+    this.searchDataServ.clearSearch();
     this.subs.unsubscribe();
   }
 
