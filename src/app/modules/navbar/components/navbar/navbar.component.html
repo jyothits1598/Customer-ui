@@ -18,9 +18,9 @@
         </div>
         <!-- Left-aligned links (default) -->
         <div class="topnav-left">
-            <div class="bck">
-                <location-selector></location-selector>
-            </div>
+
+            <ng-container #vCont></ng-container>
+            <!-- <location-selector></location-selector> -->
         </div>
         <!-- Right-aligned links -->
         <!-- <div class="topnav-right d-none d-lg-block"> -->
@@ -30,6 +30,13 @@
         </div>
     </div>
 </div>
+
+
+<ng-template #locationTemp>
+    <div class="bck">
+        <location-selector></location-selector>
+    </div>
+</ng-template>
 
 
 <style>

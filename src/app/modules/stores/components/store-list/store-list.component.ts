@@ -1,4 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Subject } from 'rxjs';
+import { take } from 'rxjs/internal/operators/take';
+import { takeUntil } from 'rxjs/operators';
 import { Pagination, StorePagination } from 'src/app/shared/classes/pagination';
 import { InfiniteScrollDirective } from 'src/app/shared/directives/infinite-scroll.directive';
 import { Store } from '../../model/store';
@@ -14,12 +17,13 @@ export class StoreListComponent implements OnInit {
   stores: Array<Store> = [];
   pagination: StorePagination;
   _filter: StoreFilter
+  unSubscribe$ = new Subject<void>()
 
   @Input() set filter(f: StoreFilter) {
     this._filter = f;
     this.stores = [];
     this.pagination = new StorePagination(this.storeData.allStores.bind(this.storeData), this._filter);
-    this.pagination.getNext().subscribe(stores => this.appendStores(stores));
+    this.pagination.getNext().pipe(take(1)).subscribe(stores => this.appendStores(stores));
   };
 
   @ViewChild('infiniteScroll', { read: InfiniteScrollDirective }) infiniteScroll: InfiniteScrollDirective;
@@ -36,7 +40,7 @@ export class StoreListComponent implements OnInit {
   }
 
   handleScrolled() {
-    this.pagination.getNext().subscribe(stores => this.appendStores(stores))
+    this.pagination.getNext().pipe(take(1)).subscribe(stores => this.appendStores(stores))
   }
 
 }

@@ -9,6 +9,8 @@ import { SearchPanelComponent } from './components/search-panel/search-panel.com
 import { SearchHistoryComponent } from './components/search-panel/search-history/search-history.component';
 import { SearchDataService } from './services/search-data.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NavbarModule } from '../navbar/navbar.module';
+import { NavbarModifierModule } from '../navbar-modifier/navbar-modifier.module';
 
 const routes: Routes = [
   {
@@ -25,6 +27,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(routes),
     StoresModule,
+    NavbarModifierModule
   ],
   exports: [StoreSearchInlineComponent],
   // providers: [SearchDataService]

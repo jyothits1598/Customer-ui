@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { concatMap, filter, map, mergeMap } from 'rxjs/operators'
 import { GeoLocationService } from 'src/app/core/services/geo-location.service';
+import { NavbarService } from 'src/app/modules/navbar/services/navbar.service';
 import { StoreFilter } from 'src/app/modules/stores/model/StoreFilter';
 import { SearchDataService } from '../../services/search-data.service';
 
@@ -17,7 +18,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   constructor(private router: Router,
     private route: ActivatedRoute,
     private location: GeoLocationService,
-    private searchDataServ: SearchDataService) { }
+    private searchDataServ: SearchDataService,
+    private navbarService: NavbarService) { }
 
   ngOnInit(): void {
     this.subs = this.route.queryParams.pipe(
@@ -25,7 +27,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       mergeMap((query: any) => this.location.userLocation().pipe(
         map(loc => ({ name: query.q, location: loc.latLng }))
       ))
-    ).subscribe(val => this.storeFilter = val)
+    ).subscribe(val => this.storeFilter = val);
   }
 
   ngOnDestroy(): void {
