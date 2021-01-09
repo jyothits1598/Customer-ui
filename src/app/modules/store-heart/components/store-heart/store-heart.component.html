@@ -1,5 +1,5 @@
 <img *ngIf="loading; else heart" src="assets/images/loader.gif" style="width: 24px;">
 <ng-template  #heart>
     <img *ngIf="!this.preview_page_status" (click)="onFavClick()"  [src]="isFavourite ? 'assets/images/ico_heart_on.png' : 'assets/images/heart.png'"  title="Favourite">
-    <img *ngIf="this.preview_page_status" (click)="onFavClick()"  [src]="isFavourite ? 'assets/images/ico_heart_solid.png' : 'assets/images/ico_heart.png'"  title="Favourite">
+    <img *ngIf="this.preview_page_status" (click)="onFavClick()"  [src]="isFavourite ? 'assets/images/ico_heart_solid.png' : 'assets/images/navbar/ico_heart_trp.png'"  title="Favourite">
 </ng-template>
