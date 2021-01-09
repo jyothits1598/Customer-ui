@@ -30,8 +30,9 @@
                     </span>
                     <span style="float:right">
                         <ul class="menu">
-                            <!-- <li style="cursor: pointer;outline:none"> <img src="assets/images/navbar/ico_heart_trp.png">
-                            </li> -->
+                            <li style="cursor: pointer;outline:none"> 
+                                <store-heart [store]="{id: storeDetail.id, isFavourite: storeDetail.isFavourite,page:'preview'}"></store-heart>
+                            </li>
                             <li style="cursor: pointer;outline:none;margin-left:16px">
                                 <app-share></app-share>
                             </li>
@@ -62,7 +63,7 @@
                                     </present-availability>
                                 </span>
                             </div><br>
-                            <div class="std-heading-4"> {{storeDetail.name}} </div>
+                            <div class="std-heading-4 text-capitalize"> {{storeDetail.name}} </div>
                         </td>
                     </tr>
                 </table>
@@ -71,7 +72,7 @@
                         <img [src]="storeDetail.logo || 'assets/svg/null_logo.svg'" class="profile-log-detail" />
                     </div>
                     <div style="position: relative;top:10px;">
-                        <div class="std-heading-4"> {{storeDetail.name}} </div>
+                        <div class="std-heading-4 text-capitalize"> {{storeDetail.name}} </div>
                         <div class="sub-name">
                             <span style="float:left !important;"> {{storeDetail.distance}} &nbsp;
                                 <present-availability [availability]="storeDetail.openingHours">

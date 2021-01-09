@@ -24,7 +24,7 @@ export class ModalService {
     overlayConfig.positionStrategy = config?.yPosition ? this.overlay.position().global().centerHorizontally().top(config.yPosition) : this.overlay.position().global().centerHorizontally().centerVertically();
 
     let overLayRef = this.overlay.create(overlayConfig);
-    // overLayRef.backdropClick().subscribe(() => { overLayRef.dismiss() })
+    overLayRef.backdropClick().subscribe(() => { modalRef.dismiss()})
     let modalRef = new ModalRef(overLayRef);
     let tempPortal = new TemplatePortal(template, this._viewContainerRef, { $implicit: modalRef });
     overLayRef.attach(tempPortal);

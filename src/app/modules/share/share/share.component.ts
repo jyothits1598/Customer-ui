@@ -1,5 +1,7 @@
-import { AfterContentInit, Component, ElementRef, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { AfterContentInit, Component, ElementRef, Input, OnInit, TemplateRef, ViewChild, Optional, ɵɵresolveBody } from '@angular/core';
 import { windowTime } from 'rxjs/operators';
+import { ComponentModalRef, ModalRef } from 'src/app/core/model/modal';
+import { ComponentPopoverRef } from 'src/app/core/model/popover';
 import { ModalService } from 'src/app/core/services/modal.service';
 import { PopoverService } from 'src/app/core/services/popover.service';
 
@@ -19,7 +21,7 @@ export class ShareComponent implements OnInit {
   }
   constructor(private popoverService: PopoverService,
     private modalService: ModalService,
-    private window: Window) { }
+    private window: Window,@Optional() private modalRef: ModalRef,@Optional() private popoverRef: ComponentPopoverRef<ShareComponent>) { }
 
   ngOnInit(): void {
   }
@@ -32,15 +34,15 @@ export class ShareComponent implements OnInit {
     this.modalService.openTemplateModal(temp);
   }
 
-  showPopover(temp: TemplateRef<any>) {
-    this.popRef = this.popoverService.openTemplatePopover(this.org, temp, {
-      xPos: 'center',
-      yPos: 'bottom',
-      // onDismiss?: () => void;
-      hasBackdrop: true,
-      outSideClick: true
-    });
-  }
+  // showPopover(temp: TemplateRef<any>) {
+  //   this.popRef = this.popoverService.openTemplatePopover(this.org, temp, {
+  //     xPos: 'center',
+  //     yPos: 'bottom',
+  //     // onDismiss?: () => void;
+  //     hasBackdrop: true,
+  //     outSideClick: true
+  //   });
+  // }
 
   fbShare() {
     FB.ui({
@@ -54,4 +56,8 @@ export class ShareComponent implements OnInit {
     window.open(`http://twitter.com/share?text=Check out this store @ menuzapp&url=${this.shareUrl}&hashtags=menuzapp`);
   }
 
+  close() {
+    if(this.popoverRef) this.popoverRef.dismiss();
+    if(this.modalRef) this.modalRef.dismiss();
+  }
 }

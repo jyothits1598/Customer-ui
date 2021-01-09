@@ -1,20 +1,26 @@
 <span #popOrigin>
-    <img [src]="isIconBlack? 'assets/images/share.png' : 'assets/images/navbar/ico_share.png'" (click)="showPopover(sharePanel)" style="cursor: pointer;outline:none;" title="share">
+    <img [src]="isIconBlack? 'assets/images/share.png' : 'assets/images/navbar/ico_share.png'" (click)="showModal(sharePanel)" style="cursor: pointer;outline:none;" title="share">
 </span>
 
 <ng-template #sharePanel>
-    <div class="share-social" >
-        <div (click)="fbShare()" class="social-fb">
-            <!-- <img src="assets/images/share-fb.png" width="150px" height="48px">  -->
-            Facebook
+    <div class="share-social">
+        <img src="assets/images/ico_close.png" style="cursor: pointer;" (cilck)="close()">
+        <div class="std-heading-4 mrtb">
+            Share this with your social community
         </div>
-        <div (click)="twtShare()" class="social-twt">
-            Twitter
+        <div (click)="fbShare()" class="social-icons social-icons--fb">
+            <img src="assets/images/profile/ico_social_facebook.png"> Facebook
+        </div>
+        <div (click)="twtShare()" class="social-icons social-icons--twt">
+            <img src="assets/images/profile/ico_social_twitter.png"> Twitter
         </div>
         <a [href]="'mailto:?body='+ shareUrl +'&subject=' + 'Check out this store  menuzapp'" style="cursor: pointer;text-decoration: none;color:#fff">
-            <div class="social-gmail" >
-                Email
+            <div class="social-gmail" class="social-icons social-icons--email" >
+                <img src="assets/images/profile/ico_email.png"> Email
             </div>
         </a>
+        <div class="social-icons social-icons--email" style="margin-bottom: 0;" >
+            <img src="assets/images/profile/ico_link.png"> Copy link 
+        </div>
     </div>
 </ng-template>

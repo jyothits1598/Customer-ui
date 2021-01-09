@@ -1,0 +1,72 @@
+
+
+
+ol {
+  list-style-type: none;
+  counter-reset: item;
+  margin: 0;
+  padding: 0;
+
+}
+
+
+
+ol > li {
+   display: table;
+  counter-increment: item;
+}
+
+ol > li:before {
+  content: counters(item, ".")"." ;
+  display: table-cell;
+
+
+}
+
+
+
+
+li ol > li:before {
+  content: counters(item, ".")".";
+}
+
+
+.content
+{
+  font-family: DM Sans;
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 24px;
+
+text-align: justify;
+
+// display: flex;
+//align-items: center;
+
+
+
+color: #1A1A1A;
+}
+
+.paragraph-style
+{
+text-transform: uppercase;
+font-family: DM Sans;
+font-style: normal;
+font-weight: bold;
+font-size: 20px;
+line-height: 24px;
+margin-top: 100px;
+}
+
+.item
+{
+  counter-increment: item-counter;
+  text-transform: uppercase;
+}
+
+.item::before
+{
+  content: counter(item-counter,upper-roman) ".";
+}

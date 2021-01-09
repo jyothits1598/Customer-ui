@@ -1,0 +1,48 @@
+
+
+
+ol {
+  list-style-type: none;
+  counter-reset: item;
+  margin: 0;
+  padding: 0;
+}
+
+ol > li {
+  display: table;
+  counter-increment: item;
+}
+
+ol > li:before {
+  content: counters(item, ".") ".";
+  display: table-cell;
+  padding-right: 0.6em;
+}
+
+
+li ol > li:before {
+  content: counters(item, ".") ".";
+}
+
+
+.content
+{
+font-family: DM Sans;
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 24px;
+text-align: justify;
+color: #1A1A1A;
+}
+
+.paragraph-style
+{
+text-transform: uppercase;
+font-family: DM Sans;
+font-style: normal;
+font-weight: bold;
+font-size: 20px;
+line-height: 24px;
+margin-top: 100px;
+}
