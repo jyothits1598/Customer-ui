@@ -8,23 +8,28 @@ import { ModalService } from 'src/app/core/services/modal.service';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
 import { SnackBarService } from 'src/app/core/services/snack-bar.service';
 
+
 @Component({
   selector: 'store-heart',
   templateUrl: './store-heart.component.html',
   styleUrls: ['./store-heart.component.scss']
 })
 export class StoreHeartComponent implements OnInit {
-  @Input() store: { id: number, isFavourite: boolean };
+  @Input() store: { id: number, isFavourite: boolean, page:string };
   isFavourite: boolean;
   loading: boolean = false;
+  preview_page_status:boolean = false;
   constructor(
     private snackBar: SnackBarService,
     private authService: AuthService,
     private modalService: ModalService,
-    private restApiService: RestApiService) { }
+    private restApiService: RestApiService) {}
 
   ngOnInit(): void {
     this.isFavourite = this.store.isFavourite;
+    if(this.store.page == 'preview'){
+      this.preview_page_status = true;
+    }
   }
 
   onFavClick() {
@@ -45,11 +50,11 @@ export class StoreHeartComponent implements OnInit {
   setFavourite(storeId: number, isFavourite: boolean) {
     if (isFavourite) return this.restApiService.post(URL_SetFavourite, {
       store_id: storeId,
-      is_favourite: 1
+      is_favourite: 1,
     });
     else return this.restApiService.patch(URL_DeleteFavourite, {
       store_id: storeId,
-      is_favourite: 0
+      is_favourite: 0,
     })
   }
 

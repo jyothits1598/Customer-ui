@@ -12,7 +12,7 @@ export interface StoreDetail {
     // description: string,
     googleUrl: string,
     facebookUrl: string,
-    // isFavourite: boolean,
+    isFavourite: boolean,
     categories: Array<StoreCategory>
     latLng: { lat: number, lng: number }
 
@@ -48,7 +48,7 @@ export function ReadStoreDetail(resp: any): StoreDetail {
         // description: data.description,
         googleUrl: data.google_business_url,
         facebookUrl: data.facebook_url,
-        // isFavourite : data.is_favourite ? true : false,
+        isFavourite : data.is_favourite ? true : false,
         categories: categories,
         latLng: { lat: data.latitude, lng: data.longitude }
     };
