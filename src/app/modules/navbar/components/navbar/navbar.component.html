@@ -2,13 +2,13 @@
     <div class="container">
         <!-- Centered link -->
 
-        <!----------------------- mobile screen --------------------->
-        <div class="d-block d-sm-none" style="margin: auto;width: 100%;text-align: center;">
+        <!-- --------------------- mobile screen --------------------->
+        <!-- <div class="d-block d-sm-none" style="margin: auto;width: 100%;text-align: center;">
             <div class="bck">
                 <location-selector></location-selector>
             </div>
-        </div>
-        <!----------------------- mobile screen end --------------------->
+        </div> -->
+        <!----------------------- mobile screen end ------------------- -->
 
         <div class="topnav-centered">
             <a routerLink="/" style="outline: 0;cursor: pointer;">
@@ -17,7 +17,7 @@
             </a>
         </div>
         <!-- Left-aligned links (default) -->
-        <div class="topnav-left d-none d-lg-block">
+        <div class="topnav-left">
             <div class="bck">
                 <location-selector></location-selector>
             </div>
@@ -26,7 +26,7 @@
         <!-- <div class="topnav-right d-none d-lg-block"> -->
         <div style="display: flex; float: right;">
             <navbar-icons></navbar-icons>
-            <app-store-search-inline></app-store-search-inline>
+            <app-store-search-inline *ngIf="ShouldShoWSearch()"></app-store-search-inline>
         </div>
     </div>
 </div>
