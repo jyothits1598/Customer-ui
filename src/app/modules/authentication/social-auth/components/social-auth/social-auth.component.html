@@ -8,11 +8,11 @@
     </button>
     <button [disabled]="inProgress" (click)="facebookSignin()" class="std-button std-button--facebook"
         style="margin-bottom: 16px;">
-        <img src="assets/images/ico_facebook.png">&nbsp; <span> {{ isLogin? 'Log in ' : 'Continue '}} </span>with
+        <img src="assets/images/profile/fb.png">&nbsp; <span> {{ isLogin? 'Log in ' : 'Continue '}} </span>with
         Facebook
         <img src="assets/images/loader.gif" *ngIf="facebookLoading" style="width: 24px;">
     </button>
     <button class="std-button std-button--apple" style="margin-bottom: 24px;" (click)="appleSignIn()">
-        <img src="assets/images/ico_apple.png">&nbsp; <span> {{ isLogin? 'Log in ' : 'Continue '}} </span>with Apple
+        <img src="assets/images/profile/apple.png">&nbsp; <span> {{ isLogin? 'Log in ' : 'Continue '}} </span>with Apple
     </button>
 </div>

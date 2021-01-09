@@ -26,7 +26,7 @@
     font-weight: bold;
     font-size: 14px;
     text-align: center;
-    padding: 14px 0 ;
+    padding: 12px 0 ;
 }
 @media only screen and (max-width: 600px) {
     .img-display-desktop {
@@ -98,4 +98,8 @@
     .only-mobile {
         display:none;
     }
+}
+.profile-ic-21 {
+    width:21px;
+    height:21px;
 }

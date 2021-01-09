@@ -15,6 +15,9 @@
                 50% 50% no-repeat #fff0;
     
   } 
+  input::-webkit-input-placeholder {
+   height: 24px;
+    }
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     .wallpaper-card {
@@ -63,21 +66,22 @@
         margin: 0 auto 25px;
     }
     .security-card {
-        margin-top:56px;
+        margin-top:8px;
         padding:16px;
     }
     .profile-radius {
-        margin: 0 auto 25px;
-        padding: 16px;
-    }
-    .security-card-user {
-        margin-top:8px;
         padding:16px;
     }
     .security-card-pwd {
         margin-top:24px;
         padding:16px;
     }
+    .bx-shdw{
+       margin-top:24px;
+    }
+   .topspace {
+       padding-top:16px;
+   }
   }
   /* Small devices (portrait tablets and large phones, 600px and up) */
   @media only screen and (min-width: 600px) {
@@ -124,20 +128,25 @@
         margin: 0 auto 25px;
     }
     .security-card {
-        margin-top:56px;
-        padding:16px;
+        margin: 120px auto 25px;
+        max-width:350px;
     }
     .profile-radius {
-        margin: 0 auto 25px;
-        padding: 16px;
-    }
-    .security-card-user {
-        margin-top:8px;
-        padding:16px;
+        margin: 88px auto 25px;
+        max-width:432px;
     }
     .security-card-pwd {
         margin-top:24px;
         padding:16px;
+    }
+    .bx-shdw{
+        margin-top:24px;
+     }
+     .fv-header {
+        margin-top:48px;
+    }
+    .fv-padding-content {
+        padding-top:32px;
     }
   }
   /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
@@ -205,21 +214,25 @@
         display:none;
     }
     .security-card {
-        margin: 72px auto 25px;
+        margin: 120px auto 25px;
         max-width:350px;
     }
     .profile-radius {
-        margin: 24px auto 25px;
-        max-width:350px;
-        padding: 16px;
-    }
-    .security-card-user {
-        margin: 72px auto 25px;
-        max-width:350px;
+        margin: 88px auto 25px;
+        max-width:432px;
     }
     .security-card-pwd {
         margin: 72px auto 25px;
         max-width:350px;
+    }
+    .fv-header {
+        margin-top:48px;
+    }
+    .fv-header {
+        margin-top:48px;
+    }
+    .fv-padding-content {
+        padding-top:32px;
     }
   }
    
@@ -291,21 +304,22 @@
         display:none;
     }
     .security-card {
-        margin: 72px auto 25px;
+        margin: 120px auto 25px;
         max-width:350px;
     }
     .profile-radius {
-        margin: 24px auto 25px;
-        max-width:350px;
-        padding: 16px;
-    }
-    .security-card-user {
-        margin: 72px auto 25px;
-        max-width:350px;
+        margin: 88px auto 25px;
+        max-width:432px;
     }
     .security-card-pwd {
         margin: 72px auto 25px;
         max-width:350px;
+    }
+    .fv-header {
+        margin-top:48px;
+    }
+    .fv-padding-content {
+        padding-top:32px;
     }
   }
   /* Extra large devices (large desktops, 1200px and up) */
@@ -376,22 +390,23 @@
         display:none;
     }
     .security-card {
-        margin: 72px auto 25px;
+        margin: 120px auto 25px;
         max-width:350px;
     }
     .profile-radius {
-        margin: 24px auto 25px;
-        padding: 16px;
-        max-width:350px;
+        margin: 88px auto 25px;
+        max-width:432px;
     }
-    .security-card-user {
-        margin: 72px auto 25px;
-        max-width:350px;
+    .fv-header {
+        margin-top:48px;
+    }
+    .fv-padding-content {
+        padding-top:32px;
     }
   }
   .signup-panel {
     // background: var(--color-pending);
-    padding: 24px 30px 0 30px;
+    padding: 22px 30px 0 30px;
     // border-radius: 8px;
     background-image: url('assets/images/banner-tsp.png');
     background-position: left;

@@ -1,4 +1,4 @@
-<div class="edit-profile-page">
+<!-- <div class="edit-profile-page"> -->
     <div class="security-card">
         <ng-container *ngIf="profileData">
             <user-profile-image
@@ -8,7 +8,7 @@
             <!-- <user-profile-image ></user-profile-image> -->
             <!-- <ng-template #noProfile>{{ profileData.firstName.charAt(0)}}</ng-template> -->
             <div *ngIf="!editMode; else editTemplate" >
-                <div class="profile-navbar-setting">
+                <!-- <div class="profile-navbar-setting">
                     <div class="container">
                         <div class="col-md-12 only-big">
                             <span class="profile-save-text" routerLink="/">
@@ -27,14 +27,14 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div style="margin-top:34px;margin-bottom:26px;text-align: center;">
                     <div class="std-heading-5">
                         <span class="text-capitalize"> {{profileData.firstName}} {{profileData.lastName}} </span>
                     </div>
                 </div>
                 <button (click)="toggleEdit()" class="std-button std-button--trans" style="margin-left: auto;margin-right: auto;display: block;">
-                <img src="assets/images/ico_edit.png"> Edit Profile
+                <img src="assets/images/ico_edit.png" width="21px" height="21px"> Edit Profile
                 </button>
             </div>
         </ng-container>
@@ -46,7 +46,7 @@
                             <div class="profile-save-text" (click)="toggleEdit()">
                                 <img src="assets/images/ico_arrow_left_white.png" style="padding-right:5px;">Edit profile
                             </div>
-                            <div class="profile-save-text" (click)="saveChanges()">
+                            <div class="profile-save-text" (click)="saveChanges()" style="font-size:16px;">
                                 <img src="assets/images/ico_check_white.png" style="padding-right:8px;"> Save &nbsp;<img *ngIf="saving" src="assets/images/loader_white_24.gif" >
                             </div>
                         </div>
@@ -72,5 +72,5 @@
                 <button (click)="saveChanges()" class="std-button std-button--primary" [disabled]="!profileForm.dirty">Save <img *ngIf="saving" src="assets/images/loader.gif" alt="" style="height: 24px;"></button>
             </div> -->
         </ng-template>
-    </div>
-</div>
+     </div>
+<!-- </div>  -->

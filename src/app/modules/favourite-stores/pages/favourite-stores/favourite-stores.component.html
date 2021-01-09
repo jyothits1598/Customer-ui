@@ -1,4 +1,4 @@
-<div class="edit-profile-page" style="overflow-y: auto;">
+<!-- <div class="edit-profile-page" style="overflow-y: auto;">
     <div class="profile-navbar">
         <div class="container">
             <div class="col-md-12 only-big">
@@ -18,9 +18,9 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="text-center" style="background: #fff;margin-top:48px;">
-        <ul class="resnt-menu-top-tabs u-margin-bottom-medium" style="margin-bottom:0">
+    </div> -->
+    <div class="text-center fv-header">
+        <ul class="resnt-menu-top-tabs u-margin-bottom-medium" style="margin-bottom:0;">
             <li class="resnt-menu-top-tabs__item custom-border">
                 <button class="resnt-menu-top-tabs__button tabs-menu resnt-menu-top-tabs__button__active"> Stores </button>
             </li>
@@ -31,10 +31,10 @@
         </ul>
     </div>
     <ng-container *ngIf="stores">
-        <div style="background: #f2f2f2;padding-top:48px;">
+        <div class="fv-padding-content topspace" style="background: #f2f2f2;">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 col-xl-4" *ngFor="let store of stores" style="margin-bottom: 20px;">
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 col-xl-4 spacing" *ngFor="let store of stores">
                         <app-store-card  [store]=store></app-store-card>
                     </div>
                 </div>
@@ -45,5 +45,5 @@
             <br><br>
         </div>
     </ng-container>
-    <div *ngIf="loading" style="text-align: center;">Loading...</div>
-</div>
+    <div *ngIf="loading" class="container">Loading...</div>
+<!-- </div> -->

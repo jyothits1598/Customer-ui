@@ -79,12 +79,14 @@ body {
     font-style: normal;
     font-weight: 500;
     color: var(--color-boldlevelcolor);
+    height: 48px;
+    overflow: hidden;
     &__item{
         display: inline-block;
     }
     &__button{
         background-color: transparent;
-        padding:14px 35px;
+        padding:14px 40px;
         border: none;
         outline: none !important;
         &__active{

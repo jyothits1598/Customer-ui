@@ -147,13 +147,13 @@
     font-style: normal;
     font-weight: bold;
     font-size: 14px;
-    line-height: 24px;
+    line-height: 20px;
     margin-bottom: 4px;
 }
 .form-input {
     border: 2px solid var(--color-background-secondary);
     border-radius: 8px !important;
-    height: 40px;
+    // height: 40px;
     box-sizing: border-box;
     font-family: DM Sans;
     font-style: normal;
@@ -161,7 +161,7 @@
     font-size: 16px;
     line-height: 24px;
     color: var(--color-boldlevelcolor);
-    padding: 8px 16px;
+    padding: 6px 16px;
     width: 100%;
     &:placeholder {
         color: var(--color-typography-tertiary);
