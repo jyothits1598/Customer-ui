@@ -29,7 +29,7 @@ export class ChangeMobileComponent implements OnInit {
       CustomValidators.required('Mobile number is required.'),
     ]),
     verificationCode: new FormControl(null, [
-      CustomValidators.required('Code is required'),
+      CustomValidators.required('Please enter verification code'),
     ])
   })
 

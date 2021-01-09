@@ -51,7 +51,7 @@ export class UseridVerificationComponent implements OnInit {
       CustomValidators.required('Mobile number is required.')
     ]),
     verificationCode: new FormControl('', [
-      CustomValidators.required('Verification code is required.')
+      CustomValidators.required('Please enter verification code')
     ]),
     // password: new FormControl('', [
     //   CustomValidators.required('Please enter your new password.')

@@ -4,11 +4,13 @@ import { UnderConstructionComponent } from '../modules/authentication/under-cons
 import { SampleComponent } from './components/sample/sample.component';
 import { IsAuthenticatedGuard } from './guards/is-authenticated.guard';
 import { LayoutComponent } from './pages/layout/layout.component';
+import{TermsServiceComponent} from 'src/app/modules/terms-service/terms-service.component';
+import { PrivacyPolicyComponent } from '../modules/privacy-policy/privacy-policy.component';
 
 const routes: Routes = [
   { path: 'sample', component: SampleComponent },
   { path: 'restaurants', loadChildren: () => import('src/app/modules/store-detail/store-detail.module').then(m => m.StoreDetailModule) },
-  
+
   {
     path: 'auth', loadChildren: () => import('src/app/modules/authentication/authentication.module').then(m => m.AuthenticationModule)
   },
@@ -17,6 +19,12 @@ const routes: Routes = [
   },
   {
     path: 'under-construction', component: UnderConstructionComponent
+  },
+  {
+    path:'terms-service',component:TermsServiceComponent
+  },
+  {
+   path:'privacy-policy', component:PrivacyPolicyComponent
   },
   {
     path: '',
@@ -34,9 +42,9 @@ const routes: Routes = [
         path: 'favourites',
         loadChildren: () => import('src/app/modules/favourite-stores/favourite-stores.module').then(m => m.FavouriteStoresModule)
       },
-      { 
-        path: 'profile', 
-        canActivate: [IsAuthenticatedGuard], 
+      {
+        path: 'profile',
+        canActivate: [IsAuthenticatedGuard],
         loadChildren: () => import('src/app/modules/user-profile/user-profile.module').then(m => m.UserProfileModule)
        },
       {
