@@ -32,7 +32,7 @@ export class SearchDataService {
   }
 
   clearSearch() {
-    this.searchInputElem.nativeElement.value = '';
+    if (this.searchInputElem) this.searchInputElem.nativeElement.value = '';
   }
 
 }

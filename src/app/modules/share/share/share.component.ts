@@ -11,53 +11,49 @@ import { PopoverService } from 'src/app/core/services/popover.service';
   styleUrls: ['./share.component.scss']
 })
 export class ShareComponent implements OnInit {
-  @ViewChild('popOrigin', { read: ElementRef }) org: ElementRef;
-  popRef = null;
-  @Input() url: string;
+  @Input() store: { id: number, name: string };
   @Input() isIconBlack: boolean;
 
-  get shareUrl(): string {
-    return this.url ? this.url : this.window.location.href;
-  }
+  @ViewChild('urlCopyInput', { read: ElementRef }) urlCopyInput: ElementRef;
+
+  caption: string;
+  url: string;
+  linkedCopied: false;
+
+  modalRef: ModalRef;
+
   constructor(private popoverService: PopoverService,
     private modalService: ModalService,
-    private window: Window,@Optional() private modalRef: ModalRef,@Optional() private popoverRef: ComponentPopoverRef<ShareComponent>) { }
+    private window: Window) { }
 
   ngOnInit(): void {
-  }
-
-  getUrl() {
-
+    if (this.store) {
+      this.caption = `Check out ${this.store.name} on menuzapp!`;
+      this.url = this.window.location.origin + '/restaurants/' + this.store.id;
+    }
   }
 
   showModal(temp: TemplateRef<any>) {
-    this.modalService.openTemplateModal(temp);
+    this.modalRef = this.modalService.openTemplateModal(temp);
   }
 
-  // showPopover(temp: TemplateRef<any>) {
-  //   this.popRef = this.popoverService.openTemplatePopover(this.org, temp, {
-  //     xPos: 'center',
-  //     yPos: 'bottom',
-  //     // onDismiss?: () => void;
-  //     hasBackdrop: true,
-  //     outSideClick: true
-  //   });
-  // }
-
   fbShare() {
+    console.log(this.url);
     FB.ui({
       method: 'share',
-      href: this.shareUrl
+      href: this.url,
+      quote: this.caption
     })
     // window.open(`https://www.facebook.com/sharer/sharer.php?u=#${this.url ? this.url : this.window.location.href}`);
   }
 
-  twtShare() {
-    window.open(`http://twitter.com/share?text=Check out this store @ menuzapp&url=${this.shareUrl}&hashtags=menuzapp`);
+  copyUrl() {
+    // this.urlCopyInput.nativeElement.focus();  
+    this.urlCopyInput.nativeElement.select();
+    this.window.document.execCommand('copy');
   }
 
   close() {
-    if(this.popoverRef) this.popoverRef.dismiss();
-    if(this.modalRef) this.modalRef.dismiss();
+    this.modalRef.dismiss();
   }
 }

@@ -4,8 +4,8 @@ import { filter } from 'rxjs/operators';
 import { UserLocation } from '../model/user-location';
 import { StorageService } from './storage.service';
 
-const locationHistoryIdentifier: string = 'locationHistory'
-const currentlocationIdentifier: string = 'currentLocation'
+const locationHistoryIdentifier: string = 'locationHistory';
+const currentlocationIdentifier: string = 'currentLocation';
 
 @Injectable({
   providedIn: 'root'

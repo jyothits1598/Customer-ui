@@ -10,7 +10,7 @@
                 <img src="assets/images/navbar/ico_place_small.png">
             </td>
             <td>
-                <b><span style="font-size:14px;">&nbsp; {{location.address.locality}}</span></b>
+                <b *ngIf="location"><span style="font-size:14px;">&nbsp; {{location.address.locality}}</span></b>
             </td>
             <td>
                 <img src="assets/images/navbar/ico_down_small.png">
