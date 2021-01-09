@@ -14,9 +14,11 @@ export class Pagination<T>{
     currentPage: number = 1;
     //to fix repeated loading in the home screen upon errors
     hasErrors: boolean = false;
+    totalCount: number;
 
     setPaginationData(resp) {
         this.currentPage += 1;
+        this.totalCount = resp.data.total;
         if (!resp.data.next_page_url) this.hasEnded = true;
     }
     constructor(source) {

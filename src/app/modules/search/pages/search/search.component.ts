@@ -15,6 +15,8 @@ import { SearchDataService } from '../../services/search-data.service';
 export class SearchComponent implements OnInit, OnDestroy {
   storeFilter: StoreFilter;
   subs: Subscription;
+  resultCount: number = null;
+
   constructor(private router: Router,
     private route: ActivatedRoute,
     private location: GeoLocationService,

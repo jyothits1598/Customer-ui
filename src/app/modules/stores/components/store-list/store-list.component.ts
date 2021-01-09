@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/internal/operators/take';
 import { takeUntil } from 'rxjs/operators';
@@ -18,6 +18,7 @@ export class StoreListComponent implements OnInit {
   pagination: StorePagination;
   _filter: StoreFilter
   unSubscribe$ = new Subject<void>()
+  @Output() totalCount = new EventEmitter<number>();
 
   @Input() set filter(f: StoreFilter) {
     this._filter = f;
@@ -36,6 +37,7 @@ export class StoreListComponent implements OnInit {
   }
 
   appendStores(stores) {
+    this.totalCount.emit(this.pagination.totalCount);
     this.stores.splice(this.stores.length, 0, ...stores)
   }
 
