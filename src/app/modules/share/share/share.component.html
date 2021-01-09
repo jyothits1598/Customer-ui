@@ -1,26 +1,32 @@
 <span #popOrigin>
-    <img [src]="isIconBlack? 'assets/images/share.png' : 'assets/images/navbar/ico_share.png'" (click)="showModal(sharePanel)" style="cursor: pointer;outline:none;" title="share">
+    <img [src]="isIconBlack? 'assets/images/share.png' : 'assets/images/navbar/ico_share.png'"
+        (click)="showModal(sharePanel)" style="cursor: pointer;outline:none;" title="share">
 </span>
 
 <ng-template #sharePanel>
     <div class="share-social">
-        <img src="assets/images/ico_close.png" style="cursor: pointer;" (cilck)="close()">
+        <img src="assets/images/ico_close.png" style="cursor: pointer;" (click)="close()">
         <div class="std-heading-4 mrtb">
             Share this with your social community
         </div>
         <div (click)="fbShare()" class="social-icons social-icons--fb">
             <img src="assets/images/profile/ico_social_facebook.png"> Facebook
         </div>
-        <div (click)="twtShare()" class="social-icons social-icons--twt">
-            <img src="assets/images/profile/ico_social_twitter.png"> Twitter
-        </div>
-        <a [href]="'mailto:?body='+ shareUrl +'&subject=' + 'Check out this store  menuzapp'" style="cursor: pointer;text-decoration: none;color:#fff">
-            <div class="social-gmail" class="social-icons social-icons--email" >
+        <a [href]="'http://twitter.com/share?text='+caption+'&url='+url" target="_blank">
+            <div class="social-icons social-icons--twt">
+                <img src="assets/images/profile/ico_social_twitter.png"> Twitter
+            </div>
+        </a>
+
+        <a [href]="'mailto:?body='+ url +'&subject=' + caption"
+            style="cursor: pointer;text-decoration: none;color:#fff">
+            <div class="social-gmail" class="social-icons social-icons--email">
                 <img src="assets/images/profile/ico_email.png"> Email
             </div>
         </a>
-        <div class="social-icons social-icons--email" style="margin-bottom: 0;" >
-            <img src="assets/images/profile/ico_link.png"> Copy link 
+        <div class="social-icons social-icons--email" style="margin-bottom: 0;" (click)="copyUrl()">
+            <img src="assets/images/profile/ico_link.png"> Copy link
         </div>
+        <input style="visibility: hidden;" type="text" [value]="url" #urlCopyInput>
     </div>
 </ng-template>

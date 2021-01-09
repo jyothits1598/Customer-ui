@@ -7,7 +7,7 @@ import { ShareComponent } from './share/share.component';
 @NgModule({
   declarations: [ShareComponent],
   imports: [
-    CommonModule
+    CommonModule,
   ],
   exports: [ShareComponent]
 })

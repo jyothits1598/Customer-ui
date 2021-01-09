@@ -34,7 +34,7 @@
                                 <store-heart [store]="{id: storeDetail.id, isFavourite: storeDetail.isFavourite,page:'preview'}"></store-heart>
                             </li>
                             <li style="cursor: pointer;outline:none;margin-left:16px">
-                                <app-share></app-share>
+                                <app-share [store]="{id: storeDetail.id, name: storeDetail.name}"></app-share>
                             </li>
                             <li style="cursor: pointer;outline:none;margin-left:16px">
                                 <a [href]="'https://www.google.com/maps/dir/?api=1&destination='+storeDetail.latLng.lat+','+storeDetail.latLng.lng" target="_blank" style="text-decoration: none;">
