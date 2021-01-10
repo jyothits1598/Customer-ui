@@ -1,57 +1,35 @@
-<!-- <div class="edit-profile-page">
-    <div class="profile-navbar">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 only-big">
-                    <span class="profile-save-text" routerLink="/">
-                        <img src="assets/images/ico_arrow_left_white.png"> Settings
-                    </span>
-                    <div class="center-logo-profile" routerLink="/">
-                        <img src="assets/svg/logo_white.svg">
-                    </div>
-                </div>
-                <div class="col-md-12 only-small">
-                    <span class="profile-save-text" routerLink="/">
-                        <img src="assets/images/ico_arrow_left_white.png">
-                    </span>
-                    <div class="center-logo-profile profile-save-text" style="cursor: text;">
-                        Settings
-                    </div>
-                </div>
+<ng-template appNavbarHeadingContent>
+    <div class="title-content profile-save-text" style="cursor: text;"> Settings </div>
+</ng-template>
+<div class="profile-radius">
+    <div class="paragraph14 paragraph14__bold">
+        Radius
+    </div>
+    <div style="margin-bottom:4px">
+        <label style="margin-top:7px;cursor: pointer;">
+            <input class="cb" type="radio" name="radius" value="0" (change)="handleSel($event.target.value)" [checked]="!radius.value" />
+            <span> Suggested radius </span>
+        </label>
+    </div>
+    <div>
+        <label style="margin-top:7px;cursor: pointer;">
+            <input class="cb" type="radio" name="radius" value="1" (change)="handleSel($event.target.value)" [checked]="radius.value"/>
+            <span> Custom radius </span>
+        </label>
+    </div>
+    <ng-container *ngIf="radius.value">
+        <div>
+            <div class="paragraph14 paragraph14__bold" style="margin-top:16px;">
+                Custom radius - {{radius.value}}km
+            </div>
+            <div >
+                <input min="1" max="10" step="1" type="range" [formControl]="radius" />
             </div>
         </div>
-    </div> -->
+    </ng-container>
+    <button type="button" (click)="save()" class="std-button std-button--primary float-right" style="margin-top:16px">
+        <span *ngIf="!loading" >Save</span>
+        <img src="assets/images/loader_white_24.gif" alt="" *ngIf="loading">
+    </button>
+</div>
     
-    <div class="profile-radius">
-            <div class="paragraph14 paragraph14__bold">
-                Radius
-            </div>
-            <div style="margin-bottom:4px">
-                <label style="margin-top:7px;cursor: pointer;">
-                    <input class="cb" type="radio" name="radius" value="0" (change)="handleSel($event.target.value)" [checked]="!radius.value" />
-                    <span> Suggested radius </span>
-                </label>
-            </div>
-            <div>
-                <label style="margin-top:7px;cursor: pointer;">
-                    <input class="cb" type="radio" name="radius" value="1" (change)="handleSel($event.target.value)" [checked]="radius.value"/>
-                    <span> Custom radius </span>
-                </label>
-            </div>
-            <ng-container *ngIf="radius.value">
-                <div>
-                    <div class="paragraph14 paragraph14__bold" style="margin-top:16px;">
-                        Custom radius - {{radius.value}}km
-                    </div>
-                    <div >
-                        <input min="1" max="10" step="1" type="range" [formControl]="radius" />
-                    </div>
-                </div>
-            </ng-container>
-            <button type="button" (click)="save()" class="std-button std-button--primary float-right" style="margin-top:16px">
-                <span *ngIf="!loading" >Save</span>
-                <img src="assets/images/loader_white_24.gif" alt="" *ngIf="loading">
-            </button>
-        </div>
-    
-<!-- </div> -->

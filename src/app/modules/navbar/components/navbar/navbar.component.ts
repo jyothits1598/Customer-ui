@@ -46,7 +46,8 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
           if (this.locationViewRef) { 
             this.containerRef.remove();
             this.containerRef.insert(this.locationViewRef); 
-            this.locationViewRef = null }
+            this.locationViewRef = null 
+          }
         }
       }
     );

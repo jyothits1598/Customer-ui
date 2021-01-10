@@ -10,5 +10,5 @@
     <div *ngIf="pagination.hasErrors">Error :(</div>
     <div *ngIf="!pagination.hasEnded" [ngStyle]="{'display':  pagination.isLoading? 'none' : 'block' }" infiniteScroll #infiniteScroll="infiniteScroll" (scrolled)="handleScrolled()">
     </div>
-    <div *ngIf="pagination.hasEnded && stores.length == 0">No Stores found</div>
+    <div *ngIf="pagination.hasEnded && stores.length == 0" class="text-center">No stores found</div>
 </div>

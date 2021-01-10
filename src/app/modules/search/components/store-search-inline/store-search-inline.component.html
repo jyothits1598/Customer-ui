@@ -5,8 +5,14 @@
                 <input class="input-transparent basu" style="border: none;outline: 0;" type="search" [formControl]="searchControl" [placeholder]="isMobile ? 'What would you like to eat?' : 'Search'"
                 (focus)="onFocus()" #searchInput (keyup.enter)="handleEnter($event.target.value)" (keyup.escape)="closePopover()" (blur)="onBlur()">
                 <!-- <span style="position: absolute; right: 36px;" (click)="searchInput.value = ''">x</span> -->
-            <img class="input-image" 
+            <div *ngIf="isMobile">
+                <img class="input-image" 
+                [src]="loading? 'assets/images/loader_blue.gif' : 'assets/images/navbar/ico_search_blue.png'">
+            </div>
+            <div *ngIf="!isMobile">
+                <img class="input-image" 
                 [src]="loading? 'assets/images/loader_white_24.gif' : 'assets/images/navbar/ico_search.png'">
+            </div>
         </div>
     </div>
 </div>
@@ -17,9 +23,11 @@
 </ng-template>
 
 <div *ngIf="isMobile && overlayOpen" class="mobile-banner">
-    <button type="button" class="mobile-banner__ico" (click)="closePopover()">
-        <img src="assets/images/ico_arrow_left_white.png" alt="">
-    </button>
+    <div class="container">
+        <button type="button" class="mobile-banner__ico profile-save-text" (click)="closePopover()">
+            <img src="assets/images/ico_arrow_left_white.png" alt="" style="padding-right: 16px;"> Search
+        </button>
+    </div>
 </div>
 <!-- <span *ngIf="overlayOpen"
     style="position: fixed; top: 0; bottom: 0; left: 0;right: 0; background-color: #81818169; z-index: -1;"

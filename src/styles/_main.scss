@@ -194,7 +194,7 @@
     margin: 0 auto;
     display: inline-block;
     padding: 8px 16px;
-
+    // line-height: 20px !important;
     &--primary {
         color: var(--color-background);
         background: var(--color-primary);
@@ -387,4 +387,10 @@ input.ng-invalid.ng-touched.error-highlight {
     font-size: 12px;
     line-height: 16px;
     color:var(--color-boldlevelcolor);
+}
+.pad-ing-left {
+    padding-left:4px;
+}
+.pad-ing-right {
+    padding-right: 4px;
 }

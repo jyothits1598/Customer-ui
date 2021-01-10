@@ -1,67 +1,46 @@
-<!-- <div class="edit-profile-page"> -->
-  <!-- <div class="profile-navbar">
-        <div class="container">
-            <div class="col-md-12 only-big">
-                <span class="profile-save-text" routerLink="/">
-                    <img src="assets/images/ico_arrow_left_white.png"> Security
-                </span>
-                <div class="center-logo-profile" routerLink="/" >
-                    <img src="assets/svg/logo_white.svg">
-                </div>
-            </div>
-            <div class="col-md-12 only-small">
-                <span class="profile-save-text" routerLink="/">
-                    <img src="assets/images/ico_arrow_left_white.png">
-                </span>
-                <div class="center-logo-profile profile-save-text" style="cursor: text;">
-                    Security
-                </div>
-            </div>
+<ng-template appNavbarHeadingContent>
+    <div class="title-content profile-save-text" style="cursor: text;"> Security </div>
+</ng-template>
+<div class="security-card">
+    <div class="label-inputs" style="margin-bottom:12px"> Mobile </div>        
+    <div class="d-flex justify-content-between" *ngIf="user.phoneNumber; else addMobile">
+        <div>
+            {{user.phoneNumber}}
         </div>
-    </div> -->
-  <div class="security-card">
-        <div class="label-inputs" style="margin-bottom:12px"> Mobile </div>
-        <div class="d-flex justify-content-between" *ngIf="user.phoneNumber; else addMobile">
-            <div>
-                {{user.phoneNumber}}
+        <img src="assets/images/ico_edit.png" style="cursor: pointer;" routerLink="./change-mobile">
+    </div>
+    <ng-template #addMobile>
+        <div class="d-flex justify-content-between">
+            <div class="color-text">
+                Add mobile
             </div>
-            <img src="assets/images/ico_edit.png" style="cursor: pointer;" routerLink="./change-mobile">
+            <img src="assets/images/ico_add.png" style="cursor: pointer;outline: none;"
+                routerLink="./change-mobile">
         </div>
-        <ng-template #addMobile>
-            <div class="d-flex justify-content-between">
-                <div class="color-text">
-                    Add mobile
-                </div>
-                <img src="assets/images/ico_add.png" style="cursor: pointer;outline: none;"
-                    routerLink="./change-mobile">
+    </ng-template>
+    <div class="label-inputs" style="margin-top:24px;margin-bottom:12px"> Email </div>
+    <div class="d-flex justify-content-between" *ngIf="user.email; else addEmail">
+        <div>
+            {{user.email}}
+        </div>
+        <img src="assets/images/ico_edit.png" style="cursor: pointer;outline: none;"
+            routerLink="./change-email">
+    </div>
+    <ng-template #addEmail>
+        <div class="d-flex justify-content-between">
+            <div class="color-text">
+                Add Email
             </div>
-        </ng-template>
-        <div class="label-inputs" style="margin-top:24px;margin-bottom:12px"> Email </div>
-        <div class="d-flex justify-content-between" *ngIf="user.email; else addEmail">
-            <div>
-                {{user.email}}
-            </div>
-            <img src="assets/images/ico_edit.png" style="cursor: pointer;outline: none;"
+            <img src="assets/images/ico_add.png" style="cursor: pointer;outline: none;"
                 routerLink="./change-email">
         </div>
-        <ng-template #addEmail>
-            <div class="d-flex justify-content-between">
-                <div class="color-text">
-                    Add Email
-                </div>
-                <img src="assets/images/ico_add.png" style="cursor: pointer;outline: none;"
-                    routerLink="./change-email">
-            </div>
-        </ng-template>
-        <div class="label-inputs" style="margin-top:24px;margin-bottom:12px"> Password </div>
-        <div class="d-flex justify-content-between">
-            <div>
-                .......
-            </div>
-            <img src="assets/images/ico_edit.png" style="cursor: pointer;outline: none;"
-                routerLink="./change-password">
+    </ng-template>
+    <div class="label-inputs" style="margin-top:24px;margin-bottom:12px"> Password </div>
+    <div class="d-flex justify-content-between">
+        <div>
+            .......
         </div>
-      <!-- <div>{{user | json}}</div> -->
-    <!-- </div> -->
-  </div>
-<!-- </div> -->
+        <img src="assets/images/ico_edit.png" style="cursor: pointer;outline: none;"
+            routerLink="./change-password">
+    </div>
+</div>

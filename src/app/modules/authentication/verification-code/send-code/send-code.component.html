@@ -1,5 +1,5 @@
 <button type="button" class="btn std-button std-button--blue" (click)="sendCode()" [disabled]="loading || sent || !data">
-    <span *ngIf="!loading; else loadingTemp">{{sent? 'Code sent' : 'Send code'}}</span>
+    <p style="margin:0" *ngIf="!loading; else loadingTemp">{{sent? 'Code sent' : 'Send code'}}</p>
 </button>
 
 <ng-template #loadingTemp>

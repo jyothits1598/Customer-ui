@@ -2,77 +2,70 @@
     <div class="profile-navbar">
         <div class="container">
             <span class="profile-save-text" routerLink="/profile/security">
-                <img src="assets/images/ico_arrow_left_white.png" style="padding-right:5px;"> Add mobile
+                <img src="assets/images/ico_arrow_left_white.png" style="padding-right:16px;"> Add mobile
             </span>
             <div class="center-logo-profile only-big" routerLink="/" >
                 <img src="assets/svg/logo_white.svg">
             </div>
         </div>
     </div>
-    <div class="security-card">
-        <!-- <div class="container-fluid"> -->
-            <div class="row">
-                <div class="col-md-12">
-                    <form [formGroup]="changeForm" (ngSubmit)="changeMobile()">
-                        <h3 class="std-heading-4 text-center"> Enter new mobile number </h3>
-                        <div class="text-center" style="margin-bottom: 24px;font-size:14px;">
-                            We'll send a verification code to this number
-                        </div>
-                        <div *ngIf="errorMessage" id="hideMe" class="error-mez">
-                            {{errorMessage}}
-                        </div>
-                        <div class="form-group form-group--margin">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label class="label-inputs"> Mobile</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <tel-input formControlName="mobile"></tel-input>
-                                    <!-- <ngx-intl-tel-input [cssClass]="'form-input'" [enablePlaceholder]="true" [onlyCountries]="['in']" [preferredCountries]="['au']" [enableAutoCountrySelect]="true" [separateDialCode]="true" formControlName="mobile" [phoneValidation]="true" ></ngx-intl-tel-input> -->
-                                </div>
-                            </div>
-                            <!-- <input type="number" class="form-input error-highlight" placeholder="Mobile number" formControlName="mobile" minlength="10" maxlength="10"> -->
-                            <div *ngIf="changeForm.controls.mobile.touched && changeForm.controls.mobile.invalid" class="error-mez">
-                                <div> {{getErrors('mobile')}} </div>
-                            </div>
-                        </div>
-                        <div class="row form-group form-group--margin">
-                            <div class="col-6" style="margin-bottom: 16px;">
-                                <input type="number" class="form-input error-highlight" placeholder="Enter code" formControlName="verificationCode"
-                                minlength="6" maxlength="6">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div *ngIf="changeForm.controls.verificationCode.touched && changeForm.controls.verificationCode.errors"
-                                        class="error-mez">
-                                            <div> {{getErrors('verificationCode')}} </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <send-code (click)="changeForm.controls.mobile.markAsTouched()"
-                                [data]="{purpose: 'change', type: 'mobile', value: (changeForm.controls.mobile.valid ? changeForm.controls.mobile.value : '')}"
-                                (error)="handleError($event)">
-                                </send-code>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group form-group--margin">
-                                    <button type="submit" class="std-button std-button--blue">
-                                        <span *ngIf="!loading; else loadingTemp"> Next </span>
-                                        <ng-template #loadingTemp>
-                                            <img src="assets/images/loader_white_24.gif" alt="" style="height: 24px;">
-                                        </ng-template>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+    <div class="security-card-pwd">
+        <form [formGroup]="changeForm" (ngSubmit)="changeMobile()">
+            <h3 class="std-heading-4 text-center"> Enter new mobile number </h3>
+            <div class="text-center paragraph14" style="margin-bottom: 24px;">
+                We'll send a verification code to this number
+            </div>
+            <div *ngIf="errorMessage" id="hideMe" class="error-mez">
+                {{errorMessage}}
+            </div>
+            <div class="form-group form-group--margin">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="label-inputs"> Mobile</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <tel-input formControlName="mobile"></tel-input>
+                        <!-- <ngx-intl-tel-input [cssClass]="'form-input'" [enablePlaceholder]="true" [onlyCountries]="['in']" [preferredCountries]="['au']" [enableAutoCountrySelect]="true" [separateDialCode]="true" formControlName="mobile" [phoneValidation]="true" ></ngx-intl-tel-input> -->
+                    </div>
+                </div>
+                <div *ngIf="changeForm.controls.mobile.touched && changeForm.controls.mobile.invalid" class="error-mez">
+                    <div> {{getErrors('mobile')}} </div>
                 </div>
             </div>
-        <!-- </div> -->
+            <div class="row">
+                <div class="col-6 pad-ing-right">
+                    <input type="number" class="form-input error-highlight" placeholder="Enter code" formControlName="verificationCode"
+                    minlength="6" maxlength="6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div *ngIf="changeForm.controls.verificationCode.touched && changeForm.controls.verificationCode.errors"
+                            class="error-mez">
+                                <div> {{getErrors('verificationCode')}} </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 pad-ing-left">
+                    <send-code (click)="changeForm.controls.mobile.markAsTouched()"
+                    [data]="{purpose: 'change', type: 'mobile', value: (changeForm.controls.mobile.valid ? changeForm.controls.mobile.value : '')}"
+                    (error)="handleError($event)">
+                    </send-code>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group" style="margin-top:24px;">
+                        <button type="submit" class="std-button std-button--blue">
+                            <p style="margin:0" *ngIf="!loading; else loadingTemp"> Next </p>
+                            <ng-template #loadingTemp>
+                                <img src="assets/images/loader_white_24.gif" alt="" style="height: 24px;">
+                            </ng-template>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </div>

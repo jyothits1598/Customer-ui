@@ -19,6 +19,7 @@ import { PasswordConfirmationGuard } from './guards/password-confirmation.guard'
 import { CurrentPasswordComponent } from './pages/user-security/current-password/current-password.component';
 import { VerificationCodeModule } from '../authentication/verification-code/verification-code.module';
 import { TelInputModule } from '../tel-input/tel-input.module';
+import { NavbarModifierModule } from '../navbar-modifier/navbar-modifier.module';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { TelInputModule } from '../tel-input/tel-input.module';
     FileUploadModule,
     PasswordHelperModule,
     VerificationCodeModule,
-    TelInputModule
+    TelInputModule,
+    NavbarModifierModule
   ],
   providers: [PasswordConfirmationGuard]
 })

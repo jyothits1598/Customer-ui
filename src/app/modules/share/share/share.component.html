@@ -12,7 +12,7 @@
         <div (click)="fbShare()" class="social-icons social-icons--fb">
             <img src="assets/images/profile/ico_social_facebook.png"> Facebook
         </div>
-        <a [href]="'http://twitter.com/share?text='+caption+'&url='+url" target="_blank">
+        <a [href]="'http://twitter.com/share?text='+caption+'&url='+url" target="_blank" style="cursor: pointer;text-decoration: none;color:#fff">
             <div class="social-icons social-icons--twt">
                 <img src="assets/images/profile/ico_social_twitter.png"> Twitter
             </div>
@@ -27,6 +27,6 @@
         <div class="social-icons social-icons--email" style="margin-bottom: 0;" (click)="copyUrl()">
             <img src="assets/images/profile/ico_link.png"> Copy link
         </div>
-        <input style="visibility: hidden;" type="text" [value]="url" #urlCopyInput>
+        <input  type="text" [value]="url" #urlCopyInput>
     </div>
-</ng-template>
+</ng-template> 

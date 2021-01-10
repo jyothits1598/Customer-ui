@@ -1,76 +1,51 @@
-<!-- <div class="edit-profile-page"> -->
-    <div class="security-card">
-        <ng-container *ngIf="profileData">
-            <user-profile-image
-                [profileImageUrl]="editMode ? profileForm.controls.profileImage.value : profileData.profileImage"
-                [editMode]="editMode" (urlChange)="handleFileChange($event)">
-            </user-profile-image>
-            <!-- <user-profile-image ></user-profile-image> -->
-            <!-- <ng-template #noProfile>{{ profileData.firstName.charAt(0)}}</ng-template> -->
-            <div *ngIf="!editMode; else editTemplate" >
-                <!-- <div class="profile-navbar-setting">
-                    <div class="container">
-                        <div class="col-md-12 only-big">
-                            <span class="profile-save-text" routerLink="/">
-                                <img src="assets/images/ico_arrow_left_white.png"> Profile
-                            </span>
-                            <div class="center-logo-profile" routerLink="/" >
-                                <img src="assets/svg/logo_white.svg">
-                            </div>
-                        </div>
-                        <div class="col-md-12 only-small">
-                            <span class="profile-save-text" routerLink="/">
-                                <img src="assets/images/ico_arrow_left_white.png">
-                            </span>
-                            <div class="center-logo-profile profile-save-text" style="cursor: text;">
-                                Profile
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-                <div style="margin-top:34px;margin-bottom:26px;text-align: center;">
-                    <div class="std-heading-5">
-                        <span class="text-capitalize"> {{profileData.firstName}} {{profileData.lastName}} </span>
-                    </div>
+<ng-template appNavbarHeadingContent>
+    <div class="title-content profile-save-text" style="cursor: text;"> Profile </div>
+</ng-template>
+<div class="security-card">
+    <ng-container *ngIf="profileData">
+        <user-profile-image
+            [profileImageUrl]="editMode ? profileForm.controls.profileImage.value : profileData.profileImage"
+            [editMode]="editMode" (urlChange)="handleFileChange($event)">
+        </user-profile-image>
+        <div *ngIf="!editMode; else editTemplate" >
+            <div style="margin-top:34px;margin-bottom:26px;text-align: center;">
+                <div class="std-heading-5">
+                    <span class="text-capitalize"> {{profileData.firstName}} {{profileData.lastName}} </span>
                 </div>
-                <button (click)="toggleEdit()" class="std-button std-button--trans" style="margin-left: auto;margin-right: auto;display: block;">
-                <img src="assets/images/ico_edit.png" width="21px" height="21px"> Edit Profile
-                </button>
             </div>
-        </ng-container>
-        <ng-template #editTemplate>
-            <div class="profile-navbar-setting">
-                <div class="container">
-                    <div class="col-md-12">
-                        <div class="d-flex justify-content-between">
-                            <div class="profile-save-text" (click)="toggleEdit()">
-                                <img src="assets/images/ico_arrow_left_white.png" style="padding-right:5px;">Edit profile
-                            </div>
-                            <div class="profile-save-text" (click)="saveChanges()" style="font-size:16px;">
-                                <img src="assets/images/ico_check_white.png" style="padding-right:8px;"> Save &nbsp;<img *ngIf="saving" src="assets/images/loader_white_24.gif" >
-                            </div>
+            <button (click)="toggleEdit()" class="std-button std-button--trans" style="margin-left: auto;margin-right: auto;display: block;">
+            <img src="assets/images/ico_edit.png" width="21px" height="21px"> Edit Profile
+            </button>
+        </div>
+    </ng-container>
+    <ng-template #editTemplate>
+        <div class="profile-navbar-setting">
+            <div class="container">
+                <div class="col-md-12">
+                    <div class="d-flex justify-content-between">
+                        <div class="profile-save-text" (click)="toggleEdit()">
+                            <img src="assets/images/ico_arrow_left_white.png" style="padding-right:5px;">Edit profile
+                        </div>
+                        <div class="profile-save-text" (click)="saveChanges()" style="font-size:16px;">
+                            <img src="assets/images/ico_check_white.png" style="padding-right:8px;"> Save &nbsp;<img *ngIf="saving" src="assets/images/loader_white_24.gif" >
                         </div>
                     </div>
                 </div>
             </div>
-            <form [formGroup]="profileForm">
-                <div style="margin-top:24px;margin-bottom: 16px;">
-                    <label class="label-inputs">First Name</label>
-                    <input formControlName="firstName" type="text" class="form-input error-highlight">
-                    <span class="error-mez" *ngIf="profileForm.controls.firstName.touched && profileForm.controls.firstName.invalid">First name is
-                        required.</span>
-                </div>
-                <div>
-                    <label class="label-inputs" >Last Name</label>
-                    <input formControlName="lastName" type="text" class="form-input error-highlight">
-                    <span class="error-mez" *ngIf="profileForm.controls.lastName.touched && profileForm.controls.lastName.invalid">Last name is
-                        required.</span>
-                </div>
-            </form>
-            <!-- <div class="col text-center" style="margin-top:24px;">
-                <button (click)="toggleEdit()" class="std-button std-button--trans" style="margin-right:16px"> Cancel</button>
-                <button (click)="saveChanges()" class="std-button std-button--primary" [disabled]="!profileForm.dirty">Save <img *ngIf="saving" src="assets/images/loader.gif" alt="" style="height: 24px;"></button>
-            </div> -->
-        </ng-template>
-     </div>
-<!-- </div>  -->
+        </div>
+        <form [formGroup]="profileForm">
+            <div style="margin-top:24px;margin-bottom: 16px;">
+                <label class="label-inputs">First Name</label>
+                <input formControlName="firstName" type="text" class="form-input error-highlight">
+                <span class="error-mez" *ngIf="profileForm.controls.firstName.touched && profileForm.controls.firstName.invalid">First name is
+                    required.</span>
+            </div>
+            <div>
+                <label class="label-inputs" >Last Name</label>
+                <input formControlName="lastName" type="text" class="form-input error-highlight">
+                <span class="error-mez" *ngIf="profileForm.controls.lastName.touched && profileForm.controls.lastName.invalid">Last name is
+                    required.</span>
+            </div>
+        </form>
+    </ng-template>
+</div>
