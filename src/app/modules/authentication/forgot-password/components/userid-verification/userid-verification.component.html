@@ -32,7 +32,7 @@
             </div>
         </ng-container>
         <div class="row">
-            <div class="col-6 pad-ing-right" style="margin-bottom: 24px;">
+            <div class="col-6 pad-ing-right" style="margin-bottom: 34px;">
                 <input type="text" class="form-input error-highlight" placeholder="Enter code"
                     formControlName="verificationCode">
                 <div *ngIf="form.controls.verificationCode.touched && form.controls.verificationCode.errors"
@@ -40,7 +40,7 @@
                     <div> {{getErrors('verificationCode')}} </div>
                 </div>
             </div>
-            <div class="col-6 pad-ing-left" style="margin-bottom: 24px;">
+            <div class="col-6 pad-ing-left" style="margin-bottom: 34px;">
                 <send-code (click)="form.controls.email.markAsTouched(); form.controls.mobile.markAsTouched();"
                     [data]="activeIdControl.valid ? {purpose: 'forgotPassword', type: activeType, value: activeType === 'email'? form.value.email : form.value.mobile}: null"
                     (error)="handleErrors($event)">

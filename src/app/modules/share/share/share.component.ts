@@ -19,7 +19,7 @@ export class ShareComponent implements OnInit {
   caption: string;
   url: string;
   linkedCopied: false;
-
+  showpopup:boolean = false;
   modalRef: ModalRef;
 
   constructor(private popoverService: PopoverService,
@@ -48,9 +48,9 @@ export class ShareComponent implements OnInit {
   }
 
   copyUrl() {
-    // this.urlCopyInput.nativeElement.focus();  
     this.urlCopyInput.nativeElement.select();
     this.window.document.execCommand('copy');
+    this.showpopup = true;
   }
 
   close() {

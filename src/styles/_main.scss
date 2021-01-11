@@ -106,27 +106,14 @@
     font-size: 14px;
     color: var(--color-primary);
 }
-// .input-search-border {
-//     border: 0;
-//     outline: 0;
-//     width: 100%;
-//     font-size: 16px;
-//     padding-left: 45px;
-//     line-height: 24px;
-//     font-style: normal;
-//     font-weight: normal;
-//     color: var(--color-boldlevelcolor);
-//     height: 48px;
-//     box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);
-// }
-// .locate {
-//     height: 48px;
-//     width: 100%;
-//     line-height: 48px;
-//     padding-left: 8px;
-//     cursor: pointer;
-// }
-// forms
+.ch-me {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--color-primary);
+    cursor: pointer;
+}
 .m-star {
     color: var(--color-failure);
 }

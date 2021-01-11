@@ -5,28 +5,27 @@
 
 <ng-template #sharePanel>
     <div class="share-social">
-        <img src="assets/images/ico_close.png" style="cursor: pointer;" (click)="close()">
+        <img src="assets/images/ico_close.png" style="cursor: pointer;" (click)="close()"> <span *ngIf="showpopup" class="f11" id="hideMe"> URL Copied </span>
         <div class="std-heading-4 mrtb">
             Share this with your social community
         </div>
-        <div (click)="fbShare()" class="social-icons social-icons--fb">
+        <button (click)="fbShare()" class="social-icons social-icons--fb">
             <img src="assets/images/profile/ico_social_facebook.png"> Facebook
-        </div>
-        <a [href]="'http://twitter.com/share?text='+caption+'&url='+url" target="_blank" style="cursor: pointer;text-decoration: none;color:#fff">
-            <div class="social-icons social-icons--twt">
+        </button>
+        <a [href]="'http://twitter.com/share?text='+caption+'&url='+url" target="_blank" class="sh-box">
+            <button class="social-icons social-icons--twt">
                 <img src="assets/images/profile/ico_social_twitter.png"> Twitter
-            </div>
+            </button>
         </a>
 
-        <a [href]="'mailto:?body='+ url +'&subject=' + caption"
-            style="cursor: pointer;text-decoration: none;color:#fff">
-            <div class="social-gmail" class="social-icons social-icons--email">
+        <a [href]="'mailto:?body='+ url +'&subject=' + caption" class="sh-box">
+            <button class="social-gmail" class="social-icons social-icons--email">
                 <img src="assets/images/profile/ico_email.png"> Email
-            </div>
+            </button>
         </a>
-        <div class="social-icons social-icons--email" style="margin-bottom: 0;" (click)="copyUrl()">
+        <button class="social-icons social-icons--email" style="margin-bottom: 0;" (click)="copyUrl()">
             <img src="assets/images/profile/ico_link.png"> Copy link
-        </div>
-        <input  type="text" [value]="url" #urlCopyInput>
+        </button>
+        <input type="text" [value]="url" id="hideMe" #urlCopyInput class="hide-div" style="color:transparent;border:0">
     </div>
 </ng-template> 

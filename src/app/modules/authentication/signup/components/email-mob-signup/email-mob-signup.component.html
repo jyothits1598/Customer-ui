@@ -15,8 +15,10 @@
             </div>
 
             <div class="form-group form-group--margin">
-                <div class="label-inputs"> <span class="float-left"> Email </span><span class="float-right"
-                        style="color: #353FA8;cursor: pointer;" (click)="toggleType()"> Use mobile </span> </div>
+                <div class="float-left label-inputs"> Email </div>
+                <div class="float-right ch-me" (click)="toggleType()">
+                    Use mobile 
+                </div>
                 <input type="text" class="form-input error-highlight" placeholder="Email address"
                     formControlName="email">
                 <div *ngIf="controls.email.touched && controls.email.errors" class="error-mez">
@@ -37,11 +39,9 @@
             <div class="form-group form-group--margin">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="label-inputs">
-                            <span class="float-left"> Mobile </span>
-                            <span class="float-right" style="color: #353FA8;;cursor: pointer;" (click)="toggleType()">
-                                Use email
-                            </span>
+                        <div class="float-left label-inputs"> Mobile </div>
+                        <div class="float-right ch-me" (click)="toggleType()">
+                            Use email
                         </div>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
         </ng-container>
 
         <div class="form-group form-group--margin">
-            <div class="label-inputs"> <span class="float-left"> Password </span></div>
+            <div class="label-inputs"> Password </div>
             <app-password [showHint]="false">
                 <input passwordInput type="password" class="form-input error-highlight custom-padd"
                     placeholder="Password" formControlName="password">
