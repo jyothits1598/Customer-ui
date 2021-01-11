@@ -15,10 +15,11 @@
                 </ul>
             </div>
         </div>
-        <div class="modal-body" [style.max-height]="loading? '600px': 'calc(90vh - 108px)'">
+       
+        <div class="modal-body" [style.max-height]="loading? '600px': 'calc(90vh - 108px)'" >
             <p *ngIf="loading">Loading...</p>
             <ng-container *ngIf="itemDetail">
-                <div class="std-heading-3">
+                <div class="std-heading-3 text-capitalize">
                     {{itemDetail.name}}
                 </div>
                 <div class="item-div-image">

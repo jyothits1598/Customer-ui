@@ -1,9 +1,9 @@
 <div style="margin-bottom:30px">
     <div class="d-flex justify-content-between" style="margin-bottom:20px;">
-        <div class="std-heading-4">
+        <div class="std-heading-4 text-capitalize">
             {{modifier.name}} <br>
             <span class="small-content" *ngIf="modifier.minSelection > 0; else optionalChoice">
-                Choose {{modifier.minSelection}} to {{modifier.maxSelection}}
+                Choose {{modifier.minSelection}} to {{modifier.maxSelection}} <span class="small-content" *ngIf="modifier.freeSelection > 0;">( {{modifier.freeSelection}} free )</span>
             </span>
         </div>
         <div *ngIf="modifier.minSelection > 0; else optional">
@@ -18,7 +18,7 @@
                             <label class="form-check-label lable-text">
                                 <input type="checkbox" class="form-check-input" [id]="modifier.name+i"
                                     [formControl]="optionControls.at(i)" (change)="handleChange()">
-                                <span [for]="modifier.name+i"> {{option.name}} </span>
+                                <span [for]="modifier.name+i" class="text-capitalize"> {{option.name}} </span>
                             </label>
                         </div>
                     </td>

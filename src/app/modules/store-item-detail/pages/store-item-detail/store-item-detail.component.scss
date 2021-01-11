@@ -86,3 +86,7 @@
         background: rgba(0, 0, 0, 0.32);
     }
 }
+
+.modal-body::-webkit-scrollbar {
+    display: none;
+}
