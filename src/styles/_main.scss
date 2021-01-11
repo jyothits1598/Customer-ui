@@ -21,8 +21,7 @@
 }
 .menu li {
     float: left;
-    list-style-type: none;
-    font-family: DM Sans;
+    list-style-type: none;    
     font-style: normal;
     font-weight: bold;
     font-size: 14px;
@@ -42,8 +41,7 @@
 .bck {
     // background: var(--color-inside-bg);
     border-radius: 24px;
-    padding: 8px 16px;
-    font-family: DM Sans;
+    padding: 8px 16px;    
     font-style: normal;
     font-weight: bold;
     font-size: 14px;
@@ -57,7 +55,7 @@
 //     background: var(--color-inside-bg);
 //     border-radius: 24px;
 //     padding: 8px 16px;
-//     font-family: DM Sans;
+//     
 //     font-style: normal;
 //     font-weight: normal;
 //     font-size: 16px;
@@ -132,8 +130,7 @@
 .m-star {
     color: var(--color-failure);
 }
-.error-mez {
-    font-family: DM Sans;
+.error-mez {    
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
@@ -142,8 +139,7 @@
     margin-top: 4px !important;
 }
 .label-inputs {
-    color: var(--color-boldlevelcolor);
-    font-family: DM Sans;
+    color: var(--color-boldlevelcolor);   
     font-style: normal;
     font-weight: bold;
     font-size: 14px;
@@ -154,8 +150,7 @@
     border: 2px solid var(--color-background-secondary);
     border-radius: 8px !important;
     // height: 40px;
-    box-sizing: border-box;
-    font-family: DM Sans;
+    box-sizing: border-box;    
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
@@ -187,8 +182,7 @@
     border-radius: 8px;
     border: none;
     outline: none !important;
-    font-size: 16px;
-    font-family: DM Sans;
+    font-size: 16px;    
     font-style: normal;
     font-weight: bold;
     // margin: 0 auto;
@@ -360,8 +354,7 @@ input.ng-invalid.ng-touched.error-highlight {
     color:var(--color-primary);
 }
 .profile-save-text {
-    font-size: 14px;
-    font-family: DM Sans;
+    font-size: 14px;    
     font-style: normal;
     font-weight: bold;
     color: var(--color-background);
@@ -380,8 +373,7 @@ input.ng-invalid.ng-touched.error-highlight {
     height: 48px;
     line-height: 48px;
 }
-.rating-size {
-    font-family: DM Sans;
+.rating-size {   
     font-style: normal;
     font-weight: normal;
     font-size: 12px;
@@ -398,7 +390,6 @@ input.ng-invalid.ng-touched.error-highlight {
     color:var(--color-primary);
     text-decoration: none;
     line-height:20px;
-    font-family: DM Sans;
     font-style: normal;
     font-weight: bold;
     font-size: 16px;

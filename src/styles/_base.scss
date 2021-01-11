@@ -17,16 +17,14 @@ body {
   background: #fff;
 }
 
-.std-heading-3 {
-  font-family: DM Sans;
+.std-heading-3 {  
   font-style: normal;
   font-weight: bold;
   font-size: 24px;
   line-height: 28px;
   color: var(--color-boldlevelcolor);
 }
-.std-heading-4 {
-    font-family: DM Sans;
+.std-heading-4 {   
     font-style: normal;
     font-weight: bold;
     font-size: 20px;
@@ -34,16 +32,14 @@ body {
     color: var(--color-boldlevelcolor);
     // text-transform: capitalize;
   }
-  .std-heading-5 {
-    font-family: DM Sans;
+  .std-heading-5 {    
     font-style: normal;
     font-weight: bold;
     font-size: 16px;
     line-height: 24px;
     color: var(--color-boldlevelcolor);
   }
-  .paragraph {
-    font-family: DM Sans;
+  .paragraph {    
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
@@ -52,8 +48,7 @@ body {
     text-transform: lowercase;
   }
 
-  .paragraph14{
-    font-family: DM Sans;
+  .paragraph14{    
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
@@ -74,13 +69,13 @@ body {
     padding: 0px;
     width: 100%;
     // height:48px;
-    font-size: 14px;
-    font-family: DM Sans;
+    font-size: 14px;    
     font-style: normal;
     font-weight: 500;
     color: var(--color-boldlevelcolor);
     height: 48px;
     overflow: hidden;
+    line-height: 20px;
     &__item{
         display: inline-block;
     }
@@ -115,8 +110,7 @@ body {
   margin-top: auto;
   margin-bottom: auto;
 }
-.signup-header {
-    font-family: DM Sans;
+.signup-header {    
     font-style: normal;
     font-weight: bold;
     font-size: 32px;
@@ -172,3 +166,15 @@ input.custom-password-eye {
 .custom-padd {
   padding-right: 45px;
 }
+.required {   
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  color: #1a1a1a;
+  padding: 4px 8px;
+  border-radius: 12px;
+  &--fa2 {
+    position: relative;
+  }
+}
+  

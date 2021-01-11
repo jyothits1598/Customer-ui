@@ -1,5 +1,5 @@
 <ul class="menu">
-    <li class="auto-width" ></li>
+    <li class="auto-width" *ngIf="!isLoggedin"></li>
     <li class="auto-width" routerLink="/" style="cursor: pointer;outline:none"> 
         <img class="a1 img-display-desktop" src="assets/images/navbar/ico_home.png">
         <img class="img-display-mobile" src="assets/images/profile/ico_home.png" >
@@ -11,7 +11,7 @@
         </li>
         <li class="auto-width"></li>
     </ng-template>
-    <ng-container *ngIf="isLoggedin$ | async; else block">
+    <ng-container *ngIf="isLoggedin; else block">
         <li class="auto-width" routerLink="/favourites" style="cursor: pointer;outline:none"> 
             <img class="a1 img-display-desktop" src="assets/images/navbar/ico_heart.png"> 
             <img class="img-display-mobile" src="assets/images/profile/ico_heart.png"> 
