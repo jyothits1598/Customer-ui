@@ -1,24 +1,7 @@
-<!-- <div class="edit-profile-page" style="overflow-y: auto;">
-    <div class="profile-navbar">
-        <div class="container">
-            <div class="col-md-12 only-big">
-                <span class="profile-save-text" routerLink="/">
-                    <img src="assets/images/ico_arrow_left_white.png"> Favourites
-                </span>
-                <div class="center-logo-profile" routerLink="/">
-                    <img src="assets/svg/logo_white.svg">
-                </div>
-            </div>
-            <div class="col-md-12 only-small">
-                <span class="profile-save-text" routerLink="/">
-                    <img src="assets/images/ico_arrow_left_white.png">
-                </span>
-                <div class="center-logo-profile profile-save-text" style="cursor: text;">
-                    Favourites
-                </div>
-            </div>
-        </div>
-    </div> -->
+
+    <ng-template appNavbarHeadingContent>
+        <div class="title-content profile-save-text" style="cursor: text;"> Favourites </div>
+    </ng-template>
     <div class="text-center fv-header">
         <ul class="resnt-menu-top-tabs u-margin-bottom-medium" style="margin-bottom:0;">
             <li class="resnt-menu-top-tabs__item custom-border">
@@ -46,4 +29,3 @@
         </div>
     </ng-container>
     <div *ngIf="loading" class="container">Loading...</div>
-<!-- </div> -->

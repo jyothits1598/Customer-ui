@@ -191,10 +191,10 @@
     font-family: DM Sans;
     font-style: normal;
     font-weight: bold;
-    margin: 0 auto;
-    display: inline-block;
-    padding: 8px 16px;
-    // line-height: 20px !important;
+    // margin: 0 auto;
+    // display: inline-block;
+    padding: 10px 16px;
+    line-height: 20px;
     &--primary {
         color: var(--color-background);
         background: var(--color-primary);
@@ -393,4 +393,16 @@ input.ng-invalid.ng-touched.error-highlight {
 }
 .pad-ing-right {
     padding-right: 4px;
+}
+.blue-line-text {
+    color:var(--color-primary);
+    text-decoration: none;
+    line-height:20px;
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    margin:0;
+    outline:0;
+    cursor:pointer;
 }

@@ -56,15 +56,13 @@
                 <div class="error-mez">{{returnErrors('password')}}.</div>
             </div>
         </div>
-        <div class="form-group">
-            <button [disabled]="loggingIn" type="submit" class="std-button std-button--blue"><span
-                    *ngIf="!loggingIn; else inProgressTemp">Log in</span> </button>
+        <div style="margin-bottom:26px" >
+            <button [disabled]="loggingIn" type="submit" class="std-button std-button--blue"><p style="margin:0"
+                    *ngIf="!loggingIn; else inProgressTemp">Log in</p> </button>
         </div>
     </form>
-    <div class="text-center" style="margin-bottom:24px">
-        <a routerLink="/auth/forgot-password" style="color:#353FA8;text-decoration: none;font-weight:bold">
+    <div class="text-center blue-line-text" style="margin-bottom:24px" routerLink="/auth/forgot-password">
             Forgot password
-        </a>
     </div>
     <img src="assets/images/divider_or.png" style="margin-bottom: 16px;width:100%">
 
