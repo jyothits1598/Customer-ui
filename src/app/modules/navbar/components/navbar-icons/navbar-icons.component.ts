@@ -11,6 +11,7 @@ export class NavbarIconsComponent implements OnInit, OnDestroy {
   isLoggedin: boolean;
   constructor(private authService: AuthService) { }
   stateSubs: Subscription;
+  
   ngOnInit(): void {
     this.stateSubs = this.authService.isLoggedIn$().subscribe(state => this.isLoggedin = state);
   }
