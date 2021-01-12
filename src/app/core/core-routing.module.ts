@@ -6,6 +6,7 @@ import { IsAuthenticatedGuard } from './guards/is-authenticated.guard';
 import { LayoutComponent } from './pages/layout/layout.component';
 import{TermsServiceComponent} from 'src/app/modules/terms-service/terms-service.component';
 import { PrivacyPolicyComponent } from '../modules/privacy-policy/privacy-policy.component';
+import { CartComponent } from '../modules/cart/pages/cart/cart.component';
 
 const routes: Routes = [
   { path: 'sample', component: SampleComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   {
    path:'privacy-policy', component:PrivacyPolicyComponent
   },
+  
   {
     path: '',
     component: LayoutComponent,

@@ -14,7 +14,7 @@ import { HttpAuthErrorInterceptor } from './interceptors/http-auth-error.interce
 import { SampleComponent } from './components/sample/sample.component';
 import { IsAuthenticatedGuard } from './guards/is-authenticated.guard';
 import { CartButtonComponent } from './components/cart-button/cart-button.component';
-
+import { CartModule } from '../modules/cart/cart.module';
 
 @NgModule({
   declarations: [CoreComponent, LayoutComponent, SnackBarComponent, SnackBarContainerComponent, LoginPromptComponent, SampleComponent, CartButtonComponent],
@@ -23,6 +23,7 @@ import { CartButtonComponent } from './components/cart-button/cart-button.compon
     CoreRoutingModule,
     NavbarModule,
     HomeModule,
+    CartModule
   ],
   exports: [CoreComponent],
   providers: [

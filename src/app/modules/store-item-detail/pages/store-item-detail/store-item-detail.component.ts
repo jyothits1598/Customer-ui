@@ -31,13 +31,13 @@ import { StoreItemDataService } from '../../services/store-item-data.service';
 })
 export class StoreItemDetailComponent implements OnChanges, OnDestroy {
   reqSubs: Subscription;
-  @Input() item: { storeId: number, itemId: number };
-  itemDetail: StoreItemDetail
-  loading: boolean = true;
-show=true;
-  selectedOptions: FormArray;
-  sC: boolean = true;
-
+  @Input() item : { storeId: number, itemId: number };
+  itemDetail : StoreItemDetail
+  loading : boolean = true;
+  show = true;
+  selectedOptions : FormArray;
+  sC : boolean = true;
+  cartAmount : any = 0;
   constructor(private storeItemData: StoreItemDataService,
     private location: Location) { }
     
@@ -46,6 +46,8 @@ show=true;
       this.itemDetail = detail;
       let control = this.itemDetail.modifiers.map((mod) => new FormControl());
       this.selectedOptions = new FormArray(control);
+      this.getSelectedCartsDetails();
+     
     });
   }
   
@@ -59,4 +61,17 @@ show=true;
   ngOnDestroy(): void {
     this.reqSubs.unsubscribe();
   }
+
+  getSelectedCartsDetails(){
+    this.cartAmount = 0;
+    if(this.selectedOptions.value){
+      this.selectedOptions.value.forEach(mod => {
+        if(mod){
+          mod.forEach(content => {
+            this.cartAmount = this.cartAmount + parseFloat(content.price);
+          });
+        }
+      });
+    }
+   }
 }
