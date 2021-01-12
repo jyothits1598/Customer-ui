@@ -7,7 +7,7 @@
         left: 0;
         right: 0;
         margin-top: 48px;
-        background: #fff;
+        color: var(--color-background);
         padding: 16px 8px;
     }
     .store-search-home-input {
@@ -18,33 +18,34 @@
         font-size: 16px;
         line-height: 24px;
         cursor: pointer;
-        color: #1a1a1a;
-        background: #fafafa;
-        z-index: 1;
+        color: var(--color-boldlevelcolor);
+        background:var(--color-background-tertiary);
     }
     .input-transparent {
         background: transparent;
-        color: #1a1a1a;
+        color: var(--color-boldlevelcolor);
         padding-left: 30px !important;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 24px;
+        padding-right: 10px !important;
     }
     .input-image {
         position: absolute;
-        left: 10px !important;
-        width: 24px;
-        height: 24px;
-        top: 10px;
+        top:4px;
+        left:4px;
     }
     .input-transparent::placeholder {
-        color: #1a1a1a;
-        opacity: 0.5;
+        color:var(--color-typography-tertiary);
     }
     .input-transparent:-ms-input-placeholder {
         /* Internet Explorer 10-11 */
-        color: #1a1a1a;
+        color:var(--color-typography-tertiary);
     }
     .input-transparent::-ms-input-placeholder {
         /* Microsoft Edge */
-        color: #1a1a1a;
+        color:var(--color-typography-tertiary);
     }
 }
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -77,6 +78,11 @@
         cursor: pointer;
         color: var(--color-background);
     }
+    .input-image {
+        position: absolute;
+        top:4px;
+        right:4px;
+    }
 }
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
 @media (min-width: 768px) {
@@ -107,6 +113,11 @@
         line-height: 24px;
         cursor: pointer;
         color: var(--color-background);
+    }
+    .input-image {
+        position: absolute;
+        top:4px;
+        right:4px;
     }
 }
 
@@ -139,6 +150,11 @@
         cursor: pointer;
         color: var(--color-background);
     }
+    .input-image {
+        position: absolute;
+        top:4px;
+        right:4px;
+    }
 }
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1400px) {
@@ -170,6 +186,11 @@
         cursor: pointer;
         color: var(--color-background);
     }
+    .input-image {
+        position: absolute;
+        top:4px;
+        right:4px;
+    }
 }
 .input-transparent {
     width: 100%;
@@ -178,13 +199,13 @@
 .store-search-home-input {
     position: relative;
 }
-.input-image {
-    position: absolute;
-    right: 10px;
-    width: 24px;
-    height: 24px;
-    top: 8px;
-}
+// .input-image {
+//     position: absolute;
+//     right: 10px;
+//     width: 24px;
+//     height: 24px;
+//     top: 8px;
+// }
 
 .mobile-banner {
     display: block;

@@ -13,7 +13,7 @@
         <form [formGroup]="changeForm" (ngSubmit)="changeEmail()">
             <h3 class="std-heading-4 text-center"> Enter new email address </h3>
             <div class="text-center paragraph14" style="margin-bottom: 24px;">
-                We’ll send a verification code to the email
+                We’ll send a verification code to this email
             </div>
             <div *ngIf="errorMessage" id="hideMe" class="error-mez text-capitalize">
                 {{errorMessage}}

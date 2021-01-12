@@ -16,7 +16,7 @@
     // margin:0;
     width: 100%;
     border:0;
-    background: #FAFAFA;
+    background: var(--color-background-tertiary);
     border-radius: 24px;
     padding: 4px 30px 4px 40px;
 }
@@ -28,7 +28,8 @@
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     .cover-bg {
-        margin-top:60px;
+        margin-top:72px;
+        margin-bottom:16px;
     }
     .mobile-pad {
       padding-top:24px;
@@ -36,6 +37,9 @@
     // .sticky-navbar {
     //     top:100px;
     // }
+    .newClasscontainer {
+      padding-left: 16px !important;
+    }
   }
   /* Small devices (portrait tablets and large phones, 600px and up) */
   @media only screen and (min-width: 600px) {

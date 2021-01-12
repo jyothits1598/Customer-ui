@@ -56,7 +56,7 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
         }),
         filter((val) => val),
         debounce(() => interval(500)),
-        switchMap((val) => this.restApiService.get(`api/stores/search?name=${val}`).pipe(finalize(() => this.loading = false), map(resp => resp.data.stores || []))),
+        switchMap((val) => this.restApiService.get(`api/stores/search? + name=${val}`).pipe(finalize(() => this.loading = false), map(resp => resp.data.stores || []))),
       ).subscribe(res => { this.searchData = res; this.showResults(); });
     // this.keyupSubs = fromEvent(this.searchInput.nativeElement, 'keyup')
     //   .pipe(

@@ -14,38 +14,37 @@
                 </div>
             </div>
             <button (click)="toggleEdit()" class="std-button std-button--trans" style="margin-left: auto;margin-right: auto;display: block;">
-            <img src="assets/images/ico_edit.png" width="21px" height="21px"> Edit Profile
+            <img src="assets/images/ico_edit.png" width="18px" height="18px"> Edit profile
             </button>
         </div>
     </ng-container>
     <ng-template #editTemplate>
         <div class="profile-navbar-setting">
             <div class="container">
-                <div class="col-md-12">
-                    <div class="d-flex justify-content-between">
-                        <div class="profile-save-text" (click)="toggleEdit()">
-                            <img src="assets/images/ico_arrow_left_white.png" style="padding-right:5px;">Edit profile
-                        </div>
-                        <div class="profile-save-text" (click)="saveChanges()" style="font-size:16px;">
-                            <img src="assets/images/ico_check_white.png" style="padding-right:8px;"> Save &nbsp;<img *ngIf="saving" src="assets/images/loader_white_24.gif" >
-                        </div>
+                <div class="d-flex justify-content-between">
+                    <div (click)="toggleEdit()" class="pic-header" >
+                        <img src="assets/images/ico_arrow_left_white.png" style="padding-right:5px;">Edit profile
+                    </div>
+                    <div (click)="saveChanges()" class="pic-header1">
+                        <img src="assets/images/ico_check_white.png" style="padding-right:8px;"> Save &nbsp;<img *ngIf="saving" src="assets/images/loader_white_24.gif" >
                     </div>
                 </div>
             </div>
         </div>
         <form [formGroup]="profileForm">
             <div style="margin-top:24px;margin-bottom: 16px;">
-                <label class="label-inputs">First Name</label>
+                <label class="label-inputs">First name</label>
                 <input formControlName="firstName" type="text" class="form-input error-highlight">
                 <span class="error-mez" *ngIf="profileForm.controls.firstName.touched && profileForm.controls.firstName.invalid">First name is
                     required.</span>
             </div>
             <div>
-                <label class="label-inputs" >Last Name</label>
+                <label class="label-inputs" >Last name</label>
                 <input formControlName="lastName" type="text" class="form-input error-highlight">
                 <span class="error-mez" *ngIf="profileForm.controls.lastName.touched && profileForm.controls.lastName.invalid">Last name is
                     required.</span>
             </div>
+            <br><br><br>
         </form>
     </ng-template>
 </div>
