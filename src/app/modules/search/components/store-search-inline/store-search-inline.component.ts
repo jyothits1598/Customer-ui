@@ -39,7 +39,7 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
     private layoutService: LayoutService,
     private searchDataServ: SearchDataService,
     private router: Router,
-    private route: ActivatedRoute) { this.isMobile = this.layoutService.isMobile; }
+  ) { this.isMobile = this.layoutService.isMobile; }
 
   ngAfterViewInit(): void {
     this.searchDataServ.registerSearchElement(this.searchInput);
@@ -56,8 +56,8 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
         }),
         filter((val) => val),
         debounce(() => interval(500)),
-        switchMap((val) => this.restApiService.get(`api/stores/search?name=${val}`).pipe(finalize(() => this.loading = false), map(resp => resp.data.stores || []))),
-      ).subscribe(res => { this.searchData = res; this.showResults(); });
+        switchMap((val: string) => this.searchDataServ.search(val).pipe(finalize(() => this.loading = false))))
+      .subscribe(res => { this.searchData = res; this.showResults(); });
     // this.keyupSubs = fromEvent(this.searchInput.nativeElement, 'keyup')
     //   .pipe(
     //     map((event: any) => event.target.value),

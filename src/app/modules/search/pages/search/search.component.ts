@@ -20,8 +20,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   constructor(private router: Router,
     private route: ActivatedRoute,
     private location: GeoLocationService,
-    private searchDataServ: SearchDataService,
-    private navbarService: NavbarService) { }
+    private searchDataServ: SearchDataService) { }
 
   ngOnInit(): void {
     this.subs = this.route.queryParams.pipe(
