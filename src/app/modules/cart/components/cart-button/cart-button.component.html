@@ -4,14 +4,14 @@
             <div>
                 <img src="assets/images/cart/cart.svg" />
                 <span class="cart-text cart-count">
-                    1
+                    {{cartItemCount$ | async}}
                 </span>
             </div>
             <div class="cart-text">
                 checkout
             </div>
             <div class="cart-text">
-                $13.00
+                ${{cartTotalAmount$ |async }}
             </div>
         </div>
     </div>

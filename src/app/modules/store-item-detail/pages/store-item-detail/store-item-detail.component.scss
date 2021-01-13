@@ -54,7 +54,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 99999;
+    z-index: 500;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -94,25 +94,6 @@ label{
     label{
         color: #353FA8;
     }
-}
-.add-extra-item
-{
-   margin:24px 0 48px;
-   .item-circle-disable{
-    width:40px;
-    height:40px;
-    border: 1px solid #B3B3B3;
-    box-sizing: border-box;
-    border-radius: 100%;
-   
-   }
-   .mlr-32{
-       margin:0 32px;
-       margin-top:10px;
-       label{
-            color: #000;
-        }
-   }
 }
 
 .footer-btn {

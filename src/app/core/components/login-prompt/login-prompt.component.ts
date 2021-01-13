@@ -12,7 +12,7 @@ export class LoginPromptComponent implements OnInit {
   loginRoute = ROUTE_SIGNIN;
   wasLoggedIn: boolean;
 
-  constructor(public modalRef: ComponentModalRef,
+  constructor(public modalRef: ComponentModalRef<LoginPromptComponent>,
     public authService: AuthService,
     public window: Window) { }
 

@@ -1,12 +1,9 @@
-import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { filter, finalize, map, mergeMap } from 'rxjs/operators';
-import { ModalService } from 'src/app/core/services/modal.service';
-import { StoreDetail, StoreItem } from 'src/app/modules/store-detail/model/store-detail';
+import { StoreDetail } from 'src/app/modules/store-detail/model/store-detail';
 import { StoreDetailDataService } from '../../services/store-detail-data.service';
 import { GeoLocationService } from 'src/app/core/services/geo-location.service';
-import { combineLatest, CombineLatestSubscriber } from 'rxjs/internal/observable/combineLatest';
-import { forkJoin, zip } from 'rxjs';
 import { UserLocation } from 'src/app/core/model/user-location';
 
 @Component({
@@ -47,14 +44,6 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    // this.routeParamsSubs = this.route.params.pipe(
-    // ).subscribe((param) => {
-    //   let id = parseInt(param.id);
-    //   if (id) {
-    //     this.storeId = id;
-    //     this.loadStore();
-    //   }
-    // });
     this.routeParamsSubs = this.route.params.pipe(
       mergeMap((param) => this.geoLoc.userLocation().pipe(map(loc => { return { param: param.id, location: loc } })))
     ).subscribe((data) => {
