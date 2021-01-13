@@ -1,0 +1,19 @@
+.right-content {
+    position: fixed;
+    width:320px;
+    height:100%;
+    z-index: 1;
+    background: #ffffff;
+    right:0;
+    top:0;
+    bottom:0;
+    box-shadow: inset 1px 0px 0px rgba(0, 0, 0, 0.1);
+    .empty-cart {
+        margin-top:80px;
+        padding: 16px;
+        text-align: center;
+    }
+    .mt{
+        margin-top:30px;
+    }
+}
