@@ -1,5 +1,5 @@
 <div class="cart-card">
-    <div class="cart-button">
+    <div class="cart-button" *ngIf="cartData$ | async; let data">
         <div class="d-flex justify-content-between">
             <div>
                 <img src="assets/images/cart/cart.svg" />

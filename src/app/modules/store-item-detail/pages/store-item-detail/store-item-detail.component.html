@@ -15,8 +15,8 @@
                 </ul>
             </div>
         </div>
-       
-        <div class="modal-body" [style.max-height]="loading? '600px': 'calc(90vh - 108px)'" >
+        <!-- <div> validity state of formarray, {{selectedOptions.valid}}</div> -->
+        <div class="modal-body" [style.max-height]="loading? '600px': 'calc(90vh - 108px)'">
             <p *ngIf="loading">Loading...</p>
             <ng-container *ngIf="itemDetail">
                 <div class="std-heading-3 text-capitalize">
@@ -38,8 +38,8 @@
             <br><br>
         </div>
         <div class="footer-btn">
-            <button type="button" (click)="getSelectedCartsDetails()" class="btn std-button std-button--blue">
-                Add to cart <span class="float-right" *ngIf="cartAmount">${{cartAmount.toFixed(2)}}</span>
+            <button (click)="addToCart()" type="button" class="btn std-button std-button--blue">
+                Add to cart <span *ngIf="itemDetail" class="float-right">${{totalAmount}}</span>
             </button>
         </div>
     </div>

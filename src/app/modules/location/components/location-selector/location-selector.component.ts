@@ -27,7 +27,7 @@ export class LocationSelectorComponent implements OnInit, AfterViewInit {
     private modalService: ModalService) { }
 
   ngAfterViewInit(): void {
-    console.log('ngoninit just ran')
+    
   }
 
   overlayRef: PopoverRef | ModalRef;
@@ -35,7 +35,6 @@ export class LocationSelectorComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.geoLocationService.userLocation().subscribe((location) => {
-      console.log('subscription from location, ', location);
       let loc = location;
       this.location = location;
       if (loc.address.locality.length > 22) loc.address.locality = loc.address.locality.slice(0, 22) + '...';

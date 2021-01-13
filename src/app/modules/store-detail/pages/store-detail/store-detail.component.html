@@ -1,5 +1,5 @@
-<div *ngIf="selecteditemId">
-    <store-item-detail [item]="{itemId: selecteditemId, storeId: storeId}"></store-item-detail>
+<div *ngIf="selecteditemId && storeDetail">
+    <store-item-detail [item]="{itemId: selecteditemId, storeName: storeDetail.name ,storeId: storeId}"></store-item-detail>
 </div>
 
 

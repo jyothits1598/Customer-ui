@@ -1,11 +1,14 @@
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { Location } from '@angular/common';
-import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormControl } from '@angular/forms';
+import { templateVisitAll } from '@angular/compiler';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { AbstractControl, FormArray, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { finalize } from 'rxjs/operators';
-import { StoreItemDetail } from '../../model/store-item-detail';
+import { CartData } from 'src/app/core/model/cart';
+import { CartService } from 'src/app/core/services/cart.service';
+import { ItemModifier, StoreItemDetail } from '../../model/store-item-detail';
 import { StoreItemDataService } from '../../services/store-item-data.service';
 
 @Component({
@@ -31,47 +34,81 @@ import { StoreItemDataService } from '../../services/store-item-data.service';
 })
 export class StoreItemDetailComponent implements OnChanges, OnDestroy {
   reqSubs: Subscription;
-  @Input() item : { storeId: number, itemId: number };
-  itemDetail : StoreItemDetail
-  loading : boolean = true;
+  selectedvalueChangeSubs: Subscription;
+
+  @Input() item: { storeId: number, storeName: string, itemId: number };
+  itemDetail: StoreItemDetail
+  loading: boolean = true;
   show = true;
-  selectedOptions : FormArray;
-  sC : boolean = true;
-  cartAmount : any = 0;
+  selectedOptions: FormArray;
+
+  totalAmount: any = 0;
+  makeCalculations: (itemBasePrice: number, selectedModifiers: Array<ItemModifier>) => number;
+
   constructor(private storeItemData: StoreItemDataService,
-    private location: Location) { }
-    
-    ngOnChanges(): void {
+    private location: Location,
+    private cartService: CartService) {
+    this.makeCalculations = this.cartService.makeCalculations;
+  }
+
+  ngOnChanges(): void {
+    //clear previous subscription
+    if (this.selectedvalueChangeSubs) this.selectedvalueChangeSubs.unsubscribe();
+    if (this.reqSubs) this.reqSubs.unsubscribe();
+
     this.reqSubs = this.storeItemData.itemDetail(this.item.storeId, this.item.itemId).pipe(finalize(() => this.loading = false)).subscribe(detail => {
       this.itemDetail = detail;
       let control = this.itemDetail.modifiers.map((mod) => new FormControl());
       this.selectedOptions = new FormArray(control);
-      this.getSelectedCartsDetails();
-     
+      this.selectedvalueChangeSubs = this.setUpSubscription(this.selectedOptions);
     });
   }
-  
+
+  setUpSubscription(formControl: AbstractControl) {
+    return formControl.valueChanges.subscribe(
+      (value) => this.totalAmount = this.makeCalculations(this.itemDetail.basePrice, value)
+    )
+  }
+
   close() {
     this.show = false;
     setTimeout(() => {
       this.location.back();
     }, 200);
   }
-  
+
   ngOnDestroy(): void {
     this.reqSubs.unsubscribe();
+    this.selectedvalueChangeSubs.unsubscribe();
   }
 
-  getSelectedCartsDetails(){
-    this.cartAmount = 0;
-    if(this.selectedOptions.value){
-      this.selectedOptions.value.forEach(mod => {
-        if(mod){
-          mod.forEach(content => {
-            this.cartAmount = this.cartAmount + parseFloat(content.price);
-          });
-        }
-      });
+  addToCart() {
+    if (this.selectedOptions.invalid) {
+      this.selectedOptions.markAllAsTouched();
+      return;
     }
-   }
+
+    let cartData: CartData = {
+      storeId: this.item.storeId,
+      storeName: this.item.storeName,
+      items: this.selectedOptions.value
+    };
+
+    this.cartService.addItem(cartData);
+  }
+
+
+
+  // getSelectedCartsDetails() {
+  //   this.cartAmount = 0;
+  //   if (this.selectedOptions.value) {
+  //     this.selectedOptions.value.forEach(mod => {
+  //       if (mod) {
+  //         mod.forEach(content => {
+  //           this.cartAmount = this.cartAmount + parseFloat(content.price);
+  //         });
+  //       }
+  //     });
+  //   }
+  // }
 }
