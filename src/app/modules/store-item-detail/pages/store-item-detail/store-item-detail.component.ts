@@ -1,11 +1,15 @@
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { Location } from '@angular/common';
-import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormControl } from '@angular/forms';
+import { templateVisitAll } from '@angular/compiler';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { AbstractControl, FormArray, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { merge, Subject } from 'rxjs';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { finalize } from 'rxjs/operators';
-import { StoreItemDetail } from '../../model/store-item-detail';
+import { finalize, takeUntil } from 'rxjs/operators';
+import { CartData } from 'src/app/core/model/cart';
+import { CartService } from 'src/app/core/services/cart.service';
+import { ItemModifier, StoreItemDetail } from '../../model/store-item-detail';
 import { StoreItemDataService } from '../../services/store-item-data.service';
 
 @Component({
@@ -31,47 +35,89 @@ import { StoreItemDataService } from '../../services/store-item-data.service';
 })
 export class StoreItemDetailComponent implements OnChanges, OnDestroy {
   reqSubs: Subscription;
-  @Input() item : { storeId: number, itemId: number };
-  itemDetail : StoreItemDetail
-  loading : boolean = true;
+  selectedvalueChangeSubs: Subscription;
+
+  @Input() item: { storeId: number, storeName: string, itemId: number };
+  itemDetail: StoreItemDetail
+  loading: boolean = true;
   show = true;
-  selectedOptions : FormArray;
-  sC : boolean = true;
-  cartAmount : any = 0;
+  selectedOptions: FormArray;
+  itemCount: FormControl = new FormControl(1);
+
+  totalAmount: any = 0;
+  makeCalculations: (itemBasePrice: number, selectedModifiers: Array<ItemModifier>, count: number) => number;
+
+  unSubscribe$: Subject<boolean> = new Subject<boolean>();
+  itemAddedToCart: boolean = false;
+
   constructor(private storeItemData: StoreItemDataService,
-    private location: Location) { }
-    
-    ngOnChanges(): void {
-    this.reqSubs = this.storeItemData.itemDetail(this.item.storeId, this.item.itemId).pipe(finalize(() => this.loading = false)).subscribe(detail => {
+    private location: Location,
+    private cartService: CartService) {
+    this.makeCalculations = this.cartService.makeCalculations;
+  }
+
+  ngOnChanges(): void {
+    //clear previous subscription
+    if (this.selectedvalueChangeSubs) this.selectedvalueChangeSubs.unsubscribe();
+    if (this.reqSubs) this.reqSubs.unsubscribe();
+
+    this.reqSubs = this.storeItemData.itemDetail(this.item.storeId, this.item.itemId).pipe(takeUntil(this.unSubscribe$), finalize(() => this.loading = false)).subscribe(detail => {
       this.itemDetail = detail;
       let control = this.itemDetail.modifiers.map((mod) => new FormControl());
       this.selectedOptions = new FormArray(control);
-      this.getSelectedCartsDetails();
-     
+      this.selectedvalueChangeSubs = this.setUpSubscription();
     });
   }
-  
+
+  setUpSubscription() {
+    return merge(
+      this.selectedOptions.valueChanges, this.itemCount.valueChanges
+    ).pipe(takeUntil(this.unSubscribe$)).subscribe(() => this.totalAmount = this.makeCalculations(this.itemDetail.basePrice, this.selectedOptions.value, this.itemCount.value));
+  }
+
   close() {
     this.show = false;
     setTimeout(() => {
       this.location.back();
     }, 200);
   }
-  
+
   ngOnDestroy(): void {
-    this.reqSubs.unsubscribe();
+    this.unSubscribe$.next(true);
   }
 
-  getSelectedCartsDetails(){
-    this.cartAmount = 0;
-    if(this.selectedOptions.value){
-      this.selectedOptions.value.forEach(mod => {
-        if(mod){
-          mod.forEach(content => {
-            this.cartAmount = this.cartAmount + parseFloat(content.price);
-          });
-        }
-      });
+  addToCart() {
+    if (this.selectedOptions.invalid) {
+      this.selectedOptions.markAllAsTouched();
+      return;
     }
-   }
+    let itemDetail = { ...this.itemDetail };
+    itemDetail.modifiers = this.selectedOptions.value;
+
+    let cartData: CartData = {
+      storeId: this.item.storeId,
+      storeName: this.item.storeName,
+
+      items: [{ item: itemDetail, quantity: this.itemCount.value}]
+    };
+
+    this.cartService.addItem(cartData).pipe(takeUntil(this.unSubscribe$)).subscribe(() => {
+      this.itemAddedToCart = true;
+    });
+  }
+
+
+
+  // getSelectedCartsDetails() {
+  //   this.cartAmount = 0;
+  //   if (this.selectedOptions.value) {
+  //     this.selectedOptions.value.forEach(mod => {
+  //       if (mod) {
+  //         mod.forEach(content => {
+  //           this.cartAmount = this.cartAmount + parseFloat(content.price);
+  //         });
+  //       }
+  //     });
+  //   }
+  // }
 }

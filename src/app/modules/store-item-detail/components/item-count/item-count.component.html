@@ -1,0 +1,11 @@
+<div class="add-extra-item">
+    <div class="d-flex justify-content-center">
+        <button [disabled]="count === 1" (click)="count = count -1; change.emit(count)">
+            <img src="assets/images/cart/item-menus-disable.svg" />
+        </button>
+        <label class="mlr-32">{{count}}</label>
+        <button (click)="count = count+1; change.emit(count)">
+            <img src="assets/images/cart/item-add-enable.svg" />
+        </button>
+    </div>
+</div>

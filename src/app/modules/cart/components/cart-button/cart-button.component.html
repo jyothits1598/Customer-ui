@@ -1,21 +1,27 @@
 <div class="cart-card cart-anim">
-    <div class="cart-button">
+    <div class="cart-button" *ngIf="cartData$ | async; let data">
         <div class="row">
             <div class="col-sm-4 col-4">
                 <img src="assets/images/cart/cart.svg" />
                 <span class="cart-text cart-count">
-                    1
+                    {{cartItemCount$ | async}}
                 </span>
             </div>
             <div class="col-sm-4 col-4 cart-text">
                 Checkout
             </div>
             <div class="col-sm-4 col-4 text-right cart-text">
-                $13.00
+                ${{cartTotalAmount$ |async }}
             </div>
         </div>
     </div>
 </div>
+
+<!--
+    while doing Payment
+-->
+
+
 <div class="cart-card dopayment" *ngIf="doPayment">
     <div>
         <svg width="100%" height="56" viewBox="0 0 344 56" fill="none" xmlns="http://www.w3.org/2000/svg">

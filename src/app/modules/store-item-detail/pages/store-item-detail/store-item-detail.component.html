@@ -15,8 +15,8 @@
                 </ul>
             </div>
         </div>
-       
-        <div class="modal-body" [style.max-height]="loading? '600px': 'calc(90vh - 108px)'" >
+        <!-- <div> validity state of formarray, {{selectedOptions.valid}}</div> -->
+        <div class="modal-body" [style.max-height]="loading? '600px': 'calc(90vh - 108px)'">
             <p *ngIf="loading">Loading...</p>
             <ng-container *ngIf="itemDetail">
                 <div class="std-heading-3 text-capitalize">
@@ -35,35 +35,26 @@
                     </div>
                 </ng-container>
             </ng-container>
-            <div *ngIf="itemDetail.modifiers.length > 0">
-                <div  class="cart-item-show-more text-center">
+            <div *ngIf="itemDetail?.modifiers.length > 0">
+                <div class="cart-item-show-more text-center">
                     <label>
                         Show 7 more
                     </label>
                 </div>
                 <hr>
-                <div class="add-extra-item">
-                    <div class="d-flex justify-content-center">
-                        <img src="assets/images/cart/item-menus-disable.svg"/>
-                        <label class="mlr-32">1</label>
-                        <img src="assets/images/cart/item-add-enable.svg"/>
-                    </div>
-                </div>
-            </div>    
-            
+                <item-count (change)="itemCount.patchValue($event)"></item-count>
+            </div>
+
         </div>
         <div class="footer-btn">
-            <!-- <button type="button" (click)="getSelectedCartsDetails()" class="btn std-button std-button--blue">
-                Add to cart <span class="float-right" *ngIf="cartAmount">${{cartAmount.toFixed(2)}}</span>
-            </button> -->
-            <div class="cart-card">
-                <div class="cart-button" (click)="getSelectedCartsDetails()">
-                    <div class="cart-text text-center">
-                        Add to cart
-                        <span class="float-right" *ngIf="cartAmount">${{cartAmount.toFixed(2)}}</span>
-                    </div>
-                </div>
-            </div>
+            <button (click)="addToCart()" type="button" class="btn std-button std-button--blue">
+                <ng-container *ngIf="!itemAddedToCart; else added">
+                    Add to cart <span *ngIf="itemDetail" class="float-right">${{totalAmount}}</span>
+                </ng-container>
+                <ng-template #added>
+                    <span>Item added</span>
+                </ng-template>
+            </button>
         </div>
     </div>
     <div class="item-detail-background" (click)="close()"></div>

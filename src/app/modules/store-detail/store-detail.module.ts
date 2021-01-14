@@ -14,7 +14,6 @@ import { FacebookLikeCountModule } from '../facebook-like-count/facebook-like-co
 import { GoogleRatingModule } from '../google-rating/google-rating.module';
 import { CartModule } from '../cart/cart.module';
 
-
 const routes: Routes = [
   {
     path: ':id',

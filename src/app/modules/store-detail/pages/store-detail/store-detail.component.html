@@ -1,5 +1,5 @@
-<div *ngIf="selecteditemId">
-    <store-item-detail [item]="{itemId: selecteditemId, storeId: storeId}"></store-item-detail>
+<div *ngIf="selecteditemId && storeDetail">
+    <store-item-detail [item]="{itemId: selecteditemId, storeName: storeDetail.name ,storeId: storeId}"></store-item-detail>
 </div>
 
 
@@ -121,3 +121,6 @@
         <cart-button></cart-button>
     </ng-container>
 </div>
+
+<cart-button></cart-button>
+<app-cart></app-cart>
