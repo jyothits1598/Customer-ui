@@ -9,11 +9,10 @@ import { CartService } from 'src/app/core/services/cart.service';
   styleUrls: ['./cart-button.component.scss']
 })
 export class CartButtonComponent implements OnInit {
-
+  doPayment: boolean = false;
   cartData$: Observable<CartData>;
   cartItemCount$: Observable<number>;
   cartTotalAmount$ : Observable<number>;
-  doPayment: boolean = false;
   constructor(private cartService: CartService) { }
 
   ngOnInit(): void {

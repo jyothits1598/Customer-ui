@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-  orderStatus:string = 'thankyou'; /**Cart status empty,checkout,continue,placeOrder,bankcards,addcard,orders,thankyou */
+  orderStatus:string = 'orders'; /**Cart status empty,checkout,continue,placeOrder,bankcards,addcard,orders,thankyou */
   orderPrepareStatus:string = 'orderReady';/**confirmingOrder,preparingOrder,orderReady */
   constructor() { }
 

@@ -52,6 +52,40 @@
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
     height:auto;
+    .card-applepay{
+        width:100%;
+        height: 56px;
+        background: var(--color-apple);
+        border-radius: 8px;
+        /* Inside Auto Layout */
+        flex: none;
+        order: 0;
+        align-self: stretch;
+        flex-grow: 0;
+        padding:18px;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        color: #FFFFFF;
+        font-style: normal;
+    }
+    .card-paypal{
+        width:100%;
+        height: 56px;
+        background: var(--color-background-tertiary);
+        border-radius: 8px;
+        /* Inside Auto Layout */
+        flex: none;
+        order: 0;
+        align-self: stretch;
+        flex-grow: 0;
+        padding:18px;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        color: #1A1A1A;
+        font-style: normal;
+    }
     .cancel{
            width:100%;
             height: 56px;
