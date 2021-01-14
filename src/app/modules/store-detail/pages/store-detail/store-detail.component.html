@@ -117,13 +117,7 @@
             <store-category [categories]="storeDetail.categories" [scrolledDown]="scrolledDown"></store-category>
             <!----------------------------- items cards end ---------------------->
         </div>
-        <div class="right-content" style="z-index: 99999;">
-            <div class="empty-cart">
-                <img src="assets/images/empty_cart.png">
-                <p class="paragraph" style="margin-top:34px">
-                    Add some items to your order to get started
-                </p>
-            </div>
-        </div>
+        <app-cart></app-cart>
+        <cart-button></cart-button>
     </ng-container>
 </div>

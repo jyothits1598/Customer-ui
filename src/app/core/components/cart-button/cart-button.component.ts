@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartButtonComponent implements OnInit {
 
+  doPayment:boolean = true;
   constructor() { }
 
   ngOnInit(): void {
