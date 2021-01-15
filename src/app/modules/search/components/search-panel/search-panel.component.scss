@@ -4,8 +4,8 @@
     box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
-
-@media only screen and (max-width: 600px) {
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) { 
     .custom-location-body {
         position: fixed;
         top: 120px;
@@ -16,4 +16,65 @@
         width: 100%;
         border-radius: 0px;
     }
-}
+    body{
+        overflow: hidden;
+    }
+  }
+  // Small devices (landscape phones, 576px and up)
+  @media (min-width: 576px) and (max-width: 767.98px) { 
+    .custom-location-body {
+        position: fixed;
+        top: 120px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 0;
+        width: 100%;
+        border-radius: 0px;
+    }
+    body{
+        overflow: hidden;
+    }
+  }
+  // Medium devices (tablets, 768px and up)
+  @media (min-width: 768px) and (max-width: 991.98px) {
+    .custom-location-body {
+        position: fixed;
+        top: 120px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 0;
+        width: 100%;
+        border-radius: 0px;
+    }
+    body{
+        overflow: hidden;
+    }
+  }
+  // Large devices (desktops, 992px and up)
+  @media (min-width: 992px) and (max-width: 1199.98px) { 
+    .cover-bg {
+        margin-top:72px;
+        margin-bottom:16px;
+      }
+      .mobile-pad {
+        padding-top:24px;
+      }
+      .newClasscontainer {
+        padding-left: 16px !important;
+      }
+  }
+  // Extra large devices (large desktops, 1200px and up)
+  @media (min-width: 1200px) {
+    .cover-bg {
+        margin-top:72px;
+        margin-bottom:16px;
+      }
+      .mobile-pad {
+        padding-top:24px;
+      }
+      .newClasscontainer {
+        padding-left: 16px !important;
+      }
+  }

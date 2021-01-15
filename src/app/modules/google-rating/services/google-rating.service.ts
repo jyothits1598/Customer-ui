@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class GoogleRatingService {
-
+ 
   placeService: google.maps.places.PlacesService;
   constructor(private rendererFactory: RendererFactory2, private ngZone: NgZone) {
     this.placeService = new google.maps.places.PlacesService(
@@ -13,6 +13,7 @@ export class GoogleRatingService {
   }
 
   getRating(name: string, address: string): Observable<number> {
+    return;
     return new Observable(
       (observer) => {
         this.placeService.textSearch({ query: `${name}, ${address}` }, (resp) => {

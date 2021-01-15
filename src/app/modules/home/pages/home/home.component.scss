@@ -25,60 +25,58 @@
     left:5px;
     top:4px
 }
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
-    .cover-bg {
-        margin-top:72px;
-        margin-bottom:16px;
-    }
-    .mobile-pad {
-      padding-top:24px;
-    }
-    // .sticky-navbar {
-    //     top:100px;
-    // }
-    .newClasscontainer {
-      padding-left: 16px !important;
-    }
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) { 
+  .cover-bg {
+    margin-top:72px;
+    margin-bottom:16px;
   }
-  /* Small devices (portrait tablets and large phones, 600px and up) */
-  @media only screen and (min-width: 600px) {
-    // .cover-bg {
-    //     margin-top:48px;
-    // }
-    // .sticky-navbar {
-    //     top:48px;
-    // }
+  .mobile-pad {
+    padding-top:24px;
   }
-  /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
-  @media (min-width: 768px) {  
-    // .cover-bg {
-    //     margin-top:60px;
-    // }
-    // .sticky-navbar {
-    //     margin-top:60px;
-    // }
+  .newClasscontainer {
+    padding-left: 16px !important;
   }
-   
-  /* Large devices (desktops, 992px and up) */
-  @media (min-width: 992px) { 
-    .cover-bg {
-        margin-top:48px;
-    }
-    // .sticky-navbar {
-    //     top:48px;
-    // }
+}
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) and (max-width: 767.98px) { 
+  .cover-bg {
+    margin-top:72px;
+    margin-bottom:16px;
   }
-  /* Extra large devices (large desktops, 1200px and up) */
-  @media (min-width: 1400px) {  
-    .cover-bg {
-        margin-top:48px;
-    }
-    // .sticky-navbar {
-    //     top:48px;
-    // }
+  .mobile-pad {
+    padding-top:24px;
   }
-  .small-home-text {
+  .newClasscontainer {
+    padding-left: 16px !important;
+  }
+}
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .cover-bg {
+    margin-top:72px;
+    margin-bottom:16px;
+  }
+  .mobile-pad {
+    padding-top:24px;
+  }
+  .newClasscontainer {
+    padding-left: 16px !important;
+  }
+}
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+  .cover-bg {
+    margin-top:48px;
+  }
+}
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+  .cover-bg {
+    margin-top:48px;
+  }
+}
+.small-home-text {
     margin-top:8px;
     font-size:12px;
     font-style: normal;

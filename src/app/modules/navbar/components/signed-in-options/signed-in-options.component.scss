@@ -26,14 +26,23 @@
     text-align: center;
     padding: 12px 0;
 }
-@media only screen and (max-width: 600px) {
+.profile-ic-21 {
+    width:21px;
+    height:21px;
+}
+.pdr-16 {
+    margin-right: 16px;
+}
+
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) { 
     .img-display-desktop {
-        display: none;
+        display:none;
     }
     .img-display-mobile {
-        display: block;
+        display:block;
     }
-
     .profile-popup {
         position: fixed;
         top: 0;
@@ -47,60 +56,76 @@
     .only-mobile {
         display:block;
     }
-}
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
+ }
+ 
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) and (max-width: 767.98px) { 
     .img-display-desktop {
-        display: block;
-    }
-    .img-display-mobile {
-        display: none;
-    }
-    .only-mobile {
         display:none;
     }
-}
-/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
-@media (min-width: 768px) {
     .img-display-mobile {
-        display: none;
+        display:block;
     }
-    .img-display-desktop {
-        display: block;
+    .profile-popup {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        margin-bottom: 56px;
+        border-radius: 0;
     }
     .only-mobile {
-        display:none;
+        display:block;
     }
-}
+ }
 
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) and (max-width: 991.98px) { 
+    .img-display-desktop {
+        display:none;
+    }
     .img-display-mobile {
-        display: none;
+        display:block;
+    }
+    .profile-popup {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        margin-bottom: 56px;
+        border-radius: 0;
+    }
+    .only-mobile {
+        display:block;
+    }
+ }
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+    .img-display-mobile {
+        display:none;
     }
     .img-display-desktop {
-        display: block;
+        display:block;
     }
     .only-mobile {
         display:none;
     }
-}
-/* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1400px) {
+ }
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { 
     .img-display-mobile {
-        display: none;
+        display:none;
     }
     .img-display-desktop {
-        display: block;
+        display:block;
     }
     .only-mobile {
         display:none;
     }
-}
-.profile-ic-21 {
-    width:21px;
-    height:21px;
-}
-.pdr-16 {
-    margin-right: 16px;
-}
+ }
