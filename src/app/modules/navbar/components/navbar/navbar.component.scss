@@ -1,5 +1,40 @@
 .modal1 {
-    right: 20px !important;
-    position: absolute !important;
-    max-width: 100px;
+  right: 20px !important;
+  position: absolute !important;
+  max-width: 100px;
+}
+
+:host > div {
+  position: fixed;
+  width: 100vw;
+  top: 0px;
+  z-index: 1090;
+  background: var(--color-primary);
+  color: var(--color-background);
+
+  & div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  & > div {
+    width: 100%;
+    height: 48px;
+    line-height: 48px;
+
+    & > * {
+      flex-basis: 33.3333%;
+    }
+
+    & > div {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    & > a > img {
+      margin: auto;
+    }
+  }
 }
