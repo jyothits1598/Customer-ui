@@ -74,11 +74,6 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
     this.searchDataServ.registerSearchElement(this.searchInput);
   }
 
-  onFocus(): void {
-    this.focusEntered = true;
-    this.openSearchBox();
-  }
-
   openSearchBox(): void {
     this.keyupSubs = fromEvent(this.searchInput.nativeElement, 'keyup')
       .pipe(
@@ -111,8 +106,8 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   closeSearchBox(): void {
     this.keyupSubs.unsubscribe();
     setTimeout(() => {
-      this.popoverRef.dismiss();
-      this.overlayOpen = false;
+      // this.popoverRef.dismiss();
+      // this.overlayOpen = false;
     }, 100);
   }
 

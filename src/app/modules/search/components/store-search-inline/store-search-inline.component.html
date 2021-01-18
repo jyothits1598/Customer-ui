@@ -3,7 +3,7 @@
   <div class="above-bg" #searchContainer>
     <div class="store-search-home-input">
       <input class="input-transparent" style="border: none;outline: 0;" type="search" [formControl]="searchControl" [placeholder]="isMobile ? 'What would you like to eat?' : 'Search'"
-        (focus)="onFocus();" (click)="openSearchBox();" #searchInput (keyup.enter)="handleEnter($event.target.value)" (keyup.escape)="closeSearchBox()" (blur)="onBlur();">
+        (click)="openSearchBox();" #searchInput (keyup.enter)="handleEnter($event.target.value)" (keyup.escape)="closeSearchBox()">
       <span *ngIf="isMobile">
         <img class="input-image" [src]="loading? 'assets/images/navbar/loader32_blue.gif' : 'assets/images/navbar/ico_search_blue.png'">
       </span>
