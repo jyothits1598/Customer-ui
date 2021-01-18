@@ -1,22 +1,63 @@
 .modal1 {
-    right: 20px !important;
-    position: absolute !important;
-    max-width: 100px;
+  right: 20px !important;
+  position: absolute !important;
+  max-width: 100px;
 }
-.topnav {
-    position: relative;
-    overflow: hidden;
+
+:host > div {
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  z-index: 900;
+  background: var(--color-primary);
+  color: var(--color-background);
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 48px;
+    line-height: 48px;
+
+    & > * {
+      flex-basis: 100%;
+      width: 100%;
+    }
+
+    & > div:last-of-type {
+      display: block;
+    }
+    & > *:first-child {
+      display: block;
+      text-align: center;
+    }
+
+    & > div > a > img {
+      margin: auto;
+    }
+  }
 }
-.topnav-centered a {
-    float: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-.topnav-right {
-    float: right;
-}
-.topnav-left {
-    float: left;
+@media (min-width: 991.98px) {
+  :host > div {
+    & > div {
+      flex-direction: row;
+      justify-content: space-between;
+      & > * {
+        flex-basis: 33.3333%;
+        width: auto;
+      }
+
+      & > div:last-of-type {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+      }
+      & > *:first-child {
+        justify-content: flex-start;
+        text-align: inherit;
+        margin-top: 5px;
+      }
+    }
+  }
 }

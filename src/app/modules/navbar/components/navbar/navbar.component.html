@@ -1,39 +1,69 @@
-<div class="top-bar">
-    <div class="container">
-        <!-- Centered link -->
-
-        <!-- --------------------- mobile screen --------------------->
-        <!-- <div class="d-block d-sm-none" style="margin: auto;width: 100%;text-align: center;">
-            <div class="bck">
-                <location-selector></location-selector>
-            </div>
-        </div> -->
-        <!----------------------- mobile screen end ------------------- -->
-
-        <div class="topnav-centered">
-            <a routerLink="/" style="outline: 0;cursor: pointer;">
-                <img class="only-big" src="assets/svg/logo_white.svg">
-                <!-- <img class="only-small" src="assets/images/profile/logo_white.png">  -->
-            </a>
-        </div>
-        <!-- Left-aligned links (default) -->
-        <div class="topnav-left center-block-location">
-
-            <ng-container #vCont></ng-container>
-            <!-- <location-selector></location-selector> -->
-        </div>
-        <!-- Right-aligned links -->
-        <!-- <div class="topnav-right d-none d-lg-block"> -->
-        <div style="display: flex; float: right;">
-            <navbar-icons></navbar-icons>
-            <app-store-search-inline *ngIf="ShouldShoWSearch()"></app-store-search-inline>
-        </div>
+<div>
+  <div class="container">
+    <div>
+      <ng-container #vCont></ng-container>
     </div>
+    <div>
+      <a routerLink="/" style="outline: 0;cursor: pointer;">
+        <img class="only-big" src="assets/svg/logo_white.svg">
+      </a>
+    </div>
+    <div>
+      <navbar-icons></navbar-icons>
+      <app-store-search-inline *ngIf="ShouldShoWSearch()"></app-store-search-inline>
+    </div>
+
+  </div>
+</div>
+
+<ng-template #locationTemp>
+  <div class="bck">
+    <location-selector></location-selector>
+  </div>
+</ng-template>
+
+<!--
+
+
+<div class="top-bar">
+  <div class="container">
+
+    <div class="topnav-centered">
+      <a routerLink="/" style="outline: 0;cursor: pointer;">
+        <img class="only-big" src="assets/svg/logo_white.svg">
+      </a>
+    </div>
+    <div class="topnav-left center-block-location">
+
+      <ng-container #vCont></ng-container>
+    </div>
+  </div>
 </div>
 
 
-<ng-template #locationTemp>
-    <div class="bck">
-        <location-selector></location-selector>
-    </div>
-</ng-template>
+
+
+-->
+<style>
+  .topnav {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .topnav-centered a {
+    float: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .topnav-right {
+    float: right;
+  }
+
+  .topnav-left {
+    float: left;
+  }
+
+</style>

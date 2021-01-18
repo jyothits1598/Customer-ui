@@ -1,29 +1,27 @@
 <ul class="menu">
-    <li class="auto-width" *ngIf="!isLoggedin"></li>
-    <li class="auto-width" routerLink="/" style="cursor: pointer;outline:none"> 
-        <!-- <img class="a1 img-display-desktop" src="assets/images/navbar/ico_home.png"> -->
-        <img [src]= "home_status ? active_image : inactive_image" class="a1 img-display-desktop">
-        <img class="img-display-mobile" src="assets/images/profile/ico_home.png" >
+  <li class="auto-width" *ngIf="!isLoggedin"></li>
+  <li class="auto-width" routerLink="/" style="cursor: pointer;outline:none">
+    <img class="a1 img-display-desktop" src="assets/images/navbar/ico_home.png">
+    <img class="img-display-mobile" src="assets/images/profile/ico_home.png">
+  </li>
+  <ng-template #block>
+    <li class="auto-width" routerLink="/auth/signup" style="cursor: pointer;outline:none">
+      <img class="a1 img-display-desktop" src="assets/images/navbar/ico_account.png">
+      <img class="img-display-mobile" src="assets/images/profile/ico_account.png">
     </li>
-    <ng-template #block>
-        <li class="auto-width" routerLink="/auth/signup" style="cursor: pointer;outline:none;padding-right:16px;">  
-            <img class="a1 img-display-desktop" src="assets/images/navbar/ico_account.png">
-            <img class="img-display-mobile" src="assets/images/profile/ico_account.png" >
-        </li>
-        <li class="auto-width"></li>
-    </ng-template>
-    <ng-container *ngIf="isLoggedin; else block">
-        <li class="auto-width" routerLink="/favourites" style="cursor: pointer;outline:none"> 
-            <img [src]= "fav_status ? fv_active_image : fv_inactive_image" class="a1 img-display-desktop">
-            <!-- <img class="a1 img-display-desktop" src="assets/images/navbar/ico_heart.png">  -->
-            <img class="img-display-mobile" src="assets/images/profile/ico_heart.png"> 
-        </li>
-        <li class="auto-width" routerLink="/" style="cursor: pointer;outline:none"> 
-            <img class="a1 img-display-desktop" src="assets/images/navbar/ico_bell.png" > 
-            <img class="img-display-mobile" src="assets/images/profile/ico_bell.png" > 
-        </li>
-        <li class="auto-width" style="cursor: pointer;outline:none;">
-            <signed-in-options></signed-in-options>
-        </li>
-    </ng-container>
+    <li class="auto-width"></li>
+  </ng-template>
+  <ng-container *ngIf="isLoggedin; else block">
+    <li class="auto-width" routerLink="/favourites" style="cursor: pointer;outline:none">
+      <img class="a1 img-display-desktop" src="assets/images/navbar/ico_heart.png">
+      <img class="img-display-mobile" src="assets/images/profile/ico_heart.png">
+    </li>
+    <li class="auto-width" routerLink="/" style="cursor: pointer;outline:none">
+      <img class="a1 img-display-desktop" src="assets/images/navbar/ico_bell.png">
+      <img class="img-display-mobile" src="assets/images/profile/ico_bell.png">
+    </li>
+    <li class="auto-width" style="cursor: pointer;outline:none;">
+      <signed-in-options></signed-in-options>
+    </li>
+  </ng-container>
 </ul>
