@@ -106,8 +106,8 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   closeSearchBox(): void {
     this.keyupSubs.unsubscribe();
     setTimeout(() => {
-      // this.popoverRef.dismiss();
-      // this.overlayOpen = false;
+      this.popoverRef.dismiss();
+      this.overlayOpen = false;
     }, 100);
   }
 
