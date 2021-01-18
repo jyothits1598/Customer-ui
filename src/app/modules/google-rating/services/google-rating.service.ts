@@ -1,3 +1,4 @@
+import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Injectable, NgZone, Renderer2, RendererFactory2 } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -12,19 +13,18 @@ export class GoogleRatingService {
       this.rendererFactory.createRenderer(null, null).createElement('div'));
   }
 
-  getRating(name: string, address: string): Observable<number> {
-    return;
-    return new Observable(
-      (observer) => {
-        this.placeService.textSearch({ query: `${name}, ${address}` }, (resp) => {
-          this.ngZone.run(() => {
-            if (resp?.length === 1 && resp[0].rating) {
-              observer.next(resp[0].rating);
-              observer.complete();
-            } else { observer.next(null) }
-          }, this)
-        })
-      }
-    )
-  }
+  // getRating(name: string, address: string): Observable<number> {
+  //   return new Observable(
+  //     (observer) => {
+  //       this.placeService.textSearch({ query: `${name}, ${address}` }, (resp) => {
+  //         this.ngZone.run(() => {
+  //           if (resp?.length === 1 && resp[0].rating) {
+  //             observer.next(resp[0].rating);
+  //             observer.complete();
+  //           } else { observer.next(null) }
+  //         }, this)
+  //       })
+  //     }
+  //   )
+  // }
 }

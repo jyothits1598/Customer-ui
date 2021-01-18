@@ -12,9 +12,9 @@ export class GoogleRatingComponent implements OnInit {
   constructor(private googleRating: GoogleRatingService) { }
 
   ngOnInit(): void {
-    this.googleRating.getRating(this.store.name, this.store.address).subscribe(
-      (rat) => { this.rating = rat; }
-    )
+    // this.googleRating.getRating(this.store.name, this.store.address).subscribe(
+    //   (rat) => { this.rating = rat; }
+    // )
   }
 
 }

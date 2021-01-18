@@ -1,7 +1,7 @@
-<span class="sub-name float-right" *ngIf="openTimings; else closed">
-    <table>
+<label class="sub-name float-right" *ngIf="openTimings; else closed" style="margin: 0;">
+    <table style="margin: 0;">
         <tr>
-            <td style="padding-top:1px;padding-right: 4px;">
+            <td style="padding-right: 4px;margin: 0;vertical-align: bottom;">
                 <ng-container *ngIf="fullDay; else opTime">
                     Opens 24HRS
                 </ng-container>
@@ -9,17 +9,17 @@
                     Open {{formatTime(openTimings.startTime)}}-{{formatTime(openTimings.endTime)}}
                 </ng-template>
             </td>
-            <td>
+            <td valign="middle">
                 <img src="assets/images/ico_circle_filled_small.png" >
             </td>
         </tr>
     </table>
-</span>
+</label>
 <ng-template #closed>
     <span class="sub-name float-right">
         <table>
             <tr>
-                <td style="padding-top:1px;padding-right:4px;">
+                <td style="padding-right:4px;">
                     <next-availability [availability]="_availability"></next-availability>
                 </td>
                 <td>
