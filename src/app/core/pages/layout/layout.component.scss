@@ -1,0 +1,17 @@
+:host > div {
+  overflow: auto;
+  position: absolute;
+  top: 130px;
+  right: 0px;
+  bottom: 56px;
+  left: 0px;
+  padding: 0px;
+  margin: 0px;
+}
+
+@media (min-width: 991.98px) {
+  :host > div {
+    top: 48px;
+    bottom: 0px;
+  }
+}

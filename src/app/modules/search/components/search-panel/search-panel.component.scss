@@ -32,7 +32,7 @@ li {
   width: 376px;
   box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  max-height: 80vh;
+  max-height: 90vh;
   overflow-y: auto;
 }
 // Extra small devices (portrait phones, less than 576px)
@@ -46,9 +46,8 @@ li {
     margin: 0;
     width: 100%;
     border-radius: 0px;
-  }
-  body {
-    overflow: hidden;
+
+    height: calc(100vh - 120px - 56px);
   }
 }
 // Small devices (landscape phones, 576px and up)
@@ -62,9 +61,7 @@ li {
     margin: 0;
     width: 100%;
     border-radius: 0px;
-  }
-  body {
-    overflow: hidden;
+    height: calc(100vh - 120px - 56px);
   }
 }
 // Medium devices (tablets, 768px and up)
@@ -79,14 +76,10 @@ li {
     width: 100%;
     border-radius: 0px;
   }
-  body {
-    overflow: hidden;
-  }
 }
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) and (max-width: 1199.98px) {
   .cover-bg {
-    margin-top: 72px;
     margin-bottom: 16px;
   }
   .mobile-pad {
@@ -99,7 +92,6 @@ li {
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
   .cover-bg {
-    margin-top: 72px;
     margin-bottom: 16px;
   }
   .mobile-pad {

@@ -1,9 +1,10 @@
 .nav-login {
-    background: var(--color-primary);
-    color: var(--color-background);
-    width: 100%;
-    position: relative;
-    z-index: 1;
-    height: 48px;
-    line-height: 48px;
+  background: var(--color-primary);
+  color: var(--color-background);
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  z-index: 900;
+  height: 48px;
+  line-height: 48px;
 }
