@@ -1,6 +1,7 @@
 <div>
   <div class="container">
-    <location-selector></location-selector>
+
+    <ng-container #vCont></ng-container>
 
     <a routerLink="/" style="outline: 0;cursor: pointer;">
       <img class="only-big" src="assets/svg/logo_white.svg">
@@ -13,6 +14,13 @@
 
   </div>
 </div>
+
+<ng-template #locationTemp>
+  <div class="bck">
+    <location-selector></location-selector>
+  </div>
+</ng-template>
+
 <!--
 
 
@@ -32,11 +40,7 @@
 </div>
 
 
-<ng-template #locationTemp>
-  <div class="bck">
 
-  </div>
-</ng-template>
 
 -->
 <style>

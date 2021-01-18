@@ -48,22 +48,21 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    /*
-    this.containerRef.createEmbeddedView(this.locationTemplate)
+    this.containerRef.createEmbeddedView(this.locationTemplate);
     this.templateSubs = this.navbarService.headingTemplate$.subscribe(
       (temp) => {
         if (temp) {
           this.locationViewRef = this.containerRef.detach();
           this.containerRef.createEmbeddedView(temp);
         } else {
-          if (this.locationViewRef) { 
+          if (this.locationViewRef) {
             this.containerRef.remove();
-            this.containerRef.insert(this.locationViewRef); 
-            this.locationViewRef = null 
+            this.containerRef.insert(this.locationViewRef);
+            this.locationViewRef = null;
           }
         }
       }
-    );*/
+    );
   }
 
   debug() {

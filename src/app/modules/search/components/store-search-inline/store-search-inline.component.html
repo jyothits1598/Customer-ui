@@ -1,33 +1,30 @@
 <!-- <input (focus)="handleFocus()" (blur)="handleBlur()" style="border: none;" type="text" placeholder="Search"> -->
-<div style="outline: none;cursor: pointer;">
-    <div class="above-bg" #searchContainer>
-        <div class="store-search-home-input">
-                <input class="input-transparent" style="border: none;outline: 0;" type="search" [formControl]="searchControl" [placeholder]="isMobile ? 'What would you like to eat?' : 'Search'"
-                (focus)="onFocus()" #searchInput (keyup.enter)="handleEnter($event.target.value)" (keyup.escape)="closePopover()" (blur)="onBlur()">
-                <!-- <span style="position: absolute; right: 36px;" (click)="searchInput.value = ''">x</span> -->
-            <span *ngIf="isMobile">
-                <img class="input-image" 
-                [src]="loading? 'assets/images/navbar/loader32_blue.gif' : 'assets/images/navbar/ico_search_blue.png'">
-            </span>
-            <span *ngIf="!isMobile">
-                <img class="input-image" 
-                [src]="loading? 'assets/images/navbar/loader32.gif' : 'assets/images/navbar/ico_search.png'">
-            </span>
-        </div>
+<div class="root">
+  <div class="above-bg" #searchContainer>
+    <div class="store-search-home-input">
+      <input class="input-transparent" style="border: none;outline: 0;" type="search" [formControl]="searchControl" [placeholder]="isMobile ? 'What would you like to eat?' : 'Search'"
+        (focus)="onFocus();" (click)="openSearchBox();" #searchInput (keyup.enter)="handleEnter($event.target.value)" (keyup.escape)="closeSearchBox()" (blur)="onBlur();">
+      <span *ngIf="isMobile">
+        <img class="input-image" [src]="loading? 'assets/images/navbar/loader32_blue.gif' : 'assets/images/navbar/ico_search_blue.png'">
+      </span>
+      <span *ngIf="!isMobile">
+        <img class="input-image" [src]="loading? 'assets/images/navbar/loader32.gif' : 'assets/images/navbar/ico_search.png'">
+      </span>
     </div>
+  </div>
 </div>
 
 <ng-template #panelTemplate>
-    <search-panel [results]="searchData" [searchTerm]="searchTerm" (selectedItem)="onSearchItemSelect($event)">
-    </search-panel>
+  <search-panel [results]="searchData" [searchTerm]="searchTerm" (selectedItem)="onSearchItemSelect($event)">
+  </search-panel>
 </ng-template>
 
 <div *ngIf="isMobile && overlayOpen" class="mobile-banner">
-    <div class="container">
-        <button type="button" class="mobile-banner__ico profile-save-text" (click)="closePopover()">
-            <img src="assets/images/ico_arrow_left_white.png" alt="" style="padding-right: 16px;"> Search
-        </button>
-    </div>
+  <div class="container">
+    <button type="button" class="mobile-banner__ico profile-save-text" (click)="closePopover()">
+      <img src="assets/images/ico_arrow_left_white.png" alt="" style="padding-right: 16px;"> Search
+    </button>
+  </div>
 </div>
 <!-- <span *ngIf="overlayOpen"
     style="position: fixed; top: 0; bottom: 0; left: 0;right: 0; background-color: #81818169; z-index: -1;"

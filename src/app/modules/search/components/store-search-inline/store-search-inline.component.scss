@@ -1,237 +1,232 @@
+@media (max-width: 991.98px) {
+  :host > div:first-of-type {
+    position: absolute;
+    background-color: #fff;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    outline: none;
+    cursor: pointer;
+    margin-top: 48px;
+    padding: 16px 8px;
+  }
+}
+
 // Extra small devices (portrait phones, less than 576px)
-@media (max-width: 575.98px) { 
-    .above-bg {
-        position: absolute;
-        width: 100%;
-        top: 0;
-        left: 0;
-        right: 0;
-        margin-top: 48px;
-        color: var(--color-background);
-        padding: 16px 8px;
-    }
-    .store-search-home-input {
-        border-radius: 24px;
-        padding: 8px 16px;        
-        font-style: normal;
-        font-weight: normal;
-        font-size: 16px;
-        line-height: 24px;
-        cursor: pointer;
-        color: var(--color-boldlevelcolor);
-        background:var(--color-background-tertiary);
-    }
-    .input-transparent {
-        background: transparent;
-        color: var(--color-boldlevelcolor);
-        padding-left: 30px !important;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 16px;
-        line-height: 24px;
-        padding-right: 10px !important;
-    }
-    .input-image {
-        position: absolute;
-        top:4px;
-        left:4px;
-    }
-    .input-transparent::placeholder {
-        color:var(--color-typography-tertiary);
-    }
-    .input-transparent:-ms-input-placeholder {
-        /* Internet Explorer 10-11 */
-        color:var(--color-typography-tertiary);
-    }
-    .input-transparent::-ms-input-placeholder {
-        /* Microsoft Edge */
-        color:var(--color-typography-tertiary);
-    }
- }
+@media (max-width: 575.98px) {
+  .above-bg {
+    width: 100%;
+    color: var(--color-background);
+  }
+  .store-search-home-input {
+    border-radius: 24px;
+    padding: 8px 16px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    cursor: pointer;
+    color: var(--color-boldlevelcolor);
+    background: var(--color-background-tertiary);
+  }
+  .input-transparent {
+    background: transparent;
+    color: var(--color-boldlevelcolor);
+    padding-left: 30px !important;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    padding-right: 10px !important;
+  }
+  .input-image {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+  }
+  .input-transparent::placeholder {
+    color: var(--color-typography-tertiary);
+  }
+  .input-transparent:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: var(--color-typography-tertiary);
+  }
+  .input-transparent::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: var(--color-typography-tertiary);
+  }
+}
 
 // Small devices (landscape phones, 576px and up)
-@media (min-width: 576px) and (max-width: 767.98px) { 
-    .above-bg {
-        position: absolute;
-        width: 100%;
-        top: 0;
-        left: 0;
-        right: 0;
-        margin-top: 48px;
-        color: var(--color-background);
-        padding: 16px 8px;
-    }
-    .store-search-home-input {
-        border-radius: 24px;
-        padding: 8px 16px;        
-        font-style: normal;
-        font-weight: normal;
-        font-size: 16px;
-        line-height: 24px;
-        cursor: pointer;
-        color: var(--color-boldlevelcolor);
-        background:var(--color-background-tertiary);
-    }
-    .input-transparent {
-        background: transparent;
-        color: var(--color-boldlevelcolor);
-        padding-left: 30px !important;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 16px;
-        line-height: 24px;
-        padding-right: 10px !important;
-    }
-    .input-image {
-        position: absolute;
-        top:4px;
-        left:4px;
-    }
-    .input-transparent::placeholder {
-        color:var(--color-typography-tertiary);
-    }
-    .input-transparent:-ms-input-placeholder {
-        /* Internet Explorer 10-11 */
-        color:var(--color-typography-tertiary);
-    }
-    .input-transparent::-ms-input-placeholder {
-        /* Microsoft Edge */
-        color:var(--color-typography-tertiary);
-    }
- }
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .above-bg {
+    width: 100%;
+    color: var(--color-background);
+  }
+  .store-search-home-input {
+    border-radius: 24px;
+    padding: 8px 16px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    cursor: pointer;
+    color: var(--color-boldlevelcolor);
+    background: var(--color-background-tertiary);
+  }
+  .input-transparent {
+    background: transparent;
+    color: var(--color-boldlevelcolor);
+    padding-left: 30px !important;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    padding-right: 10px !important;
+  }
+  .input-image {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+  }
+  .input-transparent::placeholder {
+    color: var(--color-typography-tertiary);
+  }
+  .input-transparent:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: var(--color-typography-tertiary);
+  }
+  .input-transparent::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: var(--color-typography-tertiary);
+  }
+}
 
 // Medium devices (tablets, 768px and up)
-@media (min-width: 768px) and (max-width: 991.98px) { 
-    .above-bg {
-        position: absolute;
-        width: 100%;
-        top: 0;
-        left: 0;
-        right: 0;
-        margin-top: 48px;
-        color: var(--color-background);
-        padding: 16px 8px;
-    }
-    .store-search-home-input {
-        border-radius: 24px;
-        padding: 8px 16px;        
-        font-style: normal;
-        font-weight: normal;
-        font-size: 16px;
-        line-height: 24px;
-        cursor: pointer;
-        color: var(--color-boldlevelcolor);
-        background:var(--color-background-tertiary);
-    }
-    .input-transparent {
-        background: transparent;
-        color: var(--color-boldlevelcolor);
-        padding-left: 30px !important;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 16px;
-        line-height: 24px;
-        padding-right: 10px !important;
-    }
-    .input-image {
-        position: absolute;
-        top:4px;
-        left:4px;
-    }
-    .input-transparent::placeholder {
-        color:var(--color-typography-tertiary);
-    }
-    .input-transparent:-ms-input-placeholder {
-        /* Internet Explorer 10-11 */
-        color:var(--color-typography-tertiary);
-    }
-    .input-transparent::-ms-input-placeholder {
-        /* Microsoft Edge */
-        color:var(--color-typography-tertiary);
-    }
- }
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .above-bg {
+    width: 100%;
+    color: var(--color-background);
+  }
+  .store-search-home-input {
+    border-radius: 24px;
+    padding: 8px 16px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    cursor: pointer;
+    color: var(--color-boldlevelcolor);
+    background: var(--color-background-tertiary);
+  }
+  .input-transparent {
+    background: transparent;
+    color: var(--color-boldlevelcolor);
+    padding-left: 30px !important;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    padding-right: 10px !important;
+  }
+  .input-image {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+  }
+  .input-transparent::placeholder {
+    color: var(--color-typography-tertiary);
+  }
+  .input-transparent:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: var(--color-typography-tertiary);
+  }
+  .input-transparent::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: var(--color-typography-tertiary);
+  }
+}
 
 // Large devices (desktops, 992px and up)
-@media (min-width: 992px) and (max-width: 1199.98px) { 
-    .input-transparent {
-        background: transparent;
-        color: var(--color-background);
-    }
-    .input-transparent::placeholder {
-        color: var(--color-background);
-        opacity: 0.5;
-    }
-    .input-transparent:-ms-input-placeholder {
-        /* Internet Explorer 10-11 */
-        color: var(--color-background);
-    }
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .input-transparent {
+    background: transparent;
+    color: var(--color-background);
+  }
+  .input-transparent::placeholder {
+    color: var(--color-background);
+    opacity: 0.5;
+  }
+  .input-transparent:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: var(--color-background);
+  }
 
-    .input-transparent::-ms-input-placeholder {
-        /* Microsoft Edge */
-        color: var(--color-background);
-    }
-    .store-search-home-input {
-        background: var(--color-inside-bg);
-        border-radius: 24px;
-        padding: 8px 16px;       
-        font-style: normal;
-        font-weight: normal;
-        font-size: 16px;
-        line-height: 24px;
-        cursor: pointer;
-        color: var(--color-background);
-    }
-    .input-image {
-        position: absolute;
-        top:4px;
-        right:4px;
-    }
- }
+  .input-transparent::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: var(--color-background);
+  }
+  .store-search-home-input {
+    background: var(--color-inside-bg);
+    border-radius: 24px;
+    padding: 8px 16px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    cursor: pointer;
+    color: var(--color-background);
+  }
+  .input-image {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+  }
+}
 
 // Extra large devices (large desktops, 1200px and up)
-@media (min-width: 1200px) { 
-    .input-transparent {
-        background: transparent;
-        color: var(--color-background);
-    }
-    .input-transparent::placeholder {
-        color: var(--color-background);
-        opacity: 0.5;
-    }
-    .input-transparent:-ms-input-placeholder {
-        /* Internet Explorer 10-11 */
-        color: var(--color-background);
-    }
+@media (min-width: 1200px) {
+  .input-transparent {
+    background: transparent;
+    color: var(--color-background);
+  }
+  .input-transparent::placeholder {
+    color: var(--color-background);
+    opacity: 0.5;
+  }
+  .input-transparent:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: var(--color-background);
+  }
 
-    .input-transparent::-ms-input-placeholder {
-        /* Microsoft Edge */
-        color: var(--color-background);
-    }
-    .store-search-home-input {
-        background: var(--color-inside-bg);
-        border-radius: 24px;
-        padding: 8px 16px;       
-        font-style: normal;
-        font-weight: normal;
-        font-size: 16px;
-        line-height: 24px;
-        cursor: pointer;
-        color: var(--color-background);
-    }
-    .input-image {
-        position: absolute;
-        top:4px;
-        right:4px;
-    }
- }
-
+  .input-transparent::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: var(--color-background);
+  }
+  .store-search-home-input {
+    background: var(--color-inside-bg);
+    border-radius: 24px;
+    padding: 8px 16px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    cursor: pointer;
+    color: var(--color-background);
+  }
+  .input-image {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+  }
+}
 
 .input-transparent {
-    width: 100%;
-    padding-right: 30px;
+  width: 100%;
+  padding-right: 30px;
 }
 .store-search-home-input {
-    position: relative;
+  position: relative;
 }
 // .input-image {
 //     position: absolute;
@@ -242,18 +237,18 @@
 // }
 
 .mobile-banner {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 48px;
-    right: 0;
-    background: var(--color-primary);
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 48px;
+  right: 0;
+  background: var(--color-primary);
 
-    &__ico {
-        border: none;
-        background-color: transparent;
-    }
+  &__ico {
+    border: none;
+    background-color: transparent;
+  }
 }
 
 // input[type="search"]::-webkit-search-cancel-button {

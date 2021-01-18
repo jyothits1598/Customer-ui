@@ -1,17 +1,9 @@
 <ng-container *ngIf="history.length > 0">
-    <div class="history" > Recent searches </div>
-    <ul style="list-style-type: none;cursor: pointer; margin-bottom: 0;">
-        <li *ngFor="let item of history" (click)="selectedItem.emit(item)" routerLink="/search" [queryParams]="{q:item}" style="outline:0">
-            <table>
-                <tr>
-                    <td valign=" middle" style="padding: 12px;">
-                        <img src="assets/images/ico_search_plane.png">
-                    </td>
-                    <td style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;">
-                        <div class="paragraph text-capitalize"> {{item}} </div>
-                    </td>
-                </tr>
-            </table>
-        </li>
-    </ul>
+  <div class="history"> Recent searches </div>
+  <ul style="list-style-type: none;cursor: pointer; margin-bottom: 0;">
+    <li *ngFor="let item of history" (click)="selectedItem.emit(item)" routerLink="/search" [queryParams]="{q:item}" tabindex="1">
+      <img src="assets/images/ico_search_plane.png">
+      <div class="paragraph text-capitalize"> {{item}} </div>
+    </li>
+  </ul>
 </ng-container>

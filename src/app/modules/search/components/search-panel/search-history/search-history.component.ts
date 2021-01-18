@@ -6,18 +6,15 @@ import { StoreSearchInlineComponent } from '../../store-search-inline/store-sear
 @Component({
   selector: 'search-history',
   templateUrl: './search-history.component.html',
-  styleUrls: ['./search-history.component.scss']
+  styleUrls: ['./search-history.component.scss'],
 })
 export class SearchHistoryComponent implements OnInit {
   @Output() selectedItem = new EventEmitter<string>();
   history: Array<string>;
 
-  constructor(private searchService: SearchDataService) { }
+  constructor(private searchService: SearchDataService) {}
 
   ngOnInit(): void {
     this.history = this.searchService.getHistory();
   }
-
-
-
 }

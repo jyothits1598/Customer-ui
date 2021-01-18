@@ -1,47 +1,22 @@
 <div class="custom-location-body">
-    <ul style="list-style-type: none;cursor: pointer; margin-bottom: 0;">
-        <li *ngIf="searchTerm" (click)="handleClick(searchTerm)" routerLink="/search" [queryParams]="{q:searchTerm}"
-            style="outline: 0;">
-            <table>
-                <tr>
-                    <td valign="middle" style="padding: 12px;">
-                        <img src="assets/images/ico_search_plane.png">
-                    </td>
-                    <td style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;">
-                        <div class="paragraph text-capitalize"> Search for "{{searchTerm}}" </div>
-                    </td>
-                </tr>
-            </table>
-        </li>
-        <ng-container *ngIf="searchTerm">
-            <li (click)="handleClick(result.store_name)" *ngFor="let result of results" routerLink="/search"
-                [queryParams]="{q:result.store_name}" style="outline: 0;">
-                <table>
-                    <tr>
-                        <td valign="middle" style="padding: 12px;">
-                            <img src="assets/images/ico_search_plane.png">
-                        </td>
-                        <td style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;">
-                            <div class="paragraph text-capitalize"> {{result.store_name}} &nbsp; </div>
-                        </td>
-                    </tr>
-                </table>
-            </li>
-        </ng-container>
-        <li *ngIf="searchTerm && results && results.length === 0">
-            <table>
-                <tr>
-                    <td valign="middle" style="padding: 12px;">
-                        <img src="assets/images/ico_search_plane.png">
-                    </td>
-                    <td style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);">
-                        <div class="paragraph text-capitalize"> No results </div>
-                    </td>
-                </tr>
-            </table>
-        </li>
-        <li>
-            <search-history [style.display]="searchTerm? 'none': ''" (selectedItem)="selectedItem.emit($event)"></search-history>
-        </li>
-    </ul>
+  <div *ngIf="searchTerm" class="history">New search</div>
+  <ul style="list-style-type: none;cursor: pointer; margin-bottom: 0;">
+    <ng-container *ngIf="searchTerm">
+      <li (click)="handleClick(searchTerm)" routerLink="/search" [queryParams]="{q:searchTerm}" tabindex="1">
+        <img src="assets/images/ico_search_plane.png">
+        <div> Results for "{{searchTerm}}" </div>
+      </li>
+      <li (click)="handleClick(result.store_name)" *ngFor="let result of results" routerLink="/search" [queryParams]="{q:result.store_name}" tabindex="1">
+        <img src="assets/images/ico_search_plane.png">
+        <div>{{result.store_name}}</div>
+      </li>
+      <li *ngIf="results && results.length === 0" tabindex="1">
+        <img src="assets/images/ico_search_plane.png">
+        <div>No results</div>
+      </li>
+    </ng-container>
+    <li>
+      <search-history [style.display]="searchTerm? 'none': ''" (selectedItem)="selectedItem.emit($event)"></search-history>
+    </li>
+  </ul>
 </div>
