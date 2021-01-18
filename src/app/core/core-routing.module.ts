@@ -4,9 +4,9 @@ import { UnderConstructionComponent } from '../modules/authentication/under-cons
 import { SampleComponent } from './components/sample/sample.component';
 import { IsAuthenticatedGuard } from './guards/is-authenticated.guard';
 import { LayoutComponent } from './pages/layout/layout.component';
-import{TermsServiceComponent} from 'src/app/modules/terms-service/terms-service.component';
+import { TermsServiceComponent } from 'src/app/modules/terms-service/terms-service.component';
 import { PrivacyPolicyComponent } from '../modules/privacy-policy/privacy-policy.component';
-import { CartComponent } from '../modules/cart/pages/cart/cart.component';
+import { CartComponent } from '../modules/order/pages/cart/cart.component';
 
 const routes: Routes = [
   { path: 'sample', component: SampleComponent },
@@ -22,12 +22,11 @@ const routes: Routes = [
     path: 'under-construction', component: UnderConstructionComponent
   },
   {
-    path:'terms-service',component:TermsServiceComponent
+    path: 'terms-service', component: TermsServiceComponent
   },
   {
-   path:'privacy-policy', component:PrivacyPolicyComponent
+    path: 'privacy-policy', component: PrivacyPolicyComponent
   },
-  
   {
     path: '',
     component: LayoutComponent,
@@ -48,14 +47,19 @@ const routes: Routes = [
         path: 'profile',
         canActivate: [IsAuthenticatedGuard],
         loadChildren: () => import('src/app/modules/user-profile/user-profile.module').then(m => m.UserProfileModule)
-       },
+      },
       {
         path: '**',
         redirectTo: '',
         pathMatch: 'full'
       }
     ]
-  }
+  },
+  {
+    path: 'cart',
+    component: CartComponent,
+    outlet: 'order'
+  },
 ];
 
 @NgModule({

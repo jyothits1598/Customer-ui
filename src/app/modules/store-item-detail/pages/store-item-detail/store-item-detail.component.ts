@@ -92,7 +92,7 @@ export class StoreItemDetailComponent implements OnChanges, OnDestroy {
       return;
     }
     let itemDetail = { ...this.itemDetail };
-    itemDetail.modifiers = this.selectedOptions.value;
+    itemDetail.modifiers = this.selectedOptions.value.filter(m => m);
 
     let cartData: CartData = {
       storeId: this.item.storeId,

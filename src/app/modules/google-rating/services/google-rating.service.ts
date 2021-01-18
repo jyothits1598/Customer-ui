@@ -1,9 +1,7 @@
 import { Injectable, NgZone, Renderer2, RendererFactory2 } from '@angular/core';
 import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class GoogleRatingService {
 
   placeService: google.maps.places.PlacesService;

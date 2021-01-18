@@ -29,11 +29,6 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
   constructor(private storeDetailServ: StoreDetailDataService,
     private route: ActivatedRoute, private geoLoc: GeoLocationService) { }
 
-  renderLikeBtn(): void {
-    console.log('rendereing like', FB.XFBML, this.fbParent);
-    FB.XFBML.parse();
-  }
-
   observeIntersection() {
     let obs = new IntersectionObserver((entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
       if (entries[0].isIntersecting) this.scrolledDown = false;
@@ -43,7 +38,6 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     this.routeParamsSubs = this.route.params.pipe(
       mergeMap((param) => this.geoLoc.userLocation().pipe(map(loc => { return { param: param.id, location: loc } })))
     ).subscribe((data) => {
@@ -58,8 +52,6 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
     this.routeQueryparamsSubs = this.route.queryParams.subscribe((qParams) => {
       this.selecteditemId = +qParams.i;
     })
-
-    // this.geoLoc.userLocation().subscribe((loc) => { console.log(loc) })
   }
 
   loadStore(location?: UserLocation) {

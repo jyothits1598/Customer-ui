@@ -1,0 +1,367 @@
+<!--
+    page overlay if required in page
+-->
+<div *ngIf="orderStatus == 'bankcards'" [ngClass]="{'orders-payment': orderStatus === 'bankcards'}"></div>
+
+<div class="payment" *ngIf="orderStatus == 'bankcards'">
+    <div class="payment-header">
+        <img class="cursor-pointer" src="assets/images/cart/ico_arrow_left.svg" />
+        <label class="f-16 f-b ml-16">Payment</label>
+    </div>
+    <hr>
+    <div class="payment-body">
+        <label class="f-20 f-b">Add payment method</label>
+        <div class="mt-28">
+            <ul>
+                <li class="d-flex justify-content-between">
+                    <img src="assets/images/cart/applepay.svg" />
+                    <label class="f-16 mt-1" style="width:200px">Set up Apple Pay</label>
+                    <img class="mt-1" src="assets/images/cart/chevron.svg" />
+                </li>
+                <hr>
+                <li class="d-flex justify-content-between">
+                    <img src="assets/images/cart/googlepay.svg" />
+                    <label class="f-16 mt-1" style="width:200px">Set up Google Pay</label>
+                    <img class="mt-1" src="assets/images/cart/chevron.svg" />
+                </li>
+                <hr>
+                <li class="d-flex justify-content-between">
+                    <img src="assets/images/cart/creditcard.svg" />
+                    <label class="f-16 mt-1" style="width:200px">Credit/Debit card</label>
+                    <img class="mt-1" src="assets/images/cart/chevron.svg" />
+                </li>
+                <hr>
+                <li class="d-flex justify-content-between">
+                    <img src="assets/images/cart/paypal.svg" />
+                    <label class="f-16 mt-1" style="width:200px">PayPal</label>
+                    <img class="mt-1" src="assets/images/cart/chevron.svg" />
+                </li>
+                <hr>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--  
+    Card for Add Card
+-->
+<div class="payment" *ngIf="orderStatus == 'addcard'">
+    <div class="payment-header">
+        <img class="cursor-pointer" src="assets/images/cart/ico_arrow_left.svg" />
+        <label class="f-16 f-b ml-16">Add Card</label>
+    </div>
+    <hr>
+    <div class="add-card-body">
+        <div class="mct-16">
+            <label class="label-inputs">Name on card</label>
+            <input formControlName="nameOnCard" type="text" class="form-input error-highlight">
+        </div>
+        <div class="mct-16">
+            <label class="label-inputs">Billing address</label>
+            <input formControlName="billingAddress" type="text" class="form-input error-highlight">
+        </div>
+        <div class="mct-16">
+            <label class="label-inputs">Billing country</label>
+            <select formControlName="billingCountry" class="form-input error-highlight">
+                <option>Australia</option>
+            </select>
+        </div>
+        <div class="mct-16">
+            <label class="label-inputs">Cart number</label>
+            <input formControlName="cartNumber" placeholder="0000 0000 0000 0000" type="text"
+                class="form-input error-highlight">
+        </div>
+        <div class="mct-16">
+            <div class="d-flex justify-content-between">
+                <div class="pr-2 date-width">
+                    <label class="label-inputs">Expiry date</label>
+                    <select formControlName="month" class="form-input error-highlight">
+                        <option>MM</option>
+                    </select>
+                </div>
+                <div class="date-width">
+                    <label class="label-inputs"></label><br>
+                    <select formControlName="year" class="form-input error-highlight">
+                        <option>YYYY</option>
+                    </select>
+                </div>
+                <div class="date-width pl-2">
+                    <label class="label-inputs">CVV/CID</label>
+                    <input formControlName="cvv" type="text" class="form-input error-highlight">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  
+    Confirming Order
+-->
+<div class="confirming-order" *ngIf="orderStatus == 'orders'">
+    <div class="confirming-order-header">
+    </div>
+    <!--
+        Confirming Order
+    -->
+    <div *ngIf="orderPrepareStatus == 'confirmingOrder'">
+        <div class="mt-28 text-center">
+            <svg width="42" height="60" viewBox="0 0 42 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M39 57V3H3V57L9 51L15 57L21 51L27 57L33 51L39 57Z" stroke="#F2F2F2" stroke-width="6"
+                    stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <div class="mt-22">
+                <label class="f-20 f-b">Confirming order</label>
+            </div>
+            <div>
+                <label class="f-14">We are working on it...</label>
+            </div>
+        </div>
+        <div class="mtb-88">
+            <svg width="100%" height="24" viewBox="0 0 344 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="344" height="24" fill="white" />
+                <rect width="312" height="24" transform="translate(16)" fill="white" />
+                <path d="M34 22V4H22V22L24 20L26 22L28 20L30 22L32 20L34 22Z" stroke="#353FA8" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                <rect x="44" y="11" width="108" height="2" rx="1" fill="#B3B3B3" />
+                <path
+                    d="M164 8H180V17C180 18.0609 179.579 19.0783 178.828 19.8284C178.078 20.5786 177.061 21 176 21H168C166.939 21 165.922 20.5786 165.172 19.8284C164.421 19.0783 164 18.0609 164 17V8Z"
+                    stroke="#B3B3B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M168 2V5" stroke="#B3B3B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M172 2V5" stroke="#B3B3B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M176 2V5" stroke="#B3B3B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M164 8H161C161 12.5 163 12 164 12V8Z" stroke="#B3B3B3" stroke-width="2"
+                    stroke-linejoin="round" />
+                <path d="M180 8H183C183 12.4815 181 11.9835 180 11.9835V8Z" stroke="#B3B3B3" stroke-width="2"
+                    stroke-linejoin="round" />
+                <rect x="192" y="11" width="104" height="2" rx="1" fill="#B3B3B3" />
+                <path
+                    d="M326 11.0799V11.9999C325.999 14.1563 325.301 16.2545 324.009 17.9817C322.718 19.7088 320.903 20.9723 318.835 21.5838C316.767 22.1952 314.557 22.1218 312.534 21.3744C310.512 20.6271 308.785 19.246 307.611 17.4369C306.437 15.6279 305.88 13.4879 306.022 11.3362C306.164 9.18443 306.997 7.13619 308.398 5.49694C309.799 3.85768 311.693 2.71525 313.796 2.24001C315.9 1.76477 318.1 1.9822 320.07 2.85986"
+                    stroke="#B3B3B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M326 4L316 14.01L313 11.01" stroke="#B3B3B3" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </div>
+    </div>
+    <!--
+        Preparing Order
+    -->
+    <div *ngIf="orderPrepareStatus == 'preparingOrder'">
+        <div class="mt-28 text-center">
+            <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M12 24H60V51C60 54.1826 58.7357 57.2348 56.4853 59.4853C54.2348 61.7357 51.1826 63 48 63H24C20.8174 63 17.7652 61.7357 15.5147 59.4853C13.2643 57.2348 12 54.1826 12 51V24Z"
+                    stroke="#FFC439" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M24 6V15" stroke="#FFC439" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M36 6V15" stroke="#FFC439" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M48 6V15" stroke="#FFC439" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M12 24H3C3 37.5 9 36 12 36V24Z" stroke="#FFC439" stroke-width="6" stroke-linejoin="round" />
+                <path d="M60 24H69C69 37.4444 63 35.9506 60 35.9506V24Z" stroke="#FFC439" stroke-width="6"
+                    stroke-linejoin="round" />
+            </svg>
+
+            <div class="mt-22">
+                <label class="f-20 f-b">Preparing order</label>
+            </div>
+            <div>
+                <label class="f-14">We estimate it will be ready in:</label>
+            </div>
+            <div>
+                <label class="f-16 f-b">2 minutes</label>
+            </div>
+            <div class="d-flex justify-content-center">
+                <div class="mt-8" id="progressbar">
+                    <div></div>
+                </div>
+            </div>
+        </div>
+        <div class="mtb-88">
+            <svg width="100%" height="24" viewBox="0 0 344 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="344" height="24" fill="white" />
+                <rect width="312" height="24" transform="translate(16)" fill="white" />
+                <path d="M34 22V4H22V22L24 20L26 22L28 20L30 22L32 20L34 22Z" stroke="#353FA8" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                <rect x="44" y="11" width="108" height="2" rx="1" fill="#353FA8" />
+                <path
+                    d="M164 8H180V17C180 18.0609 179.579 19.0783 178.828 19.8284C178.078 20.5786 177.061 21 176 21H168C166.939 21 165.922 20.5786 165.172 19.8284C164.421 19.0783 164 18.0609 164 17V8Z"
+                    stroke="#353FA8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M168 2V5" stroke="#353FA8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M172 2V5" stroke="#353FA8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M176 2V5" stroke="#353FA8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M164 8H161C161 12.5 163 12 164 12V8Z" stroke="#353FA8" stroke-width="2"
+                    stroke-linejoin="round" />
+                <path d="M180 8H183C183 12.4815 181 11.9835 180 11.9835V8Z" stroke="#353FA8" stroke-width="2"
+                    stroke-linejoin="round" />
+                <rect x="192" y="11" width="104" height="2" rx="1" fill="#B3B3B3" />
+                <path
+                    d="M326 11.0799V11.9999C325.999 14.1563 325.301 16.2545 324.009 17.9817C322.718 19.7088 320.903 20.9723 318.835 21.5838C316.767 22.1952 314.557 22.1218 312.534 21.3744C310.512 20.6271 308.785 19.246 307.611 17.4369C306.437 15.6279 305.88 13.4879 306.022 11.3362C306.164 9.18443 306.997 7.13619 308.398 5.49694C309.799 3.85768 311.693 2.71525 313.796 2.24001C315.9 1.76477 318.1 1.9822 320.07 2.85986"
+                    stroke="#B3B3B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M326 4L316 14.01L313 11.01" stroke="#B3B3B3" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </div>
+    </div>
+    <!--
+         Order Ready
+    -->
+    <div *ngIf="orderPrepareStatus == 'orderReady'">
+        <div class="mt-28 text-center">
+            <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M66 33.2396V35.9996C65.9963 42.4689 63.9015 48.7636 60.028 53.9451C56.1545 59.1265 50.7099 62.917 44.5061 64.7513C38.3023 66.5856 31.6718 66.3653 25.6034 64.1234C19.535 61.8814 14.354 57.7379 10.8329 52.3108C7.3118 46.8837 5.63937 40.4638 6.06503 34.0085C6.49069 27.5533 8.99162 21.4086 13.1948 16.4908C17.3981 11.5731 23.0784 8.14574 29.3886 6.72003C35.6988 5.29432 42.3008 5.9466 48.21 8.57959"
+                    stroke="#36A900" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M66 12L36 42.03L27 33.03" stroke="#36A900" stroke-width="6" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+            <div class="mt-22">
+                <label class="f-20 f-b">Ready</label>
+            </div>
+            <div>
+                <label class="f-14">Your order is ready</label>
+            </div>
+        </div>
+        <div class="mtb-88">
+            <svg width="100%" height="24" viewBox="0 0 344 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="344" height="24" fill="white" />
+                <rect width="312" height="24" transform="translate(16)" fill="white" />
+                <path d="M34 22V4H22V22L24 20L26 22L28 20L30 22L32 20L34 22Z" stroke="#353FA8" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                <rect x="44" y="11" width="108" height="2" rx="1" fill="#353FA8" />
+                <path
+                    d="M164 8H180V17C180 18.0609 179.579 19.0783 178.828 19.8284C178.078 20.5786 177.061 21 176 21H168C166.939 21 165.922 20.5786 165.172 19.8284C164.421 19.0783 164 18.0609 164 17V8Z"
+                    stroke="#353FA8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M168 2V5" stroke="#353FA8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M172 2V5" stroke="#353FA8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M176 2V5" stroke="#353FA8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M164 8H161C161 12.5 163 12 164 12V8Z" stroke="#353FA8" stroke-width="2"
+                    stroke-linejoin="round" />
+                <path d="M180 8H183C183 12.4815 181 11.9835 180 11.9835V8Z" stroke="#353FA8" stroke-width="2"
+                    stroke-linejoin="round" />
+                <rect x="192" y="11" width="104" height="2" rx="1" fill="#353FA8" />
+                <path
+                    d="M326 11.0799V11.9999C325.999 14.1563 325.301 16.2545 324.009 17.9817C322.718 19.7088 320.903 20.9723 318.835 21.5838C316.767 22.1952 314.557 22.1218 312.534 21.3744C310.512 20.6271 308.785 19.246 307.611 17.4369C306.437 15.6279 305.88 13.4879 306.022 11.3362C306.164 9.18443 306.997 7.13619 308.398 5.49694C309.799 3.85768 311.693 2.71525 313.796 2.24001C315.9 1.76477 318.1 1.9822 320.07 2.85986"
+                    stroke="#353FA8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M326 4L316 14.01L313 11.01" stroke="#353FA8" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </div>
+    </div>
+    <div class="order-body">
+        <h4 class="f-20 f-b text-capitalize">The lamb shop spring hill</h4>
+        <u class="f-14-blue mct-16">View store</u>
+        <u class="f-14-blue mct-16 ml-16">View receipt</u>
+        <h4 class="f-14 f-b mct-16">Order number #63456</h4>
+        <label class="f-16 mct-4">2 items
+            <i class="fa fa-circle" aria-hidden="true"></i>
+            6:45pm 12 Nov 2020
+        </label>
+        <!--
+            Ordered Items
+        -->
+        <div class="cart-items mt-48">
+            <div class="d-flex justify-content-between">
+                <label class="f-16 f-b pr-3">1x</label>
+                <div class="f-16 f-b pr-2">
+                    <label class="f-16 f-b item-name text-capitalize">Lamb Sauvlaki</label>
+                </div>
+                <div>
+                    <label class="f-14 mr-15">$15.99</label>
+                </div>
+            </div>
+            <div class="cart-item-modifiers">
+                <span>Small </span>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+                <span>Large </span>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+                <span>Small </span>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+                <span>Large </span>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+                <span>Small </span>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+                <span>Large </span>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+            </div>
+        </div>
+        <hr>
+        <div class="cart-items">
+            <div class="d-flex justify-content-between">
+                <label class="f-16 f-b pr-3">1x</label>
+                <div class="f-16 f-b pr-2">
+                    <label class="f-16 f-b item-name text-capitalize">Lamb Sauvlaki</label>
+                </div>
+                <div>
+                    <label class="f-14 mr-15">$15.99</label>
+                </div>
+            </div>
+            <div class="cart-item-modifiers">
+                <span>Small </span>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+                <span>Large </span>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+                <span>Small </span>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+                <span>Large </span>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+                <span>Small </span>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+                <span>Large </span>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+            </div>
+        </div>
+        <hr>
+        <!--
+            Surcharge
+        -->
+        <div class="order-surcharge">
+            <div class="d-flex justify-content-between">
+                <label class="f-16-blur">Surcharge</label>
+                <label class="f-14 f-b">$1.77</label>
+            </div>
+        </div>
+        <hr>
+        <!--
+            Sub Total
+        -->
+        <div class="order-surcharge">
+            <div class="d-flex justify-content-between">
+                <label class="f-16-blur">Sub total</label>
+                <label class="f-14 f-b">$19.55</label>
+            </div>
+        </div>
+        <hr>
+    </div>
+</div>
+<!--
+    Thank You
+-->
+<div class="thankyou" *ngIf="orderStatus == 'thankyou'">
+    <div class="thankyou-header">
+    </div>
+    <div class="mt-28 thankyou-body text-center">
+        <svg width="40" height="38" viewBox="0 0 40 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M35.2241 5.00585C34.3444 4.05291 33.3 3.29697 32.1505 2.78121C31.001 2.26546 29.7689 2 28.5246 2C27.2803 2 26.0482 2.26546 24.8987 2.78121C23.7492 3.29697 22.7047 4.05291 21.8251 5.00585L19.9995 6.98261L18.174 5.00585C16.3972 3.08187 13.9873 2.001 11.4745 2.001C8.9617 2.001 6.55183 3.08187 4.77502 5.00585C2.9982 6.92982 2 9.53929 2 12.2602C2 14.9811 2.9982 17.5906 4.77502 19.5145L6.60058 21.4913L19.9995 36L33.3985 21.4913L35.2241 19.5145C36.1041 18.562 36.8022 17.4311 37.2785 16.1864C37.7548 14.9417 38 13.6075 38 12.2602C38 10.9128 37.7548 9.5787 37.2785 8.33398C36.8022 7.08925 36.1041 5.95834 35.2241 5.00585V5.00585Z"
+                stroke="#353FA8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <div class="mt-22">
+            <label class="f-20 f-b">Thank you</label>
+        </div>
+        <div>
+            <label class="f-14">Tap the heart to add
+                <span class="text-capitalize">The lamb shop spring hill</span>
+                to your favourites
+            </label>
+        </div>
+        <div class="mct-16">
+            <svg width="100%" height="40" viewBox="0 0 312 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M0 8C0 3.58172 3.58172 0 8 0H304C308.418 0 312 3.58172 312 8V32C312 36.4183 308.418 40 304 40H8C3.58172 40 0 36.4183 0 32V8Z"
+                    fill="#FAFAFA" />
+                <path
+                    d="M130 15L131 15C131 15.5523 130.552 16 130 16V15ZM130 10L129 10C129 9.58482 129.257 9.21282 129.645 9.06528C130.033 8.91773 130.472 9.02533 130.747 9.33564L130 10ZM138 19L138.747 18.3356C139.099 18.7314 139.082 19.3327 138.707 19.7071L138 19ZM130 27L130.707 27.7071C130.421 27.9931 129.991 28.0787 129.617 27.9239C129.244 27.7691 129 27.4045 129 27H130ZM130 22V21C130.552 21 131 21.4477 131 22H130ZM119 28L119.832 28.5547C119.588 28.9214 119.132 29.0848 118.71 28.9571C118.288 28.8294 118 28.4407 118 28H119ZM129 15L129 10L131 10L131 15L129 15ZM129 27V22H131V27H129ZM130 23C126.799 23 124.263 24.3704 122.5 25.7809C121.62 26.4845 120.945 27.1888 120.492 27.715C120.266 27.9776 120.096 28.1943 119.986 28.3422C119.93 28.4161 119.889 28.4727 119.864 28.5091C119.851 28.5273 119.842 28.5405 119.837 28.5482C119.834 28.552 119.832 28.5546 119.831 28.5557C119.831 28.5562 119.831 28.5564 119.831 28.5562C119.831 28.5562 119.831 28.556 119.831 28.5557C119.831 28.5556 119.832 28.5554 119.832 28.5553C119.832 28.555 119.832 28.5547 119 28C118.168 27.4453 118.168 27.4449 118.168 27.4446C118.169 27.4444 118.169 27.444 118.169 27.4437C118.169 27.4431 118.17 27.4424 118.17 27.4416C118.172 27.44 118.173 27.438 118.174 27.4357C118.178 27.431 118.182 27.4249 118.187 27.4174C118.197 27.4024 118.211 27.3819 118.23 27.3561C118.266 27.3046 118.318 27.2323 118.386 27.1422C118.521 26.962 118.718 26.7099 118.977 26.41C119.492 25.8112 120.255 25.0155 121.25 24.2191C123.237 22.6296 126.201 21 130 21V23ZM130.747 9.33564L138.747 18.3356L137.253 19.6644L129.253 10.6644L130.747 9.33564ZM138.707 19.7071L130.707 27.7071L129.293 26.2929L137.293 18.2929L138.707 19.7071ZM130 16C127.463 16 125.621 16.7439 124.259 17.8167C122.883 18.9014 121.939 20.3687 121.296 21.8896C120.653 23.4102 120.326 24.9445 120.162 26.1084C120.08 26.6877 120.04 27.1688 120.02 27.5017C120.01 27.6681 120.005 27.797 120.002 27.8822C120.001 27.9248 120.001 27.9564 120 27.9764C120 27.9863 120 27.9933 120 27.9973C120 27.9993 120 28.0005 120 28.001C120 28.0012 120 28.0012 120 28.0011C120 28.001 120 28.0007 120 28.0007C120 28.0004 120 28 119 28C118 28 118 27.9995 118 27.999C118 27.9988 118 27.9982 118 27.9977C118 27.9968 118 27.9956 118 27.9943C118 27.9916 118 27.9881 118 27.9839C118 27.9753 118 27.9637 118 27.9491C118.001 27.9198 118.002 27.8784 118.003 27.8258C118.006 27.7206 118.012 27.5702 118.023 27.3811C118.046 27.0031 118.092 26.4685 118.182 25.8291C118.361 24.5555 118.722 22.8398 119.454 21.1104C120.186 19.3813 121.305 17.5986 123.022 16.2458C124.754 14.8811 127.037 14 130 14V16Z"
+                    fill="#353FA8" />
+                <path
+                    d="M153.912 25.192C153.091 25.192 152.365 25.0533 151.736 24.776C151.107 24.488 150.611 24.0827 150.248 23.56C149.885 23.0267 149.699 22.3813 149.688 21.624H151.848C151.869 22.1467 152.056 22.5893 152.408 22.952C152.771 23.304 153.267 23.48 153.896 23.48C154.44 23.48 154.872 23.352 155.192 23.096C155.512 22.8293 155.672 22.4773 155.672 22.04C155.672 21.5813 155.528 21.224 155.24 20.968C154.963 20.712 154.589 20.504 154.12 20.344C153.651 20.184 153.149 20.0133 152.616 19.832C151.752 19.5333 151.091 19.1493 150.632 18.68C150.184 18.2107 149.96 17.5867 149.96 16.808C149.949 16.1467 150.104 15.5813 150.424 15.112C150.755 14.632 151.203 14.264 151.768 14.008C152.333 13.7413 152.984 13.608 153.72 13.608C154.467 13.608 155.123 13.7413 155.688 14.008C156.264 14.2747 156.712 14.648 157.032 15.128C157.363 15.608 157.539 16.1787 157.56 16.84H155.368C155.357 16.4453 155.203 16.0987 154.904 15.8C154.616 15.4907 154.211 15.336 153.688 15.336C153.24 15.3253 152.861 15.4373 152.552 15.672C152.253 15.896 152.104 16.2267 152.104 16.664C152.104 17.0373 152.221 17.336 152.456 17.56C152.691 17.7733 153.011 17.9547 153.416 18.104C153.821 18.2533 154.285 18.4133 154.808 18.584C155.363 18.776 155.869 19 156.328 19.256C156.787 19.512 157.155 19.8533 157.432 20.28C157.709 20.696 157.848 21.2347 157.848 21.896C157.848 22.4827 157.699 23.0267 157.4 23.528C157.101 24.0293 156.659 24.4347 156.072 24.744C155.485 25.0427 154.765 25.192 153.912 25.192ZM159.587 25V13.48H161.635V18.28C161.902 17.8427 162.259 17.5013 162.707 17.256C163.166 17 163.688 16.872 164.275 16.872C165.256 16.872 166.014 17.1813 166.547 17.8C167.091 18.4187 167.363 19.3253 167.363 20.52V25H165.331V20.712C165.331 20.0293 165.192 19.5067 164.915 19.144C164.648 18.7813 164.222 18.6 163.635 18.6C163.059 18.6 162.579 18.8027 162.195 19.208C161.822 19.6133 161.635 20.1787 161.635 20.904V25H159.587ZM172.057 25.192C171.375 25.192 170.815 25.0853 170.377 24.872C169.94 24.648 169.615 24.3547 169.401 23.992C169.188 23.6293 169.081 23.2293 169.081 22.792C169.081 22.056 169.369 21.4587 169.945 21C170.521 20.5413 171.385 20.312 172.537 20.312H174.553V20.12C174.553 19.576 174.399 19.176 174.089 18.92C173.78 18.664 173.396 18.536 172.937 18.536C172.521 18.536 172.159 18.6373 171.849 18.84C171.54 19.032 171.348 19.32 171.273 19.704H169.273C169.327 19.128 169.519 18.6267 169.849 18.2C170.191 17.7733 170.628 17.448 171.161 17.224C171.695 16.9893 172.292 16.872 172.953 16.872C174.084 16.872 174.975 17.1547 175.625 17.72C176.276 18.2853 176.601 19.0853 176.601 20.12V25H174.857L174.665 23.72C174.431 24.1467 174.1 24.4987 173.673 24.776C173.257 25.0533 172.719 25.192 172.057 25.192ZM172.521 23.592C173.108 23.592 173.561 23.4 173.881 23.016C174.212 22.632 174.42 22.1573 174.505 21.592H172.761C172.217 21.592 171.828 21.6933 171.593 21.896C171.359 22.088 171.241 22.328 171.241 22.616C171.241 22.9253 171.359 23.1653 171.593 23.336C171.828 23.5067 172.137 23.592 172.521 23.592ZM178.556 25V17.064H180.38L180.572 18.552C180.86 18.04 181.249 17.6347 181.74 17.336C182.241 17.0267 182.828 16.872 183.5 16.872V19.032H182.924C182.476 19.032 182.076 19.1013 181.724 19.24C181.372 19.3787 181.094 19.6187 180.892 19.96C180.7 20.3013 180.604 20.776 180.604 21.384V25H178.556ZM188.615 25.192C187.815 25.192 187.105 25.0213 186.487 24.68C185.868 24.3387 185.383 23.8587 185.031 23.24C184.679 22.6213 184.503 21.9067 184.503 21.096C184.503 20.2747 184.673 19.544 185.015 18.904C185.367 18.264 185.847 17.768 186.455 17.416C187.073 17.0533 187.799 16.872 188.631 16.872C189.409 16.872 190.097 17.0427 190.695 17.384C191.292 17.7253 191.756 18.1947 192.087 18.792C192.428 19.3787 192.599 20.0347 192.599 20.76C192.599 20.8773 192.593 21 192.583 21.128C192.583 21.256 192.577 21.3893 192.567 21.528H186.535C186.577 22.1467 186.791 22.632 187.175 22.984C187.569 23.336 188.044 23.512 188.599 23.512C189.015 23.512 189.361 23.4213 189.639 23.24C189.927 23.048 190.14 22.8027 190.279 22.504H192.359C192.209 23.0053 191.959 23.464 191.607 23.88C191.265 24.2853 190.839 24.6053 190.327 24.84C189.825 25.0747 189.255 25.192 188.615 25.192ZM188.631 18.536C188.129 18.536 187.687 18.68 187.303 18.968C186.919 19.2453 186.673 19.672 186.567 20.248H190.519C190.487 19.7253 190.295 19.3093 189.943 19C189.591 18.6907 189.153 18.536 188.631 18.536Z"
+                    fill="#353FA8" />
+            </svg>
+        </div>
+    </div>
+</div>

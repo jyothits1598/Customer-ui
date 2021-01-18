@@ -1,0 +1,162 @@
+<!--  
+    cart right side bar window
+-->
+<div class="right-content">
+    <div class="right-content-overflow">
+
+        <!--  
+            cart window if item added to cart
+        -->
+        <!-- <div class="order-cart" *ngIf="orderStatus == 'checkout' || orderStatus == 'placeOrder'"> -->
+        <div class="order-cart" *ngIf="cartData$ | async; let cartData; else emptyTemplate">
+            <span (click)="closeCart()">close</span>
+            <h4 class="f-20 f-b mc-4">Your Order</h4>
+            <u class="f-16-blue text-capitalize"> {{cartData.storeName}}</u>
+            <!--
+                Select order type
+            -->
+            <div class="order-type">
+                <span class="order-type-background">
+                    <input type="radio" class="order-type-radio" value="true" checked="checked" name="order_type"
+                        id="pick_up_asap">
+                    <label for="pick_up_asap">Pick up</label>
+
+                    <input type="radio" class="order-type-radio" disabled value="true" name="order_type"
+                        id="schedule_to_pick_up">
+                    <label for="schedule_to_pick_up">Dine in</label>
+                </span>
+            </div>
+            <!--
+                if order type is pickup
+            -->
+            <div class="order-pick-up-type">
+                <input type="radio" class="pick-up-radio" value="true" checked="checked" name="pick_up"
+                    id="pick_up_asap">
+                <label for="pick_up_asap" class="f-16">Pick up asap</label>
+
+                <input type="radio" class="pick-up-radio" disabled value="true" name="pick_up" id="schedule_to_pick_up">
+                <label for="schedule_to_pick_up" class="f-16">Schedule for later</label>
+            </div>
+            <!--
+                Cart added items.
+            -->
+            <div class="cart-items mct-16" *ngFor="let item of cartData.items">
+                <div class="d-flex justify-content-between">
+                    <label class="f-16 f-b pr-3">{{item.quantity}}x</label>
+                    <div class="f-16 f-b pr-2">
+                        <label class="f-16 f-b item-name text-capitalize">Lamb Sauvlaki</label>
+                    </div>
+                    <div>
+                        <label class="f-14 mr-15">${{makeCalculations(item.item.basePrice, item.item.modifiers,
+                            item.quantity)}}</label>
+                        <img src="assets/images/cart/exclude.svg">
+                    </div>
+                </div>
+                <div class="cart-item-modifiers">
+                    <ng-container *ngFor="let mod of item.item.modifiers">
+                        <span>{{mod.name}} </span>
+                        <i class="fa fa-circle" aria-hidden="true"></i>
+                    </ng-container>
+                    <!-- <span>Large </span>
+                    <i class="fa fa-circle" aria-hidden="true"></i>
+                    <span>Small </span>
+                    <i class="fa fa-circle" aria-hidden="true"></i>
+                    <span>Large </span>
+                    <i class="fa fa-circle" aria-hidden="true"></i>
+                    <span>Small </span>
+                    <i class="fa fa-circle" aria-hidden="true"></i>
+                    <span>Large </span>
+                    <i class="fa fa-circle" aria-hidden="true"></i> -->
+                </div>
+            </div>
+            <hr>
+            <!-- <div class="cart-items">
+                <div class="d-flex justify-content-between">
+                    <label class="f-16 f-b pr-3">1x</label>
+                    <div class="f-16 f-b pr-2">
+                        <label class="f-16 f-b item-name text-capitalize">Lamb Sauvlaki</label>
+                    </div>
+                    <div>
+                        <label class="f-14 mr-15">$15.99</label>
+                        <img src="assets/images/cart/exclude.svg">
+                    </div>
+                </div>
+                <div class="cart-item-modifiers">
+                    <span>Small </span>
+                    <i class="fa fa-circle" aria-hidden="true"></i>
+                    <span>Large </span>
+                    <i class="fa fa-circle" aria-hidden="true"></i>
+                    <span>Small </span>
+                    <i class="fa fa-circle" aria-hidden="true"></i>
+                    <span>Large </span>
+                    <i class="fa fa-circle" aria-hidden="true"></i>
+                    <span>Small </span>
+                    <i class="fa fa-circle" aria-hidden="true"></i>
+                    <span>Large </span>
+                    <i class="fa fa-circle" aria-hidden="true"></i>
+                </div>
+            </div> -->
+            <hr>
+            <!--
+                Surcharge
+            -->
+            <ng-container *ngIf="cartTotal$ | async; let total">
+
+                <div class="order-surcharge">
+                    <div class="d-flex justify-content-between">
+                        <label class="f-16-blur">Surcharge</label>
+                        <label class="f-14 f-b">$0.00</label>
+                    </div>
+                </div>
+                <hr>
+                <!--
+                Sub Total
+            -->
+                <div class="order-surcharge">
+                    <div class="d-flex justify-content-between">
+                        <label class="f-16-blur">Sub total</label>
+                        <label class="f-14 f-b">${{total}}</label>
+                    </div>
+                </div>
+                <hr>
+                <!--
+                Amount Due
+            -->
+                <div class="order-surcharge">
+                    <div class="d-flex justify-content-between">
+                        <label class="f-16 f-b">Amount due</label>
+                        <label class="f-24 f-b">${{total}}</label>
+                    </div>
+                </div>
+                <hr>
+            </ng-container>
+
+            <!-- <div *ngIf="orderStatus == 'placeOrder'">
+                <h4 class="f-20 f-b mt-8">Payment</h4>
+                <ul>
+                    <li class="d-flex justify-content-between">
+                        <label class="f-16 mt-8">Add payment method</label>
+                        <img class="mt-1" src="assets/images/cart/chevron.svg" />
+                    </li>
+                    <hr>
+                </ul>
+            </div> -->
+        </div>
+        <!--  
+            Card for Add payment Method
+        -->
+
+    </div>
+    <ng-template #emptyTemplate>
+        <!--  
+                empty cart window if no item added
+            -->
+        <div class="empty-cart">
+            <img src="assets/images/empty_cart.png">
+            <p class="paragraph mt">
+                Add some items to your order to get started
+            </p>
+        </div>
+    </ng-template>
+
+</div>

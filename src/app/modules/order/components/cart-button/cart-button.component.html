@@ -1,5 +1,5 @@
 <div class="cart-card cart-anim" *ngIf="cartData$ | async; let data">
-    <div class="cart-button" >
+    <div class="cart-button" (click)="openCart()">
         <div class="row">
             <div class="col-sm-4 col-4">
                 <img src="assets/images/cart/cart.svg" />
