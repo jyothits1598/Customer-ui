@@ -1,5 +1,7 @@
-<img [src]="profileImageUrl ? profileImageUrl : 'assets/images/add_image.png'" alt="profile image"
-    style="width: 112px;height:112px;margin-left: auto;margin-right: auto;display: block;border-radius: 50%;object-fit: cover;">
+<div *ngIf="profileImageUrl"> <img [src]="profileImageUrl ? profileImageUrl : 'assets/images/add_image.png'" alt="profile image" class="icon_profile"> </div>
+<div *ngIf="!profileImageUrl" class="icon-profile text-uppercase">
+    {{profileData.firstName | slice:0:1 }}{{profileData.lastName | slice:0:1 }}
+</div>
 <ng-container *ngIf="editMode">
     <div class="text-center text12" >
         JPG, PNG or GIF up to 5mb. <br> Minimum size 500 x 500 pixels.
@@ -7,9 +9,15 @@
     <div class="col text-center">
         <file-upload [accept]="validFileFormats" [asyncValidators]="asyncValidators" (file)="handleFileUpload($event)"
             (error)="handleFileError($event)">
-            <button class="std-button std-button--trans" style="margin-right:16px;text-align: center;"> Change <img
+            <button class="std-button std-button--trans" style="margin-right:16px;text-align: center;"> 
+               {{ profileImageUrl ? 'Change' : 'Add profile'}}
+                <img
                     *ngIf="uploading" src="assets/images/loader.gif" alt="" style="height: 24px;"></button>
         </file-upload>
-        <button (click)="urlChange.emit(null)" class="std-button std-button--trans">Remove</button>
+
+        <button *ngIf="profileImageUrl" (click)="urlChange.emit(null)" class="std-button std-button--trans">Remove</button>
     </div>
 </ng-container>
+<div *ngIf="errorMessage" class="error-mez" id="hideMe">
+    {{errorMessage}}
+</div>

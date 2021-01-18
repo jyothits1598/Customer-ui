@@ -44,7 +44,17 @@ const routes:
           component: ChangeEmailComponent
         },
         {
+          path: 'add-email',
+          canActivate: [PasswordConfirmationGuard],
+          component: ChangeEmailComponent
+        },
+        {
           path: 'change-mobile',
+          canActivate: [PasswordConfirmationGuard],
+          component: ChangeMobileComponent
+        },
+        {
+          path: 'add-mobile',
           canActivate: [PasswordConfirmationGuard],
           component: ChangeMobileComponent
         }

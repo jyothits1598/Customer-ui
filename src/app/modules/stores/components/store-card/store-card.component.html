@@ -8,7 +8,7 @@
                         <!-- <img src="assets/images/Rectangle 4.png" class="profile-image" /> -->
                     </td>
                     <td style="padding-left: 8px;width:100%">
-                        <table style="margin-bottom: 3px;">
+                        <table style="margin-bottom: 4px;">
                             <tr>
                                 <td>
                                     <div class="store-name">
@@ -33,8 +33,9 @@
           
                     <table>
                         <tr>
-                            <td>
-                                <facebook-like-count [url]="store.facebookUrl"></facebook-like-count>
+                            <td style="padding-right:8px">
+                                <!-- [url]="store.facebookUrl" -->
+                                <facebook-like-count ></facebook-like-count>
                             </td>
                             <td align="top">
                                 <google-rating [store]="store"></google-rating>

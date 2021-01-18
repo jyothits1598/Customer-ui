@@ -15,7 +15,7 @@ export class UserProfileComponent implements OnInit {
   isLoading = true;
   profileData: UserProfile;
   editMode: boolean = false;
-
+  errorMessage;
   profileForm: FormGroup = new FormGroup({
     firstName: new FormControl(null, CustomValidators.required('First name is required.')),
     lastName: new FormControl(null, CustomValidators.required('Last name is required.')),
@@ -38,15 +38,27 @@ export class UserProfileComponent implements OnInit {
   handleFileChange(imgUrl: string) {
     this.profileForm.controls.profileImage.setValue(imgUrl);
     this.profileForm.controls.profileImage.markAsDirty();
-
   }
 
   saveChanges() {
-    this.saving = true;
-    if (this.profileForm.invalid) { this.profileForm.markAllAsTouched(); }
+    if (this.profileForm.invalid) { 
+      this.profileForm.markAllAsTouched();
+      this.saving = false;
+    }
+    if (this.profileForm.valid) { this.saving = true; 
     this.userProfData.updateProfile(this.profileForm.value).pipe(finalize(() => this.saving = false)).subscribe(
-      () => { this.profileData = this.profileForm.value; this.profileForm.reset(); this.editMode = false; }
+      (resp) => { 
+        this.profileData = this.profileForm.value; 
+        this.profileForm.reset(); 
+        this.editMode = false; 
+      },
+      (resp) => { this.handleError(resp) }
     );
   }
+}
 
+  handleError(errorResp) {
+    if (errorResp.error.first_name) this.errorMessage = errorResp.error.first_name[0];
+    if (errorResp.error.last_name) this.errorMessage = errorResp.error.last_name[0];  
+  }
 }

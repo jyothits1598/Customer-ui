@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 import { filter, finalize, map, mergeMap } from 'rxjs/operators';
 import { ModalService } from 'src/app/core/services/modal.service';
 import { StoreDetail, StoreItem } from 'src/app/modules/store-detail/model/store-detail';
@@ -30,7 +31,7 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
   @ViewChild('observationElement', { read: ElementRef }) obsElement: ElementRef;
   @ViewChild('fbParent', { read: ElementRef }) fbParent: ElementRef;
   constructor(private storeDetailServ: StoreDetailDataService,
-    private route: ActivatedRoute, private geoLoc: GeoLocationService) { }
+    private route: ActivatedRoute, private geoLoc: GeoLocationService, private location: Location) { }
 
   renderLikeBtn(): void {
     console.log('rendereing like', FB.XFBML, this.fbParent);
@@ -88,6 +89,10 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.routeQueryparamsSubs.unsubscribe();
     this.routeParamsSubs.unsubscribe();
+  }
+
+  goBack() {
+    this.location.back(); // <-- go back to previous location on cancel
   }
 
 }

@@ -17,6 +17,7 @@ export class AuthParentComponent implements OnInit {
           this.isforgot = false;
           if(this.router.url && this.router.url.indexOf(this.forgot_url) > -1){
             this.isforgot = true;
+            console.log(this.isforgot);
           }
         }});
   }

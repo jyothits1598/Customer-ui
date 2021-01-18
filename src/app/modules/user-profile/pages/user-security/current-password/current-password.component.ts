@@ -15,8 +15,13 @@ export class CurrentPasswordComponent implements OnInit {
   errorRespMsg: string = null;
   loading: boolean = false;
 
-  isEmail: boolean = false;
+  isaddE: boolean = false;
+  ischangeE: boolean = false;
+  isaddM: boolean = false;
+  ischangeM: boolean = false;
 
+  isEmail: boolean = false;
+  isMobiletext: boolean = false;
   // current_url:string = "/current-password";
   // current_url_status:boolean = false;
   passwordForm: FormGroup = new FormGroup({
@@ -38,7 +43,10 @@ export class CurrentPasswordComponent implements OnInit {
 
   ngOnInit(): void {
     // console.log(this.router.url);
-    this.isEmail = this.router.url.includes('change-email')
+    this.isaddE = this.router.url.includes('add-email');
+    this.ischangeE = this.router.url.includes('change-email');
+    this.isaddM = this.router.url.includes('add-mobile');
+    this.ischangeM = this.router.url.includes('change-mobile');
     this.redirectUrl = this.activatedRoute.snapshot.queryParams.redirect;
   }
 

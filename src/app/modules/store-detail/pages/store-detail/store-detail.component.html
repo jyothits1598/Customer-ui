@@ -13,7 +13,7 @@
                         <table>
                             <tr>
                                 <td>
-                                    <img src="assets/images/ico_arrow_left_white.png" routerLink="/"
+                                    <img src="assets/images/ico_arrow_left_white.png" (click)="goBack()"
                                         style="cursor: pointer;outline:0;">
                                 </td>
                                 <td align="bottom">
@@ -84,8 +84,9 @@
                 <div style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);padding: 8px 0 8px 0;">
                     <table>
                         <tr>
-                            <td>
-                                <facebook-like-count [url]="storeDetail.facebookUrl"></facebook-like-count>
+                            <td style="padding-right:8px">
+                                <!-- [url]="storeDetail.facebookUrl" -->
+                                <facebook-like-count ></facebook-like-count>
                             </td>
                             <td align="top">
                                 <google-rating [store]="storeDetail"></google-rating>

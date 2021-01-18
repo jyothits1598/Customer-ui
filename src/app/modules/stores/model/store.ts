@@ -11,7 +11,7 @@ export interface Store {
     distance: string;
     description: string,
     googleUrl: string,
-    facebookUrl: string,
+    // facebookUrl: string,
     isFavourite: boolean,
     latLng: { lat: number, lng: number }
 }
@@ -28,7 +28,7 @@ export function ReadStore(data: any): Store {
         distance: data.distance,
         description: data.description,
         googleUrl: data.google_business_url,
-        facebookUrl: data.facebook_url,
+        // facebookUrl: data.facebook_url,
         latLng: { lat: data.latitude, lng: data.longitude },
         isFavourite: data.is_favourite ? true : false
     };

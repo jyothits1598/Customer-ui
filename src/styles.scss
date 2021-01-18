@@ -97,7 +97,6 @@
         left: 50%;
         transform: translate(-50%, -50%);
         outline: 0;
-        cursor: pointer;
     }
     .center-block-location {
         text-align: center !important;
@@ -195,7 +194,6 @@
         left: 50%;
         transform: translate(-50%, -50%);
         outline: 0;
-        cursor: pointer;
     }
     .center-block-location {
         text-align: center !important;
@@ -293,7 +291,6 @@
         left: 50%;
         transform: translate(-50%, -50%);
         outline: 0;
-        cursor: pointer;
     }
     .center-block-location {
         text-align: center !important;
@@ -400,8 +397,6 @@
     }
     .title-content {
         margin-top: -5px;
-        outline: 0;
-        cursor: pointer;
     }
     .title-content-search {
         margin-top: -5px;
@@ -492,14 +487,15 @@
     }
     .title-content {
         margin-top: -5px;
-        outline: 0;
-        cursor: pointer;
     }
     .title-content-search {
         margin-top: -5px;
         outline: 0;
         cursor: pointer;
     }
+ }
+ .icon-user-color {
+    background-image: url('assets/images/navbar/ico_account.png');
  }
   .signup-panel {
     // background: var(--color-pending);

@@ -26,6 +26,7 @@
     font-weight: bold;
     font-size: 14px;
     line-height: 20px;
+    padding-right:4px;
     color: var(--color-primary);
     // padding: 12px;
     // &:hover {
@@ -345,7 +346,7 @@ input.ng-invalid.ng-touched.error-highlight {
     font-style: normal;
     font-weight: bold;
     color: var(--color-background);
-    cursor: pointer;
+    // cursor: pointer;
     outline: 0;
 }
 .profile-navbar {
@@ -388,4 +389,12 @@ input.ng-invalid.ng-touched.error-highlight {
     font-style: normal;
     font-weight: bold;
     font-size: 14px;
+    line-height: 20px;
+    margin:0;
+}
+.arrow-back {
+    padding-right:16px;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
 }
