@@ -41,4 +41,11 @@ export class RestApiService {
     );
   }
 
+  delete(url) {
+    return this.http.delete(API_URL_LINK + url).pipe(
+      take(1),
+      catchError((httpError) => throwError(httpError.error))
+    )
+  }
+
 }

@@ -21,7 +21,7 @@ export class CartButtonComponent implements OnInit {
     this.cartData$ = this.cartService.cartData$;
     this.cartItemCount$ = this.cartService.cartItemCount$;
     this.cartTotalAmount$ = this.cartService.cartTotalAmount$;
-  }
+  } 
 
   openCart() {
     this.router.navigate([{ outlets: { 'order': ['cart'] } }])

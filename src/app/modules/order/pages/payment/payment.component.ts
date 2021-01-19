@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./payment.component.scss']
 })
 export class PaymentComponent implements OnInit {
-  orderStatus:string = 'continue'; /**Cart status empty,checkout,continue,placeOrder,bankcards,addcard,orders,thankyou */
+  orderStatus:string = 'orders'; /**Cart status empty,checkout,continue,placeOrder,bankcards,addcard,orders,thankyou */
   orderPrepareStatus:string = 'orderReady';/**confirmingOrder,preparingOrder,orderReady */
   constructor() { }
 

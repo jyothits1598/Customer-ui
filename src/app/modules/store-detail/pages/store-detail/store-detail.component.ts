@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { filter, finalize, map, mergeMap } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
+import { finalize, map, mergeMap } from 'rxjs/operators';
 import { StoreDetail } from 'src/app/modules/store-detail/model/store-detail';
 import { StoreDetailDataService } from '../../services/store-detail-data.service';
 import { GeoLocationService } from 'src/app/core/services/geo-location.service';
@@ -27,7 +27,9 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
   @ViewChild('observationElement', { read: ElementRef }) obsElement: ElementRef;
   @ViewChild('fbParent', { read: ElementRef }) fbParent: ElementRef;
   constructor(private storeDetailServ: StoreDetailDataService,
-    private route: ActivatedRoute, private geoLoc: GeoLocationService) { }
+    private route: ActivatedRoute,
+    private geoLoc: GeoLocationService,
+    private router: Router) { }
 
   observeIntersection() {
     let obs = new IntersectionObserver((entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
@@ -52,6 +54,10 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
     this.routeQueryparamsSubs = this.route.queryParams.subscribe((qParams) => {
       this.selecteditemId = +qParams.i;
     })
+
+    // open cart by default
+    if (!this.router.url.includes('order:cart')) this.router.navigate([{ outlets: { 'order': ['cart'] } }], { replaceUrl: true })
+
   }
 
   loadStore(location?: UserLocation) {

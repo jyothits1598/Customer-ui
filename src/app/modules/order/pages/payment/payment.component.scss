@@ -1,0 +1,28 @@
+.right-content {
+    position: fixed;
+    width:320px;
+    height:100%;
+    z-index: 3;
+    background: #ffffff;
+    right:0;
+    top:0;
+    bottom:0;
+    box-shadow: inset 1px 0px 0px rgba(0, 0, 0, 0.1);
+    .right-content-overflow{
+        overflow: auto;
+        height:90%;
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+    .right-content-overflow::-webkit-scrollbar {
+        display: none;
+      }
+    .empty-cart {
+        margin-top:80px;
+        padding: 32px;
+        text-align: center;
+    }
+    .mt{
+        margin-top:30px;
+    }
+}

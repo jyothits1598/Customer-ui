@@ -46,26 +46,29 @@ export class CartService {
   ) {
 
     this.authService.loggedUser$.subscribe((user) => {
-      if (user) {
-        //try to fetch from backend
-        this.getCart().subscribe((cart) => { this.cartData.next(cart) })
-      } else {
-        //try to fetch from localstorage
-        let cartData = this.storageService.get(this.storageIdentifier);
-        if (cartData) {
-        } this.cartData.next(cartData);
+      let savedData = this.storageService.get(this.storageIdentifier);
+      console.log('datat from savedData', savedData)
+      if (savedData) this.addItem(savedData).subscribe();
+      else {
+        if (user) {
+          //try to fetch from backend
+          this.getCart().subscribe((cart) => { if (cart) { this.cartData.next(cart); this.storageService.store(this.storageIdentifier, cart) } })
+        }
       }
+      // else {
+      //   //try to fetch from localstorage
+      //   let cartData = this.storageService.get(this.storageIdentifier);
+      //   if (cartData) {
+      //   } this.cartData.next(cartData);
+      // }
     })
-
-
   }
-
 
   addItem(item: CartData): Observable<boolean> {
     let presentCartData = this.presentCartData;
     let resultObs: Observable<any>;
 
-    if (presentCartData) {
+    if (presentCartData && item) {
       //check if the items are form same store
       if (this.presentCartData.storeId === item.storeId) {
         let cartData = { ...this.presentCartData };
@@ -81,13 +84,11 @@ export class CartService {
         resultObs = modalRef.instance.userDecision.pipe(take(1), finalize(() => { modalRef.dismiss() }));
       }
     }
-
-    // there is no previous item in cart
     else {
-      // this.cartData.next(item);
+      // there is no previous item in cart
       resultObs = of(true);
     }
-    if (this.authService.isLoggedIn) resultObs = resultObs.pipe(switchMap((val) => this.postCart(item)));
+    if (this.authService.isLoggedIn) resultObs = resultObs.pipe(switchMap(() => this.postCart(item)));
 
     return resultObs.pipe(tap(() => { this.cartData.next(item); this.storageService.store(this.storageIdentifier, item) }));
   }
@@ -137,16 +138,22 @@ export class CartService {
   deleteItem(itemId: number): Observable<boolean> {
     let pCart = this.presentCartData;
     let itemIndex = pCart.items.findIndex(item => item.item.id === itemId);
-    pCart.items.slice(itemIndex, 1);
-
-    return this.addItem({ ...pCart });
+    pCart.items.splice(itemIndex, 1);
+    if (pCart.items.length) return this.addItem({ ...pCart });
+    else return this.addItem(null)
   }
 
   postCart(cartData: CartData) {
-    return this.restApiService.post('api/customer/cart', MapToDto(cartData));
+    console.log('calling post cart', cartData);
+    if (!cartData) return this.restApiService.delete('api/customer/cart');
+    else return this.restApiService.post('api/customer/cart', MapToDto(cartData));
   }
 
   getCart() {
     return this.restApiService.get('api/customer/cart').pipe(map((cart: { data: CartDto }) => mapToCartData(cart.data)));
+  }
+
+  debug() {
+    this.cartData.next(null)
   }
 }

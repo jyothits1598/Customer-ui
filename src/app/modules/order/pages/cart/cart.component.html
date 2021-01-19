@@ -49,7 +49,7 @@
                     <div>
                         <label class="f-14 mr-15">${{makeCalculations(item.item.basePrice, item.item.modifiers,
                             item.quantity)}}</label>
-                        <img src="assets/images/cart/exclude.svg">
+                        <img (click)="deleteItem(item.item.id)" src="assets/images/cart/exclude.svg">
                     </div>
                 </div>
                 <div class="cart-item-modifiers">
@@ -129,6 +129,7 @@
                     </div>
                 </div>
                 <hr>
+                <button (click)="continue()">Continue</button>
             </ng-container>
 
             <!-- <div *ngIf="orderStatus == 'placeOrder'">
@@ -145,7 +146,6 @@
         <!--  
             Card for Add payment Method
         -->
-
     </div>
     <ng-template #emptyTemplate>
         <!--  

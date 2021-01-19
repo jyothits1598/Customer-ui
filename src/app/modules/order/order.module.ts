@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { CartComponent } from './pages/cart/cart.component';
 import { CartButtonComponent } from './components/cart-button/cart-button.component';
 import { PaymentComponent } from './pages/payment/payment.component';
-import { AppRoutingModule } from 'src/app/app-routing.module';
 import { RouterModule } from '@angular/router';
+import { ConfirmationComponent } from './pages/confirmation/confirmation.component';
+import { CartSummaryComponent } from './pages/cart-summary/cart-summary.component';
 
 @NgModule({
-  declarations: [CartComponent, CartButtonComponent, PaymentComponent],
+  declarations: [CartComponent, CartButtonComponent, PaymentComponent, ConfirmationComponent, CartSummaryComponent],
   imports: [
     RouterModule,
     CommonModule
