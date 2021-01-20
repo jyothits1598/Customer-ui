@@ -93,4 +93,24 @@ body.modal-open {
     border-radius: 0px;
     background: rgba(255, 255, 255, 1);
 }
-
+.store-icons-det {
+    cursor: pointer;
+    outline:none;
+    &--det1 { 
+        margin-left:16px;
+    }
+}
+.dist-sp {
+    padding-right: 8px;
+}
+.bt-m {
+    margin-bottom: 4px;
+}
+.tim-body {
+    padding-left: 10px;
+}
+.rating-card {
+    box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);
+    padding: 8px 0 8px 0;
+    margin-top:12px;
+}

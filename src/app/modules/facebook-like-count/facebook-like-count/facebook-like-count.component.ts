@@ -10,7 +10,7 @@ export class FacebookLikeCountComponent implements AfterViewInit {
   @ViewChild('pbLikeContainer', { read: ElementRef }) pbContainer: ElementRef;
   constructor() { }
   ngAfterViewInit(): void {
-    if (this.url) FB.XFBML.parse(this.pbContainer.nativeElement);
+    // if (this.url) FB.XFBML.parse(this.pbContainer.nativeElement);
   }
 
   ngOnInit(): void {

@@ -18,8 +18,10 @@
                                 </td>
                             </tr>
                         </table>
-                        <span class="sub-name float-left"> {{ store.distance }} </span>
-                        <present-availability [availability]="store.openingHours"></present-availability>
+                        <div class="d-flex justify-content-between sub-name">
+                            <span> {{ store.distance }} </span>
+                            <present-availability [availability]="store.openingHours"></present-availability>
+                        </div>
                     </td>
                 </tr>
             </table>
@@ -30,32 +32,17 @@
             </div>
         </div>
         <div class="content-card">
-          
-                    <table>
-                        <tr>
-                            <td style="padding-right:8px">
-                                <!-- [url]="store.facebookUrl" -->
-                                <facebook-like-count ></facebook-like-count>
-                            </td>
-                            <td align="top">
-                                <google-rating [store]="store"></google-rating>
-                            </td>
-                        </tr>
-                    </table>
-                    <!-- <div class="description-chating">
-                        <table style="width: 100%;">
-                            <tr>
-                                <td>
-                                    <div> No comments yet </div>
-                                    <div> Be the first to start the conversation </div>
-                                </td>
-                                <td style="text-align: right; ">
-                                    <img src="assets/images/ico_comment.png" >
-                                </td>
-                            </tr>
-                        </table>
-                    </div> -->
-                
+            <table>
+                <tr>
+                    <td style="padding-right:8px">
+                        <!-- [url]="store.facebookUrl" -->
+                        <facebook-like-count ></facebook-like-count>
+                    </td>
+                    <td align="top">
+                        <google-rating [store]="store"></google-rating>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
     <div class="chating-card">
@@ -70,14 +57,11 @@
                     </li>
                     <li>
                         <a [href]="'https://www.google.com/maps/dir/?api=1&destination='+store.latLng.lat+','+store.latLng.lng" target="_blank" style="text-decoration: none;">
-                            <img src="assets/images/ico_navigation_black.png" title="Direction">
+                            <img src="assets/svg/cards/direction.svg" title="Direction">
                         </a>
                     </li>
                 </ul>
             </span>
-            <!-- <span>
-                <p class="comment-text"><span> 9 </span> comments </p>
-            </span> -->
         </div>
     </div>
 </div>

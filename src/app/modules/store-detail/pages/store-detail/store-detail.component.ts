@@ -31,7 +31,7 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
   @ViewChild('observationElement', { read: ElementRef }) obsElement: ElementRef;
   @ViewChild('fbParent', { read: ElementRef }) fbParent: ElementRef;
   constructor(private storeDetailServ: StoreDetailDataService,
-    private route: ActivatedRoute, private geoLoc: GeoLocationService, private location: Location) { }
+    private route: ActivatedRoute, private geoLoc: GeoLocationService,private location: Location) { }
 
   renderLikeBtn(): void {
     console.log('rendereing like', FB.XFBML, this.fbParent);
@@ -92,7 +92,7 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
   }
 
   goBack() {
-    this.location.back(); // <-- go back to previous location on cancel
+    this.location.back(); 
   }
 
 }

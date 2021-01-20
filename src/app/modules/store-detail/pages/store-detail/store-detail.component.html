@@ -13,7 +13,7 @@
             <table>
               <tr>
                 <td>
-                  <img src="assets/images/ico_arrow_left_white.png" (click)="goback()" style="cursor: pointer;outline:0;">
+                  <img src="assets/images/ico_arrow_left_white.png" (click)="goBack()" style="cursor: pointer;outline:0;">
                 </td>
                 <td align="bottom">
                   <span *ngIf="scrolledDown" style="display: inline-block; animation: fadeInDown .1s">&nbsp;
@@ -28,15 +28,15 @@
           </span>
           <span style="float:right">
             <ul class="menu">
-              <li style="cursor: pointer;outline:none">
+              <li class="store-icons-det">
                 <store-heart [store]="{id: storeDetail.id, isFavourite: storeDetail.isFavourite,page:'preview'}"></store-heart>
               </li>
-              <li style="cursor: pointer;outline:none;margin-left:16px">
+              <li class="store-icons-det store-icons-det--det1" >
                 <app-share [store]="{id: storeDetail.id, name: storeDetail.name}"></app-share>
               </li>
-              <li style="cursor: pointer;outline:none;margin-left:16px">
+              <li class="store-icons-det store-icons-det--det1">
                 <a [href]="'https://www.google.com/maps/dir/?api=1&destination='+storeDetail.latLng.lat+','+storeDetail.latLng.lng" target="_blank" style="text-decoration: none;">
-                  <img src="assets/images/navbar/ico_navigation.png" title="Direction">
+                  <img src="assets/svg/cards/share-detail.svg" title="Direction">
                 </a>
               </li>
             </ul>
@@ -54,13 +54,12 @@
             <td valign="middle">
               <img [src]="storeDetail.logo || 'assets/svg/null_logo.svg'" class="profile-log-detail" />
             </td>
-            <td style="padding-left: 8px;width:100%">
-              <div class="sub-name">
-                <span style="float:left !important;"> {{storeDetail.distance}} &nbsp;
-                  <present-availability [availability]="storeDetail.openingHours">
-                  </present-availability>
-                </span>
-              </div><br>
+            <td class="tim-body" >
+              <div class="d-flex flex-row sub-name bt-m">
+                <span class="dist-sp" > {{storeDetail.distance}} </span>
+                <present-availability [availability]="storeDetail.openingHours">
+                </present-availability>
+              </div>
               <div class="std-heading-4 text-capitalize"> {{storeDetail.name}} </div>
             </td>
           </tr>
@@ -70,19 +69,18 @@
             <img [src]="storeDetail.logo || 'assets/svg/null_logo.svg'" class="profile-log-detail" />
           </div>
           <div style="position: relative;top:10px;">
-            <div class="std-heading-4 text-capitalize"> {{storeDetail.name}} </div>
-            <div class="sub-name">
-              <span style="float:left !important;"> {{storeDetail.distance}} &nbsp;
+            <div class="std-heading-4 text-capitalize bt-m"> {{storeDetail.name}} </div>
+              <div class="d-flex flex-row sub-name">
+                <span class="dist-sp" > {{storeDetail.distance}} </span>
                 <present-availability [availability]="storeDetail.openingHours">
                 </present-availability>
-              </span>
-            </div>
-          </div><br>
+              </div>
+          </div>
         </div>
-        <div style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);padding: 8px 0 8px 0;">
+        <div class="rating-card">
           <table>
             <tr>
-              <td>
+              <td style="padding-right:8px">
                 <facebook-like-count [url]="storeDetail.facebookUrl"></facebook-like-count>
               </td>
               <td align="top">
@@ -92,23 +90,9 @@
           </table>
         </div>
         <div class="address-content">
-          <!-- <hr class="d-block d-sm-none"> -->
           {{storeDetail.address}}
         </div>
-        <!-- <div class="d-flex justify-content-between">
-                    <span>
-                        <ul class="chat-icons">
-                            <li>
-                                <store-heart [store]="{id: storeDetail.id, isFavourite: true}"></store-heart>
-                            </li>
-                            <li> <img src="assets/images/chat.png"> </li>
-                            <li> <img src="assets/images/share.png"> </li>
-                        </ul>
-                    </span>
-                    <span>
-                        <p class="comment-text"><span> 9 </span> comments </p>
-                    </span>
-                </div> -->
+       
         <div style="width: 100%; height: 0px; position: absolute; background: pink" #observationElement></div>
       </div>
       <!----------------------------- items cards -------------------------->
