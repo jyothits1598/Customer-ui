@@ -11,7 +11,7 @@ export class SearchDataService {
   searchHistory: Array<string>;
   searchInputElem: ElementRef;
 
-  panelOpen$ = new BehaviorSubject<boolean>(false);
+  overlayOpen = false;
 
   constructor(private storageService: StorageService) {
     this.searchHistory = this.storageService.get(this.storageKey) || [];
@@ -36,13 +36,5 @@ export class SearchDataService {
 
   clearSearch() {
     if (this.searchInputElem) this.searchInputElem.nativeElement.value = '';
-  }
-
-  set isPanelOpen(val: boolean) {
-    this.panelOpen$.next(val);
-  }
-
-  get isPanelOpen(): boolean {
-    return this.panelOpen$.value;
   }
 }

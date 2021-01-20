@@ -1,3 +1,7 @@
+.is-hidden {
+  display: none;
+}
+
 .sticky-navbar {
   position: relative;
   // position:-webkit-sticky;
@@ -24,6 +28,10 @@
   position: absolute;
   left: 5px;
   top: 4px;
+}
+
+.cover-bg {
+  margin-top: 120px;
 }
 // Extra small devices (portrait phones, less than 576px)
 @media (max-width: 575.98px) {
@@ -65,7 +73,10 @@
   }
 }
 // Large devices (desktops, 992px and up)
-@media (min-width: 992px) and (max-width: 1199.98px) {
+@media (min-width: 992px) {
+  .cover-bg {
+    margin-top: 48px;
+  }
 }
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {

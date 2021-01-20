@@ -1,4 +1,3 @@
-
 <!-- <div class="container" style="margin-top:20px">
     <div class="row">
         <div class="col-md-12">
@@ -11,54 +10,54 @@
     </div>
 </div> -->
 
-<div style="margin-top:48px;" *ngIf="isLoggedin; else bckYellow" ></div>
+<div style="margin-top:48px;" *ngIf="isLoggedin; else bckYellow"></div>
 <!-- <div class="categories-items">
     <div class="container newClasscontainer">
         
     </div>
 </div> -->
 <ng-template #bckYellow>
-    <div class="cover-bg">
-        <div class="container newClasscontainer">
-            <div class="signup-panel">
-                <div class="std-heading-3" style="margin-bottom: 8px;">
-                    Sign up and get $10 off <br> your first order*
-                </div>
-                <input type="button" class="std-button std-button--primary" value="Sign up" routerLink="/auth/signup">
-                <input type="button" class="std-button std-button--transparency" value="Log in" routerLink="/auth/signin">
-                <div class="small-home-text" >
-                    *New members only. $30 minimum order
-                </div>
-            </div>
+  <div class="cover-bg">
+    <div class="container newClasscontainer">
+      <div class="signup-panel">
+        <div class="std-heading-3" style="margin-bottom: 8px;">
+          Sign up and get $10 off <br> your first order*
         </div>
+        <input type="button" class="std-button std-button--primary" value="Sign up" routerLink="/auth/signup">
+        <input type="button" class="std-button std-button--transparency" value="Log in" routerLink="/auth/signin">
+        <div class="small-home-text">
+          *New members only. $30 minimum order
+        </div>
+      </div>
     </div>
+  </div>
 </ng-template>
-<section class="table-responsive sticky-navbar">
+<section class="table-responsive sticky-navbar" [ngClass]="{ 'is-hidden': isHidden }">
 
-    <div class="mobile-pad" *ngIf="isLoggedin" ></div>
-    <!-- mobile store search -->
-    <!-- <div class="search-store-mobile d-block d-sm-none">
+  <div class="mobile-pad" *ngIf="isLoggedin"></div>
+  <!-- mobile store search -->
+  <!-- <div class="search-store-mobile d-block d-sm-none">
         <img src="assets/images/navbar/ico_search_blue.png" class="img-input">
         <input class="input-transparent" style="border: none;outline: 0;" type="text" placeholder="What would you like to eat?">
 
     </div> -->
-    <!-- mobile store search end -->
-    <div class="text-center">
-        <ul class="resnt-menu-top-tabs u-margin-bottom-medium" style="margin-bottom:0">
-            <li class="resnt-menu-top-tabs__item custom-border" style="line-height: 20px;">
-                <button class="resnt-menu-top-tabs__button tabs-menu resnt-menu-top-tabs__button__active" style="line-height: 20px;"> Nearby </button>              
-            </li>
-            <li class="resnt-menu-top-tabs__item custom-border">
-                <button class="resnt-menu-top-tabs__button tabs-menu resnt-menu-top-tabs__button__border" routerLink=""> Reviews </button>
-            </li>
-            <li class="resnt-menu-top-tabs__item">
-                <button class="resnt-menu-top-tabs__button tabs-menu" routerLink=""> Likes
-                </button>
-            </li>
-        </ul>
-    </div>
+  <!-- mobile store search end -->
+  <div class="text-center">
+    <ul class="resnt-menu-top-tabs u-margin-bottom-medium" style="margin-bottom:0">
+      <li class="resnt-menu-top-tabs__item custom-border" style="line-height: 20px;">
+        <button class="resnt-menu-top-tabs__button tabs-menu resnt-menu-top-tabs__button__active" style="line-height: 20px;"> Nearby </button>
+      </li>
+      <li class="resnt-menu-top-tabs__item custom-border">
+        <button class="resnt-menu-top-tabs__button tabs-menu resnt-menu-top-tabs__button__border" routerLink=""> Reviews </button>
+      </li>
+      <li class="resnt-menu-top-tabs__item">
+        <button class="resnt-menu-top-tabs__button tabs-menu" routerLink=""> Likes
+        </button>
+      </li>
+    </ul>
+  </div>
 
 </section>
 <div class="store-list-bg">
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </div>
