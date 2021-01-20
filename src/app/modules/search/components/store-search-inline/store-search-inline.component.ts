@@ -58,6 +58,10 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   popoverRef: PopoverRef;
   isMobile: boolean;
 
+  get overlayOpen() {
+    return this.layoutService.isMobile;
+  }
+
   constructor(
     private restApiService: RestApiService,
     private popoverService: PopoverService,
