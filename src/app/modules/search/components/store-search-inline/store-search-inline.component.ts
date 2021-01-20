@@ -55,7 +55,6 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   loading: boolean;
   searchData: any;
   searchTerm: string;
-  overlayOpen: boolean;
   popoverRef: PopoverRef;
   isMobile: boolean;
 
@@ -96,7 +95,7 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
         this.searchData = res;
       });
     if (
-      !this.overlayOpen &&
+      !this.searchDataServ.overlayOpen &&
       (this.searchDataServ.getHistory().length > 0 || this.searchData?.length)
     ) {
       this.openComponentPopover();
@@ -107,7 +106,7 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
     this.keyupSubs.unsubscribe();
     setTimeout(() => {
       this.popoverRef.dismiss();
-      this.overlayOpen = false;
+      this.searchDataServ.overlayOpen = false;
     }, 100);
   }
 
@@ -116,18 +115,18 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
       xPos: this.layoutService.isMobile ? 'center' : 'end',
       yPos: 'bottom',
       onDismiss: () => {
-        this.overlayOpen = false;
+        this.searchDataServ.overlayOpen = false;
       },
     };
     // hasBackdrop ?: true | false;
     // darkBackground ?: true | false;
-    if (this.overlayOpen) return;
+    if (this.searchDataServ.overlayOpen) return;
     this.popoverRef = this.popoverService.openTemplatePopover(
       this.searchContainer,
       this.panelTemplate,
       popoverConfig
     );
-    this.overlayOpen = true;
+    this.searchDataServ.overlayOpen = true;
   }
 
   handleEnter(value) {

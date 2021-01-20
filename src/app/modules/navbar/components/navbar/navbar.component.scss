@@ -7,10 +7,15 @@
 :host > div {
   position: fixed;
   width: 100%;
-  top: 0px;
+  top: -120px;
   z-index: 900;
   background: var(--color-primary);
   color: var(--color-background);
+  transition: top 0.5s;
+
+  &.is-active {
+    top: 0px;
+  }
 
   & > div {
     display: flex;
@@ -40,6 +45,7 @@
 }
 @media (min-width: 991.98px) {
   :host > div {
+    top: 0px;
     & > div {
       flex-direction: row;
       justify-content: space-between;

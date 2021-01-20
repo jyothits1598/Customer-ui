@@ -6,12 +6,6 @@
 @import "~@angular/cdk/overlay-prebuilt.css";
 @import "./styles/animations";
 
-body {
-  overflow: hidden;
-  margin: 0px;
-  padding: 0px;
-}
-
 .modal-content {
   border: 0 !important;
   border-radius: 0 !important;

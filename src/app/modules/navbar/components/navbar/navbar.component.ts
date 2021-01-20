@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  HostListener,
   OnDestroy,
   OnInit,
   TemplateRef,
@@ -16,6 +17,7 @@ import { ModalService } from 'src/app/core/services/modal.service';
 import { PopoverService } from 'src/app/core/services/popover.service';
 import { LayoutService } from 'src/app/core/services/layout.service';
 import { NavbarService } from '../../services/navbar.service';
+import { SearchDataService } from 'src/app/modules/search/services/search-data.service';
 
 @Component({
   selector: 'app-navbar',
@@ -26,6 +28,8 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   isLoggedin$: Observable<boolean>;
   template: TemplateRef<any>;
 
+  isNavBarActive = true;
+
   //view reference will be stored only when the location selector view has been detached
   locationViewRef: ViewRef;
 
@@ -34,13 +38,24 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('vCont', { read: ViewContainerRef })
   containerRef: ViewContainerRef;
 
+  @HostListener('window:scroll', ['$event'])
+  onScroll(event) {
+    const y = window.pageYOffset;
+    if (y < 300 || this.searchDataServ.overlayOpen) {
+      this.isNavBarActive = true;
+    } else {
+      this.isNavBarActive = false;
+    }
+  }
+
   templateSubs: Subscription;
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private layoutService: LayoutService,
-    private navbarService: NavbarService
+    private navbarService: NavbarService,
+    private searchDataServ: SearchDataService
   ) {}
 
   ngOnInit(): void {

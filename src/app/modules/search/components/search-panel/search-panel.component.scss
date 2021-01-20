@@ -12,7 +12,7 @@ li {
     width: 48px;
   }
 
-  & > div {
+  &:not(:last-of-type) > div {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     width: 100%;
   }
