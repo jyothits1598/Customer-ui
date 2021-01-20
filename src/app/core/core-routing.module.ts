@@ -11,6 +11,7 @@ import { PaymentComponent } from '../modules/order/pages/payment/payment.compone
 import { ConfirmationComponent } from '../modules/order/pages/confirmation/confirmation.component';
 import { CartSummaryComponent } from '../modules/order/pages/cart-summary/cart-summary.component';
 import { OrderContainerComponent } from '../modules/order/components/cart-button/order-container/order-container.component';
+import { AddPaymentOptionsComponent } from '../modules/order/components/add-payment-options/add-payment-options.component';
 
 const routes: Routes = [
   { path: 'sample', component: SampleComponent },
@@ -36,6 +37,11 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full'
+      },
+      {
         path: 'home',
         loadChildren: () => import('src/app/modules/home/home.module').then(m => m.HomeModule)
       },
@@ -59,17 +65,10 @@ const routes: Routes = [
       }
     ]
   },
-
   {
     path: 'status',
     component: OrderContainerComponent,
     outlet: 'order',
-    children: [
-      {
-        path: 'cart',
-        component: CartComponent,
-      },
-    ]
   },
   {
     path: 'cart',
@@ -79,6 +78,11 @@ const routes: Routes = [
   {
     path: 'cart-summary',
     component: CartSummaryComponent,
+    outlet: 'order'
+  },
+  {
+    path: 'add-payment-opt',
+    component: AddPaymentOptionsComponent,
     outlet: 'order'
   },
   {

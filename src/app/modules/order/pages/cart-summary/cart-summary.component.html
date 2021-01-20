@@ -1,1 +1,10 @@
-<p>cart-summary works!</p>
+<div class="right-content">
+    <div class="right-content-overflow">
+        <cart-content></cart-content>
+        <!-- <payment-options></payment-options> -->
+        <div (click)=addPayment()>
+            Add payment options >
+        </div>
+        <button *ngIf="cartTotal$ | async; let total" (click)="makePayment()">Make Payment{{total}}</button>
+    </div>
+</div>

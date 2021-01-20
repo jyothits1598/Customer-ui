@@ -47,7 +47,6 @@ export class CartService {
 
     this.authService.loggedUser$.subscribe((user) => {
       let savedData = this.storageService.get(this.storageIdentifier);
-      console.log('datat from savedData', savedData)
       if (savedData) this.addItem(savedData).subscribe();
       else {
         if (user) {

@@ -16,27 +16,14 @@ export class CartComponent implements OnInit, OnDestroy {
     private cartService: CartService,
     private router: Router
   ) { }
-  cartData$: Observable<CartData>;
   cartTotal$: Observable<number>;
   unsub$ = new Subject<true>();
 
-  makeCalculations: (itemBasePrice: number, selectedModifiers: Array<ItemModifier>, count: number) => number;
-
   ngOnInit(): void {
-    this.makeCalculations = this.cartService.makeCalculations;
-    this.cartData$ = this.cartService.cartData$;
     this.cartTotal$ = this.cartService.cartTotalAmount$;
   }
 
-  deleteItem(itemId: number) {
-    this.cartService.deleteItem(itemId).pipe(takeUntil(this.unsub$)).subscribe(item => { console.log('delete subs', item) });
-  }
-
-  closeCart() {
-    this.router.navigate([{ outlets: { 'order': null } }])
-  }
-
-  continue(){
+  continue() {
     this.router.navigate([{ outlets: { 'order': ['cart-summary'] } }]);
   }
 

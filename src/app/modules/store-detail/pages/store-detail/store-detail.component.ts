@@ -56,7 +56,7 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
     })
 
     // open cart by default
-    if (!this.router.url.includes('order:cart')) this.router.navigate([{ outlets: { 'order': ['cart'] } }], { replaceUrl: true })
+    if (!this.router.url.includes('(order:')) this.router.navigate([{ outlets: { 'order': ['cart'] } }], { replaceUrl: true })
 
   }
 
