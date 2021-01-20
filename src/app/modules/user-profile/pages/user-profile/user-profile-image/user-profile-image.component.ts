@@ -18,7 +18,6 @@ export class UserProfileImageComponent implements OnInit {
   validFileFormats = ['.jpeg', '.jpg', '.png', '.gif'];
   asyncValidators = [AsyncFileValidators.imageSizeValidator(500, 500, 500, 500)];
   profileData: UserProfile;
-  
   constructor(private userProfData: UserProfileDataService) { }
 
   handleFileUpload(file: File) {
@@ -42,7 +41,7 @@ export class UserProfileImageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userProfData.getProfileData().subscribe(prof => { this.profileData = prof; });
+    this.userProfData.getProfileData().subscribe(prof => { this.profileData = prof;});
   }
 
 }

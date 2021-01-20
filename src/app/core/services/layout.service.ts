@@ -6,7 +6,7 @@ import { Injectable, OnInit } from '@angular/core';
 })
 export class LayoutService {
   get isMobile(): boolean {
-    return this.window.document.documentElement.clientWidth < 500;
+    return this.window.document.documentElement.clientWidth < 992;
   }
 
   matcher: MediaQueryList;

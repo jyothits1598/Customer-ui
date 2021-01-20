@@ -92,4 +92,9 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.templateSubs.unsubscribe();
   }
+
+  ShouldShoWSearch() {
+    return !(this.router.url !== '/' && this.layoutService.isMobile);
+  }
+
 }

@@ -1,27 +1,9 @@
-<!-- <div style="background: #fafafa;"> -->
-    <!-- <section class="table-responsive sticky-navbar" style="margin-top:48px;">
-        <div class="text-center" style="background: #fff;">
-            <ul class="resnt-menu-top-tabs u-margin-bottom-medium" style="margin-bottom:0">
-                <li class="resnt-menu-top-tabs__item custom-border">
-                    <button class="resnt-menu-top-tabs__button tabs-menu resnt-menu-top-tabs__button__active"> Nearby </button>
-                </li>
-                <li class="resnt-menu-top-tabs__item custom-border">
-                    <button class="resnt-menu-top-tabs__button tabs-menu resnt-menu-top-tabs__button__border" routerLink=""> Reviews </button>
-                </li>
-                <li class="resnt-menu-top-tabs__item">
-                    <button class="resnt-menu-top-tabs__button tabs-menu" routerLink=""> Likes
-                    </button>
-                </li>
-            </ul>
-        </div>
-    </section> -->
-    <ng-template appNavbarHeadingContent>
-        <div class="title-content-search profile-save-text">
-            <img src="assets/images/ico_arrow_left_white.png" routerLink="../" alt="" style="padding-right: 16px;outline: 0;">
-            <span *ngIf="resultCount !== null">{{resultCount}} store{{resultCount===1? '':'s'}} nearby</span>
-        </div>
-    </ng-template>
-    <div class="store-search">
-        <store-list (totalCount)="resultCount = $event" *ngIf="storeFilter" [filter]="storeFilter"></store-list>
+<ng-template appNavbarHeadingContent>
+    <div class="title-content-search profile-save-text">
+        <img src="assets/images/ico_arrow_left_white.png" routerLink="../" alt="" style="padding-right: 16px;outline: 0;">
+        <span *ngIf="resultCount !== null">{{resultCount}} store{{resultCount===1? '':'s'}} nearby</span>
     </div>
-<!-- </div> -->
+</ng-template>
+<div class="store-search">
+    <store-list (totalCount)="resultCount = $event" *ngIf="storeFilter" [filter]="storeFilter"></store-list>
+</div>
