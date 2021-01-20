@@ -67,13 +67,12 @@ body {
     list-style: none;
     padding: 0px;
     width: 100%;
-    font-size: 14px;    
-    font-style: normal;
-    font-weight: 500;
-    color: var(--color-boldlevelcolor);
-    height: 48px;
+    font-size: 14px !important;
+    font-style: normal !important;
+    font-weight: 500 !important;
+    color: var(--color-boldlevelcolor) !important;
+    height: 48px !important;
     overflow: hidden;
-    line-height: 20px !important;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -82,10 +81,12 @@ body {
     }
     &__button{
         background-color: transparent;
-        height:48px;
         border: none;
         outline: none !important;
         width:125px;
+        padding:14px 0;
+        line-height: 20px;
+        // border-right: 2px #E5E5E5 solid;
         &__active{
             position: relative;
         }
@@ -95,7 +96,7 @@ body {
             position: absolute;
             bottom: 0px;
             left: 32%;
-            width: 35%;
+            width: 38.4%;
         }
     }    
 }
@@ -106,12 +107,17 @@ body {
   content: " ";
   position: absolute;
   border-left: 2px #E5E5E5 solid;
-  top: 35%;
+  top: 25%;
   right: 0;
-  height: 35%;
+  height: 50%;
   margin-top: auto;
   margin-bottom: auto;
 }
+// .b-d {
+//   border-right: 2px #E5E5E5 solid;
+//   padding-top: 12px;
+//   padding-bottom: 12px;
+// }
 .signup-header {    
     font-style: normal;
     font-weight: bold;

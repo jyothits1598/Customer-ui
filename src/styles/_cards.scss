@@ -73,8 +73,13 @@
 .chat-icons li {
     list-style-type: none;
     float:left;
-    padding-right: 25px;
     cursor: pointer;
+    .heart {
+        padding-right: 28px;
+    }
+    .share {
+        padding-right: 29px;
+    }
 }
 .comment-text {    
     font-style: normal;

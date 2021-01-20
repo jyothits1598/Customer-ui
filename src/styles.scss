@@ -572,3 +572,70 @@ input[class="cb"]:checked + span:before {
 // .tel-error.error-highlight{
 //     border: 1px solid red;
 // }
+
+.home-icon {
+  background-image: url("assets/svg/signup/ico_home.svg");
+  width:40px;
+  height:40px;
+  &:hover {
+    background-image: url("assets/svg/signup/ico_home_h.svg");
+  }
+}
+.fav-icon {
+  background-image: url("assets/svg/signup/ico_heart.svg");
+  width:40px;
+  height:40px;
+  &:hover {
+    background-image: url("assets/svg/signup/ico_heart_h.svg");
+  }
+}
+.bell-icon{
+  background-image: url("assets/svg/signup/ico_bell.svg");
+  width:40px;
+  height:40px;
+  &:hover {
+    background-image: url("assets/svg/signup/ico_bell_h.svg");
+  }
+}
+.menu-icon {
+  margin-right:12px;
+  background-image: url("assets/svg/signup/ico_menu.svg");
+  width:40px;
+  height:40px;
+  &:hover {
+    background-image: url("assets/svg/signup/ico_menu_h.svg");
+  }
+}
+.user-icon {
+  background-image: url("assets/svg/signup/ico_account.svg");
+  width:40px;
+  height:40px;
+  &:hover {
+    background-image: url("assets/svg/signup/ico_account_h.svg");
+  }
+}
+.home-icon-mobile {
+  background-image: url("assets/svg/mobile/ico_home_m.svg");
+  width:40px;
+  height:40px;
+}
+.user-icon-mobile {
+  background-image: url("assets/svg/mobile/ico_account_m.svg");
+  width:40px;
+  height:40px;
+}
+.fav-icon-mobile {
+  background-image: url("assets/svg/mobile/ico_heart_m.svg");
+  width:40px;
+  height:40px;
+}
+.bell-icon-mobile {
+  background-image: url("assets/svg/mobile/ico_bell_m.svg");
+  width:40px;
+  height:40px;
+}
+.menu-icon-mobile {
+  background-image: url("assets/svg/mobile/ico_menu_m.svg");
+  width:40px;
+  height:40px;
+}

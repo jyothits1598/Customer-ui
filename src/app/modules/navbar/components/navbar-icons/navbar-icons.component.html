@@ -1,28 +1,26 @@
 <ul class="menu">
     <li class="auto-width" *ngIf="!isLoggedin"></li>
-    <li class="auto-width" routerLink="/" style="cursor: pointer;outline:none"> 
-        <!-- <img class="a1 img-display-desktop" src="assets/images/navbar/ico_home.png"> -->
-        <img [src]= "home_status ? active_image : inactive_image" class="a1 img-display-desktop">
-        <img class="img-display-mobile" src="assets/images/profile/ico_home.png" >
+    <li class="auto-width cu-out" routerLink="/"> 
+        <div class="home-icon img-display-desktop"></div>
+        <div class="home-icon-mobile img-display-mobile"></div>
     </li>
     <ng-template #block>
-        <li class="auto-width" routerLink="/auth/signup" style="cursor: pointer;outline:none;padding-right:16px;">  
-            <img class="a1 img-display-desktop" src="assets/images/navbar/ico_account.png">
-            <img class="img-display-mobile" src="assets/images/profile/ico_account.png" >
+        <li class="auto-width cu-out pr-12" routerLink="/auth/signup" >  
+            <div class="user-icon img-display-desktop"></div>
+            <div class="user-icon-mobile img-display-mobile"></div>
         </li>
         <li class="auto-width"></li>
     </ng-template>
     <ng-container *ngIf="isLoggedin; else block">
-        <li class="auto-width" routerLink="/favourites" style="cursor: pointer;outline:none"> 
-            <img [src]= "fav_status ? fv_active_image : fv_inactive_image" class="a1 img-display-desktop">
-            <!-- <img class="a1 img-display-desktop" src="assets/images/navbar/ico_heart.png">  -->
-            <img class="img-display-mobile" src="assets/images/profile/ico_heart.png"> 
+        <li class="auto-width cu-out" routerLink="/favourites">
+            <div class="fav-icon img-display-desktop"></div>
+            <div class="fav-icon-mobile img-display-mobile"></div>
         </li>
-        <li class="auto-width" routerLink="/" style="cursor: pointer;outline:none"> 
-            <img class="a1 img-display-desktop" src="assets/images/navbar/ico_bell.png" > 
-            <img class="img-display-mobile" src="assets/images/profile/ico_bell.png" > 
+        <li class="auto-width cu-out" routerLink="/" > 
+            <div class="bell-icon img-display-desktop"></div>
+            <div class="bell-icon-mobile img-display-mobile"></div>
         </li>
-        <li class="auto-width" style="cursor: pointer;outline:none;">
+        <li class="auto-width cu-out">
             <signed-in-options></signed-in-options>
         </li>
     </ng-container>

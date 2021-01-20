@@ -50,10 +50,14 @@
             <span>
                 <ul class="chat-icons">
                     <li>
-                        <store-heart [store]="{id: store.id, isFavourite: store.isFavourite, page:'main'}"></store-heart>
+                        <span class="heart">
+                            <store-heart [store]="{id: store.id, isFavourite: store.isFavourite, page:'main'}"></store-heart>
+                        </span>
                     </li>
                     <li>
-                        <app-share [isIconBlack]="true" [store]="store"></app-share>
+                        <span class="share">
+                            <app-share [isIconBlack]="true" [store]="store"></app-share>
+                        </span>
                     </li>
                     <li>
                         <a [href]="'https://www.google.com/maps/dir/?api=1&destination='+store.latLng.lat+','+store.latLng.lng" target="_blank" style="text-decoration: none;">
