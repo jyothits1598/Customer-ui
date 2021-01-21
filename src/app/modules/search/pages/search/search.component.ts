@@ -24,7 +24,6 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subs = this.route.queryParams.pipe(
-      tap(()=>console.log('search query param')),
       filter(param => param.q),
       mergeMap((query: any) => this.location.userLocation().pipe(
         map(loc => ({ name: query.q, location: loc.latLng }))

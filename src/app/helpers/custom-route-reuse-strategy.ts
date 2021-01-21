@@ -8,15 +8,15 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
     }
     store(route: ActivatedRouteSnapshot, handle: DetachedRouteHandle): void {
         this.storedRouteHandles.set(this.getKey(route, route.data.key), handle);
-        console.log(this.storedRouteHandles);
+        // console.log(this.storedRouteHandles);
     }
     shouldAttach(route: ActivatedRouteSnapshot): boolean {
-        console.log('should attach condition', (route.data.reuseRoute === true) && !!this.storedRouteHandles.get(this.getKey(route, route.data.key)))
+        // console.log('should attach condition', (route.data.reuseRoute === true) && !!this.storedRouteHandles.get(this.getKey(route, route.data.key)))
         return (route.data.reuseRoute === true) && !!this.storedRouteHandles.get(this.getKey(route, route.data.key));
     }
     retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle {
         let condition = route.routeConfig ? this.storedRouteHandles.get(this.getKey(route, route.data.key)) : null;
-        console.log('retrieve condition', condition);
+        // console.log('retrieve condition', condition);
         if (route.routeConfig) return this.storedRouteHandles.get(this.getKey(route, route.data.key));
         else return null;
     }
@@ -26,7 +26,7 @@ export class CustomRouteReuseStrategy implements RouteReuseStrategy {
 
     private getKey(route: ActivatedRouteSnapshot, key: string): string {
         // console.log('get key', route.queryParams)
-        console.log('get key', route.url + Object.values(route.queryParams).join('') + key);
+        // console.log('get key', route.url + Object.values(route.queryParams).join('') + key);
         return Object.values(route.queryParams).join('') + key
     }
 
