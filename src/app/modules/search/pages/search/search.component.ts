@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { concatMap, filter, map, mergeMap } from 'rxjs/operators'
 import { GeoLocationService } from 'src/app/core/services/geo-location.service';
+import { LayoutService } from 'src/app/core/services/layout.service';
 import { NavbarService } from 'src/app/modules/navbar/services/navbar.service';
 import { StoreFilter } from 'src/app/modules/stores/model/StoreFilter';
 import { SearchDataService } from '../../services/search-data.service';
@@ -16,12 +17,16 @@ export class SearchComponent implements OnInit, OnDestroy {
   storeFilter: StoreFilter;
   subs: Subscription;
   resultCount: number = null;
-
+  isMobile: boolean;
+  
   constructor(private router: Router,
     private route: ActivatedRoute,
     private location: GeoLocationService,
     private searchDataServ: SearchDataService,
-    private navbarService: NavbarService) { }
+    private layoutService: LayoutService,
+    private navbarService: NavbarService) {
+      this.isMobile = this.layoutService.isMobile;
+     }
 
   ngOnInit(): void {
     this.subs = this.route.queryParams.pipe(

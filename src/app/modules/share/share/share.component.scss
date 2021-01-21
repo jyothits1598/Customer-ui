@@ -1,16 +1,21 @@
-.social-icons {
+.social-icons{
     cursor: pointer;
     border-radius: 4px;
-    font-size: 16px;
-    text-align: center;
-    font-style: normal;
-    font-weight: bold;
     margin-bottom:8px;
-    height:56px;
-    line-height:20px;
     border:0;
     width: 100%;
     outline: 0; 
+    text-align: center;
+    padding:18px;
+    height:56px;
+    & label {
+        font-size: 16px;
+        font-style: normal;
+        font-weight: bold;
+        line-height:20px;
+        margin:0;
+        padding-left:8px;
+    }
     &--fb {
         background:#1877F2;
         color: var(--color-background);
@@ -26,15 +31,16 @@
 }
 .share-social {
     background:var(--color-background);
-    padding: 16px;
     margin-top: 25px;
     box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.2);
     border-radius: 16px;
     max-width:328px;
+    & .pd-comp {
+       padding:16px;
+    }
 }
 .mrtb {
     margin-bottom:24px;
-    margin-top:16px;
 }
 .sh-box {
     cursor: pointer;

@@ -26,12 +26,14 @@
     overflow: hidden;
     text-overflow: ellipsis;
     width:220px;
+    color: var(--color-boldlevelcolor);
 }
 .sub-name {   
     font-style: normal;
     font-weight: normal;
     font-size: 12px;
     line-height: 16px;
+    color: var(--color-boldlevelcolor);
 }
 .store-image {
     width:100%;

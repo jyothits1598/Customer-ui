@@ -4,6 +4,7 @@
         <span *ngIf="resultCount !== null">{{resultCount}} store{{resultCount===1? '':'s'}} nearby</span>
     </div>
 </ng-template>
+<div style="margin-top:120px" *ngIf="isMobile"></div>
 <div class="store-search">
     <store-list (totalCount)="resultCount = $event" *ngIf="storeFilter" [filter]="storeFilter"></store-list>
 </div>
