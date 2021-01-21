@@ -5,27 +5,31 @@
 
 <ng-template #sharePanel>
     <div class="share-social">
-        <img src="assets/images/ico_close.png" style="cursor: pointer;" (click)="close()"> <span *ngIf="showpopup" class="f11" id="hideMe"> URL Copied </span>
-        <div class="std-heading-4 mrtb">
-            Share this with your social community
+        <div style="padding:12px">
+            <img src="assets/svg/ico_close.svg" style="cursor: pointer;" (click)="close()"> <span *ngIf="showpopup" class="f11" id="hideMe"> URL Copied </span>
         </div>
-        <div (click)="fbShare()" class="social-icons social-icons--fb">
-            <img src="assets/images/profile/ico_social_facebook.png"> Facebook
-        </div>
-        <a [href]="'http://twitter.com/share?text='+caption+'&url='+url" target="_blank" class="sh-box">
-            <div class="social-icons social-icons--twt">
-                <img src="assets/images/profile/ico_social_twitter.png"> Twitter
+       <div class="pd-comp">
+            <div class="std-heading-4 mrtb">
+                Share this with your social community
             </div>
-        </a>
+            <div (click)="fbShare()" class="social-icons social-icons--fb">
+                <img src="assets/svg/ico_social_facebook.svg"><label>Facebook</label>
+            </div>
+            <a [href]="'http://twitter.com/share?text='+caption+'&url='+url" target="_blank" class="sh-box">
+                <div class="social-icons social-icons--twt">
+                    <img src="assets/svg/ico_social_twitter.svg"><label>Twitter</label> 
+                </div>
+            </a>
 
-        <a [href]="'mailto:?body='+ url +'&subject=' + caption" class="sh-box">
-            <div class="social-gmail" class="social-icons social-icons--email">
-                <img src="assets/images/profile/ico_email.png"> Email
+            <a [href]="'mailto:?body='+ url +'&subject=' + caption" class="sh-box">
+                <div class="social-gmail" class="social-icons social-icons--email">
+                    <img src="assets/svg/ico_email.svg"><label>Email</label>
+                </div>
+            </a>
+            <div class="social-icons social-icons--email" style="margin-bottom: 0;" (click)="copyUrl()">
+                <img src="assets/svg/ico_link.svg"><label>Copy link</label>
             </div>
-        </a>
-        <div class="social-icons social-icons--email" style="margin-bottom: 0;" (click)="copyUrl()">
-            <img src="assets/images/profile/ico_link.png"> Copy link
+            <input type="text" [value]="url" id="hideMe" #urlCopyInput class="hide-div" style="color:transparent;border:0">
         </div>
-        <input type="text" [value]="url" id="hideMe" #urlCopyInput class="hide-div" style="color:transparent;border:0">
     </div>
 </ng-template> 
