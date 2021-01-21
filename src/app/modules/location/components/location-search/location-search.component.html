@@ -1,17 +1,8 @@
-<!-- <div class="row">
-    <div class="col-md-12"> -->
-        <!-- <div class="input-container"> -->
-            <!-- <img src="assets/images/ico_arrow_left.png" class="input-img-top" (click)="searchedLocation.emit(null)"> -->
-            <!-- <input type="text" class="input-search-border" #searchInput placeholder="Enter address or suburb"> -->
-            <!-- <img src="assets/images/ico_arrow_left.png"> -->
-        <!-- </div> -->
-    <!-- </div>
-</div> -->
 <div style="border-bottom:1px solid #ccc;padding:8px;">
     <table class="search-ipt-panel" >
         <tr>
-            <td valign="middle" style="cursor: pointer;">
-                <img src="assets/images/ico_arrow_left.png" (click)="searchedLocation.emit(null)">
+            <td valign="middle" style="cursor: pointer;padding-right: 8px;">
+                <img src="assets/svg/ico_arrow_left_blue.svg" (click)="searchedLocation.emit(null)">
             </td>
             <td>
                 <input type="text" #searchInput placeholder="Enter address or suburb" class="border-box-input">
@@ -23,11 +14,11 @@
     </table>
 </div>
 <div *ngIf="!suggestionsLoading">
-    <div *ngFor="let suggestion of suggestions" (click)="onLocSelect(suggestion)" style="padding:0 0 0 10px">
+    <div *ngFor="let suggestion of suggestions" (click)="onLocSelect(suggestion)" style="padding:0 0 0 16px">
         <table style="cursor: pointer;">
             <tr>
-                <td valign="middle" style="padding-right: 10px;">
-                    <img src="assets/images/ico_place.png">
+                <td valign="middle" style="padding-right: 16px;">
+                    <img src="assets/svg/ico_place_tab.svg">
                 </td>
                 <td style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;padding: 5px 0px;">
                     <div class="paragraph"> {{suggestion.structured_formatting.main_text}} </div>

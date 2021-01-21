@@ -1,17 +1,17 @@
 <div class="custom-location-body">
-  <div *ngIf="searchTerm" class="history">New search</div>
+  <div *ngIf="searchTerm" class="history" style="margin-top:12px">New search</div>
   <ul style="list-style-type: none;cursor: pointer; margin-bottom: 0;">
     <ng-container *ngIf="searchTerm">
       <li (click)="handleClick(searchTerm)" routerLink="/search" [queryParams]="{q:searchTerm}" tabindex="1">
-        <img src="assets/images/ico_search_plane.png">
+        <img src="assets/svg/ico_search_tabs.svg" >
         <div> Results for "{{searchTerm}}" </div>
       </li>
       <li (click)="handleClick(result.store_name)" *ngFor="let result of results" routerLink="/search" [queryParams]="{q:result.store_name}" tabindex="1">
-        <img src="assets/images/ico_search_plane.png">
+        <img src="assets/svg/ico_search_tabs.svg">
         <div>{{result.store_name}}</div>
       </li>
       <li *ngIf="results && results.length === 0" tabindex="1">
-        <img src="assets/images/ico_search_plane.png">
+        <img src="assets/svg/ico_search_tabs.svg">
         <div>No results</div>
       </li>
     </ng-container>

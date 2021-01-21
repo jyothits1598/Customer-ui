@@ -21,9 +21,9 @@
 
 <div *ngIf="isMobile && overlayOpen" class="mobile-banner">
   <div class="container">
-    <button type="button" class="mobile-banner__ico profile-save-text" (click)="closeSearchBox()">
-      <img src="assets/images/ico_arrow_left_white.png" alt="" style="padding-right: 16px;"> Search
-    </button>
+    <span class="mobile-banner__ico profile-save-text">
+      <img src="assets/svg/ico_arrow_left.svg" alt="" (click)="closeSearchBox()" class="se-inline"> Search
+    </span>
   </div>
 </div>
 <!-- <span *ngIf="overlayOpen"

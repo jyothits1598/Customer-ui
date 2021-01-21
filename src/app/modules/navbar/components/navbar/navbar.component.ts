@@ -56,7 +56,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     private layoutService: LayoutService,
     private navbarService: NavbarService,
     private searchDataServ: SearchDataService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.isLoggedin$ = this.authService.isLoggedIn$();
@@ -94,7 +94,9 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ShouldShoWSearch() {
-    return !(this.router.url !== '/' && this.layoutService.isMobile);
+    console.log(this.router.url);
+    // return !((this.router.url !== '/' || !this.router.url.includes('/search')) && this.layoutService.isMobile);
+    return !this.layoutService.isMobile || this.router.url === '/' || this.router.url.includes('/search');
   }
 
 }

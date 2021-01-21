@@ -8,11 +8,11 @@
             <div class="placeholder-header">
                 Recent locations
             </div>
-            <div *ngFor="let loc of locationHistory" style="padding:0 0 0 10px;cursor: pointer;">
+            <div *ngFor="let loc of locationHistory" style="padding:0 0 0 16px;cursor: pointer;">
                 <table (click)="handleLocation(loc)">
                     <tr>
-                        <td valign="middle" style="padding-right: 10px;">
-                            <img src="assets/images/ico_history.png">
+                        <td valign="middle" style="padding-right: 16px;">
+                            <img src="assets/svg/ico_history_tab.svg">
                         </td>
                         <td style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;padding: 5px 0px;">
                             <div class="paragraph"> {{loc.address.locality}} </div>

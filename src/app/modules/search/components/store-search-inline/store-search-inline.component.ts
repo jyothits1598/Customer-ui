@@ -59,7 +59,8 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   isMobile: boolean;
 
   get overlayOpen() {
-    return this.layoutService.isMobile;
+    // return this.layoutService.isMobile;
+    return this.searchDataServ.overlayOpen;
   }
 
   constructor(
