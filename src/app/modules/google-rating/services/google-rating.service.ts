@@ -13,6 +13,7 @@ export class GoogleRatingService {
   }
 
   getRating(name: string, address: string): Observable<number> {
+    return null;
     return new Observable(
       (observer) => {
         this.placeService.textSearch({ query: `${name}, ${address}` }, (resp) => {
