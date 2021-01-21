@@ -37,7 +37,7 @@ export class StoreListComponent implements OnInit {
 
   appendStores(stores) {
     this.totalCount.emit(this.pagination.totalCount);
-    this.stores.splice(this.stores.length, 0, ...stores)
+    this.stores.splice(this.stores.length, 0, ...stores);
   }
 
   handleScrolled() {
