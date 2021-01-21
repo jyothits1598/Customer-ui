@@ -33,11 +33,6 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
   constructor(private storeDetailServ: StoreDetailDataService,
     private route: ActivatedRoute, private geoLoc: GeoLocationService,private location: Location) { }
 
-  renderLikeBtn(): void {
-    console.log('rendereing like', FB.XFBML, this.fbParent);
-    FB.XFBML.parse();
-  }
-
   observeIntersection() {
     let obs = new IntersectionObserver((entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
       if (entries[0].isIntersecting) this.scrolledDown = false;
@@ -59,7 +54,6 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
     this.routeParamsSubs = this.route.params.pipe(
       mergeMap((param) => this.geoLoc.userLocation().pipe(map(loc => { return { param: param.id, location: loc } })))
     ).subscribe((data) => {
-      console.log(data);
       let id = parseInt(data.param);
       if (id) {
         this.storeId = id;

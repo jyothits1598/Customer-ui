@@ -7,9 +7,10 @@ export const environment = {
 };
 
 
+
 /* Test server */
-export const API_URL_LINK = 'https://uat.api.menuzapp.com/';
-// export const API_URL_LINK = 'https://dev.api.menuzapp.com/';
+// export const API_URL_LINK = 'https://uat.api.menuzapp.com/';
+export const API_URL_LINK = 'https://dev.api.menuzapp.com/';
 
 export const APP_LINK = 'http://localhost:4200/';
 

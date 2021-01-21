@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
-import { take } from 'rxjs/internal/operators/take';
-import { takeUntil } from 'rxjs/operators';
-import { Pagination, StorePagination } from 'src/app/shared/classes/pagination';
+import { take } from 'rxjs/operators';
+import { StorePagination } from 'src/app/shared/classes/pagination';
 import { InfiniteScrollDirective } from 'src/app/shared/directives/infinite-scroll.directive';
 import { Store } from '../../model/store';
 import { StoreFilter } from '../../model/StoreFilter';
@@ -30,7 +29,7 @@ export class StoreListComponent implements OnInit {
   @ViewChild('infiniteScroll', { read: InfiniteScrollDirective }) infiniteScroll: InfiniteScrollDirective;
 
   constructor(
-    private storeData: StoresDataService,
+    private storeData: StoresDataService
   ) { }
 
   ngOnInit(): void {
