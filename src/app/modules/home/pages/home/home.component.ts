@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { pairwise, takeUntil } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { LayoutService } from 'src/app/core/services/layout.service';
 import { SearchDataService } from 'src/app/modules/search/services/search-data.service';
@@ -17,23 +19,49 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     protected searchService: SearchDataService,
-    private layoutService: LayoutService
+    private layoutService: LayoutService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.isMobile = this.layoutService.isMobile;
   }
 
+  unSub$ = new Subject<true>();
+
+
   ngOnInit(): void {
     // this.isLoggedin$ = this.authService.isLoggedIn$();
-    this.stateSubs = this.authService
-      .isLoggedIn$()
+    this.authService
+      .isLoggedIn$().pipe(takeUntil(this.unSub$))
       .subscribe((state) => (this.isLoggedin = state));
+
+    // this.router.events.pipe(pairwise()).subscribe(([prevRouteEvent, currRouteEvent]) => {
+    //   if (prevRouteEvent instanceof NavigationEnd && currRouteEvent instanceof NavigationStart) {
+    //     this._routeScrollPositions[prevRouteEvent.url] = window.pageYOffset;
+    //   }
+    //   if (currRouteEvent instanceof NavigationEnd) {
+    //     window.scrollTo(0, this._routeScrollPositions[currRouteEvent.url] || 0);
+    //   }
+    // })
+
+    // this.router.events.pipe().subscribe((event) => {
+    //   // if(event instanceof NavigationEnd || event instanceof NavigationStart){
+    //   console.log(this.router.routerState);
+    //   // console.log(event1, event2)?
+    // })
+    // this.route.data.subscribe((data)=>{console.log('printing data', data)})
   }
+
+  // ngOnInit() {
+
+  //   // save or restore scroll position on route change
+  // }
 
   get isHidden(): boolean {
     return this.searchService.overlayOpen;
   }
 
   ngOnDestroy(): void {
-    this.stateSubs.unsubscribe();
+    this.unSub$.next(true);
   }
 }

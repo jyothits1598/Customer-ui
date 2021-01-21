@@ -1,9 +1,9 @@
-<ng-template appNavbarHeadingContent>
+<!-- <ng-template appNavbarHeadingContent>
     <div class="title-content-search profile-save-text">
         <img src="assets/svg/ico_arrow_left.svg" routerLink="../" alt="" style="padding-right: 16px;outline: 0;">
         <span *ngIf="resultCount !== null">{{resultCount}} store{{resultCount===1? '':'s'}} nearby</span>
     </div>
-</ng-template>
+</ng-template> -->
 <div class="store-search">
     <store-list (totalCount)="resultCount = $event" *ngIf="storeFilter" [filter]="storeFilter"></store-list>
 </div>

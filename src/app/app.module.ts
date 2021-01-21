@@ -7,6 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PrivacyPolicyComponent } from 'src/app/modules/privacy-policy/privacy-policy.component';
 import { TermsServiceComponent } from 'src/app/modules/terms-service/terms-service.component';
+import { RouteReuseStrategy } from '@angular/router';
+import { CustomRouteReuseStrategy } from './helpers/custom-route-reuse-strategy';
 
 
 @NgModule({
@@ -20,9 +22,15 @@ import { TermsServiceComponent } from 'src/app/modules/terms-service/terms-servi
     AppRoutingModule,
     CoreModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+
   ],
-  providers: [],
+  providers: [
+    {
+      provide: RouteReuseStrategy,
+      useClass: CustomRouteReuseStrategy,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

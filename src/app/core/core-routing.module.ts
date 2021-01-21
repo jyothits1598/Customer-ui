@@ -4,7 +4,7 @@ import { UnderConstructionComponent } from '../modules/authentication/under-cons
 import { SampleComponent } from './components/sample/sample.component';
 import { IsAuthenticatedGuard } from './guards/is-authenticated.guard';
 import { LayoutComponent } from './pages/layout/layout.component';
-import{TermsServiceComponent} from 'src/app/modules/terms-service/terms-service.component';
+import { TermsServiceComponent } from 'src/app/modules/terms-service/terms-service.component';
 import { PrivacyPolicyComponent } from '../modules/privacy-policy/privacy-policy.component';
 
 const routes: Routes = [
@@ -21,10 +21,10 @@ const routes: Routes = [
     path: 'under-construction', component: UnderConstructionComponent
   },
   {
-    path:'terms-service',component:TermsServiceComponent
+    path: 'terms-service', component: TermsServiceComponent
   },
   {
-   path:'privacy-policy', component:PrivacyPolicyComponent
+    path: 'privacy-policy', component: PrivacyPolicyComponent
   },
   {
     path: '',
@@ -32,11 +32,13 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: () => import('src/app/modules/home/home.module').then(m => m.HomeModule)
+        loadChildren: () => import('src/app/modules/home/home.module').then(m => m.HomeModule),
+        data: { reuseRoute: true, key: 'home-module' }
       },
       {
         path: 'search',
-        loadChildren: () => import('src/app/modules/search/search.module').then(m => m.SearchModule)
+        loadChildren: () => import('src/app/modules/search/search.module').then(m => m.SearchModule),
+        data: { reuseRoute: true, key: 'search-module' }
       },
       {
         path: 'favourites',
@@ -46,7 +48,7 @@ const routes: Routes = [
         path: 'profile',
         canActivate: [IsAuthenticatedGuard],
         loadChildren: () => import('src/app/modules/user-profile/user-profile.module').then(m => m.UserProfileModule)
-       },
+      },
       {
         path: '**',
         redirectTo: '',
