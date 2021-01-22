@@ -17,4 +17,13 @@ export class NavbarHeadingContentDirective implements OnInit, OnDestroy {
     this.navBarService.setTemplate(null)
   }
 
+  setTemplate() {
+    this.navBarService.setTemplate(this.host)
+  }
+
+  removeTemplate() {
+    this.navBarService.setTemplate(null);
+
+  }
+
 }
