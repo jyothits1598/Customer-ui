@@ -140,8 +140,8 @@ export class AuthService {
   handleLoginResp(data: any) {
     let user = ReadUserDetails(data.user_details);
     let token = 'Bearer ' + data.access_token;
-    this._loggedUser.next(user);
     this._accessToken.next(token);
+    this._loggedUser.next(user);
 
     //save into storage
     this.storeageService.store('authToken', token);

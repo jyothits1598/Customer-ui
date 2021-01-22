@@ -16,7 +16,7 @@
             </div>
         </div>
         <!-- <div> validity state of formarray, {{selectedOptions.valid}}</div> -->
-        <div class="modal-body" [style.max-height]="loading? '600px': 'calc(90vh - 108px)'">
+        <div class="modal-body">
             <p *ngIf="loading">Loading...</p>
             <ng-container *ngIf="itemDetail">
                 <div class="std-heading-3 text-capitalize">
@@ -47,14 +47,16 @@
 
         </div>
         <div class="footer-btn">
-            <button (click)="addToCart()" type="button" class="btn std-button std-button--blue">
-                <ng-container *ngIf="!itemAddedToCart; else added">
-                    Add to cart <span *ngIf="itemDetail" class="float-right">${{totalAmount}}</span>
-                </ng-container>
-                <ng-template #added>
-                    <span>Item added</span>
-                </ng-template>
-            </button>
+            <div class="add-cart-card text-center">
+                <div (click)="addToCart()" type="button" class="cart-button">
+                    <ng-container *ngIf="!itemAddedToCart; else added">
+                        <span class="cart-text">Add to cart</span> <span *ngIf="itemDetail" class="float-right  cart-text">${{totalAmount}}</span>
+                    </ng-container>
+                    <ng-template #added>
+                        <img src="assets/images/loader_white_24.gif"/>
+                    </ng-template>
+                </div>
+            </div>
         </div>
     </div>
     <div class="item-detail-background" (click)="close()"></div>

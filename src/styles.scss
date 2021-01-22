@@ -5,6 +5,7 @@
 @import "./styles/cards";
 @import '~@angular/cdk/overlay-prebuilt.css';
 @import "./styles/animations";
+@import "./styles/cart";
 .modal-content {
     border: 0 !important;
     border-radius: 0 !important;
@@ -222,9 +223,7 @@
     .main-content {
         width:80%;
     }
-    .right-content {
-        width:20%;
-    }
+    
     .store-list-bg {
         padding: 32px 0;
     }
@@ -317,9 +316,7 @@
     .main-content {
         width:80%;
     }
-    .right-content {
-        width:20%;
-    }
+   
     .store-list-bg {
         padding: 32px 0;
     }
@@ -404,9 +401,7 @@
     .main-content {
         width:80%;
     }
-    .right-content {
-        width:20%;
-    }
+   
     .detail-items {
         padding: 0;
     }

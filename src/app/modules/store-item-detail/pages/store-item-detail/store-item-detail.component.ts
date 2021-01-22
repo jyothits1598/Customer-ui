@@ -92,7 +92,7 @@ export class StoreItemDetailComponent implements OnChanges, OnDestroy {
       return;
     }
     let itemDetail = { ...this.itemDetail };
-    itemDetail.modifiers = this.selectedOptions.value;
+    itemDetail.modifiers = this.selectedOptions.value.filter(m => m);
 
     let cartData: CartData = {
       storeId: this.item.storeId,
@@ -103,6 +103,11 @@ export class StoreItemDetailComponent implements OnChanges, OnDestroy {
 
     this.cartService.addItem(cartData).pipe(takeUntil(this.unSubscribe$)).subscribe(() => {
       this.itemAddedToCart = true;
+      
+      setTimeout(() => {
+        this.show = false;
+        this.location.back();
+      }, 600);
     });
   }
 

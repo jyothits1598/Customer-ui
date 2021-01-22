@@ -13,7 +13,7 @@ import { LoginPromptComponent } from './components/login-prompt/login-prompt.com
 import { HttpAuthErrorInterceptor } from './interceptors/http-auth-error.interceptor';
 import { SampleComponent } from './components/sample/sample.component';
 import { IsAuthenticatedGuard } from './guards/is-authenticated.guard';
-import { CartModule } from '../modules/cart/cart.module';
+import { OrderModule } from '../modules/order/order.module';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
@@ -23,7 +23,7 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
     CoreRoutingModule,
     NavbarModule,
     HomeModule,
-    CartModule
+    OrderModule
   ],
   exports: [CoreComponent],
   providers: [

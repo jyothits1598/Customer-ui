@@ -101,20 +101,20 @@ export class SocialAuthComponent implements OnInit, OnDestroy {
   }
 
   loadLibraries() {
-    this.libraryLoaderService.loadLibrary(ExternalLibraries.AppleLogin).subscribe(
-      () => {
-        this.appleLoading = false;
-        AppleID.auth.init(
-          {
-            clientId: 'menuapp.com',
-            scope: 'email name',
-            redirectURI: 'https://uat.menuzapp.com/apple-signin',
-            usePopup: true,
-            state: '{url: "localhost:4200/apple-confirmation", code: "fasdf"}',
-          }
-        )
-      }
-    )
+    // this.libraryLoaderService.loadLibrary(ExternalLibraries.AppleLogin).subscribe(
+    //   () => {
+    //     this.appleLoading = false;
+    //     AppleID.auth.init(
+    //       {
+    //         clientId: 'menuapp.com',
+    //         scope: 'email name',
+    //         redirectURI: 'https://uat.menuzapp.com/apple-signin',
+    //         usePopup: true,
+    //         state: '{url: "localhost:4200/apple-confirmation", code: "fasdf"}',
+    //       }
+    //     )
+    //   }
+    // )
   }
 
   handleError(err) {
