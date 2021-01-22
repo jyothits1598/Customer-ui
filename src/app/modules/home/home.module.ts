@@ -4,6 +4,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { StoresModule } from '../stores/stores.module';
 import { RouterModule, Routes } from '@angular/router';
 import { NearbyStoresComponent } from '../stores/pages/nearby-stores/nearby-stores.component';
+import { FilterCategoriesComponent } from './pages/filter-categories/filter-categories.component';
 
 const routes: Routes = [
   {
@@ -19,7 +20,7 @@ const routes: Routes = [
 ]
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [HomeComponent, FilterCategoriesComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
