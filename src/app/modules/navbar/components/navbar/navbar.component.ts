@@ -38,14 +38,17 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('vCont', { read: ViewContainerRef })
   containerRef: ViewContainerRef;
 
+  lastScrollYPos = window.pageYOffset;
+
   @HostListener('window:scroll', ['$event'])
   onScroll(event) {
     const y = window.pageYOffset;
-    if (y < 300 || this.searchDataServ.overlayOpen) {
+    if (y == 0 || this.searchDataServ.overlayOpen || y < this.lastScrollYPos) {
       this.isNavBarActive = true;
     } else {
       this.isNavBarActive = false;
     }
+    this.lastScrollYPos = y;
   }
 
   templateSubs: Subscription;
@@ -56,7 +59,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     private layoutService: LayoutService,
     private navbarService: NavbarService,
     private searchDataServ: SearchDataService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.isLoggedin$ = this.authService.isLoggedIn$();
@@ -95,7 +98,10 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ShouldShoWSearch() {
     // return !((this.router.url !== '/' || !this.router.url.includes('/search')) && this.layoutService.isMobile);
-    return !this.layoutService.isMobile || this.router.url === '/' || this.router.url.includes('/search');
+    return (
+      !this.layoutService.isMobile ||
+      this.router.url === '/' ||
+      this.router.url.includes('/search')
+    );
   }
-
 }
