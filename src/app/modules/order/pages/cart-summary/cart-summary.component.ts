@@ -9,6 +9,7 @@ import { CartService } from 'src/app/core/services/cart.service';
   styleUrls: ['./cart-summary.component.scss']
 })
 export class CartSummaryComponent implements OnInit {
+  doPayment:boolean = false;
   constructor(
     private cartService: CartService,
     private router: Router
@@ -27,6 +28,7 @@ export class CartSummaryComponent implements OnInit {
   }
 
   makePayment() {
+    this.doPayment=true;
   }
 
 }
