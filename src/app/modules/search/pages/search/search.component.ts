@@ -1,9 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { concatMap, filter, map, mergeMap, tap } from 'rxjs/operators'
+import { AfterViewInit, Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { filter, map, mergeMap, pairwise, takeUntil, tap } from 'rxjs/operators'
 import { GeoLocationService } from 'src/app/core/services/geo-location.service';
 import { LayoutService } from 'src/app/core/services/layout.service';
+import { NavbarHeadingContentDirective } from 'src/app/modules/navbar-modifier/directives/navbar-heading-content.directive';
 import { NavbarService } from 'src/app/modules/navbar/services/navbar.service';
 import { StoreFilter } from 'src/app/modules/stores/model/StoreFilter';
 import { SearchDataService } from '../../services/search-data.service';
@@ -13,33 +14,67 @@ import { SearchDataService } from '../../services/search-data.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent implements OnInit, OnDestroy {
+export class SearchComponent implements OnInit, OnDestroy, AfterViewInit {
   storeFilter: StoreFilter;
-  subs: Subscription;
   resultCount: number = null;
   isMobile: boolean;
-  
+
+  @ViewChild('seachTempl', { read: TemplateRef }) searchTemp: TemplateRef<any>;
+  unSub$ = new Subject<true>();
+
   constructor(private router: Router,
     private route: ActivatedRoute,
     private location: GeoLocationService,
     private searchDataServ: SearchDataService,
     private layoutService: LayoutService,
-    private navbarService: NavbarService) {
-      this.isMobile = this.layoutService.isMobile;
-     }
+    private navbarServic: NavbarService
+  ) {
+    this.isMobile = this.layoutService.isMobile;
+  }
+
+  ngAfterViewInit(): void {
+    this.navbarServic.setTemplate(this.searchTemp);
+  }
+
+  checkForRoute(url: string) {
+    // console.log('ckecking route', url)
+    return url.includes('/search');
+  }
 
   ngOnInit(): void {
-    this.subs = this.route.queryParams.pipe(
+    this.route.queryParams.pipe(
       filter(param => param.q),
       mergeMap((query: any) => this.location.userLocation().pipe(
-        map(loc => ({ name: query.q, location: loc.latLng }))
-      ))
-    ).subscribe(val => {this.storeFilter = val;  });
+        map(loc => ({ name: query.q, location: loc.latLng })),
+      )),
+      takeUntil(this.unSub$)
+    ).subscribe(val => { this.storeFilter = val; });
+    // this.router.events.pipe(filter((event) => { return event instanceof NavigationEnd || event instanceof NavigationStart }), pairwise()).subscribe(([prevRouteEvent, currRouteEvent]) => {
+    //   if (prevRouteEvent instanceof NavigationEnd && currRouteEvent instanceof NavigationStart) { 
+    //     console.log('prev', prevRouteEvent.url, 'current', currRouteEvent.url)
+    //     // if (this.isRouteIsReused(prevRouteEvent.url)) this._routeScrollPositions[prevRouteEvent.url] = window.pageYOffset;
+    //     if (this.checkForRoute(prevRouteEvent.url)) {
+    //       //navigating away
+    //       console.log('navigating away');
+    //     } else if (this.checkForRoute(currRouteEvent.url)) {
+    //       //navigating into
+    //       console.log('navigating into');
+    //     }
+    //   }
+    //   if (currRouteEvent instanceof NavigationEnd) {
+    //     if (this.checkForRoute(currRouteEvent.url)) console.log('navigating end 2');
+    //   }
+    // })
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd), takeUntil(this.unSub$)).subscribe(
+      (end: NavigationEnd) => {
+        if (this.checkForRoute(end.url)) this.navbarServic.setTemplate(this.searchTemp);
+        else this.navbarServic.setTemplate(null);
+      }
+    )
   }
 
   ngOnDestroy(): void {
     this.searchDataServ.clearSearch();
-    this.subs.unsubscribe();
   }
 
 }

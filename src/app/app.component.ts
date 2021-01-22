@@ -38,7 +38,5 @@ export class AppComponent {
     return false;
   }
 
-  ngOnDestroy() {
-
-  }
+  
 }
