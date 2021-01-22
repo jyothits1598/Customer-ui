@@ -28,6 +28,8 @@ import {
   PopoverConfig,
   PopoverRef,
 } from 'src/app/core/model/popover';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { GeoLocationService } from 'src/app/core/services/geo-location.service';
 import { LayoutService } from 'src/app/core/services/layout.service';
 import { PopoverService } from 'src/app/core/services/popover.service';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
@@ -69,7 +71,8 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
     private layoutService: LayoutService,
     private searchDataServ: SearchDataService,
     private router: Router,
-    private route: ActivatedRoute
+    private geoLoactionServ: GeoLocationService,
+    private authService: AuthService
   ) {
     this.isMobile = this.layoutService.isMobile;
   }
@@ -90,7 +93,7 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
         filter((val) => val),
         debounce(() => interval(500)),
         switchMap((val) =>
-          this.restApiService.get(`api/stores/search? + name=${val}`).pipe(
+          this.restApiService.get(`api/stores/search?${this.constructQuery(val, this.geoLoactionServ.getUserLocation()?.latLng, this.authService.loggedUser?.customRadius)}`).pipe(
             finalize(() => (this.loading = false)),
             map((resp) => resp.data.stores || [])
           )
@@ -148,6 +151,12 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
       this.searchTerm = name;
       this.closeSearchBox();
     }
+  }
+
+  constructQuery(name: string, latLng: { lat: number, lng: number }, distance: number) {
+    let result = 'name=' + name;
+    if (latLng) result += `&lat=${latLng.lat}&lng=${latLng.lng}&distance=${distance ? distance : 5}`;
+    return result;
   }
 
   ngOnDestroy(): void {
