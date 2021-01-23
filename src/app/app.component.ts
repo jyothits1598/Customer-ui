@@ -20,7 +20,7 @@ export class AppComponent {
         if (this.isRouteIsReused(prevRouteEvent.url)) this._routeScrollPositions[prevRouteEvent.url] = window.pageYOffset;
       }
       if (currRouteEvent instanceof NavigationEnd) {
-        if (this.isRouteIsReused(currRouteEvent.url)) window.scrollTo(0, this._routeScrollPositions[currRouteEvent.url] || 0);
+        if (this.isRouteIsReused(currRouteEvent.url)) window.scrollTo(0, this._routeScrollPositions[currRouteEvent.url] + 250 || 0);
       }
     })
     // this.router.events.subscribe(event => {

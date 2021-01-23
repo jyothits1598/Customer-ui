@@ -94,8 +94,8 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
         debounce(() => interval(500)),
         switchMap((val) =>
           this.restApiService.get(`api/stores/search?${this.constructQuery(val, this.geoLoactionServ.getUserLocation()?.latLng, this.authService.loggedUser?.customRadius)}`).pipe(
-            finalize(() => (this.loading = false)),
-            map((resp) => resp.data.stores || [])
+            finalize(() => (this.loading = false)),           
+            map((resp) => resp.data.stores || [])            
           )
         )
       )
@@ -141,6 +141,7 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
     this.searchInput.nativeElement.blur();
     this.closeSearchBox();
     if (value) {
+      console.log(value);
       this.router.navigate(['/search'], { queryParams: { q: value } });
     }
   }

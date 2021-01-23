@@ -121,10 +121,13 @@ input::-webkit-input-placeholder {
     z-index: 1;
   }
   .store-search {
-    padding-top: 32px !important;
+    padding-top: 16px !important;
   }
   .signup-panel {
     padding: 24px 24px 4px 0px !important;
+  }
+  .sp {
+    padding:0 16px !important;
   }
 }
 
@@ -219,10 +222,13 @@ input::-webkit-input-placeholder {
     cursor: pointer;
   }
   .store-search {
-    padding-top: 32px !important;
+    padding-top: 16px !important;
   }
   .signup-panel {
     padding: 24px 24px 4px 0px !important;
+  }
+  .sp {
+    padding:0 16px !important;
   }
 }
 
@@ -317,10 +323,13 @@ input::-webkit-input-placeholder {
     cursor: pointer;
   }
   .store-search {
-    padding-top: 32px !important;
+    padding-top: 16px !important;
   }
   .signup-panel {
     padding: 24px 24px 4px 0px !important;
+  }
+  .sp {
+    padding-right:16px !important;
   }
 }
 
@@ -407,7 +416,7 @@ input::-webkit-input-placeholder {
     cursor: pointer;
   }
   .mtb-5 {
-    margin-top:5px;
+    margin-top:7px;
   }
 }
 
@@ -494,7 +503,7 @@ input::-webkit-input-placeholder {
     cursor: pointer;
   }
   .mtb-5 {
-    margin-top:5px;
+    margin-top:7px;
   }
 }
 .signup-panel {

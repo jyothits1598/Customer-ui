@@ -3,7 +3,9 @@
         <img src="assets/svg/ico_arrow_left.svg" routerLink="../" alt="" style="padding-right: 16px;outline: 0;">
         <label *ngIf="resultCount !== null">{{resultCount}} store{{resultCount===1? '':'s'}} nearby</label>
     </div> -->
-    <label class="bs-label"> <img src="assets/svg/ico_arrow_left.svg" routerLink="../" alt="" style="padding-right: 16px;outline: 0;cursor: pointer;"> <span *ngIf="resultCount !== null"> {{resultCount}} store{{resultCount===1? '':'s'}} nearby </span> </label>
+    <label class="bs-label" style="z-index: 99999;background:#353FA8;"> 
+        <img src="assets/svg/ico_arrow_left.svg" valign="top" routerLink="../" alt="" style="padding-right: 16px;outline: 0;cursor: pointer;"> 
+        <label *ngIf="resultCount !== null" class="result-name" > {{resultCount}} store{{resultCount===1? '':'s'}} nearby </label> </label>
 </ng-template>
 
 <div style="margin-top:120px" *ngIf="isMobile"></div>

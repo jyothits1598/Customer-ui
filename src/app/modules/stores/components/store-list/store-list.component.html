@@ -1,17 +1,20 @@
-<div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 col-xl-4 spacing" *ngFor="let store of stores" >
-                <app-store-card [store]="store"></app-store-card>
-            </div>
-            <br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 col-xl-4 spacing" *ngFor="let store of stores" >
+            <app-store-card [store]="store"></app-store-card>
         </div>
         <br><br>
-        <div *ngIf="pagination.isLoading">Loading....</div>
-        <div *ngIf="pagination.hasErrors">Error :(</div>
-        <div *ngIf="!pagination.hasEnded" [ngStyle]="{'display':  pagination.isLoading? 'none' : 'block' }" infiniteScroll #infiniteScroll="infiniteScroll" (scrolled)="handleScrolled()">
-        </div>
+    </div>
+    <br><br>
+    <div *ngIf="pagination.isLoading">Loading....</div>
+    <div *ngIf="pagination.hasErrors">Error :(</div>
+    <div *ngIf="!pagination.hasEnded" [ngStyle]="{'display':  pagination.isLoading? 'none' : 'block' }" infiniteScroll #infiniteScroll="infiniteScroll" (scrolled)="handleScrolled()">
     </div>
 </div>
-<div *ngIf="pagination.hasEnded && stores.length == 0" class="text-center" style="background: #fff;">No stores found</div>
+<div *ngIf="pagination.hasEnded && stores.length == 0" class="text-center align" >
+    <div style="padding-top:152px">
+        <img src="assets/svg/ico_search_scale.svg">
+        <div class="no-result"> No matches for found </div>
+    </div>
+</div>
 
