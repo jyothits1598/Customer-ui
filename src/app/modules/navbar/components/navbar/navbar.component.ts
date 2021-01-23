@@ -108,3 +108,4 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
 }
+
