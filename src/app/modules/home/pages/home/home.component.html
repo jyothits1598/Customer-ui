@@ -1,10 +1,6 @@
 
 <div style="margin-top:48px;" *ngIf="isLoggedin; else bckYellow"></div>
-<!-- <div class="categories-items">
-    <div class="container newClasscontainer">
-        <app-filter-categories></app-filter-categories>
-    </div>
-</div> -->
+
 <ng-template #bckYellow>
   <div class="cover-bg">
     <div class="container newClasscontainer">
@@ -23,6 +19,11 @@
 </ng-template>
 <section class="table-responsive sticky-navbar" >
   <div class="mobile-pad" *ngIf="isLoggedin"></div>
+  <!-- <div class="categories-items">
+    <div class="container">
+        <app-filter-categories></app-filter-categories>
+    </div>
+  </div> -->
   <div class="text-center">
     <ul class="resnt-menu-top-tabs u-margin-bottom-medium" style="margin-bottom:0">
       <li class="resnt-menu-top-tabs__item custom-border" >
