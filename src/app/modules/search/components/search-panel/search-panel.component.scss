@@ -3,7 +3,7 @@ li {
   flex-direction: row;
   width: 100%;
   outline: 0;
-  border:0;
+  border: 0;
   & > * {
     padding: 12px 0 12px 0;
   }
@@ -12,16 +12,21 @@ li {
     width: 100%;
   }
   & img {
-    padding-right:16px;
+    padding-right: 16px;
+  }
+
+  &:focus {
+    background-color: #ededed;
   }
 }
 
-.history {
+.list-title {
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 20px;
   color: #808080;
+  margin-top: 12px;
 }
 
 .custom-location-body {
@@ -76,9 +81,9 @@ li {
 }
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) and (max-width: 1199.98px) {
-  .custom-location-body { 
+  .custom-location-body {
     position: relative;
-    top:5px;
+    top: 5px;
     box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.2);
   }
   .cover-bg {
@@ -102,9 +107,9 @@ li {
   .newClasscontainer {
     padding-left: 16px !important;
   }
-  .custom-location-body { 
+  .custom-location-body {
     position: relative;
-    top:5px;
+    top: 5px;
     box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.2);
   }
 }

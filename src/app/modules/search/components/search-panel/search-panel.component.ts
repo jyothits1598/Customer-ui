@@ -1,25 +1,27 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SearchDataService } from '../../services/search-data.service';
-import { SearchHistoryComponent } from './search-history/search-history.component';
 
 @Component({
   selector: 'search-panel',
   templateUrl: './search-panel.component.html',
-  styleUrls: ['./search-panel.component.scss']
+  styleUrls: ['./search-panel.component.scss'],
 })
 export class SearchPanelComponent implements OnInit {
   @Input() results: Array<any>;
   @Input() searchTerm: string;
   @Output() selectedItem = new EventEmitter<string>();
 
-  constructor(private searchDataServ: SearchDataService) { }
+  history: Array<string>;
 
-  ngOnInit(): void { }
+  constructor(private searchDataServ: SearchDataService) {}
+
+  ngOnInit(): void {
+    this.history = this.searchDataServ.getHistory();
+  }
 
   handleClick(term: string) {
     console.log('handle click inside seach pannel called', term);
     this.selectedItem.emit(term);
-    if(term) this.searchDataServ.addItem(term);
+    if (term) this.searchDataServ.addItem(term);
   }
-
 }

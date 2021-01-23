@@ -2,8 +2,8 @@
 <div class="root">
   <div class="above-bg" #searchContainer>
     <div class="store-search-home-input">
-      <input class="input-transparent" style="border: none;outline: 0;" type="search" [formControl]="searchControl" [placeholder]="isMobile ? 'What would you like to eat?' : 'Search'"
-        (focus)="openSearchBox();" (click)="openSearchBox();" #searchInput (keyup.enter)="handleEnter($event.target.value)" (keyup.escape)="closeSearchBox()">
+      <input #searchInput class="input-transparent" style="border: none;outline: 0;" type="search" [formControl]="searchControl" [placeholder]="isMobile ? 'What would you like to eat?' : 'Search'"
+        (focus)="openSearchBox();" (click)="openSearchBox();" (keyup)="searchInputKeyup($event);">
       <span *ngIf="isMobile" (blur)="closeSearchBox()">
         <img class="input-image" [src]="loading? 'assets/images/navbar/loader32_blue.gif' : 'assets/svg/signup/ico_search_m.svg'">
       </span>
@@ -15,8 +15,43 @@
 </div>
 
 <ng-template #panelTemplate>
-  <search-panel [results]="searchData" [searchTerm]="searchTerm" (selectedItem)="onSearchItemSelect($event)">
-  </search-panel>
+  <div class="custom-location-body">
+
+    <ng-container *ngIf="searchTerm">
+      <div class="list-title">New search</div>
+      <ul style="list-style-type: none;cursor: pointer; margin-bottom: 0;">
+        <li #listItem (click)="searchForItem(searchTerm)" routerLink="/search" [queryParams]="{q:searchTerm}" tabindex="1" (keyup)="searchListKeyup($event, 0);">
+          <img src="assets/svg/ico_search_tabs.svg">
+          <div> Results for "{{searchTerm}}" </div>
+        </li>
+        <li #listItem *ngFor="let storeItem of searchData; let i = index;" (click)="searchForItem(storeItem.store_name)" (keyup)="searchListKeyup($event, i + 1);" routerLink="/search"
+          [queryParams]="{q:storeItem.store_name}" tabindex="1">
+          <img src="assets/svg/ico_search_tabs.svg">
+          <div>{{storeItem.store_name}}</div>
+        </li>
+        <li *ngIf="searchData && searchData.length === 0" tabindex="1">
+          <img src="assets/svg/ico_search_tabs.svg">
+          <div>No results</div>
+        </li>
+      </ul>
+    </ng-container>
+
+    <ng-container *ngIf="!searchTerm">
+      <div class="list-title"> Recent searches </div>
+      <ul style="list-style-type: none;cursor: pointer; margin: 0;padding: 0;">
+        <li #listItem *ngFor="let storeItem of history; let i = index;" (click)="searchForItem(storeItem.store_name)" (keyup)="searchListKeyup($event, i);" routerLink="/search"
+          [queryParams]="{q:storeItem.store_name}" tabindex="1">
+          <img src="assets/svg/ico_search_tabs.svg">
+          <div class="paragraph text-capitalize"> {{storeItem}} </div>
+        </li>
+      </ul>
+    </ng-container>
+
+
+  </div>
+
+
+
 </ng-template>
 
 <div *ngIf="isMobile && overlayOpen" class="mobile-banner">

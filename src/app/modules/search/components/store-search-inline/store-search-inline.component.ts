@@ -1,5 +1,7 @@
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
+import { ViewChildren } from '@angular/core';
+import { QueryList } from '@angular/core';
 import {
   AfterViewInit,
   Component,
@@ -49,7 +51,7 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   @ViewChild('panelTemplate', { read: TemplateRef })
   panelTemplate: TemplateRef<any>;
 
-  focusEntered = false;
+  @ViewChildren('listItem') listItems: QueryList<ElementRef>;
 
   searchControl: FormControl = new FormControl(null);
 
@@ -60,8 +62,9 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   popoverRef: PopoverRef;
   isMobile: boolean;
 
+  history: Array<string>;
+
   get overlayOpen() {
-    // return this.layoutService.isMobile;
     return this.searchDataServ.overlayOpen;
   }
 
@@ -79,6 +82,57 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.searchDataServ.registerSearchElement(this.searchInput);
+    this.history = this.searchDataServ.getHistory();
+  }
+
+  searchInputKeyup($event): void {
+    switch ($event.code) {
+      case 'Enter':
+        this.searchForItem($event.target.value);
+        break;
+      case 'Escape':
+        this.closeSearchBox();
+        break;
+      case 'ArrowDown':
+        this.navToList();
+        break;
+      default:
+        console.log(
+          'searchInputKeyup(): key code not picked up: ',
+          ($event as KeyboardEvent).code
+        );
+        break;
+    }
+  }
+
+  searchListKeyup($event: KeyboardEvent, onIndex: number): void {
+    $event.preventDefault();
+    $event.stopImmediatePropagation();
+    switch ($event.code) {
+      case 'ShiftLeft':
+        this.isLeftShiftPressed = !this.isLeftShiftPressed;
+        break;
+      case 'ShiftRight':
+        this.isRightShiftPressed = !this.isRightShiftPressed;
+        break;
+      case 'Enter':
+        //this.searchForItem($event.target.value);
+        break;
+      case 'Escape':
+        this.closeSearchBox();
+        break;
+      case 'Tab':
+      case 'ArrowDown':
+      case 'ArrowUp':
+        this.navInList($event, onIndex);
+        break;
+      default:
+        console.log(
+          'searchListKeyup(): keycode not picked up: ',
+          ($event as KeyboardEvent).code
+        );
+        break;
+    }
   }
 
   openSearchBox(): void {
@@ -93,10 +147,18 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
         filter((val) => val),
         debounce(() => interval(500)),
         switchMap((val) =>
-          this.restApiService.get(`api/stores/search?${this.constructQuery(val, this.geoLoactionServ.getUserLocation()?.latLng, this.authService.loggedUser?.customRadius)}`).pipe(
-            finalize(() => (this.loading = false)),
-            map((resp) => resp.data.stores || [])
-          )
+          this.restApiService
+            .get(
+              `api/stores/search?${this.constructQuery(
+                val,
+                this.geoLoactionServ.getUserLocation()?.latLng,
+                this.authService.loggedUser?.customRadius
+              )}`
+            )
+            .pipe(
+              finalize(() => (this.loading = false)),
+              map((resp) => resp.data.stores || [])
+            )
         )
       )
       .subscribe((res) => {
@@ -107,6 +169,50 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
       (this.searchDataServ.getHistory().length > 0 || this.searchData?.length)
     ) {
       this.openComponentPopover();
+    }
+  }
+
+  navToList() {
+    if (this.listItems.length > 0) {
+      this.listItems.first.nativeElement.focus();
+    }
+  }
+
+  private isLeftShiftPressed = false;
+  private isRightShiftPressed = false;
+
+  navInList($event: KeyboardEvent, curIndex: number) {
+    const index = this.getNextIndex($event.code, curIndex);
+    console.log(
+      'navInList(): new index: ',
+      index,
+      'code: ',
+      $event.code,
+      ', curIndex: ',
+      curIndex
+    );
+    if (index < 0) {
+      this.searchInput.nativeElement.focus();
+    } else if (index >= this.listItems.length) {
+      this.closeSearchBox();
+    } else {
+      this.listItems.toArray()[index].nativeElement.focus();
+    }
+  }
+
+  private getNextIndex(code: string, curIndex: number): number {
+    let newIndex = curIndex;
+    if (code === 'Tab') {
+      // return this.isLeftShiftPressed || this.isRightShiftPressed
+      //   ? --newIndex
+      //   : ++newIndex;
+      return newIndex;
+    } else {
+      return code === 'ArrowDown'
+        ? ++newIndex
+        : code === 'ArrowUp'
+        ? --newIndex
+        : newIndex;
     }
   }
 
@@ -137,25 +243,28 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
     this.searchDataServ.overlayOpen = true;
   }
 
-  handleEnter(value) {
-    this.searchInput.nativeElement.blur();
-    this.closeSearchBox();
+  searchForItem(value: string) {
     if (value) {
+      this.closeSearchBox();
+      this.searchInput.nativeElement.value = value;
+      this.searchInput.nativeElement.blur();
+      this.searchDataServ.addItem(value);
+
+      this.searchTerm = value;
       this.router.navigate(['/search'], { queryParams: { q: value } });
     }
   }
 
-  onSearchItemSelect(name: string) {
-    if (name) {
-      this.searchInput.nativeElement.value = name;
-      this.searchTerm = name;
-      this.closeSearchBox();
-    }
-  }
-
-  constructQuery(name: string, latLng: { lat: number, lng: number }, distance: number) {
+  constructQuery(
+    name: string,
+    latLng: { lat: number; lng: number },
+    distance: number
+  ) {
     let result = 'name=' + name;
-    if (latLng) result += `&lat=${latLng.lat}&lng=${latLng.lng}&distance=${distance ? distance : 5}`;
+    if (latLng)
+      result += `&lat=${latLng.lat}&lng=${latLng.lng}&distance=${
+        distance ? distance : 5
+      }`;
     return result;
   }
 
