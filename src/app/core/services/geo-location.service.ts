@@ -30,6 +30,10 @@ export class GeoLocationService {
     return this.userLocation$.asObservable().pipe(filter(value => !!value));
   }
 
+  getUserLocation() {
+    return this.userLocation$.value;
+  }
+
   setLocation(location: UserLocation, saveToHistory: boolean = false) {
 
     if (saveToHistory) {
