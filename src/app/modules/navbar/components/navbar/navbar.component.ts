@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   HostListener,
@@ -58,7 +59,8 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     private router: Router,
     private layoutService: LayoutService,
     private navbarService: NavbarService,
-    private searchDataServ: SearchDataService
+    private searchDataServ: SearchDataService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -79,6 +81,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
             this.locationViewRef = null;
           }
         }
+        this.cdr.detectChanges();
       }
     );
   }

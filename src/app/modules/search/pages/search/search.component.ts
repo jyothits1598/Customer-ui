@@ -6,6 +6,7 @@ import { GeoLocationService } from 'src/app/core/services/geo-location.service';
 import { LayoutService } from 'src/app/core/services/layout.service';
 import { NavbarHeadingContentDirective } from 'src/app/modules/navbar-modifier/directives/navbar-heading-content.directive';
 import { NavbarService } from 'src/app/modules/navbar/services/navbar.service';
+import { StoreListComponent } from 'src/app/modules/stores/components/store-list/store-list.component';
 import { StoreFilter } from 'src/app/modules/stores/model/StoreFilter';
 import { SearchDataService } from '../../services/search-data.service';
 
@@ -20,6 +21,7 @@ export class SearchComponent implements OnInit, OnDestroy, AfterViewInit {
   isMobile: boolean;
 
   @ViewChild('seachTempl', { read: TemplateRef }) searchTemp: TemplateRef<any>;
+
   unSub$ = new Subject<true>();
 
   constructor(private router: Router,
