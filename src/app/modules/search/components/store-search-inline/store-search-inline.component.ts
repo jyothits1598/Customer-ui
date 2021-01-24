@@ -56,39 +56,37 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   searchControl: FormControl = new FormControl(null);
 
   keyupSubs: Subscription;
-  loading: boolean;
   searchData: any;
   searchTerm: string;
   popoverRef: PopoverRef;
   isMobile: boolean;
 
   history: Array<string>;
+  loading$ = this.searchDataService.isLoading$;
+  searchResults$ = this.searchDataService.inlineSearchResults$;
 
   get overlayOpen() {
-    return this.searchDataServ.overlayOpen;
+    return this.searchDataService.overlayOpen;
   }
 
   constructor(
-    private restApiService: RestApiService,
     private popoverService: PopoverService,
     private layoutService: LayoutService,
-    private searchDataServ: SearchDataService,
-    private router: Router,
-    private geoLoactionServ: GeoLocationService,
-    private authService: AuthService
+    private searchDataService: SearchDataService,
+    private router: Router
   ) {
     this.isMobile = this.layoutService.isMobile;
   }
 
   ngAfterViewInit(): void {
-    this.searchDataServ.registerSearchElement(this.searchInput);
-    this.history = this.searchDataServ.getHistory();
+    this.history = this.searchDataService.getHistory();
   }
 
   searchInputKeyup($event): void {
+    const value = $event.target.value;
     switch ($event.code) {
       case 'Enter':
-        this.searchForItem($event.target.value);
+        this.searchForItem(value);
         break;
       case 'Escape':
         this.closeSearchBox();
@@ -97,10 +95,8 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
         this.navToList();
         break;
       default:
-        console.log(
-          'searchInputKeyup(): key code not picked up: ',
-          ($event as KeyboardEvent).code
-        );
+        this.searchTerm = value;
+        this.searchDataService.updateInlineSearch(value);
         break;
     }
   }
@@ -127,46 +123,15 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
         this.navInList($event, onIndex);
         break;
       default:
-        console.log(
-          'searchListKeyup(): keycode not picked up: ',
-          ($event as KeyboardEvent).code
-        );
         break;
     }
   }
 
   openSearchBox(): void {
-    this.keyupSubs = fromEvent(this.searchInput.nativeElement, 'keyup')
-      .pipe(
-        map((event: any) => event.target.value),
-        distinctUntilChanged(),
-        tap((term) => {
-          if (term) this.loading = true;
-          this.searchTerm = term;
-        }),
-        filter((val) => val),
-        debounce(() => interval(500)),
-        switchMap((val) =>
-          this.restApiService
-            .get(
-              `api/stores/search?${this.constructQuery(
-                val,
-                this.geoLoactionServ.getUserLocation()?.latLng,
-                this.authService.loggedUser?.customRadius
-              )}`
-            )
-            .pipe(
-              finalize(() => (this.loading = false)),
-              map((resp) => resp.data.stores || [])
-            )
-        )
-      )
-      .subscribe((res) => {
-        this.searchData = res;
-      });
     if (
-      !this.searchDataServ.overlayOpen &&
-      (this.searchDataServ.getHistory().length > 0 || this.searchData?.length)
+      !this.searchDataService.overlayOpen &&
+      (this.searchDataService.getHistory().length > 0 ||
+        this.searchData?.length)
     ) {
       this.openComponentPopover();
     }
@@ -183,14 +148,6 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
 
   navInList($event: KeyboardEvent, curIndex: number) {
     const index = this.getNextIndex($event.code, curIndex);
-    console.log(
-      'navInList(): new index: ',
-      index,
-      'code: ',
-      $event.code,
-      ', curIndex: ',
-      curIndex
-    );
     if (index < 0) {
       this.searchInput.nativeElement.focus();
     } else if (index >= this.listItems.length) {
@@ -220,7 +177,7 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
     this.keyupSubs.unsubscribe();
     setTimeout(() => {
       if (this.popoverRef) this.popoverRef.dismiss();
-      this.searchDataServ.overlayOpen = false;
+      this.searchDataService.overlayOpen = false;
     }, 100);
   }
 
@@ -229,18 +186,18 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
       xPos: this.layoutService.isMobile ? 'center' : 'end',
       yPos: 'bottom',
       onDismiss: () => {
-        this.searchDataServ.overlayOpen = false;
+        this.searchDataService.overlayOpen = false;
       },
     };
     // hasBackdrop ?: true | false;
     // darkBackground ?: true | false;
-    if (this.searchDataServ.overlayOpen) return;
+    if (this.searchDataService.overlayOpen) return;
     this.popoverRef = this.popoverService.openTemplatePopover(
       this.searchContainer,
       this.panelTemplate,
       popoverConfig
     );
-    this.searchDataServ.overlayOpen = true;
+    this.searchDataService.overlayOpen = true;
   }
 
   searchForItem(value: string) {
@@ -248,24 +205,11 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
       this.closeSearchBox();
       this.searchInput.nativeElement.value = value;
       this.searchInput.nativeElement.blur();
-      this.searchDataServ.addItem(value);
+      this.searchDataService.addItem(value);
 
       this.searchTerm = value;
       this.router.navigate(['/search'], { queryParams: { q: value } });
     }
-  }
-
-  constructQuery(
-    name: string,
-    latLng: { lat: number; lng: number },
-    distance: number
-  ) {
-    let result = 'name=' + name;
-    if (latLng)
-      result += `&lat=${latLng.lat}&lng=${latLng.lng}&distance=${
-        distance ? distance : 5
-      }`;
-    return result;
   }
 
   ngOnDestroy(): void {
