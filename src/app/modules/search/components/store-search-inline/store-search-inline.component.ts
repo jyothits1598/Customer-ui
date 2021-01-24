@@ -1,43 +1,22 @@
-import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
-import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
 import { ViewChildren } from '@angular/core';
 import { QueryList } from '@angular/core';
 import {
   AfterViewInit,
   Component,
   ElementRef,
-  Injector,
   OnDestroy,
   OnInit,
   TemplateRef,
   ViewChild,
-  ViewContainerRef,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { fromEvent, interval, of, Subscription } from 'rxjs';
-import {
-  debounce,
-  distinctUntilChanged,
-  filter,
-  finalize,
-  map,
-  switchMap,
-  tap,
-} from 'rxjs/operators';
-import {
-  ComponentPopoverRef,
-  PopoverConfig,
-  PopoverRef,
-} from 'src/app/core/model/popover';
-import { AuthService } from 'src/app/core/services/auth.service';
-import { GeoLocationService } from 'src/app/core/services/geo-location.service';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+
+import { PopoverConfig, PopoverRef } from 'src/app/core/model/popover';
 import { LayoutService } from 'src/app/core/services/layout.service';
 import { PopoverService } from 'src/app/core/services/popover.service';
-import { RestApiService } from 'src/app/core/services/rest-api.service';
 import { SearchDataService } from '../../services/search-data.service';
-import { SearchHistoryComponent } from '../search-panel/search-history/search-history.component';
-import { SearchPanelComponent } from '../search-panel/search-panel.component';
 
 @Component({
   selector: 'app-store-search-inline',
@@ -55,8 +34,6 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
 
   searchControl: FormControl = new FormControl(null);
 
-  keyupSubs: Subscription;
-  searchData: any;
   searchTerm: string;
   popoverRef: PopoverRef;
   isMobile: boolean;
@@ -101,18 +78,10 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  searchListKeyup($event: KeyboardEvent, onIndex: number): void {
-    $event.preventDefault();
-    $event.stopImmediatePropagation();
+  searchListKeyup($event, value: string, onIndex: number): void {
     switch ($event.code) {
-      case 'ShiftLeft':
-        this.isLeftShiftPressed = !this.isLeftShiftPressed;
-        break;
-      case 'ShiftRight':
-        this.isRightShiftPressed = !this.isRightShiftPressed;
-        break;
       case 'Enter':
-        //this.searchForItem($event.target.value);
+        this.searchForItem(value);
         break;
       case 'Escape':
         this.closeSearchBox();
@@ -127,14 +96,28 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
     }
   }
 
+  private docScrollPrevention($event: KeyboardEvent) {
+    if ($event.code === 'ArrowUp' || $event.code === 'ArrowDown') {
+      $event.preventDefault();
+    }
+  }
+
   openSearchBox(): void {
+    document.addEventListener('keydown', this.docScrollPrevention);
     if (
       !this.searchDataService.overlayOpen &&
-      (this.searchDataService.getHistory().length > 0 ||
-        this.searchData?.length)
+      this.searchDataService.getHistory().length > 0
     ) {
       this.openComponentPopover();
     }
+  }
+
+  closeSearchBox(): void {
+    document.removeEventListener('keydown', this.docScrollPrevention);
+    setTimeout(() => {
+      if (this.popoverRef) this.popoverRef.dismiss();
+      this.searchDataService.overlayOpen = false;
+    }, 100);
   }
 
   navToList() {
@@ -142,9 +125,6 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
       this.listItems.first.nativeElement.focus();
     }
   }
-
-  private isLeftShiftPressed = false;
-  private isRightShiftPressed = false;
 
   navInList($event: KeyboardEvent, curIndex: number) {
     const index = this.getNextIndex($event.code, curIndex);
@@ -160,9 +140,6 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   private getNextIndex(code: string, curIndex: number): number {
     let newIndex = curIndex;
     if (code === 'Tab') {
-      // return this.isLeftShiftPressed || this.isRightShiftPressed
-      //   ? --newIndex
-      //   : ++newIndex;
       return newIndex;
     } else {
       return code === 'ArrowDown'
@@ -171,14 +148,6 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
         ? --newIndex
         : newIndex;
     }
-  }
-
-  closeSearchBox(): void {
-    this.keyupSubs.unsubscribe();
-    setTimeout(() => {
-      if (this.popoverRef) this.popoverRef.dismiss();
-      this.searchDataService.overlayOpen = false;
-    }, 100);
   }
 
   openComponentPopover(results = null) {
@@ -201,6 +170,7 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   }
 
   searchForItem(value: string) {
+    console.log(`searchForItem(): hit, value: '${value}'`);
     if (value) {
       this.closeSearchBox();
       this.searchInput.nativeElement.value = value;
@@ -212,7 +182,5 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
-    if (this.keyupSubs) this.keyupSubs.unsubscribe();
-  }
+  ngOnDestroy(): void {}
 }

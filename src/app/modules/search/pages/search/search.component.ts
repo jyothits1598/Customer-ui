@@ -6,24 +6,11 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import {
-  ActivatedRoute,
-  NavigationEnd,
-  NavigationStart,
-  Router,
-} from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import {
-  filter,
-  map,
-  mergeMap,
-  pairwise,
-  takeUntil,
-  tap,
-} from 'rxjs/operators';
+import { filter, map, mergeMap, takeUntil, tap } from 'rxjs/operators';
 import { GeoLocationService } from 'src/app/core/services/geo-location.service';
 import { LayoutService } from 'src/app/core/services/layout.service';
-import { NavbarHeadingContentDirective } from 'src/app/modules/navbar-modifier/directives/navbar-heading-content.directive';
 import { NavbarService } from 'src/app/modules/navbar/services/navbar.service';
 import { StoreFilter } from 'src/app/modules/stores/model/StoreFilter';
 import { SearchDataService } from '../../services/search-data.service';
@@ -39,7 +26,7 @@ export class SearchComponent implements OnInit, OnDestroy, AfterViewInit {
   isMobile: boolean;
 
   @ViewChild('seachTempl', { read: TemplateRef }) searchTemp: TemplateRef<any>;
-  unSub$ = new Subject<true>();
+  unSub$ = new Subject<void>();
 
   constructor(
     private router: Router,
@@ -104,6 +91,7 @@ export class SearchComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy(): void {
-    this.searchDataService.clearSearchResults();
+    this.unSub$.next();
+    this.unSub$.complete();
   }
 }
