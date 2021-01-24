@@ -72,6 +72,7 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
         this.navToList();
         break;
       default:
+        this.openSearchBox();
         this.searchTerm = value;
         this.searchDataService.updateInlineSearch(value);
         break;
@@ -131,7 +132,7 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
     if (index < 0) {
       this.searchInput.nativeElement.focus();
     } else if (index >= this.listItems.length) {
-      this.closeSearchBox();
+      this.listItems.last.nativeElement.focus();
     } else {
       this.listItems.toArray()[index].nativeElement.focus();
     }
@@ -169,7 +170,7 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
     this.searchDataService.overlayOpen = true;
   }
 
-  searchForItem(value: string) {
+  private searchForItem(value: string) {
     console.log(`searchForItem(): hit, value: '${value}'`);
     if (value) {
       this.closeSearchBox();
