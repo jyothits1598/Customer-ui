@@ -11,11 +11,6 @@
   z-index: 900;
   background: var(--color-primary);
   color: var(--color-background);
-  transition: top 0.5s;
-
-  &.is-active {
-    top: 0px;
-  }
 
   & > div {
     display: flex;
