@@ -12,6 +12,7 @@ import {
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { PopoverConfig, PopoverRef } from 'src/app/core/model/popover';
 import { LayoutService } from 'src/app/core/services/layout.service';
@@ -40,7 +41,9 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
 
   history: Array<string>;
   loading$ = this.searchDataService.isLoading$;
-  searchResults$ = this.searchDataService.inlineSearchResults$;
+  searchResults$ = this.searchDataService.inlineSearchResults$.pipe(
+    tap((_) => this.navToList())
+  );
 
   get overlayOpen() {
     return this.searchDataService.overlayOpen;
