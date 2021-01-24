@@ -23,6 +23,12 @@ input::-webkit-input-placeholder {
   font-size: 14px;
   line-height: 20px;
 }
+.bs-label{
+  line-height: 20px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+}
 // Extra small devices (portrait phones, less than 576px)
 @media (max-width: 575.98px) {
   .wallpaper-card {
@@ -104,19 +110,24 @@ input::-webkit-input-placeholder {
   .bck:hover {
     background: none !important;
   }
-  .title-content-search {
+  .bs-label{
+    margin: 0;
+    line-height: 20px;
     position: absolute;
-    top: 50%;
-    left: 20%;
-    transform: translate(-50%, -50%);
-    outline: 0;
-    cursor: pointer;
+    left: 0;
+    top: 0;
+    margin-left: 16px;
+    margin-top: 12px;
+    z-index: 1;
   }
   .store-search {
-    padding-top: 32px !important;
+    padding-top: 16px !important;
   }
   .signup-panel {
     padding: 24px 24px 4px 0px !important;
+  }
+  .sp {
+    padding:0 16px !important;
   }
 }
 
@@ -185,13 +196,15 @@ input::-webkit-input-placeholder {
   .isMobile-center {
     text-align: center;
   }
-  .title-content {
+  .bs-label{
+    margin: 0;
+    line-height: 20px;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    outline: 0;
-    cursor: pointer;
+    left: 0;
+    top: 0;
+    margin-left: 16px;
+    margin-top: 12px;
+    z-index: 1;
   }
   .center-block-location {
     text-align: center !important;
@@ -200,7 +213,7 @@ input::-webkit-input-placeholder {
   .bck:hover {
     background: none !important;
   }
-  .title-content-search {
+  .title-content {
     position: absolute;
     top: 50%;
     left: 20%;
@@ -209,10 +222,13 @@ input::-webkit-input-placeholder {
     cursor: pointer;
   }
   .store-search {
-    padding-top: 32px !important;
+    padding-top: 16px !important;
   }
   .signup-panel {
     padding: 24px 24px 4px 0px !important;
+  }
+  .sp {
+    padding:0 16px !important;
   }
 }
 
@@ -281,13 +297,15 @@ input::-webkit-input-placeholder {
   .isMobile-center {
     text-align: center;
   }
-  .title-content {
+  .bs-label{
+    margin: 0;
+    line-height: 20px;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    outline: 0;
-    cursor: pointer;
+    left: 0;
+    top: 0;
+    margin-left: 16px;
+    margin-top: 12px;
+    z-index: 1;
   }
   .center-block-location {
     text-align: center !important;
@@ -296,7 +314,7 @@ input::-webkit-input-placeholder {
   .bck:hover {
     background: none !important;
   }
-  .title-content-search {
+  .title-content {
     position: absolute;
     top: 50%;
     left: 20%;
@@ -305,10 +323,13 @@ input::-webkit-input-placeholder {
     cursor: pointer;
   }
   .store-search {
-    padding-top: 32px !important;
+    padding-top: 16px !important;
   }
   .signup-panel {
     padding: 24px 24px 4px 0px !important;
+  }
+  .sp {
+    padding-right:16px !important;
   }
 }
 
@@ -394,10 +415,8 @@ input::-webkit-input-placeholder {
     outline: 0;
     cursor: pointer;
   }
-  .title-content-search {
-    margin-top: -5px;
-    outline: 0;
-    cursor: pointer;
+  .mtb-5 {
+    margin-top:7px;
   }
 }
 
@@ -483,10 +502,8 @@ input::-webkit-input-placeholder {
     outline: 0;
     cursor: pointer;
   }
-  .title-content-search {
-    margin-top: -5px;
-    outline: 0;
-    cursor: pointer;
+  .mtb-5 {
+    margin-top:7px;
   }
 }
 .signup-panel {

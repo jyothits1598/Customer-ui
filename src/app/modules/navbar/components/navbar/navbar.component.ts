@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   HostListener,
@@ -39,7 +40,9 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   lastPinnedYPos = 0;
   lastScrollYPos = window.pageYOffset;
 
-  dynamicPosition$ = new BehaviorSubject<object>({ top: '0px' });
+  dynamicPosition$ = new BehaviorSubject<object>({
+    top: `${this.lastPinnedYPos}px`,
+  });
 
   @HostListener('window:scroll', ['$event'])
   onScroll(event) {
@@ -49,7 +52,10 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
         this.dynamicPosition$.next({ top: '0px', transition: 'top 0.2s' });
         this.lastPinnedYPos = y;
       } else {
-        this.dynamicPosition$.next({ top: `-${y - this.lastPinnedYPos}px` });
+        this.dynamicPosition$.next({
+          top: `-${y - this.lastPinnedYPos}px`,
+          transition: 'top 0.2s',
+        });
       }
       this.lastScrollYPos = y;
     }
@@ -62,7 +68,8 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     private router: Router,
     private layoutService: LayoutService,
     private navbarService: NavbarService,
-    private searchDataServ: SearchDataService
+    private searchDataServ: SearchDataService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -83,6 +90,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
             this.locationViewRef = null;
           }
         }
+        this.cdr.detectChanges();
       }
     );
   }

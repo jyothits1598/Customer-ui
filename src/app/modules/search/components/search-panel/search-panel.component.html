@@ -1,22 +1,20 @@
 <div class="custom-location-body">
-  <div *ngIf="searchTerm" class="history" style="margin-top:12px">New search</div>
-  <ul style="list-style-type: none;cursor: pointer; margin-bottom: 0;">
+  <div *ngIf="searchTerm" class="history pder" >New search</div>
+  <ul style="list-style-type: none;cursor: pointer; margin-bottom: 0;width:100%;">
     <ng-container *ngIf="searchTerm">
       <li (click)="handleClick(searchTerm)" routerLink="/search" [queryParams]="{q:searchTerm}" tabindex="1">
         <img src="assets/svg/ico_search_tabs.svg" >
-        <div> Results for "{{searchTerm}}" </div>
+        <div class="text-capitalize" > Results for "{{searchTerm}}" </div>
       </li>
       <li (click)="handleClick(result.store_name)" *ngFor="let result of results" routerLink="/search" [queryParams]="{q:result.store_name}" tabindex="1">
         <img src="assets/svg/ico_search_tabs.svg">
-        <div>{{result.store_name}}</div>
+        <div class="text-capitalize" >{{result.store_name}}</div>
       </li>
       <li *ngIf="results && results.length === 0" tabindex="1">
         <img src="assets/svg/ico_search_tabs.svg">
         <div>No results</div>
       </li>
     </ng-container>
-    <li>
-      <search-history [style.display]="searchTerm? 'none': ''" (selectedItem)="selectedItem.emit($event)"></search-history>
-    </li>
   </ul>
+  <search-history [style.display]="searchTerm? 'none': ''" (selectedItem)="selectedItem.emit($event)"></search-history>
 </div>

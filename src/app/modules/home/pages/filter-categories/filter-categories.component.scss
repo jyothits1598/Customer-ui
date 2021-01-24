@@ -1,0 +1,153 @@
+// .list-cusines img{
+//     padding:8px;
+// }
+// .cuisine-name {
+//     font-style: normal;
+//     font-weight: bold;
+//     font-size: 12px;
+//     line-height: 16px;
+//     text-align: center;
+//     margin:0;
+// }
+// .list-cusines li{
+//     list-style-type: none;
+//     display: inline-block;
+//     margin-right:16px;
+//     cursor: pointer;
+// }
+// .default{
+//     display:block;
+// }
+// .hover {
+//     display:none;
+// }
+// .all-food-cusines {
+//     color: #353FA8;
+// }
+// .all-food-cusines:hover{
+//     color: #F50057;
+// .default{
+//     display:none ;
+//     }
+// .hover{
+//     display: block;
+//     }
+// }
+
+.img-with-text img {
+    //display: block;
+     margin: 0 auto;
+   }
+   .img-with-text p{
+     margin-top:8px;
+     cursor: default;
+   }
+   .img-with-text {
+     float: left;
+     font-family: DM Sans;
+     font-size: 12px;
+     font-style: normal;
+     font-weight: 700;
+     line-height: 16px;
+     letter-spacing: 0px;
+     text-align: left;
+     color: var(--color-primary);
+    padding-left: 16px;
+     padding-right: 16px;
+   }
+   .images-center{
+   
+       margin-left: auto;
+       margin-right: auto;
+       width: 100%;
+   
+   }
+   // hover effect
+   .default{
+     display:block;
+     width:48px;
+     height:48px;
+   }
+   .hover{
+     display:none;
+     width:48px;
+     height:48px;
+   }
+   
+   .img-with-text:hover{
+     color: #F50057;
+     .default{
+         display:none ;
+       }
+     .hover{
+         display: block;
+       }
+     }
+   
+     .order-overflow{
+        display:flex;
+        overflow-x: scroll;
+        white-space: nowrap;
+        overflow-x:auto;
+        scroll-behavior: smooth;
+   }
+   // @media (max-width:1024px){
+   //   .order-overflow{
+   //     margin:0px 344px 16px 288px;
+   //   }
+   //   .backward{
+   //     position: absolute;
+   //     top:19%;
+   //     left:17.9%;
+   //     transform: rotate(180deg);
+   //   }
+   
+   //   .forward{
+   //     position: absolute;
+   //    // right:2%;
+   //    right:313px;
+   //     top:19%;
+   //    // left:83%;
+   //   }
+   
+   // }
+   // @media(max-width:480px){
+   //   .order-overflow{
+   //     margin:0px 50px 16px 50px;
+   //   }
+   //   .forward{
+   //     position: absolute;
+   //     right:100px;
+   //   }
+   //   .backward{
+   //     position: absolute;
+   //     top:19%;
+   //     left:6.9%;
+   //     transform: rotate(180deg);
+   //   }
+   
+   
+   // }
+   
+   .order-overflow::-webkit-scrollbar {
+     display: none;
+   }
+   .order-overflow {
+     -ms-overflow-style: none;  /* IE and Edge */
+     scrollbar-width: none;  /* Firefox */
+   }
+   .backward{
+     position: absolute;
+     top:30%;
+     left:0;
+     transform: rotate(180deg);
+   }
+   
+   .forward{
+     position: absolute;
+     right:0;
+    //right:13px;
+     top:30%
+    // left:83%;
+   }
+   

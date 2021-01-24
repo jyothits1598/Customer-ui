@@ -47,7 +47,7 @@ export class SignedInOptionsComponent implements OnInit, OnDestroy {
 
   logout() {
     // this.router.navigateByUrl('/');
-    this.window.location.reload();
+    this.window.location.href = '/';
     this.authService.logout();
   }
 
