@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   HostListener,
@@ -10,7 +11,7 @@ import {
   ViewContainerRef,
   ViewRef,
 } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
 import { ModalService } from 'src/app/core/services/modal.service';
@@ -28,8 +29,6 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   isLoggedin$: Observable<boolean>;
   template: TemplateRef<any>;
 
-  isNavBarActive = true;
-
   //view reference will be stored only when the location selector view has been detached
   locationViewRef: ViewRef;
 
@@ -38,17 +37,28 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('vCont', { read: ViewContainerRef })
   containerRef: ViewContainerRef;
 
+  lastPinnedYPos = 0;
   lastScrollYPos = window.pageYOffset;
+
+  dynamicPosition$ = new BehaviorSubject<object>({
+    top: `${this.lastPinnedYPos}px`,
+  });
 
   @HostListener('window:scroll', ['$event'])
   onScroll(event) {
-    const y = window.pageYOffset;
-    if (y == 0 || this.searchDataServ.overlayOpen || y < this.lastScrollYPos) {
-      this.isNavBarActive = true;
-    } else {
-      this.isNavBarActive = false;
+    if (this.layoutService.isMobile) {
+      const y = window.pageYOffset;
+      if (this.searchDataServ.overlayOpen || y < this.lastScrollYPos) {
+        this.dynamicPosition$.next({ top: '0px', transition: 'top 0.2s' });
+        this.lastPinnedYPos = y;
+      } else {
+        this.dynamicPosition$.next({
+          top: `-${y - this.lastPinnedYPos}px`,
+          transition: 'top 0.2s',
+        });
+      }
+      this.lastScrollYPos = y;
     }
-    this.lastScrollYPos = y;
   }
 
   templateSubs: Subscription;
@@ -58,7 +68,8 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     private router: Router,
     private layoutService: LayoutService,
     private navbarService: NavbarService,
-    private searchDataServ: SearchDataService
+    private searchDataServ: SearchDataService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -79,6 +90,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
             this.locationViewRef = null;
           }
         }
+        this.cdr.detectChanges();
       }
     );
   }

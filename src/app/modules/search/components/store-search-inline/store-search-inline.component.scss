@@ -12,8 +12,9 @@ li {
     padding-right: 16px;
     margin-bottom: 12px;
   }
-  &:focus {
-    background-color: #fafafa;
+  &:focus,
+  &:hover {
+    background-color: var(--color-background-tertiary);
   }
 }
 
@@ -378,4 +379,8 @@ li {
   cursor: pointer;
   outline: 0;
   border: 0;
+}
+.cls {
+  margin: 0;
+  line-height: 20px;
 }

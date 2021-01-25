@@ -1,5 +1,5 @@
-<div [ngClass]="{ 'is-active': isNavBarActive }">
-  <div class="container">
+<div [ngStyle]="dynamicPosition$ | async">
+  <div class="container sp">
     <div>
       <ng-container #vCont></ng-container>
     </div>

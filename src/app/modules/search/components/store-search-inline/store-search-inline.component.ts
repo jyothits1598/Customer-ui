@@ -174,7 +174,6 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   }
 
   private searchForItem(value: string) {
-    console.log(`searchForItem(): hit, value: '${value}'`);
     if (value) {
       this.closeSearchBox();
       this.searchInput.nativeElement.value = value;

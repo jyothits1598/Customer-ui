@@ -12,6 +12,7 @@ import { filter, map, mergeMap, takeUntil, tap } from 'rxjs/operators';
 import { GeoLocationService } from 'src/app/core/services/geo-location.service';
 import { LayoutService } from 'src/app/core/services/layout.service';
 import { NavbarService } from 'src/app/modules/navbar/services/navbar.service';
+import { StoreListComponent } from 'src/app/modules/stores/components/store-list/store-list.component';
 import { StoreFilter } from 'src/app/modules/stores/model/StoreFilter';
 import { SearchDataService } from '../../services/search-data.service';
 
