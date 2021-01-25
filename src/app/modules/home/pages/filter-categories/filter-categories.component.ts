@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { LayoutService } from 'src/app/core/services/layout.service';
 
 @Component({
   selector: 'app-filter-categories',
@@ -6,24 +7,25 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
   styleUrls: ['./filter-categories.component.scss']
 })
 export class FilterCategoriesComponent implements OnInit {
-//filter = new Array();
-  pageNumber : number = 1;
   right:boolean = true;
-  constructor() { }
+  constructor(
+    private layoutService: LayoutService
+  ) { }
   @ViewChild('widgetsContent') widgetsContent: ElementRef;
-
+  
   scrollRight() {
-    this.widgetsContent.nativeElement.scrollLeft += 999;
-    this.pageNumber++;
-    // if (this.widgetsContent.nativeElement.offsetWidth + this.widgetsContent.nativeElement.scrollLeft >= this.widgetsContent.nativeElement.scrollWidth) {
-      console.log("End");
-    //  this.getAllOrders('pagination');
-
-    // }
-
+    if (this.layoutService.isMobile) {
+      this.widgetsContent.nativeElement.scrollLeft += 200;
+    } else {
+      this.widgetsContent.nativeElement.scrollLeft += 999;
+    }
   }
   scrollLeft() {
-    this.widgetsContent.nativeElement.scrollLeft -= 999;
+    if (this.layoutService.isMobile) {
+      this.widgetsContent.nativeElement.scrollLeft -= 200;
+    } else {
+      this.widgetsContent.nativeElement.scrollLeft -= 999;
+    }
   }
 
   ngOnInit(): void {
