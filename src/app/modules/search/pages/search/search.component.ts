@@ -27,10 +27,7 @@ export class SearchComponent implements OnInit, OnDestroy, AfterViewInit {
   isMobile: boolean;
 
   @ViewChild('seachTempl', { read: TemplateRef }) searchTemp: TemplateRef<any>;
-  
   unSub$ = new Subject<void>();
-
-
   constructor(
     private router: Router,
     private route: ActivatedRoute,

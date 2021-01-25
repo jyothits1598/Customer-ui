@@ -18,16 +18,16 @@
   <div class="custom-location-body">
     <ng-container *ngIf="searchTerm">
       <ng-container *ngIf="searchResults$ | async as searchResults">
-        <div class="list-title">New search</div>
+        <div class="list-title pder">New search</div>
         <ul style="list-style-type: none;cursor: pointer; margin-bottom: 0;">
           <li #listItem (click)="searchForItem(searchTerm)" routerLink="/search" [queryParams]="{q:searchTerm}" tabindex="1" (keyup)="searchListKeyup($event, searchTerm, 0);">
             <img src="assets/svg/ico_search_tabs.svg">
-            <div> Results for "{{searchTerm}}" </div>
+            <div class="text-capitalize"> Results for "{{searchTerm}}" </div>
           </li>
           <li #listItem *ngFor="let storeItem of searchResults; let i = index;" (click)="searchForItem(storeItem.store_name)" (keyup)="searchListKeyup($event, storeItem.store_name, i + 1);"
             routerLink="/search" [queryParams]="{q:storeItem.store_name}" tabindex="1">
             <img src="assets/svg/ico_search_tabs.svg">
-            <div>{{storeItem.store_name}}</div>
+            <div class="text-capitalize">{{storeItem.store_name}}</div>
           </li>
           <li *ngIf="searchResults && searchResults.length === 0" tabindex="1">
             <img src="assets/svg/ico_search_tabs.svg">
@@ -52,8 +52,8 @@
 
 <div *ngIf="isMobile && overlayOpen" class="mobile-banner">
   <div class="container">
-    <label class="mobile-banner__ico profile-save-text cls" >
-      <img src="assets/svg/ico_arrow_left.svg" alt="" (click)="closeSearchBox()" class="se-inline"><label class="cls">Search </label> 
+    <label class="mobile-banner__ico profile-save-text cls">
+      <img src="assets/svg/ico_arrow_left.svg" alt="" (click)="closeSearchBox()" class="se-inline"><label class="cls">Search </label>
     </label>
   </div>
 </div>

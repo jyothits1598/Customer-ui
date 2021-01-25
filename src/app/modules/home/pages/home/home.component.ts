@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   isLoggedin: boolean;
   stateSubs: Subscription;
   isMobile: boolean;
+  isActive:string = '';
   constructor(
     private authService: AuthService,
     protected searchService: SearchDataService,
@@ -24,6 +25,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute
   ) {
     this.isMobile = this.layoutService.isMobile;
+    if(this.route.snapshot.queryParams['type']){
+      this.isActive = this.route.snapshot.queryParams['type'];
+    }
   }
 
   unSub$ = new Subject<true>();
@@ -35,6 +39,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       .isLoggedIn$().pipe(takeUntil(this.unSub$))
       .subscribe((state) => (this.isLoggedin = state));
 
+      
     // this.router.events.pipe(pairwise()).subscribe(([prevRouteEvent, currRouteEvent]) => {
     //   if (prevRouteEvent instanceof NavigationEnd && currRouteEvent instanceof NavigationStart) {
     //     this._routeScrollPositions[prevRouteEvent.url] = window.pageYOffset;
@@ -63,5 +68,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.unSub$.next(true);
+  }
+
+  
+  navigateToPath(type){
+    this.router.navigate(['/sortBy'], { queryParams: { type: type } });
   }
 }
