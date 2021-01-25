@@ -54,7 +54,6 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
       } else {
         this.dynamicPosition$.next({
           top: `-${y - this.lastPinnedYPos}px`,
-          transition: 'top 0.2s',
         });
       }
       this.lastScrollYPos = y;

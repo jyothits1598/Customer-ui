@@ -20,7 +20,8 @@
       <ng-container *ngIf="searchResults$ | async as searchResults">
         <div class="list-title">New search</div>
         <ul style="list-style-type: none;cursor: pointer; margin-bottom: 0;">
-          <li #listItem (click)="searchForItem(searchTerm)" routerLink="/search" [queryParams]="{q:searchTerm}" tabindex="1" (keyup)="searchListKeyup($event, searchTerm, 0);">
+          <li #listItem (click)="searchForItem(searchTerm)" routerLink="/search" [queryParams]="{q:searchTerm}" tabindex="1" (click)="searchForItem(searchTerm)"
+            (keyup)="searchListKeyup($event, searchTerm, 0);">
             <img src="assets/svg/ico_search_tabs.svg">
             <div> Results for "{{searchTerm}}" </div>
           </li>
@@ -52,8 +53,8 @@
 
 <div *ngIf="isMobile && overlayOpen" class="mobile-banner">
   <div class="container">
-    <label class="mobile-banner__ico profile-save-text cls" >
-      <img src="assets/svg/ico_arrow_left.svg" alt="" (click)="closeSearchBox()" class="se-inline"><label class="cls">Search </label> 
+    <label class="mobile-banner__ico profile-save-text cls">
+      <img src="assets/svg/ico_arrow_left.svg" alt="" (click)="closeSearchBox()" class="se-inline"><label class="cls">Search </label>
     </label>
   </div>
 </div>

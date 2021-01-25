@@ -64,8 +64,9 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
 
   searchInputKeyup($event): void {
     const value = $event.target.value;
-    switch ($event.code) {
+    switch ($event.code || $event.keyCode) {
       case 'Enter':
+      case 13: //mobile keyboard enter
         this.searchForItem(value);
         break;
       case 'Escape':
@@ -174,7 +175,6 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   }
 
   private searchForItem(value: string) {
-    console.log(`searchForItem(): hit, value: '${value}'`);
     if (value) {
       this.closeSearchBox();
       this.searchInput.nativeElement.value = value;
