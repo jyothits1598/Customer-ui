@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CartData } from 'src/app/core/model/cart';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { CartService } from 'src/app/core/services/cart.service';
 import { ItemModifier } from 'src/app/modules/store-item-detail/model/store-item-detail';
 
@@ -14,7 +15,7 @@ import { ItemModifier } from 'src/app/modules/store-item-detail/model/store-item
 export class CartComponent implements OnInit, OnDestroy {
   constructor(
     private cartService: CartService,
-    private router: Router
+    private router: Router,
   ) { }
   cartTotal$: Observable<number>;
   unsub$ = new Subject<true>();

@@ -12,6 +12,7 @@ import { ConfirmationComponent } from '../modules/order/pages/confirmation/confi
 import { CartSummaryComponent } from '../modules/order/pages/cart-summary/cart-summary.component';
 import { OrderContainerComponent } from '../modules/order/components/cart-button/order-container/order-container.component';
 import { AddPaymentOptionsComponent } from '../modules/order/components/add-payment-options/add-payment-options.component';
+import { OrdersGuard } from './guards/orders.guard';
 
 const routes: Routes = [
   { path: 'sample', component: SampleComponent },
@@ -73,12 +74,13 @@ const routes: Routes = [
   {
     path: 'cart',
     component: CartComponent,
-    outlet: 'order'
+    outlet: 'order',
   },
   {
     path: 'cart-summary',
     component: CartSummaryComponent,
-    outlet: 'order'
+    outlet: 'order',
+    canActivate: [OrdersGuard]
   },
   {
     path: 'add-payment-opt',

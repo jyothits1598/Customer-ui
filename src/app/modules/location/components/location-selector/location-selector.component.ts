@@ -27,29 +27,27 @@ export class LocationSelectorComponent implements OnInit, AfterViewInit, OnDestr
     private layoutService: LayoutService,
     private popOverService: PopoverService,
     private modalService: ModalService) { }
-    
-    ngAfterViewInit(): void {
-      
-    }
 
-    overlayRef: PopoverRef | ModalRef;
-    location: UserLocation;
-    
-    ngOnInit(): void {
-      console.log('this is location selector on init');
-      this.locationSubs = this.geoLocationService.userLocation().subscribe((location) => {
-        console.log('user location subscription', location);
-        let loc = location;
-        this.location = location;
+  ngAfterViewInit(): void {
+
+  }
+
+  overlayRef: PopoverRef | ModalRef;
+  location: UserLocation;
+
+  ngOnInit(): void {
+    this.locationSubs = this.geoLocationService.userLocation().subscribe((location) => {
+      let loc = location;
+      this.location = location;
       if (loc.address.locality.length > 22) loc.address.locality = loc.address.locality.slice(0, 22) + '...';
       this.location = location;
     })
   }
-  
+
   showSelectorModal() {
     this.layoutService.isMobile ?
-    this.modalService.openComponentModal(LocationPanelComponent) :
-    this.popOverService.openComponentPopover(this.popOrigin, LocationPanelComponent, { xPos: 'start', yPos: 'bottom' });
+      this.modalService.openComponentModal(LocationPanelComponent) :
+      this.popOverService.openComponentPopover(this.popOrigin, LocationPanelComponent, { xPos: 'start', yPos: 'bottom' });
   }
 
   ngOnDestroy(): void {

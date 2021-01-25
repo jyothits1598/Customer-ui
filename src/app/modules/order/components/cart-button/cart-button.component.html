@@ -1,21 +1,23 @@
-<div class="cart-card cart-anim" *ngIf="cartData$ | async; let data">
-    <div class="cart-button" [routerLink]="[{ outlets: { 'order': ['cart'] } }]">
-        <div class="row">
-            <div class="col-sm-4 col-4">
-                <img src="assets/images/cart/cart.svg" />
-                <span class="cart-text cart-count">
-                    {{cartItemCount$ | async}}
-                </span>
-            </div>
-            <div class="col-sm-4 col-4 cart-text">
-                Checkout
-            </div>
-            <div class="col-sm-4 col-4 text-right cart-text">
-                ${{cartTotalAmount$ |async }}
+<ng-container *ngIf="showCartButton$ | async">
+    <div class="cart-card cart-anim" *ngIf="cartData$ | async">
+        <div class="cart-button" [routerLink]="[{ outlets: { 'order': ['cart'] } }]">
+            <div class="row">
+                <div class="col-sm-4 col-4">
+                    <img src="assets/images/cart/cart.svg" />
+                    <span class="cart-text cart-count">
+                        {{cartItemCount$ | async}}
+                    </span>
+                </div>
+                <div class="col-sm-4 col-4 cart-text">
+                    Checkout
+                </div>
+                <div class="col-sm-4 col-4 text-right cart-text">
+                    ${{cartTotalAmount$ |async }}
+                </div>
             </div>
         </div>
     </div>
-</div>
+</ng-container>
 
 <!--
     while doing Payment

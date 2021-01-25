@@ -44,52 +44,56 @@ export class CartService {
     private authService: AuthService,
     private restApiService: RestApiService
   ) {
-
-    this.authService.loggedUser$.subscribe((user) => {
-      let savedData = this.storageService.get(this.storageIdentifier);
-      if (savedData) this.addItem(savedData).subscribe();
-      else {
-        if (user) {
-          //try to fetch from backend
-          this.getCart().subscribe((cart) => { if (cart) { this.cartData.next(cart); this.storageService.store(this.storageIdentifier, cart) } })
+    this.authService.loggedUser$.pipe(take(1)).subscribe((user) => {
+      if (!this.presentCartData) {
+        let savedData = this.storageService.get(this.storageIdentifier);
+        if (savedData) this.addItem(savedData).subscribe();
+        else {
+          if (user) {
+            //try to fetch from backend
+            this.getCart().subscribe((cart) => { if (cart) { this.cartData.next(cart); this.storageService.store(this.storageIdentifier, cart) } })
+          }
         }
       }
-      // else {
-      //   //try to fetch from localstorage
-      //   let cartData = this.storageService.get(this.storageIdentifier);
-      //   if (cartData) {
-      //   } this.cartData.next(cartData);
-      // }
     })
   }
 
-  addItem(item: CartData): Observable<boolean> {
-    let presentCartData = this.presentCartData;
+  // TODO: rewrite this function with better implementation
+  addItem(cData: CartData, replaceItems: boolean = false): Observable<boolean> {
+    console.log('add item called', cData);
+    let newCartData = this.presentCartData ? { ...this.presentCartData } : null;
     let resultObs: Observable<any>;
 
-    if (presentCartData && item) {
-      //check if the items are form same store
-      if (this.presentCartData.storeId === item.storeId) {
-        let cartData = { ...this.presentCartData };
-
+    if (newCartData && cData) {
+      //check if the items are fromm same store
+      if (newCartData.storeId === cData.storeId) {
         //in the current inplementation only one item is added at a time, hence index 0;
-        cartData.items.push(item.items[0])
-        // this.cartData.next(cartData);
+        if (replaceItems) newCartData = cData;
+        else newCartData.items.push(cData.items[0]);
         resultObs = of(true);
       } else {
-
         //item is from an other store
         let modalRef: ComponentModalRef<ConfirmationDialogComponent> = this.modalService.openComponentModal(ConfirmationDialogComponent);
-        resultObs = modalRef.instance.userDecision.pipe(take(1), finalize(() => { modalRef.dismiss() }));
+        resultObs = modalRef.instance.userDecision.pipe(take(1), tap(() => { newCartData = cData }), finalize(() => { modalRef.dismiss() }));
       }
     }
     else {
       // there is no previous item in cart
+      newCartData = cData;
       resultObs = of(true);
     }
-    if (this.authService.isLoggedIn) resultObs = resultObs.pipe(switchMap(() => this.postCart(item)));
+    //post cart to backend if signed in
+    if (this.authService.isLoggedIn) resultObs = resultObs.pipe(switchMap(() => this.postCart(cData)));
+    return resultObs.pipe(tap(() => { this.cartData.next(newCartData); this.storageService.store(this.storageIdentifier, cData) }));
+  }
 
-    return resultObs.pipe(tap(() => { this.cartData.next(item); this.storageService.store(this.storageIdentifier, item) }));
+  deleteItem(itemId: number): Observable<boolean> {
+    let pCart = { ...this.presentCartData };
+    pCart.items = [...pCart.items]
+    let itemIndex = pCart.items.findIndex(item => item.item.id === itemId);
+    pCart.items.splice(itemIndex, 1);
+    if (pCart.items.length) return this.addItem(pCart, true);
+    else return this.addItem(null);
   }
 
   calculateItemCount(cartData: CartData) {
@@ -98,7 +102,6 @@ export class CartService {
 
   calculateTotalAmount(cartData: CartData) {
     let result: number = 0;
-
     if (cartData?.items.length) {
       cartData.items.forEach(
         (item) => {
@@ -117,7 +120,6 @@ export class CartService {
     //remove null values
     let selectedMods = selectedModifiers.filter(m => m);
 
-
     selectedMods.forEach((modifier: ItemModifier) => {
 
       modifier.options.sort((opt1, opt2) => opt1.price - opt2.price);
@@ -134,16 +136,7 @@ export class CartService {
     return total * count;
   }
 
-  deleteItem(itemId: number): Observable<boolean> {
-    let pCart = this.presentCartData;
-    let itemIndex = pCart.items.findIndex(item => item.item.id === itemId);
-    pCart.items.splice(itemIndex, 1);
-    if (pCart.items.length) return this.addItem({ ...pCart });
-    else return this.addItem(null)
-  }
-
   postCart(cartData: CartData) {
-    console.log('calling post cart', cartData);
     if (!cartData) return this.restApiService.delete('api/customer/cart');
     else return this.restApiService.post('api/customer/cart', MapToDto(cartData));
   }
