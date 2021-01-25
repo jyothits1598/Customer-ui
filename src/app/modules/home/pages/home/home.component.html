@@ -27,15 +27,16 @@
   <div class="text-center">
     <ul class="resnt-menu-top-tabs u-margin-bottom-medium" style="margin-bottom:0">
       <li class="resnt-menu-top-tabs__item custom-border" >
-        <div class="resnt-menu-top-tabs__button tabs-menu resnt-menu-top-tabs__button__active" >
+        <div class="resnt-menu-top-tabs__button tabs-menu" [class.resnt-menu-top-tabs__button__active]="isActive == 'nearBy' || isActive == ''" (click)="navigateToPath('nearBy')">
           Nearby 
         </div>
       </li>
       <li class="resnt-menu-top-tabs__item custom-border">
-        <div class="resnt-menu-top-tabs__button tabs-menu resnt-menu-top-tabs__button__border" routerLink=""> Reviews </div>
+        <div class="resnt-menu-top-tabs__button tabs-menu resnt-menu-top-tabs__button__border" [class.resnt-menu-top-tabs__button__active]="isActive == 'google'" (click)="navigateToPath('google')"> 
+          Reviews </div>
       </li>
       <li class="resnt-menu-top-tabs__item">
-        <div class="resnt-menu-top-tabs__button tabs-menu" routerLink=""> 
+        <div class="resnt-menu-top-tabs__button tabs-menu" [class.resnt-menu-top-tabs__button__active]="isActive == 'facebook'"  (click)="navigateToPath('facebook')"> 
             Likes
         </div>
       </li>

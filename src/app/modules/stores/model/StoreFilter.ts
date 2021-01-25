@@ -3,4 +3,5 @@ export interface StoreFilter{
     name?: string,
     location?: {lat: number, lng: number},
     distance?: number,
+    sort_by?: string
 }
