@@ -5,6 +5,7 @@
 @import "./styles/cards";
 @import "~@angular/cdk/overlay-prebuilt.css";
 @import "./styles/animations";
+@import "./styles/cart";
 
 .modal-content {
   border: 0 !important;
@@ -47,9 +48,6 @@ input::-webkit-input-placeholder {
     display: block;
   }
   .only-big {
-    display: none;
-  }
-  .right-content {
     display: none;
   }
   .store-list-bg {
@@ -102,7 +100,6 @@ input::-webkit-input-placeholder {
     transform: translate(-50%, -50%);
     outline: 0;
     cursor: pointer;
-    z-index:9999;
   }
   .center-block-location {
     text-align: center !important;
@@ -152,9 +149,7 @@ input::-webkit-input-placeholder {
   .only-big {
     display: none;
   }
-  .right-content {
-    display: none;
-  }
+  
   .store-list-bg {
     padding: 16px 0;
   }
@@ -221,7 +216,6 @@ input::-webkit-input-placeholder {
     transform: translate(-50%, -50%);
     outline: 0;
     cursor: pointer;
-    z-index:9999;
   }
   .store-search {
     padding-top: 16px !important;
@@ -254,9 +248,7 @@ input::-webkit-input-placeholder {
   .only-big {
     display: none;
   }
-  .right-content {
-    display: none;
-  }
+  
   .store-list-bg {
     padding: 16px 0;
   }
@@ -323,7 +315,6 @@ input::-webkit-input-placeholder {
     transform: translate(-50%, -50%);
     outline: 0;
     cursor: pointer;
-    z-index:9999;
   }
   .store-search {
     padding-top: 16px !important;
@@ -370,9 +361,7 @@ input::-webkit-input-placeholder {
   .main-content {
     width: 80%;
   }
-  .right-content {
-    width: 20%;
-  }
+ 
   .store-list-bg {
     padding: 32px 0;
   }
@@ -457,9 +446,7 @@ input::-webkit-input-placeholder {
   .main-content {
     width: 80%;
   }
-  .right-content {
-    width: 20%;
-  }
+ 
   .store-list-bg {
     padding: 32px 0;
   }

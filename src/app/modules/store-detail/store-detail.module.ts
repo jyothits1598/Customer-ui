@@ -12,6 +12,7 @@ import { LazyImageDirective } from './directives/lazy-image.directive';
 import { ShareModule } from '../share/share.module';
 import { FacebookLikeCountModule } from '../facebook-like-count/facebook-like-count.module';
 import { GoogleRatingModule } from '../google-rating/google-rating.module';
+import { OrderModule } from '../order/order.module';
 
 const routes: Routes = [
   {
@@ -30,7 +31,8 @@ const routes: Routes = [
     StoreItemDetailModule,
     ShareModule,
     GoogleRatingModule,
-    FacebookLikeCountModule
+    FacebookLikeCountModule,
+    OrderModule
   ],
   providers: [StoreDetailDataService]
 })
