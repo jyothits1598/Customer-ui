@@ -14,9 +14,6 @@
   </div>
 </div>
 
-
-
-
 <ng-template #panelTemplate>
   <div class="custom-location-body">
     <ng-container *ngIf="searchTerm">
@@ -42,7 +39,7 @@
 
     <ng-container *ngIf="!searchTerm">
       <div class="list-title"> Recent searches </div>
-      <ul style="list-style-type: none;cursor: pointer; margin: 0;padding: 0;">
+      <ul style="list-style-type: none;cursor: pointer; margin: 0;">
         <li #listItem *ngFor="let storeName of history; let i = index;" (click)="searchForItem(storeName)" (keyup)="searchListKeyup($event, storeName, i);" routerLink="/search"
           [queryParams]="{q:storeName}" tabindex="1">
           <img src="assets/svg/ico_search_tabs.svg">
@@ -50,12 +47,7 @@
         </li>
       </ul>
     </ng-container>
-
-
   </div>
-
-
-
 </ng-template>
 
 <div *ngIf="isMobile && overlayOpen" class="mobile-banner">
