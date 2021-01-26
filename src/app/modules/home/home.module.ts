@@ -15,10 +15,6 @@ const routes: Routes = [
         path: '',
         component: NearbyStoresComponent
       },
-      {
-        path: 'sortBy',
-        component: NearbyStoresComponent
-      }
     ],
   }
 ]
