@@ -37,25 +37,18 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('vCont', { read: ViewContainerRef })
   containerRef: ViewContainerRef;
 
-  lastPinnedYPos = 0;
   lastScrollYPos = window.pageYOffset;
 
-  dynamicPosition$ = new BehaviorSubject<object>({
-    top: `${this.lastPinnedYPos}px`,
-  });
+  dynamicPosition$ = this.navbarService.dynamicPosition$;
 
   @HostListener('window:scroll', ['$event'])
   onScroll(event) {
     if (this.layoutService.isMobile) {
       const y = window.pageYOffset;
       if (this.searchDataServ.overlayOpen || y < this.lastScrollYPos) {
-        this.dynamicPosition$.next({ top: '0px', transition: 'top 0.2s' });
-        this.lastPinnedYPos = y;
+        this.navbarService.pinNavbarPosition(y);
       } else {
-        this.dynamicPosition$.next({
-          top: `-${y - this.lastPinnedYPos}px`,
-          transition: 'top 0.2s',
-        });
+        this.navbarService.setNavbarPosition(y);
       }
       this.lastScrollYPos = y;
     }

@@ -17,6 +17,7 @@ import { tap } from 'rxjs/operators';
 import { PopoverConfig, PopoverRef } from 'src/app/core/model/popover';
 import { LayoutService } from 'src/app/core/services/layout.service';
 import { PopoverService } from 'src/app/core/services/popover.service';
+import { NavbarService } from 'src/app/modules/navbar/services/navbar.service';
 import { SearchDataService } from '../../services/search-data.service';
 
 @Component({
@@ -41,9 +42,7 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
 
   history: Array<string>;
   loading$ = this.searchDataService.isLoading$;
-  searchResults$ = this.searchDataService.inlineSearchResults$.pipe(
-    tap((_) => this.navToList())
-  );
+  searchResults$ = this.searchDataService.inlineSearchResults$;
 
   get overlayOpen() {
     return this.searchDataService.overlayOpen;
@@ -53,6 +52,7 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
     private popoverService: PopoverService,
     private layoutService: LayoutService,
     private searchDataService: SearchDataService,
+    private navBarService: NavbarService,
     private router: Router
   ) {
     this.isMobile = this.layoutService.isMobile;
@@ -64,8 +64,9 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
 
   searchInputKeyup($event): void {
     const value = $event.target.value;
-    switch ($event.code) {
+    switch ($event.code || $event.keyCode) {
       case 'Enter':
+      case 13: //mobile keyboard enter
         this.searchForItem(value);
         break;
       case 'Escape':
@@ -108,6 +109,7 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
 
   openSearchBox(): void {
     document.addEventListener('keydown', this.docScrollPrevention);
+    this.navBarService.setNavbarPosition(0);
     if (
       !this.searchDataService.overlayOpen &&
       this.searchDataService.getHistory().length > 0
