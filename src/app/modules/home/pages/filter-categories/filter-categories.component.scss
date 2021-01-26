@@ -20,6 +20,7 @@
       & .name-cuisine {
         margin-top: 8px;
         color:var(--color-primary);
+        text-align:center;
       } 
       &:hover {
         .inactive-cuisine {
@@ -37,7 +38,9 @@
     } 
   }
 }
-
+.slider-images img{
+  margin:0 auto;
+}
 .inactive-cuisine {
   display:block;
   width:48px;

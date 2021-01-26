@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { URL_AllFavourites, URL_DeleteFavourite, URL_SetFavourite } from 'src/api/store-data';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
 import { Pagination, StorePagination } from 'src/app/shared/classes/pagination';
-import { ReadStore, Store } from '../model/store';
+import { ReadStore, Store} from '../model/store';
 import { StoreFilter } from '../model/StoreFilter';
 
 @Injectable({
@@ -65,7 +65,5 @@ export class StoresDataService {
     }
     return result ? ('?' + result) : result;
   }
-
-
 
 }

@@ -10,8 +10,15 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class NavbarIconsComponent implements OnInit, OnDestroy {
   isLoggedin: boolean;
-  
-  constructor(private authService: AuthService) { 
+  isActive:string = '';
+
+  constructor(
+    private authService: AuthService,
+    private route: ActivatedRoute) { 
+      // if(this.route.snapshot.queryParams['favourites']){
+      //   this.isActive = this.route.snapshot.queryParams['favourites'];
+      //   console.log(this.isActive);
+      // }
   }
 
   stateSubs: Subscription;

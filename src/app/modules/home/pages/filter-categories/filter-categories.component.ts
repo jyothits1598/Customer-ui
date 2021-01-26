@@ -1,18 +1,28 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Subject } from 'rxjs';
 import { LayoutService } from 'src/app/core/services/layout.service';
+import { HomeService } from '../../home.service';
+import { Cuisines } from '../../modal/cuisines';
 
 @Component({
   selector: 'app-filter-categories',
   templateUrl: './filter-categories.component.html',
   styleUrls: ['./filter-categories.component.scss']
 })
-export class FilterCategoriesComponent implements OnInit {
-  right:boolean = true;
+export class FilterCategoriesComponent implements OnInit, OnDestroy {
+  right: boolean = true;
+  cuisines = new Array<Cuisines>();
+  unSub$ = new Subject<true>();
+
   constructor(
-    private layoutService: LayoutService
+    private layoutService: LayoutService,
+    private homeService: HomeService
   ) { }
+  ngOnDestroy(): void {
+    this.unSub$.next(true);
+  }
   @ViewChild('widgetsContent') widgetsContent: ElementRef;
-  
+
   scrollRight() {
     if (this.layoutService.isMobile) {
       this.widgetsContent.nativeElement.scrollLeft += 200;
@@ -29,6 +39,9 @@ export class FilterCategoriesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
-// filter = [{prest-image:'',next-image:'',name:''}];
+    this.homeService.getCuisineData().subscribe((response) => 
+    this.cuisines = response['data']['cuisines']
+  )
+}
+
 }

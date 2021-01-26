@@ -649,3 +649,32 @@ input[class="cb"]:checked + span:before {
   width:40px;
   height:40px;
 }
+
+// active desktop icons
+.fav-icon-active {
+  background-image: url("assets/svg/signup/ico_heart_active.svg");
+  width:40px;
+  height:40px;
+}
+.home-icon-active {
+  background-image: url("assets/svg/signup/ico_home_active.svg");
+  width:40px;
+  height:40px;
+}
+
+// Mobile active
+.user-icon-mobile-active {
+  background-image: url("assets/svg/mobile/ico_account_m_active.svg");
+  width:40px;
+  height:40px;
+}
+.home-icon-mobile-active {
+  background-image: url("assets/svg/mobile/ico_home_m_active.svg");
+  width:40px;
+  height:40px;
+}
+.fav-icon-mobile-active {
+  background-image: url("assets/svg/mobile/ico_heart_m_active.svg");
+  width:40px;
+  height:40px;
+}
