@@ -15,6 +15,7 @@ import { SampleComponent } from './components/sample/sample.component';
 import { IsAuthenticatedGuard } from './guards/is-authenticated.guard';
 import { OrderModule } from '../modules/order/order.module';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { OrdersService } from './services/orders.service';
 
 @NgModule({
   declarations: [CoreComponent, LayoutComponent, SnackBarComponent, SnackBarContainerComponent, LoginPromptComponent, SampleComponent, ConfirmationDialogComponent],

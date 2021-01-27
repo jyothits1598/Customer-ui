@@ -26,10 +26,10 @@ import { CustomRouteReuseStrategy } from './helpers/custom-route-reuse-strategy'
 
   ],
   providers: [
-    {
-      provide: RouteReuseStrategy,
-      useClass: CustomRouteReuseStrategy,
-    }
+    // {
+    //   provide: RouteReuseStrategy,
+    //   useClass: CustomRouteReuseStrategy,
+    // }
   ],
   bootstrap: [AppComponent]
 })

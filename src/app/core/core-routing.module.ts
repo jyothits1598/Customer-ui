@@ -10,7 +10,7 @@ import { CartComponent } from '../modules/order/pages/cart/cart.component';
 import { PaymentComponent } from '../modules/order/pages/payment/payment.component';
 import { ConfirmationComponent } from '../modules/order/pages/confirmation/confirmation.component';
 import { CartSummaryComponent } from '../modules/order/pages/cart-summary/cart-summary.component';
-import { OrderContainerComponent } from '../modules/order/components/cart-button/order-container/order-container.component';
+import { OrderContainerComponent } from '../modules/order/components/order-container/order-container.component';
 import { AddPaymentOptionsComponent } from '../modules/order/components/add-payment-options/add-payment-options.component';
 import { OrdersGuard } from './guards/orders.guard';
 
