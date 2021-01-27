@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute ,Router} from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UserLocation } from 'src/app/core/model/user-location';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -15,7 +15,7 @@ export class NearbyStoresComponent implements OnInit, OnDestroy {
   locationSubs: Subscription;
   filter: StoreFilter = {};
 
-  constructor(private route: ActivatedRoute, private geoLocation: GeoLocationService, private authService: AuthService) {
+  constructor(private route: ActivatedRoute, private geoLocation: GeoLocationService, private authService: AuthService,private router: Router) {
     
     this.locationSubs = this.geoLocation.userLocation().subscribe((value: UserLocation) => {
       this.filter = {
@@ -24,6 +24,7 @@ export class NearbyStoresComponent implements OnInit, OnDestroy {
         sort_by: this.route.snapshot.queryParams['type'] ?  this.route.snapshot.queryParams['type'] :''
       }
     });
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   ngOnInit(): void {
