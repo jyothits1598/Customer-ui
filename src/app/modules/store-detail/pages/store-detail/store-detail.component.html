@@ -17,7 +17,7 @@
                                       style="cursor: pointer;outline:0;">
                               </td>
                               <td align="bottom">
-                                  <span *ngIf="scrolledDown"
+                                  <span *ngIf="scrolledDown" class="text-capitalize"
                                       style="display: inline-block; animation: fadeInDown .1s">&nbsp;
                                       {{storeDetail.name}}</span>
                               </td>
@@ -85,10 +85,24 @@
                   <table>
                       <tr>
                           <td>
-                              <facebook-like-count [url]="storeDetail.facebookUrl"></facebook-like-count>
-                          </td>
+                            <div class="rating-size">
+                                <table>
+                                    <tr>
+                                        <td valign="middle"><img src="assets/svg/cards/ico_social_facebook_small.svg" style="padding-right:4px"></td>
+                                        <td valign="bottom" class="rating-text" >&nbsp;{{storeDetail.facebookLike}} </td>
+                                     </tr>
+                                </table>
+                            </div>
+                        </td>
                           <td align="top">
-                              <google-rating [store]="storeDetail"></google-rating>
+                            <div class="rating-size">
+                                <table >
+                                    <tr>
+                                        <td valign="middle" style="padding-left:10px;"><img src="assets/svg/cards/ico_social_google_small.svg" ><img src="assets/svg/cards/ico_star_half_small.svg"></td>
+                                        <td valign="bottom">&nbsp;{{storeDetail.googleRating}}</td>
+                                    </tr>
+                                </table>
+                            </div>
                           </td>
                       </tr>
                   </table>

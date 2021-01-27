@@ -1,8 +1,8 @@
 <div class="cuisine-list-images">
   <div #widgetsContent class="order-overflow">
     <div class="slider-images" *ngFor="let cuisine of cuisines" >
-      <img class="inactive-cuisine" [src]="cuisine?.image?.background" />
-      <img class="active-cuisine" [src]="cuisine?.image?.hover" />
+      <img class="inactive-cuisine" [src]="cuisine?.image?.background || 'assets/svg/null_logo.svg'" />
+      <img class="active-cuisine" [src]="cuisine?.image?.hover || 'assets/svg/null_logo.svg'" />
       <div class="name-cuisine"> {{ cuisine.cuisine_name}} </div>
     </div>
     <img src="assets/catsvg/left_arrow.svg" class="backward" (click)="scrollLeft()" style="cursor: pointer" id="active_icons">
