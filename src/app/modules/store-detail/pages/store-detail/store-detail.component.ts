@@ -8,6 +8,8 @@ import { StoreDetailDataService } from '../../services/store-detail-data.service
 import { GeoLocationService } from 'src/app/core/services/geo-location.service';
 import { UserLocation } from 'src/app/core/model/user-location';
 import { Subject } from 'rxjs';
+import { OrderPages, OrderViewControllerService } from 'src/app/core/services/order-view-controller.service';
+import { LayoutService } from 'src/app/core/services/layout.service';
 
 @Component({
   selector: 'app-store-detail',
@@ -34,7 +36,8 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private geoLoc: GeoLocationService,
     private location: Location,
-    private router: Router) { }
+    private orderView: OrderViewControllerService,
+    private layoutService: LayoutService) { }
 
   observeIntersection() {
     this.interObserver = new IntersectionObserver((entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
@@ -69,7 +72,7 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
 
     // open cart by default
     // if (!this.router.url.includes('(order:')) this.router.navigate([{ outlets: { 'order': ['cart'] } }], { replaceUrl: true })
-
+    if (!this.layoutService.isMobile) this.orderView.showPage(OrderPages.Cart);
   }
 
   loadStore(storeId: number, location?: UserLocation) {

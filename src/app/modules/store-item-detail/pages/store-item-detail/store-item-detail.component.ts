@@ -108,7 +108,6 @@ export class StoreItemDetailComponent implements OnChanges, OnDestroy {
       setTimeout(() => {
         this.show = false;
         this.location.back();
-        this.router.navigate([{ outlets: { 'order': ['cart'] } }]);
       }, 0);
     });
   }
