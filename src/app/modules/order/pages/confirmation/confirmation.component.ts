@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OrdersService } from 'src/app/core/services/orders.service';
 
 @Component({
   selector: 'app-confirmation',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfirmationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private ordSrv: OrdersService) { }
 
   ngOnInit(): void {
+    this.ordSrv.orderToBeShown$.subscribe(
+      order => console.log('order to be shown', order)
+    )
   }
 
 }

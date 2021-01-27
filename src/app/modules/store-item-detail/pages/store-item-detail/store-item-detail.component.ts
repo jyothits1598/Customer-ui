@@ -52,7 +52,8 @@ export class StoreItemDetailComponent implements OnChanges, OnDestroy {
 
   constructor(private storeItemData: StoreItemDataService,
     private location: Location,
-    private cartService: CartService) {
+    private cartService: CartService,
+    private router: Router) { 
     this.makeCalculations = this.cartService.makeCalculations;
   }
 
@@ -107,7 +108,8 @@ export class StoreItemDetailComponent implements OnChanges, OnDestroy {
       setTimeout(() => {
         this.show = false;
         this.location.back();
-      }, 600);
+        this.router.navigate([{ outlets: { 'order': ['cart'] } }]);
+      }, 0);
     });
   }
 

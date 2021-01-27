@@ -1,6 +1,7 @@
 <ng-container *ngIf="showCartButton$ | async">
     <div class="cart-card cart-anim" *ngIf="cartData$ | async">
-        <div class="cart-button" [routerLink]="[{ outlets: { 'order': ['cart'] } }]">
+        <!-- <div class="cart-button" [routerLink]="[{ outlets: { 'order': ['cart'] } }]"> -->
+        <div class="cart-button" (click)="openCart()">
             <div class="row">
                 <div class="col-sm-4 col-4">
                     <img src="assets/images/cart/cart.svg" />

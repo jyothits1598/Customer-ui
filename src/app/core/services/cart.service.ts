@@ -59,7 +59,7 @@ export class CartService {
   }
 
   // TODO: rewrite this function with better implementation
-  addItem(cData: CartData, replaceItems: boolean = false): Observable<boolean> {
+  addItem(cData: CartData, replaceItems: boolean = false, skipBackend: boolean = false): Observable<boolean> {
     console.log('add item called', cData);
     let newCartData = this.presentCartData ? { ...this.presentCartData } : null;
     let resultObs: Observable<any>;
@@ -81,10 +81,11 @@ export class CartService {
       // there is no previous item in cart
       newCartData = cData;
       resultObs = of(true);
+      console.log('moiddle of flow', this.authService.isLoggedIn)
     }
     //post cart to backend if signed in
-    if (this.authService.isLoggedIn) resultObs = resultObs.pipe(switchMap(() => this.postCart(cData)));
-    return resultObs.pipe(tap(() => { this.cartData.next(newCartData); this.storageService.store(this.storageIdentifier, cData) }));
+    if (this.authService.isLoggedIn && !skipBackend) resultObs = resultObs.pipe(switchMap(() => this.postCart(newCartData)));
+    return resultObs.pipe(tap(() => { console.log('add to cart called', newCartData); this.cartData.next(newCartData); this.storageService.store(this.storageIdentifier, cData) }));
   }
 
   deleteItem(itemId: number): Observable<boolean> {

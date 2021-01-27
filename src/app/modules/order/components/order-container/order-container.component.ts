@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { OrderPages, OrderViewControllerService } from 'src/app/core/services/order-view-controller.service';
 
 @Component({
   selector: 'order-container',
@@ -9,12 +10,18 @@ import { filter } from 'rxjs/operators';
 })
 export class OrderContainerComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) { }
+  orderPages = OrderPages;
+  currentPage$;
+  constructor(private route: ActivatedRoute,
+    private orderView: OrderViewControllerService) {
+  }
+
+  close() {
+    this.orderView.showPage(null);
+  }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(
-      (qp) => { console.log(qp) }
-    )
+    this.currentPage$ = this.orderView.getCurrentPage$();
   }
 
 }

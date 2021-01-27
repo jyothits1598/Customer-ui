@@ -1,28 +1,32 @@
-<div class="right-content">
-    <div class="right-content-overflow">
+<!-- <div class="right-content">
+    <div class="right-content-overflow"> -->
         <cart-content></cart-content>
         <!-- <payment-options></payment-options> -->
-        <div class="add-payment-option" *ngIf="cartTotal$ | async; let total"  >
+        <div class="add-payment-option" *ngIf="cartTotal$ | async; let total">
             <h4 class="f-20 f-b">Payment</h4>
-            <ul (click)=addPayment() >
+            <ul [routerLink]="['../add-payment-opt']">
                 <li class="d-flex justify-content-between pointer">
                     <label class="f-16 mt-8">Add payment method</label>
                     <img class="mt-1" src="assets/images/cart/chevron.svg" />
                 </li>
                 <hr>
             </ul>
-        </div> 
-    </div>
-</div>
-<div *ngIf="cartTotal$ | async; let total"  (click)="makePayment()" class="cart-card cart-anim place-order-button-index" >
+        </div>
+    <!-- </div>
+</div> -->
+<div *ngIf="cartTotal$ | async; let total" (click)="showPaymentOpt = true"
+    class="cart-card cart-anim place-order-button-index">
     <div class="cart-button">
         <div class="d-flex justify-content-between">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M22 11.0801V12.0001C21.9988 14.1565 21.3005 16.2548 20.0093 17.9819C18.7182 19.7091 16.9033 20.9726 14.8354 21.584C12.7674 22.1954 10.5573 22.122 8.53447 21.3747C6.51168 20.6274 4.78465 19.2462 3.61096 17.4372C2.43727 15.6281 1.87979 13.4882 2.02168 11.3364C2.16356 9.18467 2.99721 7.13643 4.39828 5.49718C5.79935 3.85793 7.69279 2.71549 9.79619 2.24025C11.8996 1.76502 14.1003 1.98245 16.07 2.86011" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M22 4L12 14.01L9 11.01" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path
+                    d="M22 11.0801V12.0001C21.9988 14.1565 21.3005 16.2548 20.0093 17.9819C18.7182 19.7091 16.9033 20.9726 14.8354 21.584C12.7674 22.1954 10.5573 22.122 8.53447 21.3747C6.51168 20.6274 4.78465 19.2462 3.61096 17.4372C2.43727 15.6281 1.87979 13.4882 2.02168 11.3364C2.16356 9.18467 2.99721 7.13643 4.39828 5.49718C5.79935 3.85793 7.69279 2.71549 9.79619 2.24025C11.8996 1.76502 14.1003 1.98245 16.07 2.86011"
+                    stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M22 4L12 14.01L9 11.01" stroke="white" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
             </svg>
             <span class="cart-text cart-count">
-                Place order 
+                Place order
             </span>
             <span class="cart-text cart-count">${{total}}</span>
         </div>
@@ -32,7 +36,7 @@
 <!--
     while doing Payment
 -->
-<div class="cart-card dopayment" *ngIf="doPayment">
+<div class="cart-card dopayment" *ngIf="showPaymentOpt">
     <div class="card-applepay text-center">
         <span>Buy with
             <svg width="48" height="20" viewBox="0 0 48 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -54,9 +58,13 @@
             </svg>
         </span>
     </div>
-    <div class="cart-button mt-8 text-center">
-        <span class="cart-text">Buy with Mastercard &bull;&bull;&bull;&bull; 4567</span>
-    </div>
+    <button class="cart-button mt-8 text-center" [disabled]="paymentInProg" (click)="order()">
+        <span class="cart-text" *ngIf="!paymentInProg; else loading">Buy</span>
+        <ng-template #loading>
+            <span class="cart-text"><img src="assets/images/loader_white_24.gif" alt=""></span>
+        </ng-template>
+        <!-- <span class="cart-text">Buy with Mastercard &bull;&bull;&bull;&bull; 4567</span> -->
+    </button>
     <div class="card-paypal mt-8 text-center">
         <span>Buy with
             <svg width="83" height="20" viewBox="0 0 83 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -86,7 +94,7 @@
 
         </span>
     </div>
-    <div class="cancel">
+    <div class="cancel" (click)="showPaymentOpt = false">
         Cancel
     </div>
 </div>
