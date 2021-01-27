@@ -40,6 +40,10 @@ export class CartSummaryComponent implements OnInit, OnDestroy {
     );
   }
 
+  addPaymentOpt() {
+    this.orderView.showPage(OrderPages.AddPaymentOptions);
+  }
+
   ngOnDestroy(): void {
     this.unsub$.next(true);
   }
