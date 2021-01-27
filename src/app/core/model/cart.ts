@@ -1,6 +1,8 @@
 import { StoreItem } from "src/app/modules/store-detail/model/store-detail";
 import { StoreItemDetail } from "src/app/modules/store-item-detail/model/store-item-detail";
 
+
+// TODO: change CartData to OrderData
 export interface CartData {
     storeId: number,
     storeName: string;
@@ -9,7 +11,6 @@ export interface CartData {
 }
 
 export interface CartDto {
-    // cart: {
     store_id: number;
     items: Array<{
         item_id: number,
@@ -23,7 +24,12 @@ export interface CartDto {
             options: Array<{ option_id: number, name: string, option_price: string }>
         }>
     }>
-    // }
+}
+
+export interface OrderDto extends CartDto {
+    preparing_order: string,
+    total_price: number,
+    status: string,
 }
 
 export function mapToCartData(data: CartDto): CartData {

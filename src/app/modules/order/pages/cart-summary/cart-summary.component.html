@@ -1,19 +1,17 @@
 <!-- <div class="right-content">
     <div class="right-content-overflow"> -->
-        <cart-content></cart-content>
-        <!-- <payment-options></payment-options> -->
-        <div class="add-payment-option" *ngIf="cartTotal$ | async; let total">
-            <h4 class="f-20 f-b">Payment</h4>
-            <ul [routerLink]="['../add-payment-opt']">
-                <li class="d-flex justify-content-between pointer">
-                    <label class="f-16 mt-8">Add payment method</label>
-                    <img class="mt-1" src="assets/images/cart/chevron.svg" />
-                </li>
-                <hr>
-            </ul>
-        </div>
-    <!-- </div>
-</div> -->
+<cart-content></cart-content>
+<!-- <payment-options></payment-options> -->
+<div class="add-payment-option" *ngIf="cartTotal$ | async; let total">
+    <h4 class="f-20 f-b">Payment</h4>
+    <ul (click)="addPaymentOpt()">
+        <li class="d-flex justify-content-between pointer">
+            <label class="f-16 mt-8">Add payment method</label>
+            <img class="mt-1" src="assets/images/cart/chevron.svg" />
+        </li>
+        <hr>
+    </ul>
+</div>
 <div *ngIf="cartTotal$ | async; let total" (click)="showPaymentOpt = true"
     class="cart-card cart-anim place-order-button-index">
     <div class="cart-button">

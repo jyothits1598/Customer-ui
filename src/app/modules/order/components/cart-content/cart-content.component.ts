@@ -46,4 +46,9 @@ export class CartContentComponent implements OnInit, OnDestroy {
     this.unsub$.next(true);
   }
 
+  modifiersToOptionNameArr(mods: Array<ItemModifier>) {
+    let m = mods.map(mod => mod.options.map(op => op.name));
+    return Array.prototype.concat.apply([], m);
+  }
+
 }

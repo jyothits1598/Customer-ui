@@ -50,7 +50,7 @@ export class OrdersService {
   }
 
   getOrderDetails(orderId) {
-    return this.restApiService.get('api/customer/orders?order_id=' + orderId).pipe((resp: any) => resp.data);
+    return this.restApiService.get('api/customer/orders?order_id=' + orderId).pipe(map((resp: any) => resp.data));
   }
 
 
