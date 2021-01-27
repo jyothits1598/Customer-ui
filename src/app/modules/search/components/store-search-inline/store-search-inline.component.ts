@@ -11,8 +11,8 @@ import {
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Subject, Subscription } from 'rxjs';
+import { take, takeUntil, tap } from 'rxjs/operators';
 
 import { PopoverConfig, PopoverRef } from 'src/app/core/model/popover';
 import { LayoutService } from 'src/app/core/services/layout.service';
@@ -33,6 +33,8 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   panelTemplate: TemplateRef<any>;
 
   @ViewChildren('listItem') listItems: QueryList<ElementRef>;
+
+  finalise$ = new Subject<void>();
 
   searchControl: FormControl = new FormControl(null);
 
@@ -59,6 +61,9 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
+    this.searchDataService.fullSearchTerm$
+      .pipe(takeUntil(this.finalise$))
+      .subscribe((value) => this.searchControl.setValue(value));
     this.history = this.searchDataService.getHistory();
   }
 
@@ -110,6 +115,11 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   openSearchBox(): void {
     document.addEventListener('keydown', this.docScrollPrevention);
     this.navBarService.setNavbarPosition(0);
+    const inputVal = this.searchControl.value;
+    if (inputVal) {
+      this.searchTerm = inputVal;
+      this.searchDataService.updateInlineSearch(inputVal);
+    }
     if (
       !this.searchDataService.overlayOpen &&
       this.searchDataService.getHistory().length > 0
@@ -178,6 +188,7 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   private searchForItem(value: string) {
     if (value) {
       this.closeSearchBox();
+      this.searchDataService.updateFullSearch(value);
       this.searchInput.nativeElement.value = value;
       this.searchInput.nativeElement.blur();
       this.searchDataService.addItem(value);
@@ -187,5 +198,8 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.finalise$.next();
+    this.finalise$.complete();
+  }
 }

@@ -1,5 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  NavigationStart,
+  Router,
+} from '@angular/router';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { pairwise, takeUntil } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -16,7 +21,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   isLoggedin: boolean;
   stateSubs: Subscription;
   isMobile: boolean;
-  isActive:string = '';
+  isActive: string = '';
   constructor(
     private authService: AuthService,
     protected searchService: SearchDataService,
@@ -25,21 +30,19 @@ export class HomeComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute
   ) {
     this.isMobile = this.layoutService.isMobile;
-    if(this.route.snapshot.queryParams['type']){
+    if (this.route.snapshot.queryParams['type']) {
       this.isActive = this.route.snapshot.queryParams['type'];
     }
   }
-
   unSub$ = new Subject<true>();
-
 
   ngOnInit(): void {
     // this.isLoggedin$ = this.authService.isLoggedIn$();
     this.authService
-      .isLoggedIn$().pipe(takeUntil(this.unSub$))
+      .isLoggedIn$()
+      .pipe(takeUntil(this.unSub$))
       .subscribe((state) => (this.isLoggedin = state));
 
-      
     // this.router.events.pipe(pairwise()).subscribe(([prevRouteEvent, currRouteEvent]) => {
     //   if (prevRouteEvent instanceof NavigationEnd && currRouteEvent instanceof NavigationStart) {
     //     this._routeScrollPositions[prevRouteEvent.url] = window.pageYOffset;
@@ -70,8 +73,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.unSub$.next(true);
   }
 
-  
-  navigateToPath(type){
+  navigateToPath(type) {
     this.router.navigate(['./'], { queryParams: { type: type } });
   }
 }

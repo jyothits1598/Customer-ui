@@ -16,6 +16,8 @@ export class SearchDataService {
 
   isLoading$ = new BehaviorSubject<boolean>(false);
 
+  fullSearchTerm$ = new BehaviorSubject<string>('');
+
   inlineSearchTerm$ = new BehaviorSubject<string>('');
   inlineSearchResults$ = this.inlineSearchTerm$.pipe(
     debounce(() => interval(500)),
@@ -61,6 +63,14 @@ export class SearchDataService {
 
   updateInlineSearch(searchTerm: string): void {
     this.inlineSearchTerm$.next(searchTerm);
+  }
+
+  updateFullSearch(searchTerm: string): void {
+    this.fullSearchTerm$.next(searchTerm);
+  }
+
+  clearFullSearch(): void {
+    this.fullSearchTerm$.next(undefined);
   }
 
   constructQuery(

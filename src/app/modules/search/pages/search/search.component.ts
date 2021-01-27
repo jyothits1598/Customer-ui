@@ -34,7 +34,8 @@ export class SearchComponent implements OnInit, OnDestroy, AfterViewInit {
     private location: GeoLocationService,
     private searchDataService: SearchDataService,
     private layoutService: LayoutService,
-    private navbarServic: NavbarService
+    private navbarServic: NavbarService,
+    private searchService: SearchDataService
   ) {
     this.isMobile = this.layoutService.isMobile;
   }
@@ -88,6 +89,11 @@ export class SearchComponent implements OnInit, OnDestroy, AfterViewInit {
           this.navbarServic.setTemplate(this.searchTemp);
         else this.navbarServic.setTemplate(null);
       });
+  }
+
+  routeBack() {
+    this.searchService.clearFullSearch();
+    this.router.navigate(['./../'], { relativeTo: this.route });
   }
 
   ngOnDestroy(): void {
