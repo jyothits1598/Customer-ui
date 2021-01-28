@@ -30,8 +30,6 @@ const routes: Routes = [
     StoreHeartModule,
     StoreItemDetailModule,
     ShareModule,
-    GoogleRatingModule,
-    FacebookLikeCountModule,
     OrderModule
   ],
   providers: [StoreDetailDataService]
