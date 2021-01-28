@@ -18,3 +18,19 @@
     width:100%;
     cursor: pointer;
 }
+
+input[type=checkbox]{
+    display:none;
+}
+input[type=checkbox] + span {
+    background-image: url('/assets/images/cart/checkbox-modifier-unchecked.svg');
+    background-repeat:no-repeat;
+    padding-left: 2rem;
+    display:block;
+    cursor: no-drop;
+}
+input[type=checkbox]:checked + span {
+    background-image: url('/assets/images/cart/checkbox-modifier-checked.svg');
+    background-repeat:no-repeat;
+    cursor: pointer;
+}

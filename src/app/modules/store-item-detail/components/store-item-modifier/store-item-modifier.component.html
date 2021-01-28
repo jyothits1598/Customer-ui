@@ -1,5 +1,5 @@
 <div style="margin-bottom:30px">
-    <div class="d-flex justify-content-between" style="margin-bottom:20px;">
+    <div class="d-flex justify-content-between">
         <div class="std-heading-4 text-capitalize">
             {{modifier.name}} <br>
             <span class="small-content" *ngIf="modifier.minSelection > 0; else optionalChoice">
@@ -14,7 +14,7 @@
                 *ngFor="let option of modifier.options; let i = index">
                 <tr>
                     <td>
-                        <div class="form-check">
+                        <div class="form-check" style="padding:0;">
                             <label class="form-check-label lable-text">
                                 <input type="checkbox" class="form-check-input" [id]="modifier.name+i"
                                     [formControl]="optionControls.at(i)" (change)="handleChange()">
