@@ -4,7 +4,7 @@
     <div class="store-search-home-input">
       <input #searchInput class="input-transparent" style="border: none;outline: 0;" [formControl]="searchControl" [placeholder]="isMobile ? 'What would you like to eat?' : 'Search'"
         (focus)="openSearchBox();" (click)="openSearchBox();" (change)="openSearchBox();" (keyup)="searchInputKeyup($event);" (search)="searchInputKeyup($event)">
-      <img *ngIf="isMobile && searchInput.value.length > 0" (click)="clearSearchInput();" [src]="'assets/svg/ico_close.svg'">
+      <img *ngIf="isMobile && searchInput.value.length > 0" (click)="clearSearchInput($event);" [src]="'assets/svg/ico_close.svg'">
       <span *ngIf="isMobile">
         <img class="input-image" [src]="(loading$ | async)? 'assets/images/navbar/loader32_blue.gif' : 'assets/svg/signup/ico_search_m.svg'">
       </span>
@@ -21,12 +21,12 @@
       <ng-container *ngIf="searchResults$ | async as searchResults">
         <div class="list-title pder">New search</div>
         <ul style="list-style-type: none;cursor: pointer; margin-bottom: 0;">
-          <li #listItem (click)="searchForItem(searchInput.value)" routerLink="/search" [queryParams]="{q:searchInput.value}" tabindex="1" (keyup)="searchListKeyup($event, searchInput.value, 0);">
+          <li #listItem (click)="searchForItem(searchInput.value)" [queryParams]="{q:searchInput.value}" tabindex="1" (keyup)="searchListKeyup($event, searchInput.value, 0);">
             <img src="assets/svg/ico_search_tabs.svg">
             <div class="text-capitalize">Results for "{{searchInput.value}}" </div>
           </li>
           <li #listItem *ngFor="let storeItem of searchResults; let i = index;" (click)="searchForItem(storeItem.store_name)" (keyup)="searchListKeyup($event, storeItem.store_name, i + 1);"
-            routerLink="/search" [queryParams]="{q:storeItem.store_name}" tabindex="1">
+            [queryParams]="{q:storeItem.store_name}" tabindex="1">
             <img src="assets/svg/ico_search_tabs.svg">
             <div class="text-capitalize">{{storeItem.store_name}}</div>
           </li>
@@ -41,8 +41,7 @@
     <ng-container *ngIf="searchInput.value.length === 0">
       <div class="list-title">Recent searches</div>
       <ul style="list-style-type: none;cursor: pointer; margin: 0;">
-        <li #listItem *ngFor="let storeName of history; let i = index;" (click)="searchForItem(storeName)" (keyup)="searchListKeyup($event, storeName, i);" routerLink="/search"
-          [queryParams]="{q:storeName}" tabindex="1">
+        <li #listItem *ngFor="let storeName of history; let i = index;" (click)="searchForItem(storeName)" (keyup)="searchListKeyup($event, storeName, i);" [queryParams]="{q:storeName}" tabindex="1">
           <img src="assets/svg/ico_search_tabs.svg">
           <div class="paragraph text-capitalize"> {{storeName}} </div>
         </li>

@@ -165,7 +165,8 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  clearSearchInput() {
+  clearSearchInput($event: Event) {
+    $event.stopPropagation();
     this.searchControl.setValue('');
     this.searchDataService.updateInlineSearch('');
     this.searchInput.nativeElement.focus();
