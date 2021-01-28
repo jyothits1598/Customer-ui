@@ -17,11 +17,6 @@
 
 <ng-template #panelTemplate>
   <div class="custom-location-body">
-    <ul style="list-style-type: none;cursor: pointer; margin-bottom: 0;">
-      <li>debug: searchTerm = '{{ searchTerm}}'</li>
-      <li>debug: searchInput.value = '{{ searchInput.value}}'</li>
-
-    </ul>
     <ng-container *ngIf="searchInput.value">
       <ng-container *ngIf="searchResults$ | async as searchResults">
         <div class="list-title pder">New search</div>
