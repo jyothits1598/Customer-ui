@@ -6,6 +6,7 @@ import { StoresModule } from '../stores/stores.module';
 import { StoreSearchInlineComponent } from './components/store-search-inline/store-search-inline.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NavbarModifierModule } from '../navbar-modifier/navbar-modifier.module';
+import { BrowserModule } from '@angular/platform-browser';
 
 const routes: Routes = [
   {

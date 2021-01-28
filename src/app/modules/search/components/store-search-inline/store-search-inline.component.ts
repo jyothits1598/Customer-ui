@@ -38,7 +38,6 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
 
   searchControl: FormControl = new FormControl(null);
 
-  searchTerm: string;
   popoverRef: PopoverRef;
   isMobile: boolean;
 
@@ -71,6 +70,7 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
     const value = $event.target.value;
     switch ($event.code || $event.keyCode) {
       case 'Enter':
+      case 'NumpadEnter':
       case 13: //mobile keyboard enter
         this.searchForItem(value);
         break;
@@ -82,7 +82,6 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
         break;
       default:
         this.openSearchBox();
-        this.searchTerm = value;
         this.searchDataService.updateInlineSearch(value);
         break;
     }
@@ -91,6 +90,7 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   searchListKeyup($event, value: string, onIndex: number): void {
     switch ($event.code) {
       case 'Enter':
+      case 'NumpadEnter':
         this.searchForItem(value);
         break;
       case 'Escape':
@@ -117,7 +117,6 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
     this.navBarService.setNavbarPosition(0);
     const inputVal = this.searchControl.value;
     if (inputVal) {
-      this.searchTerm = inputVal;
       this.searchDataService.updateInlineSearch(inputVal);
     }
     if (
@@ -166,6 +165,11 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
     }
   }
 
+  clearSearchInput() {
+    this.searchControl.setValue('');
+    this.searchDataService.updateInlineSearch('');
+  }
+
   openComponentPopover(results = null) {
     let popoverConfig: PopoverConfig = {
       xPos: this.layoutService.isMobile ? 'center' : 'end',
@@ -189,11 +193,8 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
     if (value) {
       this.closeSearchBox();
       this.searchDataService.updateFullSearch(value);
-      this.searchInput.nativeElement.value = value;
       this.searchInput.nativeElement.blur();
       this.searchDataService.addItem(value);
-
-      this.searchTerm = value;
       this.router.navigate(['/search'], { queryParams: { q: value } });
     }
   }

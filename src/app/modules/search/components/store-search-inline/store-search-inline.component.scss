@@ -41,6 +41,17 @@ li {
     }
   }
 }
+
+div.store-search-home-input > img {
+  position: absolute;
+  right: 12px;
+  opacity: 0.3;
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+  margin-top: 2px;
+}
+
 // Extra small devices (portrait phones, less than 576px)
 @media (max-width: 575.98px) {
   .custom-location-body {
@@ -152,7 +163,7 @@ li {
   .input-transparent {
     background: transparent;
     color: var(--color-boldlevelcolor);
-    padding-left: 30px !important;
+    padding: 0px 30px !important;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
@@ -197,7 +208,7 @@ li {
   .input-transparent {
     background: transparent;
     color: var(--color-boldlevelcolor);
-    padding-left: 30px !important;
+    padding: 0px 30px !important;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
@@ -242,7 +253,7 @@ li {
   .input-transparent {
     background: transparent;
     color: var(--color-boldlevelcolor);
-    padding-left: 30px !important;
+    padding: 0px 30px !important;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
@@ -384,4 +395,3 @@ li {
   margin: 0;
   line-height: 20px;
 }
-

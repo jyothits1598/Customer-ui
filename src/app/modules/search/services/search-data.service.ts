@@ -54,9 +54,10 @@ export class SearchDataService {
 
   addItem(searchTerm: string) {
     if (!this.searchHistory.includes(searchTerm)) {
-      if (this.searchHistory.length < 3) this.searchHistory.unshift(searchTerm);
+      if (this.searchHistory.length < 12)
+        this.searchHistory.unshift(searchTerm);
       else
-        this.searchHistory = [searchTerm, ...this.searchHistory.splice(1, 2)];
+        this.searchHistory = [searchTerm, ...this.searchHistory.slice(0, 11)];
       this.storageService.store(this.storageKey, this.searchHistory);
     }
   }
