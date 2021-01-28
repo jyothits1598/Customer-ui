@@ -53,13 +53,11 @@ export class SearchDataService {
   }
 
   addItem(searchTerm: string) {
-    if (!this.searchHistory.includes(searchTerm)) {
-      if (this.searchHistory.length < 12)
-        this.searchHistory.unshift(searchTerm);
-      else
-        this.searchHistory = [searchTerm, ...this.searchHistory.slice(0, 11)];
-      this.storageService.store(this.storageKey, this.searchHistory);
-    }
+    const filtered = this.searchHistory.filter(
+      (val) => val.toUpperCase() !== searchTerm.toUpperCase()
+    );
+    this.searchHistory = [searchTerm, ...filtered].slice(0, 12);
+    this.storageService.store(this.storageKey, this.searchHistory);
   }
 
   updateInlineSearch(searchTerm: string): void {
