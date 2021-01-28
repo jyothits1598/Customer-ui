@@ -35,7 +35,7 @@
     while doing Payment
 -->
 <div class="cart-card dopayment" *ngIf="showPaymentOpt">
-    <div class="card-applepay text-center">
+    <!-- <div class="card-applepay text-center">
         <span>Buy with
             <svg width="48" height="20" viewBox="0 0 48 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -55,15 +55,15 @@
                     fill="white" />
             </svg>
         </span>
-    </div>
-    <button class="cart-button mt-8 text-center" [disabled]="paymentInProg" (click)="order()">
+    </div> -->
+    <div class="cart-button mt-8 text-center" [disabled]="paymentInProg" (click)="order()">
         <span class="cart-text" *ngIf="!paymentInProg; else loading">Buy</span>
         <ng-template #loading>
             <span class="cart-text"><img src="assets/images/loader_white_24.gif" alt=""></span>
         </ng-template>
         <!-- <span class="cart-text">Buy with Mastercard &bull;&bull;&bull;&bull; 4567</span> -->
-    </button>
-    <div class="card-paypal mt-8 text-center">
+    </div>
+    <!-- <div class="card-paypal mt-8 text-center">
         <span>Buy with
             <svg width="83" height="20" viewBox="0 0 83 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0)">
@@ -91,7 +91,7 @@
             </svg>
 
         </span>
-    </div>
+    </div> -->
     <div class="cancel" (click)="showPaymentOpt = false">
         Cancel
     </div>

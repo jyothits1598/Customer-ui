@@ -224,7 +224,6 @@ input[type=radio] {
         height:48px;
     }
     .order-body{
-        padding:16px;
         i{
             vertical-align: middle;
             font-size:4px;
@@ -325,7 +324,7 @@ input[type=radio] {
     animation: dopayment 0.5s linear;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
-    height:auto;
+    height:150px!important;
     .card-applepay{
         width:100%;
         height: 56px;

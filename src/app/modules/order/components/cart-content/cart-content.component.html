@@ -53,51 +53,13 @@
                     <span>{{mod}} </span>
                     <i class="fa fa-circle" aria-hidden="true"></i>
                 </ng-container>
-                <!-- <span>Large </span>
-                        <i class="fa fa-circle" aria-hidden="true"></i>
-                        <span>Small </span>
-                        <i class="fa fa-circle" aria-hidden="true"></i>
-                        <span>Large </span>
-                        <i class="fa fa-circle" aria-hidden="true"></i>
-                        <span>Small </span>
-                        <i class="fa fa-circle" aria-hidden="true"></i>
-                        <span>Large </span>
-                        <i class="fa fa-circle" aria-hidden="true"></i> -->
             </div>
+            <hr>
         </div>
-
     </div>
-    <hr>
-    <!-- <div class="cart-items">
-                <div class="d-flex justify-content-between">
-                    <label class="f-16 f-b pr-3">1x</label>
-                    <div class="f-16 f-b pr-2">
-                        <label class="f-16 f-b item-name text-capitalize">Lamb Sauvlaki</label>
-                    </div>
-                    <div>
-                        <label class="f-14 mr-15">$15.99</label>
-                        <img src="assets/images/cart/exclude.svg">
-                    </div>
-                </div>
-                <div class="cart-item-modifiers">
-                    <span>Small </span>
-                    <i class="fa fa-circle" aria-hidden="true"></i>
-                    <span>Large </span>
-                    <i class="fa fa-circle" aria-hidden="true"></i>
-                    <span>Small </span>
-                    <i class="fa fa-circle" aria-hidden="true"></i>
-                    <span>Large </span>
-                    <i class="fa fa-circle" aria-hidden="true"></i>
-                    <span>Small </span>
-                    <i class="fa fa-circle" aria-hidden="true"></i>
-                    <span>Large </span>
-                    <i class="fa fa-circle" aria-hidden="true"></i>
-                </div>
-            </div> -->
-    <hr>
     <!--
-                Surcharge
-            -->
+        Surcharge
+    -->
     <ng-container *ngIf="cartTotal$ | async; let total">
 
         <div class="order-surcharge">
@@ -108,8 +70,8 @@
         </div>
         <hr>
         <!--
-                Sub Total
-            -->
+            Sub Total
+        -->
         <div class="order-surcharge">
             <div class="d-flex justify-content-between">
                 <label class="f-16-blur">Sub total</label>
@@ -118,8 +80,8 @@
         </div>
         <hr>
         <!--
-                Amount Due
-            -->
+            Amount Due
+        -->
         <div class="order-surcharge">
             <div class="d-flex justify-content-between">
                 <label class="f-16 f-b">Amount due</label>
@@ -133,8 +95,8 @@
 
 <ng-template #emptyTemplate>
     <!--  
-            empty cart window if no item added
-        -->
+        empty cart window if no item added
+    -->
     <div class="empty-cart">
         <img src="assets/images/empty_cart.png">
         <p class="paragraph mt">
