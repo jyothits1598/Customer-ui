@@ -4,7 +4,7 @@
     <div class="store-search-home-input">
       <input #searchInput class="input-transparent" style="border: none;outline: 0;" [formControl]="searchControl" [placeholder]="isMobile ? 'What would you like to eat?' : 'Search'"
         (focus)="openSearchBox();" (click)="openSearchBox();" (change)="openSearchBox();" (keyup)="searchInputKeyup($event);" (search)="searchInputKeyup($event)">
-      <img *ngIf="isMobile" (click)="clearSearchInput();" [src]="'assets/svg/ico_close.svg'">
+      <img *ngIf="isMobile && searchInput.value.length > 0" (click)="clearSearchInput();" [src]="'assets/svg/ico_close.svg'">
       <span *ngIf="isMobile">
         <img class="input-image" [src]="(loading$ | async)? 'assets/images/navbar/loader32_blue.gif' : 'assets/svg/signup/ico_search_m.svg'">
       </span>
@@ -17,7 +17,7 @@
 
 <ng-template #panelTemplate>
   <div class="custom-location-body">
-    <ng-container *ngIf="searchInput.value">
+    <ng-container *ngIf="searchInput.value.length > 0">
       <ng-container *ngIf="searchResults$ | async as searchResults">
         <div class="list-title pder">New search</div>
         <ul style="list-style-type: none;cursor: pointer; margin-bottom: 0;">
@@ -38,7 +38,7 @@
       </ng-container>
     </ng-container>
 
-    <ng-container *ngIf="!searchInput.value">
+    <ng-container *ngIf="searchInput.value.length === 0">
       <div class="list-title">Recent searches</div>
       <ul style="list-style-type: none;cursor: pointer; margin: 0;">
         <li #listItem *ngFor="let storeName of history; let i = index;" (click)="searchForItem(storeName)" (keyup)="searchListKeyup($event, storeName, i);" routerLink="/search"

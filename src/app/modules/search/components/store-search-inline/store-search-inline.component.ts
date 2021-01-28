@@ -168,6 +168,8 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   clearSearchInput() {
     this.searchControl.setValue('');
     this.searchDataService.updateInlineSearch('');
+    this.searchInput.nativeElement.focus();
+    this.openSearchBox();
   }
 
   openComponentPopover(results = null) {
