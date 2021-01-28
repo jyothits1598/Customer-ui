@@ -285,7 +285,7 @@ input[type=radio] {
     box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.2);
     border-radius: 16px 16px 0px 0px;
     z-index:994;
-    width: 320px;
+   
     
      .cart-button{
         width:100%;
@@ -450,7 +450,9 @@ input[type=radio] {
     .right-content {
         width:23.5%;
     }
-     
+    .cart-card{
+        width:23.5%;
+    }
 }
 
 // Large devices (desktops, 992px and up)
@@ -458,16 +460,26 @@ input[type=radio] {
     .right-content {
         width:28%;
     }
+    .cart-card{
+        width:28%;
+    }
  }
 
  @media (min-width: 768px) and  (max-width: 991.98px) {
     .right-content {
+        width:320px;
+        
+    }
+    .cart-card{
         width:320px;
     }
  }
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 767.98px) {
     .right-content{
+        width:100%;
+    }
+    .cart-card{
         width:100%;
     }
 }
