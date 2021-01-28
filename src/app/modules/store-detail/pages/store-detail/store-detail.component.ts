@@ -58,8 +58,6 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
     //     this.loadStore(data.location);
     //   }
     // });
-
-    console.log('printing route params', this.route.snapshot.params.id)
     let id = parseInt(this.route.snapshot.params.id);
     if (id) {
       this.loadStore(id, this.geoLoc.getUserLocation());
@@ -79,7 +77,7 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
 
     this.loading = true;
     this.storeDetail = null;
-    this.storeDetailServ.storeDetail(storeId, location).pipe(finalize(() => this.loading = false)).subscribe(storeDetail => {
+    this.storeDetailServ.storeDetail(storeId, location).pipe(takeUntil(this.unSub$), finalize(() => this.loading = false)).subscribe(storeDetail => {
       storeDetail.categories = storeDetail.categories.sort((c1, c2) => c1.id - c2.id);
       this.storeDetail = storeDetail;
       setTimeout(() => {

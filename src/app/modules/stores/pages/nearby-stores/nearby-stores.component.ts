@@ -24,7 +24,6 @@ export class NearbyStoresComponent implements OnInit, OnDestroy {
         sort_by: this.route.snapshot.queryParams['type'] ?  this.route.snapshot.queryParams['type'] :''
       }
     });
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   ngOnInit(): void {

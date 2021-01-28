@@ -11,17 +11,18 @@ import { CartContentComponent } from './components/cart-content/cart-content.com
 import { PaymentOptionsComponent } from './components/payment-options/payment-options.component';
 import { AddPaymentOptionsComponent } from './components/add-payment-options/add-payment-options.component';
 import { OrderStatusComponent } from './pages/order-status/order-status.component';
+import { TrackingButtonComponent } from './components/tracking-button/tracking-button.component';
 
 // const routes: Routes = [
 //   { path: '', component: CartComponent },
 // ];
 
 @NgModule({
-  declarations: [CartComponent, CartButtonComponent, PaymentComponent, ConfirmationComponent, CartSummaryComponent, OrderContainerComponent, CartContentComponent, PaymentOptionsComponent, AddPaymentOptionsComponent, OrderStatusComponent],
+  declarations: [CartComponent, CartButtonComponent, PaymentComponent, ConfirmationComponent, CartSummaryComponent, OrderContainerComponent, CartContentComponent, PaymentOptionsComponent, AddPaymentOptionsComponent, OrderStatusComponent, TrackingButtonComponent],
   imports: [
     RouterModule,
     CommonModule
   ],
-  exports: [CartComponent, CartButtonComponent, OrderContainerComponent]
+  exports: [CartComponent, CartButtonComponent, OrderContainerComponent, TrackingButtonComponent]
 })
 export class OrderModule { }

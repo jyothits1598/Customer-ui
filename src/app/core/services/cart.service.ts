@@ -143,7 +143,7 @@ export class CartService {
   }
 
   getCart() {
-    return this.restApiService.get('api/customer/cart').pipe(map((cart: { data: CartDto }) => mapToCartData(cart.data)));
+    return this.restApiService.get('api/customer/cart').pipe(map((cart: { data: CartDto }) => cart.data ? mapToCartData(cart.data) : null));
   }
 
   debug() {

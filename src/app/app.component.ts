@@ -15,14 +15,14 @@ export class AppComponent {
 
   ngOnInit() {
     // save or restore scroll position on route change
-    this.router.events.pipe(filter((event) => { return event instanceof NavigationEnd || event instanceof NavigationStart }), pairwise()).subscribe(([prevRouteEvent, currRouteEvent]) => {
-      if (prevRouteEvent instanceof NavigationEnd && currRouteEvent instanceof NavigationStart) {
-        if (this.isRouteIsReused(prevRouteEvent.url)) this._routeScrollPositions[prevRouteEvent.url] = window.pageYOffset;
-      }
-      if (currRouteEvent instanceof NavigationEnd) {
-        if (this.isRouteIsReused(currRouteEvent.url)) window.scrollTo(0, this._routeScrollPositions[currRouteEvent.url] + 250 || 0);
-      }
-    })
+    // this.router.events.pipe(filter((event) => { return event instanceof NavigationEnd || event instanceof NavigationStart }), pairwise()).subscribe(([prevRouteEvent, currRouteEvent]) => {
+    //   if (prevRouteEvent instanceof NavigationEnd && currRouteEvent instanceof NavigationStart) {
+    //     if (this.isRouteIsReused(prevRouteEvent.url)) this._routeScrollPositions[prevRouteEvent.url] = window.pageYOffset;
+    //   }
+    //   if (currRouteEvent instanceof NavigationEnd) {
+    //     if (this.isRouteIsReused(currRouteEvent.url)) window.scrollTo(0, this._routeScrollPositions[currRouteEvent.url] + 250 || 0);
+    //   }
+    // })
     // this.router.events.subscribe(event => {
     //   if (event instanceof NavigationEnd || event instanceof NavigationStart) {
     //     console.log(event);
@@ -32,11 +32,9 @@ export class AppComponent {
     // })
   }
 
-  isRouteIsReused(route: string): boolean {
-    if (route === '/') return true;
-    if (route.includes('/search')) return true;
-    return false;
-  }
-
-  
+  // isRouteIsReused(route: string): boolean {
+  //   if (route === '/') return true;
+  //   if (route.includes('/search')) return true;
+  //   return false;
 }
+

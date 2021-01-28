@@ -1,0 +1,23 @@
+<ng-container *ngIf="(currOrderPage$ | async) !== ordPgs.OrderStatus">
+    <ng-container *ngIf="trackingOrder$ | async; let order">
+        <div class="cart-card cart-anim">
+            <!-- <div class="cart-button" [routerLink]="[{ outlets: { 'order': ['cart'] } }]"> -->
+            <div class="cart-button" (click)="openStatus(order.order_id)">
+                <div class="row">
+                    <div class="col-sm-4 col-4">
+                        <img src="assets/images/cart/cart.svg" />
+                        <span class="cart-text cart-count">
+                            Stat
+                        </span>
+                    </div>
+                    <div class="col-sm-4 col-4 cart-text">
+                        {{order.status}}
+                    </div>
+                    <div class="col-sm-4 col-4 text-right cart-text">
+                        Status
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</ng-container>
