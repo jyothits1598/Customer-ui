@@ -1,14 +1,14 @@
 <div class="custom-location-body">
   <div *ngIf="searchTerm" class="history pder">New search</div>
-  <ul style="list-style-type: none;cursor: pointer; margin-bottom: 0;width:100%;">
+  <ul class="search-items-list">
     <ng-container *ngIf="searchTerm">
       <li (click)="handleClick(searchTerm)" [queryParams]="{q:searchTerm}" tabindex="1">
         <img src="assets/svg/ico_search_tabs.svg">
-        <div class="text-capitalize"> Results for "{{searchTerm}}" </div>
+        <div class="text-capitalize"> Results for <span class="b-bold">"{{searchTerm}}"</span> </div>
       </li>
       <li (click)="handleClick(result.store_name)" *ngFor="let result of results" [queryParams]="{q:result.store_name}" tabindex="1">
         <img src="assets/svg/ico_search_tabs.svg">
-        <div class="text-capitalize">{{result.store_name}}</div>
+        <div class="text-capitalize"><b>{{result.store_name}}</b></div>
       </li>
       <li *ngIf="results && results.length === 0" tabindex="1">
         <img src="assets/svg/ico_search_tabs.svg">

@@ -21,7 +21,7 @@ export class ShareComponent implements OnInit {
   linkedCopied: false;
   showpopup:boolean = false;
   modalRef: ModalRef;
-
+  textMessage:any;  
   constructor(private popoverService: PopoverService,
     private modalService: ModalService,
     private window: Window) { }
@@ -51,6 +51,11 @@ export class ShareComponent implements OnInit {
     this.urlCopyInput.nativeElement.select();
     this.window.document.execCommand('copy');
     this.showpopup = true;
+    this.textMessage="Copied to Clipboard";
+    setTimeout(() => {  
+            this.textMessage="";  
+            this.showpopup=false;  
+      }, 1000);
   }
 
   close() {

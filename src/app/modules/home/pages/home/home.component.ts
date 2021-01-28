@@ -74,6 +74,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   navigateToPath(type) {
-    this.router.navigate(['./'], { queryParams: { type: type } });
+    this.router.navigate(['./sortBy'], { queryParams: { type: type } });
   }
 }

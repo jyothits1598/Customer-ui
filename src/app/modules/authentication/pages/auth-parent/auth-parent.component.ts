@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
@@ -10,7 +11,7 @@ export class AuthParentComponent implements OnInit {
   isforgot:boolean = false;
   forgot_url:string = "/auth/forgot-password";
 
-  constructor(private router: Router) { 
+  constructor(private router: Router,private location: Location) { 
     this.router.events.subscribe(
       (event: any) => {
         if (event instanceof NavigationEnd) { 
@@ -25,5 +26,7 @@ export class AuthParentComponent implements OnInit {
   ngOnInit(): void {
     
   }
-
+  goBack() {
+    this.location.back(); 
+  }
 }
