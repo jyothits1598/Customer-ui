@@ -1,6 +1,6 @@
 <ul class="menu">
     <li class="auto-width" *ngIf="!isLoggedin"></li>
-    <li class="auto-width cu-out" routerLink="/" routerLinkActive="active" #rla="routerLinkActive"> 
+    <li class="auto-width cu-out" (click)="scrollToTop()" routerLink="/" routerLinkActive="active" #rla="routerLinkActive"> 
         <div [ngClass]="rla.isActive ? 'home-icon-active img-display-desktop' : 'home-icon img-display-desktop'" ></div>
         <div [ngClass]="rla.isActive ? 'home-icon-mobile-active img-display-mobile' : 'home-icon-mobile img-display-mobile'"></div>
     </li>
