@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Observable, of, Subject } from 'rxjs';
+import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import { OrderPages, OrderViewControllerService } from 'src/app/core/services/order-view-controller.service';
 
 @Component({
@@ -8,12 +9,24 @@ import { OrderPages, OrderViewControllerService } from 'src/app/core/services/or
   templateUrl: './order-container.component.html',
   styleUrls: ['./order-container.component.scss']
 })
-export class OrderContainerComponent implements OnInit {
+export class OrderContainerComponent implements OnInit, OnDestroy {
 
   orderPages = OrderPages;
   currentPage$;
-  constructor(private route: ActivatedRoute,
+  showClose: boolean;
+  unSub$ = new Subject<true>();
+
+  constructor(private router: Router,
     private orderView: OrderViewControllerService) {
+    this.router.events.pipe(
+      filter(e => e instanceof NavigationEnd),
+      switchMap((e: NavigationEnd) => of(!e.url.includes('/restaurants/'))),
+      takeUntil(this.unSub$)
+    ).subscribe((show) => this.showClose = show);
+  }
+
+  ngOnDestroy(): void {
+    this.unSub$.next(true);
   }
 
   close() {

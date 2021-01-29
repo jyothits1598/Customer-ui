@@ -85,7 +85,7 @@ export class CartService {
     }
     //post cart to backend if signed in
     if (this.authService.isLoggedIn && !skipBackend) resultObs = resultObs.pipe(switchMap(() => this.postCart(newCartData)));
-    return resultObs.pipe(tap(() => { console.log('add to cart called', newCartData); this.cartData.next(newCartData); this.storageService.store(this.storageIdentifier, cData) }));
+    return resultObs.pipe(tap(() => { this.cartData.next(newCartData); this.storageService.store(this.storageIdentifier, newCartData) }));
   }
 
   deleteItem(itemId: number): Observable<boolean> {

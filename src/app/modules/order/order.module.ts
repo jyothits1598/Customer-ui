@@ -12,13 +12,14 @@ import { PaymentOptionsComponent } from './components/payment-options/payment-op
 import { AddPaymentOptionsComponent } from './components/add-payment-options/add-payment-options.component';
 import { OrderStatusComponent } from './pages/order-status/order-status.component';
 import { TrackingButtonComponent } from './components/tracking-button/tracking-button.component';
+import { OrderThankYouComponent } from './pages/order-thank-you/order-thank-you.component';
 
 // const routes: Routes = [
 //   { path: '', component: CartComponent },
 // ];
 
 @NgModule({
-  declarations: [CartComponent, CartButtonComponent, PaymentComponent, ConfirmationComponent, CartSummaryComponent, OrderContainerComponent, CartContentComponent, PaymentOptionsComponent, AddPaymentOptionsComponent, OrderStatusComponent, TrackingButtonComponent],
+  declarations: [CartComponent, CartButtonComponent, PaymentComponent, ConfirmationComponent, CartSummaryComponent, OrderContainerComponent, CartContentComponent, PaymentOptionsComponent, AddPaymentOptionsComponent, OrderStatusComponent, TrackingButtonComponent, OrderThankYouComponent],
   imports: [
     RouterModule,
     CommonModule

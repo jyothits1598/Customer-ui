@@ -6,7 +6,8 @@ export enum OrderPages {
   Cart = 1,
   CartSummary,
   OrderStatus,
-  AddPaymentOptions
+  AddPaymentOptions,
+  Thankyou
 }
 
 @Injectable({

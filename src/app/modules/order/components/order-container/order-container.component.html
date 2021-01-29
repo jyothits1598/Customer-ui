@@ -1,12 +1,13 @@
 <div class="right-content" *ngIf="currentPage$ | async; let currentPage">
     <div class="right-content-overflow">
-        <span (click)="close()">Close</span>
+        <span *ngIf="showClose" (click)="close()">Close</span>
         <ng-container [ngSwitch]="currentPage">
             <!-- the same view can be shown in more than one case -->
             <cart *ngSwitchCase="orderPages.Cart"></cart>
             <cart-summary *ngSwitchCase="orderPages.CartSummary"></cart-summary>
             <order-status *ngSwitchCase="orderPages.OrderStatus"></order-status>
             <add-payment-options *ngSwitchCase="orderPages.AddPaymentOptions"></add-payment-options>
+            <order-thank-you *ngSwitchCase="orderPages.Thankyou"></order-thank-you>
         </ng-container>
     </div>
 </div>

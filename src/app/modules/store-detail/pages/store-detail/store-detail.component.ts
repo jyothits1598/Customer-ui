@@ -70,7 +70,7 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
 
     // open cart by default
     // if (!this.router.url.includes('(order:')) this.router.navigate([{ outlets: { 'order': ['cart'] } }], { replaceUrl: true })
-    if (!this.layoutService.isMobile) this.orderView.showPage(OrderPages.Cart);
+    if (!this.layoutService.isMobile && !this.orderView.getCurrentPage()) this.orderView.showPage(OrderPages.Cart);
   }
 
   loadStore(storeId: number, location?: UserLocation) {

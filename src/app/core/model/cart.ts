@@ -11,6 +11,7 @@ export interface CartData {
 
 export interface CartDto {
     store_id: number;
+    store_name: string;
     items: Array<{
         item_id: number,
         item_name: string,
@@ -51,7 +52,7 @@ export function mapToOrderData(data: OrderDto) {
 export function mapToCartData(data: CartDto): CartData {
     return {
         storeId: data.store_id,
-        storeName: 'name',
+        storeName: data.store_name,
         items: data.items.map((item) => {
             let mod = item.modifiers.map((mod) => {
                 return {
@@ -101,6 +102,7 @@ export function MapToDto(data: CartData): CartDto {
         });
     return {
         store_id: data.storeId,
+        store_name: data.storeName,
         items: items
     }
 }
