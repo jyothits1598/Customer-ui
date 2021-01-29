@@ -380,3 +380,8 @@ input.ng-invalid.ng-touched.error-highlight {
   border:0;
   cursor: pointer;
 }
+.sticky-navbar {
+  position: relative;
+  width: 100%;
+  background: var(--color-background);
+}

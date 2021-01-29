@@ -30,9 +30,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute
   ) {
     this.isMobile = this.layoutService.isMobile;
-    if (this.route.snapshot.queryParams['type']) {
-      this.isActive = this.route.snapshot.queryParams['type'];
-    }
+    // if (this.route.snapshot.queryParams['type']) {
+    //   this.isActive = this.route.snapshot.queryParams['type'];
+    // }
   }
   unSub$ = new Subject<true>();
 
@@ -73,7 +73,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.unSub$.next(true);
   }
 
-  navigateToPath(type) {
-    this.router.navigate(['./sortBy'], { queryParams: { type: type } });
-  }
+  // navigateToPath(type) {
+  //   this.router.navigate(['./sortBy'], { queryParams: { type: type } });
+  // }
 }

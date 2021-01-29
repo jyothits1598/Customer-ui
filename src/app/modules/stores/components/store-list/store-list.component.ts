@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { takeUntil } from 'rxjs/operators';
@@ -19,7 +20,7 @@ export class StoreListComponent implements OnInit {
   _filter: StoreFilter
   unSubscribe$ = new Subject<void>()
   @Output() totalCount = new EventEmitter<number>();
-
+  isActive: string = '';
   @Input() set filter(f: StoreFilter) {
     this._filter = f;
     this.stores = [];
@@ -30,8 +31,10 @@ export class StoreListComponent implements OnInit {
   @ViewChild('infiniteScroll', { read: InfiniteScrollDirective }) infiniteScroll: InfiniteScrollDirective;
 
   constructor(
-    private storeData: StoresDataService
-  ) { }
+    private storeData: StoresDataService,private route: ActivatedRoute, private router: Router
+  ) { 
+      this.isActive = "nearBy";
+  }
 
   ngOnInit(): void {
   }
@@ -43,6 +46,14 @@ export class StoreListComponent implements OnInit {
 
   handleScrolled() {
     this.pagination.getNext().pipe(take(1)).subscribe(stores => this.appendStores(stores))
+  }
+
+  navigateToPath(type) {
+    this.isActive = type;
+    this._filter['sort_by'] = type;
+    this.stores = [];
+    this.pagination = new StorePagination(this.storeData.allStores.bind(this.storeData), this._filter);
+    this.pagination.getNext().pipe(take(1)).subscribe(stores => this.appendStores(stores));
   }
 
 }

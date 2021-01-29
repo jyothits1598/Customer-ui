@@ -118,14 +118,14 @@ input::-webkit-input-placeholder {
     margin-top: 12px;
     z-index: 1;
   }
-  .store-search {
-    padding-top: 16px !important;
-  }
   .signup-panel {
     padding: 24px 24px 4px 0px !important;
   }
   .sp {
     padding:0 16px !important;
+  }
+  .sticky-navbar {
+    padding-top:16px;
   }
 }
 
@@ -217,14 +217,14 @@ input::-webkit-input-placeholder {
     outline: 0;
     cursor: pointer;
   }
-  .store-search {
-    padding-top: 16px !important;
-  }
   .signup-panel {
     padding: 24px 24px 4px 0px !important;
   }
   .sp {
     padding:0 16px !important;
+  }
+  .sticky-navbar {
+    padding-top:16px;
   }
 }
 
@@ -315,9 +315,6 @@ input::-webkit-input-placeholder {
     transform: translate(-50%, -50%);
     outline: 0;
     cursor: pointer;
-  }
-  .store-search {
-    padding-top: 16px !important;
   }
   .signup-panel {
     padding: 24px 24px 4px 0px !important;
@@ -410,6 +407,9 @@ input::-webkit-input-placeholder {
   .mtb-5 {
     margin-top:7px;
   }
+  .store-search {
+    padding-top: 48px;
+  }
 }
 
 // Extra large devices (large desktops, 1200px and up)
@@ -494,6 +494,9 @@ input::-webkit-input-placeholder {
   }
   .mtb-5 {
     margin-top:7px;
+  }
+  .store-search {
+    padding-top: 48px;
   }
 }
 .signup-panel {
