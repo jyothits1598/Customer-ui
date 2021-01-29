@@ -19,209 +19,212 @@
                     item.quantity)}}</label>
                 <!-- <img (click)="deleteItem(item.item.id)" src="assets/images/cart/exclude.svg"> -->
             </div>
-        </div>
-        <div class="cart-item-modifiers">
-            <ng-container *ngFor="let mod of modifiersToOptionNameArr(item.item.modifiers)">
-                <span>{{mod}} </span>
-                <i class="fa fa-circle" aria-hidden="true"></i>
-            </ng-container>
-            <!-- <span>Large </span>
+            <div class="cart-item-modifiers">
+                <ng-container *ngFor="let mod of modifiersToOptionNameArr(item.item.modifiers)">
+                    <span>{{mod}} </span>
                     <i class="fa fa-circle" aria-hidden="true"></i>
-                    <span>Small </span>
-                    <i class="fa fa-circle" aria-hidden="true"></i>
-                    <span>Large </span>
-                    <i class="fa fa-circle" aria-hidden="true"></i>
-                    <span>Small </span>
-                    <i class="fa fa-circle" aria-hidden="true"></i>
-                    <span>Large </span>
-                    <i class="fa fa-circle" aria-hidden="true"></i> -->
-        </div>
-    </div>
-
-    <ng-container *ngIf="calcTotal(ordData);let total">
-
-        <div class="order-surcharge">
-            <div class="d-flex justify-content-between">
-                <label class="f-16-blur">Surcharge</label>
-                <label class="f-14 f-b">$0.00</label>
+                </ng-container>
             </div>
+            <hr>
         </div>
-        <hr>
-        <!--
-                Sub Total
-            -->
-        <div class="order-surcharge">
-            <div class="d-flex justify-content-between">
-                <label class="f-16-blur">Sub total</label>
-                <label class="f-14 f-b">${{total}}</label>
-            </div>
-        </div>
-        <hr>
-        <!--
-                Amount Due
-            -->
-        <div class="order-surcharge">
-            <div class="d-flex justify-content-between">
-                <label class="f-16 f-b">Amount due</label>
-                <label class="f-24 f-b">${{total}}</label>
-            </div>
-        </div>
-        <hr>
-    </ng-container>
-    <button *ngIf="ordData.status === 'READY'" (click)="markAsComplete()" [disabled]="loading">
-        <span *ngIf="!loading; else ld">Complete</span>
-        <ng-template #ld>
-            <img src="/assets/images/loader_white_24.gif" alt="">
-        </ng-template>
-    </button>
-</div>
 
-
-<ng-template #conf>
-    <div>
-        <div class="mt-28 text-center">
-            <svg width="42" height="60" viewBox="0 0 42 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M39 57V3H3V57L9 51L15 57L21 51L27 57L33 51L39 57Z" stroke="#F2F2F2" stroke-width="6"
-                    stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            <div class="mt-22">
-                <label class="f-20 f-b">Confirming order</label>
-            </div>
+        <ng-container *ngIf="calcTotal(ordData);let total">
             <div>
-                <label class="f-14">We are working on it...</label>
-            </div>
-        </div>
-        <div class="mtb-88">
-            <svg width="100%" height="24" viewBox="0 0 344 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="344" height="24" fill="white" />
-                <rect width="312" height="24" transform="translate(16)" fill="white" />
-                <path d="M34 22V4H22V22L24 20L26 22L28 20L30 22L32 20L34 22Z" stroke="#353FA8" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round" />
-                <rect x="44" y="11" width="108" height="2" rx="1" fill="#B3B3B3" />
-                <path
-                    d="M164 8H180V17C180 18.0609 179.579 19.0783 178.828 19.8284C178.078 20.5786 177.061 21 176 21H168C166.939 21 165.922 20.5786 165.172 19.8284C164.421 19.0783 164 18.0609 164 17V8Z"
-                    stroke="#B3B3B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M168 2V5" stroke="#B3B3B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M172 2V5" stroke="#B3B3B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M176 2V5" stroke="#B3B3B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M164 8H161C161 12.5 163 12 164 12V8Z" stroke="#B3B3B3" stroke-width="2"
-                    stroke-linejoin="round" />
-                <path d="M180 8H183C183 12.4815 181 11.9835 180 11.9835V8Z" stroke="#B3B3B3" stroke-width="2"
-                    stroke-linejoin="round" />
-                <rect x="192" y="11" width="104" height="2" rx="1" fill="#B3B3B3" />
-                <path
-                    d="M326 11.0799V11.9999C325.999 14.1563 325.301 16.2545 324.009 17.9817C322.718 19.7088 320.903 20.9723 318.835 21.5838C316.767 22.1952 314.557 22.1218 312.534 21.3744C310.512 20.6271 308.785 19.246 307.611 17.4369C306.437 15.6279 305.88 13.4879 306.022 11.3362C306.164 9.18443 306.997 7.13619 308.398 5.49694C309.799 3.85768 311.693 2.71525 313.796 2.24001C315.9 1.76477 318.1 1.9822 320.07 2.85986"
-                    stroke="#B3B3B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M326 4L316 14.01L313 11.01" stroke="#B3B3B3" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" />
-            </svg>
-        </div>
-    </div>
-</ng-template>
-<!--
-Preparing Order
--->
-<ng-template #prep let-t>
-    <div>
-        <div class="mt-28 text-center">
-            <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M12 24H60V51C60 54.1826 58.7357 57.2348 56.4853 59.4853C54.2348 61.7357 51.1826 63 48 63H24C20.8174 63 17.7652 61.7357 15.5147 59.4853C13.2643 57.2348 12 54.1826 12 51V24Z"
-                    stroke="#FFC439" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M24 6V15" stroke="#FFC439" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M36 6V15" stroke="#FFC439" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M48 6V15" stroke="#FFC439" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M12 24H3C3 37.5 9 36 12 36V24Z" stroke="#FFC439" stroke-width="6" stroke-linejoin="round" />
-                <path d="M60 24H69C69 37.4444 63 35.9506 60 35.9506V24Z" stroke="#FFC439" stroke-width="6"
-                    stroke-linejoin="round" />
-            </svg>
-
-            <div class="mt-22">
-                <label class="f-20 f-b">Preparing order</label>
-            </div>
-            <div>
-                <label class="f-14">We estimate it will be ready in:</label>
-            </div>
-            <div>
-                <label class="f-16 f-b">{{t}}</label>
-            </div>
-            <div class="d-flex justify-content-center">
-                <div class="mt-8" id="progressbar">
-                    <div></div>
+                <div class="order-surcharge">
+                    <div class="d-flex justify-content-between">
+                        <label class="f-16-blur">Surcharge</label>
+                        <label class="f-14 f-b">$0.00</label>
+                    </div>
+                </div>
+                <hr>
+                <!--
+                    Sub Total
+                -->
+                <div class="order-surcharge">
+                    <div class="d-flex justify-content-between">
+                        <label class="f-16-blur">Sub total</label>
+                        <label class="f-14 f-b">${{total}}</label>
+                    </div>
+                </div>
+                <hr>
+                <!--
+                    Amount Due
+                -->
+                <div class="order-surcharge">
+                    <div class="d-flex justify-content-between">
+                        <label class="f-16 f-b">Amount due</label>
+                        <label class="f-24 f-b">${{total}}</label>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="mtb-88">
-            <svg width="100%" height="24" viewBox="0 0 344 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="344" height="24" fill="white" />
-                <rect width="312" height="24" transform="translate(16)" fill="white" />
-                <path d="M34 22V4H22V22L24 20L26 22L28 20L30 22L32 20L34 22Z" stroke="#353FA8" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round" />
-                <rect x="44" y="11" width="108" height="2" rx="1" fill="#353FA8" />
-                <path
-                    d="M164 8H180V17C180 18.0609 179.579 19.0783 178.828 19.8284C178.078 20.5786 177.061 21 176 21H168C166.939 21 165.922 20.5786 165.172 19.8284C164.421 19.0783 164 18.0609 164 17V8Z"
-                    stroke="#353FA8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M168 2V5" stroke="#353FA8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M172 2V5" stroke="#353FA8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M176 2V5" stroke="#353FA8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M164 8H161C161 12.5 163 12 164 12V8Z" stroke="#353FA8" stroke-width="2"
-                    stroke-linejoin="round" />
-                <path d="M180 8H183C183 12.4815 181 11.9835 180 11.9835V8Z" stroke="#353FA8" stroke-width="2"
-                    stroke-linejoin="round" />
-                <rect x="192" y="11" width="104" height="2" rx="1" fill="#B3B3B3" />
-                <path
-                    d="M326 11.0799V11.9999C325.999 14.1563 325.301 16.2545 324.009 17.9817C322.718 19.7088 320.903 20.9723 318.835 21.5838C316.767 22.1952 314.557 22.1218 312.534 21.3744C310.512 20.6271 308.785 19.246 307.611 17.4369C306.437 15.6279 305.88 13.4879 306.022 11.3362C306.164 9.18443 306.997 7.13619 308.398 5.49694C309.799 3.85768 311.693 2.71525 313.796 2.24001C315.9 1.76477 318.1 1.9822 320.07 2.85986"
-                    stroke="#B3B3B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M326 4L316 14.01L313 11.01" stroke="#B3B3B3" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" />
-            </svg>
-        </div>
+            <hr>
+        </ng-container>
+        <button *ngIf="ordData.status === 'READY'" (click)="markAsComplete()" [disabled]="loading">
+            <span *ngIf="!loading; else ld">Complete</span>
+            <ng-template #ld>
+                <img src="/assets/images/loader_white_24.gif" alt="">
+            </ng-template>
+        </button>
     </div>
-</ng-template>
-<!--
+
+    <ng-template #conf>
+        <div>
+            <div class="mt-28 text-center">
+                <svg width="42" height="60" viewBox="0 0 42 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M39 57V3H3V57L9 51L15 57L21 51L27 57L33 51L39 57Z" stroke="#F2F2F2" stroke-width="6"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <div class="mt-22">
+                    <label class="f-20 f-b">Confirming order</label>
+                </div>
+                <div>
+                    <label class="f-14">We are working on it...</label>
+                </div>
+            </div>
+            <div class="mtb-88">
+                <svg width="100%" height="24" viewBox="0 0 344 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="344" height="24" fill="white" />
+                    <rect width="312" height="24" transform="translate(16)" fill="white" />
+                    <path d="M34 22V4H22V22L24 20L26 22L28 20L30 22L32 20L34 22Z" stroke="#353FA8" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    <rect x="44" y="11" width="108" height="2" rx="1" fill="#B3B3B3" />
+                    <path
+                        d="M164 8H180V17C180 18.0609 179.579 19.0783 178.828 19.8284C178.078 20.5786 177.061 21 176 21H168C166.939 21 165.922 20.5786 165.172 19.8284C164.421 19.0783 164 18.0609 164 17V8Z"
+                        stroke="#B3B3B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M168 2V5" stroke="#B3B3B3" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M172 2V5" stroke="#B3B3B3" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M176 2V5" stroke="#B3B3B3" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M164 8H161C161 12.5 163 12 164 12V8Z" stroke="#B3B3B3" stroke-width="2"
+                        stroke-linejoin="round" />
+                    <path d="M180 8H183C183 12.4815 181 11.9835 180 11.9835V8Z" stroke="#B3B3B3" stroke-width="2"
+                        stroke-linejoin="round" />
+                    <rect x="192" y="11" width="104" height="2" rx="1" fill="#B3B3B3" />
+                    <path
+                        d="M326 11.0799V11.9999C325.999 14.1563 325.301 16.2545 324.009 17.9817C322.718 19.7088 320.903 20.9723 318.835 21.5838C316.767 22.1952 314.557 22.1218 312.534 21.3744C310.512 20.6271 308.785 19.246 307.611 17.4369C306.437 15.6279 305.88 13.4879 306.022 11.3362C306.164 9.18443 306.997 7.13619 308.398 5.49694C309.799 3.85768 311.693 2.71525 313.796 2.24001C315.9 1.76477 318.1 1.9822 320.07 2.85986"
+                        stroke="#B3B3B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M326 4L316 14.01L313 11.01" stroke="#B3B3B3" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </div>
+        </div>
+    </ng-template>
+    <!--
+Preparing Order
+-->
+    <ng-template #prep let-t>
+        <div>
+            <div class="mt-28 text-center">
+                <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12 24H60V51C60 54.1826 58.7357 57.2348 56.4853 59.4853C54.2348 61.7357 51.1826 63 48 63H24C20.8174 63 17.7652 61.7357 15.5147 59.4853C13.2643 57.2348 12 54.1826 12 51V24Z"
+                        stroke="#FFC439" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M24 6V15" stroke="#FFC439" stroke-width="6" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M36 6V15" stroke="#FFC439" stroke-width="6" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M48 6V15" stroke="#FFC439" stroke-width="6" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M12 24H3C3 37.5 9 36 12 36V24Z" stroke="#FFC439" stroke-width="6"
+                        stroke-linejoin="round" />
+                    <path d="M60 24H69C69 37.4444 63 35.9506 60 35.9506V24Z" stroke="#FFC439" stroke-width="6"
+                        stroke-linejoin="round" />
+                </svg>
+
+                <div class="mt-22">
+                    <label class="f-20 f-b">Preparing order</label>
+                </div>
+                <div>
+                    <label class="f-14">We estimate it will be ready in:</label>
+                </div>
+                <div>
+                    <label class="f-16 f-b">{{t}}</label>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <div class="mt-8" id="progressbar">
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="mtb-88">
+                <svg width="100%" height="24" viewBox="0 0 344 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="344" height="24" fill="white" />
+                    <rect width="312" height="24" transform="translate(16)" fill="white" />
+                    <path d="M34 22V4H22V22L24 20L26 22L28 20L30 22L32 20L34 22Z" stroke="#353FA8" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    <rect x="44" y="11" width="108" height="2" rx="1" fill="#353FA8" />
+                    <path
+                        d="M164 8H180V17C180 18.0609 179.579 19.0783 178.828 19.8284C178.078 20.5786 177.061 21 176 21H168C166.939 21 165.922 20.5786 165.172 19.8284C164.421 19.0783 164 18.0609 164 17V8Z"
+                        stroke="#353FA8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M168 2V5" stroke="#353FA8" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M172 2V5" stroke="#353FA8" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M176 2V5" stroke="#353FA8" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M164 8H161C161 12.5 163 12 164 12V8Z" stroke="#353FA8" stroke-width="2"
+                        stroke-linejoin="round" />
+                    <path d="M180 8H183C183 12.4815 181 11.9835 180 11.9835V8Z" stroke="#353FA8" stroke-width="2"
+                        stroke-linejoin="round" />
+                    <rect x="192" y="11" width="104" height="2" rx="1" fill="#B3B3B3" />
+                    <path
+                        d="M326 11.0799V11.9999C325.999 14.1563 325.301 16.2545 324.009 17.9817C322.718 19.7088 320.903 20.9723 318.835 21.5838C316.767 22.1952 314.557 22.1218 312.534 21.3744C310.512 20.6271 308.785 19.246 307.611 17.4369C306.437 15.6279 305.88 13.4879 306.022 11.3362C306.164 9.18443 306.997 7.13619 308.398 5.49694C309.799 3.85768 311.693 2.71525 313.796 2.24001C315.9 1.76477 318.1 1.9822 320.07 2.85986"
+                        stroke="#B3B3B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M326 4L316 14.01L313 11.01" stroke="#B3B3B3" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </div>
+        </div>
+    </ng-template>
+    <!--
     Order Ready
 -->
-<ng-template #rdy>
-    <div>
-        <div class="mt-28 text-center">
-            <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M66 33.2396V35.9996C65.9963 42.4689 63.9015 48.7636 60.028 53.9451C56.1545 59.1265 50.7099 62.917 44.5061 64.7513C38.3023 66.5856 31.6718 66.3653 25.6034 64.1234C19.535 61.8814 14.354 57.7379 10.8329 52.3108C7.3118 46.8837 5.63937 40.4638 6.06503 34.0085C6.49069 27.5533 8.99162 21.4086 13.1948 16.4908C17.3981 11.5731 23.0784 8.14574 29.3886 6.72003C35.6988 5.29432 42.3008 5.9466 48.21 8.57959"
-                    stroke="#36A900" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M66 12L36 42.03L27 33.03" stroke="#36A900" stroke-width="6" stroke-linecap="round"
-                    stroke-linejoin="round" />
-            </svg>
-            <div class="mt-22">
-                <label class="f-20 f-b">Ready</label>
+    <ng-template #rdy>
+        <div>
+            <div class="mt-28 text-center">
+                <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M66 33.2396V35.9996C65.9963 42.4689 63.9015 48.7636 60.028 53.9451C56.1545 59.1265 50.7099 62.917 44.5061 64.7513C38.3023 66.5856 31.6718 66.3653 25.6034 64.1234C19.535 61.8814 14.354 57.7379 10.8329 52.3108C7.3118 46.8837 5.63937 40.4638 6.06503 34.0085C6.49069 27.5533 8.99162 21.4086 13.1948 16.4908C17.3981 11.5731 23.0784 8.14574 29.3886 6.72003C35.6988 5.29432 42.3008 5.9466 48.21 8.57959"
+                        stroke="#36A900" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M66 12L36 42.03L27 33.03" stroke="#36A900" stroke-width="6" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+                <div class="mt-22">
+                    <label class="f-20 f-b">Ready</label>
+                </div>
+                <div>
+                    <label class="f-14">Your order is ready</label>
+                </div>
             </div>
-            <div>
-                <label class="f-14">Your order is ready</label>
+            <div class="mtb-88">
+                <svg width="100%" height="24" viewBox="0 0 344 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="344" height="24" fill="white" />
+                    <rect width="312" height="24" transform="translate(16)" fill="white" />
+                    <path d="M34 22V4H22V22L24 20L26 22L28 20L30 22L32 20L34 22Z" stroke="#353FA8" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    <rect x="44" y="11" width="108" height="2" rx="1" fill="#353FA8" />
+                    <path
+                        d="M164 8H180V17C180 18.0609 179.579 19.0783 178.828 19.8284C178.078 20.5786 177.061 21 176 21H168C166.939 21 165.922 20.5786 165.172 19.8284C164.421 19.0783 164 18.0609 164 17V8Z"
+                        stroke="#353FA8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M168 2V5" stroke="#353FA8" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M172 2V5" stroke="#353FA8" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M176 2V5" stroke="#353FA8" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M164 8H161C161 12.5 163 12 164 12V8Z" stroke="#353FA8" stroke-width="2"
+                        stroke-linejoin="round" />
+                    <path d="M180 8H183C183 12.4815 181 11.9835 180 11.9835V8Z" stroke="#353FA8" stroke-width="2"
+                        stroke-linejoin="round" />
+                    <rect x="192" y="11" width="104" height="2" rx="1" fill="#353FA8" />
+                    <path
+                        d="M326 11.0799V11.9999C325.999 14.1563 325.301 16.2545 324.009 17.9817C322.718 19.7088 320.903 20.9723 318.835 21.5838C316.767 22.1952 314.557 22.1218 312.534 21.3744C310.512 20.6271 308.785 19.246 307.611 17.4369C306.437 15.6279 305.88 13.4879 306.022 11.3362C306.164 9.18443 306.997 7.13619 308.398 5.49694C309.799 3.85768 311.693 2.71525 313.796 2.24001C315.9 1.76477 318.1 1.9822 320.07 2.85986"
+                        stroke="#353FA8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M326 4L316 14.01L313 11.01" stroke="#353FA8" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
             </div>
         </div>
-        <div class="mtb-88">
-            <svg width="100%" height="24" viewBox="0 0 344 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="344" height="24" fill="white" />
-                <rect width="312" height="24" transform="translate(16)" fill="white" />
-                <path d="M34 22V4H22V22L24 20L26 22L28 20L30 22L32 20L34 22Z" stroke="#353FA8" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round" />
-                <rect x="44" y="11" width="108" height="2" rx="1" fill="#353FA8" />
-                <path
-                    d="M164 8H180V17C180 18.0609 179.579 19.0783 178.828 19.8284C178.078 20.5786 177.061 21 176 21H168C166.939 21 165.922 20.5786 165.172 19.8284C164.421 19.0783 164 18.0609 164 17V8Z"
-                    stroke="#353FA8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M168 2V5" stroke="#353FA8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M172 2V5" stroke="#353FA8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M176 2V5" stroke="#353FA8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M164 8H161C161 12.5 163 12 164 12V8Z" stroke="#353FA8" stroke-width="2"
-                    stroke-linejoin="round" />
-                <path d="M180 8H183C183 12.4815 181 11.9835 180 11.9835V8Z" stroke="#353FA8" stroke-width="2"
-                    stroke-linejoin="round" />
-                <rect x="192" y="11" width="104" height="2" rx="1" fill="#353FA8" />
-                <path
-                    d="M326 11.0799V11.9999C325.999 14.1563 325.301 16.2545 324.009 17.9817C322.718 19.7088 320.903 20.9723 318.835 21.5838C316.767 22.1952 314.557 22.1218 312.534 21.3744C310.512 20.6271 308.785 19.246 307.611 17.4369C306.437 15.6279 305.88 13.4879 306.022 11.3362C306.164 9.18443 306.997 7.13619 308.398 5.49694C309.799 3.85768 311.693 2.71525 313.796 2.24001C315.9 1.76477 318.1 1.9822 320.07 2.85986"
-                    stroke="#353FA8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M326 4L316 14.01L313 11.01" stroke="#353FA8" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" />
-            </svg>
-        </div>
-    </div>
-</ng-template>
+    </ng-template>

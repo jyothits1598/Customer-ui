@@ -37,15 +37,15 @@
                     </ng-container>
                 </div>
             </ng-container>
-            <!-- <div *ngIf="itemDetail?.modifiers.length > 0">
-                <div class="cart-item-show-more text-center">
+            <div *ngIf="itemDetail?.modifiers.length > 0">
+                <!-- <div class="cart-item-show-more text-center">
                     <label>
                         Show 7 more
                     </label>
-                </div>
-                <hr>
+                </div> 
+                <hr> -->
                 <item-count (change)="itemCount.patchValue($event)"></item-count>
-            </div> -->
+            </div>
 
         </div>
         <div class="footer-btn">
