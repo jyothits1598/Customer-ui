@@ -8,6 +8,14 @@
             [ngTemplateOutletContext]="{$implicit: ordData.preparingOrder}"></ng-container>
         <ng-container *ngSwitchCase="'READY'" [ngTemplateOutlet]="rdy"></ng-container>
     </ng-container>
+    <div>
+        <p>{{ordData.storeName}}</p>
+        <a [routerLink]="'/restaurants/'+ordData.storeId">View Store</a>
+        <a>View Recipt</a>
+        <p>Order #{{ordData.id}}</p>
+        <p>{{getCount(ordData)}}</p>
+        <p>{{ordData.orderTime}}</p>
+    </div>
     <div class="cart-items mct-16" *ngFor="let item of ordData.items">
         <div class="d-flex justify-content-between">
             <label class="f-16 f-b pr-3">{{item.quantity}}x</label>
@@ -27,45 +35,45 @@
             </div>
             <hr>
         </div>
-
-        <ng-container *ngIf="calcTotal(ordData);let total">
-            <div>
-                <div class="order-surcharge">
-                    <div class="d-flex justify-content-between">
-                        <label class="f-16-blur">Surcharge</label>
-                        <label class="f-14 f-b">$0.00</label>
-                    </div>
-                </div>
-                <hr>
-                <!--
-                    Sub Total
-                -->
-                <div class="order-surcharge">
-                    <div class="d-flex justify-content-between">
-                        <label class="f-16-blur">Sub total</label>
-                        <label class="f-14 f-b">${{total}}</label>
-                    </div>
-                </div>
-                <hr>
-                <!--
-                    Amount Due
-                -->
-                <div class="order-surcharge">
-                    <div class="d-flex justify-content-between">
-                        <label class="f-16 f-b">Amount due</label>
-                        <label class="f-24 f-b">${{total}}</label>
-                    </div>
+    </div>
+    <ng-container *ngIf="calcTotal(ordData);let total">
+        <div>
+            <div class="order-surcharge">
+                <div class="d-flex justify-content-between">
+                    <label class="f-16-blur">Surcharge</label>
+                    <label class="f-14 f-b">$0.00</label>
                 </div>
             </div>
             <hr>
-        </ng-container>
-        <button *ngIf="ordData.status === 'READY'" (click)="markAsComplete()" [disabled]="loading">
-            <span *ngIf="!loading; else ld">Complete</span>
-            <ng-template #ld>
-                <img src="/assets/images/loader_white_24.gif" alt="">
-            </ng-template>
-        </button>
-    </div>
+            <!--
+                    Sub Total
+                -->
+            <div class="order-surcharge">
+                <div class="d-flex justify-content-between">
+                    <label class="f-16-blur">Sub total</label>
+                    <label class="f-14 f-b">${{total}}</label>
+                </div>
+            </div>
+            <hr>
+            <!--
+                    Amount Due
+                -->
+            <div class="order-surcharge">
+                <div class="d-flex justify-content-between">
+                    <label class="f-16 f-b">Amount due</label>
+                    <label class="f-24 f-b">${{total}}</label>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </ng-container>
+    <button *ngIf="ordData.status === 'READY'" (click)="markAsComplete()" [disabled]="loading">
+        <span *ngIf="!loading; else ld">Complete</span>
+        <ng-template #ld>
+            <img src="/assets/images/loader_white_24.gif" alt="">
+        </ng-template>
+    </button>
+
 
     <ng-template #conf>
         <div>

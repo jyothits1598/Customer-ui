@@ -21,7 +21,7 @@ import { SearchDataService } from '../../services/search-data.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent implements OnInit, OnDestroy, AfterViewInit {
+export class SearchComponent implements OnInit, OnDestroy {
   storeFilter: StoreFilter;
   resultCount: number = null;
   isMobile: boolean;
@@ -29,18 +29,11 @@ export class SearchComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('seachTempl', { read: TemplateRef }) searchTemp: TemplateRef<any>;
   unSub$ = new Subject<void>();
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private location: GeoLocationService,
-    private searchDataService: SearchDataService,
     private layoutService: LayoutService,
-    private navbarServic: NavbarService
   ) {
     this.isMobile = this.layoutService.isMobile;
-  }
-
-  ngAfterViewInit(): void {
-    this.navbarServic.setTemplate(this.searchTemp);
   }
 
   checkForRoute(url: string) {
@@ -78,20 +71,21 @@ export class SearchComponent implements OnInit, OnDestroy, AfterViewInit {
     //     if (this.checkForRoute(currRouteEvent.url)) console.log('navigating end 2');
     //   }
     // })
-    this.router.events
-      .pipe(
-        filter((event) => event instanceof NavigationEnd),
-        takeUntil(this.unSub$)
-      )
-      .subscribe((end: NavigationEnd) => {
-        if (this.checkForRoute(end.url))
-          this.navbarServic.setTemplate(this.searchTemp);
-        else this.navbarServic.setTemplate(null);
-      });
+    // this.router.events
+    //   .pipe(
+    //     filter((event) => event instanceof NavigationEnd),
+    //     takeUntil(this.unSub$)
+    //   )
+    //   .subscribe((end: NavigationEnd) => {
+    //     if (this.checkForRoute(end.url))
+    //       this.navbarServic.setTemplate(this.searchTemp);
+    //     else this.navbarServic.setTemplate(null);
+    //   });
   }
 
   ngOnDestroy(): void {
     this.unSub$.next();
     this.unSub$.complete();
+    console.log('destroying search ondestroy');
   }
 }
