@@ -30,7 +30,8 @@ export interface OrderDto extends CartDto {
     preparing_order: string,
     total_price: number,
     status: string,
-    order_id: number
+    order_id: number,
+    updated_at: string,
 }
 
 export interface ConfirmedOrderData extends CartData {
@@ -38,6 +39,7 @@ export interface ConfirmedOrderData extends CartData {
     totalPrice: number,
     status: string,
     id: number
+    orderTime: Date
 }
 
 export function mapToOrderData(data: OrderDto) {
@@ -46,6 +48,7 @@ export function mapToOrderData(data: OrderDto) {
     ordData.totalPrice = data.total_price;
     ordData.status = data.status;
     ordData.id = data.order_id;
+    ordData.orderTime = new Date(data.updated_at)
     return ordData;
 }
 

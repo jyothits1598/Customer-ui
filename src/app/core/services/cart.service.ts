@@ -7,6 +7,7 @@ import { CartData, CartDto, mapToCartData, MapToDto } from '../model/cart';
 import { ComponentModalRef } from '../model/modal';
 import { AuthService } from './auth.service';
 import { ModalService } from './modal.service';
+import { OrderPages, OrderViewControllerService } from './order-view-controller.service';
 import { RestApiService } from './rest-api.service';
 import { StorageService } from './storage.service';
 
@@ -42,7 +43,8 @@ export class CartService {
   constructor(private modalService: ModalService,
     private storageService: StorageService,
     private authService: AuthService,
-    private restApiService: RestApiService
+    private restApiService: RestApiService,
+    private orderView: OrderViewControllerService
   ) {
     this.authService.loggedUser$.pipe(take(1)).subscribe((user) => {
       if (!this.presentCartData) {
@@ -85,7 +87,7 @@ export class CartService {
     }
     //post cart to backend if signed in
     if (this.authService.isLoggedIn && !skipBackend) resultObs = resultObs.pipe(switchMap(() => this.postCart(newCartData)));
-    return resultObs.pipe(tap(() => { this.cartData.next(newCartData); this.storageService.store(this.storageIdentifier, newCartData) }));
+    return resultObs.pipe(tap(() => { this.cartData.next(newCartData); if(!newCartData) this.orderView.showPage(OrderPages.Cart); this.storageService.store(this.storageIdentifier, newCartData) }));
   }
 
   deleteItem(itemId: number): Observable<boolean> {

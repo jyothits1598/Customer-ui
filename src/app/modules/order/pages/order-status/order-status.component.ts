@@ -1,3 +1,4 @@
+import { listLazyRoutes } from '@angular/compiler/src/aot/lazy_routes';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { interval, NEVER, of, Subject, timer } from 'rxjs';
 import { finalize, map, mergeMap, switchMap, takeUntil } from 'rxjs/operators';
@@ -57,4 +58,8 @@ export class OrderStatusComponent implements OnInit, OnDestroy {
     });
   }
 
+  getCount(oD: ConfirmedOrderData) {
+    return oD.items.reduce((i1, i2) => i1 + i2.quantity, 0);
+  }
+ 
 }

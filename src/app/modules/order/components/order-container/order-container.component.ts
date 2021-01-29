@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Observable, of, Subject } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
+import { LayoutService } from 'src/app/core/services/layout.service';
 import { OrderPages, OrderViewControllerService } from 'src/app/core/services/order-view-controller.service';
 
 @Component({
@@ -17,10 +18,11 @@ export class OrderContainerComponent implements OnInit, OnDestroy {
   unSub$ = new Subject<true>();
 
   constructor(private router: Router,
-    private orderView: OrderViewControllerService) {
+    private orderView: OrderViewControllerService,
+    private layout: LayoutService) {
     this.router.events.pipe(
       filter(e => e instanceof NavigationEnd),
-      switchMap((e: NavigationEnd) => of(!e.url.includes('/restaurants/'))),
+      switchMap((e: NavigationEnd) => of(!e.url.includes('/restaurants/') || this.layout.isMobile)),
       takeUntil(this.unSub$)
     ).subscribe((show) => this.showClose = show);
   }

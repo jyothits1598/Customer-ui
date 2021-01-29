@@ -90,7 +90,7 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.unSub$.next(true);
     this.interObserver.unobserve(this.obsElement.nativeElement);
-    if (!this.cartSrv.presentCartData && this.orderView.getCurrentPage() === OrderPages.Cart) this.orderView.showPage(null);
+     if (!this.cartSrv.presentCartData && this.orderView.getCurrentPage() === OrderPages.Cart) this.orderView.showPage(null);
 
   }
 
