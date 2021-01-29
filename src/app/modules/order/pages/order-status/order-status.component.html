@@ -1,4 +1,5 @@
-<div *ngIf="ordData">
+<div  class="confirming-order"  *ngIf="ordData">
+    
     <!--
         Confirming Order
     -->
@@ -59,12 +60,18 @@
             </div>
             <hr>
         </ng-container>
-        <button *ngIf="ordData.status === 'READY'" (click)="markAsComplete()" [disabled]="loading">
-            <span *ngIf="!loading; else ld">Complete</span>
-            <ng-template #ld>
-                <img src="/assets/images/loader_white_24.gif" alt="">
-            </ng-template>
-        </button>
+        <div class="cart-card cart-anim" *ngIf="ordData.status === 'READY'" >
+            <div class="cart-button" (click)="markAsComplete()" [disabled]="loading">
+                <div class="row">
+                    <div class="col-sm-12 col-12 cart-text text-center">
+                        <span *ngIf="!loading; else ld">Complete</span>
+                        <ng-template #ld>
+                            <img src="/assets/images/loader_white_24.gif" alt="">
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <ng-template #conf>

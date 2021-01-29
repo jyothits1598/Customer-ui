@@ -24,7 +24,7 @@ input[type=radio] + span {
     background-repeat:no-repeat;
     padding-left: 1.7rem;
     display:block;
-    cursor: no-drop;
+    cursor: pointer;
 }
 input[type=radio]:checked + span {
     background-image: url('/assets/images/cart/radio-modifier-checked.svg');

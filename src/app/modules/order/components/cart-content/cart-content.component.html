@@ -35,7 +35,7 @@
                 Cart added items.
             -->
     <div>
-        <div *ngIf="itemDelInProg">Loader/Blocker</div>
+        <div *ngIf="itemDelInProg" class="right-content content-opacity"></div>
         <div class="cart-items mct-16" *ngFor="let item of cartData.items">
             <div class="d-flex justify-content-between">
                 <label class="f-16 f-b pr-3">{{item.quantity}}x</label>

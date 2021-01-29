@@ -27,7 +27,7 @@ input[type=checkbox] + span {
     background-repeat:no-repeat;
     padding-left: 2rem;
     display:block;
-    cursor: no-drop;
+    cursor: pointer;
 }
 input[type=checkbox]:checked + span {
     background-image: url('/assets/images/cart/checkbox-modifier-checked.svg');
