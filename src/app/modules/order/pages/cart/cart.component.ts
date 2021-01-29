@@ -1,21 +1,21 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { CartData } from 'src/app/core/model/cart';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CartService } from 'src/app/core/services/cart.service';
-import { ItemModifier } from 'src/app/modules/store-item-detail/model/store-item-detail';
+import { OrderPages, OrderViewControllerService } from 'src/app/core/services/order-view-controller.service';
 
 @Component({
-  selector: 'app-cart',
+  selector: 'cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit, OnDestroy {
   constructor(
     private cartService: CartService,
-    private router: Router,
+    private orderViewSrv: OrderViewControllerService,
+    private authService: AuthService,
+    private router: Router
   ) { }
   cartTotal$: Observable<number>;
   unsub$ = new Subject<true>();
@@ -25,7 +25,8 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   continue() {
-    this.router.navigate([{ outlets: { 'order': ['cart-summary'] } }]);
+    if (!this.authService.isLoggedIn) this.router.navigate(['/auth/signin'], { queryParams: { redirect: this.router.url } });
+    else this.orderViewSrv.showPage(OrderPages.CartSummary)
   }
 
   ngOnDestroy(): void {

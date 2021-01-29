@@ -1,19 +1,16 @@
 <div *ngIf="selecteditemId && storeDetail">
   <store-item-detail [item]="{itemId: selecteditemId, storeName: storeDetail.name ,storeId: storeId}"></store-item-detail>
 </div>
-
-
 <div class="main-panel" id="main-panel">
-  <!-- <div style="width: 100%; height: 48px; position: absolute;" #observationElement></div> -->
   <ng-container *ngIf="storeDetail">
       <div class="main-content">
           <div class="fixed-shadow" #topBar [class.newClass]="scrolledDown">
               <div class="margins-left">
-                  <span style="float:left">
+                  <span class="float-left">
                       <table>
                           <tr>
-                              <td>
-                                  <img src="assets/images/ico_arrow_left_white.png" (click)=" goBack()"
+                              <td (click)=" goBack()">
+                                  <img src="assets/images/ico_arrow_left_white.png" 
                                       style="cursor: pointer;outline:0;">
                               </td>
                               <td align="bottom">
@@ -23,42 +20,36 @@
                               </td>
                           </tr>
                       </table>
-
-                      <!-- <img src="assets/images/ico_arrow_left_white.png" routerLink="/"
-                          style="cursor: pointer;outline:0;"> &nbsp; <span class="fixed-name-scroll"
-                          style="display: none;"> {{storeDetail.name}}</span>  -->
                   </span>
-                  <span style="float:right">
+                  <span class="float-right">
                       <ul class="menu">
-                          <li style="cursor: pointer;outline:none"> 
+                          <li class="pointer-outline-none"> 
                               <store-heart [store]="{id: storeDetail.id, isFavourite: storeDetail.isFavourite,page:'preview'}"></store-heart>
                           </li>
-                          <li style="cursor: pointer;outline:none;margin-left:16px">
+                          <li class="pointer-outline-none ml-20">
                               <app-share [store]="{id: storeDetail.id, name: storeDetail.name}"></app-share>
                           </li>
-                          <li style="cursor: pointer;outline:none;margin-left:16px">
+                          <li class="pointer-outline-none ml-20">
                               <a [href]="'https://www.google.com/maps/dir/?api=1&destination='+storeDetail.latLng.lat+','+storeDetail.latLng.lng" target="_blank" style="text-decoration: none;">
                                   <img src="assets/images/navbar/ico_navigation.png" title="Direction">
                               </a>
                           </li>
                       </ul>
                   </span>
-                  <!-- <span> <img src="assets/images/ico_arrow_left.png" routerLink="/"
-                          style="cursor: pointer;outline:0;"> &nbsp; <span *ngIf="scrolledDown" class="fixed-name-scroll"> {{storeDetail.name}}</span> </span> -->
               </div>
           </div>
           <div class="wal-image">
               <img [src]="storeDetail.storeImage || 'assets/images/Area.png' ">
           </div>
           <div class="wallpaper-card">
-              <table class="d-none d-sm-block">
+              <table class="store-details-desktop-card">
                   <tr>
                       <td valign="middle">
                           <img [src]="storeDetail.logo || 'assets/svg/null_logo.svg'" class="profile-log-detail" />
                       </td>
-                      <td style="padding-left: 8px;width:100%">
+                      <td class="store-nav-banner-card">
                           <div class="sub-name">
-                              <span style="float:left !important;"> {{storeDetail.distance}} &nbsp;
+                              <span class="float-left d-inline-flex" > {{storeDetail.distance}} &nbsp;
                                   <present-availability [availability]="storeDetail.openingHours">
                                   </present-availability>
                               </span>
@@ -67,73 +58,57 @@
                       </td>
                   </tr>
               </table>
-              <div class="d-block d-sm-none">
-                  <div style="position: absolute;top:-76px;left:0;z-index: 1;">
-                      <img [src]="storeDetail.logo || 'assets/svg/null_logo.svg'" class="profile-log-detail" />
+              <div class="store-details-tab-mobile-card">
+                  <div class="mobile-tab-logo">
+                    <img [src]="storeDetail.logo || 'assets/svg/null_logo.svg'" class="profile-log-detail" />
                   </div>
-                  <div style="position: relative;top:10px;">
+                  <div class="store-detail-card-text">
                       <div class="std-heading-4 text-capitalize"> {{storeDetail.name}} </div>
                       <div class="sub-name">
-                          <span style="float:left !important;"> {{storeDetail.distance}} &nbsp;
+                          <span class="float-left d-inline-flex"> {{storeDetail.distance}} &nbsp;
                               <present-availability [availability]="storeDetail.openingHours">
                               </present-availability>
                           </span>
                       </div>
-                  </div><br>
-              </div>
-              <div style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);padding: 8px 0 8px 0;">
-                  <table>
-                      <tr>
-                          <td>
-                            <div class="rating-size">
-                                <table>
-                                    <tr>
-                                        <td valign="middle"><img src="assets/svg/cards/ico_social_facebook_small.svg" style="padding-right:4px"></td>
-                                        <td valign="bottom" class="rating-text" >&nbsp;{{storeDetail.facebookLike}} </td>
-                                     </tr>
-                                </table>
-                            </div>
-                        </td>
-                          <td align="top">
-                            <div class="rating-size">
-                                <table >
-                                    <tr>
-                                        <td valign="middle" style="padding-left:10px;"><img src="assets/svg/cards/ico_social_google_small.svg" ><img src="assets/svg/cards/ico_star_half_small.svg"></td>
-                                        <td valign="bottom">&nbsp;{{storeDetail.googleRating}}</td>
-                                    </tr>
-                                </table>
-                            </div>
-                          </td>
-                      </tr>
-                  </table>
-              </div>
+                  </div>
+                  <br>
+                    <hr class="hr">
+                </div>
+                <div class="facebook-google-contain">
+                    <table>
+                        <tr>
+                            <td>
+                              <div class="rating-size">
+                                  <table>
+                                      <tr>
+                                          <td valign="middle"><img src="assets/svg/cards/ico_social_facebook_small.svg" style="padding-right:4px"></td>
+                                          <td valign="bottom" class="rating-text" >&nbsp;{{storeDetail.facebookLike}} </td>
+                                       </tr>
+                                  </table>
+                              </div>
+                             </td>
+                            <td align="top">
+                              <div class="rating-size">
+                                  <table >
+                                      <tr>
+                                          <td valign="middle" style="padding-left:10px;"><img src="assets/svg/cards/ico_social_google_small.svg" ><img src="assets/svg/cards/ico_star_half_small.svg"></td>
+                                          <td valign="bottom">&nbsp;{{storeDetail.googleRating}}</td>
+                                      </tr>
+                                  </table>
+                              </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <hr class="hr">
               <div class="address-content">
-                  <!-- <hr class="d-block d-sm-none"> -->
                   {{storeDetail.address}}
               </div>
-              <!-- <div class="d-flex justify-content-between">
-                  <span>
-                      <ul class="chat-icons">
-                          <li>
-                              <store-heart [store]="{id: storeDetail.id, isFavourite: true}"></store-heart>
-                          </li>
-                          <li> <img src="assets/images/chat.png"> </li>
-                          <li> <img src="assets/images/share.png"> </li>
-                      </ul>
-                  </span>
-                  <span>
-                      <p class="comment-text"><span> 9 </span> comments </p>
-                  </span>
-              </div> -->
               <div style="width: 100%; height: 0px; position: absolute; background: pink" #observationElement></div>
           </div>
           <!----------------------------- items cards -------------------------->
           <store-category [categories]="storeDetail.categories" [scrolledDown]="scrolledDown"></store-category>
           <!----------------------------- items cards end ---------------------->
       </div>
-      <!-- <app-cart></app-cart> -->
   </ng-container>
 </div>
-
-<!-- <cart-button></cart-button> -->
-<!-- <app-cart></app-cart> -->

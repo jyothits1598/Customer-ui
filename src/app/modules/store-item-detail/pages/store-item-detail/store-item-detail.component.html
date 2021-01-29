@@ -25,23 +25,25 @@
                 <div class="item-div-image">
                     <img [src]="itemDetail.image" class="img-fluid">
                 </div>
-                <ng-container *ngFor="let modifier of itemDetail.modifiers; let i = index">
-                    <div [ngSwitch]="modifier.minSelection === 1 && modifier.maxSelection === 1">
-                        <store-item-modifier *ngSwitchCase="false" [formControl]="selectedOptions.at(i)"
-                            [modifier]="modifier">
-                        </store-item-modifier>
-                        <item-modifer-selector-radio *ngSwitchCase="true" [modifier]="modifier"
-                            [formControl]="selectedOptions.at(i)"></item-modifer-selector-radio>
-                    </div>
-                </ng-container>
+                <div class="pt-3 pb-3">
+                    <ng-container *ngFor="let modifier of itemDetail.modifiers; let i = index">
+                        <div [ngSwitch]="modifier.minSelection === 1 && modifier.maxSelection === 1">
+                            <store-item-modifier *ngSwitchCase="false" [formControl]="selectedOptions.at(i)"
+                                [modifier]="modifier">
+                            </store-item-modifier>
+                            <item-modifer-selector-radio *ngSwitchCase="true" [modifier]="modifier"
+                                [formControl]="selectedOptions.at(i)"></item-modifer-selector-radio>
+                        </div>
+                    </ng-container>
+                </div>
             </ng-container>
             <div *ngIf="itemDetail?.modifiers.length > 0">
-                <div class="cart-item-show-more text-center">
+                <!-- <div class="cart-item-show-more text-center">
                     <label>
                         Show 7 more
                     </label>
-                </div>
-                <hr>
+                </div> 
+                <hr> -->
                 <item-count (change)="itemCount.patchValue($event)"></item-count>
             </div>
 

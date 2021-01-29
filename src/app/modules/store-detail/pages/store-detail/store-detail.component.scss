@@ -1,17 +1,30 @@
-.right-content {
-    position: fixed;
-    width:20%;
-    height:100%;
-    z-index: 1;
-    background: #ffffff;
-    right:0;
-    top:0;
-    bottom:0;
-    box-shadow: inset 1px 0px 0px rgba(0, 0, 0, 0.1);
+.pointer-outline-none{
+    cursor: pointer;
+    outline:0;
+}
+.ml-20{
+    margin-left:20px;
 }
 .main-content {
     position:relative;
     height:100%;
+}
+.fixed-shadow {
+    position:fixed;
+    top:0;
+    left:0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+    height:48px;
+    padding: 12px;
+    color: var(--color-background);
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+}
+.sticy-header-store-name{
+    display: inline-block;
+    animation: fadeInDown .1s;
+    margin-left:20px;
 }
 .wal-image {
     width:100%;
@@ -33,6 +46,10 @@
     -ms-transition: all 2s ease;
     transition: all 2s ease;
 }
+.store-nav-banner-card{
+    padding-left: 10px;
+    width:100%
+}
 .profile-log-detail {
     width: 80px;
     height: 80px;
@@ -45,26 +62,10 @@
     font-weight: normal;
     font-size: 12px;
     line-height: 16px;
-    padding-top:16px;
+  
 }
-.empty-cart {
-    margin-top:80px;
-    padding: 16px;
-    text-align: center;
-}
-.fixed-shadow {
-    position:fixed;
-    top:0;
-    left:0;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
-    height:48px;
-    padding: 10px;
-    color: var(--color-background);
-    font-style: normal;
-    font-weight: bold;
-    font-size: 14px;
-    // transition: background .1s;
-}
+
+
 .newClass {
     z-index: 2;
     background:var(--color-primary);
@@ -114,3 +115,71 @@ body.modal-open {
     padding: 8px 0 8px 0;
     margin-top:12px;
 }
+
+hr{
+    margin-top:12px;
+    margin-bottom:12px;
+}
+
+//large devices
+@media (min-width: 991.98px) {
+    .store-details-desktop-card{
+        display:block;
+    }
+    .store-details-tab-mobile-card{
+        display:none;
+    }
+    .facebook-google-contain{
+        padding-top: 8px;
+    }
+}
+// Medium devices (tablets, 768px and up)
+@media (max-width: 991.98px) {
+    .store-details-desktop-card{
+        display:none;
+    }
+    .store-details-tab-mobile-card{
+        display:block;
+    }
+    .mobile-tab-logo{
+        position: absolute;
+        top:-76px;
+        left:0;
+        z-index: 1;
+    }
+    .store-detail-card-text{
+        position: relative;
+        top:10px;
+    }
+}
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+    .main-content {
+    width: 76.5%;
+    }
+    .fixed-shadow {
+    width: 76.5%;
+    }
+     
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .main-content {
+        width: 72%;
+      }
+    .fixed-shadow {
+        width: 72%;
+    }
+ }
+
+ // Large devices (desktops, 992px and up)
+@media (max-width: 991.98px) {
+    .main-content {
+        width: 100%;
+      }
+    .fixed-shadow {
+        width: 100%;
+    }
+ }
+

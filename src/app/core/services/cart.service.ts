@@ -7,6 +7,7 @@ import { CartData, CartDto, mapToCartData, MapToDto } from '../model/cart';
 import { ComponentModalRef } from '../model/modal';
 import { AuthService } from './auth.service';
 import { ModalService } from './modal.service';
+import { OrderPages, OrderViewControllerService } from './order-view-controller.service';
 import { RestApiService } from './rest-api.service';
 import { StorageService } from './storage.service';
 
@@ -42,7 +43,8 @@ export class CartService {
   constructor(private modalService: ModalService,
     private storageService: StorageService,
     private authService: AuthService,
-    private restApiService: RestApiService
+    private restApiService: RestApiService,
+    private orderView: OrderViewControllerService
   ) {
     this.authService.loggedUser$.pipe(take(1)).subscribe((user) => {
       if (!this.presentCartData) {
@@ -59,7 +61,7 @@ export class CartService {
   }
 
   // TODO: rewrite this function with better implementation
-  addItem(cData: CartData, replaceItems: boolean = false): Observable<boolean> {
+  addItem(cData: CartData, replaceItems: boolean = false, skipBackend: boolean = false): Observable<boolean> {
     console.log('add item called', cData);
     let newCartData = this.presentCartData ? { ...this.presentCartData } : null;
     let resultObs: Observable<any>;
@@ -81,10 +83,11 @@ export class CartService {
       // there is no previous item in cart
       newCartData = cData;
       resultObs = of(true);
+      console.log('moiddle of flow', this.authService.isLoggedIn)
     }
     //post cart to backend if signed in
-    if (this.authService.isLoggedIn) resultObs = resultObs.pipe(switchMap(() => this.postCart(cData)));
-    return resultObs.pipe(tap(() => { this.cartData.next(newCartData); this.storageService.store(this.storageIdentifier, cData) }));
+    if (this.authService.isLoggedIn && !skipBackend) resultObs = resultObs.pipe(switchMap(() => this.postCart(newCartData)));
+    return resultObs.pipe(tap(() => { this.cartData.next(newCartData); if(!newCartData) this.orderView.showPage(OrderPages.Cart); this.storageService.store(this.storageIdentifier, newCartData) }));
   }
 
   deleteItem(itemId: number): Observable<boolean> {
@@ -142,7 +145,7 @@ export class CartService {
   }
 
   getCart() {
-    return this.restApiService.get('api/customer/cart').pipe(map((cart: { data: CartDto }) => mapToCartData(cart.data)));
+    return this.restApiService.get('api/customer/cart').pipe(map((cart: { data: CartDto }) => cart.data ? mapToCartData(cart.data) : null));
   }
 
   debug() {

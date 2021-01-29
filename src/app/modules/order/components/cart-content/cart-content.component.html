@@ -1,10 +1,4 @@
 <div class="order-cart" *ngIf="cartData$ | async; let cartData; else emptyTemplate">
-    <div class="cart-card-close" (click)="closeCart()">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M18 6L6 18" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M6 6L18 18" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </div>
     <h4 class="f-20 f-b mc-4">Your Order</h4>
     <u class="f-16-blue text-capitalize"> {{cartData.storeName}}</u>
     <!--
@@ -35,12 +29,14 @@
                 Cart added items.
             -->
     <div>
-        <div *ngIf="itemDelInProg">Loader/Blocker</div>
+        <div *ngIf="itemDelInProg" class="right-content content-opacity"></div>
         <div class="cart-items mct-16" *ngFor="let item of cartData.items">
             <div class="d-flex justify-content-between">
-                <label class="f-16 f-b pr-3">{{item.quantity}}x</label>
-                <div class="f-16 f-b pr-2">
-                    <label class="f-16 f-b item-name text-capitalize">{{item.item.name}}</label>
+                <div class="d-flex">
+                    <label class="f-16 f-b pr-4">{{item.quantity}}x</label>
+                    <div class="f-16 f-b pr-2">
+                        <label class="f-16 f-b item-name text-capitalize">{{item.item.name}}</label>
+                    </div>
                 </div>
                 <div>
                     <label class="f-14 mr-15">${{makeCalculations(item.item.basePrice, item.item.modifiers,
@@ -49,55 +45,17 @@
                 </div>
             </div>
             <div class="cart-item-modifiers">
-                <ng-container *ngFor="let mod of item.item.modifiers">
-                    <span>{{mod.name}} </span>
+                <ng-container *ngFor="let mod of modifiersToOptionNameArr(item.item.modifiers)">
+                    <span>{{mod}} </span>
                     <i class="fa fa-circle" aria-hidden="true"></i>
                 </ng-container>
-                <!-- <span>Large </span>
-                        <i class="fa fa-circle" aria-hidden="true"></i>
-                        <span>Small </span>
-                        <i class="fa fa-circle" aria-hidden="true"></i>
-                        <span>Large </span>
-                        <i class="fa fa-circle" aria-hidden="true"></i>
-                        <span>Small </span>
-                        <i class="fa fa-circle" aria-hidden="true"></i>
-                        <span>Large </span>
-                        <i class="fa fa-circle" aria-hidden="true"></i> -->
             </div>
+            <hr>
         </div>
-
     </div>
-    <hr>
-    <!-- <div class="cart-items">
-                <div class="d-flex justify-content-between">
-                    <label class="f-16 f-b pr-3">1x</label>
-                    <div class="f-16 f-b pr-2">
-                        <label class="f-16 f-b item-name text-capitalize">Lamb Sauvlaki</label>
-                    </div>
-                    <div>
-                        <label class="f-14 mr-15">$15.99</label>
-                        <img src="assets/images/cart/exclude.svg">
-                    </div>
-                </div>
-                <div class="cart-item-modifiers">
-                    <span>Small </span>
-                    <i class="fa fa-circle" aria-hidden="true"></i>
-                    <span>Large </span>
-                    <i class="fa fa-circle" aria-hidden="true"></i>
-                    <span>Small </span>
-                    <i class="fa fa-circle" aria-hidden="true"></i>
-                    <span>Large </span>
-                    <i class="fa fa-circle" aria-hidden="true"></i>
-                    <span>Small </span>
-                    <i class="fa fa-circle" aria-hidden="true"></i>
-                    <span>Large </span>
-                    <i class="fa fa-circle" aria-hidden="true"></i>
-                </div>
-            </div> -->
-    <hr>
     <!--
-                Surcharge
-            -->
+        Surcharge
+    -->
     <ng-container *ngIf="cartTotal$ | async; let total">
 
         <div class="order-surcharge">
@@ -108,8 +66,8 @@
         </div>
         <hr>
         <!--
-                Sub Total
-            -->
+            Sub Total
+        -->
         <div class="order-surcharge">
             <div class="d-flex justify-content-between">
                 <label class="f-16-blur">Sub total</label>
@@ -118,8 +76,8 @@
         </div>
         <hr>
         <!--
-                Amount Due
-            -->
+            Amount Due
+        -->
         <div class="order-surcharge">
             <div class="d-flex justify-content-between">
                 <label class="f-16 f-b">Amount due</label>
@@ -133,8 +91,8 @@
 
 <ng-template #emptyTemplate>
     <!--  
-            empty cart window if no item added
-        -->
+        empty cart window if no item added
+    -->
     <div class="empty-cart">
         <img src="assets/images/empty_cart.png">
         <p class="paragraph mt">

@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { finalize, takeUntil } from 'rxjs/operators';
 import { CartData } from 'src/app/core/model/cart';
 import { CartService } from 'src/app/core/services/cart.service';
+import { OrderPages, OrderViewControllerService } from 'src/app/core/services/order-view-controller.service';
 import { ItemModifier, StoreItemDetail } from '../../model/store-item-detail';
 import { StoreItemDataService } from '../../services/store-item-data.service';
 
@@ -52,7 +53,8 @@ export class StoreItemDetailComponent implements OnChanges, OnDestroy {
 
   constructor(private storeItemData: StoreItemDataService,
     private location: Location,
-    private cartService: CartService) {
+    private cartService: CartService,
+    private ov: OrderViewControllerService) { 
     this.makeCalculations = this.cartService.makeCalculations;
   }
 
@@ -103,11 +105,11 @@ export class StoreItemDetailComponent implements OnChanges, OnDestroy {
 
     this.cartService.addItem(cartData).pipe(takeUntil(this.unSubscribe$)).subscribe(() => {
       this.itemAddedToCart = true;
-      
+      this.ov.showPage(OrderPages.Cart);
       setTimeout(() => {
         this.show = false;
         this.location.back();
-      }, 600);
+      }, 0);
     });
   }
 

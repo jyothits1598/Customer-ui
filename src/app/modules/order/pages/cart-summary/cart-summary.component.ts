@@ -1,18 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
+import { finalize, takeUntil } from 'rxjs/operators';
 import { CartService } from 'src/app/core/services/cart.service';
+import { OrderPages, OrderViewControllerService } from 'src/app/core/services/order-view-controller.service';
+import { OrdersService } from 'src/app/core/services/orders.service';
 
 @Component({
-  selector: 'app-cart-summary',
+  selector: 'cart-summary',
   templateUrl: './cart-summary.component.html',
   styleUrls: ['./cart-summary.component.scss']
 })
-export class CartSummaryComponent implements OnInit {
-  doPayment:boolean = false;
+export class CartSummaryComponent implements OnInit, OnDestroy {
+  showPaymentOpt: boolean = false;
+  paymentInProg: boolean = false;
+
+  unSub$ = new Subject<true>();
+
   constructor(
     private cartService: CartService,
-    private router: Router
+    private orderService: OrdersService,
+    private orderView: OrderViewControllerService
   ) { }
 
   cartTotal$: Observable<number>;
@@ -22,13 +30,22 @@ export class CartSummaryComponent implements OnInit {
     this.cartTotal$ = this.cartService.cartTotalAmount$;
   }
 
-  addPayment(){
-    this.router.navigate([{ outlets: { 'order': ['add-payment-opt'] } }]);
-
+  order() {
+    this.paymentInProg = true;
+    this.orderService.makeOrder().pipe(
+      takeUntil(this.unsub$),
+      finalize(() => this.paymentInProg = false)
+    ).subscribe(
+      (orderId) => { this.orderView.showPage(OrderPages.OrderStatus); this.orderService.setOrderToBeShown(orderId) }
+    );
   }
 
-  makePayment() {
-    this.doPayment=true;
+  addPaymentOpt() {
+    this.orderView.showPage(OrderPages.AddPaymentOptions);
+  }
+
+  ngOnDestroy(): void {
+    this.unsub$.next(true);
   }
 
 }

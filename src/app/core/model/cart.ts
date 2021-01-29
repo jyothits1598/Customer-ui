@@ -1,6 +1,7 @@
 import { StoreItem } from "src/app/modules/store-detail/model/store-detail";
 import { StoreItemDetail } from "src/app/modules/store-item-detail/model/store-item-detail";
 
+// TODO: change CartData to OrderData
 export interface CartData {
     storeId: number,
     storeName: string;
@@ -9,13 +10,13 @@ export interface CartData {
 }
 
 export interface CartDto {
-    // cart: {
     store_id: number;
+    store_name: string;
     items: Array<{
         item_id: number,
         item_name: string,
         quantity: number,
-        possition: number,
+        position: number,
         item_price: string,
         modifiers: Array<{
             modifier_id: number,
@@ -23,13 +24,38 @@ export interface CartDto {
             options: Array<{ option_id: number, name: string, option_price: string }>
         }>
     }>
-    // }
+}
+
+export interface OrderDto extends CartDto {
+    preparing_order: string,
+    total_price: number,
+    status: string,
+    order_id: number,
+    updated_at: string,
+}
+
+export interface ConfirmedOrderData extends CartData {
+    preparingOrder: string,
+    totalPrice: number,
+    status: string,
+    id: number
+    orderTime: Date
+}
+
+export function mapToOrderData(data: OrderDto) {
+    let ordData: ConfirmedOrderData = <ConfirmedOrderData>mapToCartData(data);
+    ordData.preparingOrder = data.preparing_order;
+    ordData.totalPrice = data.total_price;
+    ordData.status = data.status;
+    ordData.id = data.order_id;
+    ordData.orderTime = new Date(data.updated_at)
+    return ordData;
 }
 
 export function mapToCartData(data: CartDto): CartData {
     return {
         storeId: data.store_id,
-        storeName: 'name',
+        storeName: data.store_name,
         items: data.items.map((item) => {
             let mod = item.modifiers.map((mod) => {
                 return {
@@ -73,12 +99,13 @@ export function MapToDto(data: CartData): CartDto {
                 item_name: item.item.name,
                 item_price: item.item.basePrice.toString(),
                 quantity: item.quantity,
-                possition: index,
+                position: index,
                 modifiers: modifiers
             }
         });
     return {
         store_id: data.storeId,
+        store_name: data.storeName,
         items: items
     }
 }

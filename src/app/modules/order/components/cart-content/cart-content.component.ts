@@ -34,16 +34,17 @@ export class CartContentComponent implements OnInit, OnDestroy {
     this.cartService.deleteItem(itemId).pipe(takeUntil(this.unsub$), finalize(() => this.itemDelInProg = false)).pipe().subscribe();
   }
 
-  closeCart() {
-    this.router.navigate([{ outlets: { 'order': null } }]);
-  }
-
   continue() {
     this.router.navigate([{ outlets: { 'order': ['cart-summary'] } }]);
   }
 
   ngOnDestroy(): void {
     this.unsub$.next(true);
+  }
+
+  modifiersToOptionNameArr(mods: Array<ItemModifier>) {
+    let m = mods.map(mod => mod.options.map(op => op.name));
+    return Array.prototype.concat.apply([], m);
   }
 
 }

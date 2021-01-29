@@ -19,3 +19,15 @@
     width:100%;
     cursor: pointer;
 }
+input[type=radio] + span {
+    background-image: url('/assets/images/cart/radio-modifier-unchecked.svg');
+    background-repeat:no-repeat;
+    padding-left: 1.7rem;
+    display:block;
+    cursor: pointer;
+}
+input[type=radio]:checked + span {
+    background-image: url('/assets/images/cart/radio-modifier-checked.svg');
+    background-repeat:no-repeat;
+    cursor: pointer;
+}
