@@ -22,7 +22,7 @@ export class TrackingButtonComponent implements OnInit {
     this.trackingOrder$ = this.ordSrv.trackingOrder$;
     this.currOrderPage$ = this.orderView.getCurrentPage$();
 
-    // this.trackingOrder$.subscribe((tr) => console.log('tracking button', tr));
+    // this.ordSrv.trackingOrder$.subscribe((tr) => console.log('tracking button', tr));
   }
 
   openStatus(id: number) {

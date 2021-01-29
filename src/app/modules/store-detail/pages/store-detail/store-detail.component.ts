@@ -10,6 +10,7 @@ import { UserLocation } from 'src/app/core/model/user-location';
 import { Subject } from 'rxjs';
 import { OrderPages, OrderViewControllerService } from 'src/app/core/services/order-view-controller.service';
 import { LayoutService } from 'src/app/core/services/layout.service';
+import { CartService } from 'src/app/core/services/cart.service';
 
 @Component({
   selector: 'app-store-detail',
@@ -37,6 +38,7 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
     private geoLoc: GeoLocationService,
     private location: Location,
     private orderView: OrderViewControllerService,
+    private cartSrv: CartService,
     private layoutService: LayoutService) { }
 
   observeIntersection() {
@@ -74,7 +76,6 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
   }
 
   loadStore(storeId: number, location?: UserLocation) {
-
     this.loading = true;
     this.storeDetail = null;
     this.storeDetailServ.storeDetail(storeId, location).pipe(takeUntil(this.unSub$), finalize(() => this.loading = false)).subscribe(storeDetail => {
@@ -89,6 +90,7 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.unSub$.next(true);
     this.interObserver.unobserve(this.obsElement.nativeElement);
+    if (!this.cartSrv.presentCartData && this.orderView.getCurrentPage() === OrderPages.Cart) this.orderView.showPage(null);
 
   }
 

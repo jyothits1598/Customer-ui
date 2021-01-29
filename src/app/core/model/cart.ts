@@ -16,7 +16,7 @@ export interface CartDto {
         item_id: number,
         item_name: string,
         quantity: number,
-        possition: number,
+        position: number,
         item_price: string,
         modifiers: Array<{
             modifier_id: number,
@@ -96,7 +96,7 @@ export function MapToDto(data: CartData): CartDto {
                 item_name: item.item.name,
                 item_price: item.item.basePrice.toString(),
                 quantity: item.quantity,
-                possition: index,
+                position: index,
                 modifiers: modifiers
             }
         });
