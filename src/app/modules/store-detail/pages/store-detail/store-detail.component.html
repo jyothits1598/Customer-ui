@@ -9,13 +9,14 @@
                   <span class="float-left">
                       <table>
                           <tr>
-                              <td>
-                                  <img src="assets/images/ico_arrow_left_white.png" routerLink="/"  class="pointer-outline-none" >
+                              <td (click)=" goBack()">
+                                  <img src="assets/images/ico_arrow_left_white.png" 
+                                      style="cursor: pointer;outline:0;">
                               </td>
                               <td align="bottom">
-                                    <span *ngIf="scrolledDown" class="text-capitalize sticy-header-store-name">
-                                      {{storeDetail.name}}
-                                    </span>
+                                  <span *ngIf="scrolledDown" class="text-capitalize"
+                                      style="display: inline-block; animation: fadeInDown .1s">&nbsp;
+                                      {{storeDetail.name}}</span>
                               </td>
                           </tr>
                       </table>
@@ -85,7 +86,7 @@
                                        </tr>
                                   </table>
                               </div>
-                          </td>
+                             </td>
                             <td align="top">
                               <div class="rating-size">
                                   <table >

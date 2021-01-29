@@ -269,6 +269,14 @@ input[type=radio] {
 }
 
 
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 767.98px) {
+    .right-content{
+        display:none;
+        // width:100%;
+    }
+}
+
 
 .cart-card{
     display: flex;

@@ -19,11 +19,11 @@
     <ng-container *ngIf="searchTerm">
       <ng-container *ngIf="searchResults$ | async as searchResults">
         <div class="list-title pder">New search</div>
-        <ul style="list-style-type: none;cursor: pointer; margin-bottom: 0;">
+        <ul class="search-items-list" >
           <li #listItem (click)="searchForItem(searchTerm)" routerLink="/search" [queryParams]="{q:searchTerm}" tabindex="1" (click)="searchForItem(searchTerm)"
             (keyup)="searchListKeyup($event, searchTerm, 0);">
             <img src="assets/svg/ico_search_tabs.svg">
-            <div class="text-capitalize"> Results for "{{searchTerm}}" </div>
+            <div class="text-capitalize"> Results for <b class="b-bold">"{{searchTerm}}"</b> </div>
           </li>
           <li #listItem *ngFor="let storeItem of searchResults; let i = index;" (click)="searchForItem(storeItem.store_name)" (keyup)="searchListKeyup($event, storeItem.store_name, i + 1);"
             routerLink="/search" [queryParams]="{q:storeItem.store_name}" tabindex="1">

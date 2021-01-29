@@ -13,7 +13,9 @@ import { UserProfileDataService } from '../../../services/user-profile-data.serv
 export class ChangeMobileComponent implements OnInit {
   errorMessage;
   loading: boolean = false;
-
+  isaddM: boolean = false;
+  ischangeM: boolean = false;
+  
   constructor(
     private userProfileDataService: UserProfileDataService,
     private router: Router,
@@ -22,6 +24,8 @@ export class ChangeMobileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.isaddM = this.router.url.includes('add-mobile');
+    this.ischangeM = this.router.url.includes('change-mobile');
   }
 
   changeForm: FormGroup = new FormGroup({

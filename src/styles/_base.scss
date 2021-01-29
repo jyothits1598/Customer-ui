@@ -76,7 +76,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
     &__item{
         display: inline-block;
     }
@@ -87,6 +86,7 @@ body {
         width:125px;
         padding:14px 0;
         line-height: 20px;
+        cursor: pointer;
         // border-right: 2px #E5E5E5 solid;
         &__active{
             position: relative;
@@ -186,4 +186,14 @@ input.custom-password-eye {
     position: relative;
   }
 }
-  
+.search-items-list {
+  list-style-type: none;
+  cursor: pointer; 
+  margin-bottom: 0;
+  width:100%;
+  color:#1a1a1a;
+}
+.b-bold {
+  font-weight: bold;
+}
+
