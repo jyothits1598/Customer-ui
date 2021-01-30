@@ -268,16 +268,6 @@ input[type=radio] {
     }
 }
 
-
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 767.98px) {
-    .right-content{
-        display:none;
-        // width:100%;
-    }
-}
-
-
 .cart-card{
     display: flex;
     flex-direction: column;
@@ -394,17 +384,6 @@ input[type=radio] {
     content:" \B7 ";
 }
 
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 767.98px) {
-    .cart-card{
-        width:100%;
-       
-    }
-    .cart-button{
-        width:100%
-    }
-}
-
 @-webkit-keyframes cart-anim {
     0% {
         height:0;
@@ -483,11 +462,18 @@ input[type=radio] {
     }
  }
 /* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 767.98px) {
+@media (max-width: 767.98px) {
     .right-content{
         width:100%;
     }
     .cart-card{
         width:100%;
+    }
+    .cart-card{
+        width:100%;
+       
+    }
+    .cart-button{
+        width:100%
     }
 }
