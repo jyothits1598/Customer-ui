@@ -13,7 +13,7 @@
     </ul>
 </div>
 <div *ngIf="cartTotal$ | async; let total" (click)="showPaymentOpt = true"
-    class="cart-card cart-anim place-order-button-index">
+    class="cart-in-store-details cart-card cart-anim place-order-button-index">
     <div class="cart-button">
         <div class="d-flex justify-content-between">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,7 +34,7 @@
 <!--
     while doing Payment
 -->
-<div class="cart-card dopayment" *ngIf="showPaymentOpt">
+<div class="cart-in-store-details cart-card dopayment" *ngIf="showPaymentOpt">
     <!-- <div class="card-applepay text-center">
         <span>Buy with
             <svg width="48" height="20" viewBox="0 0 48 20" fill="none" xmlns="http://www.w3.org/2000/svg">
