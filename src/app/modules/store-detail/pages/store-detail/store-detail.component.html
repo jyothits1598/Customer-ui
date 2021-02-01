@@ -1,114 +1,132 @@
 <div *ngIf="selecteditemId && storeDetail">
-  <store-item-detail [item]="{itemId: selecteditemId, storeName: storeDetail.name ,storeId: storeId}"></store-item-detail>
+    <store-item-detail [item]="{itemId: selecteditemId, storeName: storeDetail.name ,storeId: storeId}">
+    </store-item-detail>
 </div>
 <div class="main-panel" id="main-panel">
-  <ng-container *ngIf="storeDetail">
-      <div class="main-content">
-          <div class="fixed-shadow" #topBar [class.newClass]="scrolledDown">
-              <div class="margins-left">
-                  <span class="float-left">
-                      <table>
-                          <tr>
-                              <td (click)=" goBack()">
-                                  <img src="assets/images/ico_arrow_left_white.png" 
-                                      style="cursor: pointer;outline:0;">
-                              </td>
-                              <td align="bottom">
-                                  <span *ngIf="scrolledDown" class="text-capitalize"
-                                      style="display: inline-block; animation: fadeInDown .1s">&nbsp;
-                                      {{storeDetail.name}}</span>
-                              </td>
-                          </tr>
-                      </table>
-                  </span>
-                  <span class="float-right">
-                      <ul class="menu">
-                          <li class="pointer-outline-none"> 
-                              <store-heart [store]="{id: storeDetail.id, isFavourite: storeDetail.isFavourite,page:'preview'}"></store-heart>
-                          </li>
-                          <li class="pointer-outline-none ml-20">
-                              <app-share [store]="{id: storeDetail.id, name: storeDetail.name}"></app-share>
-                          </li>
-                          <li class="pointer-outline-none ml-20">
-                              <a [href]="'https://www.google.com/maps/dir/?api=1&destination='+storeDetail.latLng.lat+','+storeDetail.latLng.lng" target="_blank" style="text-decoration: none;">
-                                  <img src="assets/images/navbar/ico_navigation.png" title="Direction">
-                              </a>
-                          </li>
-                      </ul>
-                  </span>
-              </div>
-          </div>
-          <div class="wal-image">
-              <img [src]="storeDetail.storeImage || 'assets/images/Area.png' ">
-          </div>
-          <div class="wallpaper-card">
-              <table class="store-details-desktop-card">
-                  <tr>
-                      <td valign="middle">
-                          <img [src]="storeDetail.logo || 'assets/svg/null_logo.svg'" class="profile-log-detail" />
-                      </td>
-                      <td class="store-nav-banner-card">
-                          <div class="sub-name">
-                              <span class="float-left d-inline-flex" > {{storeDetail.distance}} &nbsp;
-                                  <present-availability [availability]="storeDetail.openingHours">
-                                  </present-availability>
-                              </span>
-                          </div><br>
-                          <div class="std-heading-4 text-capitalize"> {{storeDetail.name}} </div>
-                      </td>
-                  </tr>
-              </table>
-              <div class="store-details-tab-mobile-card">
-                  <div class="mobile-tab-logo">
-                    <img [src]="storeDetail.logo || 'assets/svg/null_logo.svg'" class="profile-log-detail" />
-                  </div>
-                  <div class="store-detail-card-text">
-                      <div class="std-heading-4 text-capitalize"> {{storeDetail.name}} </div>
-                      <div class="sub-name">
-                          <span class="float-left d-inline-flex"> {{storeDetail.distance}} &nbsp;
-                              <present-availability [availability]="storeDetail.openingHours">
-                              </present-availability>
-                          </span>
-                      </div>
-                  </div>
-                  <br>
+    <ng-container *ngIf="storeDetail">
+        <div class="main-content">
+            <div class="fixed-shadow" #topBar [class.newClass]="scrolledDown">
+                <div class="margins-left">
+                    <span class="float-left">
+                        <table>
+                            <tr>
+                                <td (click)=" goBack()">
+                                    <img src="assets/images/ico_arrow_left_white.png"
+                                        style="cursor: pointer;outline:0;">
+                                </td>
+                                <td align="bottom">
+                                    <span *ngIf="scrolledDown" class="text-capitalize"
+                                        style="display: inline-block; animation: fadeInDown .1s">&nbsp;
+                                        {{storeDetail.name}}</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </span>
+                    <span class="float-right">
+                        <ul class="menu">
+                            <li class="pointer-outline-none">
+                                <store-heart
+                                    [store]="{id: storeDetail.id, isFavourite: storeDetail.isFavourite,page:'preview'}">
+                                </store-heart>
+                            </li>
+                            <li class="pointer-outline-none ml-20">
+                                <app-share [store]="{id: storeDetail.id, name: storeDetail.name}"></app-share>
+                            </li>
+                            <li class="pointer-outline-none ml-20">
+                                <a [href]="'https://www.google.com/maps/dir/?api=1&destination='+storeDetail.latLng.lat+','+storeDetail.latLng.lng"
+                                    target="_blank" style="text-decoration: none;">
+                                    <img src="assets/images/navbar/ico_navigation.png" title="Direction">
+                                </a>
+                            </li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+            <div class="wal-image">
+                <img [src]="storeDetail.storeImage || 'assets/images/Area.png' ">
+            </div>
+            <div class="wallpaper-card">
+                <table class="store-details-desktop-card">
+                    <tr>
+                        <td valign="middle">
+                            <img [src]="storeDetail.logo || 'assets/svg/null_logo.svg'" class="profile-log-detail" />
+                        </td>
+                        <td class="store-nav-banner-card">
+                            <div class="sub-name">
+                                <span class="float-left d-inline-flex"> {{storeDetail.distance}} &nbsp;
+                                    <present-availability [availability]="storeDetail.openingHours">
+                                    </present-availability>
+                                </span>
+                            </div><br>
+                            <div class="std-heading-4 text-capitalize"> {{storeDetail.name}} </div>
+                        </td>
+                    </tr>
+                </table>
+                <div class="store-details-tab-mobile-card">
+                    <div class="mobile-tab-logo">
+                        <img [src]="storeDetail.logo || 'assets/svg/null_logo.svg'" class="profile-log-detail" />
+                    </div>
+                    <div class="store-detail-card-text">
+                        <div class="std-heading-4 text-capitalize"> {{storeDetail.name}} </div>
+                        <div class="sub-name">
+                            <span class="float-left d-inline-flex"> {{storeDetail.distance}} &nbsp;
+                                <present-availability [availability]="storeDetail.openingHours">
+                                </present-availability>
+                            </span>
+                        </div>
+                    </div>
+                    <br>
                     <hr class="hr">
                 </div>
                 <div class="facebook-google-contain">
                     <table>
                         <tr>
                             <td>
-                              <div class="rating-size">
-                                  <table>
-                                      <tr>
-                                          <td valign="middle"><img src="assets/svg/cards/ico_social_facebook_small.svg" style="padding-right:4px"></td>
-                                          <td valign="bottom" class="rating-text" >&nbsp;{{storeDetail.facebookLike}} </td>
-                                       </tr>
-                                  </table>
-                              </div>
-                             </td>
+                                <div class="rating-size">
+                                    <table>
+                                        <tr>
+                                            <td valign="middle"><img
+                                                    src="assets/svg/cards/ico_social_facebook_small.svg"
+                                                    style="padding-right:4px"></td>
+                                            <td valign="bottom" class="rating-text">
+                                                &nbsp;{{storeDetail.facebookLike}} </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </td>
                             <td align="top">
-                              <div class="rating-size">
-                                  <table >
-                                      <tr>
-                                          <td valign="middle" style="padding-left:10px;"><img src="assets/svg/cards/ico_social_google_small.svg" ><img src="assets/svg/cards/ico_star_half_small.svg"></td>
-                                          <td valign="bottom">&nbsp;{{storeDetail.googleRating}}</td>
-                                      </tr>
-                                  </table>
-                              </div>
+                                <div class="rating-size">
+                                    <table>
+                                        <tr>
+                                            <td valign="middle" style="padding-left:10px;"><img
+                                                    src="assets/svg/cards/ico_social_google_small.svg"><img
+                                                    src="assets/svg/cards/ico_star_half_small.svg"></td>
+                                            <td valign="bottom">&nbsp;{{storeDetail.googleRating}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </td>
                         </tr>
                     </table>
                 </div>
                 <hr class="hr">
-              <div class="address-content">
-                  {{storeDetail.address}}
-              </div>
-              <div style="width: 100%; height: 0px; position: absolute; background: pink" #observationElement></div>
-          </div>
-          <!----------------------------- items cards -------------------------->
-          <store-category [categories]="storeDetail.categories" [scrolledDown]="scrolledDown"></store-category>
-          <!----------------------------- items cards end ---------------------->
-      </div>
-  </ng-container>
+                <div class="address-content">
+                    {{storeDetail.address}}
+                </div>
+                <div style="width: 100%; height: 0px; position: absolute; background: pink" #observationElement>
+                </div>
+            </div>
+            <!----------------------------- items cards -------------------------->
+            <store-category *ngIf="storeDetail.typeOfCreation !== 'Store shell'; else claim"
+                [categories]="storeDetail.categories" [scrolledDown]="scrolledDown"></store-category>
+            <ng-template #claim>
+                <div>
+                    <h2>Claim this store</h2>
+                    <p><a [href]="partnerAppLink+'store/step1/'+storeDetail.id+'?claim=true'" target="_blank">Click
+                            here</a></p>
+                </div>
+            </ng-template>
+            <!----------------------------- items cards end ---------------------->
+        </div>
+    </ng-container>
 </div>
