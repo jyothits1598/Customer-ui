@@ -4,6 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { DOCUMENT } from '@angular/common';
 
+
 @Component({
   selector: 'navbar-icons',
   templateUrl: './navbar-icons.component.html',
