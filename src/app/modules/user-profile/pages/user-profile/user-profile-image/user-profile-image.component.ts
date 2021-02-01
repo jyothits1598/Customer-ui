@@ -12,6 +12,8 @@ import { UserProfileDataService } from '../../../services/user-profile-data.serv
 export class UserProfileImageComponent implements OnInit {
   @Input() profileImageUrl: string;
   @Input() editMode: boolean;
+  @Input() name: {firstName: string, lastName: string};
+
   @Output() urlChange = new EventEmitter<string | null>();
   uploading: boolean = false;
   errorMessage;
@@ -21,6 +23,7 @@ export class UserProfileImageComponent implements OnInit {
   constructor(private userProfData: UserProfileDataService) { }
 
   handleFileUpload(file: File) {
+    
     this.uploading = true;
     this.userProfData.uplaodProfileImage(file).pipe(finalize(() => { this.uploading = false })).subscribe(
       (resp) => {
@@ -41,7 +44,7 @@ export class UserProfileImageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userProfData.getProfileData().subscribe(prof => { this.profileData = prof;});
+    // this.userProfData.getProfileData().subscribe(prof => { this.profileData = prof;});
   }
 
 }

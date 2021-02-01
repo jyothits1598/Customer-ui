@@ -1,15 +1,17 @@
-<div class="pull-left mt-sm" (click)="scrollLeft()">
-  <img src="assets/catsvg/left_arrow.svg">
-</div>   
+<div class="pull-left mt-sm hidden" (click)="scrollLeft()" *ngIf="leftActive">
+  <img src="assets/svg/left_arrow.svg">
+</div>
 <div class="cuisine-list-images">
   <div #widgetsContent class="order-overflow">
-    <div class="slider-images" *ngFor="let cuisine of cuisines" >
+    <div #left class="slider-images slide-pddr-left" data-side="left"></div>
+    <div class="slider-images" *ngFor="let cuisine of cuisines">
       <img class="inactive-cuisine" [src]="cuisine?.image?.background || 'assets/svg/null_logo.svg'" />
       <img class="active-cuisine" [src]="cuisine?.image?.hover || 'assets/svg/null_logo.svg'" />
       <div class="name-cuisine"> {{ cuisine.cuisine_name}} </div>
     </div>
+    <div #right class="slider-images slide-pddr-right" data-side="right"></div>
   </div>
 </div>
-<div class="pull-right mt-sm" style="margin-top:-104px" (click)="scrollRight()" >
-  <img src="assets/catsvg/right_arrow.svg">
+<div class="pull-right mt-sm" style="margin-top:-104px" (click)="scrollRight()" *ngIf="rightActive">
+  <img src="assets/svg/right_arrow.svg">
 </div>

@@ -1,4 +1,8 @@
 import { Component, ElementRef, HostListener, OnDestroy, OnInit, Renderer2, TemplateRef, ViewChild } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { of } from 'rxjs/internal/observable/of';
+import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import { PopoverRef } from 'src/app/core/model/popover';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { LayoutService } from 'src/app/core/services/layout.service';
@@ -13,18 +17,25 @@ export class SignedInOptionsComponent implements OnInit, OnDestroy {
   @ViewChild('lineIcon', { read: ElementRef }) icon: ElementRef;
   unListen: any;
   popoverRef: PopoverRef;
+  profileRouteActive;
+
+  unSub$ = new Subject<true>();
   constructor(private popover: PopoverService,
     private authService: AuthService,
-    private layoutService: LayoutService,
     private renderer: Renderer2,
     private window: Window,
-    private host: ElementRef) { }
+    private router: Router) { }
 
   ngOnDestroy(): void {
     if (this.unListen) this.unListen();
   }
 
   ngOnInit(): void {
+    this.router.events.pipe(
+      filter(e => e instanceof NavigationEnd),
+      switchMap((e: NavigationEnd) => of(e.url.includes('/profile/'))),
+      takeUntil(this.unSub$)
+    ).subscribe(c => this.profileRouteActive = c);
   }
 
   setupListener() {

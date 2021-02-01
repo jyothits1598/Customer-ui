@@ -41,6 +41,13 @@
 .slider-images img{
   margin:0 auto;
 }
+.slide-pddr-left {
+  padding-right: 0 !important;
+  margin-right:0 !important;
+}
+.slide-pddr-right {
+  padding-left: 0 !important;
+}
 .inactive-cuisine {
   display:block;
   width:48px;
@@ -50,10 +57,6 @@
   width:48px;
   height:48px;
   display:none;
-}
-.backward .forward {
-  z-index: 1;
-  cursor: pointer;
 }
 .mt-sm {
   background: var(--color-background);
@@ -87,9 +90,6 @@
 }
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) and (max-width: 991.98px) {
-  .mt-sm{
-    display:none;
-  }
   .cuisine-list-images {
     padding:8px 0px 24px 0;
   }

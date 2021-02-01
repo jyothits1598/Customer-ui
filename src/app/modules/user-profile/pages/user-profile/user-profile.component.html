@@ -5,16 +5,18 @@
     <ng-container *ngIf="profileData">
         <user-profile-image
             [profileImageUrl]="editMode ? profileForm.controls.profileImage.value : profileData.profileImage"
-            [editMode]="editMode" (urlChange)="handleFileChange($event)">
+            [editMode]="editMode" (urlChange)="handleFileChange($event)"
+            [name]="{firstName: profileData.firstName, lastName: profileData.lastName}">
         </user-profile-image>
-        <div *ngIf="!editMode; else editTemplate" >
+        <div *ngIf="!editMode; else editTemplate">
             <div style="margin-top:34px;margin-bottom:26px;text-align: center;">
                 <div class="std-heading-5">
                     <span class="text-capitalize"> {{profileData.firstName}} {{profileData.lastName}} </span>
                 </div>
             </div>
-            <button (click)="toggleEdit()" class="std-button std-button--trans" style="margin-left: auto;margin-right: auto;display: block;">
-            <img src="assets/images/ico_edit.png" width="18px" height="18px"> Edit profile
+            <button (click)="toggleEdit()" class="std-button std-button--trans"
+                style="margin-left: auto;margin-right: auto;display: block;">
+                <img src="assets/images/ico_edit.png" width="18px" height="18px"> Edit profile
             </button>
         </div>
     </ng-container>
@@ -23,10 +25,12 @@
             <div class="container">
                 <div class="d-flex justify-content-between">
                     <div class="pic-header">
-                        <img src="assets/images/ico_arrow_left_white.png" (click)="toggleEdit()" style="padding-right:16px;cursor: pointer;outline:0" >Edit profile
+                        <img src="assets/images/ico_arrow_left_white.png" (click)="toggleEdit()"
+                            style="padding-right:16px;cursor: pointer;outline:0">Edit profile
                     </div>
                     <div (click)="saveChanges()" class="pic-header1" style="cursor: pointer; ">
-                        <img src="assets/images/ico_check_white.png" style="padding-right:8px;"> Save &nbsp;<img *ngIf="saving" src="assets/images/loader_white_24.gif" >
+                        <img src="assets/images/ico_check_white.png" style="padding-right:8px;"> Save &nbsp;<img
+                            *ngIf="saving" src="assets/images/loader_white_24.gif">
                     </div>
                 </div>
             </div>
@@ -35,13 +39,16 @@
             <div style="margin-top:24px;margin-bottom: 16px;">
                 <label class="label-inputs">First name</label>
                 <input formControlName="firstName" type="text" class="form-input error-highlight">
-                <span class="error-mez" *ngIf="profileForm.controls.firstName.touched && profileForm.controls.firstName.invalid">First name is
+                <span class="error-mez"
+                    *ngIf="profileForm.controls.firstName.touched && profileForm.controls.firstName.invalid">First name
+                    is
                     required.</span>
             </div>
             <div>
-                <label class="label-inputs" >Last name</label>
+                <label class="label-inputs">Last name</label>
                 <input formControlName="lastName" type="text" class="form-input error-highlight">
-                <span class="error-mez" *ngIf="profileForm.controls.lastName.touched && profileForm.controls.lastName.invalid">Last name is
+                <span class="error-mez"
+                    *ngIf="profileForm.controls.lastName.touched && profileForm.controls.lastName.invalid">Last name is
                     required.</span>
             </div>
             <div *ngIf="errorMessage" class="error-mez" id="hideMe">

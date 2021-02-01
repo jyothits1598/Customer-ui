@@ -15,7 +15,8 @@ export class HttpAuthErrorInterceptor implements HttpInterceptor {
         return next.handle(req).pipe(
             catchError((error: HttpErrorResponse) => {
                 if (error.error == 'Unauthorized.') {
-                    this.modalService.openComponentModal(LoginPromptComponent);
+                    // this.modalService.openComponentModal(LoginPromptComponent);
+                    this.router.navigateByUrl('/auth/signin');
                 }
                 return throwError(error);
             })

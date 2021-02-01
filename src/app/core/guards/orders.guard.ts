@@ -18,7 +18,8 @@ export class OrdersGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (!this.authSrv.isLoggedIn) {
-      this.modalSrv.openComponentModal(LoginPromptComponent)
+      // this.modalSrv.openComponentModal(LoginPromptComponent)
+      this.router.navigateByUrl('/auth/signin');
       return false;
     }
     return true;
