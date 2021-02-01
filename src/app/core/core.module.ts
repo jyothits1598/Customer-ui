@@ -13,17 +13,15 @@ import { LoginPromptComponent } from './components/login-prompt/login-prompt.com
 import { HttpAuthErrorInterceptor } from './interceptors/http-auth-error.interceptor';
 import { SampleComponent } from './components/sample/sample.component';
 import { IsAuthenticatedGuard } from './guards/is-authenticated.guard';
-import { OrderModule } from '../modules/order/order.module';
-import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+
 
 @NgModule({
-  declarations: [CoreComponent, LayoutComponent, SnackBarComponent, SnackBarContainerComponent, LoginPromptComponent, SampleComponent, ConfirmationDialogComponent],
+  declarations: [CoreComponent, LayoutComponent, SnackBarComponent, SnackBarContainerComponent, LoginPromptComponent, SampleComponent],
   imports: [
     CommonModule,
     CoreRoutingModule,
     NavbarModule,
     HomeModule,
-    OrderModule
   ],
   exports: [CoreComponent],
   providers: [

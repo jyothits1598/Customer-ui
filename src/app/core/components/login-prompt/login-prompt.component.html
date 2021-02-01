@@ -1,9 +1,9 @@
 <div class="modal-body" style="background:#fff;border-radius: 8px;margin-top: -100px;">
     <p class="paragraph14">
-        {{ wasLoggedIn? 'Looks like your session has expired. Please login to continue.' : 'Please login to use this
-        feature.'}}
+        {{ wasLoggedIn? 'Looks like your session has expired. Please login to continue.' : 'Please login to use this feature.'}}
     </p>
     <br>
-    <button class="std-button std-button--primary" (click)="logout(); modalRef.dismiss(); goToLogin()">Log in</button>
+    <button class="std-button std-button--primary" (click)="logout(); modalRef.dismiss()"
+        [routerLink]="loginRoute">Log in</button>
     <button class="std-button std-button--transparency" (click)="logoutWithReload(); modalRef.dismiss()">Cancel</button>
 </div>

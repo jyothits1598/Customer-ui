@@ -1,12 +1,12 @@
 <span #popOrigin>
-    <img [src]="isIconBlack? 'assets/svg/cards/share.svg' : 'assets/svg/cards/share-detail.svg'"
+    <img [src]="isIconBlack? 'assets/svg/cards/share.svg' : 'assets/svg/cards/send_detail.svg'"
         (click)="showModal(sharePanel)" style="cursor: pointer;outline:none;" title="share">
 </span>
 
 <ng-template #sharePanel>
     <div class="share-social">
         <div style="padding:12px">
-            <img src="assets/svg/ico_close.svg" style="cursor: pointer;" (click)="close()"> <span class="f11" > {{textMessage}} </span>
+            <img src="assets/svg/ico_close.svg" style="cursor: pointer;" (click)="close()"> <span *ngIf="showpopup" class="f11" id="hideMe"> URL Copied </span>
         </div>
        <div class="pd-comp">
             <div class="std-heading-4 mrtb">

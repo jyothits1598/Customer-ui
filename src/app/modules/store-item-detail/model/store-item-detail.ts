@@ -40,7 +40,7 @@ export function ReadModifierOptions(data: any): Array<ModifierOption> {
         result.push({
             id: o.modifier_option_id,
             name: o.name,
-            price: parseFloat(o.price)
+            price: o.price
         })
     })
     return result;

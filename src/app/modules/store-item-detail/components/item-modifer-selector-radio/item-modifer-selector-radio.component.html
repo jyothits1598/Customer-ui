@@ -8,8 +8,8 @@
             </span>
         </div>
         <div>
-            <!-- <span class="required" [ngStyle]="{background: optionControl.invalid ? '#FFBF42' : '#E2FFBC'}" ><img [src]="optionControl.invalid ? '' : 'assets/images/ico_check_small.png'"> Required </span> -->
-            <modifier-selection-status [status]="{valid: optionControl.valid, touched: optionControl.touched}"></modifier-selection-status>
+            <span class="required" [ngStyle]="{background: optionControl.invalid ? '#FFBF42' : '#E2FFBC'}" ><img [src]="optionControl.invalid ? '' : 'assets/images/ico_check_small.png'"> Required </span>
+            <!-- <modifier-selection-status [status]="{valid: optionControl.valid, touched: optionControl.touched}"></modifier-selection-status> -->
         </div>
     </div>
     <table style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;" *ngFor="let option of modifier.options; let i = index">
@@ -19,14 +19,9 @@
                     <label class="form-check-label lable-text">
                         <input type="radio" [name]="modifier.name" [id]="modifier.name+i" [formControl]="optionControl"
                         [value]="option.id" (change)="handleChange()">  
-                        <span> &nbsp;{{option.name}} </span>
+                        <span [name]="modifier.name+i"> &nbsp;{{option.name}} </span>
                     </label>
                 </div>
-            </td>
-            <td align="right">
-                <span class="small-content small-content__price">
-                    +${{option.price}}
-                </span>
             </td>
         </tr>
     </table><br>

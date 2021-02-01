@@ -6,13 +6,6 @@ import { IsAuthenticatedGuard } from './guards/is-authenticated.guard';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { TermsServiceComponent } from 'src/app/modules/terms-service/terms-service.component';
 import { PrivacyPolicyComponent } from '../modules/privacy-policy/privacy-policy.component';
-import { CartComponent } from '../modules/order/pages/cart/cart.component';
-import { PaymentComponent } from '../modules/order/pages/payment/payment.component';
-import { ConfirmationComponent } from '../modules/order/pages/confirmation/confirmation.component';
-import { CartSummaryComponent } from '../modules/order/pages/cart-summary/cart-summary.component';
-import { OrderContainerComponent } from '../modules/order/components/cart-button/order-container/order-container.component';
-import { AddPaymentOptionsComponent } from '../modules/order/components/add-payment-options/add-payment-options.component';
-import { OrdersGuard } from './guards/orders.guard';
 
 const routes: Routes = [
   { path: 'sample', component: SampleComponent },
@@ -58,37 +51,11 @@ const routes: Routes = [
       },
       {
         path: '**',
-        redirectTo: 'home',
+        redirectTo: '',
         pathMatch: 'full'
       }
     ]
-  },
-  {
-    path: 'status',
-    component: OrderContainerComponent,
-    outlet: 'order',
-  },
-  {
-    path: 'cart',
-    component: CartComponent,
-    outlet: 'order',
-  },
-  {
-    path: 'cart-summary',
-    component: CartSummaryComponent,
-    outlet: 'order',
-    canActivate: [OrdersGuard]
-  },
-  {
-    path: 'add-payment-opt',
-    component: AddPaymentOptionsComponent,
-    outlet: 'order'
-  },
-  {
-    path: 'confirmation',
-    component: ConfirmationComponent,
-    outlet: 'order'
-  },
+  }
 ];
 
 @NgModule({

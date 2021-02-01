@@ -6,12 +6,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ItemModiferSelectorRadioComponent } from './components/item-modifer-selector-radio/item-modifer-selector-radio.component';
 import { ModifierSelectionStatusComponent } from './components/modifier-selection-status/modifier-selection-status.component';
-import { ItemCountComponent } from './components/item-count/item-count.component';
 
 
 
 @NgModule({
-  declarations: [StoreItemDetailComponent, StoreItemModifierComponent, ItemModiferSelectorRadioComponent, ModifierSelectionStatusComponent, ItemCountComponent],
+  declarations: [StoreItemDetailComponent, StoreItemModifierComponent, ItemModiferSelectorRadioComponent, ModifierSelectionStatusComponent],
   imports: [
     CommonModule,
     RouterModule,

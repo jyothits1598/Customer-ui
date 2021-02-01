@@ -13,9 +13,9 @@ export class ModalRef {
     }
 }
 
-export class ComponentModalRef<T> extends ModalRef {
-    instance: T;
-    constructor(overLayRef: OverlayRef, instance: T) {
+export class ComponentModalRef extends ModalRef {
+    instance: any;
+    constructor(overLayRef: OverlayRef, instance: any) {
         super(overLayRef);
         this.instance = instance;
     }

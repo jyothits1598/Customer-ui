@@ -15,11 +15,10 @@
                 </ul>
             </div>
         </div>
-        <!-- <div> validity state of formarray, {{selectedOptions.valid}}</div> -->
-        <div class="modal-body">
+        <div class="modal-body" [style.max-height]="loading? '600px': 'calc(90vh - 108px)'">
             <p *ngIf="loading">Loading...</p>
             <ng-container *ngIf="itemDetail">
-                <div class="std-heading-3 text-capitalize">
+                <div class="std-heading-3">
                     {{itemDetail.name}}
                 </div>
                 <div class="item-div-image">
@@ -35,28 +34,12 @@
                     </div>
                 </ng-container>
             </ng-container>
-            <div *ngIf="itemDetail?.modifiers.length > 0">
-                <div class="cart-item-show-more text-center">
-                    <label>
-                        Show 7 more
-                    </label>
-                </div>
-                <hr>
-                <item-count (change)="itemCount.patchValue($event)"></item-count>
-            </div>
-
+            <br><br>
         </div>
         <div class="footer-btn">
-            <div class="add-cart-card text-center">
-                <div (click)="addToCart()" type="button" class="cart-button">
-                    <ng-container *ngIf="!itemAddedToCart; else added">
-                        <span class="cart-text">Add to cart</span> <span *ngIf="itemDetail" class="float-right  cart-text">${{totalAmount}}</span>
-                    </ng-container>
-                    <ng-template #added>
-                        <img src="assets/images/loader_white_24.gif"/>
-                    </ng-template>
-                </div>
-            </div>
+            <button type="button" class="btn std-button std-button--blue">
+                Add to cart
+            </button>
         </div>
     </div>
     <div class="item-detail-background" (click)="close()"></div>
