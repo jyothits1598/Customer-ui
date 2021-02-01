@@ -1,20 +1,20 @@
 <ul class="menu">
     <li class="auto-width" *ngIf="!isLoggedin"></li>
-    <li class="auto-width cu-out" (click)="scrollToTop()" routerLink="/" routerLinkActive="active" #rla="routerLinkActive"> 
-        <div [ngClass]="rla.isActive ? 'home-icon-active img-display-desktop' : 'home-icon img-display-desktop'" ></div>
-        <div [ngClass]="rla.isActive ? 'home-icon-mobile-active img-display-mobile' : 'home-icon-mobile img-display-mobile'"></div>
+    <li class="auto-width cu-out" routerLink="/"> 
+        <div class="home-icon img-display-desktop"></div>
+        <div class="home-icon-mobile img-display-mobile"></div>
     </li>
     <ng-template #block>
-        <li class="auto-width cu-out pr-12" routerLink="/auth/signup" routerLinkActive="active" #rla="routerLinkActive">  
+        <li class="auto-width cu-out pr-12" routerLink="/auth/signup" >  
             <div class="user-icon img-display-desktop"></div>
-            <div [ngClass]="rla.isActive ? 'user-icon-mobile-active img-display-mobile' : 'user-icon-mobile img-display-mobile'"></div>
+            <div class="user-icon-mobile img-display-mobile"></div>
         </li>
         <li class="auto-width"></li>
     </ng-template>
     <ng-container *ngIf="isLoggedin; else block">
-        <li class="auto-width cu-out" routerLink="/favourites" routerLinkActive="active" #rla="routerLinkActive">
-            <div [ngClass]="rla.isActive ? 'fav-icon-active img-display-desktop' : 'fav-icon img-display-desktop'" ></div>
-            <div [ngClass]="rla.isActive ? 'fav-icon-mobile-active img-display-mobile' : 'fav-icon-mobile img-display-mobile'"></div>
+        <li class="auto-width cu-out" routerLink="/favourites">
+            <div class="fav-icon img-display-desktop"></div>
+            <div class="fav-icon-mobile img-display-mobile"></div>
         </li>
         <li class="auto-width cu-out" routerLink="/" > 
             <div class="bell-icon img-display-desktop"></div>

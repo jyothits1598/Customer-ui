@@ -19,7 +19,7 @@ export class StoreItemDataService {
       result.id = data.item_id;
       result.name = data.item_name;
       result.image = data.item_image;
-      result.basePrice = parseFloat(data.item_base_price);  
+      result.basePrice = data.item_base_price;
       result.modifiers = ReadItemModifiers(data.modifiers_details);
       return result;
     }));

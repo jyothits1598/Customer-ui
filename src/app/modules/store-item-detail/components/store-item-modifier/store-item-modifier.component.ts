@@ -35,7 +35,7 @@ export class StoreItemModifierComponent implements OnChanges, ControlValueAccess
     this.controlDir.control.markAsTouched = () => this.optionControls.markAsTouched();
     this.controlDir.control.updateValueAndValidity();
   }
-
+  
   ngOnChanges(changes: SimpleChanges): void {
     let controls: Array<FormControl> = this.modifier.options.map(opt => { return new FormControl(false) });
     this.optionControls = new FormArray(controls, [this.minNumberValidator(this.modifier.minSelection)]);
@@ -47,9 +47,7 @@ export class StoreItemModifierComponent implements OnChanges, ControlValueAccess
     this.selections = [...this.optionControls.value]
       .map((value, index) => value ? this.modifier.options[index] : value)
       .filter(value => value);
-    let modifer = { ...this.modifier };
-    modifer.options = this.selections;
-    this.onChange(modifer);
+    this.onChange(this.selections);
 
     this.enableDisableForm();
   }

@@ -1,4 +1,4 @@
-import { ReadAvailability, TimeAvailability,FacebookCountConverstion } from '../../time-availability/model/time-availability';
+import { ReadAvailability, TimeAvailability } from '../../time-availability/model/time-availability';
 
 export interface StoreDetail {
     id: number,
@@ -15,8 +15,6 @@ export interface StoreDetail {
     isFavourite: boolean,
     categories: Array<StoreCategory>
     latLng: { lat: number, lng: number }
-    facebookLike:string,
-    googleRating:string
 
 }
 
@@ -52,9 +50,7 @@ export function ReadStoreDetail(resp: any): StoreDetail {
         facebookUrl: data.facebook_url,
         isFavourite : data.is_favourite ? true : false,
         categories: categories,
-        latLng: { lat: data.latitude, lng: data.longitude },
-        facebookLike:data.facebook_like ? FacebookCountConverstion(data.facebook_like) : 0,
-        googleRating:data.google_rating ? data.google_rating : 0
+        latLng: { lat: data.latitude, lng: data.longitude }
     };
 }
 

@@ -1,6 +1,6 @@
 <div [@selectionState]="animationState" class="required required--fa2">
     <img src="assets/images/ico_check_small.png" *ngIf="status.valid" class="required__icon--success">
-    <img src="assets/svg/ico_alert.svg" *ngIf="!status.valid && status.touched" class="required__icon--failure">
-    <span class="required__text"> Required</span>
+    <img src="assets/images/alert.png" *ngIf="!status.valid && status.touched" class="required__icon--failure">
+    <span class="required__text">Required</span>
 </div>
 <!-- [ngStyle]="{background: status.valid ? '#FFBF42' : '#E2FFBC'}" -->

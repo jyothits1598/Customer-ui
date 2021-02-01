@@ -1,8 +1,7 @@
-import { Component, HostListener, OnDestroy, OnInit, Inject } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'navbar-icons',
@@ -11,15 +10,8 @@ import { DOCUMENT } from '@angular/common';
 })
 export class NavbarIconsComponent implements OnInit, OnDestroy {
   isLoggedin: boolean;
-  isActive:string = '';
-  windowScrolled: boolean;
-  constructor(
-    private authService: AuthService,
-    private route: ActivatedRoute,@Inject(DOCUMENT) private document: Document) { 
-      // if(this.route.snapshot.queryParams['favourites']){
-      //   this.isActive = this.route.snapshot.queryParams['favourites'];
-      //   console.log(this.isActive);
-      // }
+  
+  constructor(private authService: AuthService) { 
   }
 
   stateSubs: Subscription;
@@ -31,14 +23,4 @@ export class NavbarIconsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.stateSubs.unsubscribe();
   }
-
-scrollToTop() {
-    (function smoothscroll() {
-        var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
-        if (currentScroll > 0) {
-            window.requestAnimationFrame(smoothscroll);
-            window.scrollTo(0, currentScroll - (currentScroll / 8));
-        }
-    })();
-}
 }

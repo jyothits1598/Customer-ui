@@ -16,8 +16,8 @@ export class RestApiService {
   ) {
   }
 
-  get<T = any>(url): Observable<T> {
-    return this.http.get<T>(API_URL_LINK + url).pipe(take(1));
+  get(url): Observable<any> {
+    return this.http.get(API_URL_LINK + url).pipe(take(1));
   }
 
   post(url, data): Observable<any> {
@@ -39,13 +39,6 @@ export class RestApiService {
       take(1),
       catchError((httpError) => throwError(httpError.error))
     );
-  }
-
-  delete(url) {
-    return this.http.delete(API_URL_LINK + url).pipe(
-      take(1),
-      catchError((httpError) => throwError(httpError.error))
-    )
   }
 
 }

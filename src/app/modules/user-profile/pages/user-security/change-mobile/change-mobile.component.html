@@ -2,13 +2,7 @@
     <div class="profile-navbar">
         <div class="container">
             <span class="profile-save-text">
-                <img src="assets/images/ico_arrow_left_white.png" routerLink="/profile/security" style="padding-right:16px;cursor: pointer;outline: 0;border:0;"> 
-                <label class="text-heder" *ngIf="ischangeM" >
-                    Change mobile number
-                </label>
-                <label class="text-heder" *ngIf="isaddM">
-                    Add mobile number
-                </label>
+                <img src="assets/images/ico_arrow_left_white.png" routerLink="/profile/security" style="padding-right:16px;cursor: pointer;outline: 0;border:0;"> Add mobile
             </span>
             <div class="center-logo-profile only-big" routerLink="/" >
                 <img src="assets/svg/logo_white.svg">
@@ -66,7 +60,7 @@
                         <button type="submit" class="std-button std-button--blue">
                             <p style="margin:0" *ngIf="!loading; else loadingTemp"> Next </p>
                             <ng-template #loadingTemp>
-                                <img src="assets/images/loader_white_24.gif" alt="" style="height: 24px;"> Submitting..
+                                <img src="assets/images/loader_white_24.gif" alt="" style="height: 24px;">
                             </ng-template>
                         </button>
                     </div>

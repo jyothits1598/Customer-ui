@@ -1,7 +1,7 @@
 <div *ngIf="openTimings; else closed">
-    <span class="timT" style="display:inline-flex">
+    <span class="timT">
         <ng-container *ngIf="fullDay; else opTime">
-           Opens 24HRS
+            Opens 24HRS
         </ng-container>
         <ng-template #opTime>
             Open {{formatTime(openTimings.startTime)}}-{{formatTime(openTimings.endTime)}}

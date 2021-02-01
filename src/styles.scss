@@ -5,7 +5,6 @@
 @import "./styles/cards";
 @import "~@angular/cdk/overlay-prebuilt.css";
 @import "./styles/animations";
-@import "./styles/cart";
 
 .modal-content {
   border: 0 !important;
@@ -48,6 +47,9 @@ input::-webkit-input-placeholder {
     display: block;
   }
   .only-big {
+    display: none;
+  }
+  .right-content {
     display: none;
   }
   .store-list-bg {
@@ -149,7 +151,9 @@ input::-webkit-input-placeholder {
   .only-big {
     display: none;
   }
-  
+  .right-content {
+    display: none;
+  }
   .store-list-bg {
     padding: 16px 0;
   }
@@ -172,16 +176,16 @@ input::-webkit-input-placeholder {
     margin: 0 auto 25px;
   }
   .security-card {
-    margin: 72px auto 25px;
-    max-width: 350px;
+   margin-top: 56px;
+    padding: 16px;
   }
   .profile-radius {
     padding: 16px;
     margin-top:48px;
   }
   .security-card-pwd {
-    margin: 72px auto 25px;
-    max-width: 350px;
+    margin-top: 24px;
+    padding: 16px;
   }
   .bx-shdw {
     margin-top: 24px;
@@ -248,7 +252,9 @@ input::-webkit-input-placeholder {
   .only-big {
     display: none;
   }
-  
+  .right-content {
+    display: none;
+  }
   .store-list-bg {
     padding: 16px 0;
   }
@@ -271,16 +277,16 @@ input::-webkit-input-placeholder {
     margin: 0 auto 25px;
   }
   .security-card {
-    margin: 72px auto 25px;
-    max-width: 350px;
+    margin-top: 56px;
+    padding: 16px;
   }
   .profile-radius {
     padding: 16px;
     margin-top:48px;
   }
   .security-card-pwd {
-    margin: 72px auto 25px;
-    max-width: 350px;
+    margin-top: 24px;
+    padding: 16px;
   }
   .bx-shdw {
     margin-top: 24px;
@@ -361,7 +367,9 @@ input::-webkit-input-placeholder {
   .main-content {
     width: 80%;
   }
- 
+  .right-content {
+    width: 20%;
+  }
   .store-list-bg {
     padding: 32px 0;
   }
@@ -446,7 +454,9 @@ input::-webkit-input-placeholder {
   .main-content {
     width: 80%;
   }
- 
+  .right-content {
+    width: 20%;
+  }
   .store-list-bg {
     padding: 32px 0;
   }
@@ -646,35 +656,6 @@ input[class="cb"]:checked + span:before {
 }
 .menu-icon-mobile {
   background-image: url("assets/svg/mobile/ico_menu_m.svg");
-  width:40px;
-  height:40px;
-}
-
-// active desktop icons
-.fav-icon-active {
-  background-image: url("assets/svg/signup/ico_heart_active.svg");
-  width:40px;
-  height:40px;
-}
-.home-icon-active {
-  background-image: url("assets/svg/signup/ico_home_active.svg");
-  width:40px;
-  height:40px;
-}
-
-// Mobile active
-.user-icon-mobile-active {
-  background-image: url("assets/svg/mobile/ico_account_m_active.svg");
-  width:40px;
-  height:40px;
-}
-.home-icon-mobile-active {
-  background-image: url("assets/svg/mobile/ico_home_m_active.svg");
-  width:40px;
-  height:40px;
-}
-.fav-icon-mobile-active {
-  background-image: url("assets/svg/mobile/ico_heart_m_active.svg");
   width:40px;
   height:40px;
 }

@@ -1,10 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {
-  ActivatedRoute,
-  NavigationEnd,
-  NavigationStart,
-  Router,
-} from '@angular/router';
+import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { pairwise, takeUntil } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -21,7 +16,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   isLoggedin: boolean;
   stateSubs: Subscription;
   isMobile: boolean;
-  isActive: string = '';
   constructor(
     private authService: AuthService,
     protected searchService: SearchDataService,
@@ -30,17 +24,15 @@ export class HomeComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute
   ) {
     this.isMobile = this.layoutService.isMobile;
-    if (this.route.snapshot.queryParams['type']) {
-      this.isActive = this.route.snapshot.queryParams['type'];
-    }
   }
+
   unSub$ = new Subject<true>();
+
 
   ngOnInit(): void {
     // this.isLoggedin$ = this.authService.isLoggedIn$();
     this.authService
-      .isLoggedIn$()
-      .pipe(takeUntil(this.unSub$))
+      .isLoggedIn$().pipe(takeUntil(this.unSub$))
       .subscribe((state) => (this.isLoggedin = state));
 
     // this.router.events.pipe(pairwise()).subscribe(([prevRouteEvent, currRouteEvent]) => {
@@ -71,9 +63,5 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.unSub$.next(true);
-  }
-
-  navigateToPath(type) {
-    this.router.navigate(['./sortBy'], { queryParams: { type: type } });
   }
 }

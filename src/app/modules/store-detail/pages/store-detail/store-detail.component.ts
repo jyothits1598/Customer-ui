@@ -1,11 +1,13 @@
 import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { filter, finalize, map, mergeMap } from 'rxjs/operators';
 import { ModalService } from 'src/app/core/services/modal.service';
 import { StoreDetail, StoreItem } from 'src/app/modules/store-detail/model/store-detail';
 import { StoreDetailDataService } from '../../services/store-detail-data.service';
 import { GeoLocationService } from 'src/app/core/services/geo-location.service';
+import { combineLatest, CombineLatestSubscriber } from 'rxjs/internal/observable/combineLatest';
+import { forkJoin, zip } from 'rxjs';
 import { UserLocation } from 'src/app/core/model/user-location';
 
 @Component({
@@ -29,10 +31,8 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
   @ViewChild('observationElement', { read: ElementRef }) obsElement: ElementRef;
   @ViewChild('fbParent', { read: ElementRef }) fbParent: ElementRef;
   constructor(private storeDetailServ: StoreDetailDataService,
-  private route: ActivatedRoute,
-  private geoLoc: GeoLocationService,
-  private location: Location,
-  private router: Router) { }
+    private route: ActivatedRoute, private geoLoc: GeoLocationService,private location: Location) { }
+
   observeIntersection() {
     let obs = new IntersectionObserver((entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
       if (entries[0].isIntersecting) this.scrolledDown = false;
@@ -42,6 +42,15 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
+    // this.routeParamsSubs = this.route.params.pipe(
+    // ).subscribe((param) => {
+    //   let id = parseInt(param.id);
+    //   if (id) {
+    //     this.storeId = id;
+    //     this.loadStore();
+    //   }
+    // });
     this.routeParamsSubs = this.route.params.pipe(
       mergeMap((param) => this.geoLoc.userLocation().pipe(map(loc => { return { param: param.id, location: loc } })))
     ).subscribe((data) => {
@@ -56,9 +65,7 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
       this.selecteditemId = +qParams.i;
     })
 
-    // open cart by default
-    if (!this.router.url.includes('(order:')) this.router.navigate([{ outlets: { 'order': ['cart'] } }], { replaceUrl: true })
-
+    // this.geoLoc.userLocation().subscribe((loc) => { console.log(loc) })
   }
 
   loadStore(location?: UserLocation) {

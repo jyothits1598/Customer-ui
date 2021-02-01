@@ -1,7 +1,7 @@
 <ng-container *ngIf="history.length > 0">
   <div class="history pder"> Recent searches </div>
   <ul style="list-style-type: none;cursor: pointer;width:100%">
-    <li *ngFor="let item of history" (click)="selectedItem.emit(item)" [queryParams]="{q:item}" tabindex="1">
+    <li *ngFor="let item of history" (click)="selectedItem.emit(item)" routerLink="/search" [queryParams]="{q:item}" tabindex="1">
       <img src="assets/svg/ico_search_tabs.svg">
       <div class="paragraph text-capitalize"> {{item}} </div>
     </li>
