@@ -4,15 +4,14 @@
       <ng-container #vCont></ng-container>
     </div>
     <div>
-      <a routerLink="/" style="outline: 0;cursor: pointer;">
-        <img class="only-big" src="assets/svg/logo_white.svg">
+      <a>
+        <img class="only-big cur" src="assets/svg/logo_white.svg" routerLink="/">
       </a>
     </div>
     <div>
       <navbar-icons></navbar-icons>
       <app-store-search-inline *ngIf="ShouldShoWSearch()"></app-store-search-inline>
     </div>
-
   </div>
 </div>
 

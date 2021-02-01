@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { SnackBarService } from 'src/app/core/services/snack-bar.service';
 import { CustomValidators } from 'src/app/helpers/validators';
 import { UserProfileDataService } from '../../../services/user-profile-data.service';
 
@@ -13,15 +14,19 @@ import { UserProfileDataService } from '../../../services/user-profile-data.serv
 export class ChangeEmailComponent implements OnInit {
   errorMessage;
   loading: boolean = false;
-
+  isaddE: boolean = false;
+  ischangeE: boolean = false;
+  
   constructor(
     private userProfileDataService: UserProfileDataService,
     private router: Router,
     private route: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,private snackBarService: SnackBarService
   ) { }
 
   ngOnInit(): void {
+    this.isaddE = this.router.url.includes('add-email');
+    this.ischangeE = this.router.url.includes('change-email');
   }
 
   changeForm: FormGroup = new FormGroup({

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SearchHistoryComponent } from './search-history.component';
+import { ItemCountComponent } from './item-count.component';
 
-describe('SearchHistoryComponent', () => {
-  let component: SearchHistoryComponent;
-  let fixture: ComponentFixture<SearchHistoryComponent>;
+describe('ItemCountComponent', () => {
+  let component: ItemCountComponent;
+  let fixture: ComponentFixture<ItemCountComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SearchHistoryComponent ]
+      declarations: [ ItemCountComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SearchHistoryComponent);
+    fixture = TestBed.createComponent(ItemCountComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

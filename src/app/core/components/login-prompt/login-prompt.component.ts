@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ComponentModalRef } from '../../model/modal';
 import { ROUTE_SIGNIN } from '../../routes/routes';
 import { AuthService } from '../../services/auth.service';
@@ -12,9 +13,10 @@ export class LoginPromptComponent implements OnInit {
   loginRoute = ROUTE_SIGNIN;
   wasLoggedIn: boolean;
 
-  constructor(public modalRef: ComponentModalRef,
+  constructor(public modalRef: ComponentModalRef<LoginPromptComponent>,
     public authService: AuthService,
-    public window: Window) { }
+    public window: Window,
+    public router: Router) { }
 
   ngOnInit(): void {
     this.wasLoggedIn = this.authService.isLoggedIn
@@ -22,6 +24,10 @@ export class LoginPromptComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+  }
+
+  goToLogin() {
+    this.router.navigateByUrl('/auth/signin');
   }
 
   logoutWithReload() {

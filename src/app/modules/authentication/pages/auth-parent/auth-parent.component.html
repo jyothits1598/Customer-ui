@@ -1,9 +1,9 @@
 <div class="nav-login" >
     <div class="container">
-        <span class="profile-save-text only-small" routerLink="/" *ngIf="!isforgot">
+        <span class="profile-save-text only-small" (click)=" goBack()" *ngIf="!isforgot">
             <img src="assets/svg/ico_arrow_left.svg">
         </span>
-        <span *ngIf="isforgot" routerLink="/" class="profile-save-text"> <img src="assets/svg/ico_arrow_left.svg" style="padding-right:16px;"> Forgot password </span>
+        <span *ngIf="isforgot" (click)=" goBack()" class="profile-save-text"> <img src="assets/svg/ico_arrow_left.svg" style="padding-right:16px;"> Forgot password </span>
         <div class="center-logo-profile" routerLink="/" *ngIf="!isforgot">
             <img src="assets/svg/logo_white.svg">
         </div>

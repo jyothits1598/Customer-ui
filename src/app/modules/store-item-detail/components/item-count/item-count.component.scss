@@ -1,0 +1,21 @@
+.add-extra-item
+{
+   margin:24px 0 48px;
+   .item-circle-disable{
+    width:40px;
+    height:40px;
+    border: 1px solid #B3B3B3;
+    box-sizing: border-box;
+    border-radius: 100%;
+   
+   }
+   .mlr-32{
+       margin:0 32px;
+       margin-top:10px;
+       font-weight:bold;
+       label{
+            color: #000;
+        }
+   }
+  
+}

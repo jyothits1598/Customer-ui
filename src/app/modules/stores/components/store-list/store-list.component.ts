@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { StorePagination } from 'src/app/shared/classes/pagination';
+import { takeUntil } from 'rxjs/operators';
+import { Pagination, StorePagination } from 'src/app/shared/classes/pagination';
 import { InfiniteScrollDirective } from 'src/app/shared/directives/infinite-scroll.directive';
 import { Store } from '../../model/store';
 import { StoreFilter } from '../../model/StoreFilter';

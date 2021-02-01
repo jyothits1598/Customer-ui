@@ -125,12 +125,13 @@ export class AuthService {
     return this.restApiService.post('api/customer/v1/social-auth', data).pipe(tap(
       (resp) => this.handleLoginResp(resp)
     ))
-
   }
 
   logout() {
-    this._accessToken.next(null);
-    this._loggedUser.next(null);
+    if (this.loggedUser) {
+      this._accessToken.next(null);
+      this._loggedUser.next(null);
+    }
 
     this.storeageService.remove('authToken')
     this.storeageService.remove('user')
@@ -140,8 +141,8 @@ export class AuthService {
   handleLoginResp(data: any) {
     let user = ReadUserDetails(data.user_details);
     let token = 'Bearer ' + data.access_token;
-    this._loggedUser.next(user);
     this._accessToken.next(token);
+    this._loggedUser.next(user);
 
     //save into storage
     this.storeageService.store('authToken', token);

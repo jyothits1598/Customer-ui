@@ -36,10 +36,26 @@
                 <tr>
                     <td style="padding-right:8px">
                         <!-- [url]="store.facebookUrl" -->
-                        <facebook-like-count ></facebook-like-count>
+                        <!-- <facebook-like-count [store]="store"></facebook-like-count> -->
+                        <div class="rating-size">
+                            <table>
+                                <tr>
+                                    <td valign="middle"><img src="assets/svg/cards/ico_social_facebook_small.svg" style="padding-right:4px"></td>
+                                    <td valign="bottom" class="rating-text" >&nbsp;{{store.facebookLike}} </td>
+                                </tr>
+                            </table>
+                        </div>
                     </td>
                     <td align="top">
-                        <google-rating [store]="store"></google-rating>
+                        <!-- <google-rating [store]="store"></google-rating> -->
+                        <div class="rating-size">
+                            <table>
+                                <tr>
+                                    <td valign="middle"><img src="assets/svg/cards/ico_social_google_small.svg" ><img src="assets/svg/cards/ico_star_half_small.svg"></td>
+                                    <td valign="bottom">&nbsp;{{store.googleRating}}</td>
+                                </tr>
+                            </table>
+                        </div>
                     </td>
                 </tr>
             </table>

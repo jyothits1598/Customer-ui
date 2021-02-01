@@ -38,7 +38,7 @@ export class ModalService {
     modalConfig.positionStrategy = config?.yPosition ? this.overlay.position().global().centerHorizontally().top(config.yPosition) : this.overlay.position().global().centerHorizontally().centerVertically();
 
     let overLayRef = this.overlay.create(modalConfig);
-    let modalRef = new ComponentModalRef(overLayRef, null);2
+    let modalRef = new ComponentModalRef(overLayRef, null);
     overLayRef.backdropClick().subscribe(() => { modalRef.dismiss() })
     let compPortal = new ComponentPortal(component, null, this.createInjector(modalRef, this.injector));
     let compRef = overLayRef.attach(compPortal);

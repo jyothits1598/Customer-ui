@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { URL_AllFavourites, URL_DeleteFavourite, URL_SetFavourite } from 'src/api/store-data';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
 import { Pagination, StorePagination } from 'src/app/shared/classes/pagination';
-import { ReadStore, Store } from '../model/store';
+import { ReadStore, Store} from '../model/store';
 import { StoreFilter } from '../model/StoreFilter';
 
 @Injectable({
@@ -15,6 +15,7 @@ export class StoresDataService {
   }
 
   allStores(filter: StoreFilter): Observable<StorePagination> {
+    console.log("try",filter);
     return this.restApiService.get('api/stores/search' + this.filterToQuery(filter));
   }
 
@@ -43,6 +44,7 @@ export class StoresDataService {
 
   filterToQuery(filter: StoreFilter): string {
     let result = '';
+    let sort_by = '';
     if (filter) {
       if (filter.name) result += ('name=' + filter.name);
       if (filter.page) {
@@ -51,16 +53,17 @@ export class StoresDataService {
         }
         result += ('page=' + filter.page)
       }
+      if(filter.sort_by){
+        sort_by = "&sort_by="+filter.sort_by;
+      }
       if (filter.location) {
         if (result) {
           result += '&';
         }
-        result += (`lat=${filter.location.lat}&lng=${filter.location.lng}&distance=${filter.distance ? filter.distance : 5}`)
+        result += (`lat=${filter.location.lat}&lng=${filter.location.lng}&distance=${filter.distance ? filter.distance : 5}`+sort_by)
       }
     }
     return result ? ('?' + result) : result;
   }
-
-
 
 }

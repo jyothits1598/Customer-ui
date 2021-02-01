@@ -1,41 +1,24 @@
-import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
-import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
+import { ViewChildren } from '@angular/core';
+import { QueryList } from '@angular/core';
 import {
   AfterViewInit,
   Component,
   ElementRef,
-  Injector,
   OnDestroy,
   OnInit,
   TemplateRef,
   ViewChild,
-  ViewContainerRef,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { fromEvent, interval, of, Subscription } from 'rxjs';
-import {
-  debounce,
-  distinctUntilChanged,
-  filter,
-  finalize,
-  map,
-  switchMap,
-  tap,
-} from 'rxjs/operators';
-import {
-  ComponentPopoverRef,
-  PopoverConfig,
-  PopoverRef,
-} from 'src/app/core/model/popover';
-import { AuthService } from 'src/app/core/services/auth.service';
-import { GeoLocationService } from 'src/app/core/services/geo-location.service';
+import { Router } from '@angular/router';
+import { Subject, Subscription } from 'rxjs';
+import { take, takeUntil, tap } from 'rxjs/operators';
+
+import { PopoverConfig, PopoverRef } from 'src/app/core/model/popover';
 import { LayoutService } from 'src/app/core/services/layout.service';
 import { PopoverService } from 'src/app/core/services/popover.service';
-import { RestApiService } from 'src/app/core/services/rest-api.service';
+import { NavbarService } from 'src/app/modules/navbar/services/navbar.service';
 import { SearchDataService } from '../../services/search-data.service';
-import { SearchHistoryComponent } from '../search-panel/search-history/search-history.component';
-import { SearchPanelComponent } from '../search-panel/search-panel.component';
 
 @Component({
   selector: 'app-store-search-inline',
@@ -49,73 +32,145 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   @ViewChild('panelTemplate', { read: TemplateRef })
   panelTemplate: TemplateRef<any>;
 
-  focusEntered = false;
+  @ViewChildren('listItem') listItems: QueryList<ElementRef>;
+
+  finalise$ = new Subject<void>();
 
   searchControl: FormControl = new FormControl(null);
 
-  keyupSubs: Subscription;
-  loading: boolean;
-  searchData: any;
-  searchTerm: string;
   popoverRef: PopoverRef;
   isMobile: boolean;
 
+  history: Array<string>;
+  loading$ = this.searchDataService.isLoading$;
+  searchResults$ = this.searchDataService.inlineSearchResults$;
+
   get overlayOpen() {
-    // return this.layoutService.isMobile;
-    return this.searchDataServ.overlayOpen;
+    return this.searchDataService.overlayOpen;
   }
 
   constructor(
-    private restApiService: RestApiService,
     private popoverService: PopoverService,
     private layoutService: LayoutService,
-    private searchDataServ: SearchDataService,
-    private router: Router,
-    private geoLoactionServ: GeoLocationService,
-    private authService: AuthService
+    private searchDataService: SearchDataService,
+    private navBarService: NavbarService,
+    private router: Router
   ) {
     this.isMobile = this.layoutService.isMobile;
   }
 
   ngAfterViewInit(): void {
-    this.searchDataServ.registerSearchElement(this.searchInput);
+    this.searchDataService.fullSearchTerm$
+      .pipe(takeUntil(this.finalise$))
+      .subscribe((value) => this.searchControl.setValue(value));
+    this.history = this.searchDataService.getHistory();
+  }
+
+  searchInputKeyup($event): void {
+    const value = $event.target.value;
+    switch ($event.code || $event.keyCode) {
+      case 'Enter':
+      case 'NumpadEnter':
+      case 13: //mobile keyboard enter
+        this.searchForItem(value);
+        break;
+      case 'Escape':
+        this.closeSearchBox();
+        break;
+      case 'ArrowDown':
+        this.navToList();
+        break;
+      default:
+        this.openSearchBox();
+        this.searchDataService.updateInlineSearch(value);
+        break;
+    }
+  }
+
+  searchListKeyup($event, value: string, onIndex: number): void {
+    switch ($event.code) {
+      case 'Enter':
+      case 'NumpadEnter':
+        this.searchForItem(value);
+        break;
+      case 'Escape':
+        this.closeSearchBox();
+        break;
+      case 'Tab':
+      case 'ArrowDown':
+      case 'ArrowUp':
+        this.navInList($event, onIndex);
+        break;
+      default:
+        break;
+    }
+  }
+
+  private docScrollPrevention($event: KeyboardEvent) {
+    if ($event.code === 'ArrowUp' || $event.code === 'ArrowDown') {
+      $event.preventDefault();
+    }
   }
 
   openSearchBox(): void {
-    this.keyupSubs = fromEvent(this.searchInput.nativeElement, 'keyup')
-      .pipe(
-        map((event: any) => event.target.value),
-        distinctUntilChanged(),
-        tap((term) => {
-          if (term) this.loading = true;
-          this.searchTerm = term;
-        }),
-        filter((val) => val),
-        debounce(() => interval(500)),
-        switchMap((val) =>
-          this.restApiService.get(`api/stores/search?${this.constructQuery(val, this.geoLoactionServ.getUserLocation()?.latLng, this.authService.loggedUser?.customRadius)}`).pipe(
-            finalize(() => (this.loading = false)),           
-            map((resp) => resp.data.stores || [])            
-          )
-        )
-      )
-      .subscribe((res) => {
-        this.searchData = res;
-      });
+    document.addEventListener('keydown', this.docScrollPrevention);
+    this.navBarService.setNavbarPosition(0);
+    const inputVal = this.searchControl.value;
+    if (inputVal) {
+      this.searchDataService.updateInlineSearch(inputVal);
+    }
     if (
-      !this.searchDataServ.overlayOpen &&
-      (this.searchDataServ.getHistory().length > 0 || this.searchData?.length)
+      !this.searchDataService.overlayOpen &&
+      this.searchDataService.getHistory().length > 0
     ) {
       this.openComponentPopover();
     }
   }
 
   closeSearchBox(): void {
-    this.keyupSubs.unsubscribe();
+    document.removeEventListener('keydown', this.docScrollPrevention);
     setTimeout(() => {
       if (this.popoverRef) this.popoverRef.dismiss();
-      this.searchDataServ.overlayOpen = false;
+      this.searchDataService.overlayOpen = false;
     }, 100);
+  }
+
+  navToList() {
+    if (this.listItems.length > 0) {
+      this.listItems.first.nativeElement.focus();
+    }
+  }
+
+  navInList($event: KeyboardEvent, curIndex: number) {
+    const index = this.getNextIndex($event.code, curIndex);
+    if (index < 0) {
+      this.searchInput.nativeElement.focus();
+    } else if (index >= this.listItems.length) {
+      this.listItems.last.nativeElement.focus();
+    } else {
+      this.listItems.toArray()[index].nativeElement.focus();
+    }
+  }
+
+  private getNextIndex(code: string, curIndex: number): number {
+    let newIndex = curIndex;
+    if (code === 'Tab') {
+      return newIndex;
+    } else {
+      return code === 'ArrowDown'
+        ? ++newIndex
+        : code === 'ArrowUp'
+        ? --newIndex
+        : newIndex;
+    }
+  }
+
+  clearSearchInput($event: Event) {
+    $event.stopPropagation();
+    this.searchControl.setValue('');
+    this.searchDataService.updateInlineSearch('');
+    this.searchInput.nativeElement.focus();
+    this.openSearchBox();
   }
 
   openComponentPopover(results = null) {
@@ -123,44 +178,32 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
       xPos: this.layoutService.isMobile ? 'center' : 'end',
       yPos: 'bottom',
       onDismiss: () => {
-        this.searchDataServ.overlayOpen = false;
+        this.searchDataService.overlayOpen = false;
       },
     };
     // hasBackdrop ?: true | false;
     // darkBackground ?: true | false;
-    if (this.searchDataServ.overlayOpen) return;
+    if (this.searchDataService.overlayOpen) return;
     this.popoverRef = this.popoverService.openTemplatePopover(
       this.searchContainer,
       this.panelTemplate,
       popoverConfig
     );
-    this.searchDataServ.overlayOpen = true;
+    this.searchDataService.overlayOpen = true;
   }
 
-  handleEnter(value) {
-    this.searchInput.nativeElement.blur();
-    this.closeSearchBox();
+  private searchForItem(value: string) {
     if (value) {
-      console.log(value);
+      this.closeSearchBox();
+      this.searchDataService.updateFullSearch(value);
+      this.searchInput.nativeElement.blur();
+      this.searchDataService.addItem(value);
       this.router.navigate(['/search'], { queryParams: { q: value } });
     }
   }
 
-  onSearchItemSelect(name: string) {
-    if (name) {
-      this.searchInput.nativeElement.value = name;
-      this.searchTerm = name;
-      this.closeSearchBox();
-    }
-  }
-
-  constructQuery(name: string, latLng: { lat: number, lng: number }, distance: number) {
-    let result = 'name=' + name;
-    if (latLng) result += `&lat=${latLng.lat}&lng=${latLng.lng}&distance=${distance ? distance : 5}`;
-    return result;
-  }
-
   ngOnDestroy(): void {
-    if (this.keyupSubs) this.keyupSubs.unsubscribe();
+    this.finalise$.next();
+    this.finalise$.complete();
   }
 }
