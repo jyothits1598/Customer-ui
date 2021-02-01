@@ -123,6 +123,12 @@ input::-webkit-input-placeholder {
   .sticky-navbar {
     padding-top:16px;
   }
+  .card-container-padding{
+    padding:0px 16px;
+  }
+  .bg-white {
+    display:none;
+  }
 }
 
 // Small devices (landscape phones, 576px and up)
@@ -220,11 +226,16 @@ input::-webkit-input-placeholder {
   .sticky-navbar {
     padding-top:16px;
   }
+  .card-container-padding{
+    padding:0px 16px;
+  }
+  .bg-white {
+    display:none;
+  }
 }
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) and (max-width: 991.98px) {
- 
   .wallpaper-card {
     position: relative;
     margin: 16px;
@@ -315,6 +326,12 @@ input::-webkit-input-placeholder {
   .sp {
     padding-right:16px !important;
   }
+  .card-container-padding{
+    padding:0px 16px;
+  }
+  .bg-white {
+    display:none;
+  }
 }
 
 // Large devices (desktops, 992px and up)
@@ -326,9 +343,9 @@ input::-webkit-input-placeholder {
     width: 522px;
     height: 184px;
     background: var(--color-background);
-    left: 80px;
+    left: 0;
     border-radius: 16px;
-    margin: 88px 0 48px 0;
+    margin: 88px 0 48px 16px;
     padding: 16px;
   }
   .wal-image {
@@ -393,6 +410,9 @@ input::-webkit-input-placeholder {
   .store-search {
     padding-top: 48px;
   }
+  .card-container-padding{
+    padding:0px 16px;
+  }
 }
 
 // Extra large devices (large desktops, 1200px and up)
@@ -404,9 +424,9 @@ input::-webkit-input-placeholder {
     width: 522px;
     height: 184px;
     background: var(--color-background);
-    left: 80px;
+    left: 0;
     border-radius: 16px;
-    margin: 88px 0 48px 0;
+    margin: 88px 0 48px 48px;
     padding: 16px;
   }
   .wal-image {
@@ -426,8 +446,6 @@ input::-webkit-input-placeholder {
     padding-left: 80px;
     padding-right: 80px;
   }
-
- 
   .store-list-bg {
     padding: 32px 0;
   }
@@ -475,6 +493,9 @@ input::-webkit-input-placeholder {
   }
   .store-search {
     padding-top: 48px;
+  }
+  .card-container-padding{
+    padding:0px 48px;
   }
 }
 .signup-panel {

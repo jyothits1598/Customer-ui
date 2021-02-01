@@ -4,6 +4,9 @@
             <div class="d-flex justify-content-between">
                 <div class="close-icon">
                     <img src="assets/images/ico_close.png" (click)="close()" style="cursor: pointer;outline:0">
+                    <!-- <span class="std-heading-3 text-capitalize">
+                        {{itemDetail.name}}
+                    </span> -->
                 </div>
                 <ul class="menu">
                     <li class="pd">
@@ -23,7 +26,7 @@
                     {{itemDetail.name}}
                 </div>
                 <div class="item-div-image">
-                    <img [src]="itemDetail.image" class="img-fluid">
+                    <img [src]="itemDetail.image || 'assets/svg/details/modifier_null.svg'" class="img-fluid">
                 </div>
                 <div class="pt-3 pb-3">
                     <ng-container *ngFor="let modifier of itemDetail.modifiers; let i = index">

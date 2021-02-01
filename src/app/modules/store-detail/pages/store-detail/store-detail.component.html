@@ -1,42 +1,35 @@
 <div *ngIf="selecteditemId && storeDetail">
   <store-item-detail [item]="{itemId: selecteditemId, storeName: storeDetail.name ,storeId: storeId}"></store-item-detail>
 </div>
-<div class="main-panel" id="main-panel">
+<div class="main-panel">
   <ng-container *ngIf="storeDetail">
       <div class="main-content">
-          <div class="fixed-shadow" #topBar [class.newClass]="scrolledDown">
-              <div class="margins-left">
-                  <span class="float-left">
-                      <table>
-                          <tr>
-                              <td (click)=" goBack()">
-                                  <img src="assets/images/ico_arrow_left_white.png" 
-                                      style="cursor: pointer;outline:0;">
-                              </td>
-                              <td align="bottom">
-                                  <span *ngIf="scrolledDown" class="text-capitalize"
-                                      style="display: inline-block; animation: fadeInDown .1s">&nbsp;
-                                      {{storeDetail.name}}</span>
-                              </td>
-                          </tr>
-                      </table>
-                  </span>
-                  <span class="float-right">
-                      <ul class="menu">
-                          <li class="pointer-outline-none"> 
-                              <store-heart [store]="{id: storeDetail.id, isFavourite: storeDetail.isFavourite,page:'preview'}"></store-heart>
-                          </li>
-                          <li class="pointer-outline-none ml-20">
-                              <app-share [store]="{id: storeDetail.id, name: storeDetail.name}"></app-share>
-                          </li>
-                          <li class="pointer-outline-none ml-20">
-                              <a [href]="'https://www.google.com/maps/dir/?api=1&destination='+storeDetail.latLng.lat+','+storeDetail.latLng.lng" target="_blank" style="text-decoration: none;">
-                                  <img src="assets/images/navbar/ico_navigation.png" title="Direction">
-                              </a>
-                          </li>
-                      </ul>
-                  </span>
-              </div>
+          <div class="fixed-shadow d-flex justify-content-between" #topBar [class.newClass]="scrolledDown">
+            <table (click)=" goBack()" class="left-hover">
+                <tr>
+                    <td >
+                        <img src="assets/images/ico_arrow_left_white.png">
+                    </td>
+                    <td align="bottom">
+                        <label *ngIf="scrolledDown" class="text-capitalize st-name-card">
+                            {{storeDetail.name}}
+                        </label>
+                    </td>
+                </tr>
+            </table>
+            <ul class="menu">
+                <li class="pointer-outline-none"> 
+                    <store-heart [store]="{id: storeDetail.id, isFavourite: storeDetail.isFavourite,page:'preview'}"></store-heart>
+                </li>
+                <li class="pointer-outline-none ml-20">
+                    <app-share [store]="{id: storeDetail.id, name: storeDetail.name}"></app-share>
+                </li>
+                <li class="pointer-outline-none ml-20">
+                    <a [href]="'https://www.google.com/maps/dir/?api=1&destination='+storeDetail.latLng.lat+','+storeDetail.latLng.lng" target="_blank" style="text-decoration: none;">
+                        <img src="assets/images/navbar/ico_navigation.png" title="Direction">
+                    </a>
+                </li>
+            </ul>
           </div>
           <div class="wal-image">
               <img [src]="storeDetail.storeImage || 'assets/images/Area.png' ">
