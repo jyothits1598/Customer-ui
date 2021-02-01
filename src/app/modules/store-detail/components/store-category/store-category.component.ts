@@ -15,7 +15,7 @@ export class StoreCategoryComponent implements OnInit, AfterViewInit {
   currentCategory: StoreCategory;
   pauseObservation: boolean;
 
-  constructor() { }
+  constructor(private window: Window) { }
 
 ngAfterViewInit(): void {
   this.initiateObservation();
