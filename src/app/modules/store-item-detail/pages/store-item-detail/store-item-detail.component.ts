@@ -1,7 +1,7 @@
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { Location } from '@angular/common';
 import { templateVisitAll } from '@angular/compiler';
-import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AbstractControl, FormArray, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { merge, Subject } from 'rxjs';
@@ -37,26 +37,37 @@ import { StoreItemDataService } from '../../services/store-item-data.service';
 export class StoreItemDetailComponent implements OnChanges, OnDestroy {
   reqSubs: Subscription;
   selectedvalueChangeSubs: Subscription;
-
+  @ViewChild('observationElement', { read: ElementRef }) obsElement: ElementRef;
   @Input() item: { storeId: number, storeName: string, itemId: number };
   itemDetail: StoreItemDetail
   loading: boolean = true;
   show = true;
   selectedOptions: FormArray;
   itemCount: FormControl = new FormControl(1);
-
+  addingToCart: boolean = false;
   totalAmount: any = 0;
   makeCalculations: (itemBasePrice: number, selectedModifiers: Array<ItemModifier>, count: number) => number;
 
   unSubscribe$: Subject<boolean> = new Subject<boolean>();
   itemAddedToCart: boolean = false;
 
+  // interObserver: IntersectionObserver;
+  // scrolledDown: boolean;
+  
   constructor(private storeItemData: StoreItemDataService,
     private location: Location,
     private cartService: CartService,
-    private ov: OrderViewControllerService) { 
+    private ov: OrderViewControllerService) {
     this.makeCalculations = this.cartService.makeCalculations;
   }
+
+  // observeIntersection() {
+  //   this.interObserver = new IntersectionObserver((entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
+  //     if (entries[0].isIntersecting) this.scrolledDown = false;
+  //     else this.scrolledDown = true;
+  //   });
+  //   this.interObserver.observe(this.obsElement.nativeElement);
+  // }
 
   ngOnChanges(): void {
     //clear previous subscription
@@ -93,6 +104,8 @@ export class StoreItemDetailComponent implements OnChanges, OnDestroy {
       this.selectedOptions.markAllAsTouched();
       return;
     }
+    
+    this.addingToCart = true;
     let itemDetail = { ...this.itemDetail };
     itemDetail.modifiers = this.selectedOptions.value.filter(m => m);
 
@@ -100,11 +113,10 @@ export class StoreItemDetailComponent implements OnChanges, OnDestroy {
       storeId: this.item.storeId,
       storeName: this.item.storeName,
 
-      items: [{ item: itemDetail, quantity: this.itemCount.value}]
+      items: [{ item: itemDetail, quantity: this.itemCount.value }]
     };
 
-    this.cartService.addItem(cartData).pipe(takeUntil(this.unSubscribe$)).subscribe(() => {
-      this.itemAddedToCart = true;
+    this.cartService.addItem(cartData).pipe(takeUntil(this.unSubscribe$), finalize(() => this.addingToCart = false)).subscribe(() => {
       this.ov.showPage(OrderPages.Cart);
       setTimeout(() => {
         this.show = false;
@@ -112,8 +124,6 @@ export class StoreItemDetailComponent implements OnChanges, OnDestroy {
       }, 0);
     });
   }
-
-
 
   // getSelectedCartsDetails() {
   //   this.cartAmount = 0;

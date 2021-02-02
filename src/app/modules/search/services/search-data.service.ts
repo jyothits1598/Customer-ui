@@ -1,5 +1,4 @@
-import { ElementRef, Injectable } from '@angular/core';
-import { NativeElementInjectorDirective } from 'ngx-intl-tel-input';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, interval, Subject } from 'rxjs';
 import { debounce, finalize, map, switchMap, take, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -12,7 +11,10 @@ import { StorageService } from 'src/app/core/services/storage.service';
 })
 export class SearchDataService {
   storageKey = 'searchHistory';
-  searchHistory: Array<string>;
+
+  searchHistory$ = new BehaviorSubject<string[]>(
+    this.storageService.get(this.storageKey) || []
+  );
 
   isLoading$ = new BehaviorSubject<boolean>(false);
 
@@ -44,20 +46,18 @@ export class SearchDataService {
     private restApiService: RestApiService,
     private geoLoactionServ: GeoLocationService,
     private authService: AuthService
-  ) {
-    this.searchHistory = this.storageService.get(this.storageKey) || [];
-  }
-
-  getHistory() {
-    return this.searchHistory;
-  }
+  ) {}
 
   addItem(searchTerm: string) {
-    const filtered = this.searchHistory.filter(
-      (val) => val.toUpperCase() !== searchTerm.toUpperCase()
-    );
-    this.searchHistory = [searchTerm, ...filtered].slice(0, 12);
-    this.storageService.store(this.storageKey, this.searchHistory);
+    const newHistory = [
+      searchTerm,
+      ...this.searchHistory$.value.filter(
+        (val) => val.toUpperCase() !== searchTerm.toUpperCase()
+      ),
+    ].slice(0, 12);
+
+    this.storageService.store(this.storageKey, newHistory);
+    this.searchHistory$.next(newHistory);
   }
 
   updateInlineSearch(searchTerm: string): void {

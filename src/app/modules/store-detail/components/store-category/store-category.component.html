@@ -17,7 +17,7 @@
         <table class="table-responsive">
             <tr>
                 <td *ngFor="let category of categories; let i = index" class="stick-header-names">
-                    <div class="pill-button tabs-menu first text-capitalize"
+                    <div class="pill-button tabs-menu text-capitalize"
                         [ngStyle]="category === currentCategory ? {'background': '#353FA8', 'color': '#fff'} : {} "
                         (click)="handleTabClick(i)">
                         {{category.name}}

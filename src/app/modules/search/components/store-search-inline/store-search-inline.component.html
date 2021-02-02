@@ -40,12 +40,15 @@
 
     <ng-container *ngIf="searchInput.value.length === 0">
       <div class="list-title">Recent searches</div>
-      <ul style="list-style-type: none;cursor: pointer; margin: 0;">
-        <li #listItem *ngFor="let storeName of history; let i = index;" (click)="searchForItem(storeName)" (keyup)="searchListKeyup($event, storeName, i);" [queryParams]="{q:storeName}" tabindex="1">
-          <img src="assets/svg/ico_search_tabs.svg">
-          <div class="paragraph text-capitalize"> {{storeName}} </div>
-        </li>
-      </ul>
+      <ng-container *ngIf="history$ | async as history">
+        <ul style="list-style-type: none;cursor: pointer; margin: 0;">
+          <li #listItem *ngFor="let storeName of history; let i = index;" (click)="searchForItem(storeName)" (keyup)="searchListKeyup($event, storeName, i);" [queryParams]="{q:storeName}"
+            tabindex="1">
+            <img src="assets/svg/ico_search_tabs.svg">
+            <div class="paragraph text-capitalize"> {{storeName}} </div>
+          </li>
+        </ul>
+      </ng-container>
     </ng-container>
   </div>
 </ng-template>
