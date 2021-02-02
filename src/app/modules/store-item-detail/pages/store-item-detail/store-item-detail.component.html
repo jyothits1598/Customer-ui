@@ -18,7 +18,6 @@
                 </ul>
             </div>
         </div>
-        <!-- <div> validity state of formarray, {{selectedOptions.valid}}</div> -->
         <div class="modal-body">
             <p *ngIf="loading">Loading...</p>
             <ng-container *ngIf="itemDetail">
@@ -39,26 +38,27 @@
                         </div>
                     </ng-container>
                 </div>
+                <div>
+                    <!-- <div class="cart-item-show-more text-center">
+                        <label>
+                            Show 7 more
+                        </label>
+                    </div> 
+                    <hr> -->
+                    <item-count (change)="itemCount.patchValue($event)"></item-count>
+                </div>
             </ng-container>
-            <div *ngIf="itemDetail?.modifiers.length > 0">
-                <!-- <div class="cart-item-show-more text-center">
-                    <label>
-                        Show 7 more
-                    </label>
-                </div> 
-                <hr> -->
-                <item-count (change)="itemCount.patchValue($event)"></item-count>
-            </div>
 
         </div>
         <div class="footer-btn">
             <div class="add-cart-card text-center">
                 <div (click)="addToCart()" type="button" class="cart-button">
-                    <ng-container *ngIf="!itemAddedToCart; else added">
-                        <span class="cart-text">Add to cart</span> <span *ngIf="itemDetail" class="float-right  cart-text">${{totalAmount}}</span>
+                    <ng-container *ngIf="!addingToCart; else ld">
+                        <span class="cart-text">Add to cart</span> <span *ngIf="itemDetail"
+                            class="float-right  cart-text">${{totalAmount}}</span>
                     </ng-container>
-                    <ng-template #added>
-                        <img src="assets/images/loader_white_24.gif"/>
+                    <ng-template #ld>
+                        <img src="assets/images/loader_white_24.gif" />
                     </ng-template>
                 </div>
             </div>
