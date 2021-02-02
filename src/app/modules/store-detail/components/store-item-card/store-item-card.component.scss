@@ -35,10 +35,10 @@ body.modal-open {
     height: 48px;
     overflow-y: hidden;
 }
-// .first {
-//     text-transform:lowercase;
-// }
-// .first:first-letter {
-//     text-transform: capitalize !important;
-//   }
-  
+.item-name {
+    text-transform:lowercase;
+    margin:0;
+}
+.item-name::first-letter {
+    text-transform: capitalize !important;
+}

@@ -17,11 +17,11 @@
         <table class="table-responsive">
             <tr>
                 <td *ngFor="let category of categories; let i = index" class="stick-header-names">
-                    <div class="pill-button tabs-menu text-capitalize"
+                    <button class="pill-button tabs-menu text-capitalize"
                         [ngStyle]="category === currentCategory ? {'background': '#353FA8', 'color': '#fff'} : {} "
                         (click)="handleTabClick(i)">
                         {{category.name}}
-                    </div>
+                    </button>
                 </td>
             </tr>
         </table>
@@ -32,7 +32,7 @@
             <div class=" pt-4">
                 <div #categorySections [attr.data-category-index]="i"
                         *ngFor="let category of categories;let i = index">
-                    <div class="std-heading-4 first category-name-spacing text-lowercase">
+                    <div class="std-heading-4 category-name-spacing text-capitalize">
                         {{category.name}}
                     </div>
                     <div class="row">

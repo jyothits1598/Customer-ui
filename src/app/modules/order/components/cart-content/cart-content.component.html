@@ -57,21 +57,23 @@
         Surcharge
     -->
     <ng-container *ngIf="cartTotal$ | async; let total">
-
-        <div class="order-surcharge">
-            <div class="d-flex justify-content-between">
-                <label class="f-16-blur">Surcharge</label>
-                <label class="f-14 f-b">$0.00</label>
-            </div>
-        </div>
-        <hr>
         <!--
-            Sub Total
+           Sub total
         -->
         <div class="order-surcharge">
             <div class="d-flex justify-content-between">
                 <label class="f-16-blur">Sub total</label>
                 <label class="f-14 f-b">${{total}}</label>
+            </div>
+        </div>
+        <hr>
+        <!--
+            Surcharge
+        -->
+        <div class="order-surcharge">
+            <div class="d-flex justify-content-between">
+                <label class="f-16-blur">Surcharge</label>
+                <label class="f-14 f-b">$0.00</label>
             </div>
         </div>
         <hr>
