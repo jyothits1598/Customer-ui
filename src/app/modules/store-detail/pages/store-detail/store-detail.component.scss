@@ -197,3 +197,43 @@ hr{
     }
  }
 
+ .category-name-spacing{
+    margin-bottom: 16px;
+    margin-top:16px;
+}
+.store-details-body{
+    background: #f2f2f2;
+}
+
+
+.col-img img{
+    width:112px;
+    height:112px;
+}
+.small-cat-cards {
+    background: var(--color-background);
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    width:100%;
+    transition: all .6s cubic-bezier(.165,.84,.44,1);
+}
+.small-cat-cards:hover {
+    box-shadow: 0 15px 30px rgba(0,0,0,.25);
+}
+.img-custom {
+    border-radius: 0 8px 8px 0;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+.claim-store-bar{
+    height:56px;
+    background:#fff;
+    padding:18px 62px
+}
+.card-container-padding{
+    padding:0px 16px;
+}
+.claim-store-padding{
+    height:300px;
+}

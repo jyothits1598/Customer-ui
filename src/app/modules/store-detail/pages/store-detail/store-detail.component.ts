@@ -11,6 +11,7 @@ import { Subject } from 'rxjs';
 import { OrderPages, OrderViewControllerService } from 'src/app/core/services/order-view-controller.service';
 import { LayoutService } from 'src/app/core/services/layout.service';
 import { CartService } from 'src/app/core/services/cart.service';
+import { PARTNER_APP_LINK } from 'src/environments/environment';
 
 @Component({
   selector: 'app-store-detail',
@@ -27,7 +28,8 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
   storeDetail: StoreDetail;
   loading: boolean = true;
   error: boolean = false;
-
+  partnerAppLink = PARTNER_APP_LINK;
+  
   unSub$ = new Subject<true>();
 
   @ViewChild('observationElement', { read: ElementRef }) obsElement: ElementRef;
@@ -71,7 +73,6 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
     })
 
     // open cart by default
-    // if (!this.router.url.includes('(order:')) this.router.navigate([{ outlets: { 'order': ['cart'] } }], { replaceUrl: true })
     if (!this.layoutService.isMobile && !this.orderView.getCurrentPage()) this.orderView.showPage(OrderPages.Cart);
   }
 

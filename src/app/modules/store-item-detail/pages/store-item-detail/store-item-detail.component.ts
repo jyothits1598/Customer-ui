@@ -44,7 +44,7 @@ export class StoreItemDetailComponent implements OnChanges, OnDestroy {
   show = true;
   selectedOptions: FormArray;
   itemCount: FormControl = new FormControl(1);
-
+  addingToCart: boolean = false;
   totalAmount: any = 0;
   makeCalculations: (itemBasePrice: number, selectedModifiers: Array<ItemModifier>, count: number) => number;
 
@@ -57,7 +57,7 @@ export class StoreItemDetailComponent implements OnChanges, OnDestroy {
   constructor(private storeItemData: StoreItemDataService,
     private location: Location,
     private cartService: CartService,
-    private ov: OrderViewControllerService) { 
+    private ov: OrderViewControllerService) {
     this.makeCalculations = this.cartService.makeCalculations;
   }
 
@@ -104,6 +104,8 @@ export class StoreItemDetailComponent implements OnChanges, OnDestroy {
       this.selectedOptions.markAllAsTouched();
       return;
     }
+    
+    this.addingToCart = true;
     let itemDetail = { ...this.itemDetail };
     itemDetail.modifiers = this.selectedOptions.value.filter(m => m);
 
@@ -111,11 +113,10 @@ export class StoreItemDetailComponent implements OnChanges, OnDestroy {
       storeId: this.item.storeId,
       storeName: this.item.storeName,
 
-      items: [{ item: itemDetail, quantity: this.itemCount.value}]
+      items: [{ item: itemDetail, quantity: this.itemCount.value }]
     };
 
-    this.cartService.addItem(cartData).pipe(takeUntil(this.unSubscribe$)).subscribe(() => {
-      this.itemAddedToCart = true;
+    this.cartService.addItem(cartData).pipe(takeUntil(this.unSubscribe$), finalize(() => this.addingToCart = false)).subscribe(() => {
       this.ov.showPage(OrderPages.Cart);
       setTimeout(() => {
         this.show = false;
@@ -123,8 +124,6 @@ export class StoreItemDetailComponent implements OnChanges, OnDestroy {
       }, 0);
     });
   }
-
-
 
   // getSelectedCartsDetails() {
   //   this.cartAmount = 0;

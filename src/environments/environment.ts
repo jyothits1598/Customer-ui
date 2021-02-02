@@ -13,6 +13,7 @@ export const environment = {
 export const API_URL_LINK = 'https://dev.api.menuzapp.com/';
 
 export const APP_LINK = 'http://localhost:4200/';
+export const PARTNER_APP_LINK = 'https://dev.menuzapp.com/partner/';
 
 /*
  * For easier debugging in development mode, you can import the following file

@@ -47,7 +47,7 @@ export class OrdersService {
     switchMap(() => this.restApiService.get('api/customer/orders').pipe(
       map((resp) => {
         let ords: Array<OrderDto> = resp.data?.orders || [];
-        return ords.find((o) => o.status === 'NEW' || o.status === 'READY' || o.status === 'COOKING')
+        return ords.find((o) => o.status === 'NEW' || o.status === 'READY' || o.status === 'COOKING' || o.status === 'DENY')
       })
     )),
     startWith<any>({}),
@@ -83,7 +83,7 @@ export class OrdersService {
       // switchMap(() => this.ordView.getCurrentPage() === OrderPages.OrderStatus ? NEVER : of(true)),
       switchMap(() => this.restApiService.get('api/customer/orders').pipe(map((resp) => resp.data?.orders || []))),
       switchMap((orders) => {
-        let ord = orders.find((o) => o.status === 'NEW' || o.status === 'READY' || o.status === 'COOKING');
+        let ord = orders.find((o) => o.status === 'NEW' || o.status === 'READY' || o.status === 'COOKING' || o.status === 'DENY');
         if (ord?.order_id !== this._trackingOrder.value?.order_id || ord?.status !== this._trackingOrder.value?.status) {
           return of(orders);
         } return NEVER
@@ -120,11 +120,11 @@ export class OrdersService {
     return this.restApiService.get('api/customer/orders?order_id=' + orderId).pipe(map((resp: any) => mapToOrderData(resp.data.orders[0])));
   }
 
-  markOrderComplete(ordId: number) {
+  markOrderComplete(ordId: number,orderStatus: string) {
     return this.restApiService.patch('api/customer/orders',
       {
         "order_id": ordId,
-        "status": "COMPLETED"
+        "status": orderStatus
       });
   }
 
