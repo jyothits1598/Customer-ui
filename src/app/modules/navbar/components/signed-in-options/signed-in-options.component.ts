@@ -1,7 +1,6 @@
 import { Component, ElementRef, HostListener, OnDestroy, OnInit, Renderer2, TemplateRef, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { Subject } from 'rxjs';
-import { of } from 'rxjs/internal/observable/of';
+import { Subject, of } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import { PopoverRef } from 'src/app/core/model/popover';
 import { AuthService } from 'src/app/core/services/auth.service';
