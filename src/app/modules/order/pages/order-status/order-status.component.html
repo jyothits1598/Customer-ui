@@ -8,6 +8,7 @@
         <ng-container *ngSwitchCase="'COOKING'" [ngTemplateOutlet]="prep"
             [ngTemplateOutletContext]="{$implicit: ordData.preparingOrder}"></ng-container>
         <ng-container *ngSwitchCase="'READY'" [ngTemplateOutlet]="rdy"></ng-container>
+        <ng-container *ngSwitchCase="'DENY'" [ngTemplateOutlet]="deny"></ng-container>
     </ng-container>
     <div class="order-body">
         <h4 class="f-20 f-b text-capitalize">{{ordData.storeName}}</h4>
@@ -77,10 +78,22 @@
         </ng-container>
     </div>
     <div class="cart-card cart-anim" *ngIf="ordData.status === 'READY'" >
-        <div class="cart-button" (click)="markAsComplete()" [disabled]="loading">
+        <div class="cart-button" (click)="markAsComplete('COMPLETED')" [disabled]="loading">
             <div class="row">
                 <div class="col-sm-12 col-12 cart-text text-center">
                     <span *ngIf="!loading; else ld">Complete</span>
+                    <ng-template #ld>
+                        <img src="/assets/images/loader_white_24.gif" alt="">
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cart-card cart-anim" *ngIf="ordData.status === 'DENY'" >
+        <div class="cart-button" (click)="markAsComplete('CLOSE')" [disabled]="loading">
+            <div class="row">
+                <div class="col-sm-12 col-12 cart-text text-center">
+                    <span *ngIf="!loading; else ld">Close</span>
                     <ng-template #ld>
                         <img src="/assets/images/loader_white_24.gif" alt="">
                     </ng-template>
@@ -251,7 +264,38 @@ Preparing Order
         </div>
     </div>
 </ng-template>
-
+<ng-template #deny>
+    <div>
+        <div class="mt-28 text-center">
+            <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M23.58 6H48.42L66 23.58V48.42L48.42 66H23.58L6 48.42V23.58L23.58 6Z" stroke="#FF1212" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M27 36H45" stroke="#FF1212" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="mt-22">
+                <label class="f-20 f-b">Order not accepted</label>
+            </div>
+            <div>
+                <label class="f-14">Please phone <span class="text-capitalize">{{ordData.storeName}} on <u style="color:#353FA8;">{{ordData.phone_number}}</u></span></label>
+            </div>
+        </div>
+        <div class="mtb-88">
+            <svg width="100%" height="24" viewBox="0 0 256 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="256" height="24" fill="white"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M5 4C5 3.44772 5.44772 3 6 3H18C18.5523 3 19 3.44772 19 4V22C19 22.4045 18.7564 22.7691 18.3827 22.9239C18.009 23.0787 17.5789 22.9931 17.2929 22.7071L16 21.4142L14.7071 22.7071C14.3166 23.0976 13.6834 23.0976 13.2929 22.7071L12 21.4142L10.7071 22.7071C10.3166 23.0976 9.68342 23.0976 9.29289 22.7071L8 21.4142L6.70711 22.7071C6.42111 22.9931 5.99099 23.0787 5.61732 22.9239C5.24364 22.7691 5 22.4045 5 22V4ZM7 5V19.5858L7.29289 19.2929C7.68342 18.9024 8.31658 18.9024 8.70711 19.2929L10 20.5858L11.2929 19.2929C11.6834 18.9024 12.3166 18.9024 12.7071 19.2929L14 20.5858L15.2929 19.2929C15.4804 19.1054 15.7348 19 16 19C16.2652 19 16.5196 19.1054 16.7071 19.2929L17 19.5858V5H7Z" fill="#B3B3B3"/>
+                <rect x="28" y="11" width="80" height="2" rx="1" fill="#B3B3B3"/>
+                <path d="M120 8H136V17C136 18.0609 135.579 19.0783 134.828 19.8284C134.078 20.5786 133.061 21 132 21H124C122.939 21 121.922 20.5786 121.172 19.8284C120.421 19.0783 120 18.0609 120 17V8Z" stroke="#B3B3B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M124 2V5" stroke="#B3B3B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M128 2V5" stroke="#B3B3B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M132 2V5" stroke="#B3B3B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M120 8H117C117 12.5 119 12 120 12V8Z" stroke="#B3B3B3" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M136 8H139C139 12.4815 137 11.9835 136 11.9835V8Z" stroke="#B3B3B3" stroke-width="2" stroke-linejoin="round"/>
+                <rect x="148" y="11" width="76" height="2" rx="1" fill="#B3B3B3"/>
+                <path d="M254 11.0799V11.9999C253.999 14.1563 253.301 16.2545 252.009 17.9817C250.718 19.7088 248.903 20.9723 246.835 21.5838C244.767 22.1952 242.557 22.1218 240.534 21.3744C238.512 20.6271 236.785 19.246 235.611 17.4369C234.437 15.6279 233.88 13.4879 234.022 11.3362C234.164 9.18443 234.997 7.13619 236.398 5.49694C237.799 3.85768 239.693 2.71525 241.796 2.24001C243.9 1.76477 246.1 1.9822 248.07 2.85986" stroke="#B3B3B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M254 4L244 14.01L241 11.01" stroke="#B3B3B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+    </div>
+</ng-template>
     <ng-template #loader>
         <img class="cart-loader" src="/assets/images/loader_blue.gif" alt="">
     </ng-template>

@@ -47,7 +47,7 @@ export class OrdersService {
     switchMap(() => this.restApiService.get('api/customer/orders').pipe(
       map((resp) => {
         let ords: Array<OrderDto> = resp.data?.orders || [];
-        return ords.find((o) => o.status === 'NEW' || o.status === 'READY' || o.status === 'COOKING')
+        return ords.find((o) => o.status === 'NEW' || o.status === 'READY' || o.status === 'COOKING' || o.status === 'DENY')
       })
     )),
     startWith<any>({}),
@@ -120,11 +120,11 @@ export class OrdersService {
     return this.restApiService.get('api/customer/orders?order_id=' + orderId).pipe(map((resp: any) => mapToOrderData(resp.data.orders[0])));
   }
 
-  markOrderComplete(ordId: number) {
+  markOrderComplete(ordId: number,orderStatus: string) {
     return this.restApiService.patch('api/customer/orders',
       {
         "order_id": ordId,
-        "status": "COMPLETED"
+        "status": orderStatus
       });
   }
 

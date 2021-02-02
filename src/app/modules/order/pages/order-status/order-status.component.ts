@@ -50,9 +50,9 @@ export class OrderStatusComponent implements OnInit, OnDestroy {
     this.unSub$.next(true);
   }
 
-  markAsComplete() {
+  markAsComplete(orderStatus) {
     this.loading = true;
-    this.ordSrv.markOrderComplete(this.ordData.id).pipe(takeUntil(this.unSub$), finalize(() => this.loading = false)).subscribe(() => {
+    this.ordSrv.markOrderComplete(this.ordData.id,orderStatus).pipe(takeUntil(this.unSub$), finalize(() => this.loading = false)).subscribe(() => {
       this.ordSrv.setThankyouData({ storeName: this.ordData.storeName });
       this.ordView.showPage(OrderPages.Thankyou);
     });
