@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CartService } from 'src/app/core/services/cart.service';
+import { LayoutService } from 'src/app/core/services/layout.service';
 import { OrderPages, OrderViewControllerService } from 'src/app/core/services/order-view-controller.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class CartComponent implements OnInit, OnDestroy {
     private cartService: CartService,
     private orderViewSrv: OrderViewControllerService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
   ) { }
   cartTotal$: Observable<number>;
   unsub$ = new Subject<true>();
@@ -25,7 +26,10 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   continue() {
-    if (!this.authService.isLoggedIn) this.router.navigate(['/auth/signin'], { queryParams: { redirect: this.router.url } });
+    if (!this.authService.isLoggedIn) {
+      this.router.navigate(['/auth/signin'], { queryParams: { redirect: this.router.url } });
+      this.orderViewSrv.showPage(null);
+    }
     else this.orderViewSrv.showPage(OrderPages.CartSummary)
   }
 
