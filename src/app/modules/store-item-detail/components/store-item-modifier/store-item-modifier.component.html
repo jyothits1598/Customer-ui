@@ -3,7 +3,11 @@
         <div class="std-heading-4 text-capitalize">
             {{modifier.name}} <br>
             <span class="small-content" *ngIf="modifier.minSelection > 0; else optionalChoice">
-                Choose {{modifier.minSelection}} to {{modifier.maxSelection}} <span class="small-content" *ngIf="modifier.freeSelection > 0;">( {{modifier.freeSelection}} free )</span>
+               <span [ngClass]="(this.optionControls.touched && this.optionControls.invalid) ? 'errorText' : '' "> Choose {{modifier.minSelection}} to {{modifier.maxSelection}} 
+                   <span *ngIf="modifier.freeSelection > 0;">
+                       ( {{modifier.freeSelection}} free )
+                    </span> 
+                </span>
             </span>
         </div>
         <div *ngIf="modifier.minSelection > 0; else optional">

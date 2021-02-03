@@ -4,7 +4,7 @@
         <div class="std-heading-4 text-capitalize">
             {{modifier.name}} <br>
             <span class="small-content"> 
-                Choose 1
+                <span [ngClass]="(this.optionControl.touched && this.optionControl.invalid) ? 'errorText' : '' "> Choose 1 </span>
             </span>
         </div>
         <div>

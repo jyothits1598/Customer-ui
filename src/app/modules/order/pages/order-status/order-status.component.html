@@ -47,19 +47,19 @@
          </div>
         <ng-container *ngIf="calcTotal(ordData);let total">
             <div>
-                <div class="order-surcharge">
-                    <div class="d-flex justify-content-between">
-                        <label class="f-16-blur">Surcharge</label>
-                        <label class="f-14 f-b">$0.00</label>
-                    </div>
-                </div>
-                <hr>
                 <!--
                         Sub Total
                     -->
                 <div class="order-surcharge">
                     <div class="d-flex justify-content-between">
                         <label class="f-16-blur">Sub total</label>
+                        <label class="f-14 f-b">${{total}}</label>
+                    </div>
+                </div>
+                <hr>
+                <div class="order-surcharge">
+                    <div class="d-flex justify-content-between">
+                        <label class="f-16-blur"> Total </label>
                         <label class="f-14 f-b">${{total}}</label>
                     </div>
                 </div>
