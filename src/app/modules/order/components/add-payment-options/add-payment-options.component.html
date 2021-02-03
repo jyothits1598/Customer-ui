@@ -16,11 +16,11 @@
                 <hr>
                 <li class="d-flex justify-content-between">
                     <img src="assets/images/cart/googlepay.svg" />
-                    <label class="f-16 mt-1" style="width:200px">Set up Google Pay</label>
+                    <label class="f-16 mt-1 cursor-pointer" style="width:200px">Set up Google Pay</label>
                     <img class="mt-1" src="assets/images/cart/chevron.svg" />
                 </li>
                 <hr>
-                <li class="d-flex justify-content-between">
+                <li class="d-flex justify-content-between cursor-pointer" (click)="showModal(addCard)">
                     <img src="assets/images/cart/creditcard.svg" />
                     <label class="f-16 mt-1" style="width:200px">Credit/Debit card</label>
                     <img class="mt-1" src="assets/images/cart/chevron.svg" />
@@ -36,3 +36,71 @@
         </div>
     </div>
 </div>
+
+<style>
+   
+</style>
+<ng-template #addCard>
+   <div class="popup-window">
+        <div class="popup-header">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 6L6 18" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M6 6L18 18" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <label class="f-16 f-b ml-16">Add Card</label>
+        </div>
+        <hr>
+        <div class="modal-body" style="padding-top:0">
+            <div class="mct-16">
+                <label class="label-inputs">Name on card</label>
+                <input formControlName="nameOnCard" type="text" class="form-input error-highlight">
+            </div>
+            <div class="mct-16">
+                <label class="label-inputs">Billing address</label>
+                <input formControlName="billingAddress" type="text" class="form-input error-highlight">
+            </div>
+            <div class="mct-16">
+                <label class="label-inputs">Billing country</label>
+                <select formControlName="billingCountry" class="form-input error-highlight">
+                    <option>Australia</option>
+                </select>
+            </div>
+            <div class="mct-16">
+                <label class="label-inputs">Cart number</label>
+                <input formControlName="cartNumber" placeholder="0000 0000 0000 0000" type="text"
+                    class="form-input error-highlight">
+            </div>
+            <div class="mct-16">
+                <div class="d-flex justify-content-between">
+                    <div class="pr-2 date-width" style="width:150px;">
+                        <label class="label-inputs">Expiry date</label>
+                        <select formControlName="month" class="form-input error-highlight">
+                            <option>MM</option>
+                        </select>
+                    </div>
+                    <div class="date-width">
+                        <label class="label-inputs"></label><br>
+                        <select formControlName="year" class="form-input error-highlight">
+                            <option>YYYY</option>
+                        </select>
+                    </div>
+                    <div class="date-width pl-2" style="width:150px;">
+                        <label class="label-inputs">CVV/CID</label>
+                        <input formControlName="cvv" type="text" class="form-input error-highlight">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div  class="cart-card cart-anim continue-button-index card-button-size" >
+            <div class="cart-button">
+                <div class="row">
+                    <div class="col-sm-12 col-12 text-center">
+                        <span class="cart-text cart-count">
+                            Add card 
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </div>
+</ng-template>
