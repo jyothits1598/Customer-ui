@@ -89,7 +89,7 @@
             </div>
         </div>
     </div>
-    <div class="cart-card cart-anim" *ngIf="ordData.status === 'DENY'" >
+    <div class="cart-in-store-details cart-card cart-anim" *ngIf="ordData.status === 'DENY'" >
         <div class="cart-button" (click)="markAsComplete('CLOSE')" [disabled]="loading">
             <div class="row">
                 <div class="col-sm-12 col-12 cart-text text-center">
