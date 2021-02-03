@@ -1,7 +1,7 @@
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { Location } from '@angular/common';
 import { templateVisitAll } from '@angular/compiler';
-import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AbstractControl, FormArray, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { merge, Subject } from 'rxjs';
@@ -37,7 +37,7 @@ import { StoreItemDataService } from '../../services/store-item-data.service';
 export class StoreItemDetailComponent implements OnChanges, OnDestroy {
   reqSubs: Subscription;
   selectedvalueChangeSubs: Subscription;
-
+  @ViewChild('observationElement', { read: ElementRef }) obsElement: ElementRef;
   @Input() item: { storeId: number, storeName: string, itemId: number };
   itemDetail: StoreItemDetail
   loading: boolean = true;
@@ -51,12 +51,23 @@ export class StoreItemDetailComponent implements OnChanges, OnDestroy {
   unSubscribe$: Subject<boolean> = new Subject<boolean>();
   itemAddedToCart: boolean = false;
 
+  // interObserver: IntersectionObserver;
+  // scrolledDown: boolean;
+  
   constructor(private storeItemData: StoreItemDataService,
     private location: Location,
     private cartService: CartService,
     private ov: OrderViewControllerService) {
     this.makeCalculations = this.cartService.makeCalculations;
   }
+
+  // observeIntersection() {
+  //   this.interObserver = new IntersectionObserver((entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
+  //     if (entries[0].isIntersecting) this.scrolledDown = false;
+  //     else this.scrolledDown = true;
+  //   });
+  //   this.interObserver.observe(this.obsElement.nativeElement);
+  // }
 
   ngOnChanges(): void {
     //clear previous subscription

@@ -41,7 +41,8 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
   popoverRef: PopoverRef;
   isMobile: boolean;
 
-  history: Array<string>;
+  history$ = this.searchDataService.searchHistory$;
+
   loading$ = this.searchDataService.isLoading$;
   searchResults$ = this.searchDataService.inlineSearchResults$;
 
@@ -63,7 +64,6 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
     this.searchDataService.fullSearchTerm$
       .pipe(takeUntil(this.finalise$))
       .subscribe((value) => this.searchControl.setValue(value));
-    this.history = this.searchDataService.getHistory();
   }
 
   searchInputKeyup($event): void {
@@ -119,10 +119,7 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
     if (inputVal) {
       this.searchDataService.updateInlineSearch(inputVal);
     }
-    if (
-      !this.searchDataService.overlayOpen &&
-      this.searchDataService.getHistory().length > 0
-    ) {
+    if (!this.searchDataService.overlayOpen) {
       this.openComponentPopover();
     }
   }
