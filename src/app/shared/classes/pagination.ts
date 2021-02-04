@@ -45,11 +45,34 @@ export class StorePagination extends Pagination<Store>{
             return this.source(this.storeFilter).pipe(
                 finalize(() => this.isLoading = false),
                 tap(resp => { this.setPaginationData(resp) }),
+                // catchError((error) => { this.hasErrors = true; return error }),
+                // map((resp: any) => {
+                //     let newStores = [];
+                //     if (resp.data.stores) resp.data.stores.forEach(store => { newStores.push(ReadStore(store)) });
+                //     return newStores;
+                // })
+            );
+        } else return of([])
+    }
+}
+
+export class OrderPagination extends Pagination<ConfirmedOrderData>{
+
+    constructor(source: (any) => Observable<any>) {
+        super(source);
+    }
+
+    getNext(): Observable<Array<ConfirmedOrderData>> {
+        if (!this.hasEnded && !this.isLoading && !this.hasErrors) {
+            this.isLoading = true;
+            return this.source(this.currentPage).pipe(
+                finalize(() => this.isLoading = false),
+                tap(resp => { this.setPaginationData(resp) }),
                 catchError((error) => { this.hasErrors = true; return error }),
                 map((resp: any) => {
-                    let newStores = [];
-                    if (resp.data.stores) resp.data.stores.forEach(store => { newStores.push(ReadStore(store)) });
-                    return newStores;
+                    let ordersList = [];
+                    if (resp.data.orders) resp.data.orders.forEach(ord => { ordersList.push(mapToOrderData(ord)) });
+                    return ordersList || [];
                 })
             );
         } else return of([])
