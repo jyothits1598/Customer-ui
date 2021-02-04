@@ -7,7 +7,11 @@ import { ConfirmedOrderData, mapToOrderData, OrderDto } from '../model/cart';
 import { AuthService } from './auth.service';
 import { CartService } from './cart.service';
 import { OrderPages, OrderViewControllerService } from './order-view-controller.service';
+<<<<<<< HEAD
 //import { orders } from 'src/app/core/model/cart';
+=======
+import { orders } from 'src/app/core/model/cart';
+>>>>>>> c68c2f1 (rebase - resolving conflicts in order-service.ts)
 import { Pagination } from 'src/app/shared/classes/pagination';
 
 @Injectable({
