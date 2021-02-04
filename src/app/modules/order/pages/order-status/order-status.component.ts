@@ -15,7 +15,8 @@ import { ItemModifier } from 'src/app/modules/store-item-detail/model/store-item
 })
 export class OrderStatusComponent implements OnInit, OnDestroy {
 
-  constructor(private ordSrv: OrdersService,
+  constructor(
+    private ordSrv: OrdersService,
     private cartSrv: CartService,
     private ordView: OrderViewControllerService) { }
 

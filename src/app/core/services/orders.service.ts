@@ -7,6 +7,8 @@ import { ConfirmedOrderData, mapToOrderData, OrderDto } from '../model/cart';
 import { AuthService } from './auth.service';
 import { CartService } from './cart.service';
 import { OrderPages, OrderViewControllerService } from './order-view-controller.service';
+import { orders } from 'src/app/core/model/cart';
+import { Pagination } from 'src/app/shared/classes/pagination';
 
 @Injectable({
   providedIn: 'root'
@@ -59,6 +61,9 @@ export class OrdersService {
     }),
 
   )
+
+
+  get orderHistoryorder
 
   get orderToBeShown$(): Observable<number> {
     return this._orderToBeShown.asObservable();
@@ -120,7 +125,11 @@ export class OrdersService {
     return this.restApiService.get('api/customer/orders?order_id=' + orderId).pipe(map((resp: any) => mapToOrderData(resp.data.orders[0])));
   }
 
-  markOrderComplete(ordId: number,orderStatus: string) {
+  getAllOrder(): Observable<Pagination<OrderDto>> {
+    return this.restApiService.get('api/customer/orders/history').pipe(map((resp: any) => resp.data));
+  }
+
+  markOrderComplete(ordId: number, orderStatus: string) {
     return this.restApiService.patch('api/customer/orders',
       {
         "order_id": ordId,

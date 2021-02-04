@@ -109,3 +109,38 @@ export function MapToDto(data: CartData): CartDto {
         items: items
     }
 }
+
+export interface ordersList{
+    current_page: number,
+    first_page_url: string,
+    total: number,
+    orders: Array<orders>
+}
+export interface orders {
+    order_id: number,
+    phone_number: number,
+    items: Array<items>,
+    store_name: string,
+    total_price: number
+}
+
+export interface items {
+    item_id: number,
+    item_name: string,
+    item_price: string,
+    modifiers: Array<modifier>,
+    quantity: number,
+    total_item_price: number,
+}
+export interface modifier {
+    modifier_id: number,
+    modifier_name: string,
+    options:Array<options>
+}
+
+export interface options{
+    name: string,
+    optionId: number,
+    option_price: number
+}
+
