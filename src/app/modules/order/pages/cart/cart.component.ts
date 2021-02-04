@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
+import { OrderSummary } from 'src/app/core/model/cart';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CartService } from 'src/app/core/services/cart.service';
 import { LayoutService } from 'src/app/core/services/layout.service';
@@ -18,11 +19,11 @@ export class CartComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private router: Router,
   ) { }
-  cartTotal$: Observable<number>;
+  cartSummary$: Observable<OrderSummary>;
   unsub$ = new Subject<true>();
 
   ngOnInit(): void {
-    this.cartTotal$ = this.cartService.cartTotalAmount$;
+    this.cartSummary$ = this.cartService.orderSummary$;
   }
 
   continue() {

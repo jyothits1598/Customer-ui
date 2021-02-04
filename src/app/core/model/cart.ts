@@ -9,6 +9,13 @@ export interface CartData {
     items: Array<{ item: StoreItemDetail, quantity: number }>
 }
 
+export interface OrderSummary {
+    subtotal: number;
+    surcharge: number;
+    total: number;
+    totalItemCount: number;
+}
+
 export interface CartDto {
     store_id: number;
     store_name: string;
@@ -110,7 +117,7 @@ export function MapToDto(data: CartData): CartDto {
     }
 }
 
-export interface ordersList{
+export interface ordersList {
     current_page: number,
     first_page_url: string,
     total: number,
@@ -135,10 +142,10 @@ export interface items {
 export interface modifier {
     modifier_id: number,
     modifier_name: string,
-    options:Array<options>
+    options: Array<options>
 }
 
-export interface options{
+export interface options {
     name: string,
     optionId: number,
     option_price: number

@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { finalize, map, switchMap, take, tap } from 'rxjs/operators';
 import { ItemModifier } from 'src/app/modules/store-item-detail/model/store-item-detail';
 import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
-import { CartData, CartDto, mapToCartData, MapToDto } from '../model/cart';
+import { CartData, CartDto, mapToCartData, MapToDto, OrderSummary } from '../model/cart';
 import { ComponentModalRef } from '../model/modal';
 import { AuthService } from './auth.service';
 import { ModalService } from './modal.service';
@@ -24,15 +24,34 @@ export class CartService {
     return this.cartData.asObservable();
   }
 
-  get cartItemCount$(): Observable<number> {
-    return this.cartData.asObservable().pipe(
-      map(item => this.calculateItemCount(item))
-    )
-  }
+  // get cartItemCount$(): Observable<number> {
+  //   return this.cartData.asObservable().pipe(
+  //     map(item => this.calculateItemCount(item))
+  //   )
+  // }
 
-  get cartTotalAmount$(): Observable<number> {
+  // get cartTotalAmount$(): Observable<number> {
+  //   return this.cartData.asObservable().pipe(
+  //     map(item => this.calculateSubTotal(item))
+  //   )
+  // }
+
+  get orderSummary$(): Observable<OrderSummary> {
     return this.cartData.asObservable().pipe(
-      map(item => this.calculateTotalAmount(item))
+      map(data => {
+        let count = this.calculateItemCount(data);
+        if (!count) return null;
+        
+        let subTotal = this.calculateSubTotal(data);
+        let surChrg = subTotal * 0.02;
+        let total = subTotal + surChrg;
+        return {
+          subtotal: Math.round((subTotal + Number.EPSILON) * 100) / 100,
+          surcharge: Math.round((surChrg + Number.EPSILON) * 100) / 100,
+          total: Math.round((total + Number.EPSILON) * 100) / 100,
+          totalItemCount: count
+        }
+      })
     )
   }
 
@@ -87,7 +106,7 @@ export class CartService {
     }
     //post cart to backend if signed in
     if (this.authService.isLoggedIn && !skipBackend) resultObs = resultObs.pipe(switchMap(() => this.postCart(newCartData)));
-    return resultObs.pipe(tap(() => { this.cartData.next(newCartData); if(!newCartData) this.orderView.showPage(OrderPages.Cart); this.storageService.store(this.storageIdentifier, newCartData) }));
+    return resultObs.pipe(tap(() => { this.cartData.next(newCartData); if (!newCartData) this.orderView.showPage(OrderPages.Cart); this.storageService.store(this.storageIdentifier, newCartData) }));
   }
 
   deleteItem(itemId: number): Observable<boolean> {
@@ -103,7 +122,7 @@ export class CartService {
     return (cartData && cartData.items?.length) ? cartData.items.length : 0;
   }
 
-  calculateTotalAmount(cartData: CartData) {
+  calculateSubTotal(cartData: CartData) {
     let result: number = 0;
     if (cartData?.items.length) {
       cartData.items.forEach(

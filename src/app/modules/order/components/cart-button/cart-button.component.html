@@ -2,18 +2,18 @@
     <div class="cart-card cart-anim" *ngIf="cartData$ | async">
         <!-- <div class="cart-button" [routerLink]="[{ outlets: { 'order': ['cart'] } }]"> -->
         <div class="cart-button" (click)="openCart()">
-            <div class="row">
+            <div class="row" *ngIf="cartSummary$ | async; let s">
                 <div class="col-sm-4 col-4">
                     <img src="assets/images/cart/cart.svg" />
                     <span class="cart-text cart-count">
-                        {{cartItemCount$ | async}}
+                        {{s.totalItemCount}}
                     </span>
                 </div>
                 <div class="col-sm-4 col-4 cart-text">
                     Checkout
                 </div>
                 <div class="col-sm-4 col-4 text-right cart-text">
-                    ${{cartTotalAmount$ |async }}
+                    ${{s.total}}
                 </div>
             </div>
         </div>
