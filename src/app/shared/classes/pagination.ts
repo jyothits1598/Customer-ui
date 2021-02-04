@@ -45,12 +45,12 @@ export class StorePagination extends Pagination<Store>{
             return this.source(this.storeFilter).pipe(
                 finalize(() => this.isLoading = false),
                 tap(resp => { this.setPaginationData(resp) }),
-                // catchError((error) => { this.hasErrors = true; return error }),
-                // map((resp: any) => {
-                //     let newStores = [];
-                //     if (resp.data.stores) resp.data.stores.forEach(store => { newStores.push(ReadStore(store)) });
-                //     return newStores;
-                // })
+                catchError((error) => { this.hasErrors = true; return error }),
+                map((resp: any) => {
+                    let newStores = [];
+                    if (resp.data.stores) resp.data.stores.forEach(store => { newStores.push(ReadStore(store)) });
+                    return newStores;
+                })
             );
         } else return of([])
     }
