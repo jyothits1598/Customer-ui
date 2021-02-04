@@ -1,6 +1,6 @@
 <div class="custom-location-body">
     <location-search (searchedLocation)="handleLocation($event, true)"></location-search>
-    <div style="padding:16px;">
+    <div class="user-curt-pad">
         <user-current-location (currentLocation)="handleLocation($event)"></user-current-location>
     </div>
     <div class="row" *ngIf="locationHistory && locationHistory.length">

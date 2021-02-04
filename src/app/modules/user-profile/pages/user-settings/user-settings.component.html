@@ -5,16 +5,16 @@
     <div class="paragraph14 paragraph14__bold">
         Radius
     </div>
-    <div style="margin-bottom:4px">
-        <label style="margin-top:7px;cursor: pointer;">
+    <div style="margin-bottom:4px;margin-top:14px;">
+        <label>
             <input class="cb" type="radio" name="radius" value="0" (change)="handleSel($event.target.value)" [checked]="!radius.value" />
-            <span> Suggested radius </span>
+            <p> Suggested radius </p>
         </label>
     </div>
     <div>
-        <label style="margin-top:7px;cursor: pointer;">
+        <label>
             <input class="cb" type="radio" name="radius" value="1" (change)="handleSel($event.target.value)" [checked]="radius.value"/>
-            <span> Custom radius </span>
+            <p> Custom radius </p>
         </label>
     </div>
     <ng-container *ngIf="radius.value">
@@ -22,7 +22,7 @@
             <div class="paragraph14 paragraph14__bold" style="margin-top:16px;margin-bottom:4px;">
                 Custom radius - {{radius.value}}km
             </div>
-            <div >
+            <div style="padding: 8px 0;">
                 <input min="1" max="10" step="1" type="range" [formControl]="radius" />
             </div>
         </div>

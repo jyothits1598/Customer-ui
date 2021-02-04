@@ -34,7 +34,7 @@ input::-webkit-input-placeholder {
 @media (max-width: 575.98px) {
   .wallpaper-card {
     position: relative;
-    margin: 16px;
+    margin: 15px 16px 14px 16px;
   }
   .overflow-container {
     width: 100% !important;
@@ -66,6 +66,9 @@ input::-webkit-input-placeholder {
     margin-top: -15px;
   }
   .margins-center {
+    margin: 0 auto 25px;
+  }
+  .margins-center-forgot {
     margin: 0 auto 25px;
   }
   .security-card {
@@ -115,7 +118,7 @@ input::-webkit-input-placeholder {
     z-index: 1;
   }
   .signup-panel {
-    padding: 24px 24px 4px 0px !important;
+    padding: 24px 24px 4px 24px !important;
   }
   .sp {
     padding:0 16px !important;
@@ -129,13 +132,16 @@ input::-webkit-input-placeholder {
   .bg-white {
     display:none;
   }
+  .l18 {
+    line-height:18px !important;
+  }
 }
 
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) and (max-width: 767.98px) {
   .wallpaper-card {
     position: relative;
-    margin: 16px;
+    margin: 15px 16px 14px 16px;
   }
   .overflow-container {
     width: 100% !important;
@@ -169,6 +175,9 @@ input::-webkit-input-placeholder {
     margin-top: -15px;
   }
   .margins-center {
+    margin: 0 auto 25px;
+  }
+  .margins-center-forgot {
     margin: 0 auto 25px;
   }
   .security-card {
@@ -218,7 +227,7 @@ input::-webkit-input-placeholder {
     cursor: pointer;
   }
   .signup-panel {
-    padding: 24px 24px 4px 0px !important;
+    padding: 24px 24px 4px 24px !important;
   }
   .sp {
     padding:0 16px !important;
@@ -232,13 +241,16 @@ input::-webkit-input-placeholder {
   .bg-white {
     display:none;
   }
+  .l18 {
+    line-height:18px !important;
+  }
 }
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) and (max-width: 991.98px) {
   .wallpaper-card {
     position: relative;
-    margin: 16px;
+    margin: 15px 16px 14px 16px;
   }
   .overflow-container {
     width: 100% !important;
@@ -274,6 +286,9 @@ input::-webkit-input-placeholder {
   .margins-center {
     margin: 0 auto 25px;
   }
+  .margins-center-forgot {
+    margin: 0 auto 25px;
+  }
   .security-card {
     margin: 72px auto 25px;
     max-width: 350px;
@@ -321,7 +336,7 @@ input::-webkit-input-placeholder {
     cursor: pointer;
   }
   .signup-panel {
-    padding: 24px 24px 4px 0px !important;
+    padding: 24px 24px 4px 24px !important;
   }
   .sp {
     padding-right:16px !important;
@@ -345,11 +360,11 @@ input::-webkit-input-placeholder {
     background: var(--color-background);
     left: 0;
     border-radius: 16px;
-    margin: 88px 0 48px 16px;
+    margin: 88px 0 40px 16px;
     padding: 16px;
   }
   .wal-image {
-    height: 320px;
+    height: 312px;
   }
   .only-small {
     display: none;
@@ -366,12 +381,16 @@ input::-webkit-input-placeholder {
   }
   .store-list-bg-fv {
     padding: 50px 0;
-  }
-  
+  } 
   .margins-center {
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
     border-radius: 16px;
     margin: 48px auto 25px;
+  }
+  .margins-center-forgot {
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    margin: 72px auto 25px;
   }
   .spacing {
     margin-bottom: 24px;
@@ -426,11 +445,11 @@ input::-webkit-input-placeholder {
     background: var(--color-background);
     left: 0;
     border-radius: 16px;
-    margin: 88px 0 48px 48px;
+    margin: 88px 0 40px 48px;
     padding: 16px;
   }
   .wal-image {
-    height: 320px;
+    height: 312px;
   }
   .only-small {
     display: none;
@@ -456,6 +475,11 @@ input::-webkit-input-placeholder {
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
     border-radius: 16px;
     margin: 48px auto 25px;
+  }
+  .margins-center-forgot {
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    margin: 72px auto 25px;
   }
   .spacing {
     margin-bottom: 24px;
@@ -546,17 +570,17 @@ input[class="cb"],
 input[class="rd"] {
   display: none;
 }
-input[class="cb"] + span:before {
+input[class="cb"] + p:before {
   content: "";
   display: inline-block;
   background: url("assets/images/ico_check_blank.png") no-repeat;
-  height: 25px;
+  height: 24px;
   margin-right: 5px;
   margin-bottom: -7px;
-  width: 25px;
+  width: 24px;
   cursor: pointer;
 }
-input[class="cb"]:checked + span:before {
+input[class="cb"]:checked + p:before {
   background: url("assets/images/ico_check_fill.png") no-repeat;
 }
 
