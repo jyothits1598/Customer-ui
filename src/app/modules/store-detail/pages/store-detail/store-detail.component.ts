@@ -29,7 +29,7 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
   loading: boolean = true;
   error: boolean = false;
   partnerAppLink = PARTNER_APP_LINK;
-  
+
   unSub$ = new Subject<true>();
 
   @ViewChild('observationElement', { read: ElementRef }) obsElement: ElementRef;
@@ -90,8 +90,8 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.unSub$.next(true);
-    this.interObserver.unobserve(this.obsElement.nativeElement);
-     if (!this.cartSrv.presentCartData && this.orderView.getCurrentPage() === OrderPages.Cart) this.orderView.showPage(null);
+    if (this.interObserver) this.interObserver.unobserve(this.obsElement.nativeElement);
+    if (!this.cartSrv.presentCartData && this.orderView.getCurrentPage() === OrderPages.Cart) this.orderView.showPage(null);
 
   }
 
