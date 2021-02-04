@@ -63,7 +63,7 @@ export class OrdersService {
   )
 
 
-  get orderHistoryorder
+  // get orderHistoryorder
 
   get orderToBeShown$(): Observable<number> {
     return this._orderToBeShown.asObservable();
@@ -125,8 +125,8 @@ export class OrdersService {
     return this.restApiService.get('api/customer/orders?order_id=' + orderId).pipe(map((resp: any) => mapToOrderData(resp.data.orders[0])));
   }
 
-  getAllOrder(): Observable<Pagination<OrderDto>> {
-    return this.restApiService.get('api/customer/orders/history').pipe(map((resp: any) => resp.data));
+  getAllOrder(page: number): Observable<Pagination<OrderDto>> {
+    return this.restApiService.get('api/customer/orders/history?page=' + page);
   }
 
   markOrderComplete(ordId: number, orderStatus: string) {
