@@ -16,12 +16,14 @@ import { IsAuthenticatedGuard } from './guards/is-authenticated.guard';
 import { OrderModule } from '../modules/order/order.module';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { OrdersService } from './services/orders.service';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 @NgModule({
   declarations: [CoreComponent, LayoutComponent, SnackBarComponent, SnackBarContainerComponent, LoginPromptComponent, SampleComponent, ConfirmationDialogComponent],
   imports: [
     CommonModule,
     CoreRoutingModule,
+    OverlayModule,
     NavbarModule,
     HomeModule,
     OrderModule

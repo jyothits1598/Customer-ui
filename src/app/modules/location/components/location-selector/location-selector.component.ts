@@ -44,9 +44,9 @@ export class LocationSelectorComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   showSelectorModal() {
-    this.layoutService.isMobile ?
+    this.overlayRef = this.layoutService.isMobile ?
       this.modalService.openComponentModal(LocationPanelComponent) :
-      this.popOverService.openComponentPopover(this.popOrigin, LocationPanelComponent, { xPos: 'start', yPos: 'bottom' });
+      this.popOverService.openComponentPopover(this.popOrigin, LocationPanelComponent, { xPos: 'start', yPos: 'bottom', disableAutoClose: true, onOutsideClick: () => this.overlayRef.dismiss() });
   }
 
   ngOnDestroy(): void {
