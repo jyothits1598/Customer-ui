@@ -1,5 +1,5 @@
 <div *ngIf="selecteditemId && storeDetail">
-  <store-item-detail [isStoreOpen]="isStoreOpen" [item]="{itemId: selecteditemId, storeName: storeDetail.name ,storeId: storeId}"></store-item-detail>
+  <store-item-detail [isStoreOpen]="isStoreOpen" [item]="{itemId: selecteditemId, storeName: storeDetail.name ,storeId: storeId,isFavourite:storeDetail.isFavourite}"></store-item-detail>
 </div>
 <div class="main-panel">
   <ng-container *ngIf="storeDetail">
@@ -22,7 +22,7 @@
                     <store-heart [store]="{id: storeDetail.id, isFavourite: storeDetail.isFavourite,page:'preview'}"></store-heart>
                 </li>
                 <li class="pointer-outline-none ml-20">
-                    <app-share [store]="{id: storeDetail.id, name: storeDetail.name}"></app-share>
+                    <app-share [store]="{id: storeDetail.id, name: storeDetail.name,page:'preview'}"></app-share>
                 </li>
                 <li class="pointer-outline-none ml-20">
                     <a [href]="'https://www.google.com/maps/dir/?api=1&destination='+storeDetail.latLng.lat+','+storeDetail.latLng.lng" target="_blank" style="text-decoration: none;">

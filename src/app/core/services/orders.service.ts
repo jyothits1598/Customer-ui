@@ -16,7 +16,7 @@ import { Pagination } from 'src/app/shared/classes/pagination';
 export class OrdersService {
   _orderToBeShown = new BehaviorSubject<number>(null);
   _trackingOrder = new BehaviorSubject<OrderDto>(null);
-  _thankyouData = new BehaviorSubject<{ storeName: string }>(null);
+  _thankyouData = new BehaviorSubject<{ storeName: string, storeId: number }>(null);
 
   forcedCheckingSub = new Subject<true>();
 
@@ -30,11 +30,12 @@ export class OrdersService {
     this._orderToBeShown.next(orderId);
   }
 
-  setThankyouData(data: { storeName: string }) {
+  setThankyouData(data: { storeName: string, storeId: number }) {
+    console.log(data);
     this._thankyouData.next(data);
   }
 
-  get thankyouData$(): Observable<{ storeName: string }> {
+  get thankyouData$(): Observable<{ storeName: string, storeId: number }> {
     return this._thankyouData.asObservable();
   }
 
