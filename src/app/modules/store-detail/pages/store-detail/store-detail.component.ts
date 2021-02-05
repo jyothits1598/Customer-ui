@@ -30,7 +30,12 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
   storeDetail: StoreDetail;
   loading: boolean = true;
   error: boolean = false;
+<<<<<<< HEAD
   isStoreOpen: boolean;
+=======
+  partnerAppLink = PARTNER_APP_LINK;
+
+>>>>>>> modal-popover-defects
   unSub$ = new Subject<true>();
   @ViewChild('observationElement', { read: ElementRef }) obsElement: ElementRef;
   @ViewChild('fbParent', { read: ElementRef }) fbParent: ElementRef;
@@ -93,7 +98,7 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.unSub$.next(true);
-    this.interObserver.unobserve(this.obsElement.nativeElement);
+    if (this.interObserver) this.interObserver.unobserve(this.obsElement.nativeElement);
     if (!this.cartSrv.presentCartData && this.orderView.getCurrentPage() === OrderPages.Cart) this.orderView.showPage(null);
 
   }

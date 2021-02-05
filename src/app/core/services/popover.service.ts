@@ -1,6 +1,8 @@
 import { ConnectedPosition, Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal, PortalInjector, TemplatePortal } from '@angular/cdk/portal';
 import { ElementRef, Injectable, Injector, Renderer2, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Router } from '@angular/router';
+import { take } from 'rxjs/operators';
 import { ComponentPopoverRef, PopoverConfig, PopoverRef } from '../model/popover';
 
 @Injectable({
@@ -16,7 +18,8 @@ export class PopoverService {
   }
 
   constructor(private overlay: Overlay,
-    private injector: Injector) { }
+    private injector: Injector,
+    private router: Router) { }
 
   registerRenderer() {
 
@@ -25,47 +28,107 @@ export class PopoverService {
   openTemplatePopover(origin: ElementRef, template: TemplateRef<any>, config: PopoverConfig = null) {
     //set up overlay configuration
     let overlayConfig = new OverlayConfig();
-    // overlayConfig.hasBackdrop = config.hasBackdrop === false ? false : true;
     overlayConfig.hasBackdrop = false;
     overlayConfig.positionStrategy = this.overlay.position().flexibleConnectedTo(origin.nativeElement).withPositions(this.generatePositions(config));
 
     let overLayRef = this.overlay.create(overlayConfig);
     // overLayRef.backdropClick().subscribe(e => { popoverRef.dismiss() });
     let popoverRef = new PopoverRef(overLayRef);
-    if (config.onDismiss) { popoverRef.onDismiss = config.onDismiss; }
+    if (config.onDismiss) { popoverRef.onDismiss = config.onDismiss; };
     let tempPortal = new TemplatePortal(template, this._viewContainerRef, { $implicit: popoverRef });
     overLayRef.attach(tempPortal);
 
-    if (true) {
-      let unListen;
-      setTimeout(() => {
-        unListen = this._renderer.listen('document', 'click', (e) => { if (!overLayRef.overlayElement.contains(e.target)) popoverRef.dismiss(); })
-      }, 100);
+    //auto hide functionality
+    let unListen;
+    let subs = this.router.events.pipe(take(1)).subscribe(() => popoverRef.dismiss())
 
-      // add outside click 
-      if (popoverRef.onDismiss) {
-        let onDisFun = popoverRef.onDismiss;
-        popoverRef.onDismiss = () => {
-          onDisFun();
-          unListen();
+    //click count is considered to deal with event bubbling
+    let clickCount: number = 0;
+    unListen = this._renderer.listen('document', 'click',
+      config.disableAutoClose ?
+        (e) => {
+          clickCount++;
+          if ((clickCount > 1) && !overLayRef.overlayElement.contains(e.target)) config.onOutsideClick();
         }
-      } else {
-        popoverRef.onDismiss = () => { unListen() }
+        :
+        (e) => {
+          clickCount++;
+          if (clickCount > 1) popoverRef.dismiss();
+        }
+    )
+
+
+    //if these is an onDimiss function add unListen along with it
+    if (popoverRef.onDismiss) {
+      let onDisFun = popoverRef.onDismiss;
+      popoverRef.onDismiss = () => {
+        onDisFun();
+        unListen();
+        subs.unsubscribe();
       }
+    } else {
+      popoverRef.onDismiss = () => { unListen(); subs.unsubscribe(); }
     }
+
+
     return popoverRef;
-    // document.addEventListener('click', (event) => { console.log('called click event handler, ', overLayRef.overlayElement.contains(<HTMLElement>(event.target)), event.target) })
   }
 
   openComponentPopover(origin: ElementRef, component: any, config: PopoverConfig = null) {
+    // let overlayConfig = new OverlayConfig();
+    // overlayConfig.hasBackdrop = true;
+    // overlayConfig.positionStrategy = this.overlay.position().flexibleConnectedTo(origin.nativeElement).withPositions(this.generatePositions(config));
+    // let overlayRef = this.overlay.create(overlayConfig);
+    // let popoverRef = new ComponentPopoverRef(overlayRef, null);
+    // let compPortal = new ComponentPortal(component, null, this.createInjector(popoverRef, this.injector));
+    // overlayRef.backdropClick().subscribe(e => { popoverRef.dismiss() })
+    // popoverRef.instance = overlayRef.attach(compPortal);
+    // return popoverRef;
+    //set up overlay configuration
     let overlayConfig = new OverlayConfig();
-    overlayConfig.hasBackdrop = true;
+    overlayConfig.hasBackdrop = false;
     overlayConfig.positionStrategy = this.overlay.position().flexibleConnectedTo(origin.nativeElement).withPositions(this.generatePositions(config));
-    let overlayRef = this.overlay.create(overlayConfig);
-    let popoverRef = new ComponentPopoverRef(overlayRef, null);
+
+    let overLayRef = this.overlay.create(overlayConfig);
+    // overLayRef.backdropClick().subscribe(e => { popoverRef.dismiss() });
+    let popoverRef = new PopoverRef(overLayRef);
+    if (config.onDismiss) { popoverRef.onDismiss = config.onDismiss; };
     let compPortal = new ComponentPortal(component, null, this.createInjector(popoverRef, this.injector));
-    overlayRef.backdropClick().subscribe(e => { popoverRef.dismiss() })
-    popoverRef.instance = overlayRef.attach(compPortal);
+    overLayRef.attach(compPortal);
+
+    //auto hide functionality
+    let unListen;
+    let subs = this.router.events.pipe(take(1)).subscribe(() => popoverRef.dismiss())
+
+    //click count is considered to deal with event bubbling
+    let clickCount: number = 0;
+    unListen = this._renderer.listen('document', 'click',
+      config.disableAutoClose ?
+        (e) => {
+          clickCount++;
+          if ((clickCount > 1) && !overLayRef.overlayElement.contains(e.target)) config.onOutsideClick();
+        }
+        :
+        (e) => {
+          clickCount++;
+          if (clickCount > 1) popoverRef.dismiss();
+        }
+    )
+
+
+    //if these is an onDimiss function add unListen along with it
+    if (popoverRef.onDismiss) {
+      let onDisFun = popoverRef.onDismiss;
+      popoverRef.onDismiss = () => {
+        onDisFun();
+        unListen();
+        subs.unsubscribe();
+      }
+    } else {
+      popoverRef.onDismiss = () => { unListen(); subs.unsubscribe(); }
+    }
+
+
     return popoverRef;
   }
 
@@ -104,3 +167,20 @@ export class PopoverService {
 
 
 }
+ // if (config.onOutsideClick) {
+    //   let unListen;
+    //   setTimeout(() => {
+    //     unListen = this._renderer.listen('document', 'click', (e) => { if (!overLayRef.overlayElement.contains(e.target)) config.onOutsideClick(); })
+    //   }, 100);
+
+    //   // add outside click 
+    //   if (popoverRef.onDismiss) {
+    //     let onDisFun = popoverRef.onDismiss;
+    //     popoverRef.onDismiss = () => {
+    //       onDisFun();
+    //       unListen();
+    //     }
+    //   } else {
+    //     popoverRef.onDismiss = () => { unListen() }
+    //   }
+    // }
