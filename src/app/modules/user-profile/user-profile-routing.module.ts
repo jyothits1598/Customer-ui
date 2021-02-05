@@ -11,6 +11,7 @@ import { ChangeEmailComponent } from './pages/user-security/change-email/change-
 import { PasswordConfirmationGuard } from './guards/password-confirmation.guard';
 import { ChangeMobileComponent } from './pages/user-security/change-mobile/change-mobile.component';
 import { BasicProfileComponent } from './pages/basic-profile/basic-profile.component';
+import { UserHistoryComponent } from './pages/user-history/user-history.component';
 
 const routes:
   Routes = [
@@ -61,6 +62,10 @@ const routes:
       ]
 
     },
+    {
+      path: 'history',
+      component: UserHistoryComponent
+    }
 
   ];
 

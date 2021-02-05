@@ -79,6 +79,9 @@ export class StoreItemDetailComponent implements OnChanges, OnDestroy {
       let control = this.itemDetail.modifiers.map((mod) => new FormControl());
       this.selectedOptions = new FormArray(control);
       this.selectedvalueChangeSubs = this.setUpSubscription();
+      
+      //initialise total amount
+      this.totalAmount = this.makeCalculations(this.itemDetail.basePrice, [], 1)
     });
   }
 
@@ -104,7 +107,7 @@ export class StoreItemDetailComponent implements OnChanges, OnDestroy {
       this.selectedOptions.markAllAsTouched();
       return;
     }
-    
+
     this.addingToCart = true;
     let itemDetail = { ...this.itemDetail };
     itemDetail.modifiers = this.selectedOptions.value.filter(m => m);
