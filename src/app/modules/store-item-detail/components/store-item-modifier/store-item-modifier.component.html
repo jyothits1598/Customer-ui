@@ -1,14 +1,14 @@
 <div style="margin-bottom:30px">
-    <div class="d-flex justify-content-between">
-        <div class="std-heading-4 text-capitalize">
-            {{modifier.name}} <br>
-            <span class="small-content" *ngIf="modifier.minSelection > 0; else optionalChoice">
-               <span [ngClass]="(this.optionControls.touched && this.optionControls.invalid) ? 'errorText' : '' "> Choose {{modifier.minSelection}} to {{modifier.maxSelection}} 
-                   <span *ngIf="modifier.freeSelection > 0;">
+    <div class="d-flex justify-content-between" style="padding: 2px 0;">
+        <div class="text-capitalize">
+            <p class="std-heading-4" style="margin-bottom: 4px;">{{modifier.name}} </p> 
+            <label class="small-content" *ngIf="modifier.minSelection > 0; else optionalChoice">
+               <label [ngClass]="(this.optionControls.touched && this.optionControls.invalid) ? 'errorText' : '' "> Choose {{modifier.minSelection}} to {{modifier.maxSelection}} 
+                   <label *ngIf="modifier.freeSelection > 0;">
                        ( {{modifier.freeSelection}} free )
-                    </span> 
-                </span>
-            </span>
+                   </label> 
+                </label>
+            </label>
         </div>
         <div *ngIf="modifier.minSelection > 0; else optional">
             <modifier-selection-status [status]="{valid: optionControls.valid, touched: optionControls.touched}"></modifier-selection-status>
@@ -27,9 +27,9 @@
                 </div>
             </td>
             <td align="right">
-                <span class="small-content small-content__price">
+                <label class="small-content small-content__price">
                     +${{option.price}}
-                </span>
+                </label>
             </td>
         </tr>
     </table>
@@ -40,7 +40,7 @@
     </div>
 </ng-template>
 <ng-template #optionalChoice>
-    <span class="small-content"> Choose 1 to {{modifier.maxSelection}} </span>
+    <label class="small-content"> Choose 1 to {{modifier.maxSelection}} </label>
 </ng-template>
         <!-- <button (click)="optionControls.markAllAsTouched()">mark as touched</button> -->
         <!-- <button (click)="this.setupAccessor()">show control</button> -->
