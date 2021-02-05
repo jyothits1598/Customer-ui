@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { finalize, map, switchMap, take, tap } from 'rxjs/operators';
-import { ItemModifier } from 'src/app/modules/store-item-detail/model/store-item-detail';
+import { ItemModifier, StoreItemDetail } from 'src/app/modules/store-item-detail/model/store-item-detail';
 import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
 import { CartData, CartDto, mapToCartData, MapToDto, OrderSummary } from '../model/cart';
 import { ComponentModalRef } from '../model/modal';
@@ -19,6 +19,30 @@ export class CartService {
   cartData = new BehaviorSubject<CartData>(null);
 
   storageIdentifier: string = 'cartData';
+  
+  get presentCartData() {
+    return this.cartData.value;
+  }
+
+  constructor(private modalService: ModalService,
+    private storageService: StorageService,
+    private authService: AuthService,
+    private restApiService: RestApiService,
+    private orderView: OrderViewControllerService
+  ) {
+    this.authService.loggedUser$.subscribe((user) => {
+      if (!this.presentCartData) {
+        let savedData = this.storageService.get(this.storageIdentifier);
+        if (savedData) this.addItem(savedData).subscribe();
+        else {
+          if (user) {
+            //try to fetch from backend
+            this.getCart().subscribe((cart) => { if (cart) { this.cartData.next(cart); this.storageService.store(this.storageIdentifier, cart) } })
+          }
+        }
+      }else this.addItem(this.presentCartData).subscribe();
+    })
+  }
 
   get cartData$(): Observable<CartData> {
     return this.cartData.asObservable();
@@ -41,7 +65,7 @@ export class CartService {
       map(data => {
         let count = this.calculateItemCount(data);
         if (!count) return null;
-        
+
         let subTotal = this.calculateSubTotal(data);
         let surChrg = subTotal * 0.02;
         let total = subTotal + surChrg;
@@ -55,33 +79,8 @@ export class CartService {
     )
   }
 
-  get presentCartData() {
-    return this.cartData.value;
-  }
-
-  constructor(private modalService: ModalService,
-    private storageService: StorageService,
-    private authService: AuthService,
-    private restApiService: RestApiService,
-    private orderView: OrderViewControllerService
-  ) {
-    this.authService.loggedUser$.pipe(take(1)).subscribe((user) => {
-      if (!this.presentCartData) {
-        let savedData = this.storageService.get(this.storageIdentifier);
-        if (savedData) this.addItem(savedData).subscribe();
-        else {
-          if (user) {
-            //try to fetch from backend
-            this.getCart().subscribe((cart) => { if (cart) { this.cartData.next(cart); this.storageService.store(this.storageIdentifier, cart) } })
-          }
-        }
-      }
-    })
-  }
-
   // TODO: rewrite this function with better implementation
   addItem(cData: CartData, replaceItems: boolean = false, skipBackend: boolean = false): Observable<boolean> {
-    console.log('add item called', cData);
     let newCartData = this.presentCartData ? { ...this.presentCartData } : null;
     let resultObs: Observable<any>;
 
@@ -90,7 +89,11 @@ export class CartService {
       if (newCartData.storeId === cData.storeId) {
         //in the current inplementation only one item is added at a time, hence index 0;
         if (replaceItems) newCartData = cData;
-        else newCartData.items.push(cData.items[0]);
+        else {
+          let item = newCartData.items.find((item) => this.checkIfIdentical(item.item, cData.items[0].item));
+          if (item) item.quantity += cData.items[0].quantity;
+          else newCartData.items.push(cData.items[0]);
+        }
         resultObs = of(true);
       } else {
         //item is from an other store
@@ -105,8 +108,25 @@ export class CartService {
       console.log('moiddle of flow', this.authService.isLoggedIn)
     }
     //post cart to backend if signed in
+    console.log('add item called', cData, skipBackend)
     if (this.authService.isLoggedIn && !skipBackend) resultObs = resultObs.pipe(switchMap(() => this.postCart(newCartData)));
     return resultObs.pipe(tap(() => { this.cartData.next(newCartData); if (!newCartData) this.orderView.showPage(OrderPages.Cart); this.storageService.store(this.storageIdentifier, newCartData) }));
+  }
+
+  //check if both items are same and have the same modifier configuration
+  checkIfIdentical(item1: StoreItemDetail, item2: StoreItemDetail) {
+    if (item1.id !== item2.id || item1.modifiers.length !== item2.modifiers.length) return false;
+    for (const m1 of item1.modifiers) {
+      //check if the same mod is present
+      const m2 = item2.modifiers.find((m) => m.id === m1.id);
+      if (m2) {
+        for (const op1 of m1.options) {
+          const op2 = m2.options.find((o) => o.id === op1.id);
+          if (!op2) return false;
+        }
+      } else return false;
+    }
+    return true;
   }
 
   deleteItem(itemId: number): Observable<boolean> {
@@ -170,4 +190,168 @@ export class CartService {
   debug() {
     this.cartData.next(null)
   }
+
+  //test function
+  // testCheckIfIdentical() {
+  //   //case 1 equal
+  //   let c1i1: StoreItemDetail = {
+  //     id: 1,
+  //     name: 'dummy',
+  //     basePrice: 10,
+  //     image: 'dummy',
+  //     storeId: 1,
+  //     modifiers: [
+  //       {
+  //         id: 1,
+  //         name: 'dummy',
+  //         minSelection: 0,
+  //         maxSelection: 0,
+  //         freeSelection: 0,
+  //         options: [
+  //           { id: 1, name: 'dummy', price: 0 }
+  //         ]
+  //       }
+  //     ]
+  //   };
+  //   let c1i2: StoreItemDetail = {
+  //     id: 1,
+  //     name: 'dummy',
+  //     basePrice: 10,
+  //     image: 'dummy',
+  //     storeId: 1,
+  //     modifiers: [
+  //       {
+  //         id: 1,
+  //         name: 'dummy',
+  //         minSelection: 0,
+  //         maxSelection: 0,
+  //         freeSelection: 0,
+  //         options: [
+  //           { id: 1, name: 'dummy', price: 0 }
+  //         ]
+  //       }
+  //     ]
+  //   };
+  //   const c1 = this.checkIfIdentical(c1i1, c1i2)
+  //   console.log('required answer, true', c1)
+
+  //   //different modifier
+  //   let c2i1: StoreItemDetail = {
+  //     id: 1,
+  //     name: 'dummy',
+  //     basePrice: 10,
+  //     image: 'dummy',
+  //     storeId: 1,
+  //     modifiers: [
+  //       {
+  //         id: 2,
+  //         name: 'dummy',
+  //         minSelection: 0,
+  //         maxSelection: 0,
+  //         freeSelection: 0,
+  //         options: [
+  //           { id: 1, name: 'dummy', price: 0 }
+  //         ]
+  //       }
+  //     ]
+  //   };
+  //   let c2i2: StoreItemDetail = {
+  //     id: 1,
+  //     name: 'dummy',
+  //     basePrice: 10,
+  //     image: 'dummy',
+  //     storeId: 1,
+  //     modifiers: [
+  //       {
+  //         id: 1,
+  //         name: 'dummy',
+  //         minSelection: 0,
+  //         maxSelection: 0,
+  //         freeSelection: 0,
+  //         options: [
+  //           { id: 1, name: 'dummy', price: 0 }
+  //         ]
+  //       }
+  //     ]
+  //   };
+
+  //   const c2 = this.checkIfIdentical(c2i1, c2i2);
+  //   console.log('required answer, false', c2)
+
+  //   //case 3 - same modifier and different items
+  //   let c3i1: StoreItemDetail = {
+  //     id: 1,
+  //     name: 'dummy',
+  //     basePrice: 10,
+  //     image: 'dummy',
+  //     storeId: 1,
+  //     modifiers: [
+  //       {
+  //         id: 1,
+  //         name: 'dummy',
+  //         minSelection: 0,
+  //         maxSelection: 0,
+  //         freeSelection: 0,
+  //         options: [
+  //           { id: 1, name: 'dummy', price: 0 }
+  //         ]
+  //       }
+  //     ]
+  //   };
+  //   let c3i2: StoreItemDetail = {
+  //     id: 1,
+  //     name: 'dummy',
+  //     basePrice: 10,
+  //     image: 'dummy',
+  //     storeId: 1,
+  //     modifiers: [
+  //       {
+  //         id: 1,
+  //         name: 'dummy',
+  //         minSelection: 0,
+  //         maxSelection: 0,
+  //         freeSelection: 0,
+  //         options: [
+  //           { id: 2, name: 'dummy', price: 0 }
+  //         ]
+  //       }
+  //     ]
+  //   };
+
+  //   const c3 = this.checkIfIdentical(c3i1, c3i2);
+  //   console.log('required answer, false', c3)
+
+  //   // case 4 - one does not have modifiers
+  //   let c4i1: StoreItemDetail = {
+  //     id: 1,
+  //     name: 'dummy',
+  //     basePrice: 10,
+  //     image: 'dummy',
+  //     storeId: 1,
+  //     modifiers: [
+  //       {
+  //         id: 1,
+  //         name: 'dummy',
+  //         minSelection: 0,
+  //         maxSelection: 0,
+  //         freeSelection: 0,
+  //         options: [
+  //           { id: 1, name: 'dummy', price: 0 }
+  //         ]
+  //       }
+  //     ]
+  //   };
+  //   let c4i2: StoreItemDetail = {
+  //     id: 1,
+  //     name: 'dummy',
+  //     basePrice: 10,
+  //     image: 'dummy',
+  //     storeId: 1,
+  //     modifiers: []
+  //   };
+  //   const c4 = this.checkIfIdentical(c4i1, c4i2)
+  //   console.log('required answer, false', c4)
+
+
+  // }
 }

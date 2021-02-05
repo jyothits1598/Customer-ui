@@ -4,13 +4,14 @@
 </span>
 <!-- [ngClass]="{active: profileRouteActive}" -->
 <ng-template #profTemp>
+    <div *ngIf="isMobile" disableBodyScroll></div>
     <ul class="profile-popup">
         <li class="only-mobile" style="padding: 0;margin:0;">
             <div class="profile-header-resp">
                 More
             </div>
         </li>
-        <li routerLink="profile/basic" style="outline:0;" class="">
+        <li routerLink="profile/basic" style="outline:0;">
             <img src="assets/svg/signup/ico_account_blue.svg" class="pdr-16"><label>Profile</label>
         </li>
         <li routerLink="profile/settings" style="outline:0;"> <img src="assets/svg/signup/ico_settings_outline.svg"
@@ -23,8 +24,8 @@
             <span style="padding-left:16px;"> History </span> 
         </li>
         <!-- <li  style="outline:0;" routerLink="/under-construction"> <img src="assets/images/profile/ico_mobile.png" class="profile-ic-21" > <span style="padding-left:16px;"> Get the app </span> </li> -->
-        <li (click)="logout()" style="outline:0;"> 
-            <img src="assets/svg/signup/ico_logout.svg" class="pdr-16"><label>Logout</label> 
+        <li (click)="logout()" style="outline:0;">
+            <img src="assets/svg/signup/ico_logout.svg" class="pdr-16"><label>Logout</label>
         </li>
     </ul>
 </ng-template>

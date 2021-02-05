@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { ItemModiferSelectorRadioComponent } from './components/item-modifer-selector-radio/item-modifer-selector-radio.component';
 import { ModifierSelectionStatusComponent } from './components/modifier-selection-status/modifier-selection-status.component';
 import { ItemCountComponent } from './components/item-count/item-count.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -14,6 +15,7 @@ import { ItemCountComponent } from './components/item-count/item-count.component
   declarations: [StoreItemDetailComponent, StoreItemModifierComponent, ItemModiferSelectorRadioComponent, ModifierSelectionStatusComponent, ItemCountComponent],
   imports: [
     CommonModule,
+    SharedModule,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,

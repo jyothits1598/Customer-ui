@@ -100,7 +100,7 @@ export class LoginComponent implements OnInit {
   afterSignin() {
     if (!this.authService.loggedUser.firstName || !this.authService.loggedUser.lastName) { this.router.navigate(['/profile']); return; }
     this.route.snapshot.queryParams.redirect ?
-      this.router.navigate([this.route.snapshot.queryParams.redirect])
+      this.router.navigateByUrl(this.route.snapshot.queryParams.redirect)
       : this.router.navigate(['/'])
   }
 

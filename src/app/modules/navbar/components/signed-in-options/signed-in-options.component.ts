@@ -17,13 +17,14 @@ export class SignedInOptionsComponent implements OnInit, OnDestroy {
   unListen: any;
   popoverRef: PopoverRef;
   profileRouteActive;
-
+  isMobile = this.lSrv.isMobile;
+  
   unSub$ = new Subject<true>();
   constructor(private popover: PopoverService,
     private authService: AuthService,
-    private renderer: Renderer2,
     private window: Window,
-    private router: Router) { }
+    private router: Router,
+    private lSrv: LayoutService) { }
 
   ngOnDestroy(): void {
     if (this.unListen) this.unListen();
@@ -37,26 +38,17 @@ export class SignedInOptionsComponent implements OnInit, OnDestroy {
     ).subscribe(c => this.profileRouteActive = c);
   }
 
-  setupListener() {
-    setTimeout(() => {
-      this.unListen = this.renderer.listen(window, 'click', (e) => { this.closePopover(); });
-    }, 0);
-  }
-
   showPopover(template: TemplateRef<any>) {
     if (this.popoverRef) return;
-    this.popoverRef = this.popover.openTemplatePopover(this.icon, template, { xPos: 'end', yPos: 'bottom', hasBackdrop: false });
-    this.setupListener();
+    this.popoverRef = this.popover.openTemplatePopover(this.icon, template, { xPos: 'end', yPos: 'bottom', hasBackdrop: false, onDismiss: () => { this.popoverRef = null } });
+    // this.setupListener();
   }
 
   closePopover() {
     this.popoverRef.dismiss();
-    this.unListen();
-    this.popoverRef = null;
   }
 
   logout() {
-    // this.router.navigateByUrl('/');
     this.window.location.href = '/';
     this.authService.logout();
   }

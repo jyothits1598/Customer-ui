@@ -14,6 +14,7 @@ import { OrderModule } from 'src/app/modules/order/order.module';
   declarations: [NavbarComponent, SignedInOptionsComponent, NavbarIconsComponent],
   imports: [
     CommonModule,
+    SharedModule,
     RouterModule,
     LocationModule,
     ModalModule,

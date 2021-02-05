@@ -16,32 +16,34 @@
     </div>
     <table style=" box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;"
                 *ngFor="let option of modifier.options; let i = index">
-        <tr>
-            <td>
-                <div class="form-check" style="padding:0;">
-                    <label class="form-check-label lable-text">
-                        <input type="checkbox" class="form-check-input" [id]="modifier.name+i"
-                            [formControl]="optionControls.at(i)" (change)="handleChange()">
-                        <span [for]="modifier.name+i" class="text-capitalize"> {{option.name}} </span>
-                    </label>
-                </div>
-            </td>
-            <td align="right">
-                <label class="small-content small-content__price">
-                    +${{option.price}}
-                </label>
-            </td>
-        </tr>
-    </table>
-</div>
-<ng-template #optional>
-    <div>
-        <span class="required" style="background: #fafafa"> Optional </span>
-    </div>
-</ng-template>
-<ng-template #optionalChoice>
-    <label class="small-content"> Choose 1 to {{modifier.maxSelection}} </label>
-</ng-template>
+                <tr>
+                    <td>
+                        <div class="form-check" style="padding:0;">
+                            <label class="form-check-label lable-text">
+                                <input type="checkbox" class="form-check-input" [id]="modifier.name+i"
+                                    [formControl]="optionControls.at(i)" (change)="handleChange()">
+                                <span [for]="modifier.name+i" class="text-capitalize"> {{option.name}} </span>
+                            </label>
+                        </div>
+                    </td>
+                    <td align="right">
+                        <span class="small-content small-content__price">
+                            +${{option.price}}
+                        </span>
+                    </td>
+                </tr>
+                </table>
+        </div>
+
+        <ng-template #optional>
+            <div>
+                <span class="required" style="background: #fafafa"> Optional </span>
+            </div>
+        </ng-template>
+
+        <ng-template #optionalChoice>
+            <span class="small-content"> Choose upto {{modifier.maxSelection}} </span>
+        </ng-template>
         <!-- <button (click)="optionControls.markAllAsTouched()">mark as touched</button> -->
         <!-- <button (click)="this.setupAccessor()">show control</button> -->
         <!-- <input type="text" [formControl]="testControl">

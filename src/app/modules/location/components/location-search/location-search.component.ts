@@ -36,10 +36,6 @@ export class LocationSearchComponent implements AfterViewInit, OnDestroy {
       switchMap((val: string) => { return this.googleLocation.getSuggestions(val).pipe(finalize(() => this.suggestionsLoading = false)) })).subscribe(
         (val: any) => {
           this.suggestions = val;
-          console.log('this is the autocomplete suggestions', val)
-          // setTimeout(() => {
-          //   this.changeDetector.detectChanges();
-          // }, 0);
         }
       )
 
