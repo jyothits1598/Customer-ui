@@ -10,6 +10,7 @@ import { finalize, takeUntil } from 'rxjs/operators';
 import { CartData } from 'src/app/core/model/cart';
 import { CartService } from 'src/app/core/services/cart.service';
 import { OrderPages, OrderViewControllerService } from 'src/app/core/services/order-view-controller.service';
+import { SnackBarService } from 'src/app/core/services/snack-bar.service';
 import { ItemModifier, StoreItemDetail } from '../../model/store-item-detail';
 import { StoreItemDataService } from '../../services/store-item-data.service';
 
@@ -39,6 +40,8 @@ export class StoreItemDetailComponent implements OnChanges, OnDestroy {
   selectedvalueChangeSubs: Subscription;
   @ViewChild('observationElement', { read: ElementRef }) obsElement: ElementRef;
   @Input() item: { storeId: number, storeName: string, itemId: number };
+  @Input() isStoreOpen: boolean;
+
   itemDetail: StoreItemDetail
   loading: boolean = true;
   show = true;
@@ -57,7 +60,8 @@ export class StoreItemDetailComponent implements OnChanges, OnDestroy {
   constructor(private storeItemData: StoreItemDataService,
     private location: Location,
     private cartService: CartService,
-    private ov: OrderViewControllerService) {
+    private ov: OrderViewControllerService,
+    private sBSrv: SnackBarService) {
     this.makeCalculations = this.cartService.makeCalculations;
   }
 
@@ -79,7 +83,7 @@ export class StoreItemDetailComponent implements OnChanges, OnDestroy {
       let control = this.itemDetail.modifiers.map((mod) => new FormControl());
       this.selectedOptions = new FormArray(control);
       this.selectedvalueChangeSubs = this.setUpSubscription();
-      
+
       //initialise total amount
       this.totalAmount = this.makeCalculations(this.itemDetail.basePrice, [], 1)
     });
@@ -103,6 +107,11 @@ export class StoreItemDetailComponent implements OnChanges, OnDestroy {
   }
 
   addToCart() {
+    if(!this.isStoreOpen){
+      this.sBSrv.error('Sorry, the store is currently not taking any orders.');
+      return;
+    }
+
     if (this.selectedOptions.invalid) {
       this.selectedOptions.markAllAsTouched();
       return;

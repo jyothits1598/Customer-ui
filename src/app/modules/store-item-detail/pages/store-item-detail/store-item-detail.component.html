@@ -52,7 +52,7 @@
         </div>
         <div class="footer-btn">
             <div class="add-cart-card text-center">
-                <div (click)="addToCart()" type="button" class="cart-button">
+                <div [ngStyle]="{'filter': !isStoreOpen? 'opacity(0.5)':''}" (click)="addToCart()" type="button" class="cart-button">
                     <ng-container *ngIf="!addingToCart; else ld">
                         <span class="cart-text">Add to cart</span> <span *ngIf="itemDetail"
                             class="float-right  cart-text">${{totalAmount}}</span>
