@@ -32,23 +32,27 @@ export interface OrderDto extends CartDto {
     status: string,
     order_id: number,
     updated_at: string,
+    ordered_at: string,
 }
 
 export interface ConfirmedOrderData extends CartData {
     preparingOrder: string,
     totalPrice: number,
     status: string,
-    id: number
-    orderTime: Date
+    id: number,
+    orderTime: Date,
+    orderedAt: string,
 }
 
 export function mapToOrderData(data: OrderDto) {
+    console.log('map to order called', data);
     let ordData: ConfirmedOrderData = <ConfirmedOrderData>mapToCartData(data);
     ordData.preparingOrder = data.preparing_order;
     ordData.totalPrice = data.total_price;
     ordData.status = data.status;
     ordData.id = data.order_id;
-    ordData.orderTime = new Date(data.updated_at)
+    ordData.orderTime = new Date(data.updated_at);
+    ordData.orderedAt = data.ordered_at;
     return ordData;
 }
 
@@ -110,37 +114,37 @@ export function MapToDto(data: CartData): CartDto {
     }
 }
 
-export interface ordersList{
-    current_page: number,
-    first_page_url: string,
-    total: number,
-    orders: Array<orders>
-}
-export interface orders {
-    order_id: number,
-    phone_number: number,
-    items: Array<items>,
-    store_name: string,
-    total_price: number
-}
+// export interface ordersList{
+//     current_page: number,
+//     first_page_url: string,
+//     total: number,
+//     orders: Array<orders>
+// }
+// export interface orders {
+//     order_id: number,
+//     phone_number: number,
+//     items: Array<items>,
+//     store_name: string,
+//     total_price: number
+// }
 
-export interface items {
-    item_id: number,
-    item_name: string,
-    item_price: string,
-    modifiers: Array<modifier>,
-    quantity: number,
-    total_item_price: number,
-}
-export interface modifier {
-    modifier_id: number,
-    modifier_name: string,
-    options:Array<options>
-}
+// export interface items {
+//     item_id: number,
+//     item_name: string,
+//     item_price: string,
+//     modifiers: Array<modifier>,
+//     quantity: number,
+//     total_item_price: number,
+// }
+// export interface modifier {
+//     modifier_id: number,
+//     modifier_name: string,
+//     options:Array<options>
+// }
 
-export interface options{
-    name: string,
-    optionId: number,
-    option_price: number
-}
+// export interface options{
+//     name: string,
+//     optionId: number,
+//     option_price: number
+// }
 

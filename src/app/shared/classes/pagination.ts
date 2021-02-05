@@ -20,6 +20,7 @@ export class Pagination<T>{
     totalCount: number;
 
     setPaginationData(resp) {
+        console.log('set page', resp, resp.data.next_page_url);
         this.currentPage += 1;
         this.totalCount = resp.data.total;
         if (!resp.data.next_page_url) this.hasEnded = true;

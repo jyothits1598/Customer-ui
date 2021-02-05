@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CartService } from 'src/app/core/services/cart.service';
 import { OrdersService } from 'src/app/core/services/orders.service';
-import { ConfirmedOrderData, orders } from 'src/app/core/model/cart';
+import { ConfirmedOrderData } from 'src/app/core/model/cart';
 import { Subject } from 'rxjs';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { finalize, switchMap, takeUntil } from 'rxjs/operators';
 import { OrderPagination, Pagination } from 'src/app/shared/classes/pagination';
+import { ItemModifier } from 'src/app/modules/store-item-detail/model/store-item-detail';
 @Component({
   selector: 'app-user-history',
   templateUrl: './user-history.component.html',
@@ -21,19 +22,29 @@ export class UserHistoryComponent implements OnInit, OnDestroy {
   unSub$ = new Subject<true>();
   ordData: Array<ConfirmedOrderData> = [];
   pagination: OrderPagination;
+  loading: boolean;
+
+  makeCalculations: (itemBasePrice: number, selectedModifiers: Array<ItemModifier>, count: number) => number = this.cartSrv.makeCalculations;
+  calcTotal: (cartData) => number = this.cartSrv.calculateTotalAmount;
+
   ngOnInit(): void {
     this.pagination = new OrderPagination(this.ordSrv.getAllOrder.bind(this.ordSrv));
     this.pagination.getNext().pipe(takeUntil(this.unSub$)).subscribe(resp => this.ordData.splice(this.ordData.length, 0, ...resp));
-    //         }
-    //     ),
-    //     takeUntil(this.unSub$)
-    //   )
-    //     .subscribe((data) => { this.ordData = data });
-    // }
-
   }
+
+  modifiersToOptionNameArr(mods: Array<ItemModifier>) {
+    let m = mods.map(mod => mod.options.map(op => op.name));
+    return Array.prototype.concat.apply([], m);
+  }
+
 
   loadNext() {
-    this.pagination.getNext().pipe(takeUntil(this.unSub$)).subscribe(resp => this.ordData.splice(this.ordData.length, 0, ...resp));
+    this.loading = true;
+    this.pagination.getNext().pipe(takeUntil(this.unSub$), finalize(() => this.loading = false)).subscribe(resp => this.ordData.splice(this.ordData.length, 0, ...resp));
   }
+
+  getCount(oD: ConfirmedOrderData) {
+    return oD.items.reduce((i1, i2) => i1 + i2.quantity, 0);
+  }
+ 
 }
