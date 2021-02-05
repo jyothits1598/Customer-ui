@@ -30,12 +30,7 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
   storeDetail: StoreDetail;
   loading: boolean = true;
   error: boolean = false;
-<<<<<<< HEAD
   isStoreOpen: boolean;
-=======
-  partnerAppLink = PARTNER_APP_LINK;
-
->>>>>>> modal-popover-defects
   unSub$ = new Subject<true>();
   @ViewChild('observationElement', { read: ElementRef }) obsElement: ElementRef;
   @ViewChild('fbParent', { read: ElementRef }) fbParent: ElementRef;
