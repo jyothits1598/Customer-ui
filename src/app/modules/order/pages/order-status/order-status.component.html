@@ -37,9 +37,9 @@
                     </div>
                 </div>
                 <div class="cart-item-modifiers">
-                    <ng-container *ngFor="let mod of modifiersToOptionNameArr(item.item.modifiers)">
+                    <ng-container *ngFor="let mod of modifiersToOptionNameArr(item.item.modifiers);let i=index;">
+                        <i class="fa fa-circle" *ngIf="i>0" aria-hidden="true"></i>
                         <span class="text-capitalize">{{mod}} </span>
-                        <i class="fa fa-circle" aria-hidden="true"></i>
                     </ng-container>   
                 </div>
                 <hr>

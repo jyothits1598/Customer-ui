@@ -3,18 +3,17 @@
 -->
 <!-- <div class="right-content">
     <div class="right-content-overflow"> -->
-        <cart-content></cart-content>
-    <!-- </div> -->
-    <!-- <button *ngIf="cartTotal$ | async; let total"></button> -->
+<cart-content></cart-content>
 <!-- </div> -->
-
-<div *ngIf="cartTotal$ | async; let total"  (click)="continue()" class="cart-in-store-details cart-card cart-anim continue-button-index" >
+<!-- <button *ngIf="cartTotal$ | async; let total"></button> -->
+<!-- </div> -->
+<div *ngIf="cartSummary$ | async; let s" (click)="continue()" class="cart-in-store-details cart-card cart-anim continue-button-index">
     <div class="cart-button">
         <div class="row">
             <div class="col-sm-12 col-12 text-center">
                 <span class="cart-text cart-count">
-                    Continue 
-                    <span class="float-right">${{total}}</span>
+                    Continue
+                    <span class="float-right">${{s.total}}</span>
                 </span>
             </div>
         </div>

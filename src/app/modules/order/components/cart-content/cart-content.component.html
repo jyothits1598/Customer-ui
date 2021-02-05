@@ -48,8 +48,9 @@
                 </div>
             </div>
             <div class="cart-item-modifiers">
-                <ng-container *ngFor="let mod of modifiersToOptionNameArr(item.item.modifiers)">
-                    <span> <i class="fa fa-circle"></i> {{mod}} </span>
+                <ng-container *ngFor="let mod of modifiersToOptionNameArr(item.item.modifiers);let i=index;">
+                    <i class="fa fa-circle" *ngIf="i>0" aria-hidden="true"></i>
+                    <span class="text-capitalize"> {{mod}} </span>
                 </ng-container>
             </div>
             <hr>
@@ -58,14 +59,12 @@
     <!--
         Surcharge
     -->
-    <ng-container *ngIf="cartTotal$ | async; let total">
-        <!--
-           Sub total
-        -->
+
+    <ng-container *ngIf="orderSummary$ | async; let summary">
         <div class="order-surcharge">
             <div class="d-flex justify-content-between">
-                <label class="f-16-blur">Sub total</label>
-                <label class="f-14 f-b">${{total}}</label>
+                <label class="f-16-blur">Surcharge</label>
+                <label class="f-14 f-b">${{summary.surcharge}}</label>
             </div>
         </div>
         <hr>
@@ -74,8 +73,8 @@
         -->
         <div class="order-surcharge">
             <div class="d-flex justify-content-between">
-                <label class="f-16-blur">Surcharge</label>
-                <label class="f-14 f-b">$0.00</label>
+                <label class="f-16-blur">Sub total</label>
+                <label class="f-14 f-b">${{summary.subtotal}}</label>
             </div>
         </div>
         <hr>
@@ -85,7 +84,7 @@
         <div class="order-surcharge">
             <div class="d-flex justify-content-between">
                 <label class="f-16 f-b">Amount due</label>
-                <label class="f-24 f-b">${{total}}</label>
+                <label class="f-24 f-b">${{summary.total}}</label>
             </div>
         </div>
         <hr>

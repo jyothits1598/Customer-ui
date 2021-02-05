@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Route, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { CartData } from 'src/app/core/model/cart';
+import { CartData, OrderSummary } from 'src/app/core/model/cart';
 import { CartService } from 'src/app/core/services/cart.service';
 import { OrderPages, OrderViewControllerService } from 'src/app/core/services/order-view-controller.service';
 
@@ -14,8 +14,7 @@ import { OrderPages, OrderViewControllerService } from 'src/app/core/services/or
 export class CartButtonComponent implements OnInit {
   doPayment: boolean = false;
   cartData$: Observable<CartData>;
-  cartItemCount$: Observable<number>;
-  cartTotalAmount$: Observable<number>;
+  cartSummary$: Observable<OrderSummary>;
   showCartButton$: Observable<boolean>;
 
   constructor(private cartService: CartService,
@@ -23,9 +22,7 @@ export class CartButtonComponent implements OnInit {
 
   ngOnInit(): void {
     this.cartData$ = this.cartService.cartData$;
-    this.cartItemCount$ = this.cartService.cartItemCount$;
-    this.cartTotalAmount$ = this.cartService.cartTotalAmount$;
-
+    this.cartSummary$ = this.cartService.orderSummary$;
     // this.showCartButton$ = this.router.events.pipe(filter((e) => e instanceof NavigationEnd), map((end: NavigationEnd) => !end.url.includes('(order:')));
     // 
     // .subscribe((end: NavigationEnd) => console.log('end event, ', end.url))
