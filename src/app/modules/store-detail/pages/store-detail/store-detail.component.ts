@@ -25,13 +25,13 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
   scrolledDown: boolean;
   userLocation: boolean;
   interObserver: IntersectionObserver;
+  partnerAppLink = PARTNER_APP_LINK;
 
   storeDetail: StoreDetail;
   loading: boolean = true;
   error: boolean = false;
   isStoreOpen: boolean;
   unSub$ = new Subject<true>();
-
   @ViewChild('observationElement', { read: ElementRef }) obsElement: ElementRef;
   @ViewChild('fbParent', { read: ElementRef }) fbParent: ElementRef;
 
