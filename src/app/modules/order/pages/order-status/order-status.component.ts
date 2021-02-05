@@ -25,7 +25,7 @@ export class OrderStatusComponent implements OnInit, OnDestroy {
   loading: boolean;
 
   makeCalculations: (itemBasePrice: number, selectedModifiers: Array<ItemModifier>, count: number) => number = this.cartSrv.makeCalculations;
-  calcTotal: (cartData) => number = this.cartSrv.calculateTotalAmount;
+  calcTotal: (cartData) => number = this.cartSrv.calculateSubTotal;
 
   ngOnInit(): void {
     this.ordSrv.orderToBeShown$.pipe(
