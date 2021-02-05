@@ -40,6 +40,7 @@ export interface OrderDto extends CartDto {
     order_id: number,
     updated_at: string,
     ordered_at: string,
+    phone_number: string,
 }
 
 export interface ConfirmedOrderData extends CartData {
@@ -49,6 +50,7 @@ export interface ConfirmedOrderData extends CartData {
     id: number,
     orderTime: Date,
     orderedAt: string,
+    phoneNumber: string,
 }
 
 export function mapToOrderData(data: OrderDto) {
@@ -60,6 +62,7 @@ export function mapToOrderData(data: OrderDto) {
     ordData.id = data.order_id;
     ordData.orderTime = new Date(data.updated_at);
     ordData.orderedAt = data.ordered_at;
+    ordData.phoneNumber = data.phone_number;
     return ordData;
 }
 
