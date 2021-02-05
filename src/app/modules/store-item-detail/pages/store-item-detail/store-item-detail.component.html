@@ -4,9 +4,9 @@
             <div class="d-flex justify-content-between">
                 <div class="close-icon">
                     <img src="assets/images/ico_close.png" (click)="close()" style="cursor: pointer;outline:0">
-                    <label class="paragraph14__bold text-capitalize pl-16">
+                    <!-- <label class="paragraph14__bold text-capitalize pl-16">
                         {{itemDetail.name}}
-                    </label>
+                    </label> -->
                 </div>
                 <ul class="menu">
                     <li class="pd">
@@ -18,7 +18,7 @@
                 </ul>
             </div>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" disableBodyScroll>
             <p *ngIf="loading">Loading...</p>
             <ng-container *ngIf="itemDetail">
                 <div class="std-heading-3 text-capitalize">
@@ -52,7 +52,7 @@
         </div>
         <div class="footer-btn">
             <div class="add-cart-card text-center">
-                <div (click)="addToCart()" type="button" class="cart-button">
+                <div [ngStyle]="{'filter': !isStoreOpen? 'opacity(0.5)':''}" (click)="addToCart()" type="button" class="cart-button">
                     <ng-container *ngIf="!addingToCart; else ld">
                         <span class="cart-text">Add to cart</span> <span *ngIf="itemDetail"
                             class="float-right  cart-text">${{totalAmount}}</span>

@@ -1,6 +1,5 @@
 <div *ngIf="selecteditemId && storeDetail">
-    <store-item-detail [item]="{itemId: selecteditemId, storeName: storeDetail.name ,storeId: storeId}">
-    </store-item-detail>
+  <store-item-detail [isStoreOpen]="isStoreOpen" [item]="{itemId: selecteditemId, storeName: storeDetail.name ,storeId: storeId}"></store-item-detail>
 </div>
 <div class="main-panel">
   <ng-container *ngIf="storeDetail">
@@ -98,6 +97,7 @@
                             </td>
                         </tr>
                     </table>
+                    <div>{{isStoreOpen}}</div>
                 </div>
                 <hr class="hr">
                 <div class="address-content">

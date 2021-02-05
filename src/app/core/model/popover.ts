@@ -26,6 +26,8 @@ export interface PopoverConfig {
     xPos?: 'start' | 'center' | 'end',
     yPos?: 'top' | 'bottom';
     onDismiss?: () => void;
+    //TODO: implemet these options
     hasBackdrop?: true | false;
-    outSideClick?: true | false;
+    onOutsideClick?: () => void;
+    disableAutoClose?: true | false;
 }

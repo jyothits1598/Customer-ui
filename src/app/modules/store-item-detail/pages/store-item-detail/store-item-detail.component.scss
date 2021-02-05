@@ -2,11 +2,11 @@
     padding-left: 28px;
 }
 .item-div-image {
-    height: 160px;
+    height:304px;
     width: 100%;
     overflow: hidden;
     border-radius: 8px;
-    margin-top: 8px;
+    margin-top: 16px;
     margin-bottom: 16px;
 }
 .item-div-image img {
@@ -142,6 +142,9 @@ label{
     }
     .modal-body{
         height:85%!important;
+    }
+    .item-div-image {
+        height: 200px !important;
     }
 }
 @media only screen and (min-width: 767.98px) {

@@ -10,10 +10,10 @@ import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges }
     trigger('selectionState',
       [
         state('unTouched', style({
-          backgroundColor: 'rgb(255, 191, 66)',
+          backgroundColor: '#FFBF42',
         })),
         state('valid', style({
-          backgroundColor: '#c0ffc8'
+          backgroundColor: '#E2FFBC'
         })),
         // state('valid', query()),
         state('inValid', style({

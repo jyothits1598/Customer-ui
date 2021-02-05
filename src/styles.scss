@@ -135,6 +135,13 @@ input::-webkit-input-placeholder {
   .l18 {
     line-height:18px !important;
   }
+  .category-tab-items-pd {
+    padding-top:16px;
+  }
+  .pill-button {
+    margin-bottom: 6px;
+    margin-top: 6px;
+  }
 }
 
 // Small devices (landscape phones, 576px and up)
@@ -244,6 +251,13 @@ input::-webkit-input-placeholder {
   .l18 {
     line-height:18px !important;
   }
+  .category-tab-items-pd {
+    padding-top:16px;
+  }
+  .pill-button {
+    margin-bottom: 6px;
+    margin-top: 6px;
+  }
 }
 
 // Medium devices (tablets, 768px and up)
@@ -347,6 +361,13 @@ input::-webkit-input-placeholder {
   .bg-white {
     display:none;
   }
+  .category-tab-items-pd {
+    padding-top:16px;
+  }
+  .pill-button {
+    margin-bottom: 6px;
+    margin-top: 6px;
+  }
 }
 
 // Large devices (desktops, 992px and up)
@@ -431,6 +452,13 @@ input::-webkit-input-placeholder {
   }
   .card-container-padding{
     padding:0px 16px;
+  }
+  .category-tab-items-pd {
+    padding-top:24px;
+  }
+  .pill-button {
+    margin-bottom: 14px;
+    margin-top: 14px;
   }
 }
 
@@ -520,6 +548,13 @@ input::-webkit-input-placeholder {
   }
   .card-container-padding{
     padding:0px 48px;
+  }
+  .category-tab-items-pd {
+    padding-top:24px;
+  }
+  .pill-button {
+    margin-bottom: 14px;
+    margin-top: 14px;
   }
 }
 .signup-panel {
