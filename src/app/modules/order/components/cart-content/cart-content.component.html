@@ -1,6 +1,6 @@
 <div class="order-cart" *ngIf="cartData$ | async; let cartData; else emptyTemplate">
     <h4 class="f-20 f-b mc-4">Your Order</h4>
-    <u class="f-16-blue text-capitalize"> {{cartData.storeName}}</u>
+    <p class="f-14-blue text-capitalize">{{cartData.storeName}}</p>
     <!--
                 Select order type
             -->
@@ -49,11 +49,11 @@
             </div>
             <div class="cart-item-modifiers">
                 <ng-container *ngFor="let mod of modifiersToOptionNameArr(item.item.modifiers);let i=index;">
-                    <i class="fa fa-circle" *ngIf="i>0" aria-hidden="true"></i>
-                    <span class="text-capitalize"> {{mod}} </span>
+                    <i class="fa fa-circle" *ngIf="i>0" aria-hidden="true"></i> 
+                    <label class="text-capitalize" style="margin:0;">{{mod}}</label>
                 </ng-container>
             </div>
-            <hr>
+            <hr class="m14px">
         </div>
     </div>
     <!--
@@ -64,30 +64,30 @@
         <div class="order-surcharge">
             <div class="d-flex justify-content-between">
                 <label class="f-16-blur">Surcharge</label>
-                <label class="f-14 f-b">${{summary.surcharge}}</label>
+                <span class="f-14 f-b">${{summary.surcharge}}</span>
             </div>
         </div>
-        <hr>
+        <hr class="m14px">
         <!--
             Surcharge
         -->
         <div class="order-surcharge">
             <div class="d-flex justify-content-between">
                 <label class="f-16-blur">Sub total</label>
-                <label class="f-14 f-b">${{summary.subtotal}}</label>
+                <span class="f-14 f-b">${{summary.subtotal}}</span>
             </div>
         </div>
-        <hr>
+        <hr class="m14px">
         <!--
             Amount Due
         -->
         <div class="order-surcharge">
             <div class="d-flex justify-content-between">
                 <label class="f-16 f-b">Amount due</label>
-                <label class="f-24 f-b">${{summary.total}}</label>
+                <span class="f-24 f-b">${{summary.total}}</span>
             </div>
         </div>
-        <hr>
+        <hr class="m14px">
     </ng-container>
 </div>
 
