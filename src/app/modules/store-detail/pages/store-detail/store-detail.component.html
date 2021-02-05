@@ -57,7 +57,7 @@
                     <img [src]="storeDetail.logo || 'assets/svg/null_logo.svg'" class="profile-log-detail" />
                   </div>
                   <div class="store-detail-card-text">
-                      <div class="std-heading-4 text-capitalize"> {{storeDetail.name}} </div>
+                      <div class="std-heading-4 text-capitalize" style="padding-bottom:4px"> {{storeDetail.name}} </div>
                       <div class="sub-name">
                           <span class="float-left d-inline-flex"> {{storeDetail.distance}} &nbsp;
                               <present-availability [availability]="storeDetail.openingHours">

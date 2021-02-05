@@ -1,13 +1,13 @@
 <div class="add-extra-item">
     <div class="d-flex justify-content-center">
         <div *ngIf="count === 1" >
-            <img src="assets/images/cart/item-menus-disable.svg" />
+            <img src="assets/images/cart/item-menus-disable.svg" style="cursor: no-drop;"/>
         </div>
-        <div *ngIf="count > 1" (click)="count = count -1; change.emit(count)">
+        <div *ngIf="count > 1" (click)="count = count -1; change.emit(count)" style="cursor: pointer;">
             <img src="assets/images/cart/item-menus-enable.svg" />
         </div>
         <label class="mlr-32">{{count}}</label>
-        <div (click)="count = count+1; change.emit(count)">
+        <div (click)="count = count+1; change.emit(count)" style="cursor: pointer;">
             <img src="assets/images/cart/item-add-enable.svg" />
         </div>
     </div>
