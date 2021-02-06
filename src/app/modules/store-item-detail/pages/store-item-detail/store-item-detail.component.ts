@@ -44,7 +44,7 @@ export class StoreItemDetailComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild('observationElement', { read: ElementRef }) obsElement: ElementRef;
   @ViewChild('orderExistsTemp', { read: TemplateRef }) oETemp: TemplateRef<any>;
 
-  @Input() item: { storeId: number, storeName: string, itemId: number };
+  @Input() item: { storeId: number, storeName: string, itemId: number, isFavourite: boolean };
   @Input() isStoreOpen: boolean;
 
   itemDetail: StoreItemDetail

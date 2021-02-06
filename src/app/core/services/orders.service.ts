@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, merge, NEVER, Observable, of, Subject } from 'rxjs';
 import { interval, never, timer } from 'rxjs';
-import { filter, map, mergeMap, pairwise, startWith, switchMap, take, tap } from 'rxjs/operators';
+import { catchError, filter, map, mergeMap, pairwise, retry, startWith, switchMap, take, tap } from 'rxjs/operators';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
 import { ConfirmedOrderData, mapToOrderData, OrderDto } from '../model/cart';
 import { AuthService } from './auth.service';
@@ -65,7 +65,7 @@ export class OrdersService {
         if (user) return merge(this.forcedCheckingSub, timer(0, 60000));
         else return NEVER
       }),
-      switchMap(() => this.currentActiveOrder()),
+      switchMap(() => this.currentActiveOrder().pipe(retry(2))),
       startWith<any>({}),
       pairwise(),
       switchMap(([old, curr]) => {
