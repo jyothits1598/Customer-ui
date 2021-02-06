@@ -30,6 +30,7 @@ export class UserHistoryComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.pagination = new OrderPagination(this.ordSrv.getAllOrder.bind(this.ordSrv));
     this.pagination.getNext().pipe(takeUntil(this.unSub$)).subscribe(resp => this.ordData.splice(this.ordData.length, 0, ...resp));
+    console.log(this.ordData);
   }
 
   modifiersToOptionNameArr(mods: Array<ItemModifier>) {
