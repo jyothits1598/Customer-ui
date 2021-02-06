@@ -266,7 +266,7 @@ Preparing Order
 </ng-template>
 <ng-template #deny>
     <div>
-        <div class="mt-48 text-center" >
+        <div class="text-center mrt-48" >
             <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M23.58 6H48.42L66 23.58V48.42L48.42 66H23.58L6 48.42V23.58L23.58 6Z" stroke="#FF1212" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M27 36H45" stroke="#FF1212" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -275,7 +275,7 @@ Preparing Order
                 <label class="f-20 f-b">Order not accepted</label>
             </div>
             <div>
-                <label class="f-14">Please phone <span class="text-capitalize">{{ordData.storeName}} on <u style="color:#353FA8;">{{ordData.phoneNumber | phone}}</u></span></label>
+                <label class="f-14">Please phone <label class="text-capitalize">{{ordData.storeName}} on <u style="color:#353FA8;">{{ordData.phoneNumber | phone}}</u></label></label>
             </div>
         </div>
         <div class="mtb-88">
