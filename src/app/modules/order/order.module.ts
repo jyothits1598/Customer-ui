@@ -15,7 +15,7 @@ import { TrackingButtonComponent } from './components/tracking-button/tracking-b
 import { OrderThankYouComponent } from './pages/order-thank-you/order-thank-you.component';
 import { PhonePipe } from 'src/app/helpers/phonePipe';
 import { ShareModule } from '../share/share.module';
-
+import { StoreHeartModule } from '../store-heart/store-heart.module';
 // const routes: Routes = [
 //   { path: '', component: CartComponent },
 // ];
@@ -25,7 +25,8 @@ import { ShareModule } from '../share/share.module';
   imports: [
     RouterModule,
     CommonModule,
-    ShareModule
+    ShareModule,
+    StoreHeartModule
   ],
   exports: [CartComponent, CartButtonComponent, OrderContainerComponent, TrackingButtonComponent]
 })
