@@ -24,11 +24,11 @@ export class OrdersService {
     return this._trackingOrder.value;
   }
 
-  _thankyouData = new BehaviorSubject<{ storeName: string }>(null);
-  setThankyouData(data: { storeName: string }) {
+  _thankyouData = new BehaviorSubject<{ storeName: string, storeId: number }>(null);
+  setThankyouData(data: { storeName: string, storeId: number }) {
     this._thankyouData.next(data);
   }
-  get thankyouData$(): Observable<{ storeName: string }> {
+  get thankyouData$(): Observable<{ storeName: string, storeId: number }> {
     return this._thankyouData.asObservable();
   }
 
