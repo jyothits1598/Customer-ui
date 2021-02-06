@@ -34,7 +34,7 @@ export class ModalService {
     let clkSubs = overLayRef.backdropClick().subscribe(() => { modalRef.dismiss() });
     let rtSubs = this.router.events.subscribe(() => modalRef.dismiss())
     let modalRef = new ModalRef(overLayRef);
-    modalRef.data = config.data;
+    modalRef.data = config?.data;
     modalRef.onDismiss = () => { clkSubs.unsubscribe(), rtSubs.unsubscribe(); this.lSrv.resetScroll(); }
     let tempPortal = new TemplatePortal(template, this._viewContainerRef, { $implicit: modalRef });
     overLayRef.attach(tempPortal);
@@ -59,7 +59,7 @@ export class ModalService {
     let clkSubs = overLayRef.backdropClick().subscribe(() => { modalRef.dismiss() });
     let rtSubs = this.router.events.subscribe(() => modalRef.dismiss())
     let modalRef = new ComponentModalRef(overLayRef, null);
-    modalRef.data = config.data;
+    modalRef.data = config?.data;
     let compPortal = new ComponentPortal(component, null, this.createInjector(modalRef, this.injector));
     let compRef = overLayRef.attach(compPortal);
     modalRef.onDismiss = () => { clkSubs.unsubscribe(), rtSubs.unsubscribe(); this.lSrv.resetScroll(); }

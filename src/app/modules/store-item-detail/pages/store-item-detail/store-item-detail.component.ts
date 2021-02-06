@@ -101,7 +101,7 @@ export class StoreItemDetailComponent implements OnInit, OnChanges, OnDestroy {
 
   addToCart() {
     if (!this.isStoreOpen) {
-      this.mdlSrv.openTemplateModal(this.oETemp, { data: 'Sorry, the store is currently closed.' })
+      this.mdlSrv.openTemplateModal(this.oETemp, { data: { heading: 'Store is closed.', message: 'Sorry, no orders are being accepted now.' } })
       return;
     }
 
@@ -111,7 +111,12 @@ export class StoreItemDetailComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     if (this.ordSrv.getCurrentActiveOrder()) {
-      this.mdlSrv.openTemplateModal(this.oETemp, { data: `Please try again once your order from ${this.ordSrv.getCurrentActiveOrder().store_name} is complete.` });
+      let storeName = this.ordSrv.getCurrentActiveOrder().store_name.charAt(0).toUpperCase() + this.ordSrv.getCurrentActiveOrder().store_name.slice(1);
+      this.mdlSrv.openTemplateModal(this.oETemp, {
+        data: {
+          heading: 'You already have an order pending', message: `Please try again once your order from ${storeName} is complete.`
+        }
+      });
       return;
     }
 
@@ -134,7 +139,7 @@ export class StoreItemDetailComponent implements OnInit, OnChanges, OnDestroy {
       }, 0);
     },
       (err) => {
-        if (err.error.error_msg[0].includes('Please try again once your order from')) {
+        if (err?.error?.error_msg[0].includes('Please try again once your order from')) {
           this.mdlSrv.openTemplateModal(this.oETemp, { data: err.error.error_msg[0] });
         }
       });

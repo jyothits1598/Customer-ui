@@ -68,11 +68,15 @@
 </div>
 
 <ng-template #orderExistsTemp let-modal>
-    <div class="modal-body cart-confirm-dialogue">
-        You have an order pending
-        <p class="paragraph14">
-            {{modal.data}}</p>
-        <br>
-        <button class="std-button std-button--primary" (click)="modal.dismiss()">Okay</button>
+    <div class="modal-body cart-confirm-dialogue text-center" >
+        <span class="cart-error-header">
+            {{modal.data.heading}}
+        </span>
+        <p class="paragraph14 pt-4">
+            {{modal.data.message}}
+        </p>
+        <div class="pt-3 pb-3">
+            <div class="success-text" (click)="modal.dismiss()">Okay</div>
+        </div>
     </div>
 </ng-template>

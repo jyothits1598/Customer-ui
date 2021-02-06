@@ -41,6 +41,7 @@ export interface OrderDto extends CartDto {
     updated_at: string,
     ordered_at: string,
     phone_number: string,
+    is_favourite:boolean
 }
 
 export interface ConfirmedOrderData extends CartData {
@@ -51,6 +52,7 @@ export interface ConfirmedOrderData extends CartData {
     orderTime: Date,
     orderedAt: string,
     phoneNumber: string,
+    isFavourite: boolean
 }
 
 export function mapToOrderData(data: OrderDto) {
@@ -63,6 +65,7 @@ export function mapToOrderData(data: OrderDto) {
     ordData.orderTime = new Date(data.updated_at);
     ordData.orderedAt = data.ordered_at;
     ordData.phoneNumber = data.phone_number;
+    ordData.isFavourite = data.is_favourite;
     return ordData;
 }
 
