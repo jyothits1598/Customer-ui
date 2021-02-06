@@ -24,11 +24,12 @@ export class OrdersService {
     return this._trackingOrder.value;
   }
 
-  _thankyouData = new BehaviorSubject<{ storeName: string, storeId: number }>(null);
-  setThankyouData(data: { storeName: string, storeId: number }) {
+  _thankyouData = new BehaviorSubject<{ storeName: string, storeId: number, isFavourite:boolean }>(null);
+  setThankyouData(data: { storeName: string, storeId: number,isFavourite:boolean }) {
+    console.log(data);
     this._thankyouData.next(data);
   }
-  get thankyouData$(): Observable<{ storeName: string, storeId: number }> {
+  get thankyouData$(): Observable<{ storeName: string, storeId: number,isFavourite:boolean }> {
     return this._thankyouData.asObservable();
   }
 
