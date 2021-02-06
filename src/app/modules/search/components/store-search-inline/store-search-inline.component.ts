@@ -194,8 +194,8 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
       this.closeSearchBox();
       this.searchDataService.updateFullSearch(value);
       this.searchInput.nativeElement.blur();
-      this.searchDataService.addItem(value);
-      this.router.navigate(['/search'], { queryParams: { q: value } });
+      this.searchDataService.searchForTerm(value);
+      this.router.navigate(['search'], { queryParams: { q: value } });
     }
   }
 

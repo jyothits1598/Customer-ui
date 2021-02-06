@@ -9,6 +9,7 @@ import {
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { filter, map, mergeMap, takeUntil, tap } from 'rxjs/operators';
+import { Constants } from 'src/app/core/model/constants';
 import { GeoLocationService } from 'src/app/core/services/geo-location.service';
 import { LayoutService } from 'src/app/core/services/layout.service';
 import { NavbarService } from 'src/app/modules/navbar/services/navbar.service';
@@ -22,6 +23,8 @@ import { SearchDataService } from '../../services/search-data.service';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit, OnDestroy {
+  pageKey = Constants.Keys.Search;
+
   storeFilter: StoreFilter;
   resultCount: number = null;
   isMobile: boolean;
@@ -45,6 +48,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    console.log('search: ngOnInit() reached');
     this.route.queryParams
       .pipe(
         filter((param) => param.q),

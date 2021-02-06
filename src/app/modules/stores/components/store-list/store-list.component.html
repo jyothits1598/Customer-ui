@@ -1,41 +1,43 @@
 <section class="table-responsive sticky-navbar">
   <div class="text-center">
     <ul class="resnt-menu-top-tabs u-margin-bottom-medium" style="margin-bottom:0">
-      <li class="resnt-menu-top-tabs__item custom-border" >
+      <li class="resnt-menu-top-tabs__item custom-border">
         <div class="resnt-menu-top-tabs__button tabs-menu" [class.resnt-menu-top-tabs__button__active]="isActive == 'nearBy' || isActive == ''" (click)="navigateToPath('nearBy')">
-          Nearby 
+          Nearby
         </div>
       </li>
       <li class="resnt-menu-top-tabs__item custom-border">
-        <div class="resnt-menu-top-tabs__button tabs-menu resnt-menu-top-tabs__button__border" [class.resnt-menu-top-tabs__button__active]="isActive == 'google'" (click)="navigateToPath('google')" > 
+        <div class="resnt-menu-top-tabs__button tabs-menu resnt-menu-top-tabs__button__border" [class.resnt-menu-top-tabs__button__active]="isActive == 'google'" (click)="navigateToPath('google')">
           Reviews </div>
       </li>
       <li class="resnt-menu-top-tabs__item">
-        <div class="resnt-menu-top-tabs__button tabs-menu" [class.resnt-menu-top-tabs__button__active]="isActive == 'facebook'"  (click)="navigateToPath('facebook')"> 
-            Likes
+        <div class="resnt-menu-top-tabs__button tabs-menu" [class.resnt-menu-top-tabs__button__active]="isActive == 'facebook'" (click)="navigateToPath('facebook')">
+          Likes
         </div>
       </li>
     </ul>
   </div>
 </section>
 <div class="store-list-bg">
+  <ng-container *ngIf="stores$ | async as stores;">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 col-xl-4 spacing" *ngFor="let store of stores" >
-                <app-store-card [store]="store"></app-store-card>
-            </div>
-            <br><br>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 col-xl-4 spacing" *ngFor="let store of stores">
+          <app-store-card (selected)="storeSelected($event)" [store]="store"></app-store-card>
         </div>
         <br><br>
-        <div *ngIf="pagination.isLoading">Loading....</div>
-        <div *ngIf="pagination.hasErrors">Error :(</div>
-        <div *ngIf="!pagination.hasEnded" [ngStyle]="{'display':  pagination.isLoading? 'none' : 'block' }" infiniteScroll #infiniteScroll="infiniteScroll" (scrolled)="handleScrolled()">
-        </div>
+      </div>
+      <br><br>
+      <div *ngIf="pagination.isLoading">Loading....</div>
+      <div *ngIf="pagination.hasErrors">Error :(</div>
+      <div *ngIf="!pagination.hasEnded" [ngStyle]="{'display':  pagination.isLoading? 'none' : 'block' }" infiniteScroll #infiniteScroll="infiniteScroll" (scrolled)="handleScrolled()">
+      </div>
     </div>
-    <div *ngIf="pagination.hasEnded && stores.length == 0" class="text-center align" >
-        <div class="not-found">
-            <img src="assets/svg/ico_search_scale.svg">
-            <div class="no-result"> No stores found </div>
-        </div>
+    <div *ngIf="pagination.hasEnded && stores.length == 0" class="text-center align">
+      <div class="not-found">
+        <img src="assets/svg/ico_search_scale.svg">
+        <div class="no-result"> No stores found </div>
+      </div>
     </div>
+  </ng-container>
 </div>
