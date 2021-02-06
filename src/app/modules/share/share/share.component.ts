@@ -11,7 +11,7 @@ import { PopoverService } from 'src/app/core/services/popover.service';
   styleUrls: ['./share.component.scss']
 })
 export class ShareComponent implements OnInit {
-  @Input() store: { id: number, name: string };
+  @Input() store: { id: number, name: string,page:string };
   @Input() isIconBlack: boolean;
 
   @ViewChild('urlCopyInput', { read: ElementRef }) urlCopyInput: ElementRef;

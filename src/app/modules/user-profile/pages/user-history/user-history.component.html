@@ -5,8 +5,8 @@
 <ng-container *ngFor="let order of ordData">
         <div class="order-body pb-40" style="padding-bottom:40px;">
             <h4 class="f-20 f-b text-capitalize">{{order.storeName}}</h4>
-            <a [routerLink]="'/restaurants/'+order.id">
-                <u class="f-14-blue mct-16">View store</u>
+            <a [routerLink]="'/restaurants/'+order.storeId">
+                <u class="f-14-blue mct-16  cursor-pointer">View store</u>
             </a>
             <u class="f-14-blue mct-16 ml-16">View receipt</u>
             <h4 class="f-14 f-b mct-16">Order number #{{order.id}}</h4>
@@ -35,7 +35,7 @@
                     <div class="cart-item-modifiers">
                         <ng-container *ngFor="let mod of modifiersToOptionNameArr(item.item.modifiers);let i=index;">
                             <i class="fa fa-circle" *ngIf="i>0" aria-hidden="true"></i>
-                            <span class="text-capitalize">{{mod}} </span>
+                            <label class="text-capitalize" style="margin:0;">{{mod}} </label>
                         </ng-container>
                     </div>
                     <hr>

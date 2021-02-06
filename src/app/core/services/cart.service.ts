@@ -167,7 +167,7 @@ export class CartService {
       modifier.options.sort((opt1, opt2) => opt1.price - opt2.price);
       let options = [...modifier.options];
 
-      options.splice(0, modifier.freeSelection);
+      // options.splice(0, modifier.freeSelection);
 
       let optTotal: number = options.reduce((o1, o2) => o1 + o2.price, 0);
 
@@ -175,7 +175,7 @@ export class CartService {
 
     });
 
-    return total * count;
+    return Math.round(((total * count) + Number.EPSILON) * 100) / 100;;
   }
 
   postCart(cartData: CartData) {

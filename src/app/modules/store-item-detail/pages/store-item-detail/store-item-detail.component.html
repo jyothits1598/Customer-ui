@@ -9,11 +9,11 @@
                     </label> -->
                 </div>
                 <ul class="menu">
-                    <li class="pd">
-                        <img src="assets/images/heart.png">
+                    <li class="pd cursor-pointer">
+                        <store-heart [store]="{id: item.storeId, isFavourite: item.isFavourite, page:'main'}"></store-heart>
                     </li>
                     <li class="pd">
-                        <img src="assets/images/share.png">
+                        <app-share [isIconBlack]="true" [store]="{id: item.storeId, name: item.storeName, page:'main'}"></app-share>
                     </li>
                 </ul>
             </div>
@@ -24,7 +24,7 @@
                 <div class="std-heading-3 text-capitalize">
                     {{itemDetail.name}}
                 </div>
-                <div class="item-div-image">
+               <div class="item-div-image">
                     <img [src]="itemDetail.image || 'assets/svg/details/modifier_null.svg'" class="img-fluid">
                 </div>
                 <div class="pt-3 pb-3">
@@ -48,7 +48,6 @@
                     <item-count (change)="itemCount.patchValue($event)"></item-count>
                 </div>
             </ng-container>
-
         </div>
         <div class="footer-btn">
             <div class="add-cart-card text-center">

@@ -8,6 +8,8 @@ import { ItemModiferSelectorRadioComponent } from './components/item-modifer-sel
 import { ModifierSelectionStatusComponent } from './components/modifier-selection-status/modifier-selection-status.component';
 import { ItemCountComponent } from './components/item-count/item-count.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ShareModule } from '../share/share.module';
+import { StoreHeartModule } from '../store-heart/store-heart.module';
 
 
 
@@ -19,6 +21,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    ShareModule,
+    StoreHeartModule
   ],
   exports: [StoreItemDetailComponent]
 })

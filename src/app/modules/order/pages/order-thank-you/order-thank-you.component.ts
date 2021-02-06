@@ -8,7 +8,7 @@ import { OrdersService } from 'src/app/core/services/orders.service';
   styleUrls: ['./order-thank-you.component.scss']
 })
 export class OrderThankYouComponent implements OnInit {
-  thankyouData$: Observable<{ storeName: string }>;
+  thankyouData$: Observable<{ storeName: string, storeId: number }>;
   constructor(private ordSrv: OrdersService) { }
 
   ngOnInit(): void {
