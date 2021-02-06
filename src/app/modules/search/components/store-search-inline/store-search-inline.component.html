@@ -25,7 +25,7 @@
             <img src="assets/svg/ico_search_tabs.svg">
             <div class="text-capitalize"> Results for <b class="b-bold">"{{searchInput.value}}"</b> </div>
           </li>
-          <li #listItem *ngFor="let storeItem of searchResults; let i = index;" (click)="searchForItem(storeItem.store_name)" (keyup)="searchListKeyup($event, storeItem.store_name, i + 1);"
+          <li #listItem *ngFor="let storeItem of searchResults; let i = index;" (click)="searchForItem(storeItem.store_name, storeItem.store_id)" (keyup)="searchListKeyup($event, storeItem.store_name, i + 1);"
             [queryParams]="{q:storeItem.store_name}" tabindex="1">
             <img src="assets/svg/ico_search_tabs.svg">
             <div class="text-capitalize">{{storeItem.store_name}}</div>

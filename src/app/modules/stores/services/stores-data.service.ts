@@ -16,7 +16,7 @@ export class StoresDataService {
 
   allStores(filter: StoreFilter): Observable<StorePagination> {
     console.log("try",filter);
-    return this.restApiService.get('api/stores/search' + this.filterToQuery(filter));
+    return this.restApiService.get('api/stores/search' + this.filterToQuery(filter) );
   }
 
   setFavourite(storeId: number, isFavourite: boolean) {
