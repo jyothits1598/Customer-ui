@@ -52,7 +52,8 @@
         </div>
         <div class="footer-btn">
             <div class="add-cart-card text-center">
-                <div [ngStyle]="{'filter': !isStoreOpen? 'opacity(0.5)':''}" (click)="addToCart()" type="button" class="cart-button">
+                <div (click)="addToCart()" type="button"
+                    class="cart-button">
                     <ng-container *ngIf="!addingToCart; else ld">
                         <span class="cart-text">Add to cart</span> <span *ngIf="itemDetail"
                             class="float-right  cart-text">${{totalAmount}}</span>
@@ -66,3 +67,13 @@
     </div>
     <div class="item-detail-background" (click)="close()"></div>
 </div>
+
+<ng-template #orderExistsTemp let-modal>
+    <div class="modal-body cart-confirm-dialogue">
+        You have an order pending
+        <p class="paragraph14">
+            {{modal.data}}</p>
+        <br>
+        <button class="std-button std-button--primary" (click)="modal.dismiss()">Okay</button>
+    </div>
+</ng-template>

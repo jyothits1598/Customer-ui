@@ -50,7 +50,7 @@ export class StoreItemModifierComponent implements OnChanges, ControlValueAccess
     let modifer = { ...this.modifier };
     modifer.options = this.selections;
     this.onChange(modifer);
-
+    this.onTouched();
     this.enableDisableForm();
   }
 
@@ -91,7 +91,7 @@ export class StoreItemModifierComponent implements OnChanges, ControlValueAccess
 
   // **Control value accessor**
   onChange = (value) => { };
-  onTouched: (value) => {};
+  onTouched: () => {};
 
   validate(c: FormControl) {
     return this.optionControls.valid ? null : { invalid: true }

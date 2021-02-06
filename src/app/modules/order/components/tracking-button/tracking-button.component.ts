@@ -19,7 +19,7 @@ export class TrackingButtonComponent implements OnInit {
     private orderView: OrderViewControllerService) { }
 
   ngOnInit(): void {
-    this.trackingOrder$ = this.ordSrv.trackingOrder$;
+    this.trackingOrder$ = this.ordSrv.activeOrder$;
     this.currOrderPage$ = this.orderView.getCurrentPage$();
 
     // this.ordSrv.trackingOrder$.subscribe((tr) => console.log('tracking button', tr));
