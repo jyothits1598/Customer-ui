@@ -5,7 +5,7 @@
 <ng-container *ngFor="let order of ordData">
         <div class="order-body pb-40" style="padding-bottom:40px;">
             <h4 class="f-20 f-b text-capitalize">{{order.storeName}}</h4>
-            <a [routerLink]="'/restaurants/'+order.id">
+            <a [routerLink]="'/restaurants/'+order.storeId">
                 <u class="f-14-blue mct-16  cursor-pointer">View store</u>
             </a>
             <u class="f-14-blue mct-16 ml-16">View receipt</u>
