@@ -4,7 +4,7 @@ import { ComponentRef } from '@angular/core';
 export class ModalRef {
     overLayRef: OverlayRef
     onDismiss: () => void;
-
+    data: any;
     constructor(overLayRef: OverlayRef) {
         this.overLayRef = overLayRef
     }
@@ -24,6 +24,7 @@ export class ComponentModalRef<T> extends ModalRef {
 }
 
 export interface ModalConfig {
+    data: any;
     yPosition?: string,
     // TODO: implement disable auto close
     disableAutoClose?: boolean

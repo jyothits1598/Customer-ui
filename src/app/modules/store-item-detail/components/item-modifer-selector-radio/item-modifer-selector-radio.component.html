@@ -4,8 +4,13 @@
         <div class="text-capitalize">
             <p class="std-heading-4" style="margin-bottom: 4px;">{{modifier.name}} </p> 
             <label class="small-content"> 
-                <label [ngClass]="(this.optionControl.touched && this.optionControl.invalid) ? 'errorText' : '' "> Choose 1 </label>
+                <label [ngClass]="(this.optionControl.touched && this.optionControl.invalid) ? 'errorText' : '' "> Choose 1 
+                    <label *ngIf="modifier.freeSelection > 0;" class="small-content">
+                        ( {{modifier.freeSelection}} free )
+                    </label> 
+                </label>
             </label>
+
         </div>
         <div>
             <!-- <span class="required" [ngStyle]="{background: optionControl.invalid ? '#FFBF42' : '#E2FFBC'}" ><img [src]="optionControl.invalid ? '' : 'assets/images/ico_check_small.png'"> Required </span> -->
