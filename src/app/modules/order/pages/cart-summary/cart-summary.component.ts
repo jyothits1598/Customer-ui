@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { finalize, takeUntil } from 'rxjs/operators';
+import { OrderSummary } from 'src/app/core/model/cart';
 import { CartService } from 'src/app/core/services/cart.service';
 import { OrderPages, OrderViewControllerService } from 'src/app/core/services/order-view-controller.service';
 import { OrdersService } from 'src/app/core/services/orders.service';
@@ -23,11 +24,12 @@ export class CartSummaryComponent implements OnInit, OnDestroy {
     private orderView: OrderViewControllerService
   ) { }
 
-  cartTotal$: Observable<number>;
+
+  orderSummary$: Observable<OrderSummary>;
   unsub$ = new Subject<true>();
 
   ngOnInit(): void {
-    this.cartTotal$ = this.cartService.cartTotalAmount$;
+    this.orderSummary$ = this.cartService.orderSummary$;
   }
 
   order() {

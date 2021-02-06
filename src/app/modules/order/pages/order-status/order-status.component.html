@@ -13,9 +13,9 @@
     <div class="order-body">
         <h4 class="f-20 f-b text-capitalize">{{ordData.storeName}}</h4>
         <a [routerLink]="'/restaurants/'+ordData.storeId">
-            <u class="f-14-blue mct-16">View store</u>
+            <label class="f-14-blue mct-16 cursor-pointer">View store</label>
         </a>
-        <u class="f-14-blue mct-16 ml-16">View receipt</u>
+        <label class="f-14-blue mct-16 ml-16">View receipt</label>
         <h4 class="f-14 f-b mct-16">Order number #{{ordData.id}}</h4>
         <label class="f-16 mct-4">{{getCount(ordData)}} items
             <i class="fa fa-circle" aria-hidden="true"></i>
@@ -37,9 +37,9 @@
                     </div>
                 </div>
                 <div class="cart-item-modifiers">
-                    <ng-container *ngFor="let mod of modifiersToOptionNameArr(item.item.modifiers)">
-                        <span class="text-capitalize">{{mod}} </span>
-                        <i class="fa fa-circle" aria-hidden="true"></i>
+                    <ng-container *ngFor="let mod of modifiersToOptionNameArr(item.item.modifiers);let i=index;">
+                        <i class="fa fa-circle" *ngIf="i>0" aria-hidden="true"></i>
+                        <label class="text-capitalize" style="margin:0;">{{mod}} </label>
                     </ng-container>   
                 </div>
                 <hr>
@@ -105,8 +105,8 @@
 
 
 <ng-template #conf>
-    <div>
-        <div class="mt-28 text-center">
+    <div class="mt-48">
+        <div class="text-center">
             <svg width="42" height="60" viewBox="0 0 42 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M0 3C0 1.34315 1.34315 0 3 0H39C40.6569 0 42 1.34315 42 3V57C42 58.2134 41.2691 59.3073 40.1481 59.7716C39.027 60.236 37.7367 59.9793 36.8787 59.1213L33 55.2426L29.1213 59.1213C27.9498 60.2929 26.0503 60.2929 24.8787 59.1213L21 55.2426L17.1213 59.1213C15.9497 60.2929 14.0503 60.2929 12.8787 59.1213L9 55.2426L5.12132 59.1213C4.26333 59.9793 2.97297 60.236 1.85195 59.7716C0.730927 59.3073 0 58.2134 0 57V3ZM6 6V49.7574L6.87868 48.8787C8.05025 47.7071 9.94975 47.7071 11.1213 48.8787L15 52.7574L18.8787 48.8787C20.0503 47.7071 21.9497 47.7071 23.1213 48.8787L27 52.7574L30.8787 48.8787C31.4413 48.3161 32.2044 48 33 48C33.7957 48 34.5587 48.3161 35.1213 48.8787L36 49.7574V6H6Z" fill="#1A1A1A"/>
             </svg>
@@ -121,7 +121,7 @@
             <svg width="100%" height="24" viewBox="0 0 344 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="344" height="24" fill="white" />
                 <rect width="312" height="24" transform="translate(16)" fill="white" />
-                <path d="M34 22V4H22V22L24 20L26 22L28 20L30 22L32 20L34 22Z" stroke="#353FA8" stroke-width="2"
+                <path d="M34 22V4H22V22L24 20L26 22L28 20L30 22L32 20L34 22Z" stroke="#1a1a1a" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round" />
                 <rect x="44" y="11" width="108" height="2" rx="1" fill="#B3B3B3" />
                 <path
@@ -176,7 +176,7 @@ Preparing Order
                 <label class="f-14">We estimate it will be ready in:</label>
             </div>
             <div>
-                <label class="f-16 f-b">{{t}} minutes </label>
+                <label class="f-16l f-b" >{{t}} minutes </label>
             </div>
             <div class="d-flex justify-content-center">
                 <div class="mt-8" id="progressbar">
@@ -266,7 +266,7 @@ Preparing Order
 </ng-template>
 <ng-template #deny>
     <div>
-        <div class="mt-28 text-center">
+        <div class="mt-48 text-center" >
             <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M23.58 6H48.42L66 23.58V48.42L48.42 66H23.58L6 48.42V23.58L23.58 6Z" stroke="#FF1212" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M27 36H45" stroke="#FF1212" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -275,7 +275,7 @@ Preparing Order
                 <label class="f-20 f-b">Order not accepted</label>
             </div>
             <div>
-                <label class="f-14">Please phone <span class="text-capitalize">{{ordData.storeName}} on <u style="color:#353FA8;">{{ordData.phone_number}}</u></span></label>
+                <label class="f-14">Please phone <span class="text-capitalize">{{ordData.storeName}} on <u style="color:#353FA8;">{{ordData.phoneNumber | phone}}</u></span></label>
             </div>
         </div>
         <div class="mtb-88">

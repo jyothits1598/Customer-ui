@@ -7,6 +7,7 @@ import { ConfirmedOrderData, mapToOrderData, OrderDto } from '../model/cart';
 import { AuthService } from './auth.service';
 import { CartService } from './cart.service';
 import { OrderPages, OrderViewControllerService } from './order-view-controller.service';
+import { Pagination } from 'src/app/shared/classes/pagination';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ import { OrderPages, OrderViewControllerService } from './order-view-controller.
 export class OrdersService {
   _orderToBeShown = new BehaviorSubject<number>(null);
   _trackingOrder = new BehaviorSubject<OrderDto>(null);
-  _thankyouData = new BehaviorSubject<{ storeName: string }>(null);
+  _thankyouData = new BehaviorSubject<{ storeName: string, storeId: number }>(null);
 
   forcedCheckingSub = new Subject<true>();
 
@@ -29,11 +30,12 @@ export class OrdersService {
     this._orderToBeShown.next(orderId);
   }
 
-  setThankyouData(data: { storeName: string }) {
+  setThankyouData(data: { storeName: string, storeId: number }) {
+    console.log(data);
     this._thankyouData.next(data);
   }
 
-  get thankyouData$(): Observable<{ storeName: string }> {
+  get thankyouData$(): Observable<{ storeName: string, storeId: number }> {
     return this._thankyouData.asObservable();
   }
 
@@ -59,6 +61,9 @@ export class OrdersService {
     }),
 
   )
+
+
+  // get orderHistoryorder
 
   get orderToBeShown$(): Observable<number> {
     return this._orderToBeShown.asObservable();
@@ -120,7 +125,11 @@ export class OrdersService {
     return this.restApiService.get('api/customer/orders?order_id=' + orderId).pipe(map((resp: any) => mapToOrderData(resp.data.orders[0])));
   }
 
-  markOrderComplete(ordId: number,orderStatus: string) {
+  getAllOrder(page: number): Observable<Pagination<OrderDto>> {
+    return this.restApiService.get('api/customer/orders/history?page=' + page);
+  }
+
+  markOrderComplete(ordId: number, orderStatus: string) {
     return this.restApiService.patch('api/customer/orders',
       {
         "order_id": ordId,

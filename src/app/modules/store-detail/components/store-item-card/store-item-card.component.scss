@@ -38,6 +38,7 @@ body.modal-open {
 .item-name {
     text-transform:lowercase;
     margin:0;
+    color:var(--color-typography-primary);
 }
 .item-name::first-letter {
     text-transform: capitalize !important;

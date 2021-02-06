@@ -5,6 +5,17 @@ label{
     margin-bottom:0;
 }
 
+.small-content {  
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 20px;
+    color: #808080;
+    margin: 0;
+    &__price {
+        font-size: 14px;
+    }
+}
 .orders-payment{
     position: fixed;
     width:100%;
@@ -27,7 +38,7 @@ Cart Fonts
 
 .f-14{
     font-size: 14px;
-    line-height: 24px;
+    line-height: 20px;
     color: #1A1A1A;  
 }
 .f-16{
@@ -35,10 +46,15 @@ Cart Fonts
     line-height: 24px;
     color: #1A1A1A;  
 }
+.f-16l{
+    font-size: 16px;
+    line-height: 20px;
+    color: #1A1A1A;
+}
 .f-20{
     font-size: 20px;
     line-height: 24px;
-    color: #1A1A1A;
+    color: var(--color-typography-primary);
 }
 .f-24{
     font-size: 24px;
@@ -47,13 +63,15 @@ Cart Fonts
 }
 .f-16-blue{
     font-size: 14px;
-    line-height: 24px;
+    line-height: 20px;
     color: var(--color-primary); 
 }
 .f-14-blue{
-    font-size: 14px;
-    line-height: 20px;
-    color: var(--color-primary); 
+    font-size: 14px !important;
+    line-height: 20px !important;
+    color: var(--color-primary);
+    margin:0;
+    text-decoration: underline;
 }
 
 
@@ -104,8 +122,8 @@ Cart Fonts
     margin-top:28px;
 }
 .mtb-88{
-    margin-top:48px;
-    margin-bottom:48px;
+    margin-top:88px;
+    margin-bottom:88px;
 }
 input[type=radio] {
     display: none;
@@ -173,12 +191,12 @@ input[type=radio] {
     }
 }
 .order-pick-up-type { 
-    margin-top:16px;
-    margin-bottom:40px;  
+    margin-top:24px;
+    margin-bottom:48px;  
     input[class=pick-up-radio] + label {
         background-image: url('/assets/images/cart/radio-unchecked.svg');
         background-repeat:no-repeat;
-        padding-left: 1.8rem;
+        padding-left: 32px;
         margin-bottom:16px;
         display:block;
         cursor: no-drop;
@@ -196,7 +214,7 @@ input[type=radio] {
         width:180px;
     }
     .cart-item-modifiers{
-        padding-left:36px;
+        padding-left:40px;
         font-size:14px;
         line-height: 20px;
         color: #808080
@@ -206,7 +224,7 @@ input[type=radio] {
         font-size:4px;
         line-height: 20px;
         color: #808080;
-        padding:0px 6px 0px 2px;
+        padding:0px 4px;
     }
 }
 
@@ -298,7 +316,7 @@ input[type=radio] {
         order: 0;
         align-self: stretch;
         flex-grow: 0;
-        padding:18px;
+        padding:18px 16px;
         outline:none;
         cursor:pointer;
         .cart-count{
@@ -509,4 +527,8 @@ input[type=radio] {
         width:100%;
         bottom:0px;
     }
+}
+
+.cursor-pointer{
+    cursor:pointer;
 }

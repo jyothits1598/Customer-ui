@@ -20,6 +20,7 @@ import { CurrentPasswordComponent } from './pages/user-security/current-password
 import { VerificationCodeModule } from '../authentication/verification-code/verification-code.module';
 import { TelInputModule } from '../tel-input/tel-input.module';
 import { NavbarModifierModule } from '../navbar-modifier/navbar-modifier.module';
+import { UserHistoryComponent } from './pages/user-history/user-history.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { NavbarModifierModule } from '../navbar-modifier/navbar-modifier.module'
     UserProfileImageComponent,
     ChangeEmailComponent,
     ChangeMobileComponent,
-    CurrentPasswordComponent
+    CurrentPasswordComponent,
+    UserHistoryComponent
   ],
   imports: [
     CommonModule,

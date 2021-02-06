@@ -9,6 +9,13 @@ export interface CartData {
     items: Array<{ item: StoreItemDetail, quantity: number }>
 }
 
+export interface OrderSummary {
+    subtotal: number;
+    surcharge: number;
+    total: number;
+    totalItemCount: number;
+}
+
 export interface CartDto {
     store_id: number;
     store_name: string;
@@ -32,23 +39,30 @@ export interface OrderDto extends CartDto {
     status: string,
     order_id: number,
     updated_at: string,
+    ordered_at: string,
+    phone_number: string,
 }
 
 export interface ConfirmedOrderData extends CartData {
     preparingOrder: string,
     totalPrice: number,
     status: string,
-    id: number
-    orderTime: Date
+    id: number,
+    orderTime: Date,
+    orderedAt: string,
+    phoneNumber: string,
 }
 
 export function mapToOrderData(data: OrderDto) {
+    console.log('map to order called', data);
     let ordData: ConfirmedOrderData = <ConfirmedOrderData>mapToCartData(data);
     ordData.preparingOrder = data.preparing_order;
     ordData.totalPrice = data.total_price;
     ordData.status = data.status;
     ordData.id = data.order_id;
-    ordData.orderTime = new Date(data.updated_at)
+    ordData.orderTime = new Date(data.updated_at);
+    ordData.orderedAt = data.ordered_at;
+    ordData.phoneNumber = data.phone_number;
     return ordData;
 }
 
@@ -109,3 +123,4 @@ export function MapToDto(data: CartData): CartDto {
         items: items
     }
 }
+

@@ -60,28 +60,35 @@
         </tr>
       </table>
     </div>
-  </div>
-  <div class="chating-card">
-    <div class="d-flex justify-content-between chating-card--chat">
-      <span>
-        <ul class="chat-icons">
-          <li>
-            <span class="heart">
-              <store-heart [store]="{id: store.id, isFavourite: store.isFavourite, page:'main'}"></store-heart>
-            </span>
-          </li>
-          <li>
-            <span class="share">
-              <app-share [isIconBlack]="true" [store]="store"></app-share>
-            </span>
-          </li>
-          <li>
-            <a [href]="'https://www.google.com/maps/dir/?api=1&destination='+store.latLng.lat+','+store.latLng.lng" target="_blank" style="text-decoration: none;">
-              <img src="assets/svg/cards/direction.svg" title="Direction">
-            </a>
-          </li>
+    <div class="chating-card">
+      <div class="d-flex justify-content-between chating-card--chat">
+        <span>
+          <ul class="chat-icons">
+            <li>
+              <span class="heart">
+                <store-heart [store]="{id: store.id, isFavourite: store.isFavourite, page:'main'}"></store-heart>
+              </span>
+            </li>
+            <li>
+              <span class="share">
+                <app-share [isIconBlack]="true" [store]="{id: store.id, name: store.name,page:'main'}"></app-share>
+              </span>
+            </li>
+            <li>
+              <a [href]="'https://www.google.com/maps/dir/?api=1&destination='+store.latLng.lat+','+store.latLng.lng" target="_blank" style="text-decoration: none;">
+                <img src="assets/svg/cards/direction.svg" title="Direction">
+              </a>
+            </li>
+          </ul>
+        </span>
+        </li>
+        <li>
+          <a [href]="'https://www.google.com/maps/dir/?api=1&destination='+store.latLng.lat+','+store.latLng.lng" target="_blank" style="text-decoration: none;">
+            <img src="assets/svg/cards/direction.svg" title="Direction">
+          </a>
+        </li>
         </ul>
-      </span>
+        </span>
+      </div>
     </div>
   </div>
-</div>

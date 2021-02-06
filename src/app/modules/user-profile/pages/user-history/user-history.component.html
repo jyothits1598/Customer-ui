@@ -1,0 +1,89 @@
+<ng-template appNavbarHeadingContent>
+    <div class="title-content profile-save-text" style="cursor: text;"> History </div>
+</ng-template>
+<div class="security-card">
+<ng-container *ngFor="let order of ordData">
+        <div class="order-body pb-40" style="padding-bottom:40px;">
+            <h4 class="f-20 f-b text-capitalize">{{order.storeName}}</h4>
+            <a [routerLink]="'/restaurants/'+order.storeId">
+                <u class="f-14-blue mct-16  cursor-pointer">View store</u>
+            </a>
+            <u class="f-14-blue mct-16 ml-16">View receipt</u>
+            <h4 class="f-14 f-b mct-16">Order number #{{order.id}}</h4>
+            <label class="f-16 mct-4">{{getCount(order)}} items
+                <i class="fa fa-circle icon-style" aria-hidden="true"></i>
+                {{order.orderedAt }}
+            </label>
+            <!--
+            Ordered Items
+        -->
+            <div class="mt-48">
+                <div class="cart-items" *ngFor="let item of order.items">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex">
+                            <label class="f-16 f-b pr-4">{{item.quantity}}x</label>
+                            <div class="f-16 f-b pr-2">
+                                <label class="f-16 f-b item-name text-capitalize">{{item.item.name}}</label>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="f-14 mr-15">
+                                ${{makeCalculations(item.item.basePrice, item.item.modifiers,item.quantity)}}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="cart-item-modifiers">
+                        <ng-container *ngFor="let mod of modifiersToOptionNameArr(item.item.modifiers);let i=index;">
+                            <i class="fa fa-circle" *ngIf="i>0" aria-hidden="true"></i>
+                            <label class="text-capitalize" style="margin:0;">{{mod}} </label>
+                        </ng-container>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            <!--
+        Surcharge
+        -->
+            <ng-container *ngIf="calcTotal(order);let total">
+                <div>
+                    <div class="order-surcharge">
+                        <div class="d-flex justify-content-between">
+                            <label class="f-16-blur">Sub total</label>
+                            <label class="f-14 f-b">${{total}}</label>
+                        </div>
+                    </div>
+                    <hr>
+                    <!--
+                        Sub Total
+                    -->
+                    <div class="order-surcharge">
+                        <div class="d-flex justify-content-between">
+                            <label class="f-16-blur">Total</label>
+                            <label class="f-14 f-b">${{total}}</label>
+                        </div>
+                    </div>
+                    <hr>
+                    <!--
+                        Amount Due
+                    -->
+                    <div class="order-surcharge">
+                        <div class="d-flex justify-content-between">
+                            <label class="f-16 f-b">Total</label>
+                            <label class="f-24 f-b">${{total}}</label>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </ng-container>
+        </div>
+</ng-container>
+<div *ngIf="!pagination.hasEnded" class="mb-80">
+    <div class="col-sm-12 text-center">
+        <span *ngIf="!loading; else ld" class="load-more"  (click)="loadNext()">Load More</span>
+        <ng-template #ld>
+            <img src="/assets/images/loader_blue.gif" alt="">
+        </ng-template>
+    </div>
+</div>
+</div>
+<!-- <button *ngIf="!pagination.hasEnded" (click)="loadNext()">Load more</button> -->

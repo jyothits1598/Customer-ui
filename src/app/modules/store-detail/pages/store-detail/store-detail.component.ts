@@ -12,6 +12,7 @@ import { OrderPages, OrderViewControllerService } from 'src/app/core/services/or
 import { LayoutService } from 'src/app/core/services/layout.service';
 import { CartService } from 'src/app/core/services/cart.service';
 import { PARTNER_APP_LINK } from 'src/environments/environment';
+import { PresentAvailabilityComponent } from 'src/app/modules/time-availability/present-availability/present-availability.component';
 
 @Component({
   selector: 'app-store-detail',
@@ -24,14 +25,13 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
   scrolledDown: boolean;
   userLocation: boolean;
   interObserver: IntersectionObserver;
+  partnerAppLink = PARTNER_APP_LINK;
 
   storeDetail: StoreDetail;
   loading: boolean = true;
   error: boolean = false;
-  partnerAppLink = PARTNER_APP_LINK;
-  
+  isStoreOpen: boolean;
   unSub$ = new Subject<true>();
-
   @ViewChild('observationElement', { read: ElementRef }) obsElement: ElementRef;
   @ViewChild('fbParent', { read: ElementRef }) fbParent: ElementRef;
 
@@ -82,6 +82,9 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
     this.storeDetailServ.storeDetail(storeId, location).pipe(takeUntil(this.unSub$), finalize(() => this.loading = false)).subscribe(storeDetail => {
       storeDetail.categories = storeDetail.categories.sort((c1, c2) => c1.id - c2.id);
       this.storeDetail = storeDetail;
+      let av = new PresentAvailabilityComponent();
+      av.availability = storeDetail.openingHours;
+      this.isStoreOpen = !!av.openTimings;
       setTimeout(() => {
         this.observeIntersection();
       }, 0);
@@ -90,8 +93,8 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.unSub$.next(true);
-    this.interObserver.unobserve(this.obsElement.nativeElement);
-     if (!this.cartSrv.presentCartData && this.orderView.getCurrentPage() === OrderPages.Cart) this.orderView.showPage(null);
+    if (this.interObserver) this.interObserver.unobserve(this.obsElement.nativeElement);
+    if (!this.cartSrv.presentCartData && this.orderView.getCurrentPage() === OrderPages.Cart) this.orderView.showPage(null);
 
   }
 

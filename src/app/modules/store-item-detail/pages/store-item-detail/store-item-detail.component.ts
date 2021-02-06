@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { finalize, takeUntil } from 'rxjs/operators';
 import { CartData } from 'src/app/core/model/cart';
 import { CartService } from 'src/app/core/services/cart.service';
+import { LayoutService } from 'src/app/core/services/layout.service';
 import { OrderPages, OrderViewControllerService } from 'src/app/core/services/order-view-controller.service';
 import { ItemModifier, StoreItemDetail } from '../../model/store-item-detail';
 import { StoreItemDataService } from '../../services/store-item-data.service';
@@ -34,40 +35,33 @@ import { StoreItemDataService } from '../../services/store-item-data.service';
     ])
   ]
 })
-export class StoreItemDetailComponent implements OnChanges, OnDestroy {
+export class StoreItemDetailComponent implements OnInit,  OnChanges, OnDestroy {
   reqSubs: Subscription;
   selectedvalueChangeSubs: Subscription;
   @ViewChild('observationElement', { read: ElementRef }) obsElement: ElementRef;
-  @Input() item: { storeId: number, storeName: string, itemId: number };
+  @Input() item: { storeId: number, storeName: string, itemId: number,isFavourite:number };
+  @Input() isStoreOpen: boolean;
+
   itemDetail: StoreItemDetail
   loading: boolean = true;
-  show = true;
   selectedOptions: FormArray;
   itemCount: FormControl = new FormControl(1);
   addingToCart: boolean = false;
   totalAmount: any = 0;
   makeCalculations: (itemBasePrice: number, selectedModifiers: Array<ItemModifier>, count: number) => number;
-
-  unSubscribe$: Subject<boolean> = new Subject<boolean>();
-  itemAddedToCart: boolean = false;
-
-  // interObserver: IntersectionObserver;
-  // scrolledDown: boolean;
   
+  unSubscribe$: Subject<boolean> = new Subject<boolean>();
+  
+  show = true;
+  closedStore;
   constructor(private storeItemData: StoreItemDataService,
     private location: Location,
     private cartService: CartService,
     private ov: OrderViewControllerService) {
     this.makeCalculations = this.cartService.makeCalculations;
   }
-
-  // observeIntersection() {
-  //   this.interObserver = new IntersectionObserver((entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
-  //     if (entries[0].isIntersecting) this.scrolledDown = false;
-  //     else this.scrolledDown = true;
-  //   });
-  //   this.interObserver.observe(this.obsElement.nativeElement);
-  // }
+  ngOnInit(): void {
+  }
 
   ngOnChanges(): void {
     //clear previous subscription
@@ -79,6 +73,9 @@ export class StoreItemDetailComponent implements OnChanges, OnDestroy {
       let control = this.itemDetail.modifiers.map((mod) => new FormControl());
       this.selectedOptions = new FormArray(control);
       this.selectedvalueChangeSubs = this.setUpSubscription();
+
+      //initialise total amount
+      this.totalAmount = this.makeCalculations(this.itemDetail.basePrice, [], 1)
     });
   }
 
@@ -95,16 +92,21 @@ export class StoreItemDetailComponent implements OnChanges, OnDestroy {
     }, 200);
   }
 
-  ngOnDestroy(): void {
-    this.unSubscribe$.next(true);
-  }
-
   addToCart() {
+    if(!this.isStoreOpen){
+      // this.sBSrv.error('Sorry, the store is currently not taking any orders.');
+      this.closedStore="Sorry, the store is currently not taking any orders.";
+      setTimeout(() => {  
+              this.closedStore="";  
+        }, 5000);
+      return;
+    }
+
     if (this.selectedOptions.invalid) {
       this.selectedOptions.markAllAsTouched();
       return;
     }
-    
+
     this.addingToCart = true;
     let itemDetail = { ...this.itemDetail };
     itemDetail.modifiers = this.selectedOptions.value.filter(m => m);
@@ -124,6 +126,18 @@ export class StoreItemDetailComponent implements OnChanges, OnDestroy {
       }, 0);
     });
   }
+  
+  ngOnDestroy(): void {
+    this.unSubscribe$.next(true);
+  }
+// observeIntersection() {
+  //   this.interObserver = new IntersectionObserver((entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
+  //     if (entries[0].isIntersecting) this.scrolledDown = false;
+  //     else this.scrolledDown = true;
+  //   });
+  //   this.interObserver.observe(this.obsElement.nativeElement);
+  // }
+
 
   // getSelectedCartsDetails() {
   //   this.cartAmount = 0;

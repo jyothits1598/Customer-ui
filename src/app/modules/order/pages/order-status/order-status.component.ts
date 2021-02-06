@@ -15,7 +15,8 @@ import { ItemModifier } from 'src/app/modules/store-item-detail/model/store-item
 })
 export class OrderStatusComponent implements OnInit, OnDestroy {
 
-  constructor(private ordSrv: OrdersService,
+  constructor(
+    private ordSrv: OrdersService,
     private cartSrv: CartService,
     private ordView: OrderViewControllerService) { }
 
@@ -24,7 +25,7 @@ export class OrderStatusComponent implements OnInit, OnDestroy {
   loading: boolean;
 
   makeCalculations: (itemBasePrice: number, selectedModifiers: Array<ItemModifier>, count: number) => number = this.cartSrv.makeCalculations;
-  calcTotal: (cartData) => number = this.cartSrv.calculateTotalAmount;
+  calcTotal: (cartData) => number = this.cartSrv.calculateSubTotal;
 
   ngOnInit(): void {
     this.ordSrv.orderToBeShown$.pipe(
@@ -53,7 +54,7 @@ export class OrderStatusComponent implements OnInit, OnDestroy {
   markAsComplete(orderStatus) {
     this.loading = true;
     this.ordSrv.markOrderComplete(this.ordData.id,orderStatus).pipe(takeUntil(this.unSub$), finalize(() => this.loading = false)).subscribe(() => {
-      this.ordSrv.setThankyouData({ storeName: this.ordData.storeName });
+      this.ordSrv.setThankyouData({ storeName: this.ordData.storeName, storeId: this.ordData.storeId });
       this.ordView.showPage(OrderPages.Thankyou);
     });
   }
