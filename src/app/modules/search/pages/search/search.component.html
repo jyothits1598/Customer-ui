@@ -10,5 +10,7 @@
 
 <div style="margin-top:120px" *ngIf="isMobile"></div>
 <div class="store-search">
-  <store-list [parentKey]="pageKey" (totalCount)="resultCount = $event" *ngIf="storeFilter" [filter]="storeFilter"></store-list>
+  <ng-container *ngIf="storeFilter$ | async as storeFilter">
+    <store-list [parentKey]="pageKey" (totalCount)="resultCount = $event" *ngIf="storeFilter" [filter]="storeFilter"></store-list>
+  </ng-container>
 </div>

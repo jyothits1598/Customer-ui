@@ -27,16 +27,24 @@ export class StoreListComponent implements OnInit, OnDestroy, AfterViewChecked {
   stores$ = new BehaviorSubject<Store[]>([]);
 
   pagination: StorePagination;
-  _filter: StoreFilter;
+  _filter$ = new BehaviorSubject<StoreFilter>(undefined);
   unSubscribe$ = new Subject<void>();
   @Output() totalCount = new EventEmitter<number>();
   isActive: string = '';
   @Input() set filter(f: StoreFilter) {
-    this._filter = f;
+    console.log('StoreListComponent. @input set filter:', f);
+    this._filter$.next(f);
     this.pagination = new StorePagination(
       this.storeData.allStores.bind(this.storeData),
-      this._filter
+      f
     );
+    this.pagination
+      .getNext()
+      .pipe(take(1))
+      .subscribe((stores) => {
+        this.stores$.next([]);
+        this.appendStores(stores);
+      });
   }
 
   @ViewChild('infiniteScroll', { read: InfiniteScrollDirective })
@@ -48,6 +56,7 @@ export class StoreListComponent implements OnInit, OnDestroy, AfterViewChecked {
     private router: Router
   ) {
     this.isActive = 'nearBy';
+    console.log('StoreListComponent.constructor()... ', this.parentKey);
   }
 
   ngOnInit(): void {
@@ -55,10 +64,18 @@ export class StoreListComponent implements OnInit, OnDestroy, AfterViewChecked {
       this.parentKey
     );
     if (cachedStoreListItem) {
-      console.log('Restore cache found for parent: ', this.parentKey);
+      console.log(
+        'StoreListComponent.ngOnInit(): Restoring storelist for key: ',
+        this.parentKey
+      );
       this.pagination.currentPage = cachedStoreListItem.currentPage;
       this.appendStores(cachedStoreListItem.stores);
     } else {
+      console.log(
+        'StoreListComponent.ngOnInit(): No cache for key: ',
+        this.parentKey,
+        ' (should getNext() from fresh pagination)'
+      );
       this.pagination
         .getNext()
         .pipe(take(1))
@@ -94,11 +111,11 @@ export class StoreListComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   navigateToPath(type) {
     this.isActive = type;
-    this._filter['sort_by'] = type;
+    this._filter$.value['sort_by'] = type;
     this.stores$.next([]);
     this.pagination = new StorePagination(
       this.storeData.allStores.bind(this.storeData),
-      this._filter
+      this._filter$.value
     );
     this.pagination
       .getNext()
