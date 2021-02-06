@@ -14,7 +14,8 @@ import { OrderStatusComponent } from './pages/order-status/order-status.componen
 import { TrackingButtonComponent } from './components/tracking-button/tracking-button.component';
 import { OrderThankYouComponent } from './pages/order-thank-you/order-thank-you.component';
 import { PhonePipe } from 'src/app/helpers/phonePipe';
-
+import { ShareModule } from '../share/share.module';
+import { StoreHeartModule } from '../store-heart/store-heart.module';
 // const routes: Routes = [
 //   { path: '', component: CartComponent },
 // ];
@@ -23,7 +24,9 @@ import { PhonePipe } from 'src/app/helpers/phonePipe';
   declarations: [CartComponent, CartButtonComponent, PaymentComponent, ConfirmationComponent, CartSummaryComponent, OrderContainerComponent, CartContentComponent, PaymentOptionsComponent, AddPaymentOptionsComponent, OrderStatusComponent, TrackingButtonComponent, OrderThankYouComponent, PhonePipe],
   imports: [
     RouterModule,
-    CommonModule
+    CommonModule,
+    ShareModule,
+    StoreHeartModule
   ],
   exports: [CartComponent, CartButtonComponent, OrderContainerComponent, TrackingButtonComponent]
 })

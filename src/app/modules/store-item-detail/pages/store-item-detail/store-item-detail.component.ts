@@ -39,7 +39,7 @@ export class StoreItemDetailComponent implements OnInit,  OnChanges, OnDestroy {
   reqSubs: Subscription;
   selectedvalueChangeSubs: Subscription;
   @ViewChild('observationElement', { read: ElementRef }) obsElement: ElementRef;
-  @Input() item: { storeId: number, storeName: string, itemId: number };
+  @Input() item: { storeId: number, storeName: string, itemId: number,isFavourite:number };
   @Input() isStoreOpen: boolean;
 
   itemDetail: StoreItemDetail
