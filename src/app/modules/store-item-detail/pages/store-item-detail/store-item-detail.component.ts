@@ -11,7 +11,6 @@ import { CartData } from 'src/app/core/model/cart';
 import { CartService } from 'src/app/core/services/cart.service';
 import { LayoutService } from 'src/app/core/services/layout.service';
 import { OrderPages, OrderViewControllerService } from 'src/app/core/services/order-view-controller.service';
-import { SnackBarService } from 'src/app/core/services/snack-bar.service';
 import { ItemModifier, StoreItemDetail } from '../../model/store-item-detail';
 import { StoreItemDataService } from '../../services/store-item-data.service';
 
@@ -54,12 +53,11 @@ export class StoreItemDetailComponent implements OnInit,  OnChanges, OnDestroy {
   unSubscribe$: Subject<boolean> = new Subject<boolean>();
   
   show = true;
-  
+  closedStore;
   constructor(private storeItemData: StoreItemDataService,
     private location: Location,
     private cartService: CartService,
-    private ov: OrderViewControllerService,
-    private sBSrv: SnackBarService) {
+    private ov: OrderViewControllerService) {
     this.makeCalculations = this.cartService.makeCalculations;
   }
   ngOnInit(): void {
@@ -96,7 +94,11 @@ export class StoreItemDetailComponent implements OnInit,  OnChanges, OnDestroy {
 
   addToCart() {
     if(!this.isStoreOpen){
-      this.sBSrv.error('Sorry, the store is currently not taking any orders.');
+      // this.sBSrv.error('Sorry, the store is currently not taking any orders.');
+      this.closedStore="Sorry, the store is currently not taking any orders.";
+      setTimeout(() => {  
+              this.closedStore="";  
+        }, 5000);
       return;
     }
 

@@ -12,7 +12,7 @@
                     </td>
                     <td align="bottom">
                         <label *ngIf="scrolledDown" class="text-capitalize st-name-card">
-                            {{storeDetail.name}}
+                            {{ storeDetail.name | slice:0:20 }}{{storeDetail.name.length > 20 ? '. .' : ''}}
                         </label>
                     </td>
                 </tr>
@@ -97,7 +97,6 @@
                             </td>
                         </tr>
                     </table>
-                    <div>{{isStoreOpen}}</div>
                 </div>
                 <hr class="hr">
                 <div class="address-content">

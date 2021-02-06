@@ -24,6 +24,7 @@
                 <div class="std-heading-3 text-capitalize">
                     {{itemDetail.name}}
                 </div>
+                <span class="close-status-store" > {{closedStore}} </span>
                 <div class="item-div-image">
                     <img [src]="itemDetail.image || 'assets/svg/details/modifier_null.svg'" class="img-fluid">
                 </div>
@@ -48,7 +49,6 @@
                     <item-count (change)="itemCount.patchValue($event)"></item-count>
                 </div>
             </ng-container>
-
         </div>
         <div class="footer-btn">
             <div class="add-cart-card text-center">
