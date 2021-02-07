@@ -51,7 +51,9 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.route.queryParams
       .pipe(
         filter((param) => param.q),
-        tap((qparams) => (this.pageKey = `${this.pageKey}:${qparams.q}`)),
+        tap(
+          (qparams) => (this.pageKey = `${Constants.Keys.Search}:${qparams.q}`)
+        ),
         mergeMap((query: any) =>
           this.location
             .userLocation()

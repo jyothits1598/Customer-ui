@@ -58,7 +58,6 @@ export class SearchDataService {
         (val) => val.toUpperCase() !== searchTerm.toUpperCase()
       ),
     ].slice(0, 12);
-    this.storeDataService.clearStoreList(Constants.Keys.Search);
     this.storageService.store(this.storageKey, newHistory);
     this.searchHistory$.next(newHistory);
   }

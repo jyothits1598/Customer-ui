@@ -27,11 +27,6 @@ export class StoresDataService {
     return this.storeListCache.get(key);
   }
 
-  clearStoreList(key: string): void {
-    console.log('StoreDataService: clearStoreList(): for key: ', key);
-    this.storeListCache.delete(key);
-  }
-
   allStores(filter: StoreFilter): Observable<StorePagination> {
     console.log('try', filter);
     return this.restApiService.get(
