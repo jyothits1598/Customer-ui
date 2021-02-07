@@ -51,6 +51,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.route.queryParams
       .pipe(
         filter((param) => param.q),
+        tap((qparams) => (this.pageKey = `${this.pageKey}:${qparams.q}`)),
         mergeMap((query: any) =>
           this.location
             .userLocation()
@@ -59,7 +60,6 @@ export class SearchComponent implements OnInit, OnDestroy {
         takeUntil(this.unSub$)
       )
       .subscribe((val) => {
-        console.log('SearchComponeont.ngOnInit(): sub val? ', val);
         this.storeFilter = val;
       });
   }

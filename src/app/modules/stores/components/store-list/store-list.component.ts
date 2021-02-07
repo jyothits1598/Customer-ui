@@ -8,7 +8,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { ScrollPositionService } from 'src/app/core/services/scroll-position.service';
 import { StorePagination } from 'src/app/shared/classes/pagination';
@@ -31,10 +31,17 @@ export class StoreListComponent implements OnInit, OnDestroy, AfterViewInit {
   unSubscribe$ = new Subject<void>();
   @Output() totalCount = new EventEmitter<number>();
   isActive: string = '';
-  @Input() filter: StoreFilter;
+  private _filter: StoreFilter;
+  @Input() set filter(val) {
+    this._filter = val;
+    console.log('Filter changed: ', val);
+    this.initPagination();
+  }
 
   @ViewChild('infiniteScroll', { read: InfiniteScrollDirective })
   infiniteScroll: InfiniteScrollDirective;
+
+  private paginationSub: Subscription = undefined;
 
   constructor(
     private storeData: StoresDataService,
@@ -51,27 +58,36 @@ export class StoreListComponent implements OnInit, OnDestroy, AfterViewInit {
       this.parentKey
     );
     if (cachedStoreListItem) {
-      console.log(
-        'StoreListComponent.ngOnInit(): Restoring pagination: ',
-        this.parentKey
-      );
-      this.pagination = cachedStoreListItem.pagination;
-      this.appendStores(cachedStoreListItem.stores);
-    } else {
-      console.log(
-        'StoreListComponent.ngOnInit(): Creationg new pagination: ',
-        this.parentKey
-      );
-      this.pagination = new StorePagination(
-        this.storeData.allStores.bind(this.storeData),
-        this.filter
-      );
-      this.pagination
-        .getNext()
-        .pipe(take(1))
-        .subscribe((stores) => this.appendStores(stores));
-      this.scrollPosService.scrollToTop();
+      this.restorePagination(cachedStoreListItem);
     }
+  }
+
+  restorePagination(cachedStoreListItem) {
+    console.log(
+      'StoreListComponent.ngOnInit(): Restoring pagination: ',
+      this.parentKey
+    );
+    this.paginationSub.unsubscribe();
+    this.stores$.next([]);
+    this.pagination = cachedStoreListItem.pagination;
+    this.appendStores(cachedStoreListItem.stores);
+  }
+
+  initPagination() {
+    console.log(
+      'StoreListComponent.initPagination(): Creating new pagination: ',
+      this.parentKey
+    );
+    this.stores$.next([]);
+    this.pagination = new StorePagination(
+      this.storeData.allStores.bind(this.storeData),
+      this._filter
+    );
+    this.paginationSub = this.pagination
+      .getNext()
+      .pipe(take(1))
+      .subscribe((stores) => this.appendStores(stores));
+    this.scrollPosService.scrollToTop();
   }
 
   ngAfterViewInit(): void {
@@ -115,11 +131,11 @@ export class StoreListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   navigateToPath(type) {
     this.isActive = type;
-    this.filter['sort_by'] = type;
+    this._filter['sort_by'] = type;
     this.stores$.next([]);
     this.pagination = new StorePagination(
       this.storeData.allStores.bind(this.storeData),
-      this.filter
+      this._filter
     );
     this.pagination
       .getNext()
