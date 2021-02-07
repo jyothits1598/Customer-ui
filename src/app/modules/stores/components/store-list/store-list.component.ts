@@ -27,25 +27,10 @@ export class StoreListComponent implements OnInit, OnDestroy, AfterViewChecked {
   stores$ = new BehaviorSubject<Store[]>([]);
 
   pagination: StorePagination;
-  _filter$ = new BehaviorSubject<StoreFilter>(undefined);
   unSubscribe$ = new Subject<void>();
   @Output() totalCount = new EventEmitter<number>();
   isActive: string = '';
-  @Input() set filter(f: StoreFilter) {
-    console.log('StoreListComponent. @input set filter:', f);
-    this._filter$.next(f);
-    this.pagination = new StorePagination(
-      this.storeData.allStores.bind(this.storeData),
-      f
-    );
-    this.pagination
-      .getNext()
-      .pipe(take(1))
-      .subscribe((stores) => {
-        this.stores$.next([]);
-        this.appendStores(stores);
-      });
-  }
+  @Input() filter: StoreFilter;
 
   @ViewChild('infiniteScroll', { read: InfiniteScrollDirective })
   infiniteScroll: InfiniteScrollDirective;
@@ -65,16 +50,19 @@ export class StoreListComponent implements OnInit, OnDestroy, AfterViewChecked {
     );
     if (cachedStoreListItem) {
       console.log(
-        'StoreListComponent.ngOnInit(): Restoring storelist for key: ',
+        'StoreListComponent.ngOnInit(): Restoring pagination: ',
         this.parentKey
       );
-      this.pagination.currentPage = cachedStoreListItem.currentPage;
+      this.pagination = cachedStoreListItem.pagination;
       this.appendStores(cachedStoreListItem.stores);
     } else {
       console.log(
-        'StoreListComponent.ngOnInit(): No cache for key: ',
-        this.parentKey,
-        ' (should getNext() from fresh pagination)'
+        'StoreListComponent.ngOnInit(): Creationg new pagination: ',
+        this.parentKey
+      );
+      this.pagination = new StorePagination(
+        this.storeData.allStores.bind(this.storeData),
+        this.filter
       );
       this.pagination
         .getNext()
@@ -89,12 +77,20 @@ export class StoreListComponent implements OnInit, OnDestroy, AfterViewChecked {
     console.log('Caching storelist for: ', this.parentKey);
     this.storeData.cacheStoreList(this.parentKey, {
       stores: this.stores$.value,
-      currentPage: this.pagination.currentPage,
+      pagination: this.pagination,
+      filter: undefined,
+      currentPage: undefined,
     });
   }
 
   appendStores(stores) {
     //this.totalCount.emit(this.pagination.totalCount);
+    console.log(
+      'current stores: ',
+      this.stores$.value,
+      ', appending stores: ',
+      stores
+    );
     this.stores$.next([...this.stores$.value, ...stores]);
   }
 
@@ -111,11 +107,11 @@ export class StoreListComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   navigateToPath(type) {
     this.isActive = type;
-    this._filter$.value['sort_by'] = type;
+    this.filter['sort_by'] = type;
     this.stores$.next([]);
     this.pagination = new StorePagination(
       this.storeData.allStores.bind(this.storeData),
-      this._filter$.value
+      this.filter
     );
     this.pagination
       .getNext()

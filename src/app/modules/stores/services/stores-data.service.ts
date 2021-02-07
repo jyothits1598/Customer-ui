@@ -97,5 +97,7 @@ export class StoresDataService {
 
 export interface StoreListCacheItem {
   stores: Store[];
+  pagination: StorePagination;
+  filter: StoreFilter;
   currentPage: number;
 }

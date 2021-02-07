@@ -25,7 +25,7 @@ import { SearchDataService } from '../../services/search-data.service';
 export class SearchComponent implements OnInit, OnDestroy {
   pageKey = Constants.Keys.Search;
 
-  storeFilter$ = new BehaviorSubject<StoreFilter>(undefined);
+  storeFilter: StoreFilter;
 
   resultCount: number = null;
   isMobile: boolean;
@@ -60,7 +60,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       )
       .subscribe((val) => {
         console.log('SearchComponeont.ngOnInit(): sub val? ', val);
-        this.storeFilter$.next(val);
+        this.storeFilter = val;
       });
   }
 
