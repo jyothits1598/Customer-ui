@@ -33,6 +33,7 @@ export class StoresDataService {
   }
 
   allStores(filter: StoreFilter): Observable<StorePagination> {
+    console.log('try', filter);
     return this.restApiService.get(
       'api/stores/search' + this.filterToQuery(filter)
     );

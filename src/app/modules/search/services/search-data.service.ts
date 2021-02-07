@@ -84,7 +84,7 @@ export class SearchDataService {
     if (latLng)
       result += `&lat=${latLng.lat}&lng=${latLng.lng}&distance=${
         distance ? distance : 5
-      }`;
+      }&suggestion=true`;
     return result;
   }
 }

@@ -51,7 +51,8 @@
         </div>
         <div class="footer-btn">
             <div class="add-cart-card text-center">
-                <div [ngStyle]="{'filter': !isStoreOpen? 'opacity(0.5)':''}" (click)="addToCart()" type="button" class="cart-button">
+                <div (click)="addToCart()" type="button"
+                    class="cart-button">
                     <ng-container *ngIf="!addingToCart; else ld">
                         <span class="cart-text">Add to cart</span> <span *ngIf="itemDetail"
                             class="float-right  cart-text">${{totalAmount}}</span>
@@ -65,3 +66,17 @@
     </div>
     <div class="item-detail-background" (click)="close()"></div>
 </div>
+
+<ng-template #orderExistsTemp let-modal>
+    <div class="modal-body cart-confirm-dialogue text-center" >
+        <span class="cart-error-header">
+            {{modal.data.heading}}
+        </span>
+        <p class="paragraph14 pt-4">
+            {{modal.data.message}}
+        </p>
+        <div class="pt-3 pb-3">
+            <div class="success-text" (click)="modal.dismiss()">Okay</div>
+        </div>
+    </div>
+</ng-template>

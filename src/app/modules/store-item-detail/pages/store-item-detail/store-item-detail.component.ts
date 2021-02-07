@@ -1,7 +1,7 @@
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { Location } from '@angular/common';
 import { templateVisitAll } from '@angular/compiler';
-import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, ViewChild, ElementRef, TemplateRef } from '@angular/core';
 import { AbstractControl, FormArray, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { merge, Subject } from 'rxjs';
@@ -10,7 +10,10 @@ import { finalize, takeUntil } from 'rxjs/operators';
 import { CartData } from 'src/app/core/model/cart';
 import { CartService } from 'src/app/core/services/cart.service';
 import { LayoutService } from 'src/app/core/services/layout.service';
+import { ModalService } from 'src/app/core/services/modal.service';
 import { OrderPages, OrderViewControllerService } from 'src/app/core/services/order-view-controller.service';
+import { OrdersService } from 'src/app/core/services/orders.service';
+import { SnackBarService } from 'src/app/core/services/snack-bar.service';
 import { ItemModifier, StoreItemDetail } from '../../model/store-item-detail';
 import { StoreItemDataService } from '../../services/store-item-data.service';
 
@@ -35,11 +38,13 @@ import { StoreItemDataService } from '../../services/store-item-data.service';
     ])
   ]
 })
-export class StoreItemDetailComponent implements OnInit,  OnChanges, OnDestroy {
+export class StoreItemDetailComponent implements OnInit, OnChanges, OnDestroy {
   reqSubs: Subscription;
   selectedvalueChangeSubs: Subscription;
   @ViewChild('observationElement', { read: ElementRef }) obsElement: ElementRef;
-  @Input() item: { storeId: number, storeName: string, itemId: number,isFavourite:number };
+  @ViewChild('orderExistsTemp', { read: TemplateRef }) oETemp: TemplateRef<any>;
+
+  @Input() item: { storeId: number, storeName: string, itemId: number, isFavourite: boolean };
   @Input() isStoreOpen: boolean;
 
   itemDetail: StoreItemDetail
@@ -49,15 +54,18 @@ export class StoreItemDetailComponent implements OnInit,  OnChanges, OnDestroy {
   addingToCart: boolean = false;
   totalAmount: any = 0;
   makeCalculations: (itemBasePrice: number, selectedModifiers: Array<ItemModifier>, count: number) => number;
-  
+
   unSubscribe$: Subject<boolean> = new Subject<boolean>();
-  
+
   show = true;
-  closedStore;
+
   constructor(private storeItemData: StoreItemDataService,
     private location: Location,
     private cartService: CartService,
-    private ov: OrderViewControllerService) {
+    private ov: OrderViewControllerService,
+    private sBSrv: SnackBarService,
+    private ordSrv: OrdersService,
+    private mdlSrv: ModalService) {
     this.makeCalculations = this.cartService.makeCalculations;
   }
   ngOnInit(): void {
@@ -73,7 +81,6 @@ export class StoreItemDetailComponent implements OnInit,  OnChanges, OnDestroy {
       let control = this.itemDetail.modifiers.map((mod) => new FormControl());
       this.selectedOptions = new FormArray(control);
       this.selectedvalueChangeSubs = this.setUpSubscription();
-
       //initialise total amount
       this.totalAmount = this.makeCalculations(this.itemDetail.basePrice, [], 1)
     });
@@ -93,17 +100,23 @@ export class StoreItemDetailComponent implements OnInit,  OnChanges, OnDestroy {
   }
 
   addToCart() {
-    if(!this.isStoreOpen){
-      // this.sBSrv.error('Sorry, the store is currently not taking any orders.');
-      this.closedStore="Sorry, the store is currently not taking any orders.";
-      setTimeout(() => {  
-              this.closedStore="";  
-        }, 5000);
+    if (!this.isStoreOpen) {
+      this.mdlSrv.openTemplateModal(this.oETemp, { data: { heading: 'Store is closed.', message: 'Sorry, no orders are being accepted now.' } })
       return;
     }
 
     if (this.selectedOptions.invalid) {
       this.selectedOptions.markAllAsTouched();
+      return;
+    }
+
+    if (this.ordSrv.getCurrentActiveOrder()) {
+      let storeName = this.ordSrv.getCurrentActiveOrder().store_name.charAt(0).toUpperCase() + this.ordSrv.getCurrentActiveOrder().store_name.slice(1);
+      this.mdlSrv.openTemplateModal(this.oETemp, {
+        data: {
+          heading: 'You already have an order pending', message: `Please try again once your order from ${storeName} is complete.`
+        }
+      });
       return;
     }
 
@@ -124,13 +137,18 @@ export class StoreItemDetailComponent implements OnInit,  OnChanges, OnDestroy {
         this.show = false;
         this.location.back();
       }, 0);
-    });
+    },
+      (err) => {
+        if (err?.error?.error_msg[0].includes('Please try again once your order from')) {
+          this.mdlSrv.openTemplateModal(this.oETemp, { data: err.error.error_msg[0] });
+        }
+      });
   }
-  
+
   ngOnDestroy(): void {
     this.unSubscribe$.next(true);
   }
-// observeIntersection() {
+  // observeIntersection() {
   //   this.interObserver = new IntersectionObserver((entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
   //     if (entries[0].isIntersecting) this.scrolledDown = false;
   //     else this.scrolledDown = true;
