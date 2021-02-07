@@ -10,6 +10,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { ScrollPositionService } from 'src/app/core/services/scroll-position.service';
 import { StorePagination } from 'src/app/shared/classes/pagination';
 import { InfiniteScrollDirective } from 'src/app/shared/directives/infinite-scroll.directive';
 import { Store } from '../../model/store';
@@ -21,7 +22,7 @@ import { StoresDataService } from '../../services/stores-data.service';
   templateUrl: './store-list.component.html',
   styleUrls: ['./store-list.component.scss'],
 })
-export class StoreListComponent implements OnInit, OnDestroy, AfterViewChecked {
+export class StoreListComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() parentKey: string = undefined;
 
   stores$ = new BehaviorSubject<Store[]>([]);
@@ -38,7 +39,8 @@ export class StoreListComponent implements OnInit, OnDestroy, AfterViewChecked {
   constructor(
     private storeData: StoresDataService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private scrollPosService: ScrollPositionService
   ) {
     this.isActive = 'nearBy';
     console.log('StoreListComponent.constructor()... ', this.parentKey);
@@ -68,13 +70,19 @@ export class StoreListComponent implements OnInit, OnDestroy, AfterViewChecked {
         .getNext()
         .pipe(take(1))
         .subscribe((stores) => this.appendStores(stores));
+      this.scrollPosService.scrollToTop();
     }
   }
 
-  ngAfterViewChecked(): void {}
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.scrollPosService.repositionFor(this.parentKey);
+    }, 0);
+  }
 
   ngOnDestroy(): void {
     console.log('Caching storelist for: ', this.parentKey);
+    this.scrollPosService.storePositionFor(this.parentKey);
     this.storeData.cacheStoreList(this.parentKey, {
       stores: this.stores$.value,
       pagination: this.pagination,
@@ -84,7 +92,7 @@ export class StoreListComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   appendStores(stores) {
-    //this.totalCount.emit(this.pagination.totalCount);
+    this.totalCount.emit(this.pagination.totalCount);
     console.log(
       'current stores: ',
       this.stores$.value,
