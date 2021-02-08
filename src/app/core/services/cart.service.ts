@@ -40,7 +40,7 @@ export class CartService {
             this.getCart().subscribe((cart) => { if (cart) { this.cartData.next(cart); this.storageService.store(this.storageIdentifier, cart) } })
           }
         }
-      } else this.addItem(this.presentCartData).subscribe();
+      } else this.addItem(this.presentCartData, true).subscribe(); //this runs when the user has logged in after adding cart data
     })
   }
 
