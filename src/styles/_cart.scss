@@ -249,16 +249,16 @@ input[type=radio] {
             padding:0px 6px 0px 2px;
         }
     }
-    #progressbar {
+    .progressbar {
     background: #F2F2F2;
     border-radius: 8px;
     width:200px;
     }
     
-    #progressbar>div {
+    .progressbar-order-by-status
+     {
     background: #FFBF42;
     border-radius: 8px;
-    width: 40%;
     height: 12px;
     border-radius: 10px;
     }

@@ -25,7 +25,7 @@ export class OrderStatusComponent implements OnInit, OnDestroy {
   loading: boolean;
 
   makeCalculations: (itemBasePrice: number, selectedModifiers: Array<ItemModifier>, count: number) => number = this.cartSrv.makeCalculations;
-  calcTotal: (cartData) => number = this.cartSrv.calculateSubTotal;
+  calcSum = this.cartSrv.calculateSummary.bind(this.cartSrv);
 
   ngOnInit(): void {
     this.ordSrv.orderToBeShown$.pipe(
@@ -53,8 +53,8 @@ export class OrderStatusComponent implements OnInit, OnDestroy {
 
   markAsComplete(orderStatus) {
     this.loading = true;
-    this.ordSrv.markOrderComplete(this.ordData.id,orderStatus).pipe(takeUntil(this.unSub$), finalize(() => this.loading = false)).subscribe(() => {
-      this.ordSrv.setThankyouData({ storeName: this.ordData.storeName, storeId: this.ordData.storeId,isFavourite: this.ordData.isFavourite });
+    this.ordSrv.markOrderComplete(this.ordData.id, orderStatus).pipe(takeUntil(this.unSub$), finalize(() => this.loading = false)).subscribe(() => {
+      this.ordSrv.setThankyouData({ storeName: this.ordData.storeName, storeId: this.ordData.storeId, isFavourite: this.ordData.isFavourite });
       this.ordView.showPage(OrderPages.Thankyou);
     });
   }
@@ -62,5 +62,21 @@ export class OrderStatusComponent implements OnInit, OnDestroy {
   getCount(oD: ConfirmedOrderData) {
     return oD.items.reduce((i1, i2) => i1 + i2.quantity, 0);
   }
- 
+
+  progressbarWidth(preparedByProgress) {
+    if (preparedByProgress >= 50) {
+      return "0%";
+    } else if (preparedByProgress >= 40) {
+      return "20%"
+    } else if (preparedByProgress >= 30) {
+      return "40%"
+    } else if (preparedByProgress >= 20) {
+      return "60%"
+    } else if (preparedByProgress >= 10) {
+      return "80%"
+    } else if (preparedByProgress == 0) {
+      return "100%"
+    }
+  }
+
 }

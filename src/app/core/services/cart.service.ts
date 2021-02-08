@@ -19,7 +19,7 @@ export class CartService {
   cartData = new BehaviorSubject<CartData>(null);
 
   storageIdentifier: string = 'cartData';
-  
+
   get presentCartData() {
     return this.cartData.value;
   }
@@ -40,7 +40,7 @@ export class CartService {
             this.getCart().subscribe((cart) => { if (cart) { this.cartData.next(cart); this.storageService.store(this.storageIdentifier, cart) } })
           }
         }
-      }else this.addItem(this.presentCartData).subscribe();
+      } else this.addItem(this.presentCartData).subscribe();
     })
   }
 
@@ -62,21 +62,23 @@ export class CartService {
 
   get orderSummary$(): Observable<OrderSummary> {
     return this.cartData.asObservable().pipe(
-      map(data => {
-        let count = this.calculateItemCount(data);
-        if (!count) return null;
-
-        let subTotal = this.calculateSubTotal(data);
-        let surChrg = subTotal * 0.02;
-        let total = subTotal + surChrg;
-        return {
-          subtotal: Math.round((subTotal + Number.EPSILON) * 100) / 100,
-          surcharge: Math.round((surChrg + Number.EPSILON) * 100) / 100,
-          total: Math.round((total + Number.EPSILON) * 100) / 100,
-          totalItemCount: count
-        }
-      })
+      map(d => this.calculateSummary(d))
     )
+  }
+
+  calculateSummary(c: CartData) {
+    let count = this.calculateItemCount(c);
+    if (!count) return null;
+
+    let subTotal = this.calculateSubTotal(c);
+    let surChrg = subTotal * 0.02;
+    let total = subTotal + surChrg;
+    return {
+      subtotal: Math.round((subTotal + Number.EPSILON) * 100) / 100,
+      surcharge: Math.round((surChrg + Number.EPSILON) * 100) / 100,
+      total: Math.round((total + Number.EPSILON) * 100) / 100,
+      totalItemCount: count
+    }
   }
 
   // TODO: rewrite this function with better implementation
@@ -105,10 +107,8 @@ export class CartService {
       // there is no previous item in cart
       newCartData = cData;
       resultObs = of(true);
-      console.log('moiddle of flow', this.authService.isLoggedIn)
     }
     //post cart to backend if signed in
-    console.log('add item called', cData, skipBackend)
     if (this.authService.isLoggedIn && !skipBackend) resultObs = resultObs.pipe(switchMap(() => this.postCart(newCartData)));
     return resultObs.pipe(tap(() => { this.cartData.next(newCartData); if (!newCartData) this.orderView.showPage(OrderPages.Cart); this.storageService.store(this.storageIdentifier, newCartData) }));
   }
