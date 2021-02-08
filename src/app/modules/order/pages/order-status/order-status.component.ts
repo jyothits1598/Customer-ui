@@ -25,7 +25,7 @@ export class OrderStatusComponent implements OnInit, OnDestroy {
   loading: boolean;
 
   makeCalculations: (itemBasePrice: number, selectedModifiers: Array<ItemModifier>, count: number) => number = this.cartSrv.makeCalculations;
-  calcTotal: (cartData) => number = this.cartSrv.calculateSubTotal;
+  calcSum = this.cartSrv.calculateSummary.bind(this.cartSrv);
 
   ngOnInit(): void {
     this.ordSrv.orderToBeShown$.pipe(
@@ -53,8 +53,8 @@ export class OrderStatusComponent implements OnInit, OnDestroy {
 
   markAsComplete(orderStatus) {
     this.loading = true;
-    this.ordSrv.markOrderComplete(this.ordData.id,orderStatus).pipe(takeUntil(this.unSub$), finalize(() => this.loading = false)).subscribe(() => {
-      this.ordSrv.setThankyouData({ storeName: this.ordData.storeName, storeId: this.ordData.storeId,isFavourite: this.ordData.isFavourite });
+    this.ordSrv.markOrderComplete(this.ordData.id, orderStatus).pipe(takeUntil(this.unSub$), finalize(() => this.loading = false)).subscribe(() => {
+      this.ordSrv.setThankyouData({ storeName: this.ordData.storeName, storeId: this.ordData.storeId, isFavourite: this.ordData.isFavourite });
       this.ordView.showPage(OrderPages.Thankyou);
     });
   }
@@ -62,5 +62,5 @@ export class OrderStatusComponent implements OnInit, OnDestroy {
   getCount(oD: ConfirmedOrderData) {
     return oD.items.reduce((i1, i2) => i1 + i2.quantity, 0);
   }
- 
+
 }
