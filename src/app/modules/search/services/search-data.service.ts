@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, interval, Subject } from 'rxjs';
 import { debounce, finalize, map, switchMap, take, tap } from 'rxjs/operators';
+import { Constants } from 'src/app/core/model/constants';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { GeoLocationService } from 'src/app/core/services/geo-location.service';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
 import { StorageService } from 'src/app/core/services/storage.service';
+import { StoresDataService } from '../../stores/services/stores-data.service';
 
 @Injectable({
   providedIn: 'root',
@@ -45,17 +47,17 @@ export class SearchDataService {
     private storageService: StorageService,
     private restApiService: RestApiService,
     private geoLoactionServ: GeoLocationService,
-    private authService: AuthService
+    private authService: AuthService,
+    private storeDataService: StoresDataService
   ) {}
 
-  addItem(searchTerm: string) {
+  searchForTerm(searchTerm: string) {
     const newHistory = [
       searchTerm,
       ...this.searchHistory$.value.filter(
         (val) => val.toUpperCase() !== searchTerm.toUpperCase()
       ),
     ].slice(0, 12);
-
     this.storageService.store(this.storageKey, newHistory);
     this.searchHistory$.next(newHistory);
   }

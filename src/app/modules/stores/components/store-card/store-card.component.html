@@ -1,87 +1,86 @@
 <div class="store-cards store-cards--shadow">
-    <div [routerLink]="'/restaurants/'+store.id" style="cursor:pointer;outline:0;">
-        <div class="store-cards store-cards--header">
-            <table>
-                <tr>
-                    <td valign="middle">
-                        <img [src]="store.logo || 'assets/svg/null_logo.svg'" class="profile-image">
-                        <!-- <img src="assets/images/Rectangle 4.png" class="profile-image" /> -->
-                    </td>
-                    <td style="padding-left: 8px;width:100%">
-                        <table style="margin-bottom: 4px;">
-                            <tr>
-                                <td>
-                                    <div class="store-name">
-                                        <!-- {{ store.name | slice:0:30 }}{{store.name.length > 30 ? '. . .' : ''}} -->
-                                        {{ store.name }}
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                        <div class="d-flex justify-content-between sub-name">
-                            <span> {{ store.distance }} </span>
-                            <present-availability [availability]="store.openingHours"></present-availability>
-                        </div>
-                    </td>
-                </tr>
+  <div (click)="select(store.id);" style="cursor:pointer;outline:0;">
+    <div class="store-cards store-cards--header">
+      <table>
+        <tr>
+          <td valign="middle">
+            <img [src]="store.logo || 'assets/svg/null_logo.svg'" class="profile-image">
+            <!-- <img src="assets/images/Rectangle 4.png" class="profile-image" /> -->
+          </td>
+          <td style="padding-left: 8px;width:100%">
+            <table style="margin-bottom: 4px;">
+              <tr>
+                <td>
+                  <div class="store-name">
+                    <!-- {{ store.name | slice:0:30 }}{{store.name.length > 30 ? '. . .' : ''}} -->
+                    {{ store.name }}
+                  </div>
+                </td>
+              </tr>
             </table>
-        </div>
-        <div class="well main-form">
-            <div class="store-image">
-                <img [src]="store.storeImage || 'assets/images/Area.png' ">
+            <div class="d-flex justify-content-between sub-name">
+              <span> {{ store.distance }} </span>
+              <present-availability [availability]="store.openingHours"></present-availability>
             </div>
-        </div>
-        <div class="content-card">
-            <table>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="well main-form">
+      <div class="store-image">
+        <img [src]="store.storeImage || 'assets/images/Area.png' ">
+      </div>
+    </div>
+    <div class="content-card">
+      <table>
+        <tr>
+          <td style="padding-right:8px">
+            <!-- [url]="store.facebookUrl" -->
+            <!-- <facebook-like-count [store]="store"></facebook-like-count> -->
+            <div class="rating-size">
+              <table>
                 <tr>
-                    <td style="padding-right:8px">
-                        <!-- [url]="store.facebookUrl" -->
-                        <!-- <facebook-like-count [store]="store"></facebook-like-count> -->
-                        <div class="rating-size">
-                            <table>
-                                <tr>
-                                    <td valign="middle"><img src="assets/svg/cards/ico_social_facebook_small.svg" style="padding-right:4px"></td>
-                                    <td valign="bottom" class="rating-text" >&nbsp;<label class="rK"> {{store.facebookLike}} </label> </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </td>
-                    <td align="top">
-                        <!-- <google-rating [store]="store"></google-rating> -->
-                        <div class="rating-size">
-                            <table>
-                                <tr>
-                                    <td valign="middle"><img src="assets/svg/cards/ico_social_google_small.svg" ><img src="assets/svg/cards/ico_star_half_small.svg"></td>
-                                    <td valign="bottom" class="rating-text">&nbsp;<label class="rK">{{store.googleRating}}</label></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </td>
+                  <td valign="middle"><img src="assets/svg/cards/ico_social_facebook_small.svg" style="padding-right:4px"></td>
+                  <td valign="bottom" class="rating-text">&nbsp;<label class="rK"> {{store.facebookLike}} </label> </td>
                 </tr>
-            </table>
-        </div>
+              </table>
+            </div>
+          </td>
+          <td align="top">
+            <!-- <google-rating [store]="store"></google-rating> -->
+            <div class="rating-size">
+              <table>
+                <tr>
+                  <td valign="middle"><img src="assets/svg/cards/ico_social_google_small.svg"><img src="assets/svg/cards/ico_star_half_small.svg"></td>
+                  <td valign="bottom" class="rating-text">&nbsp;<label class="rK">{{store.googleRating}}</label></td>
+                </tr>
+              </table>
+            </div>
+          </td>
+        </tr>
+      </table>
     </div>
     <div class="chating-card">
-        <div class="d-flex justify-content-between chating-card--chat">
-            <span>
-                <ul class="chat-icons">
-                    <li>
-                        <span class="heart">
-                            <store-heart [store]="{id: store.id, isFavourite: store.isFavourite, page:'main'}"></store-heart>
-                        </span>
-                    </li>
-                    <li>
-                        <span class="share">
-                            <app-share [isIconBlack]="true" [store]="{id: store.id, name: store.name,page:'main'}"></app-share>
-                        </span>
-                    </li>
-                    <li>
-                        <a [href]="'https://www.google.com/maps/dir/?api=1&destination='+store.latLng.lat+','+store.latLng.lng" target="_blank" style="text-decoration: none;">
-                            <img src="assets/svg/cards/direction.svg" title="Direction">
-                        </a>
-                    </li>
-                </ul>
-            </span>
-        </div>
+      <div class="d-flex justify-content-between chating-card--chat">
+        <span>
+          <ul class="chat-icons">
+            <li>
+              <span class="heart">
+                <store-heart [store]="{id: store.id, isFavourite: store.isFavourite, page:'main'}"></store-heart>
+              </span>
+            </li>
+            <li>
+              <span class="share">
+                <app-share [isIconBlack]="true" [store]="{id: store.id, name: store.name,page:'main'}"></app-share>
+              </span>
+            </li>
+            <li>
+              <a [href]="'https://www.google.com/maps/dir/?api=1&destination='+store.latLng.lat+','+store.latLng.lng" target="_blank" style="text-decoration: none;">
+                <img src="assets/svg/cards/direction.svg" title="Direction">
+              </a>
+            </li>
+          </ul>
+        </span>
+      </div>
     </div>
-</div>
+  </div>

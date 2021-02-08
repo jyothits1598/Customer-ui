@@ -157,8 +157,8 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
       return code === 'ArrowDown'
         ? ++newIndex
         : code === 'ArrowUp'
-          ? --newIndex
-          : newIndex;
+        ? --newIndex
+        : newIndex;
     }
   }
 
@@ -194,8 +194,8 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
       this.closeSearchBox();
       this.searchDataService.updateFullSearch(value);
       this.searchInput.nativeElement.blur();
-      this.searchDataService.addItem(value);
-      if (id) this.router.navigateByUrl('/restaurants/' + id)
+      this.searchDataService.searchForTerm(value);
+      if (id) this.router.navigateByUrl('/restaurants/' + id);
       else this.router.navigate(['/search'], { queryParams: { q: value } });
     }
   }
