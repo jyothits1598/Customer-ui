@@ -4,16 +4,20 @@
             <div class="d-flex justify-content-between">
                 <div class="close-icon">
                     <img src="assets/images/ico_close.png" (click)="close()" style="cursor: pointer;outline:0">
-                    <!-- <label class="paragraph14__bold text-capitalize pl-16">
-                        {{itemDetail.name}}
-                    </label> -->
+                </div>
+                <div *ngIf="scrolled" class="paragraph14__bold text-capitalize pl-16" style="flex-grow: 1;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;">
+                    {{itemDetail.name}}
                 </div>
                 <ul class="menu">
                     <!-- <li class="pd cursor-pointer">
                         <store-heart [store]="{id: item.storeId, isFavourite: item.isFavourite, page:'main'}"></store-heart>
                     </li> -->
                     <li class="pd">
-                        <app-share [isIconBlack]="true" [store]="{id: item.storeId, name: item.storeName, page:'main'}"></app-share>
+                        <app-share [isIconBlack]="true" [store]="{id: item.storeId, name: item.storeName, page:'main'}">
+                        </app-share>
                     </li>
                 </ul>
             </div>
@@ -21,10 +25,10 @@
         <div class="modal-body" disableBodyScroll>
             <p *ngIf="loading">Loading...</p>
             <ng-container *ngIf="itemDetail">
-                <div class="std-heading-3 item-name-modifier">
+                <div class="std-heading-3 item-name-modifier" inViewPort (inView)="scrolled = !$event">
                     {{itemDetail.name}}
                 </div>
-               <div class="item-div-image">
+                <div class="item-div-image">
                     <img [src]="itemDetail.image || 'assets/svg/details/modifier_null.svg'" class="img-fluid">
                 </div>
                 <div class="pt-3 pb-3">
@@ -51,8 +55,7 @@
         </div>
         <div class="footer-btn">
             <div class="add-cart-card text-center">
-                <div (click)="addToCart()" type="button"
-                    class="cart-button">
+                <div (click)="addToCart()" type="button" class="cart-button">
                     <ng-container *ngIf="!addingToCart; else ld">
                         <span class="cart-text">Add to cart</span> <span *ngIf="itemDetail"
                             class="float-right  cart-text">${{totalAmount}}</span>
@@ -68,7 +71,7 @@
 </div>
 
 <ng-template #orderExistsTemp let-modal>
-    <div class="modal-body cart-confirm-dialogue text-center" >
+    <div class="modal-body cart-confirm-dialogue text-center">
         <span class="cart-error-header">
             {{modal.data.heading}}
         </span>

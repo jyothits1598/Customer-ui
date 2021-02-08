@@ -71,7 +71,7 @@ export class CartService {
     if (!count) return null;
 
     let subTotal = this.calculateSubTotal(c);
-    let surChrg = subTotal * 0.02;
+    let surChrg = subTotal * 0.022;
     let total = subTotal + surChrg;
     return {
       subtotal: Math.round((subTotal + Number.EPSILON) * 100) / 100,

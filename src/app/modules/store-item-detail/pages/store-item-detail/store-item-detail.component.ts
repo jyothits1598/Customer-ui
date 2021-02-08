@@ -53,6 +53,7 @@ export class StoreItemDetailComponent implements OnInit, OnChanges, OnDestroy {
   itemCount: FormControl = new FormControl(1);
   addingToCart: boolean = false;
   totalAmount: any = 0;
+  scrolled: boolean;
   makeCalculations: (itemBasePrice: number, selectedModifiers: Array<ItemModifier>, count: number) => number;
 
   unSubscribe$: Subject<boolean> = new Subject<boolean>();
