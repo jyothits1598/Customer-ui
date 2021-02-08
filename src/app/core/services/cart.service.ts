@@ -139,7 +139,7 @@ export class CartService {
   }
 
   calculateItemCount(cartData: CartData) {
-    return (cartData && cartData.items?.length) ? cartData.items.length : 0;
+    return (cartData && cartData.items?.length) ? cartData.items.reduce((t, i) => t + i.quantity, 0) : 0;
   }
 
   calculateSubTotal(cartData: CartData) {

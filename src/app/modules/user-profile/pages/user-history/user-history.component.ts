@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CartService } from 'src/app/core/services/cart.service';
 import { OrdersService } from 'src/app/core/services/orders.service';
-import { ConfirmedOrderData } from 'src/app/core/model/cart';
+import { ConfirmedOrderData, OrderSummary } from 'src/app/core/model/cart';
 import { Subject } from 'rxjs';
 import { finalize, switchMap, takeUntil } from 'rxjs/operators';
 import { OrderPagination, Pagination } from 'src/app/shared/classes/pagination';
@@ -25,7 +25,7 @@ export class UserHistoryComponent implements OnInit, OnDestroy {
   loading: boolean;
 
   makeCalculations: (itemBasePrice: number, selectedModifiers: Array<ItemModifier>, count: number) => number = this.cartSrv.makeCalculations;
-  calcTotal: (cartData) => number = this.cartSrv.calculateSubTotal;
+  calcSummary: (cartData) => OrderSummary = this.cartSrv.calculateSummary.bind(this.cartSrv);
 
   ngOnInit(): void {
     this.pagination = new OrderPagination(this.ordSrv.getAllOrder.bind(this.ordSrv));
@@ -47,5 +47,5 @@ export class UserHistoryComponent implements OnInit, OnDestroy {
   getCount(oD: ConfirmedOrderData) {
     return oD.items.reduce((i1, i2) => i1 + i2.quantity, 0);
   }
- 
+
 }

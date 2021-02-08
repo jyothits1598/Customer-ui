@@ -56,7 +56,6 @@ export interface ConfirmedOrderData extends CartData {
 }
 
 export function mapToOrderData(data: OrderDto) {
-    console.log('map to order called', data);
     let ordData: ConfirmedOrderData = <ConfirmedOrderData>mapToCartData(data);
     ordData.preparingOrder = data.preparing_order;
     ordData.totalPrice = data.total_price;

@@ -2,7 +2,7 @@
     <div class="title-content profile-save-text" style="cursor: text;"> History </div>
 </ng-template>
 <div class="security-card">
-<ng-container *ngFor="let order of ordData">
+    <ng-container *ngFor="let order of ordData">
         <div class="order-body pb-40" style="padding-bottom:40px;">
             <h4 class="f-20 f-b text-capitalize">{{order.storeName}}</h4>
             <a [routerLink]="'/restaurants/'+order.storeId">
@@ -44,22 +44,23 @@
             <!--
         Surcharge
         -->
-            <ng-container *ngIf="calcTotal(order);let total">
+            <ng-container *ngIf="calcSummary(order);let s">
                 <div>
                     <div class="order-surcharge">
                         <div class="d-flex justify-content-between">
-                            <label class="f-16-blur">Sub total</label>
-                            <label class="f-14 f-b">${{total}}</label>
+                            <label class="f-16-blur">Surcharge</label>
+                            <label class="f-14 f-b">${{s.surcharge}}</label>
                         </div>
                     </div>
                     <hr>
                     <!--
                         Sub Total
                     -->
+
                     <div class="order-surcharge">
                         <div class="d-flex justify-content-between">
-                            <label class="f-16-blur">Total</label>
-                            <label class="f-14 f-b">${{total}}</label>
+                            <label class="f-16-blur">Sub total</label>
+                            <label class="f-14 f-b">${{s.subtotal}}</label>
                         </div>
                     </div>
                     <hr>
@@ -69,22 +70,22 @@
                     <div class="order-surcharge">
                         <div class="d-flex justify-content-between">
                             <label class="f-16 f-b">Total</label>
-                            <label class="f-24 f-b">${{total}}</label>
+                            <label class="f-24 f-b">${{s.total}}</label>
                         </div>
                     </div>
                     <hr>
                 </div>
             </ng-container>
         </div>
-</ng-container>
-<div *ngIf="!pagination.hasEnded" class="mb-80">
-    <div class="col-sm-12 text-center">
-        <span *ngIf="!loading; else ld" class="load-more"  (click)="loadNext()">Load More</span>
-        <ng-template #ld>
-            <img src="/assets/images/loader_blue.gif" alt="">
-        </ng-template>
+    </ng-container>
+    <div *ngIf="!pagination.hasEnded" class="mb-80">
+        <div class="col-sm-12 text-center">
+            <span *ngIf="!loading; else ld" class="load-more" (click)="loadNext()">Load More</span>
+            <ng-template #ld>
+                <img src="/assets/images/loader_blue.gif" alt="">
+            </ng-template>
+        </div>
     </div>
-</div>
-<br><br><br>
+    <br><br><br>
 </div>
 <!-- <button *ngIf="!pagination.hasEnded" (click)="loadNext()">Load more</button> -->
