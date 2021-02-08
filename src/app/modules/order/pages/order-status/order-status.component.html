@@ -178,11 +178,11 @@ Preparing Order
                 <label class="f-14">We estimate it will be ready in:</label>
             </div>
             <div>
-                <label class="f-16l f-b">{{t}} minutes </label>
+                <label class="f-16l f-b" >{{ t==0 ? '1': t }} minutes </label>
             </div>
             <div class="d-flex justify-content-center">
-                <div class="mt-8" id="progressbar">
-                    <div></div>
+                <div class="mt-8" class="progressbar" >
+                    <div class="progressbar-order-by-status" [style.width]="t ? progressbarWidth(t) : progressbarWidth(1)"></div>
                 </div>
             </div>
         </div>

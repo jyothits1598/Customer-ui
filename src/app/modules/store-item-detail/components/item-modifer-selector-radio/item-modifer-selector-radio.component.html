@@ -5,7 +5,7 @@
             <p class="std-heading-4" style="margin-bottom: 4px;">{{modifier.name}} </p> 
             <label class="small-content"> 
                 <label [ngClass]="(this.optionControl.touched && this.optionControl.invalid) ? 'errorText' : '' "> Choose 1 
-                    <label *ngIf="modifier.freeSelection > 0;" class="small-content">
+                    <label *ngIf="modifier.freeSelection > 0;" [ngClass]="(this.optionControl.touched && this.optionControl.invalid) ? 'errorText' : '' ">
                         ( {{modifier.freeSelection}} free )
                     </label> 
                 </label>
