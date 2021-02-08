@@ -123,7 +123,7 @@ label{
                 font-weight: 500;
                 font-size: 16px;
                 line-height: 20px;
-                color: #FFFFFF;
+                color: var(--color-background);
             }
         }
     }
@@ -176,7 +176,7 @@ label{
     
 }
 .cart-error-header{
-    color: #000000;
+    color: var(--color-typography-primary);
     font-weight: bold;
     font-size: 20px;
     line-height: 24px;
@@ -186,6 +186,12 @@ label{
     font-weight: bold;
     font-size: 16px;
     line-height: 20px;
-    color: #353FA8;
+    color: var(--color-primary);
     cursor:pointer;
+}
+.item-name-modifier {
+    text-transform:lowercase;
+}
+.item-name-modifier::first-letter {
+    text-transform: capitalize !important;
 }
