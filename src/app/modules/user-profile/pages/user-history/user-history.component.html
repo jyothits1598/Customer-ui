@@ -78,9 +78,17 @@
             </ng-container>
         </div>
     </ng-container>
-    <div *ngIf="!pagination.hasEnded" class="mb-80">
+    <div *ngIf="!pagination.hasEnded && ordData?.length>0" class="mb-80">
         <div class="col-sm-12 text-center">
             <span *ngIf="!loading; else ld" class="load-more" (click)="loadNext()">Load More</span>
+            <ng-template #ld>
+                <img src="/assets/images/loader_blue.gif" alt="">
+            </ng-template>
+        </div>
+    </div>
+    <div *ngIf="ordData?.length==0" class="mb-80">
+        <div class="col-sm-12 text-center">
+            <span >No data found </span>
             <ng-template #ld>
                 <img src="/assets/images/loader_blue.gif" alt="">
             </ng-template>
