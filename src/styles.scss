@@ -729,11 +729,11 @@ input[class="cb"]:checked + p:before {
   width:40px;
   height:40px;
 }
-// .active {
-//   background-image: url("assets/svg/signup/ico_menu_active.svg");
-//   width:40px;
-//   height:40px;
-// }
+.menu-icon-active {
+  background-image: url("assets/svg/signup/ico_menu_active.svg");
+  width:40px;
+  height:40px;
+}
 
 // Mobile active
 .user-icon-mobile-active {
