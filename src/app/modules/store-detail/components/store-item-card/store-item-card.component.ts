@@ -16,4 +16,8 @@ export class StoreItemCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  showDecimal(number){
+    return Math.round((parseFloat(number) + Number.EPSILON) * 100) / 100
+  }
+  
 }

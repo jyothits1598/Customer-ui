@@ -9,11 +9,12 @@
                                 <p class="item-name"> {{ storeItem.name }} </p>
                                 <!-- {{ storeItem.name | slice:0:20 }}{{storeItem.name.length > 20 ? '. .' : ''}} -->
                             </div>
-                            <div class="std-heading-5 mt-2"> ${{storeItem.basePrice}} </div>
+                            <div class="std-heading-5 mt-2"> 
+                                <span *ngIf="storeItem.basePrice">$</span>{{storeItem.basePrice ? showDecimal(storeItem.basePrice) : '$0.00' }}
+                            </div>
                         </div>
                     </div>
                 </div>
-                
             </div>
             <div class="col-auto col-img" style="padding: 0;">
                 <img [src]="storeItem.image ? storeItem.image + static_image_width : 'assets/svg/details/modifier_null.svg'" class="img-fluid img-custom">
