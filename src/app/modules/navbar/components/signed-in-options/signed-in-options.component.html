@@ -3,7 +3,9 @@
     </div>
     <div style="display: none;" routerLink="/profile" routerLinkActive="" #profLink="routerLinkActive"></div>
     <!-- <div>{{profLink.isActive}}</div> -->
-    <div class="menu-icon-mobile img-display-mobile"></div>
+    <!-- <div class="menu-icon-mobile img-display-mobile"></div> -->
+    <div class="menu-icon-mobile img-display-mobile" [ngClass]="profLink.isActive? 'menu-icon-mobile-active':''">
+    </div>
 </span>
 <!-- [ngClass]="{active: profileRouteActive}" -->
 <ng-template #profTemp>
