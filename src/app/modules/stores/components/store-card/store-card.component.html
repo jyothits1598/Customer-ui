@@ -4,7 +4,7 @@
       <table>
         <tr>
           <td valign="middle">
-            <img [src]="store.logo || 'assets/svg/null_logo.svg'" class="profile-image">
+            <img [src]="store.logo ? store.logo + static_image_width_logo : 'assets/svg/null_logo.svg'" class="profile-image">
             <!-- <img src="assets/images/Rectangle 4.png" class="profile-image" /> -->
           </td>
           <td style="padding-left: 8px;width:100%">
@@ -28,7 +28,7 @@
     </div>
     <div class="well main-form">
       <div class="store-image">
-        <img [src]="store.storeImage || 'assets/images/Area.png' ">
+        <img [src]="store.storeImage ? store.storeImage + static_image_width : 'assets/images/Area.png' ">
       </div>
     </div>
     <div class="content-card">

@@ -9,7 +9,8 @@ import { StoreItem } from 'src/app/modules/store-detail/model/store-detail';
 export class StoreItemCardComponent implements OnInit {
   @Input() storeItem: StoreItem
   
-
+  static_image_path = "https://cdn.statically.io/img/"
+  static_image_width = '?w=250,q=50,f=webp';
   constructor() { }
   
   ngOnInit(): void {

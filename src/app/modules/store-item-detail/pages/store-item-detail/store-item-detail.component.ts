@@ -58,6 +58,8 @@ export class StoreItemDetailComponent implements OnInit, OnChanges, OnDestroy {
 
   unSubscribe$: Subject<boolean> = new Subject<boolean>();
 
+  static_image_width = '?w=700,q=50,f=webp';
+
   show = true;
 
   constructor(private storeItemData: StoreItemDataService,

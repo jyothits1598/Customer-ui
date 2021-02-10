@@ -26,6 +26,8 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
   userLocation: boolean;
   interObserver: IntersectionObserver;
   partnerAppLink = PARTNER_APP_LINK;
+  static_image_width = '?w=1024,q=50,f=webp';
+  static_image_width_logo = '?w=120,q=50,f=webp';
 
   storeDetail: StoreDetail;
   loading: boolean = true;
