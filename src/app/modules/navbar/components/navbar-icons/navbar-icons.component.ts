@@ -1,9 +1,9 @@
 import { Component, HostListener, OnDestroy, OnInit, Inject } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { DOCUMENT } from '@angular/common';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, takeUntil, tap } from 'rxjs/operators';
 
 
 @Component({
@@ -15,24 +15,30 @@ export class NavbarIconsComponent implements OnInit, OnDestroy {
   isLoggedin: boolean;
   isActive: string = '';
   windowScrolled: boolean;
+  isAtHome: boolean = false;
 
-  atHome$: Observable<boolean>
+  unSub$ = new Subject<true>();
+
   constructor(
     private authService: AuthService,
     private router: Router, @Inject(DOCUMENT) private document: Document) {
-    this.atHome$ = router.events.pipe(
+    router.events.pipe(
+      takeUntil(this.unSub$),
       filter(e => e instanceof NavigationEnd),
-      map((e: NavigationEnd) => e.url === '/'))
+      map((e: NavigationEnd) => e.url === '/')).subscribe((c) => this.isAtHome = c);
+
+    //handles page refresh as the navend event is not fired
+    this.isAtHome = this.router.url === '/';
   }
 
-  stateSubs: Subscription;
 
   ngOnInit(): void {
-    this.stateSubs = this.authService.isLoggedIn$().subscribe(state => this.isLoggedin = state);
+    this.authService.isLoggedIn$().pipe(takeUntil(this.unSub$)).subscribe(state => this.isLoggedin = state);
   }
 
   ngOnDestroy(): void {
-    this.stateSubs.unsubscribe();
+    this.unSub$.next(true);
+    this.unSub$.complete();
   }
 
   scrollToTop() {

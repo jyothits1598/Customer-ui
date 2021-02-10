@@ -1,9 +1,9 @@
 <ul class="menu">
     <li class="auto-width" *ngIf="!isLoggedin"></li>
     <li class="auto-width cu-out" (click)="scrollToTop()" routerLink="/">
-        <div class="home-icon img-display-desktop" [ngClass]="(atHome$ | async) ? 'home-icon-active' : ''"></div>
+        <div class="home-icon img-display-desktop" [ngClass]="isAtHome ? 'home-icon-active' : ''"></div>
         <div
-            [ngClass]="(atHome$ | async) ? 'home-icon-mobile-active img-display-mobile' : 'home-icon-mobile img-display-mobile'">
+            [ngClass]="isAtHome ? 'home-icon-mobile-active img-display-mobile' : 'home-icon-mobile img-display-mobile'">
         </div>
     </li>
     <ng-template #block>
