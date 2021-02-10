@@ -6,14 +6,15 @@ import { LazyImageDirective } from './directives/lazy-image.directive';
 import { StateBtnComponent } from './components/state-btn/state-btn.component';
 import { DisableBodyScrollDirective } from './directives/disable-body-scroll.directive';
 import { InViewPortDirective } from './directives/in-view-port.directive';
+import { ExpandableDirective } from './directives/expandable.directive';
 
 
 
 @NgModule({
-  declarations: [PopoverDirective, InfiniteScrollDirective, LazyImageDirective, StateBtnComponent, DisableBodyScrollDirective, InViewPortDirective],
+  declarations: [PopoverDirective, InfiniteScrollDirective, LazyImageDirective, StateBtnComponent, DisableBodyScrollDirective, InViewPortDirective, ExpandableDirective],
   imports: [
     CommonModule,
   ],
-  exports: [PopoverDirective, InfiniteScrollDirective, StateBtnComponent, DisableBodyScrollDirective, InViewPortDirective]
+  exports: [PopoverDirective, InfiniteScrollDirective, StateBtnComponent, DisableBodyScrollDirective, InViewPortDirective, ExpandableDirective]
 })
 export class SharedModule { }
