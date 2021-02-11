@@ -1,0 +1,105 @@
+<div class="order-cart" *ngIf="cartData$ | async; let cartData; else emptyTemplate">
+    <h4 class="f-20 f-b mc-4">Your Order</h4>
+    <p class="f-14-blue text-capitalize">{{cartData.storeName}}</p>
+    <!--
+                Select order type
+            -->
+    <div class="order-type">
+        <span class="order-type-background">
+            <input type="radio" class="order-type-radio" value="true" checked="checked" name="order_type"
+                id="pick_up_asap">
+            <label for="pick_up_asap">Pick up</label>
+
+            <input type="radio" class="order-type-radio" disabled value="true" name="order_type"
+                id="schedule_to_pick_up">
+            <label for="schedule_to_pick_up">Dine in</label>
+        </span>
+    </div>
+    <!--
+                if order type is pickup
+            -->
+    <div class="order-pick-up-type">
+        <input type="radio" class="pick-up-radio" value="true" checked="checked" name="pick_up" id="pick_up_asap">
+        <label for="pick_up_asap" class="f-16">Pick up asap</label>
+
+        <input type="radio" class="pick-up-radio" disabled value="true" name="pick_up" id="schedule_to_pick_up">
+        <label for="schedule_to_pick_up" class="f-16">Schedule for later</label>
+    </div>
+    <!--
+                Cart added items.
+            -->
+    <div>
+        <div *ngIf="itemDelInProg" class="right-content content-opacity"></div>
+        <div class="cart-items mct-16" *ngFor="let item of cartData.items">
+            <div class="d-flex justify-content-between">
+                <div class="d-flex">
+                    <label class="f-16 f-b pr-4">{{item.quantity}}x</label>
+                    <div class="f-16 f-b pr-2">
+                        <label class="f-16 f-b item-name text-capitalize">{{item.item.name}}</label>
+                    </div>
+                </div>
+                <div>
+                    <div class="d-flex justify-content-between">
+                        <label class="f-14 mr-15">${{makeCalculations(item.item.basePrice, item.item.modifiers,
+                            item.quantity)}}
+                        </label>
+                        <img (click)="deleteItem(item.item.id)" src="assets/images/cart/exclude.svg">
+                    </div>
+                </div>
+            </div>
+            <div class="cart-item-modifiers">
+                <ng-container *ngFor="let mod of modifiersToOptionNameArr(item.item.modifiers);let i=index;">
+                    <i class="fa fa-circle" *ngIf="i>0" aria-hidden="true"></i> 
+                    <label class="text-capitalize" style="margin:0;">{{mod}}</label>
+                </ng-container>
+            </div>
+            <hr class="m14px">
+        </div>
+    </div>
+    <!--
+        Surcharge
+    -->
+    <ng-container *ngIf="orderSummary$ | async; let summary">
+
+        <div class="order-surcharge">
+            <div class="d-flex justify-content-between">
+                <label class="f-16-blur">Surcharge</label>
+                <span class="f-14 f-b">${{summary.surcharge}}</span>
+            </div>
+        </div>
+        <hr class="m14px">
+        <!--
+            Surcharge
+        -->
+        <div class="order-surcharge">
+            <div class="d-flex justify-content-between">
+                <label class="f-16-blur">Sub total</label>
+                <span class="f-14 f-b">${{summary.subtotal}}</span>
+            </div>
+        </div>
+        <hr class="m14px">
+        <!--
+            Amount Due
+        -->
+        <div class="order-surcharge">
+            <div class="d-flex justify-content-between">
+                <label class="f-16 f-b">Amount due</label>
+                <span class="f-24 f-b">${{summary.total}}</span>
+            </div>
+        </div>
+        <hr class="m14px">
+    </ng-container>
+</div>
+
+
+<ng-template #emptyTemplate>
+    <!--  
+        empty cart window if no item added
+    -->
+    <div class="empty-cart">
+        <img src="assets/images/empty_cart.png">
+        <p class="paragraph mt">
+            Add some items to your order to get started
+        </p>
+    </div>
+</ng-template>

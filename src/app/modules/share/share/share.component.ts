@@ -11,7 +11,7 @@ import { PopoverService } from 'src/app/core/services/popover.service';
   styleUrls: ['./share.component.scss']
 })
 export class ShareComponent implements OnInit {
-  @Input() store: { id: number, name: string };
+  @Input() store: { id: number, name: string,page:string };
   @Input() isIconBlack: boolean;
 
   @ViewChild('urlCopyInput', { read: ElementRef }) urlCopyInput: ElementRef;
@@ -21,7 +21,7 @@ export class ShareComponent implements OnInit {
   linkedCopied: false;
   showpopup:boolean = false;
   modalRef: ModalRef;
-
+  textMessage:any;  
   constructor(private popoverService: PopoverService,
     private modalService: ModalService,
     private window: Window) { }
@@ -51,6 +51,11 @@ export class ShareComponent implements OnInit {
     this.urlCopyInput.nativeElement.select();
     this.window.document.execCommand('copy');
     this.showpopup = true;
+    this.textMessage="Copied to Clipboard";
+    setTimeout(() => {  
+            this.textMessage="";  
+            this.showpopup=false;  
+      }, 1000);
   }
 
   close() {

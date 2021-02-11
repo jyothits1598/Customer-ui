@@ -1,0 +1,18 @@
+.cart-card-close{
+    padding-bottom:32px!important;
+}
+
+@media only screen and (min-width:991px) {
+    .cart-card-close{
+        display:none;
+    }
+}
+
+.content-opacity{
+    background: rgba(0, 0, 0, 0.2);
+    z-index:99999;
+}
+.m14px {
+    margin-top: 14px !important;
+    margin-bottom: 14px !important;
+}

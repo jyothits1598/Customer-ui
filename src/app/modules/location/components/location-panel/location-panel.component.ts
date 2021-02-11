@@ -12,7 +12,7 @@ import { GeoLocationService } from 'src/app/core/services/geo-location.service';
 export class LocationPanelComponent implements OnInit {
   locationHistory: Array<UserLocation>;
   constructor(@Optional() private popoverRef: ComponentPopoverRef<LocationPanelComponent>,
-    @Optional() private modalRef: ComponentModalRef,
+    @Optional() private modalRef: ComponentModalRef<LocationPanelComponent>,
     private geoLocation: GeoLocationService) { }
 
   ngOnInit(): void {

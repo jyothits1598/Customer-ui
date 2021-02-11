@@ -10,3 +10,5 @@ export function URL_StoreDetails(id: number) {
 export function URL_StoreItemDetail(storeId: number, itemId: number) {
     return `api/customer/stores/${storeId}/${itemId}/modifiers`;
 }
+
+export const URL_Cuisinelist = 'api/stores/v1/cuisines';

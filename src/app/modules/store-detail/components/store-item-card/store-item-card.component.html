@@ -1,25 +1,22 @@
 <div title="{{ storeItem.name }}" style="cursor: pointer;outline:0;" routerLink="." [queryParams]="{i: storeItem.id}">
     <div class="col-md-12 card small-cat-cards">
         <div class="row">
-            <div class="col" style="padding: 0;">
-                <div class="card-block" style="padding: 16px;">
+            <div class="col p16" style="height:112px;">
+                <div class="card-block ">
                     <div class="flexbox-container">
                         <div class="wrapper">
-                            <div class="paragraph" style="display: -webkit-box;
-                            -webkit-line-clamp: 2;
-                            -webkit-box-orient: vertical;
-                            height: 48px;
-                            overflow-y: hidden;text-transform: capitalize;">
-                                {{ storeItem.name }}
+                            <div class="paragraph card-content-div">
+                                <p class="item-name"> {{ storeItem.name }} </p>
                                 <!-- {{ storeItem.name | slice:0:20 }}{{storeItem.name.length > 20 ? '. .' : ''}} -->
                             </div>
-                            <div class="std-heading-5"> ${{storeItem.basePrice}} </div>
+                            <div class="std-heading-5 mt-2"> ${{storeItem.basePrice}} </div>
                         </div>
                     </div>
                 </div>
+                
             </div>
             <div class="col-auto col-img" style="padding: 0;">
-                <img [src]="storeItem.image" class="img-fluid img-custom">
+                <img [src]="storeItem.image || 'assets/svg/details/modifier_null.svg'" class="img-fluid img-custom">
             </div>
         </div>
     </div>

@@ -1,7 +1,18 @@
 <div *ngIf="!locationError; else error"  (click)="handleLocReq()" style="cursor: pointer;">
-    <div class="myCurrent"> <img [ngClass]="locationLoading ? 'small-loader' : ''" [src]="locationLoading? '/assets/svg/loader.svg' : '/assets/svg/ico_navigation_tab.svg'" style="padding-right:16px;">
-    Use my current location </div>
+    <!-- <div class="myCurrent"> <img >
+    Use my current location </div> -->
+    <table class="myCurrent">
+        <tr>
+            <td valign="middle" style="padding-right: 16px;">
+                <img [ngClass]="locationLoading ? 'small-loader' : ''" [src]="locationLoading? '/assets/svg/loader.svg' : '/assets/svg/ico_navigation_tab.svg'" width="20px" height="20px">
+            </td>
+            <td style="width:100%;">
+               <label class="myCurrent" style="margin:0"> Use my current location </label> 
+            </td>
+        </tr>
+    </table>
 </div>
+
 <ng-template #error>
     <div class="text-center">Location Error</div>
 </ng-template>

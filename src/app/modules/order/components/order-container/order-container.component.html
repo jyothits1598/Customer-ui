@@ -1,0 +1,18 @@
+<div class="right-content" *ngIf="currentPage$ | async; let currentPage">
+    <div class="right-content-overflow">
+        <div *ngIf="showClose" class="cart-card-close" (click)="close()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 6L6 18" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M6 6L18 18" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </div>
+        <ng-container [ngSwitch]="currentPage">
+            <!-- the same view can be shown in more than one case -->
+            <cart *ngSwitchCase="orderPages.Cart"></cart>
+            <cart-summary *ngSwitchCase="orderPages.CartSummary"></cart-summary>
+            <order-status *ngSwitchCase="orderPages.OrderStatus"></order-status>
+            <add-payment-options *ngSwitchCase="orderPages.AddPaymentOptions"></add-payment-options>
+            <order-thank-you *ngSwitchCase="orderPages.Thankyou"></order-thank-you>
+        </ng-container>
+    </div>
+</div>

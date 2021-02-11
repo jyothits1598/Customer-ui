@@ -2,7 +2,7 @@
     <!-- first sinup page -->
     <form [formGroup]="loginForm" (ngSubmit)="login()">
         <h3 class="std-heading-4 text-center"> Welcome back </h3>
-        <div class="error-mez" *ngIf="backendErrorMessage" id="hideMe">{{ backendErrorMessage }}</div>
+        <div class="error-mez" *ngIf="backendErrorMessage">{{ backendErrorMessage }}</div>
         <ng-template #email>
             <div class="form-group form-group--margin" style="margin-top:24px">
                 <div class="float-left label-inputs"> Email </div>
@@ -60,7 +60,7 @@
                     *ngIf="!loggingIn; else inProgressTemp">Log in</p> </button>
         </div>
     </form>
-    <div class="text-center blue-line-text" style="margin-bottom:24px" routerLink="/auth/forgot-password">
+    <div class="text-center blue-line-text" style="margin-bottom:34px" routerLink="/auth/forgot-password">
             Forgot password
     </div>
     <img src="assets/images/divider_or.png" style="margin-bottom: 16px;width:100%">

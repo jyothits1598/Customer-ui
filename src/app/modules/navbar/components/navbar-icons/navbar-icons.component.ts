@@ -1,7 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit, Inject } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { DOCUMENT } from '@angular/common';
+import { filter, map, takeUntil, tap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'navbar-icons',
@@ -10,17 +13,41 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class NavbarIconsComponent implements OnInit, OnDestroy {
   isLoggedin: boolean;
-  
-  constructor(private authService: AuthService) { 
+  isActive: string = '';
+  windowScrolled: boolean;
+  isAtHome: boolean = false;
+
+  unSub$ = new Subject<true>();
+
+  constructor(
+    private authService: AuthService,
+    private router: Router, @Inject(DOCUMENT) private document: Document) {
+    router.events.pipe(
+      takeUntil(this.unSub$),
+      filter(e => e instanceof NavigationEnd),
+      map((e: NavigationEnd) => e.url === '/')).subscribe((c) => this.isAtHome = c);
+
+    //handles page refresh as the navend event is not fired
+    this.isAtHome = this.router.url === '/';
   }
 
-  stateSubs: Subscription;
-  
+
   ngOnInit(): void {
-    this.stateSubs = this.authService.isLoggedIn$().subscribe(state => this.isLoggedin = state);
+    this.authService.isLoggedIn$().pipe(takeUntil(this.unSub$)).subscribe(state => this.isLoggedin = state);
   }
-  
+
   ngOnDestroy(): void {
-    this.stateSubs.unsubscribe();
+    this.unSub$.next(true);
+    this.unSub$.complete();
+  }
+
+  scrollToTop() {
+    (function smoothscroll() {
+      var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      if (currentScroll > 0) {
+        window.requestAnimationFrame(smoothscroll);
+        window.scrollTo(0, currentScroll - (currentScroll / 8));
+      }
+    })();
   }
 }

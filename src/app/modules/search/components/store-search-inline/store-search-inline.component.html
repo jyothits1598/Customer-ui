@@ -2,27 +2,61 @@
 <div class="root">
   <div class="above-bg" #searchContainer>
     <div class="store-search-home-input">
-      <input class="input-transparent" style="border: none;outline: 0;" type="search" [formControl]="searchControl" [placeholder]="isMobile ? 'What would you like to eat?' : 'Search'"
-        (focus)="openSearchBox();" (click)="openSearchBox();" #searchInput (keyup.enter)="handleEnter($event.target.value)" (keyup.escape)="closeSearchBox()">
-      <span *ngIf="isMobile" (blur)="closeSearchBox()">
-        <img class="input-image" [src]="loading? 'assets/images/navbar/loader32_blue.gif' : 'assets/svg/signup/ico_search_m.svg'">
+      <input #searchInput class="input-transparent" style="border: none;outline: 0;" [formControl]="searchControl" [placeholder]="isMobile ? 'What would you like to eat?' : 'Search'"
+        (focus)="openSearchBox();" (click)="openSearchBox();" (change)="openSearchBox();" (keyup)="searchInputKeyup($event);" (search)="searchInputKeyup($event)">
+      <img *ngIf="isMobile && searchInput.value.length > 0" (click)="clearSearchInput($event);" [src]="'assets/svg/ico_close.svg'">
+      <span *ngIf="isMobile">
+        <img class="input-image" [src]="(loading$ | async)? 'assets/images/navbar/loader32_blue.gif' : 'assets/svg/signup/ico_search_m.svg'">
       </span>
       <span *ngIf="!isMobile">
-        <img class="input-image" [src]="loading? 'assets/images/navbar/loader32.gif' : 'assets/svg/signup/ico_search.svg'">
+        <img class="input-image" [src]="(loading$ | async)? 'assets/images/navbar/loader32.gif' : 'assets/svg/signup/ico_search.svg'">
       </span>
     </div>
   </div>
 </div>
 
 <ng-template #panelTemplate>
-  <search-panel [results]="searchData" [searchTerm]="searchTerm" (selectedItem)="onSearchItemSelect($event)">
-  </search-panel>
+  <div class="custom-location-body">
+    <ng-container *ngIf="searchInput.value.length > 0">
+      <ng-container *ngIf="searchResults$ | async as searchResults">
+        <div class="list-title pder">New search</div>
+        <ul class="search-items-list">
+          <li #listItem (click)="searchForItem(searchInput.value)" [queryParams]="{q:searchTerm}" tabindex="1" (keyup)="searchListKeyup($event, searchInput.value, 0);">
+            <img src="assets/svg/ico_search_tabs.svg">
+            <div class="text-capitalize"> Results for <b class="b-bold">"{{searchInput.value}}"</b> </div>
+          </li>
+          <li #listItem *ngFor="let storeItem of searchResults; let i = index;" (click)="searchForItem(storeItem.store_name, storeItem.store_id)" (keyup)="searchListKeyup($event, storeItem.store_name, i + 1);"
+            [queryParams]="{q:storeItem.store_name}" tabindex="1">
+            <img src="assets/svg/ico_search_tabs.svg">
+            <div class="text-capitalize">{{storeItem.store_name}}</div>
+          </li>
+          <li *ngIf="searchResults && searchResults.length === 0" tabindex="1">
+            <img src="assets/svg/ico_search_tabs.svg">
+            <div>No results</div>
+          </li>
+        </ul>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="searchInput.value.length === 0">
+      <div class="list-title">Recent searches</div>
+      <ng-container *ngIf="history$ | async as history">
+        <ul style="list-style-type: none;cursor: pointer; margin: 0;">
+          <li #listItem *ngFor="let storeName of history; let i = index;" (click)="searchForItem(storeName)" (keyup)="searchListKeyup($event, storeName, i);" [queryParams]="{q:storeName}"
+            tabindex="1">
+            <img src="assets/svg/ico_search_tabs.svg">
+            <div class="paragraph text-capitalize"> {{storeName}} </div>
+          </li>
+        </ul>
+      </ng-container>
+    </ng-container>
+  </div>
 </ng-template>
 
 <div *ngIf="isMobile && overlayOpen" class="mobile-banner">
   <div class="container">
-    <label class="mobile-banner__ico profile-save-text cls" >
-      <img src="assets/svg/ico_arrow_left.svg" alt="" (click)="closeSearchBox()" class="se-inline"><label class="cls">Search </label> 
+    <label class="mobile-banner__ico profile-save-text cls">
+      <img src="assets/svg/ico_arrow_left.svg" alt="" (click)="closeSearchBox()" class="se-inline"><label class="cls">Search </label>
     </label>
   </div>
 </div>

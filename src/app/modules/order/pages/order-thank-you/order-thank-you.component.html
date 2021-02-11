@@ -1,0 +1,19 @@
+<div *ngIf="thankyouData$ | async; let d">
+    <div class="thankyou-header">
+    </div>
+    <div class="thankyou mrt-48">
+        <div class="text-center">
+            <store-heart [store]="{id: d.storeId, isFavourite: d.isFavourite,page:'order'}"></store-heart>
+            <div class="mt-22" style="margin-bottom:8px;">
+                <label class="f-20 f-b">Thank you</label>
+            </div>
+            <label class="f-14">Tap the heart to add
+                <span class="text-capitalize">{{d.storeName}} </span>
+                to your favourites
+            </label>
+            <div class="mt-32">
+                <app-share [store]="{id: d.storeId, name: d.storeName, page:'order'}"></app-share>
+            </div>
+        </div>
+    </div>
+</div>

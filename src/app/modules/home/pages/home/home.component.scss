@@ -1,15 +1,3 @@
-.is-hidden {
-  display: none;
-}
-
-.sticky-navbar {
-  position: relative;
-  // position:-webkit-sticky;
-  width: 100%;
-  // z-index: 1;
-  background: var(--color-background);
-  // box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
-}
 .search-store-mobile {
   position: relative;
   margin: 20px 12px;
@@ -17,7 +5,6 @@
 }
 .input-transparent {
   height: 40px;
-  // margin:0;
   width: 100%;
   border: 0;
   background: var(--color-background-tertiary);
@@ -29,44 +16,48 @@
   left: 5px;
   top: 4px;
 }
-
-.cover-bg {
-  margin-top: 120px;
-}
 // Extra small devices (portrait phones, less than 576px)
 @media (max-width: 575.98px) {
-  .cover-bg {
-    margin-bottom: 16px;
-  }
   .mobile-pad {
     padding-top: 72px;
   }
   .newClasscontainer {
-    padding-left: 24px !important;
+    padding-left: 0;
     padding-right: 0 !important;
+  }
+  .categories-items {
+    margin-top:120px;
+    height:104px;
+  }
+  .sticky-navbar {
+    padding-top:16px;
+  }
+  .pddr0 {
+    padding:0;
   }
 }
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) and (max-width: 767.98px) {
-  .cover-bg {
-    margin-bottom: 16px;
-  }
   .mobile-pad {
     padding-top: 72px;
   }
   .newClasscontainer {
-    padding-left: 24px !important;
+    padding-left: 0;
     padding-right: 0 !important;
   }
   .mtMobile-20 {
     margin-top:20px;
+  }
+  .categories-items {
+    margin-top:120px;
+    height:104px;
+  }
+  .pddr0 {
+    padding:0;
   }
 }
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) and (max-width: 991.98px) {
-  .cover-bg {
-    margin-bottom: 16px;
-  }
   .mobile-pad {
     padding-top: 72px;
   }
@@ -77,15 +68,29 @@
   .mtMobile-20 {
     margin-top:20px;
   }
+  .categories-items {
+    margin-top:120px;
+    height:104px;
+  }
+  .pddr0 {
+    padding:0;
+  }
 }
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
-  .cover-bg {
-    margin-top: 48px;
+  .categories-items {
+    margin-top:48px;
+    padding:32px 0 16px 0;
+    height:152px;
   }
 }
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
+  .categories-items {
+    margin-top:48px;
+    padding:32px 0 16px 0;
+    height:152px;
+  }
 }
 .small-home-text {
   margin-top: 8px;
@@ -95,3 +100,8 @@
   line-height: 20px;
   color: var(--color-boldlevelcolor);
 }
+.categories-items {
+  background: var(--color-background);
+}
+
+

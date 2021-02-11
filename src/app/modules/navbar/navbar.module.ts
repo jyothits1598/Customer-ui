@@ -8,16 +8,18 @@ import { ModalModule } from 'ngb-modal';
 import { SearchModule } from '../search/search.module';
 import { SignedInOptionsComponent } from './components/signed-in-options/signed-in-options.component';
 import { NavbarIconsComponent } from './components/navbar-icons/navbar-icons.component';
-
+import { OrderModule } from 'src/app/modules/order/order.module';
 
 @NgModule({
   declarations: [NavbarComponent, SignedInOptionsComponent, NavbarIconsComponent],
   imports: [
     CommonModule,
+    SharedModule,
     RouterModule,
     LocationModule,
     ModalModule,
-    SearchModule
+    SearchModule,
+    OrderModule
   ],
   exports: [NavbarComponent]
 })

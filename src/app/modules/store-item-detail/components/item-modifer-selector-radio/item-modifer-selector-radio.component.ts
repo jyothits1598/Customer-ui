@@ -30,7 +30,10 @@ export class ItemModiferSelectorRadioComponent implements OnChanges, ControlValu
 
   handleChange() {
     this.selections = this.modifier.options.filter((o) => o.id === this.optionControl.value);
-    this.onChange(this.selections);
+
+    let modifer = { ...this.modifier };
+    modifer.options = this.selections;
+    this.onChange(modifer);
   }
 
   // **Control value accessor**

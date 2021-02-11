@@ -1,41 +1,49 @@
-<div style="background: #f2f2f2;">
-    <div class="detail-items sticky-navbar" [class.sticky-navbar__visible]="scrolledDown">
-        <div class="container">
-            <table class="table-responsive" >
-                <tr>
-                    <td *ngFor="let category of categories; let i = index"
-                        style="font-size:14px;font-style: normal;font-weight: 500;white-space: nowrap;">
-                        <button class="pill-button tabs-menu first"
-                            [ngStyle]="category === currentCategory ? {'background': '#353FA8', 'color': '#fff'} : {} "
-                            (click)="handleTabClick(i)">
-                            {{category.name}}
-                        </button>
-                    </td>
-                </tr>
-            </table>
-        </div>
+<div class="store-details-body">
+    <!-- <div class="container card-container-padding bg-white">
+        <label class="order-status"> 
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 6L9 17L4 12" stroke="#36A900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Accepting online orders
+                <label style="margin:0"> <b> Lunch </b> 10:00AM - 2:00PM  </label>
+                <label class="bl-text"> More menu 
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 10L12 14L16 10" stroke="#353FA8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </label>
+        </label>
+    </div> -->
+    <div class="sticky-navbar card-container-padding" [class.sticky-navbar__visible]="scrolledDown">
+        <table class="table-responsive">
+            <tr>
+                <td *ngFor="let category of categories; let i = index" class="stick-header-names">
+                    <button class="pill-button tabs-menu text-capitalize"
+                        [ngStyle]="category === currentCategory ? {'background': '#353FA8', 'color': '#fff'} : {} "
+                        (click)="handleTabClick(i)">
+                        {{category.name}}
+                    </button>
+                </td>
+            </tr>
+        </table>
     </div>
-    <div class="detail-items">
-        <div class="container">
-            <div class="label-li">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div #categorySections [attr.data-category-index]="i"
-                            *ngFor="let category of categories;let i = index">
-                            <div class="std-heading-4 first" style="margin-bottom: 16px;margin-top:32px;">
-                                {{category.name}}
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6 col-lg-6 col-xl-4"
-                                    style="margin-bottom: 16px;padding-left: 12px;padding-right:12px;"
-                                    *ngFor="let item of category.items">
-                                    <store-item-card [storeItem]="item"></store-item-card>
-                                </div>
-                            </div>
+    
+    <div class="container card-container-padding">
+        <div class="label-li">
+            <div class="category-tab-items-pd" >
+                <div #categorySections [attr.data-category-index]="i"
+                        *ngFor="let category of categories;let i = index">
+                    <div class="std-heading-4 category-name-spacing text-capitalize">
+                        {{category.name}}
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-lg-6 col-xl-4 category-cards"
+                            *ngFor="let item of category.items">
+                            <store-item-card [storeItem]="item"></store-item-card>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <br><br><br><br>
 </div>

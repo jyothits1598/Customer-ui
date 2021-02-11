@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { URL_DeleteFavourite, URL_SetFavourite } from 'src/api/store-data';
 import { LoginPromptComponent } from 'src/app/core/components/login-prompt/login-prompt.component';
@@ -23,7 +24,8 @@ export class StoreHeartComponent implements OnInit {
     private snackBar: SnackBarService,
     private authService: AuthService,
     private modalService: ModalService,
-    private restApiService: RestApiService) {}
+    private restApiService: RestApiService,
+    private router: Router) {}
 
   ngOnInit(): void {
     this.isFavourite = this.store.isFavourite;
@@ -34,7 +36,8 @@ export class StoreHeartComponent implements OnInit {
 
   onFavClick() {
     if (!this.authService.isLoggedIn) {
-      this.modalService.openComponentModal(LoginPromptComponent);
+      // this.modalService.openComponentModal(LoginPromptComponent);
+      this.router.navigateByUrl('/auth/signin');
       return;
     }
     this.loading = true;

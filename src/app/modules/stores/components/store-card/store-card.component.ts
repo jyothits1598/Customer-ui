@@ -1,23 +1,21 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Store } from '../../model/store';
 
 @Component({
   selector: 'app-store-card',
   templateUrl: './store-card.component.html',
-  styleUrls: ['./store-card.component.scss']
+  styleUrls: ['./store-card.component.scss'],
 })
 export class StoreCardComponent implements OnInit {
   @Input() store: Store;
 
-  constructor(private window: Window) {
+  @Output() selected = new EventEmitter<number>();
+
+  constructor() {}
+
+  ngOnInit(): void {}
+
+  select(id: number) {
+    this.selected.next(id);
   }
-
-  getShareUrl(): string {
-    return this.window.location.origin + '/restaurants/' + this.store.id;
-  }
-
-  ngOnInit(): void {
-
-  }
-
 }

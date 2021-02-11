@@ -5,42 +5,81 @@
                 <div class="close-icon">
                     <img src="assets/images/ico_close.png" (click)="close()" style="cursor: pointer;outline:0">
                 </div>
+                <div *ngIf="scrolled" class="paragraph14__bold text-capitalize pl-16" style="flex-grow: 1;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;">
+                    {{itemDetail.name}}
+                </div>
                 <ul class="menu">
+                    <!-- <li class="pd cursor-pointer">
+                        <store-heart [store]="{id: item.storeId, isFavourite: item.isFavourite, page:'main'}"></store-heart>
+                    </li> -->
                     <li class="pd">
-                        <img src="assets/images/heart.png">
-                    </li>
-                    <li class="pd">
-                        <img src="assets/images/share.png">
+                        <app-share [isIconBlack]="true" [store]="{id: item.storeId, name: item.storeName, page:'main'}">
+                        </app-share>
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="modal-body" [style.max-height]="loading? '600px': 'calc(90vh - 108px)'">
+        <div class="modal-body" disableBodyScroll>
             <p *ngIf="loading">Loading...</p>
             <ng-container *ngIf="itemDetail">
-                <div class="std-heading-3">
+                <div class="std-heading-3 item-name-modifier" inViewPort (inView)="scrolled = !$event">
                     {{itemDetail.name}}
                 </div>
                 <div class="item-div-image">
-                    <img [src]="itemDetail.image" class="img-fluid">
+                    <img [src]="itemDetail.image || 'assets/svg/details/modifier_null.svg'" class="img-fluid">
                 </div>
-                <ng-container *ngFor="let modifier of itemDetail.modifiers; let i = index">
-                    <div [ngSwitch]="modifier.minSelection === 1 && modifier.maxSelection === 1">
-                        <store-item-modifier *ngSwitchCase="false" [formControl]="selectedOptions.at(i)"
-                            [modifier]="modifier">
-                        </store-item-modifier>
-                        <item-modifer-selector-radio *ngSwitchCase="true" [modifier]="modifier"
-                            [formControl]="selectedOptions.at(i)"></item-modifer-selector-radio>
-                    </div>
-                </ng-container>
+                <div class="pt-3 pb-3">
+                    <ng-container *ngFor="let modifier of itemDetail.modifiers; let i = index">
+                        <div [ngSwitch]="modifier.minSelection === 1 && modifier.maxSelection === 1">
+                            <store-item-modifier *ngSwitchCase="false" [formControl]="selectedOptions.at(i)"
+                                [modifier]="modifier">
+                            </store-item-modifier>
+                            <item-modifer-selector-radio *ngSwitchCase="true" [modifier]="modifier"
+                                [formControl]="selectedOptions.at(i)"></item-modifer-selector-radio>
+                        </div>
+                    </ng-container>
+                </div>
+                <div>
+                    <!-- <div class="cart-item-show-more text-center">
+                        <label>
+                            Show 7 more
+                        </label>
+                    </div> 
+                    <hr> -->
+                    <item-count (change)="itemCount.patchValue($event)"></item-count>
+                </div>
             </ng-container>
-            <br><br>
         </div>
         <div class="footer-btn">
-            <button type="button" class="btn std-button std-button--blue">
-                Add to cart
-            </button>
+            <div class="add-cart-card text-center">
+                <div (click)="addToCart()" type="button" class="cart-button">
+                    <ng-container *ngIf="!addingToCart; else ld">
+                        <span class="cart-text">Add to cart</span> <span *ngIf="itemDetail"
+                            class="float-right  cart-text">${{totalAmount}}</span>
+                    </ng-container>
+                    <ng-template #ld>
+                        <img src="assets/images/loader_white_24.gif" />
+                    </ng-template>
+                </div>
+            </div>
         </div>
     </div>
     <div class="item-detail-background" (click)="close()"></div>
 </div>
+
+<ng-template #orderExistsTemp let-modal>
+    <div class="modal-body cart-confirm-dialogue text-center">
+        <span class="cart-error-header">
+            {{modal.data.heading}}
+        </span>
+        <p class="paragraph14 pt-4">
+            {{modal.data.message}}
+        </p>
+        <div class="pt-3 pb-3">
+            <div class="success-text" (click)="modal.dismiss()">Okay</div>
+        </div>
+    </div>
+</ng-template>

@@ -1,47 +1,43 @@
-
-<div style="margin-top:48px;" *ngIf="isLoggedin; else bckYellow"></div>
-
-<ng-template #bckYellow>
-  <div class="cover-bg">
-    <div class="container newClasscontainer">
-      <div class="signup-panel">
-        <div class="std-heading-3" style="margin-bottom: 8px;">
-          Sign up and get $10 off <br> your first order*
-        </div>
-        <input type="button" class="std-button std-button--primary" value="Sign up" routerLink="/auth/signup">
-        <input type="button" class="std-button std-button--transparency" value="Log in" routerLink="/auth/signin">
-        <div class="small-home-text">
-          *New members only. $30 minimum order
-        </div>
+<div class="categories-items">
+  <div class="container pddr0">
+    <app-filter-categories></app-filter-categories>
+  </div>
+</div>
+<div class="cover-bg" *ngIf="!isLoggedin">
+  <div class="container newClasscontainer">
+    <div class="signup-panel">
+      <div class="std-heading-3" style="margin-bottom: 8px;">
+        Sign up and get $10 off <br> your first order*
+      </div>
+      <input type="button" class="std-button std-button--primary" value="Sign up" routerLink="/auth/signup">
+      <input type="button" class="std-button std-button--transparency" value="Log in" routerLink="/auth/signin">
+      <div class="small-home-text">
+        *New members only. $30 minimum order
       </div>
     </div>
   </div>
-</ng-template>
-<section class="table-responsive sticky-navbar" >
-  <div class="mobile-pad" *ngIf="isLoggedin"></div>
-  <!-- <div class="categories-items">
-    <div class="container">
-        <app-filter-categories></app-filter-categories>
-    </div>
-  </div> -->
+</div>
+<!-- <section class="table-responsive sticky-navbar">
   <div class="text-center">
     <ul class="resnt-menu-top-tabs u-margin-bottom-medium" style="margin-bottom:0">
       <li class="resnt-menu-top-tabs__item custom-border" >
-        <div class="resnt-menu-top-tabs__button tabs-menu resnt-menu-top-tabs__button__active" >
+        <div class="resnt-menu-top-tabs__button tabs-menu" [class.resnt-menu-top-tabs__button__active]="isActive == 'nearBy' || isActive == ''" (click)="navigateToPath('nearBy')">
           Nearby 
         </div>
       </li>
       <li class="resnt-menu-top-tabs__item custom-border">
-        <div class="resnt-menu-top-tabs__button tabs-menu resnt-menu-top-tabs__button__border" routerLink=""> Reviews </div>
+        <div class="resnt-menu-top-tabs__button tabs-menu resnt-menu-top-tabs__button__border" [class.resnt-menu-top-tabs__button__active]="isActive == 'google'" (click)="navigateToPath('google')"> 
+          Reviews </div>
       </li>
       <li class="resnt-menu-top-tabs__item">
-        <div class="resnt-menu-top-tabs__button tabs-menu" routerLink=""> 
+        <div class="resnt-menu-top-tabs__button tabs-menu" [class.resnt-menu-top-tabs__button__active]="isActive == 'facebook'"  (click)="navigateToPath('facebook')"> 
             Likes
         </div>
       </li>
     </ul>
   </div>
-</section>
-<div class="store-list-bg">
+</section> -->
+<!-- <div class="store-list-bg"> -->
   <router-outlet></router-outlet>
-</div>
+<!-- </div> -->
+

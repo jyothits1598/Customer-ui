@@ -1,10 +1,14 @@
 <div class="edit-profile-page">
     <div class="profile-navbar">
         <div class="container">
-            <span class="profile-save-text">
-                <img src="assets/images/ico_arrow_left_white.png" style="padding-right:16px;outline: 0;border:0;cursor: pointer;" routerLink="/profile/security"> Add email
-            </span>
-            <div class="center-logo-profile only-big" routerLink="/" >
+            <img src="assets/images/ico_arrow_left_white.png" class="arrow-back"  routerLink="/profile/security" >
+            <label class="text-heder" *ngIf="ischangeE" >
+                Change email 
+            </label>
+            <label class="text-heder" *ngIf="isaddE">
+                Add email
+            </label>
+            <div class="center-logo-profile only-big" routerLink="/">
                 <img src="assets/svg/logo_white.svg">
             </div>
         </div>
@@ -15,7 +19,7 @@
             <div class="text-center paragraph14" style="margin-bottom: 24px;">
                 We’ll send a verification code to this email
             </div>
-            <div *ngIf="errorMessage" id="hideMe" class="error-mez text-capitalize">
+            <div *ngIf="errorMessage" class="error-mez text-capitalize">
                 {{errorMessage}}
             </div>
             <div class="form-group form-group--margin">
@@ -49,7 +53,7 @@
                         <button type="submit" class="std-button std-button--blue">
                             <p style="margin:0" *ngIf="!loading; else loadingTemp">Next</p>
                             <ng-template #loadingTemp>
-                                <img src="assets/images/loader_white_24.gif" alt="" style="height: 24px;">
+                                 <img src="assets/images/loader_white_24.gif" alt="" style="height: 24px;"> Submitting..
                             </ng-template>
                         </button>
                     </div>

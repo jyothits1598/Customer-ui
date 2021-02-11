@@ -1,6 +1,6 @@
 <div *ngIf="profileImageUrl"> <img [src]="profileImageUrl ? profileImageUrl : 'assets/images/add_image.png'" alt="profile image" class="icon_profile"> </div>
 <div *ngIf="!profileImageUrl" class="icon-profile text-uppercase">
-    {{profileData.firstName | slice:0:1 }}{{profileData.lastName | slice:0:1 }}
+    {{name.firstName | slice:0:1 }}{{name.lastName | slice:0:1 }}
 </div>
 <ng-container *ngIf="editMode">
     <div class="text-center text12" >
@@ -18,6 +18,6 @@
         <button *ngIf="profileImageUrl" (click)="urlChange.emit(null)" class="std-button std-button--trans">Remove</button>
     </div>
 </ng-container>
-<div *ngIf="errorMessage" class="error-mez" id="hideMe">
+<div *ngIf="errorMessage" class="error-mez">
     {{errorMessage}}
 </div>

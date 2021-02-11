@@ -1,31 +1,48 @@
 <!-- <div [style.color]="getColor()">Required</div> -->
 
-    <div class="d-flex justify-content-between" style="margin-bottom:20px;">
-        <div class="std-heading-4">
-            {{modifier.name}} <br>
-            <span class="small-content"> 
-                Choose 1
-            </span>
-        </div>
-        <div>
-            <span class="required" [ngStyle]="{background: optionControl.invalid ? '#FFBF42' : '#E2FFBC'}" ><img [src]="optionControl.invalid ? '' : 'assets/images/ico_check_small.png'"> Required </span>
-            <!-- <modifier-selection-status [status]="{valid: optionControl.valid, touched: optionControl.touched}"></modifier-selection-status> -->
-        </div>
+<div class="d-flex justify-content-between" style="padding: 2px 0;">
+    <div class="text-capitalize">
+        <p class="std-heading-4" style="margin-bottom: 4px;">{{modifier.name}} </p>
+        <label class="small-content">
+            <label [ngClass]="(this.optionControl.touched && this.optionControl.invalid) ? 'errorText' : '' "> Choose 1
+                <label *ngIf="modifier.freeSelection > 0;"
+                    [ngClass]="(this.optionControl.touched && this.optionControl.invalid) ? 'errorText' : '' ">
+                    ( {{modifier.freeSelection}} free )
+                </label>
+            </label>
+        </label>
+
     </div>
-    <table style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;" *ngFor="let option of modifier.options; let i = index">
+    <div>
+        <!-- <span class="required" [ngStyle]="{background: optionControl.invalid ? '#FFBF42' : '#E2FFBC'}" ><img [src]="optionControl.invalid ? '' : 'assets/images/ico_check_small.png'"> Required </span> -->
+        <modifier-selection-status [status]="{valid: optionControl.valid, touched: optionControl.touched}">
+        </modifier-selection-status>
+    </div>
+</div>
+<div appExpandable #e="appExpadable" style="transition: max-height .25s;" [collapsedSize]="560">
+    <table style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;"
+        *ngFor="let option of modifier.options; let i = index">
         <tr>
-            <td> 
+            <td>
                 <div class="form-radio">
                     <label class="form-check-label lable-text">
                         <input type="radio" [name]="modifier.name" [id]="modifier.name+i" [formControl]="optionControl"
-                        [value]="option.id" (change)="handleChange()">  
-                        <span [name]="modifier.name+i"> &nbsp;{{option.name}} </span>
+                            [value]="option.id" (change)="handleChange()">
+                        <span> &nbsp;{{option.name}} </span>
                     </label>
                 </div>
             </td>
+            <td align="right">
+                <label class="small-content small-content__price">
+                    +${{option.price}}
+                </label>
+            </td>
         </tr>
     </table><br>
-        <!-- <div style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;" *ngFor="let option of modifier.options; let i = index">
+</div>
+<button *ngIf="modifier.options.length > 10" (click)="e.toggle()">{{e.isExpanded ? 'Hide' : 'Show'}}
+    {{modifier.options.length - 10}} <span *ngIf="!e.isExpanded">more</span></button>
+<!-- <div style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;" *ngFor="let option of modifier.options; let i = index">
             <label class="radio">
                 <input type="radio" [name]="modifier.name" [id]="modifier.name+i" [formControl]="optionControl"
                 [value]="option.id" (change)="handleChange()">
@@ -33,4 +50,3 @@
             </label>
         </div>
      -->
-

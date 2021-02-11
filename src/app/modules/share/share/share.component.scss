@@ -15,6 +15,7 @@
         line-height:20px;
         margin:0;
         padding-left:8px;
+        cursor: pointer;
     }
     &--fb {
         background:#1877F2;
@@ -62,4 +63,18 @@
     font-weight:bold;
     font-size:16px;
     float:right;
+}
+#hideMe {
+    -webkit-animation: cssAnimation 5s forwards; 
+    animation: cssAnimation 5s forwards;
+}
+@keyframes cssAnimation {
+    0%   {opacity: 1;}
+    90%  {opacity: 1;}
+    100% {opacity: 0;}
+}
+@-webkit-keyframes cssAnimation {
+    0%   {opacity: 1;}
+    90%  {opacity: 1;}
+    100% {opacity: 0;}
 }

@@ -1,7 +1,7 @@
-<div style="border-bottom:1px solid #ccc;padding:8px;">
+<div style="border-bottom:1px solid #ccc;padding:8px 12px;">
     <table class="search-ipt-panel" >
         <tr>
-            <td valign="middle" style="cursor: pointer;padding-right: 8px;">
+            <td valign="middle" style="cursor: pointer;padding-right: 8px">
                 <img src="assets/svg/ico_arrow_left_blue.svg" width="31px" height="31px" (click)="searchedLocation.emit(null)">
             </td>
             <td>
@@ -21,7 +21,7 @@
                     <img src="assets/svg/ico_place_tab.svg">
                 </td>
                 <td style="box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.1);width:100%;padding: 6px 0px;">
-                    <div class="paragraph"> {{suggestion.structured_formatting.main_text}} </div>
+                    <div class="paragraph text-capitalize"> {{suggestion.structured_formatting.main_text}} </div>
                     <div style="color: #808080;font-size: 14px;line-height: 20px;"> {{suggestion.structured_formatting.secondary_text}} </div>
                 </td>
             </tr>

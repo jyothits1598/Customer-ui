@@ -1,23 +1,35 @@
 <span style="cursor: pointer;outline:none;" #lineIcon (click)="showPopover(profTemp)" title="Settings">
-    <div class="menu-icon img-display-desktop"></div>
+    <div [ngStyle]="{'background-image': popoverRef ? 'url(ico_menu_h.svg)':''}" class="menu-icon img-display-desktop" [ngClass]="profLink.isActive? 'menu-icon-active':''">
+    </div>
+    <div style="display: none;" routerLink="/profile" routerLinkActive="" #profLink="routerLinkActive"></div>
+    <!-- <div>{{profLink.isActive}}</div> -->
     <div class="menu-icon-mobile img-display-mobile"></div>
 </span>
-
+<!-- [ngClass]="{active: profileRouteActive}" -->
 <ng-template #profTemp>
-    <ul class="profile-popup" >
+    <div *ngIf="isMobile" disableBodyScroll></div>
+    <ul class="profile-popup">
         <li class="only-mobile" style="padding: 0;margin:0;">
-            <div class="profile-header-resp" > 
-               More
-            </div> 
+            <div class="profile-header-resp">
+                More
+            </div>
         </li>
-        <li routerLink="profile/basic" style="outline:0;" class=""> 
-            <img src="assets/svg/signup/ico_account_blue.svg" class="pdr-16"><label>Profile</label> 
+        <li routerLink="profile/basic" style="outline:0;">
+            <img src="assets/svg/signup/ico_account_blue.svg" class="pdr-16"><label>Profile</label>
         </li>
-        <li routerLink="profile/settings" style="outline:0;"> <img src="assets/svg/signup/ico_settings_outline.svg" class="pdr-16"><label>Settings</label></li>
+        <li routerLink="profile/settings" style="outline:0;"> <img src="assets/svg/signup/ico_settings_outline.svg"
+                class="pdr-16"><label>Settings</label></li>
         <!-- <li  style="outline:0;" routerLink="/under-construction"> <img src="assets/images/profile/ico_dollar_sign.png" class="profile-ic-21"> <span style="padding-left:16px;"> Payment </span> </li> -->
-        <li routerLink="profile/security" style="outline:0;" > <img src="assets/svg/signup/ico_lock.svg" class="pdr-16"><label>Security </label></li>
-        <!-- <li  style="outline:0;" routerLink="/under-construction"> <img src="assets/images/profile/ico_history.png" class="profile-ic-21" > <span style="padding-left:16px;"> History </span> </li> -->
+        <li routerLink="profile/security" style="outline:0;"> <img src="assets/svg/signup/ico_lock.svg" class="pdr-16">
+            <label>Security </label>
+        </li>
+        <li routerLink="profile/history" style="outline:0;"> <img src="assets/images/profile/ico_history.png"
+                class="profile-ic-21">
+            <span style="padding-left:16px;"> History </span>
+        </li>
         <!-- <li  style="outline:0;" routerLink="/under-construction"> <img src="assets/images/profile/ico_mobile.png" class="profile-ic-21" > <span style="padding-left:16px;"> Get the app </span> </li> -->
-        <li (click)="logout()" style="outline:0;"> <img src="assets/svg/signup/ico_logout.svg" class="pdr-16"><label>Logout</label> </li>
+        <li (click)="logout()" style="outline:0;">
+            <img src="assets/svg/signup/ico_logout.svg" class="pdr-16"><label>Logout</label>
+        </li>
     </ul>
 </ng-template>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { finalize, switchMap, tap } from 'rxjs/operators';
 import { GeoLocationService } from 'src/app/core/services/geo-location.service';
 import { Store } from 'src/app/modules/stores/model/store';
@@ -16,7 +17,8 @@ export class FavouriteStoresComponent implements OnInit {
   error: boolean = false;
 
   constructor(private storeData: StoresDataService,
-    private locationService: GeoLocationService) { }
+    private locationService: GeoLocationService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.locationService.userLocation().pipe(
@@ -36,6 +38,10 @@ export class FavouriteStoresComponent implements OnInit {
     //   },
     //   () => this.error = true
     // );
+  }
+
+  storeSelected(id: number) {
+    this.router.navigate([`restaurants/${id}`]);
   }
 
 }

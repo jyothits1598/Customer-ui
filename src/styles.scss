@@ -5,6 +5,7 @@
 @import "./styles/cards";
 @import "~@angular/cdk/overlay-prebuilt.css";
 @import "./styles/animations";
+@import "./styles/cart";
 
 .modal-content {
   border: 0 !important;
@@ -33,7 +34,7 @@ input::-webkit-input-placeholder {
 @media (max-width: 575.98px) {
   .wallpaper-card {
     position: relative;
-    margin: 16px;
+    margin: 15px 16px 14px 16px;
   }
   .overflow-container {
     width: 100% !important;
@@ -49,19 +50,12 @@ input::-webkit-input-placeholder {
   .only-big {
     display: none;
   }
-  .right-content {
-    display: none;
-  }
   .store-list-bg {
     padding: 16px 0;
   }
   .store-list-bg-fv {
     padding: 110px 0;
   }
-  .fixed-shadow {
-    width: 100%;
-  }
-
   .spacing {
     margin-bottom: 16px;
     padding-left: 16px;
@@ -72,6 +66,9 @@ input::-webkit-input-placeholder {
     margin-top: -15px;
   }
   .margins-center {
+    margin: 0 auto 25px;
+  }
+  .margins-center-forgot {
     margin: 0 auto 25px;
   }
   .security-card {
@@ -120,14 +117,30 @@ input::-webkit-input-placeholder {
     margin-top: 12px;
     z-index: 1;
   }
-  .store-search {
-    padding-top: 16px !important;
-  }
   .signup-panel {
-    padding: 24px 24px 4px 0px !important;
+    padding: 24px 24px 4px 24px !important;
   }
   .sp {
     padding:0 16px !important;
+  }
+  .sticky-navbar {
+    padding-top:16px;
+  }
+  .card-container-padding{
+    padding:0px 16px;
+  }
+  .bg-white {
+    display:none;
+  }
+  .l18 {
+    line-height:18px !important;
+  }
+  .category-tab-items-pd {
+    padding-top:16px;
+  }
+  .pill-button {
+    margin-bottom: 6px;
+    margin-top: 6px;
   }
 }
 
@@ -135,7 +148,7 @@ input::-webkit-input-placeholder {
 @media (min-width: 576px) and (max-width: 767.98px) {
   .wallpaper-card {
     position: relative;
-    margin: 16px;
+    margin: 15px 16px 14px 16px;
   }
   .overflow-container {
     width: 100% !important;
@@ -151,18 +164,14 @@ input::-webkit-input-placeholder {
   .only-big {
     display: none;
   }
-  .right-content {
-    display: none;
-  }
+  
   .store-list-bg {
     padding: 16px 0;
   }
   .store-list-bg-fv {
     padding: 110px 0;
   }
-  .fixed-shadow {
-    width: 100%;
-  }
+
   .spacing {
     margin-bottom: 16px;
     padding-left: 16px;
@@ -175,17 +184,20 @@ input::-webkit-input-placeholder {
   .margins-center {
     margin: 0 auto 25px;
   }
+  .margins-center-forgot {
+    margin: 0 auto 25px;
+  }
   .security-card {
-   margin-top: 56px;
-    padding: 16px;
+    margin: 72px auto 25px;
+    max-width: 350px;
   }
   .profile-radius {
     padding: 16px;
     margin-top:48px;
   }
   .security-card-pwd {
-    margin-top: 24px;
-    padding: 16px;
+    margin: 72px auto 25px;
+    max-width: 350px;
   }
   .bx-shdw {
     margin-top: 24px;
@@ -221,14 +233,30 @@ input::-webkit-input-placeholder {
     outline: 0;
     cursor: pointer;
   }
-  .store-search {
-    padding-top: 16px !important;
-  }
   .signup-panel {
-    padding: 24px 24px 4px 0px !important;
+    padding: 24px 24px 4px 24px !important;
   }
   .sp {
     padding:0 16px !important;
+  }
+  .sticky-navbar {
+    padding-top:16px;
+  }
+  .card-container-padding{
+    padding:0px 16px;
+  }
+  .bg-white {
+    display:none;
+  }
+  .l18 {
+    line-height:18px !important;
+  }
+  .category-tab-items-pd {
+    padding-top:16px;
+  }
+  .pill-button {
+    margin-bottom: 6px;
+    margin-top: 6px;
   }
 }
 
@@ -236,7 +264,7 @@ input::-webkit-input-placeholder {
 @media (min-width: 768px) and (max-width: 991.98px) {
   .wallpaper-card {
     position: relative;
-    margin: 16px;
+    margin: 15px 16px 14px 16px;
   }
   .overflow-container {
     width: 100% !important;
@@ -252,18 +280,14 @@ input::-webkit-input-placeholder {
   .only-big {
     display: none;
   }
-  .right-content {
-    display: none;
-  }
+  
   .store-list-bg {
     padding: 16px 0;
   }
   .store-list-bg-fv {
     padding: 110px 0;
   }
-  .fixed-shadow {
-    width: 100%;
-  }
+ 
   .spacing {
     margin-bottom: 16px;
     padding-left: 16px;
@@ -276,17 +300,20 @@ input::-webkit-input-placeholder {
   .margins-center {
     margin: 0 auto 25px;
   }
+  .margins-center-forgot {
+    margin: 0 auto 25px;
+  }
   .security-card {
-    margin-top: 56px;
-    padding: 16px;
+    margin: 72px auto 25px;
+    max-width: 350px;
   }
   .profile-radius {
     padding: 16px;
     margin-top:48px;
   }
   .security-card-pwd {
-    margin-top: 24px;
-    padding: 16px;
+    margin: 72px auto 25px;
+    max-width: 350px;
   }
   .bx-shdw {
     margin-top: 24px;
@@ -322,14 +349,24 @@ input::-webkit-input-placeholder {
     outline: 0;
     cursor: pointer;
   }
-  .store-search {
-    padding-top: 16px !important;
-  }
   .signup-panel {
-    padding: 24px 24px 4px 0px !important;
+    padding: 24px 24px 4px 24px !important;
   }
   .sp {
     padding-right:16px !important;
+  }
+  .card-container-padding{
+    padding:0px 16px;
+  }
+  .bg-white {
+    display:none;
+  }
+  .category-tab-items-pd {
+    padding-top:16px;
+  }
+  .pill-button {
+    margin-bottom: 6px;
+    margin-top: 6px;
   }
 }
 
@@ -342,13 +379,13 @@ input::-webkit-input-placeholder {
     width: 522px;
     height: 184px;
     background: var(--color-background);
-    left: 80px;
+    left: 0;
     border-radius: 16px;
-    margin: 88px 0 48px 0;
+    margin: 88px 0 40px 16px;
     padding: 16px;
   }
   .wal-image {
-    height: 320px;
+    height: 312px;
   }
   .only-small {
     display: none;
@@ -356,33 +393,25 @@ input::-webkit-input-placeholder {
   .only-big {
     display: block;
   }
-
-  .detail-items {
-    padding: 0 60px;
-  }
   .margins-left {
     padding-left: 80px;
     padding-right: 80px;
-  }
-  .main-content {
-    width: 80%;
-  }
-  .right-content {
-    width: 20%;
   }
   .store-list-bg {
     padding: 32px 0;
   }
   .store-list-bg-fv {
     padding: 50px 0;
-  }
-  .fixed-shadow {
-    width: 80%;
-  }
+  } 
   .margins-center {
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
     border-radius: 16px;
     margin: 48px auto 25px;
+  }
+  .margins-center-forgot {
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    margin: 72px auto 25px;
   }
   .spacing {
     margin-bottom: 24px;
@@ -417,6 +446,22 @@ input::-webkit-input-placeholder {
   }
   .mtb-5 {
     margin-top:7px;
+  }
+  .store-search {
+    padding-top: 48px;
+  }
+  .card-container-padding{
+    padding:0px 16px;
+  }
+  .category-tab-items-pd {
+    padding-top:24px;
+  }
+  .pill-button {
+    margin-bottom: 14px;
+    margin-top: 14px;
+  }
+  .mrt-48 {
+    margin-top:48px;
   }
 }
 
@@ -429,13 +474,13 @@ input::-webkit-input-placeholder {
     width: 522px;
     height: 184px;
     background: var(--color-background);
-    left: 80px;
+    left: 0;
     border-radius: 16px;
-    margin: 88px 0 48px 0;
+    margin: 88px 0 40px 48px;
     padding: 16px;
   }
   .wal-image {
-    height: 320px;
+    height: 312px;
   }
   .only-small {
     display: none;
@@ -445,17 +490,11 @@ input::-webkit-input-placeholder {
   }
 
   .detail-items {
-    padding: 0 60px;
+    padding: 0 32px 0 32px;
   }
   .margins-left {
     padding-left: 80px;
     padding-right: 80px;
-  }
-  .main-content {
-    width: 80%;
-  }
-  .right-content {
-    width: 20%;
   }
   .store-list-bg {
     padding: 32px 0;
@@ -463,13 +502,15 @@ input::-webkit-input-placeholder {
   .store-list-bg-fv {
     padding: 50px 0;
   }
-  .fixed-shadow {
-    width: 80%;
-  }
   .margins-center {
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
     border-radius: 16px;
     margin: 48px auto 25px;
+  }
+  .margins-center-forgot {
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    margin: 72px auto 25px;
   }
   .spacing {
     margin-bottom: 24px;
@@ -504,6 +545,22 @@ input::-webkit-input-placeholder {
   }
   .mtb-5 {
     margin-top:7px;
+  }
+  .store-search {
+    padding-top: 48px;
+  }
+  .card-container-padding{
+    padding:0px 48px;
+  }
+  .category-tab-items-pd {
+    padding-top:24px;
+  }
+  .pill-button {
+    margin-bottom: 14px;
+    margin-top: 14px;
+  }
+  .mrt-48 {
+    margin-top:48px;
   }
 }
 .signup-panel {
@@ -525,9 +582,10 @@ input[type="number"]::-webkit-outer-spin-button {
   appearance: none;
   margin: 0;
 }
-.first:first-letter {
-  text-transform: capitalize;
-}
+
+// .first::first-letter {
+//   text-transform: capitalize !important;
+// }
 
 .edit-profile-page {
   position: fixed;
@@ -553,17 +611,17 @@ input[class="cb"],
 input[class="rd"] {
   display: none;
 }
-input[class="cb"] + span:before {
+input[class="cb"] + p:before {
   content: "";
   display: inline-block;
   background: url("assets/images/ico_check_blank.png") no-repeat;
-  height: 25px;
+  height: 24px;
   margin-right: 5px;
   margin-bottom: -7px;
-  width: 25px;
+  width: 24px;
   cursor: pointer;
 }
-input[class="cb"]:checked + span:before {
+input[class="cb"]:checked + p:before {
   background: url("assets/images/ico_check_fill.png") no-repeat;
 }
 
@@ -658,4 +716,41 @@ input[class="cb"]:checked + span:before {
   background-image: url("assets/svg/mobile/ico_menu_m.svg");
   width:40px;
   height:40px;
+}
+
+// active desktop icons
+.fav-icon-active {
+  background-image: url("assets/svg/signup/ico_heart_active.svg");
+  width:40px;
+  height:40px;
+}
+.home-icon-active {
+  background-image: url("assets/svg/signup/ico_home_active.svg");
+  width:40px;
+  height:40px;
+}
+.menu-icon-active {
+  background-image: url("assets/svg/signup/ico_menu_active.svg");
+  width:40px;
+  height:40px;
+}
+
+// Mobile active
+.user-icon-mobile-active {
+  background-image: url("assets/svg/mobile/ico_account_m_active.svg");
+  width:40px;
+  height:40px;
+}
+.home-icon-mobile-active {
+  background-image: url("assets/svg/mobile/ico_home_m_active.svg");
+  width:40px;
+  height:40px;
+}
+.fav-icon-mobile-active {
+  background-image: url("assets/svg/mobile/ico_heart_m_active.svg");
+  width:40px;
+  height:40px;
+}
+.errorText {
+  color:red;
 }
