@@ -18,6 +18,10 @@ export class StoreItemModifierComponent extends ItemModifierFormControlComponent
     this.controlDir.valueAccessor = this;
   }
 
+  isValid(): boolean {
+    return this.optionControls.valid;
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     let controls: Array<FormControl> = this.modifier.options.map(opt => { return new FormControl(false) });
     this.optionControls = new FormArray(controls, [this.minNumberValidator(this.modifier.minSelection)]);

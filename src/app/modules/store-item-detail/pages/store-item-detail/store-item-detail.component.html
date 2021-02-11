@@ -34,10 +34,10 @@
                 <div class="pt-3 pb-3">
                     <ng-container *ngFor="let modifier of itemDetail.modifiers; let i = index">
                         <div [ngSwitch]="modifier.minSelection === 1 && modifier.maxSelection === 1">
-                            <store-item-modifier *ngSwitchCase="false" [formControl]="selectedOptions.at(i)"
+                            <store-item-modifier #mod *ngSwitchCase="false" [formControl]="selectedOptions.at(i)"
                                 [modifier]="modifier">
                             </store-item-modifier>
-                            <item-modifer-selector-radio *ngSwitchCase="true" [modifier]="modifier"
+                            <item-modifer-selector-radio #mod *ngSwitchCase="true" [modifier]="modifier"
                                 [formControl]="selectedOptions.at(i)"></item-modifer-selector-radio>
                         </div>
                     </ng-container>

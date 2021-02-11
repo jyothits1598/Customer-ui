@@ -25,6 +25,10 @@ export class ItemModifierFormControlComponent implements ControlValueAccessor {
     this.controlDir.control.updateValueAndValidity();
   }
 
+  isValid(): boolean {
+    return false;
+  }
+
   // **Control value accessor**
   onChange = (value) => { };
   onTouched: () => {};

@@ -37,4 +37,8 @@ export class ItemModiferSelectorRadioComponent extends ItemModifierFormControlCo
     this.onChange(modifer);
   }
 
+  isValid(): boolean {
+    return this.optionControl.valid;
+  }
+
 }
