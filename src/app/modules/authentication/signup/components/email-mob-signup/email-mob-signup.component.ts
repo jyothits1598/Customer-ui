@@ -15,6 +15,8 @@ import { SignupService } from '../../services/signup.service';
 export class EmailMobSignupComponent implements OnInit {
   errorMessage;
   loading: boolean = false;
+  signupPage: boolean = true;
+  mobilePage: boolean = false;
 
   registrationForm: FormGroup = new FormGroup({
     email: new FormControl(null, [
@@ -99,6 +101,12 @@ export class EmailMobSignupComponent implements OnInit {
     if (errorResp.error.mobile_number) this.errorMessage = errorResp.error.mobile_number[0];
   }
 
-
-
+  nextSignup() {
+    this.signupPage = false;
+    this.mobilePage = true;
+  }
+  backSignup() {
+    this.signupPage = true;
+    this.mobilePage = false;
+  }
 }
