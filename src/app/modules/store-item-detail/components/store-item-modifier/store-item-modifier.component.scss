@@ -28,3 +28,14 @@ input[type=checkbox]:checked + span {
 .newOne {
     color:red;
 }
+.label-text {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 20px;
+    color:var(--color-primary);
+    cursor: pointer;
+}
+.p18 {
+    padding:18px 0 0 0;
+}

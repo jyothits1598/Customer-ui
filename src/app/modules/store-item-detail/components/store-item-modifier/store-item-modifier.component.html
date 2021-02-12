@@ -39,8 +39,14 @@
             </tr>
         </table>
     </div>
-    <button *ngIf="modifier.options.length > 10" (click)="e.toggle()">{{e.isExpanded ? 'Hide' : 'Show'}}
-        {{modifier.options.length - 10}} <span *ngIf="!e.isExpanded">more</span></button>
+    <div class="text-center p18" >
+        <label *ngIf="modifier.options.length > 10" (click)="e.toggle()" class="label-text" > 
+            {{e.isExpanded ? 'Hide' : 'Show'}} {{modifier.options.length - 10}}
+            <span *ngIf="!e.isExpanded"> more </span>
+        </label>
+    </div>
+    <!-- <button *ngIf="modifier.options.length > 10" (click)="e.toggle()">{{e.isExpanded ? 'Hide' : 'Show'}}
+        {{modifier.options.length - 10}} <span *ngIf="!e.isExpanded">more</span></button> -->
 </div>
 
 <ng-template #optional>
