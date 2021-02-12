@@ -12,7 +12,7 @@
     </ng-container>
     <div class="order-body">
         <h4 class="f-20 f-b text-capitalize">{{ordData.storeName}}</h4>
-        <a [routerLink]="'/restaurants/'+ordData.storeId">
+        <a [routerLink]="'/restaurants/'+ordData.storeId" (click)="onViewStore()">
             <label class="f-14-blue mct-16 cursor-pointer" >View store</label>
         </a>
         <label class="f-14-blue mct-16 ml-16">View receipt</label>

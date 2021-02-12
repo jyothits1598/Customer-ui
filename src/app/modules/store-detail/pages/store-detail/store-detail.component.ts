@@ -32,6 +32,7 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
   storeDetail: StoreDetail;
   loading: boolean = true;
   error: boolean = false;
+  
   isStoreOpen: boolean;
   unSub$ = new Subject<true>();
   @ViewChild('observationElement', { read: ElementRef }) obsElement: ElementRef;
@@ -39,7 +40,6 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
 
   constructor(private storeDetailServ: StoreDetailDataService,
     private route: ActivatedRoute,
-    private geoLoc: GeoLocationService,
     private location: Location,
     private orderView: OrderViewControllerService,
     private cartSrv: CartService,
@@ -54,28 +54,13 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // this.route.params.pipe(
-    //   mergeMap((param) => this.geoLoc.userLocation().pipe(map(loc => { return { param: param.id, location: loc } })))
-    // ).subscribe((data) => {
-    //   let id = parseInt(data.param);
-
-    //   if (id && id !== this.storeId) {
-    //     this.storeId = id;
-    //     this.loadStore(data.location);
-    //   }
-    // });
-    let id = parseInt(this.route.snapshot.params.id);
-    if (id) {
-      this.loadStore(id, this.geoLoc.getUserLocation());
-      this.storeId = id;
-    }
-
     this.route.queryParams.pipe(takeUntil(this.unSub$)).subscribe((qParams) => {
       this.selecteditemId = +qParams.i;
     })
 
-    // open cart by default
     if (!this.layoutService.isMobile && !this.orderView.getCurrentPage()) this.orderView.showPage(OrderPages.Cart);
+
+    this.route.params.pipe(map((p) => +p.id)).subscribe((id) => { this.reset(); this.storeId = id; this.loadStore(id); })
   }
 
   loadStore(storeId: number, location?: UserLocation) {
@@ -93,9 +78,13 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
+  reset() {
     this.unSub$.next(true);
-    if (this.interObserver) this.interObserver.unobserve(this.obsElement.nativeElement);
+    if (this.interObserver) this.interObserver.disconnect();
+  }
+
+  ngOnDestroy(): void {
+    this.reset();
     if (!this.cartSrv.presentCartData && this.orderView.getCurrentPage() === OrderPages.Cart) this.orderView.showPage(null);
 
   }
