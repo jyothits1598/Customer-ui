@@ -7,7 +7,7 @@ import { StoreDetail, StoreItem } from 'src/app/modules/store-detail/model/store
 import { StoreDetailDataService } from '../../services/store-detail-data.service';
 import { GeoLocationService } from 'src/app/core/services/geo-location.service';
 import { UserLocation } from 'src/app/core/model/user-location';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { OrderPages, OrderViewControllerService } from 'src/app/core/services/order-view-controller.service';
 import { LayoutService } from 'src/app/core/services/layout.service';
 import { CartService } from 'src/app/core/services/cart.service';
@@ -32,9 +32,10 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
   storeDetail: StoreDetail;
   loading: boolean = true;
   error: boolean = false;
-  
+
   isStoreOpen: boolean;
   unSub$ = new Subject<true>();
+  strDtlSub: Subscription
   @ViewChild('observationElement', { read: ElementRef }) obsElement: ElementRef;
   @ViewChild('fbParent', { read: ElementRef }) fbParent: ElementRef;
 
@@ -54,19 +55,23 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.route.queryParams.pipe(takeUntil(this.unSub$)).subscribe((qParams) => {
+    this.route.queryParams.subscribe((qParams) => {
       this.selecteditemId = +qParams.i;
     })
 
     if (!this.layoutService.isMobile && !this.orderView.getCurrentPage()) this.orderView.showPage(OrderPages.Cart);
 
-    this.route.params.pipe(map((p) => +p.id)).subscribe((id) => { this.reset(); this.storeId = id; this.loadStore(id); })
+    this.route.params.pipe(map((p) => +p.id)).subscribe((id) => {
+      this.reset();
+      this.storeId = id;
+      this.loadStore(id);
+    })
   }
 
   loadStore(storeId: number, location?: UserLocation) {
     this.loading = true;
     this.storeDetail = null;
-    this.storeDetailServ.storeDetail(storeId, location).pipe(takeUntil(this.unSub$), finalize(() => this.loading = false)).subscribe(storeDetail => {
+    this.strDtlSub = this.storeDetailServ.storeDetail(storeId, location).pipe(takeUntil(this.unSub$), finalize(() => this.loading = false)).subscribe(storeDetail => {
       storeDetail.categories = storeDetail.categories.sort((c1, c2) => c1.id - c2.id);
       this.storeDetail = storeDetail;
       let av = new PresentAvailabilityComponent();
@@ -79,7 +84,7 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
   }
 
   reset() {
-    this.unSub$.next(true);
+    if (this.strDtlSub) this.strDtlSub.unsubscribe();
     if (this.interObserver) this.interObserver.disconnect();
   }
 
