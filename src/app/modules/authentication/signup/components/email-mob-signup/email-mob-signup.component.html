@@ -89,7 +89,7 @@
                 Privacy Policy </b> and <b style="color:#353FA8;cursor: pointer;"> Terms of Service </b> 
         </div>
     </form> -->
-    <div *ngIf="signupPage"> 
+    <form [formGroup]="registrationForm" (ngSubmit)="signup()" *ngIf="firstPage; else secondPage">
         <div class="row">
             <div class="col-6">
                 <div class="form-group form-group--margin">
@@ -107,68 +107,72 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group form-group--margin">
-                    <div class="label-inputs"> Mobile </div>
-                    <input type="text" class="form-input error-highlight" placeholder="Mobile number">
+                    <div class="label-inputs"> Email </div>
+                    <input type="text" formControlName="email" class="form-input error-highlight" placeholder="Email address">
+                    <div *ngIf="controls.email.touched && controls.email.errors" class="error-mez">
+                        <div> {{getErrors('email')}} </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-6 pad-ing-right" style="margin-bottom: 24px;">
-                <input type="number" class="form-input error-highlight" placeholder="Enter code"
-                    minlength="6" maxlength="6">
+                <input type="number" class="form-input error-highlight" placeholder="Enter code" minlength="6"
+                    maxlength="6">
             </div>
             <div class="col-6 pad-ing-left" style="margin-bottom: 24px;">
-                <button type="button" class="btn std-button std-button--blue">
-                    <p style="margin:0" > Send code </p>
-                </button>
+                <send-code
+                    [data]="controls.email.valid ? {type: 'email', purpose: 'signup', value: controls.email.value} : null">
+                </send-code>
             </div>
         </div>
         <div class="form-group" style="margin-bottom: 24px;">
-            <button type="button" class="btn std-button std-button--blue" (click)="nextSignup()">
+            <button type="button" class="btn std-button std-button--blue">
                 Next
             </button>
         </div>
-    </div>
-    <div *ngIf="mobilePage">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group form-group--margin">
-                    <div class="label-inputs"> Email </div>
-                    <input type="text" class="form-input error-highlight" placeholder="Email address">
+    </form>
+    <ng-template #secondPage>
+        <div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group form-group--margin">
+                        <div class="label-inputs"> Mobile </div>
+                        <input type="text" class="form-input error-highlight" placeholder="Mobile number">
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-6 pad-ing-right" style="margin-bottom: 24px;">
-                <input type="number" class="form-input error-highlight" placeholder="Enter code"
-                    minlength="6" maxlength="6">
-            </div>
-            <div class="col-6 pad-ing-left" style="margin-bottom: 24px;">
-                <button type="button" class="btn std-button std-button--blue">
-                    <p style="margin:0" > Send code </p>
-                </button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group form-group--margin">
-                    <div class="label-inputs"> Password </div>
-                    <input type="text" class="form-input error-highlight" placeholder="Password">
-                </div>
-            </div>
-        </div>
-        <div class="form-group" style="margin-bottom: 24px;">
-            <div class="d-flex justify-content-between">
-                <button type="button" class="btn std-button std-button--transparency" (click)="backSignup()">
-                        Back
-                </button>
-                <button type="button" class="btn std-button std-button--primary" (click)="nextSignup()">
-                    Continue
-                </button>
-            </div>
-        </div>
 
-        
-    </div>
+            </div>
+            <div class="row">
+                <div class="col-6 pad-ing-right" style="margin-bottom: 24px;">
+                    <input type="number" class="form-input error-highlight" placeholder="Enter code" minlength="6"
+                        maxlength="6">
+                </div>
+                <div class="col-6 pad-ing-left" style="margin-bottom: 24px;">
+                    <button type="button" class="btn std-button std-button--blue">
+                        <p style="margin:0"> Send code </p>
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group form-group--margin">
+                        <div class="label-inputs"> Password </div>
+                        <input type="text" class="form-input error-highlight" placeholder="Password">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" style="margin-bottom: 24px;">
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn std-button std-button--transparency">
+                        Back
+                    </button>
+                    <button type="button" class="btn std-button std-button--primary">
+                        Continue
+                    </button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
 </div>
- <!-- <ngx-intl-tel-input [cssClass]="'form-input'" [enablePlaceholder]="true" [onlyCountries]="['in']" [preferredCountries]="['au']" [enableAutoCountrySelect]="true" [separateDialCode]="true" formControlName="mobile" [phoneValidation]="true" ></ngx-intl-tel-input> -->
+<!-- <ngx-intl-tel-input [cssClass]="'form-input'" [enablePlaceholder]="true" [onlyCountries]="['in']" [preferredCountries]="['au']" [enableAutoCountrySelect]="true" [separateDialCode]="true" formControlName="mobile" [phoneValidation]="true" ></ngx-intl-tel-input> -->

@@ -15,15 +15,19 @@ import { SignupService } from '../../services/signup.service';
 export class EmailMobSignupComponent implements OnInit {
   errorMessage;
   loading: boolean = false;
-  signupPage: boolean = true;
-  mobilePage: boolean = false;
+  firstPage: boolean = true;
 
   registrationForm: FormGroup = new FormGroup({
+    first_name: new FormControl(null, [CustomValidators.required('First name is required.')]),
+    last_name: new FormControl(null, [CustomValidators.required('Last name is required.')]),
     email: new FormControl(null, [
       CustomValidators.required('Email is required.'),
       CustomValidators.email('Email is invalid.')
     ]),
-    mobile: new FormControl(null, [
+    email_token: new FormControl(null, [
+      CustomValidators.required('Please enter verification code'),
+    ]),
+    mobile_number: new FormControl(null, [
       CustomValidators.required('Mobile number is required.')
     ]),
     password: new FormControl(null, [
@@ -32,9 +36,6 @@ export class EmailMobSignupComponent implements OnInit {
       // CustomValidators.pattern(/^.*(?=.{6,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/, 'Please enter a valid password of 6+ characters and atleast one digit, one capital & special character')
       // CustomValidators.pattern(/^.*(?=.{6,})(?=.*[a-z])(?=.*[A-Z]).*$/, 'Please enter a valid password of 6+ characters and atleast one digit, one capital')
     ]),
-    verificationCode: new FormControl(null, [
-      CustomValidators.required('Please enter verification code'),
-    ])
   })
   constructor(private signupService: SignupService,
     private snackBar: SnackBarService,
@@ -42,7 +43,7 @@ export class EmailMobSignupComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private authService: AuthService) { }
   ngOnInit(): void {
-    this.registrationForm.controls.email.disable();
+
   }
 
   get controls(): { [key: string]: AbstractControl; } {
@@ -53,7 +54,7 @@ export class EmailMobSignupComponent implements OnInit {
     return this.registrationForm.controls.mobile.disabled ? 'email' : 'mobile';
   }
 
-  get activeIdControl(): AbstractControl{
+  get activeIdControl(): AbstractControl {
     return this.activeType === 'email' ? this.registrationForm.controls.email : this.registrationForm.controls.mobile;
   }
 
@@ -101,12 +102,6 @@ export class EmailMobSignupComponent implements OnInit {
     if (errorResp.error.mobile_number) this.errorMessage = errorResp.error.mobile_number[0];
   }
 
-  nextSignup() {
-    this.signupPage = false;
-    this.mobilePage = true;
-  }
-  backSignup() {
-    this.signupPage = true;
-    this.mobilePage = false;
-  }
+
+
 }

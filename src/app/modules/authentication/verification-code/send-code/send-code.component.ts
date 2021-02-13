@@ -3,7 +3,6 @@ import { finalize } from 'rxjs/operators';
 import { URL_SendCodeChange, URL_SendCodeForgotPassword, URL_SendCodeSignup } from 'src/api/authentication';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
 import { SnackBarService } from 'src/app/core/services/snack-bar.service';
-import { SignupService } from 'src/app/modules/authentication/signup/services/signup.service';
 
 @Component({
   selector: 'send-code',
@@ -56,9 +55,6 @@ export class SendCodeComponent {
   }
 
   handleError(errorResp: any) {
-    // if (errorResp.error.error_msg) { this.error.emit(errorResp.error.error_msg[0]); return; };
-    // if (errorResp.error.email) { this.error.emit() }
-
     this.error.emit(errorResp);
   }
 
