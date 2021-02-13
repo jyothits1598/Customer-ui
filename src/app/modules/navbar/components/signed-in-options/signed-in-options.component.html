@@ -1,5 +1,5 @@
 <span style="cursor: pointer;outline:none;" #lineIcon (click)="showPopover(profTemp)" title="Settings">
-    <div [ngStyle]="{'background-image': popoverRef ? 'url(ico_menu_h.svg)':''}" class="menu-icon img-display-desktop" [ngClass]="profLink.isActive? 'menu-icon-active':''">
+    <div [ngStyle]="{'background-image': popoverRef ? 'url(assets/svg/signup/ico_menu_h.svg)':''}" class="menu-icon img-display-desktop" [ngClass]="profLink.isActive? 'menu-icon-active':''">
     </div>
     <div style="display: none;" routerLink="/profile" routerLinkActive="" #profLink="routerLinkActive"></div>
     <!-- <div>{{profLink.isActive}}</div> -->
