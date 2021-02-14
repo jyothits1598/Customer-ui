@@ -1,46 +1,32 @@
-import { Component, forwardRef, Input, OnChanges, OnInit, Self, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, forwardRef, Input, OnChanges, OnInit, Self, SimpleChanges } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, FormArray, FormControl, NgControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidatorFn } from '@angular/forms';
 import { ItemModifier } from '../../model/store-item-detail';
+import { ItemModifierFormControlComponent } from '../item-modifier-form-control.component';
 
 @Component({
   selector: 'store-item-modifier',
   templateUrl: './store-item-modifier.component.html',
   styleUrls: ['./store-item-modifier.component.scss'],
-  providers: [
-    // {
-    //   provide: NG_VALUE_ACCESSOR,
-    //   useExisting: forwardRef(() => StoreItemModifierComponent),
-    //   multi: true,
-    // },
-    // {
-    //   provide: NG_VALIDATORS,
-    //   useExisting: forwardRef(() => StoreItemModifierComponent),
-    //   multi: true,
-    // }
-  ]
 })
-export class StoreItemModifierComponent implements OnChanges, ControlValueAccessor {
-  @Input() modifier: ItemModifier;
-  selections = [];
+export class StoreItemModifierComponent extends ItemModifierFormControlComponent implements OnChanges, ControlValueAccessor {
   optionControls: FormArray;
   disabledExcess: boolean = false;
 
-  constructor(@Self() public controlDir: NgControl) {
+  constructor(@Self() public controlDir: NgControl,
+    private e: ElementRef) {
+    super(controlDir, e);
     this.controlDir.valueAccessor = this;
   }
 
-
-  setupAccessor() {
-    this.controlDir.control.validator = () => this.optionControls.valid ? null : { invalid: true };
-    this.controlDir.control.markAsTouched = () => this.optionControls.markAsTouched();
-    this.controlDir.control.updateValueAndValidity();
+  isValid(): boolean {
+    return this.optionControls.valid;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     let controls: Array<FormControl> = this.modifier.options.map(opt => { return new FormControl(false) });
     this.optionControls = new FormArray(controls, [this.minNumberValidator(this.modifier.minSelection)]);
     // this.optionControls.setValidators(this.minMaxNumberValidator(this.modifier.minSelection, this.modifier.maxSelection));
-    this.setupAccessor();
+    this.setupAccessor(this.optionControls);
   }
 
   handleChange() {
@@ -54,6 +40,7 @@ export class StoreItemModifierComponent implements OnChanges, ControlValueAccess
     this.enableDisableForm();
   }
 
+  //disable form if max options have been selected, enable if max not selected
   enableDisableForm() {
     if (this.selections.length === this.modifier.maxSelection) {
       this.optionControls.controls.forEach(c => { if (!c.value) { c.disable(); this.disabledExcess = true; } })
@@ -86,30 +73,5 @@ export class StoreItemModifierComponent implements OnChanges, ControlValueAccess
       if ([...control.value].filter(val => val).length < min) return { 'Minimum': 'Minimum not satisfied' }
       return null;
     };
-  }
-
-
-  // **Control value accessor**
-  onChange = (value) => { };
-  onTouched: () => {};
-
-  validate(c: FormControl) {
-    return this.optionControls.valid ? null : { invalid: true }
-  }
-  writeValue(obj: any): void {
-
-  }
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-  setDisabledState?(isDisabled: boolean): void {
-    // throw new Error('Method not implemented.');
-  }
-
-  markAsTouched() {
-    this.optionControls.markAllAsTouched();
   }
 }
