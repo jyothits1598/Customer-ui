@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { URL_FacebookSignup, URL_forgotPassword, URL_newPassword, URL_SendCodeForgotPassword, URL_SendCodeSignup, URL_Signup } from 'src/api/authentication';
+import { URL_FacebookSignup, URL_forgotPassword, URL_newPassword, URL_SendCodeForgotPassword, URL_SendCodeSignup, URL_Signup, URL_verifyCode } from 'src/api/authentication';
 import { URL_ProfileData, URL_ProfileImageUpload } from 'src/api/profile';
+import { BackendResponse } from 'src/app/core/model/backend-resp';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
 
 @Injectable()
@@ -47,6 +49,10 @@ export class SignupService {
     d.verificationCode = data.verificationCode
 
     return this.restApiService.post(URL_Signup, d);
+  }
+
+  verifyEmai(email: string, code: string): Observable<BackendResponse<any>> {
+    return this.restApiService.post(URL_verifyCode, { type: 'email', email: email, token: code }, false);
   }
 
   updateProfile(data: { firstName: string, lastName: string, profileImage?: string }) {

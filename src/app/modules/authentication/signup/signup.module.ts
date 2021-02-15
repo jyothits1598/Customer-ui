@@ -12,6 +12,7 @@ import { IsAuthenticatedGuard } from 'src/app/core/guards/is-authenticated.guard
 import { FileUploadModule } from '../../file-upload/file-upload.module';
 import { VerificationCodeModule } from '../verification-code/verification-code.module';
 import { TelInputModule } from '../../tel-input/tel-input.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const routes: Routes = [
   {
@@ -35,6 +36,7 @@ const routes: Routes = [
   declarations: [SignupComponent, EmailMobSignupComponent, BasicProfileComponent],
   imports: [
     CommonModule,
+    SharedModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     FormsModule,

@@ -89,18 +89,22 @@
                 Privacy Policy </b> and <b style="color:#353FA8;cursor: pointer;"> Terms of Service </b> 
         </div>
     </form> -->
-    <form [formGroup]="registrationForm" (ngSubmit)="signup()" *ngIf="firstPage; else secondPage">
+    <form [formGroup]="emailForm" (ngSubmit)="validateEmail()" *ngIf="firstPage; else secondPage">
         <div class="row">
             <div class="col-6">
                 <div class="form-group form-group--margin">
                     <div class="label-inputs"> First Name </div>
-                    <input type="text" class="form-input error-highlight" placeholder="First Name">
+                    <input formControlName="first_name" type="text" class="form-input error-highlight"
+                        placeholder="First Name">
+                    <app-abs-control-error [control]="emailControls.first_name"></app-abs-control-error>
                 </div>
             </div>
             <div class="col-6">
                 <div class="form-group form-group--margin">
                     <div class="label-inputs"> Last Name </div>
-                    <input type="text" class="form-input error-highlight" placeholder="Last Name">
+                    <input type="text" formControlName="last_name" class="form-input error-highlight"
+                        placeholder="Last Name">
+                    <app-abs-control-error [control]="emailControls.last_name"></app-abs-control-error>
                 </div>
             </div>
         </div>
@@ -108,26 +112,26 @@
             <div class="col-md-12">
                 <div class="form-group form-group--margin">
                     <div class="label-inputs"> Email </div>
-                    <input type="text" formControlName="email" class="form-input error-highlight" placeholder="Email address">
-                    <div *ngIf="controls.email.touched && controls.email.errors" class="error-mez">
-                        <div> {{getErrors('email')}} </div>
-                    </div>
+                    <input type="text" formControlName="email" class="form-input error-highlight"
+                        placeholder="Email address">
+                    <app-abs-control-error [control]="emailControls.email"></app-abs-control-error>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-6 pad-ing-right" style="margin-bottom: 24px;">
-                <input type="number" class="form-input error-highlight" placeholder="Enter code" minlength="6"
-                    maxlength="6">
+                <input type="number" formControlName="email_token" class="form-input error-highlight"
+                    placeholder="Enter code" minlength="6" maxlength="6">
+                <app-abs-control-error [control]="emailControls.email_token"></app-abs-control-error>
             </div>
-            <div class="col-6 pad-ing-left" style="margin-bottom: 24px;">
-                <send-code
-                    [data]="controls.email.valid ? {type: 'email', purpose: 'signup', value: controls.email.value} : null">
+            <div class=" col-6 pad-ing-left" style="margin-bottom: 24px;">
+                <send-code (error)="setErrors(emailForm,$event)"
+                    [data]="emailControls.email.valid ? {type: 'email', purpose: 'signup', value: emailControls.email.value} : null">
                 </send-code>
             </div>
         </div>
         <div class="form-group" style="margin-bottom: 24px;">
-            <button type="button" class="btn std-button std-button--blue">
+            <button type="submit" class="btn std-button std-button--blue">
                 Next
             </button>
         </div>
