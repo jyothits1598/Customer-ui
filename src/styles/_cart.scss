@@ -237,7 +237,6 @@ input[type=radio] {
 
 .confirming-order{
     padding: 16px;
-    bottom:0;
     .confirming-order-header{
         height:48px;
     }
@@ -251,35 +250,19 @@ input[type=radio] {
         }
     }
     .progressbar {
-        background: #F2F2F2;
-        border-radius: 8px;
-        width:200px;
+    background: #F2F2F2;
+    border-radius: 8px;
+    width:200px;
     }
     
     .progressbar-order-by-status
-    {
-        background: #FFBF42;
-        border-radius: 8px;
-        height: 12px;
-        border-radius: 10px;
-        -webkit-animation: progressBar 3s ease-in-out;
-        -webkit-animation-fill-mode:both; 
-        -moz-animation: progressBar 3s ease-in-out;
-        -moz-animation-fill-mode:both; 
+     {
+    background: #FFBF42;
+    border-radius: 8px;
+    height: 12px;
+    border-radius: 10px;
     }
 }
-
-
-@-webkit-keyframes progressBar {
-  0% { width: 0; }
-  100% { width: 100%; }
-}
-
-@-moz-keyframes progressBar {
-  0% { width: 0; }
-  100% { width: 100%; }
-}
-
 .payment{
     .payment-header{
         padding:14px 16px 0px;
