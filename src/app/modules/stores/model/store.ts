@@ -25,7 +25,7 @@ export function ReadStore(data: any): Store {
         cuisine: data.cuisine_name,
         openingHours: ReadAvailability(data.opening_hours),
         logo: data.store_logo,
-        storeImage:data.store_image,
+        storeImage: data.store_image,
         address: data.store_address,
         distance: data.distance,
         description: data.description,

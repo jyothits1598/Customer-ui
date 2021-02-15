@@ -1,6 +1,7 @@
 <div class="order-cart" *ngIf="cartData$ | async; let cartData; else emptyTemplate">
     <h4 class="f-20 f-b mc-4">Your Order</h4>
     <p class="f-14-blue text-capitalize">{{cartData.storeName}}</p>
+    <!-- [routerLink]="'/resturants/'+cartData.storeId" -->
     <!--
                 Select order type
             -->
@@ -60,14 +61,6 @@
         Surcharge
     -->
     <ng-container *ngIf="orderSummary$ | async; let summary">
-
-        <div class="order-surcharge">
-            <div class="d-flex justify-content-between">
-                <label class="f-16-blur">Surcharge</label>
-                <span class="f-14 f-b">${{summary.surcharge}}</span>
-            </div>
-        </div>
-        <hr class="m14px">
         <!--
             Surcharge
         -->
@@ -75,6 +68,16 @@
             <div class="d-flex justify-content-between">
                 <label class="f-16-blur">Sub total</label>
                 <span class="f-14 f-b">${{summary.subtotal}}</span>
+            </div>
+        </div>
+        <hr class="m14px">
+          <!--
+            Sub total
+        -->
+        <div class="order-surcharge">
+            <div class="d-flex justify-content-between">
+                <label class="f-16-blur">Surcharge</label>
+                <span class="f-14 f-b">${{summary.surcharge}}</span>
             </div>
         </div>
         <hr class="m14px">

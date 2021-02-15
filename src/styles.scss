@@ -751,6 +751,11 @@ input[class="cb"]:checked + p:before {
   width:40px;
   height:40px;
 }
+.menu-icon-mobile-active {
+  background-image: url("assets/svg/mobile/ico_menu_m_active.svg");
+  width:40px;
+  height:40px;
+}
 .errorText {
   color:red;
 }

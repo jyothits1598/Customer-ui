@@ -1,26 +1,30 @@
 <div class="store-item-popup">
     <div @slideIn class="detail-items-popup" *ngIf="show">
-        <div class="ico-close-nav">
-            <div class="d-flex justify-content-between">
-                <div class="close-icon">
-                    <img src="assets/images/ico_close.png" (click)="close()" style="cursor: pointer;outline:0">
-                </div>
-                <div *ngIf="scrolled" class="paragraph14__bold text-capitalize pl-16" style="flex-grow: 1;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;">
-                    {{itemDetail.name}}
-                </div>
-                <ul class="menu">
-                    <!-- <li class="pd cursor-pointer">
-                        <store-heart [store]="{id: item.storeId, isFavourite: item.isFavourite, page:'main'}"></store-heart>
-                    </li> -->
-                    <li class="pd">
-                        <app-share [isIconBlack]="true" [store]="{id: item.storeId, name: item.storeName, page:'main'}">
-                        </app-share>
-                    </li>
-                </ul>
-            </div>
+        <div class="ico-close-nav" [ngStyle]="{'border-bottom': scrolled ? '1.5px solid #ccc' : '' }">
+            <table style="width: 100%;">
+                <tr>
+                    <td width="24px"> 
+                        <label class="close-icon">
+                            <img src="assets/images/ico_close.png" (click)="close()" style="cursor: pointer;outline:0">
+                        </label>
+                    </td>
+                    <td>
+                        <label *ngIf="scrolled" class="paragraph14__bold text-capitalize pl-16 ptop" style="flex-grow: 1;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;">
+                            {{itemDetail.name}}
+                        </label>
+                    </td>
+                    <td style="text-align: right;">
+                        <!-- <store-heart [store]="{id: item.storeId, isFavourite: item.isFavourite, page:'main'}"></store-heart> -->
+                        <label>
+                            <app-share [isIconBlack]="true" [store]="{id: item.storeId, name: item.storeName, page:'main'}">
+                            </app-share>
+                        </label>
+                    </td>
+                </tr>
+            </table>
         </div>
         <div class="modal-body" disableBodyScroll>
             <p *ngIf="loading">Loading...</p>
@@ -29,15 +33,15 @@
                     {{itemDetail.name}}
                 </div>
                 <div class="item-div-image">
-                    <img [src]="itemDetail.image || 'assets/svg/details/modifier_null.svg'" class="img-fluid">
+                    <img [src]="itemDetail.image ? itemDetail.image + static_image_width : 'assets/svg/details/modifier_null.svg'" class="img-fluid">
                 </div>
                 <div class="pt-3 pb-3">
                     <ng-container *ngFor="let modifier of itemDetail.modifiers; let i = index">
                         <div [ngSwitch]="modifier.minSelection === 1 && modifier.maxSelection === 1">
-                            <store-item-modifier *ngSwitchCase="false" [formControl]="selectedOptions.at(i)"
+                            <store-item-modifier #mod *ngSwitchCase="false" [formControl]="selectedOptions.at(i)"
                                 [modifier]="modifier">
                             </store-item-modifier>
-                            <item-modifer-selector-radio *ngSwitchCase="true" [modifier]="modifier"
+                            <item-modifer-selector-radio #mod *ngSwitchCase="true" [modifier]="modifier"
                                 [formControl]="selectedOptions.at(i)"></item-modifer-selector-radio>
                         </div>
                     </ng-container>

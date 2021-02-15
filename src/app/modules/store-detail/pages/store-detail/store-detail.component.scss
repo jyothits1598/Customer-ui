@@ -135,8 +135,10 @@ hr{
 }
 .order-status-text {
     font-size:14px;
+    font-style: normal;
     font-weight: normal;
     color: var(--color-primary);
+    line-height: 20px;
 }
 //large devices
 @media (min-width: 991.98px) {
@@ -202,7 +204,7 @@ hr{
 
  .category-name-spacing{
     margin-bottom: 16px;
-    margin-top:16px;
+    // margin-top:16px;
 }
 .store-details-body{
     background: #f2f2f2;

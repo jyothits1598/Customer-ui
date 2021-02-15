@@ -1,29 +1,59 @@
-input[type="range"] { 
+// input[type="range"] { 
+//     -webkit-appearance: none;
+//     // position: relative;
+//     overflow: hidden;
+//     height: 8px;
+//     width: 100%;
+//     cursor: pointer;
+//     border-radius: 8px; 
+// }
+
+// input[type="range"]::-webkit-slider-runnable-track {
+//     background: var(--color-background-secondary);
+// }
+
+// input[type=range]:focus {
+//     outline: none;
+//   }
+//  input[type="range"]::-webkit-slider-thumb {
+//     -webkit-appearance: none;
+//     width: 8px; /* 1 */
+//     height: 8px;
+//     background:var(--color-background);
+//     box-shadow: -100vw 0 0 100vw var(--color-primary);
+//     border-radius: 50%;
+//     cursor: pointer;
+// }
+.slider {
     -webkit-appearance: none;
-    // position: relative;
-    overflow: hidden;
+    width: 90%;
     height: 8px;
-    width: 100%;
-    cursor: pointer;
-    border-radius: 8px; 
-}
-
-input[type="range"]::-webkit-slider-runnable-track {
-    background: var(--color-background-secondary);
-}
-
-input[type=range]:focus {
+    border-radius: 2px;
+    background: #F2F2F2;
     outline: none;
-  }
-/*
- * 1. Set to 0 width and remove border for a slider without a thumb
- */
- input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 8px; /* 1 */
-    height: 8px;
-    background:var(--color-background);
-    box-shadow: -100vw 0 0 100vw var(--color-primary);
-    border-radius: 50%;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    margin-bottom:28px;
     cursor: pointer;
-}
+  } 
+  .slider:hover {
+    opacity: 1;
+  } 
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+    border: 2px solid #FFFFFF;
+    background: #353FA8;
+    cursor: pointer;
+  }
+  .slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+    border: 2px solid #FFFFFF;
+    background: #353FA8;
+    cursor: pointer;
+  }
