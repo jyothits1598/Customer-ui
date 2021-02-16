@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { URL_ConfirmPassword, URL_FacebookLogin, URL_login } from 'src/api/authentication';
 import { SocialAuthHelperService } from 'src/app/modules/authentication/services/social-auth-helper.service';
+import { BackendResponse } from '../model/backend-resp';
 import { ReadUserDetails, User } from '../model/user';
 import { RestApiService } from './rest-api.service';
 import { StorageService } from './storage.service';
@@ -77,6 +78,8 @@ export class AuthService {
 
     }
 
+
+    console.log('here we set no login');
     this._loggedUser = new BehaviorSubject<User>(null);
     this._accessToken = new BehaviorSubject<string>(null);
 
@@ -119,10 +122,10 @@ export class AuthService {
   socialSignIn(user: { email: string, token: string }, type: 'google' | 'facebook') {
     let data = {
       email: user.email,
-      social_auth_token: user.token,
-      social_login_type: type
+      token: user.token,
+      type: type
     }
-    return this.restApiService.post('api/customer/v1/social-auth', data).pipe(tap(
+    return this.restApiService.post('api/v1/social-auth', data).pipe(tap(
       (resp) => this.handleLoginResp(resp)
     ))
   }
@@ -138,15 +141,16 @@ export class AuthService {
     this.storeageService.remove('authTokenExpiry')
   }
 
-  handleLoginResp(data: any) {
-    let user = ReadUserDetails(data.user_details);
-    let token = 'Bearer ' + data.access_token;
+  handleLoginResp(r: BackendResponse<any>) {
+    console.log('handle login resp', r);
+    let user = ReadUserDetails(r.data.user_details);
+    let token = 'Bearer ' + r.data.access_token;
     this._accessToken.next(token);
     this._loggedUser.next(user);
 
     //save into storage
     this.storeageService.store('authToken', token);
-    this.storeageService.store('authTokenExpiry', data.expires_at);
+    this.storeageService.store('authTokenExpiry', r.data.expires_in);
     this.storeageService.store('user', user);
   }
 

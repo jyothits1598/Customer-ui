@@ -9,6 +9,14 @@ export interface User {
 
 export function ReadUserDetails(data: any): User {
     return {
+        id: '1',
+        firstName: 'ganesh',
+        lastName: 'palankar',
+        email: 'g.p@gmail.com',
+        phoneNumber: '123456',
+        customRadius: 5
+    }
+    return {
         id: data.customer_id,
         firstName: data.first_name,
         lastName: data.last_name,

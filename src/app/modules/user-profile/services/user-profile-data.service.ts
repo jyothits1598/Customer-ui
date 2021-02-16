@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { URL_changeEmailMobile, URL_ProfileChangePassword, URL_ProfileData, URL_ProfileImageUpload } from 'src/api/profile';
 import { User, UserToBackend } from 'src/app/core/model/user';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
 import { SnackBarService } from 'src/app/core/services/snack-bar.service';
 import { UserProfile } from '../model/UserProfile';
@@ -12,7 +13,7 @@ import { UserProfile } from '../model/UserProfile';
 })
 export class UserProfileDataService {
 
-  constructor(private restApiService: RestApiService, private snackBar: SnackBarService) { }
+  constructor(private restApiService: RestApiService, private authService: AuthService) { }
 
   updateProfile(data: { firstName: string, lastName: string, profileImage?: string }) {
     let d: any = {}
@@ -31,18 +32,19 @@ export class UserProfileDataService {
     return this.restApiService.post(URL_ProfileImageUpload, formData).pipe(map((resp) => resp.data))
   }
 
-  getProfileData(): Observable<UserProfile> {
-    return this.restApiService.get(URL_ProfileData).pipe(map(
-      resp => {
-        let data = resp.data[0];
-        return {
-          firstName: data.first_name,
-          lastName: data.last_name,
-          profileImage: data.profile_image,
-          customRadius: data.custom_radius
-        }
-      }
-    ))
+  getProfileData(): Observable<User> {
+    return this.authService.loggedUser$;
+    // return this.restApiService.get(URL_ProfileData).pipe(map(
+    //   resp => {
+    //     let data = resp.data[0];
+    //     return {
+    //       firstName: data.first_name,
+    //       lastName: data.last_name,
+    //       profileImage: data.profile_image,
+    //       customRadius: data.custom_radius
+    //     }
+    //   }
+    // ))
   }
 
   changePassword(currentPassword: string, newPassword: string) {

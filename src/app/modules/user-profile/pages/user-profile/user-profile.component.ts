@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
+import { User } from 'src/app/core/model/user';
 import { CustomValidators } from 'src/app/helpers/validators';
 import { AsyncFileValidators, FileValidators } from 'src/app/modules/file-upload/file-validators';
 import { UserProfile } from '../../model/UserProfile';
@@ -13,7 +14,7 @@ import { UserProfileDataService } from '../../services/user-profile-data.service
 })
 export class UserProfileComponent implements OnInit {
   isLoading = true;
-  profileData: UserProfile;
+  profileData: User;
   editMode: boolean = false;
   errorMessage;
   profileForm: FormGroup = new FormGroup({
@@ -41,24 +42,25 @@ export class UserProfileComponent implements OnInit {
   }
 
   saveChanges() {
-    if (this.profileForm.invalid) { 
+    if (this.profileForm.invalid) {
       this.profileForm.markAllAsTouched();
       this.saving = false;
     }
-    if (this.profileForm.valid) { this.saving = true; 
-    this.userProfData.updateProfile(this.profileForm.value).pipe(finalize(() => this.saving = false)).subscribe(
-      (resp) => { 
-        this.profileData = this.profileForm.value; 
-        this.profileForm.reset(); 
-        this.editMode = false; 
-      },
-      (resp) => { this.handleError(resp) }
-    );
+    if (this.profileForm.valid) {
+      this.saving = true;
+      this.userProfData.updateProfile(this.profileForm.value).pipe(finalize(() => this.saving = false)).subscribe(
+        (resp) => {
+          this.profileData = this.profileForm.value;
+          this.profileForm.reset();
+          this.editMode = false;
+        },
+        (resp) => { this.handleError(resp) }
+      );
+    }
   }
-}
 
   handleError(errorResp) {
     if (errorResp.error.first_name) this.errorMessage = errorResp.error.first_name[0];
-    if (errorResp.error.last_name) this.errorMessage = errorResp.error.last_name[0];  
+    if (errorResp.error.last_name) this.errorMessage = errorResp.error.last_name[0];
   }
 }

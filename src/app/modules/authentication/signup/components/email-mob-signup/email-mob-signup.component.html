@@ -89,7 +89,7 @@
                 Privacy Policy </b> and <b style="color:#353FA8;cursor: pointer;"> Terms of Service </b> 
         </div>
     </form> -->
-    <form [formGroup]="emailForm" (ngSubmit)="validateEmail()" *ngIf="firstPage; else secondPage">
+    <form [formGroup]="emailForm" (ngSubmit)="validateEmail()" *ngIf="!verifiedEmail; else secondPage">
         <div class="row">
             <div class="col-6">
                 <div class="form-group form-group--margin">
@@ -131,52 +131,57 @@
             </div>
         </div>
         <div class="form-group" style="margin-bottom: 24px;">
-            <button type="submit" class="btn std-button std-button--blue">
-                Next
+            <button type="submit" class="btn std-button std-button--blue" [disabled]="loading">
+                <span *ngIf="!loading; else ldr">Next</span>
             </button>
         </div>
     </form>
     <ng-template #secondPage>
-        <div>
+        <form [formGroup]="mobForm" (ngSubmit)="signup()">
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group form-group--margin">
                         <div class="label-inputs"> Mobile </div>
-                        <input type="text" class="form-input error-highlight" placeholder="Mobile number">
+                        <tel-input formControlName="mobile_number"></tel-input>
+                        <app-abs-control-error [control]="mobControls.mobile_number"></app-abs-control-error>
                     </div>
                 </div>
 
             </div>
             <div class="row">
                 <div class="col-6 pad-ing-right" style="margin-bottom: 24px;">
-                    <input type="number" class="form-input error-highlight" placeholder="Enter code" minlength="6"
-                        maxlength="6">
+                    <input type="number" formControlName="mobile_token" class="form-input error-highlight"
+                        placeholder="Enter code" minlength="6" maxlength="6">
+                    <app-abs-control-error [control]="mobControls.mobile_token"></app-abs-control-error>
                 </div>
                 <div class="col-6 pad-ing-left" style="margin-bottom: 24px;">
-                    <button type="button" class="btn std-button std-button--blue">
-                        <p style="margin:0"> Send code </p>
-                    </button>
+                    <send-code (error)="setErrors(mobForm,$event)"
+                        [data]="mobControls.mobile_number.valid ? {type: 'mobile', purpose: 'signup', value: mobControls.mobile_number.value} : null">
+                    </send-code>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group form-group--margin">
                         <div class="label-inputs"> Password </div>
-                        <input type="text" class="form-input error-highlight" placeholder="Password">
+                        <input type="text" class="form-input error-highlight" formControlName="password"
+                            placeholder="Password">
+                        <app-abs-control-error [control]="mobControls.password"></app-abs-control-error>
                     </div>
                 </div>
             </div>
             <div class="form-group" style="margin-bottom: 24px;">
                 <div class="d-flex justify-content-between">
-                    <button type="button" class="btn std-button std-button--transparency">
+                    <button type="button" class="btn std-button std-button--transparency" (click)="back()">
                         Back
                     </button>
-                    <button type="button" class="btn std-button std-button--primary">
-                        Continue
+                    <button type="submit" class="btn std-button std-button--blue" [disabled]="loading">
+                        <span *ngIf="!loading; else ldr">Continue</span>
                     </button>
                 </div>
             </div>
-        </div>
+        </form>
     </ng-template>
 </div>
+<ng-template #ldr><img src="assets/images/loader_white_24.gif"></ng-template>
 <!-- <ngx-intl-tel-input [cssClass]="'form-input'" [enablePlaceholder]="true" [onlyCountries]="['in']" [preferredCountries]="['au']" [enableAutoCountrySelect]="true" [separateDialCode]="true" formControlName="mobile" [phoneValidation]="true" ></ngx-intl-tel-input> -->

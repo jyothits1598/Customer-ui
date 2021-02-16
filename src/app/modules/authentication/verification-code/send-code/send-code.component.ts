@@ -37,7 +37,7 @@ export class SendCodeComponent implements OnDestroy {
 
   sendCodeObs(value: string, type: 'email' | 'mobile' = 'email', purpose: 'signup' | 'forgotPassword' | 'change') {
     let data: any = {
-      type: type === 'email' ? 'email' : 'mobile_number'
+      type: type
     };
     if (type === 'email') data.email = value
     else data.mobile_number = value;
@@ -54,7 +54,7 @@ export class SendCodeComponent implements OnDestroy {
         url = URL_SendCodeChange;
         break;
     }
-    return this.restApiService.post(url, data, false);
+    return this.restApiService.post(url, data);
   }
 
   handleError(errorResp: any) {
