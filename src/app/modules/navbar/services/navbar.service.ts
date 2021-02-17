@@ -1,6 +1,7 @@
 import { Injectable, TemplateRef } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, merge } from 'rxjs';
+import { filter, map, tap } from 'rxjs/operators';
+import { ScrollService } from 'src/app/core/services/scroll.service';
 import { fileURLToPath } from 'url';
 
 @Injectable({
@@ -13,25 +14,16 @@ export class NavbarService {
   );
 
   private lastPinnedYPos = 0;
-  dynamicPosition$ = new BehaviorSubject<object>({
-    top: `${this.lastPinnedYPos}px`,
-  });
 
   headingTemplate$ = this.headingTemplate.asObservable();
-  constructor() {}
+  constructor(private scollService: ScrollService) {}
 
   setTemplate(temp: TemplateRef<any>) {
     this.headingTemplate.next(temp);
   }
+}
 
-  setNavbarPosition(yPos: number) {
-    this.dynamicPosition$.next({
-      top: `-${yPos - this.lastPinnedYPos}px`,
-    });
-  }
-
-  pinNavbarPosition(yPos: number) {
-    this.dynamicPosition$.next({ top: '0px', transition: 'top 0.2s' });
-    this.lastPinnedYPos = yPos;
-  }
+enum Direction {
+  UP,
+  DOWN,
 }

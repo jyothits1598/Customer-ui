@@ -1,5 +1,5 @@
-<div [ngStyle]="dynamicPosition$ | async">
-  <div class="container sp">
+<div [ngStyle]="navbarStyle$ | async">
+  <div class="c`tainer sp">
     <div>
       <ng-container #vCont></ng-container>
     </div>
@@ -22,7 +22,5 @@
 </ng-template>
 
 
-  <cart-button class="cart-in-nav-bar"></cart-button>
-  <tracking-button class="cart-in-nav-bar"></tracking-button>
-
-
+<cart-button class="cart-in-nav-bar"></cart-button>
+<tracking-button class="cart-in-nav-bar"></tracking-button>

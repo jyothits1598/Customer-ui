@@ -11,7 +11,7 @@ import {
   ViewContainerRef,
   ViewRef,
 } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
 import { ModalService } from 'src/app/core/services/modal.service';
@@ -19,6 +19,8 @@ import { PopoverService } from 'src/app/core/services/popover.service';
 import { LayoutService } from 'src/app/core/services/layout.service';
 import { NavbarService } from '../../services/navbar.service';
 import { SearchDataService } from 'src/app/modules/search/services/search-data.service';
+import { ScrollService } from 'src/app/core/services/scroll.service';
+import { map, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
@@ -39,20 +41,19 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   lastScrollYPos = window.pageYOffset;
 
-  dynamicPosition$ = this.navbarService.dynamicPosition$;
+  private finalise$ = new Subject<void>();
 
-  @HostListener('window:scroll', ['$event'])
-  onScroll(event) {
-    if (this.layoutService.isMobile) {
-      const y = window.pageYOffset;
-      if (this.searchDataServ.overlayOpen || y < this.lastScrollYPos) {
-        this.navbarService.pinNavbarPosition(y);
-      } else {
-        this.navbarService.setNavbarPosition(y);
-      }
-      this.lastScrollYPos = y;
-    }
-  }
+  private prevYPos = 0;
+  private prevScrollDir = Direction.DOWN;
+  private scrolledDistance = 0;
+  private limit = 150;
+  private isShowing = true;
+
+  navbarStyle$ = new BehaviorSubject<Object>({
+    top: '0em',
+    position: 'fixed',
+    transition: 'top 0.3s',
+  });
 
   templateSubs: Subscription;
 
@@ -61,12 +62,55 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     private router: Router,
     private layoutService: LayoutService,
     private navbarService: NavbarService,
-    private searchDataServ: SearchDataService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private scrollService: ScrollService
   ) {}
 
   ngOnInit(): void {
     this.isLoggedin$ = this.authService.isLoggedIn$();
+
+    this.scrollService.scrollY$
+      .pipe(
+        takeUntil(this.finalise$),
+        map((newYPos) => {
+          console.log('newYPos: ', newYPos);
+          const newScrollDir =
+            newYPos > this.prevYPos ? Direction.DOWN : Direction.UP;
+
+          const scrollChanged = newScrollDir !== this.prevScrollDir;
+
+          if (scrollChanged) {
+            this.scrolledDistance = 0;
+          } else {
+            this.scrolledDistance += newYPos - this.prevYPos;
+          }
+
+          if (this.isShowing && this.scrolledDistance > this.limit) {
+            this.isShowing = false;
+            console.log('hiding...');
+            this.navbarStyle$.next({
+              top: '-8em',
+              position: 'fixed',
+              transition: 'top 0.3s',
+            });
+          } else if (
+            newYPos < this.limit ||
+            (!this.isShowing && this.scrolledDistance < -this.limit)
+          ) {
+            console.log('showing!');
+            this.isShowing = true;
+            this.navbarStyle$.next({
+              top: '0em',
+              position: 'fixed',
+              transition: 'top 0.3s',
+            });
+          }
+
+          this.prevScrollDir = newScrollDir;
+          this.prevYPos = newYPos;
+        })
+      )
+      .subscribe();
   }
 
   ngAfterViewInit(): void {
@@ -109,4 +153,9 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
       this.router.url.includes('/search')
     );
   }
+}
+
+enum Direction {
+  UP,
+  DOWN,
 }
