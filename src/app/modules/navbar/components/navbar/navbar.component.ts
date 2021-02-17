@@ -2,8 +2,6 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
-  ElementRef,
-  HostListener,
   OnDestroy,
   OnInit,
   TemplateRef,
@@ -11,16 +9,14 @@ import {
   ViewContainerRef,
   ViewRef,
 } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
-import { ModalService } from 'src/app/core/services/modal.service';
-import { PopoverService } from 'src/app/core/services/popover.service';
 import { LayoutService } from 'src/app/core/services/layout.service';
 import { NavbarService } from '../../services/navbar.service';
-import { SearchDataService } from 'src/app/modules/search/services/search-data.service';
 import { ScrollService } from 'src/app/core/services/scroll.service';
 import { map, takeUntil } from 'rxjs/operators';
+import { Direction } from 'src/app/core/model/direction.enum';
 
 @Component({
   selector: 'app-navbar',
@@ -152,9 +148,4 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
       this.router.url.includes('/search')
     );
   }
-}
-
-enum Direction {
-  UP,
-  DOWN,
 }
