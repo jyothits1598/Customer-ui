@@ -32,7 +32,7 @@ export class SearchDataService {
           `api/stores/search?${this.constructQuery(
             searchTerm,
             this.geoLoactionServ.getUserLocation()?.latLng,
-            this.authService.loggedUser?.customRadius
+            this.authService.loggedUser?.radius
           )}`
         )
         .pipe(

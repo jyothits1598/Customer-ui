@@ -7,13 +7,15 @@
     </div>
     <div style="margin-bottom:4px;margin-top:14px;">
         <label>
-            <input class="cb" type="radio" name="radius" value="0" (change)="handleSel($event.target.value)" [checked]="!radius.value" />
+            <input class="cb" type="radio" name="radius" value="0" (change)="handleSel($event.target.value)"
+                [checked]="!radius.value" />
             <p> Suggested radius </p>
         </label>
     </div>
     <div>
         <label>
-            <input class="cb" type="radio" name="radius" value="1" (change)="handleSel($event.target.value)" [checked]="radius.value"/>
+            <input class="cb" type="radio" name="radius" value="1" (change)="handleSel($event.target.value)"
+                [checked]="radius.value" />
             <p> Custom radius </p>
         </label>
     </div>
@@ -28,8 +30,7 @@
         </div>
     </ng-container>
     <button type="button" (click)="save()" class="std-button std-button--primary float-right" style="margin-top:16px">
-        <span *ngIf="!loading" >Save</span>
+        <span *ngIf="!loading">Save</span>
         <img src="assets/images/loader_white_24.gif" alt="" *ngIf="loading">
     </button>
 </div>
-    

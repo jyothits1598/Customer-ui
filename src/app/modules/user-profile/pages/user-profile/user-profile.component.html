@@ -4,7 +4,7 @@
 <div class="security-card">
     <ng-container *ngIf="profileData">
         <user-profile-image
-            [profileImageUrl]="editMode ? profileForm.controls.profileImage.value : profileData.profileImage"
+            [profileImageUrl]="editMode ? profileForm.controls.pictureURL.value : profileData.pictureURL"
             [editMode]="editMode" (urlChange)="handleFileChange($event)"
             [name]="{firstName: profileData.firstName, lastName: profileData.lastName}">
         </user-profile-image>
@@ -16,7 +16,8 @@
             </div>
             <button (click)="toggleEdit()" class="std-button std-button--trans"
                 style="margin-left: auto;margin-right: auto;display: block;">
-                <img src="assets/svg/details/ico_edit_blue.svg" width="18px" height="18px"><label style="padding-left: 8px;margin:0;cursor: pointer;">Edit profile</label>
+                <img src="assets/svg/details/ico_edit_blue.svg" width="18px" height="18px"><label
+                    style="padding-left: 8px;margin:0;cursor: pointer;">Edit profile</label>
             </button>
         </div>
     </ng-container>

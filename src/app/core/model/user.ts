@@ -1,28 +1,45 @@
 export interface User {
-    id: string,
+    id: number,
     firstName: string,
     lastName: string,
     email: string,
     phoneNumber: string,
-    customRadius: number | null;
+    radius: number | null,
+    radiusType: 'custom' | 'suggested',
+    pictureURL: string
 }
 
-export function ReadUserDetails(data: any): User {
+
+export interface userDTO {
+    id: number;
+    first_name: string,
+    last_name: string,
+    email: string,
+    mobile_number: string,
+    picture: string,
+    search_radius_type: 'suggested' | 'custom',
+    radius: number,
+}
+
+export function ReadUserDetails(data: userDTO): User {
+    // return {
+    //     id: 1,
+    //     firstName: 'ganesh',
+    //     lastName: 'palankar',
+    //     email: 'g.p@gmail.com',
+    //     phoneNumber: '123456',
+    //     customRadius: 5,
+    //     pictureURL: ''
+    // }
     return {
-        id: '1',
-        firstName: 'ganesh',
-        lastName: 'palankar',
-        email: 'g.p@gmail.com',
-        phoneNumber: '123456',
-        customRadius: 5
-    }
-    return {
-        id: data.customer_id,
+        id: data.id,
         firstName: data.first_name,
         lastName: data.last_name,
         email: data.email,
         phoneNumber: data.mobile_number,
-        customRadius: data.custom_radius
+        radius: data.radius,
+        pictureURL: data.picture,
+        radiusType: data.search_radius_type
     }
 }
 
@@ -33,6 +50,6 @@ export function UserToBackend(user: User) {
         last_name: user.lastName,
         email: user.email,
         mobile_number: user.phoneNumber,
-        custom_radius: user.customRadius
+        custom_radius: user.radius
     }
 }

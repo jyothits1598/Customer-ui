@@ -17,7 +17,7 @@ export class UserProfileImageComponent implements OnInit {
   @Output() urlChange = new EventEmitter<string | null>();
   uploading: boolean = false;
   errorMessage;
-  validFileFormats = ['.jpeg', '.jpg', '.png', '.gif'];
+  validFileFormats = ['.jpeg', '.jpg', '.png'];
   asyncValidators = [AsyncFileValidators.imageSizeValidator(500, 500, 500, 500)];
   profileData: UserProfile;
   constructor(private userProfData: UserProfileDataService) { }
@@ -27,7 +27,7 @@ export class UserProfileImageComponent implements OnInit {
     this.uploading = true;
     this.userProfData.uplaodProfileImage(file).pipe(finalize(() => { this.uploading = false })).subscribe(
       (resp) => {
-        this.urlChange.emit(resp)
+        this.urlChange.emit(resp.url)
       },
       (resp) => {
         this.handleError(resp)

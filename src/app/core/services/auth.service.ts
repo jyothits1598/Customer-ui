@@ -34,7 +34,7 @@ export class AuthService {
 
   setCustomRadius(radius: number) {
     let user = { ...this.loggedUser };
-    user.customRadius = radius;
+    user.radius = radius;
     this.storeageService.store('user', user);
     this._loggedUser.next(user);
   }
@@ -51,6 +51,11 @@ export class AuthService {
     user.email = email;
     this.storeageService.store('user', user);
     this._loggedUser.next(user);
+  }
+
+  updateUser(u: User) {
+    this.storeageService.store('user', u)
+    this._loggedUser.next(u);
   }
 
   isLoggedIn$() {
@@ -78,8 +83,6 @@ export class AuthService {
 
     }
 
-
-    console.log('here we set no login');
     this._loggedUser = new BehaviorSubject<User>(null);
     this._accessToken = new BehaviorSubject<string>(null);
 
@@ -142,15 +145,16 @@ export class AuthService {
   }
 
   handleLoginResp(r: BackendResponse<any>) {
-    console.log('handle login resp', r);
-    let user = ReadUserDetails(r.data.user_details);
+    let user = ReadUserDetails(r.data.user);
     let token = 'Bearer ' + r.data.access_token;
     this._accessToken.next(token);
     this._loggedUser.next(user);
 
     //save into storage
     this.storeageService.store('authToken', token);
-    this.storeageService.store('authTokenExpiry', r.data.expires_in);
+    let expDt = new Date();
+    expDt.setSeconds(r.data.expires_in);
+    this.storeageService.store('authTokenExpiry', expDt);
     this.storeageService.store('user', user);
   }
 

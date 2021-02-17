@@ -22,6 +22,7 @@ export class RestApiService {
   get<T = any>(url, showError = true): Observable<T> {
     return this.http.get<T>(API_URL_LINK + url).pipe(
       take(1),
+      map((r: any) => r.data),
       catchError((httpError) => this.handleError(httpError, showError)
       )
     );
@@ -34,17 +35,17 @@ export class RestApiService {
     );
   }
 
-  patch(url, data): Observable<any> {
-    return this.http.patch((API_URL_LINK + url), data).pipe(
+  patch<T = any>(url, data, showError = true): Observable<BackendResponse<T>> {
+    return this.http.patch<BackendResponse<T>>((API_URL_LINK + url), data).pipe(
       take(1),
-      catchError((httpError) => throwError(httpError.error))
+      catchError((httpError) => this.handleError(httpError, showError))
     );
   }
 
-  put(url, data): Observable<any> {
-    return this.http.put((API_URL_LINK + url), data).pipe(
+  put<T = any>(url, data, showError = true): Observable<any> {
+    return this.http.put<BackendResponse<T>>((API_URL_LINK + url), data).pipe(
       take(1),
-      catchError((httpError) => throwError(httpError.error))
+      catchError((httpError) => this.handleError(httpError, showError))
     );
   }
 

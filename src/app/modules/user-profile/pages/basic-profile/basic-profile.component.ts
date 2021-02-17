@@ -27,13 +27,14 @@ export class BasicProfileComponent implements OnInit {
   saving: boolean = false;
 
   ngOnInit(): void {
-    
+
   }
 
   profileForm: FormGroup = new FormGroup({
     firstName: new FormControl(null, CustomValidators.required('First name is required.')),
     lastName: new FormControl(null, CustomValidators.required('Last name is required.')),
-    profileImage: new FormControl()
+    profileImage: new FormControl(),
+    profileImageName: new FormControl
   })
 
   handleSubmit() {
@@ -58,7 +59,7 @@ export class BasicProfileComponent implements OnInit {
   handleFileUpload(file: File) {
     this.imageLoading = true;
     this.userProfileDataService.uplaodProfileImage(file).pipe(finalize(() => this.imageLoading = false)).subscribe(
-      fileUrl => this.profileForm.controls.profileImage.setValue(fileUrl)
+      file => { this.profileForm.controls.profileImage.setValue(file.url); this.profileForm.controls.profileImageName.setValue(file.fileName) }
     )
   }
 
