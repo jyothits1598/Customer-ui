@@ -70,18 +70,11 @@ export class OrderStatusComponent implements OnInit, OnDestroy {
   }
 
   progressbarWidth(preparedByProgress) {
-    if (preparedByProgress >= 50) {
-      return "0%";
-    } else if (preparedByProgress >= 40) {
-      return "20%"
-    } else if (preparedByProgress >= 30) {
-      return "40%"
-    } else if (preparedByProgress >= 20) {
-      return "60%"
-    } else if (preparedByProgress >= 10) {
-      return "80%"
-    } else if (preparedByProgress == 0) {
-      return "100%"
+    let progess=  ((60 - preparedByProgress)*1.7);
+    if(progess>100){
+      return "98%";
+    }else{
+      return progess+"%";
     }
   }
 
