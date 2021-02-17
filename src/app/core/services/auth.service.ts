@@ -106,7 +106,7 @@ export class AuthService {
 
   confirmPassword(password: string) {
     return this.restApiService.post(URL_ConfirmPassword, {
-      password: password
+      current_password: password
     });
   }
 

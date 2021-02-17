@@ -1,4 +1,5 @@
-import { AbstractControl, ValidatorFn } from '@angular/forms';
+import { AbstractControl, FormGroup, ValidatorFn } from '@angular/forms';
+import { BackendErrorResponse } from '../core/model/backend-resp';
 
 export class CustomValidators {
     static required(errorMsg: string): ValidatorFn {
@@ -22,10 +23,21 @@ export class CustomValidators {
     }
 
     static mobileNumber(errorMsg: string) {
-        return (control: AbstractControl): { [key: string]: any } | null  => {
+        return (control: AbstractControl): { [key: string]: any } | null => {
             return control.value ? null : { required: errorMsg };
         };
-    }     
+    }
+}
+
+export class FormHelper {
+    static setErrors(fc: FormGroup, eResp: BackendErrorResponse) {
+        for (const key in eResp.errors) {
+            if (Object.prototype.hasOwnProperty.call(eResp.errors, key)) {
+                const c: AbstractControl = fc.controls[key];
+                if (c) c.setErrors({ backend: (eResp.errors[key])[0] })
+            }
+        }
+    }
 }
 
 

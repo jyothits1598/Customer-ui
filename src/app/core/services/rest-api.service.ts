@@ -57,6 +57,7 @@ export class RestApiService {
   }
 
   readError(e: BackendErrorResponse): string {
+    // console.log('called read error, ', e, Object.values(e.errors)[0][0])
     return Object.values(e.errors)[0][0];
   }
 

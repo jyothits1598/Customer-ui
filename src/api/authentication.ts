@@ -12,5 +12,5 @@ export const URL_SendCodeForgotPassword = 'api/customer/forgotpassword';
 export const URL_SendCodeChange = 'api/customer/send-verification-code';
 export const URL_Signup = 'api/customer/v1/signup';
 export const URL_Signup2 = 'api/v1/signup';
-export const URL_ConfirmPassword = 'api/customer/verify-password';
+export const URL_ConfirmPassword = 'api/v1/me/security/verify-password';
 export const URL_ConfirmUser = 'api/customer/verify';
