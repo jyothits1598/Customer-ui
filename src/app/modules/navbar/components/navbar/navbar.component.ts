@@ -55,8 +55,6 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     transition: 'top 0.3s',
   });
 
-  templateSubs: Subscription;
-
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -115,8 +113,9 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.containerRef.createEmbeddedView(this.locationTemplate);
-    this.templateSubs = this.navbarService.headingTemplate$.subscribe(
-      (temp) => {
+    this.navbarService.headingTemplate$
+      .pipe(takeUntil(this.finalise$))
+      .subscribe((temp) => {
         if (temp) {
           this.locationViewRef = this.containerRef.detach();
           this.containerRef.createEmbeddedView(temp);
@@ -128,8 +127,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
           }
         }
         this.cdr.detectChanges();
-      }
-    );
+      });
   }
 
   debug() {
@@ -142,7 +140,8 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.templateSubs.unsubscribe();
+    this.finalise$.next();
+    this.finalise$.complete();
   }
 
   ShouldShoWSearch() {
