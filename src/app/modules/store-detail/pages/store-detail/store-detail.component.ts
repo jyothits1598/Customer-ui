@@ -44,7 +44,8 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
     private location: Location,
     private orderView: OrderViewControllerService,
     private cartSrv: CartService,
-    private layoutService: LayoutService) { }
+    private layoutService: LayoutService,
+    private geoLoc: GeoLocationService) { }
 
   observeIntersection() {
     this.interObserver = new IntersectionObserver((entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
@@ -64,7 +65,7 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
     this.route.params.pipe(map((p) => +p.id)).subscribe((id) => {
       this.reset();
       this.storeId = id;
-      this.loadStore(id);
+      this.loadStore(id, this.geoLoc.getUserLocation());
     })
   }
 
