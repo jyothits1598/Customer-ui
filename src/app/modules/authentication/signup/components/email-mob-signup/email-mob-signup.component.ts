@@ -127,23 +127,16 @@ export class EmailMobSignupComponent implements OnInit {
   }
 
   signup() {
-    if (this.mobForm.invalid) { this.mobForm.markAllAsTouched(); return; }
+    this.mobForm.markAllAsTouched();
+    if (this.mobForm.invalid) { return; }
     this.loading = true;
 
     // prepare data
     let data: SignupData = { ...this.emailForm.value, ...this.mobForm.value };
     data.auth_type = this.type;
 
-    // this.signupService.emailSignup(data).pipe(finalize(() => this.loading = false)).subscribe(
-    //   (resp) => {
-    //     this.authService.handleLoginResp(resp);
-    //     this.router.navigate(['/profile'], { relativeTo: this.activatedRoute, queryParams: { new: true } });
-    //   },
-    //   // (resp) => { this.handleError(resp) }
-    // )
-
     this.signupService.signup(data).pipe(finalize(() => this.loading = false)).subscribe(
-      (r) => this.authService.handleLoginResp(r),
+      (r) => { this.authService.handleLoginResp(r); this.router.navigate(['/']) },
       (e) => this.setErrors(this.mobForm, e)
     )
 

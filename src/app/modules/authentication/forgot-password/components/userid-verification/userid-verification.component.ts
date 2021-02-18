@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
-import { CustomValidators } from 'src/app/helpers/validators';
+import { CustomValidators, FormHelper } from 'src/app/helpers/validators';
 import { ForgotPasswordService } from '../../services/forgot-password.service';
 
 @Component({
@@ -15,6 +15,8 @@ export class UseridVerificationComponent implements OnInit {
   loading: boolean = false;
   emailSentMsg: string;
   backendErrorMsg: string;
+  
+  setErrors = FormHelper.setErrors;
 
   get activeType(): 'email' | 'mobile' {
     return this.form.controls.mobile.enabled ? 'mobile' : 'email';
@@ -53,9 +55,6 @@ export class UseridVerificationComponent implements OnInit {
     verificationCode: new FormControl('', [
       CustomValidators.required('Please enter verification code')
     ]),
-    // password: new FormControl('', [
-    //   CustomValidators.required('Please enter your new password.')
-    // ])
   })
 
   getErrors(controlName: string) {

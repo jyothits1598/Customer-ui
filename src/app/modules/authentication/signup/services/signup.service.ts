@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { URL_FacebookSignup, URL_forgotPassword, URL_newPassword, URL_SendCodeForgotPassword, URL_SendCodeSignup, URL_Signup, URL_Signup2, URL_verifyCode } from 'src/api/authentication';
+import { URL_FacebookSignup, URL_forgotPassword, URL_newPassword, URL_SendCodeForgotPassword, URL_SendCode, URL_Signup, URL_Signup2, URL_verifyCode } from 'src/api/authentication';
 import { URL_ProfileData, URL_ProfileImageUpload } from 'src/api/profile';
 import { BackendResponse } from 'src/app/core/model/backend-resp';
 import { RestApiService } from 'src/app/core/services/rest-api.service';

@@ -24,7 +24,7 @@ export class CurrentPasswordComponent implements OnInit, OnDestroy {
   isEmail: boolean = false;
   isMobiletext: boolean = false;
   passwordForm: FormGroup = new FormGroup({
-    password: new FormControl(null, CustomValidators.required('Password is required.'))
+    current_password: new FormControl(null, CustomValidators.required('Password is required.'))
   })
 
   setErrors = FormHelper.setErrors;
@@ -42,13 +42,14 @@ export class CurrentPasswordComponent implements OnInit, OnDestroy {
   }
 
   confirmPassword() {
+    //error highlight on enter
+    this.passwordForm.markAllAsTouched();
     if (this.passwordForm.invalid) {
-      this.passwordForm.markAllAsTouched();
       return;
     }
 
     this.loading = true;
-    this.authService.confirmPassword(this.passwordForm.value.password).pipe(finalize(() => this.loading = false)).subscribe(
+    this.authService.confirmPassword(this.passwordForm.value.current_password).pipe(finalize(() => this.loading = false)).subscribe(
       () => {
         this.passwordConfGuard.passwordConfirmed = true;
         if (this.redirectUrl) this.router.navigateByUrl(this.redirectUrl)

@@ -48,18 +48,19 @@ export class UserProfileDataService {
   }
 
   changePassword(currentPassword: string, newPassword: string) {
-    return this.restApiService.patch(URL_ProfileChangePassword,
+    return this.restApiService.patch(URL_changeEmailMobile,
       {
         current_password: currentPassword,
-        new_password: newPassword
+        new_password: newPassword,
+        type: 'password',
       });
   }
 
-  changeEmail(email: string, code: string) {
-    return this.restApiService.post(URL_changeEmailMobile, {
+  changeEmail(email: string, code: string): Observable<BackendResponse<userDTO>> {
+    return this.restApiService.patch(URL_changeEmailMobile, {
       type: 'email',
       email: email,
-      verificationCode: code
+      email_token: code
     })
   };
 
@@ -68,11 +69,11 @@ export class UserProfileDataService {
     return this.restApiService.patch(URL_ProfileDataSettings, data);
   }
 
-  changeMobile(phoneNumber: string, code: string) {
-    return this.restApiService.post(URL_changeEmailMobile, {
-      type: 'mobile_number',
+  changeMobile(phoneNumber: string, code: string): Observable<BackendResponse<userDTO>> {
+    return this.restApiService.patch(URL_changeEmailMobile, {
+      type: 'mobile',
       mobile_number: phoneNumber,
-      verificationCode: code
+      mobile_token: code
     })
   }
 }

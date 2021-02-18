@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subject } from 'rxjs';
 import { finalize, takeUntil } from 'rxjs/operators';
-import { URL_SendCodeChange, URL_SendCodeForgotPassword, URL_SendCodeSignup } from 'src/api/authentication';
+import { URL_SendCodeChange, URL_SendCodeForgotPassword, URL_SendCode } from 'src/api/authentication';
 import { BackendErrorResponse } from 'src/app/core/model/backend-resp';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
 import { SnackBarService } from 'src/app/core/services/snack-bar.service';
@@ -41,17 +41,16 @@ export class SendCodeComponent implements OnDestroy {
     };
     if (type === 'email') data.email = value
     else data.mobile_number = value;
-    let url;
+    let url = URL_SendCode;
     switch (this.data.purpose) {
       case 'signup':
-        url = URL_SendCodeSignup;
         data.action = 'signup'
         break;
       case 'forgotPassword':
-        url = URL_SendCodeForgotPassword;
+        data.action = 'change-password'
         break;
       case 'change':
-        url = URL_SendCodeChange;
+        data.action = 'security'
         break;
     }
     return this.restApiService.post(url, data);
