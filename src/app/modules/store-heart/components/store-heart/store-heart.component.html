@@ -1,7 +1,7 @@
 <!-- <img *ngIf="loading; else heart" src="assets/images/loader.gif" style="width: 24px;"> -->
 <!-- <ng-template  #heart> -->
     <img class="cursor-pointer" *ngIf="store.page == 'main'" (click)="onFavClick()"  [src]="isFavourite ? 'assets/svg/cards/heart_black.svg' : 'assets/svg/cards/heart.svg'"  title="Favourite">
-    <img class="cursor-pointer" *ngIf="store.page == 'preview'" (click)="onFavClick()"  [src]="isFavourite ? 'assets/svg/cards/heart_on.svg' : 'assets/svg/cards/heart_fff.svg'"  title="Favourite">
+    <img class="cursor-pointer" *ngIf="store.page == 'preview'" (click)="onFavClick()"  [src]="isFavourite ? 'assets/svg/cards/white_heart.svg' : 'assets/svg/cards/heart_fff.svg'"  title="Favourite">
     <img class="cursor-pointer" *ngIf="store.page == 'order'" (click)="onFavClick()"  [src]="isFavourite ? 'assets/images/cart/order-favourite.svg' : 'assets/images/cart/order-unfavourite.svg'"  title="Favourite">
 
     <!-- </ng-template> -->

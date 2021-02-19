@@ -178,11 +178,11 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6 col-lg-6 col-xl-4 category-cards">
-                                        <div  style="cursor: pointer;outline:0;">
-                                            <div class="col-md-12 card small-cat-cards">
+                                        <a [href]="partnerAppLink+'store/step1/'+storeDetail.id+'?claim=true'" target="_blank" style="cursor: pointer;outline: 0;text-decoration: none;" >
+                                            <div class="col-md-12 card small-cat-cards" >
                                                 <div class="row">
                                                     <div class="col p-3" style="height:112px;">
-                                                        <u><a style="color:#353FA8;" [href]="partnerAppLink+'store/step1/'+storeDetail.id+'?claim=true'" target="_blank">Click here</a></u> to claim this store!
+                                                        <u><a style="color:#353FA8;">Click here</a></u><span style="color:#1a1a1a;"> to claim this store! </span> 
                                                     </div>
                                                         <div class="col-auto col-img" style="padding: 0;">
                                                         <svg width="112" class="img-fluid img-custom" height="112" viewBox="0 0 112 112" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -193,7 +193,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

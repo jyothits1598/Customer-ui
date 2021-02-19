@@ -45,7 +45,8 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
     private orderView: OrderViewControllerService,
     private cartSrv: CartService,
     private layoutService: LayoutService,
-    private geoLoc: GeoLocationService) { }
+    private geoLoc: GeoLocationService,
+    private window: Window) { }
 
   observeIntersection() {
     this.interObserver = new IntersectionObserver((entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {

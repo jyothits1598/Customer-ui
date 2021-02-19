@@ -50,7 +50,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private window: Window) { }
 
   ngOnInit(): void {
     this.loginForm.controls.email.disable();
@@ -76,7 +77,7 @@ export class LoginComponent implements OnInit {
       this.loginForm.controls.email.disable();
     }
   }
-  
+
 
   returnErrors(controlName: string) {
     return Object.values(this.loginForm.controls[controlName].errors)[0];
@@ -99,9 +100,10 @@ export class LoginComponent implements OnInit {
 
   afterSignin() {
     if (!this.authService.loggedUser.firstName || !this.authService.loggedUser.lastName) { this.router.navigate(['/profile']); return; }
-    this.route.snapshot.queryParams.redirect ?
-      this.router.navigateByUrl(this.route.snapshot.queryParams.redirect)
-      : this.router.navigate(['/'])
+    // this.route.snapshot.queryParams.redirect ?
+    //   this.router.navigateByUrl(this.route.snapshot.queryParams.redirect)
+    //   : this.router.navigate(['/'])
+    this.window.location.href = this.route.snapshot.queryParams.redirect || '/';
   }
 
   handleErrors(error: any) {
@@ -116,7 +118,7 @@ export class LoginComponent implements OnInit {
       }
       if (error.error.error_msg) this.backendErrorMessage = error.error.error_msg;
       if (error.error.mobile_number) this.backendErrorMessage = error.error.mobile_number;
-    } 
+    }
   }
 
 }
