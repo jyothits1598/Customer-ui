@@ -114,7 +114,6 @@ export class StoreSearchInlineComponent implements AfterViewInit, OnDestroy {
 
   openSearchBox(): void {
     document.addEventListener('keydown', this.docScrollPrevention);
-    this.navBarService.setNavbarPosition(0);
     const inputVal = this.searchControl.value;
     if (inputVal) {
       this.searchDataService.updateInlineSearch(inputVal);
