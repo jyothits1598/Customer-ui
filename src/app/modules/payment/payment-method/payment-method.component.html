@@ -1,0 +1,55 @@
+<div class="payment-body mt-3">
+    <div *ngIf="paymentDetails?.length > 0">
+        <label class="f-20 f-b">Saved payment methods</label>
+        <div class="mt-28">
+            <ul *ngFor="let card of paymentDetails">
+                <li class="d-flex justify-content-between card--hover cursor-pointer">
+                    <div class="d-flex justify-content-start">
+                        <img src="assets/images/cart/master-card.svg" class="mr-16" />
+                        <label class="f-16 mt-1 cursor-pointer">•••• •••• •••• {{card.last4}}</label>
+                    </div>
+                    <img class="mt-1" src="assets/images/cart/chevron.svg" />
+                </li>
+                <hr>
+            </ul>  
+        </div>
+    </div>
+    <label class="f-20 f-b">Add payment method</label>
+    <div class="mt-28">
+        <ul>
+            <li class="d-flex justify-content-between card--hover cursor-nodrop">
+                <div class="d-flex justify-content-start">
+                    <img src="assets/images/cart/applepay.svg" class="mr-16" />
+                    <label class="f-16 mt-1 cursor-nodrop">Set up Apple Pay</label>
+                </div>
+                <img class="mt-1" src="assets/images/cart/chevron.svg" />
+            </li>
+            <hr>
+            <li class="d-flex justify-content-between cursor-nodrop">
+                <div class="d-flex justify-content-start">
+                    <img src="assets/images/cart/googlepay.svg" class="mr-16" />
+                    <label class="f-16 mt-1 cursor-nodrop">Set up Google Pay</label>
+                </div>    
+                    <img class="mt-1" src="assets/images/cart/chevron.svg" />
+               
+            </li>
+            <hr>
+            <li class="d-flex justify-content-between cursor-pointer" (click)="sendMessage()">
+                <div class="d-flex justify-content-start">
+                    <img src="assets/images/cart/creditcard.svg" class="mr-16"/>
+                    <label class="f-16 mt-1  cursor-pointer">Credit/Debit card</label>
+                </div>
+                <img class="mt-1" src="assets/images/cart/chevron.svg" />
+            </li>
+            <hr>
+            <li class="d-flex justify-content-between cursor-nodrop">
+                <div class="d-flex justify-content-start">
+                    <img src="assets/images/cart/paypal.svg" class="mr-16"/>
+                    <label class="f-16 mt-1 cursor-nodrop">PayPal</label>
+                </div>
+                <img class="mt-1" src="assets/images/cart/chevron.svg" />
+            </li>
+            <hr>
+        </ul>
+    </div>
+</div>

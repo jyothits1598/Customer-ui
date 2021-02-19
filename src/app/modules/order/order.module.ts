@@ -16,6 +16,7 @@ import { OrderThankYouComponent } from './pages/order-thank-you/order-thank-you.
 import { PhonePipe } from 'src/app/helpers/phonePipe';
 import { ShareModule } from '../share/share.module';
 import { StoreHeartModule } from '../store-heart/store-heart.module';
+import { PaymentModule } from 'src/app/modules/payment/payment.module';
 // const routes: Routes = [
 //   { path: '', component: CartComponent },
 // ];
@@ -26,7 +27,8 @@ import { StoreHeartModule } from '../store-heart/store-heart.module';
     RouterModule,
     CommonModule,
     ShareModule,
-    StoreHeartModule
+    StoreHeartModule,
+    PaymentModule
   ],
   exports: [CartComponent, CartButtonComponent, OrderContainerComponent, TrackingButtonComponent]
 })

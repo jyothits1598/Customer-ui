@@ -21,6 +21,9 @@ import { VerificationCodeModule } from '../authentication/verification-code/veri
 import { TelInputModule } from '../tel-input/tel-input.module';
 import { NavbarModifierModule } from '../navbar-modifier/navbar-modifier.module';
 import { UserHistoryComponent } from './pages/user-history/user-history.component';
+import { UserPaymentComponent } from './pages/user-payment/user-payment.component';
+import { PaymentModule } from 'src/app/modules/payment/payment.module';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +37,8 @@ import { UserHistoryComponent } from './pages/user-history/user-history.componen
     ChangeEmailComponent,
     ChangeMobileComponent,
     CurrentPasswordComponent,
-    UserHistoryComponent
+    UserHistoryComponent,
+    UserPaymentComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +51,8 @@ import { UserHistoryComponent } from './pages/user-history/user-history.componen
     PasswordHelperModule,
     VerificationCodeModule,
     TelInputModule,
-    NavbarModifierModule
+    NavbarModifierModule,
+    PaymentModule
   ],
   providers: [PasswordConfirmationGuard]
 })
