@@ -1,0 +1,43 @@
+.add-card-body{
+   padding:0px 16px 16px;
+    .date-width{
+        width:150px;
+    }
+}
+input[type=text]:hover
+{
+    border:2px solid var(--color-primary); 
+}
+select:hover{
+    border:2px solid var(--color-primary); 
+}
+
+.profile-navbar-setting {
+    background: var(--color-primary);
+    color: var(--color-background);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 990;
+    height: 48px;
+    line-height: 48px;
+}
+.pic-header {
+    font-size:14px;
+    font-weight: bold;
+}
+.pic-header1 {
+    font-size:16px;
+    font-weight: bold;
+}
+
+.card-button-size{
+    border-radius:16px;
+    width:100%;
+}
+
+.popup-header{
+    padding:16px 16px 0;
+}
