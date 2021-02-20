@@ -6,7 +6,7 @@ import { OrderSummary } from 'src/app/core/model/cart';
 import { CartService } from 'src/app/core/services/cart.service';
 import { OrderPages, OrderViewControllerService } from 'src/app/core/services/order-view-controller.service';
 import { OrdersService } from 'src/app/core/services/orders.service';
-
+import {PaymentService} from 'src/app/modules/payment/services/payment.service';
 @Component({
   selector: 'cart-summary',
   templateUrl: './cart-summary.component.html',
@@ -15,13 +15,15 @@ import { OrdersService } from 'src/app/core/services/orders.service';
 export class CartSummaryComponent implements OnInit, OnDestroy {
   showPaymentOpt: boolean = false;
   paymentInProg: boolean = false;
+  placeorder: boolean = false;
 
   unSub$ = new Subject<true>();
-
+  paymentDetails = new Array();
   constructor(
     private cartService: CartService,
     private orderService: OrdersService,
-    private orderView: OrderViewControllerService
+    private orderView: OrderViewControllerService,
+    private paymentService: PaymentService
   ) { }
 
 
@@ -50,4 +52,15 @@ export class CartSummaryComponent implements OnInit, OnDestroy {
     this.unsub$.next(true);
   }
 
+  checkPaymentCardStatus(){
+    this.placeorder = true;
+    this.paymentService.payMentCardDetails().subscribe(Details => {
+      if(Details.length > 0){
+       this.paymentDetails = Details;
+       this.showPaymentOpt = true;
+      }else{
+        this.orderView.showPage(OrderPages.AddPaymentOptions);
+      } 
+     });
+  }
 }
