@@ -31,12 +31,10 @@
         <img [src]="store.storeImage ? store.storeImage + static_image_width : 'assets/images/Area.png' ">
       </div>
     </div>
-    <div class="content-card">
+    <!-- <div class="content-card" style="display:none">
       <table>
         <tr>
           <td style="padding-right:8px">
-            <!-- [url]="store.facebookUrl" -->
-            <!-- <facebook-like-count [store]="store"></facebook-like-count> -->
             <div class="rating-size">
               <table>
                 <tr>
@@ -47,7 +45,6 @@
             </div>
           </td>
           <td align="top">
-            <!-- <google-rating [store]="store"></google-rating> -->
             <div class="rating-size">
               <table>
                 <tr>
@@ -59,7 +56,7 @@
           </td>
         </tr>
       </table>
-    </div>
+    </div> -->
   </div>
   <div class="chating-card">
     <div class="d-flex justify-content-between chating-card--chat">
@@ -81,6 +78,14 @@
             </a>
           </li>
         </ul>
+      </span>
+      <span>
+        <table>
+          <tr>
+            <td valign="middle" class="rating-text">&nbsp;<label class="rK">{{store.googleRating}}</label></td>
+            <td valign="middle"><img src="assets/svg/cards/ico_star_half_small.svg"></td>
+          </tr>
+        </table>
       </span>
     </div>
   </div>
