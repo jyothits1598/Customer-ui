@@ -2,7 +2,7 @@ import { listLazyRoutes } from '@angular/compiler/src/aot/lazy_routes';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { interval, NEVER, of, Subject, timer } from 'rxjs';
 import { finalize, map, mergeMap, switchMap, takeUntil } from 'rxjs/operators';
-import { ConfirmedOrderData, OrderDto } from 'src/app/core/model/cart';
+import { ConfirmedOrderData, mapToOrderData, OrderDto } from 'src/app/core/model/cart';
 import { CartService } from 'src/app/core/services/cart.service';
 import { LayoutService } from 'src/app/core/services/layout.service';
 import { OrderPages, OrderViewControllerService } from 'src/app/core/services/order-view-controller.service';
@@ -31,17 +31,9 @@ export class OrderStatusComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.ordSrv.orderToBeShown$.pipe(
-      switchMap((id) =>
-        timer(0, 10000).pipe(
-          map(() => id),
-          switchMap((id) => {
-            if (!this.ordData || (this.ordData.status !== 'READY' && this.ordData.status !== 'COMPLETE')) return this.ordSrv.getOrderDetails(id);
-            else return NEVER
-          }))
-      ),
-      takeUntil(this.unSub$)
+
     )
-      .subscribe((data) => { this.ordData = data })
+      .subscribe((data) => { this.ordData = mapToOrderData(data) })
   }
 
   modifiersToOptionNameArr(mods: Array<ItemModifier>) {
@@ -70,11 +62,11 @@ export class OrderStatusComponent implements OnInit, OnDestroy {
   }
 
   progressbarWidth(preparedByProgress) {
-    let progess=  ((60 - preparedByProgress)*1.7);
-    if(progess>100){
+    let progess = ((60 - preparedByProgress) * 1.7);
+    if (progess > 100) {
       return "98%";
-    }else{
-      return progess+"%";
+    } else {
+      return progess + "%";
     }
   }
 

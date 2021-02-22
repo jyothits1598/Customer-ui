@@ -40,7 +40,9 @@ export class CartSummaryComponent implements OnInit, OnDestroy {
       takeUntil(this.unsub$),
       finalize(() => this.paymentInProg = false)
     ).subscribe(
-      (orderId) => { this.orderView.showPage(OrderPages.OrderStatus); this.orderService.setOrderToBeShown(orderId) }
+      (orderId) => { this.orderView.showPage(OrderPages.OrderStatus); 
+        // this.orderService.setOrderToBeShown(orderId)
+       }
     );
   }
 

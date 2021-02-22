@@ -12,7 +12,7 @@ import { OrdersService } from 'src/app/core/services/orders.service';
 export class TrackingButtonComponent implements OnInit {
 
   ordPgs = OrderPages;
-  trackingOrder$: Observable<OrderDto>;
+  trackingOrder$: Observable<Array<OrderDto>>;
   currOrderPage$: Observable<OrderPages>;
 
   constructor(private ordSrv: OrdersService,
@@ -26,7 +26,7 @@ export class TrackingButtonComponent implements OnInit {
   }
 
   openStatus(id: number) {
-    this.ordSrv.setOrderToBeShown(id);
+    // this.ordSrv.setOrderToBeShown(id);
     this.orderView.showPage(OrderPages.OrderStatus)
   }
 

@@ -11,9 +11,9 @@ export class ConfirmationComponent implements OnInit {
   constructor(private ordSrv: OrdersService) { }
 
   ngOnInit(): void {
-    this.ordSrv.orderToBeShown$.subscribe(
-      order => console.log('order to be shown', order)
-    )
+    // this.ordSrv.orderToBeShown$.subscribe(
+    //   // order => console.log('order to be shown', order)
+    // )
   }
 
 }

@@ -1,36 +1,56 @@
 <ng-container *ngIf="(currOrderPage$ | async) !== ordPgs.OrderStatus">
-    <ng-container *ngIf="trackingOrder$ | async; let order">
-        <div class="cart-card cart-anim">
+    <ng-container *ngIf="trackingOrder$ | async; let orders">
+        <div class="cart-card cart-anim" *ngIf="orders.length;">
             <!-- <div class="cart-button" [routerLink]="[{ outlets: { 'order': ['cart'] } }]"> -->
-            <div class="cart-button" (click)="openStatus(order.order_id)">
-                <div class="row">
-                    <div class="col-sm-4 col-4">
-                        <svg *ngIf="order.status == 'NEW'" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M5 4C5 3.44772 5.44772 3 6 3H18C18.5523 3 19 3.44772 19 4V22C19 22.4045 18.7564 22.7691 18.3827 22.9239C18.009 23.0787 17.5789 22.9931 17.2929 22.7071L16 21.4142L14.7071 22.7071C14.3166 23.0976 13.6834 23.0976 13.2929 22.7071L12 21.4142L10.7071 22.7071C10.3166 23.0976 9.68342 23.0976 9.29289 22.7071L8 21.4142L6.70711 22.7071C6.42111 22.9931 5.99099 23.0787 5.61732 22.9239C5.24364 22.7691 5 22.4045 5 22V4ZM7 5V19.5858L7.29289 19.2929C7.68342 18.9024 8.31658 18.9024 8.70711 19.2929L10 20.5858L11.2929 19.2929C11.6834 18.9024 12.3166 18.9024 12.7071 19.2929L14 20.5858L15.2929 19.2929C15.4804 19.1054 15.7348 19 16 19C16.2652 19 16.5196 19.1054 16.7071 19.2929L17 19.5858V5H7Z" fill="#1A1A1A"/>
-                        </svg>
-                        <svg  *ngIf="order.status == 'COOKING'" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4 8H20V17C20 18.0609 19.5786 19.0783 18.8284 19.8284C18.0783 20.5786 17.0609 21 16 21H8C6.93913 21 5.92172 20.5786 5.17157 19.8284C4.42143 19.0783 4 18.0609 4 17V8Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M8 2V5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M12 2V5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M16 2V5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M4 8H1C1 12.5 3 12 4 12V8Z" stroke="white" stroke-width="2" stroke-linejoin="round"/>
-                            <path d="M20 8H23C23 12.4815 21 11.9835 20 11.9835V8Z" stroke="white" stroke-width="2" stroke-linejoin="round"/>
-                        </svg>
-                        <svg *ngIf="order.status == 'READY'" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M22 11.0799V11.9999C21.9988 14.1563 21.3005 16.2545 20.0093 17.9817C18.7182 19.7088 16.9033 20.9723 14.8354 21.5838C12.7674 22.1952 10.5573 22.1218 8.53447 21.3744C6.51168 20.6271 4.78465 19.246 3.61096 17.4369C2.43727 15.6279 1.87979 13.4879 2.02168 11.3362C2.16356 9.18443 2.99721 7.13619 4.39828 5.49694C5.79935 3.85768 7.69279 2.71525 9.79619 2.24001C11.8996 1.76477 14.1003 1.9822 16.07 2.85986" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M22 4L12 14.01L9 11.01" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        <svg  *ngIf="order.status == 'DENY'" width="24" height="24" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M23.58 6H48.42L66 23.58V48.42L48.42 66H23.58L6 48.42V23.58L23.58 6Z" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M27 36H45" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                            
-                    </div>
-                    <div class="col-sm-8 col-8 cart-text">
-                        Track order
+            <ng-container *ngIf="orders[0]; let order">
+                <div class="cart-button" (click)="openStatus(order.order_id)">
+                    <div class="row">
+                        <div class="col-sm-4 col-4">
+                            <svg *ngIf="order.status == 'NEW'" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M5 4C5 3.44772 5.44772 3 6 3H18C18.5523 3 19 3.44772 19 4V22C19 22.4045 18.7564 22.7691 18.3827 22.9239C18.009 23.0787 17.5789 22.9931 17.2929 22.7071L16 21.4142L14.7071 22.7071C14.3166 23.0976 13.6834 23.0976 13.2929 22.7071L12 21.4142L10.7071 22.7071C10.3166 23.0976 9.68342 23.0976 9.29289 22.7071L8 21.4142L6.70711 22.7071C6.42111 22.9931 5.99099 23.0787 5.61732 22.9239C5.24364 22.7691 5 22.4045 5 22V4ZM7 5V19.5858L7.29289 19.2929C7.68342 18.9024 8.31658 18.9024 8.70711 19.2929L10 20.5858L11.2929 19.2929C11.6834 18.9024 12.3166 18.9024 12.7071 19.2929L14 20.5858L15.2929 19.2929C15.4804 19.1054 15.7348 19 16 19C16.2652 19 16.5196 19.1054 16.7071 19.2929L17 19.5858V5H7Z"
+                                    fill="#1A1A1A" />
+                            </svg>
+                            <svg *ngIf="order.status == 'COOKING'" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M4 8H20V17C20 18.0609 19.5786 19.0783 18.8284 19.8284C18.0783 20.5786 17.0609 21 16 21H8C6.93913 21 5.92172 20.5786 5.17157 19.8284C4.42143 19.0783 4 18.0609 4 17V8Z"
+                                    stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M8 2V5" stroke="white" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M12 2V5" stroke="white" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M16 2V5" stroke="white" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M4 8H1C1 12.5 3 12 4 12V8Z" stroke="white" stroke-width="2"
+                                    stroke-linejoin="round" />
+                                <path d="M20 8H23C23 12.4815 21 11.9835 20 11.9835V8Z" stroke="white" stroke-width="2"
+                                    stroke-linejoin="round" />
+                            </svg>
+                            <svg *ngIf="order.status == 'READY'" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M22 11.0799V11.9999C21.9988 14.1563 21.3005 16.2545 20.0093 17.9817C18.7182 19.7088 16.9033 20.9723 14.8354 21.5838C12.7674 22.1952 10.5573 22.1218 8.53447 21.3744C6.51168 20.6271 4.78465 19.246 3.61096 17.4369C2.43727 15.6279 1.87979 13.4879 2.02168 11.3362C2.16356 9.18443 2.99721 7.13619 4.39828 5.49694C5.79935 3.85768 7.69279 2.71525 9.79619 2.24001C11.8996 1.76477 14.1003 1.9822 16.07 2.85986"
+                                    stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M22 4L12 14.01L9 11.01" stroke="white" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                            <svg *ngIf="order.status == 'DENY'" width="24" height="24" viewBox="0 0 72 72" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M23.58 6H48.42L66 23.58V48.42L48.42 66H23.58L6 48.42V23.58L23.58 6Z"
+                                    stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M27 36H45" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+
+                        </div>
+                        <div class="col-sm-8 col-8 cart-text">
+                            Track order
+                        </div>
                     </div>
                 </div>
-            </div>
+            </ng-container>
         </div>
     </ng-container>
 </ng-container>

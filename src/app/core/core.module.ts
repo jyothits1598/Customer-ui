@@ -32,7 +32,8 @@ import { OverlayModule } from '@angular/cdk/overlay';
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: HttpHeaderInterceptor,
+      // useClass: HttpHeaderInterceptor,
+      useExisting: HttpHeaderInterceptor,
       multi: true
     },
     {
@@ -44,7 +45,8 @@ import { OverlayModule } from '@angular/cdk/overlay';
       provide: Window,
       useValue: window
     },
-    IsAuthenticatedGuard
+    IsAuthenticatedGuard,
+    OrdersService
   ]
 })
 export class CoreModule { }

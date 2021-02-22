@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject, merge, NEVER, Observable, of, Subject } from 'rxjs';
 import { interval, never, timer } from 'rxjs';
 import { catchError, filter, map, mergeMap, pairwise, retry, startWith, switchMap, take, tap } from 'rxjs/operators';
@@ -8,77 +8,110 @@ import { AuthService } from './auth.service';
 import { CartService } from './cart.service';
 import { OrderPages, OrderViewControllerService } from './order-view-controller.service';
 import { Pagination } from 'src/app/shared/classes/pagination';
+import { HttpHeaderInterceptor } from '../interceptors/http-header';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 
-export class OrdersService {
-  _orderToBeShown = new BehaviorSubject<number>(null);
+export class OrdersService implements OnInit {
+  _orderToBeShown = new BehaviorSubject<OrderDto>(null);
+  _trackingOrder = new BehaviorSubject<Array<OrderDto>>([]);
+  _updatedAt = new Subject<string>();
 
-  _trackingOrder = new BehaviorSubject<OrderDto>(null);
-  get activeOrder$(): Observable<OrderDto> {
+  get activeOrder$(): Observable<Array<OrderDto>> {
     return this._trackingOrder.asObservable();
   }
   getCurrentActiveOrder(): OrderDto {
-    return this._trackingOrder.value;
+    return this._trackingOrder.value[0];
   }
 
-  _thankyouData = new BehaviorSubject<{ storeName: string, storeId: number, isFavourite:boolean }>(null);
-  setThankyouData(data: { storeName: string, storeId: number,isFavourite:boolean }) {
-    console.log(data);
+  _thankyouData = new BehaviorSubject<{ storeName: string, storeId: number, isFavourite: boolean }>(null);
+  setThankyouData(data: { storeName: string, storeId: number, isFavourite: boolean }) {
     this._thankyouData.next(data);
   }
-  get thankyouData$(): Observable<{ storeName: string, storeId: number,isFavourite:boolean }> {
+  get thankyouData$(): Observable<{ storeName: string, storeId: number, isFavourite: boolean }> {
     return this._thankyouData.asObservable();
   }
 
-  forcedCheckingSub = new Subject<true>();
-  forceOrderUpdate() {
-    this.forcedCheckingSub.next(true)
-  }
+  // forcedCheckingSub = new Subject<true>();
+  // forceOrderUpdate() {
+  //   this.forcedCheckingSub.next(true);
+  // }
 
   constructor(private restApiService: RestApiService,
     private cartService: CartService,
-    private authService: AuthService,) {
+    private authService: AuthService) {
     this.setUpInterval();
   }
-
-  setOrderToBeShown(orderId: number) {
-    this._orderToBeShown.next(orderId);
+  ngOnInit(): void {
   }
 
-  get orderToBeShown$(): Observable<number> {
-    return this._orderToBeShown.asObservable();
+  get orderToBeShown$(): Observable<OrderDto> {
+    //return the first order that 
+    return this._trackingOrder.asObservable().pipe(map((o) => o[0]));
   }
 
   makeOrder(): Observable<number> {
     return this.restApiService.post('api/customer/orders', {}).pipe(
       map(resp => resp.data.order_id),
-      tap((ordId) => { this.cartService.addItem(null, false, true).pipe(take(1)).subscribe(); this._orderToBeShown.next(ordId); this.forceOrderUpdate(); }),
+      tap((ordId) => { this.cartService.addItem(null, false, true).pipe(take(1)).subscribe(); }),
       // mergeMap((orderId: number) => this.cartService.addItem(null, false, true).pipe(map(() => orderId)))
     )
   }
 
   setUpInterval() {
-    this.authService.loggedUser$.pipe(
-      switchMap((user) => {
-        if (user) return merge(this.forcedCheckingSub, timer(0, 60000));
+    //first get initial orders array and updated_at time-stamp
+    this.authService.isLoggedIn$().pipe(
+      switchMap((isLogged) => {
+        if (isLogged) return of(true);
         else return NEVER
       }),
-      switchMap(() => this.currentActiveOrder().pipe(retry(2))),
-      startWith<any>({}),
-      pairwise(),
-      switchMap(([old, curr]) => {
-        if (curr?.order_id !== old?.order_id || curr?.status !== old?.status) {
-          return of(curr);
-        } return NEVER
-      }),
+      switchMap(() => this.restApiService.get('api/customer/orders')),
+      take(1)
     ).subscribe(
-      (currOrd) => this._trackingOrder.next(currOrd)
-      // new Subject()
+      (resp) => {
+        this._trackingOrder.next(resp.data.orders);
+        this._updatedAt.next(resp.data.updated_at)
+      }
     )
+
+    //set up subsription for long polling   
+    this.authService.isLoggedIn$().pipe(
+      switchMap((isLogged) => {
+        if (isLogged) return of(true);
+        else return NEVER
+      }),
+      switchMap(() => this._updatedAt),
+    ).subscribe(
+      (u) => {
+        this.restApiService.post('api/customer/orders/sync', { updated_at: u }).subscribe(
+          (resp) => {
+            if (resp.data.is_updated) this._trackingOrder.next(resp.data.orders);
+            this._updatedAt.next(resp.data.updated_at);
+          }
+        )
+      })
   }
+
+
+  // setUpInterval() {
+  //   this.authService.loggedUser$.pipe(
+  //     switchMap((user) => {
+  //       if (user) return merge(this.forcedCheckingSub, timer(0, 60000));
+  //       else return NEVER
+  //     }),
+  //     switchMap(() => this.currentActiveOrder().pipe(retry(2))),
+  //     startWith<any>({}),
+  //     pairwise(),
+  //     switchMap(([old, curr]) => {
+  //       if (curr?.order_id !== old?.order_id || curr?.status !== old?.status) {
+  //         return of(curr);
+  //       } return NEVER
+  //     }),
+  //   ).subscribe(
+  //     (currOrd) => this._trackingOrder.next(currOrd)
+  //     // new Subject()
+  //   )
+  // }
 
   currentActiveOrder(): Observable<OrderDto> {
     return this.restApiService.get('api/customer/orders').pipe(
@@ -119,7 +152,7 @@ export class OrdersService {
       {
         "order_id": ordId,
         "status": orderStatus
-      }).pipe(tap(() => this.forceOrderUpdate()));
+      }).pipe();
   }
 
 

@@ -2,8 +2,9 @@ import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } fro
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
+import { OrdersService } from '../services/orders.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class HttpHeaderInterceptor implements HttpInterceptor {
 
   isLoggedIn: boolean;

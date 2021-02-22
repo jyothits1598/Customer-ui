@@ -70,8 +70,8 @@ export class AuthService {
 
       //check if the token has expired
       if ((Date.now() < d.getTime())) {
-        this._loggedUser = new BehaviorSubject<User>(user);
         this._accessToken = new BehaviorSubject<string>(token);
+        this._loggedUser = new BehaviorSubject<User>(user);
         return;
       }
 
