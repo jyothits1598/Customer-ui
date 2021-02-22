@@ -12,7 +12,7 @@ declare var SqPaymentForm: any;
 export class AddCardComponent implements OnInit {
   addCardForm: FormGroup = new FormGroup({
     nameOnCard: new FormControl(null, Validators.required),
-    billingAddress: new FormControl(null, Validators.required),
+   // billingAddress: new FormControl(null, Validators.required),
     billingCountry: new FormControl('AU', Validators.required)
   });
   saving: boolean = false;
@@ -148,7 +148,7 @@ export class AddCardComponent implements OnInit {
     this.saving = true;
     var data = {
       'cardholder_name': this.addCardForm.controls.nameOnCard.value,
-      'billing_address': this.addCardForm.controls.billingAddress.value,
+      //'billing_address': this.addCardForm.controls.billingAddress.value,
       'billing_country': this.addCardForm.controls.billingCountry.value,
       'postal_code': (<HTMLInputElement>document.getElementById('postal-code')).value,
       'card_nonce': (<HTMLInputElement>document.getElementById('card-nonce')).value,

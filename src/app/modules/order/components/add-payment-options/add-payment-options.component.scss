@@ -13,10 +13,14 @@
     border-radius:16px;
     width:100%;
 }
+
 @media (max-width: 520px) {
     .popup-window{
         margin-left:0%;
         width:100%;
         display:block;
     }
+}
+.max-width{
+    max-width: 482px;
 }
