@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { BackendErrorResponse } from 'src/app/core/model/backend-resp';
+import { ReadUserDetails } from 'src/app/core/model/user';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { SnackBarService } from 'src/app/core/services/snack-bar.service';
-import { CustomValidators } from 'src/app/helpers/validators';
+import { CustomValidators, FormHelper } from 'src/app/helpers/validators';
 import { UserProfileDataService } from '../../../services/user-profile-data.service';
 
 @Component({
@@ -11,17 +15,20 @@ import { UserProfileDataService } from '../../../services/user-profile-data.serv
   templateUrl: './change-email.component.html',
   styleUrls: ['./change-email.component.scss']
 })
-export class ChangeEmailComponent implements OnInit {
+export class ChangeEmailComponent implements OnInit, OnDestroy {
   errorMessage;
   loading: boolean = false;
   isaddE: boolean = false;
   ischangeE: boolean = false;
-  
+
+  setError = FormHelper.setErrors;
+
+  unSub$ = new Subject<true>();
   constructor(
     private userProfileDataService: UserProfileDataService,
     private router: Router,
     private route: ActivatedRoute,
-    private authService: AuthService,private snackBarService: SnackBarService
+    private authService: AuthService, private sb: SnackBarService
   ) { }
 
   ngOnInit(): void {
@@ -34,31 +41,27 @@ export class ChangeEmailComponent implements OnInit {
       CustomValidators.required('Email is required.'),
       CustomValidators.email('Email is invalid.')
     ]),
-    verificationCode: new FormControl(null, [
+    email_token: new FormControl(null, [
       CustomValidators.required('Please enter verification code'),
     ])
   })
 
-  getErrors(controlName: string) {
-    return Object.values(this.changeForm.controls[controlName].errors)[0];
-  }
-
   changeEmail() {
+    //error highlight on enter
+    this.changeForm.markAllAsTouched();
     if (this.changeForm.invalid) {
-      this.changeForm.markAllAsTouched();
       return;
     }
     this.loading = true;
-    this.userProfileDataService.changeEmail(this.changeForm.value.email, this.changeForm.value.verificationCode).subscribe(
-      () => { this.authService.setEmail(this.changeForm.value.email); this.router.navigate(['../'], {relativeTo: this.route}) },
-      (err) => { this.loading = false; this.handleError(err) }
+    this.userProfileDataService.changeEmail(this.changeForm.value.email, this.changeForm.value.email_token).pipe(takeUntil(this.unSub$)).subscribe(
+      (resp) => { this.authService.updateUser(ReadUserDetails(resp.data)); this.sb.success(resp.message); this.router.navigate(['../'], { relativeTo: this.route }) },
+      (err: BackendErrorResponse) => { this.loading = false; this.setError(this.changeForm, err); }
     )
   }
 
-  handleError(errorResp) {
-    if (errorResp.error.error_msg) this.errorMessage = errorResp.error.error_msg[0];
-    if (errorResp.error.verificationCode) this.changeForm.controls.verificationCode.setErrors({ backend: errorResp.error.verificationCode[0] });
-    if (errorResp.error.email) this.changeForm.controls.email.setErrors({ backend: errorResp.error.email[0] })
+  ngOnDestroy(): void {
+    this.unSub$.next(true);
+    this.unSub$.complete();
   }
 
 }

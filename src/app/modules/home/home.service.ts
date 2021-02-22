@@ -13,7 +13,7 @@ export class HomeService {
 
   constructor(private restApiService: RestApiService) { }
 
-  getCuisineData(): Observable<Array<Cuisines>> {
+  getCuisineData(): Observable<any> {
     return this.restApiService.get(URL_Cuisinelist);
   }
 

@@ -29,8 +29,8 @@ export class NearbyStoresComponent implements OnInit, OnDestroy {
       .subscribe((value: UserLocation) => {
         this.filter = {
           location: value.latLng,
-          distance: this.authService.loggedUser?.customRadius
-            ? this.authService.loggedUser.customRadius
+          distance: this.authService.loggedUser?.radius
+            ? this.authService.loggedUser.radius
             : 5,
           sort_by: this.route.snapshot.queryParams['type']
             ? this.route.snapshot.queryParams['type']

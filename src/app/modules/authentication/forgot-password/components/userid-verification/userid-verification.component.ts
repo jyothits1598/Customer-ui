@@ -1,8 +1,12 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subject } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { CustomValidators } from 'src/app/helpers/validators';
+import { BackendErrorResponse } from 'src/app/core/model/backend-resp';
+import { User } from 'src/app/core/model/user';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { CustomValidators, FormHelper } from 'src/app/helpers/validators';
 import { ForgotPasswordService } from '../../services/forgot-password.service';
 
 @Component({
@@ -11,52 +15,78 @@ import { ForgotPasswordService } from '../../services/forgot-password.service';
   styleUrls: ['./userid-verification.component.scss']
 })
 export class UseridVerificationComponent implements OnInit {
-
+  loggedUser: User;
   loading: boolean = false;
   emailSentMsg: string;
   backendErrorMsg: string;
+  unSub$ = new Subject<true>();
 
-  get activeType(): 'email' | 'mobile' {
-    return this.form.controls.mobile.enabled ? 'mobile' : 'email';
-  }
+  setErrors = FormHelper.setErrors;
 
+  isEmailActive: boolean;
+  
   @Output() varificationData = new EventEmitter<{ type: 'email' | 'mobile', code: string, value: string }>();
 
   toggleType() {
-    if (this.form.controls.mobile.enabled) {
-      this.form.controls.email.enable();
-      this.form.controls.mobile.disable();
+    if (this.isEmailActive) {
+      this.isEmailActive = false;
+      if (!this.loggedUser) {
+        this.form.controls.email.disable();
+        this.form.controls.mobile_number.enable();
+      }
     } else {
-      this.form.controls.email.disable();
-      this.form.controls.mobile.enable();
+      this.isEmailActive = true;
+      if (!this.loggedUser) {
+        this.form.controls.email.enable();
+        this.form.controls.mobile_number.disable();
+      }
     }
   }
 
-  constructor(private forgotPassword: ForgotPasswordService) { }
+  constructor(private forgotPassword: ForgotPasswordService,
+    private authSrv: AuthService) { }
 
   ngOnInit(): void {
-    this.form.controls.email.disable();
+    this.loggedUser = this.authSrv.loggedUser;
+
+    this.form = new FormGroup({
+      email: new FormControl({ value: this.loggedUser?.email, disabled: !!this.loggedUser }, [
+        CustomValidators.required('Email is required.'),
+        CustomValidators.email('Please enter a valid email.')
+      ]),
+      mobile_number: new FormControl({ value: this.loggedUser?.phoneNumber, disabled: true }, [
+        CustomValidators.required('Mobile number is required.')
+      ]),
+      token: new FormControl('', [
+        CustomValidators.required('Please enter verification code')
+      ]),
+    })
   }
 
   get activeIdControl() {
-    return this.activeType === 'email' ? this.form.controls.email : this.form.controls.mobile;
+    return this.isEmailActive ? this.form.controls.email : this.form.controls.mobile_number;
   }
 
-  form: FormGroup = new FormGroup({
-    email: new FormControl('', [
-      CustomValidators.required('Email is required.'),
-      CustomValidators.email('Please enter a valid email.')
-    ]),
-    mobile: new FormControl('', [
-      CustomValidators.required('Mobile number is required.')
-    ]),
-    verificationCode: new FormControl('', [
-      CustomValidators.required('Please enter verification code')
-    ]),
-    // password: new FormControl('', [
-    //   CustomValidators.required('Please enter your new password.')
-    // ])
-  })
+  getSendCodeData() {
+    if (this.loggedUser) {
+      //email and mobile is available
+      return {
+        type: this.isEmailActive ? 'email' : 'mobile',
+        value: this.isEmailActive ? this.loggedUser.email : this.loggedUser.phoneNumber,
+        purpose: 'forgotPassword'
+      }
+    }
+    else {
+      if (this.activeIdControl.invalid) return null;
+      else return {
+        type: this.isEmailActive ? 'email' : 'mobile',
+        value: this.activeIdControl.valid,
+        purpose: 'forgotPassword'
+      }
+    }
+  }
+
+  form: FormGroup;
 
   getErrors(controlName: string) {
     return Object.values(this.form.controls[controlName].errors)[0];
@@ -69,38 +99,12 @@ export class UseridVerificationComponent implements OnInit {
     }
 
     this.loading = true;
-    // this.restApiService.post(
-    //   URL_forgotPassword,
-    //   {
-    //     email: this.form.controls.email.value,
-    //     next_url: APP_LINK + 'reset-password'
-    //   }
-    // ).pipe(finalize(() => this.loading = false)).subscribe(
-    //   (resp) => {
-    //     this.emailSentMsg = resp.data;
-    //   },
-    //   (resp) => { this.handleErrors(resp) }
-    // )
-    ;
-    // let data = { ...this.form.value };
-    // data.type = this.activeType;
-    // this.signupService.newPassword(data).pipe(finalize(() => this.loading = false)).subscribe(
-    //   () => this.router.navigate(['../success'], { relativeTo: this.route }),
-    //   (resp) => this.handleErrors(resp)
-    // )
-    let data = { type: this.activeType, value: this.activeIdControl.value, code: this.form.controls.verificationCode.value };
+
+    let data: any = { type: this.isEmailActive ? 'email' : 'mobile', value: this.activeIdControl.value, code: this.form.controls.token.value };
     this.forgotPassword.verfiyUser(data).pipe(finalize(() => { this.loading = false; })).subscribe(
       () => { this.varificationData.emit(data) },
-      (resp) => this.handleErrors(resp)
+      (resp: BackendErrorResponse) => this.setErrors(this.form, resp)
     )
-  }
-
-  handleErrors(data: any) {
-    console.log('inside handle error', data);
-    if (data.error?.email) this.form.controls.email.setErrors({ backend: data.error.email })
-    if (data.error.verificationCode) this.form.controls.verificationCode.setErrors({ backend: data.error.verificationCode })
-    if (data.error?.error_msg) this.backendErrorMsg = data.error.error_msg;
-    if (data.error?.mobile_number) this.form.controls.mobile_number.setErrors({ backend: data.error.mobile_number })
   }
 
 }

@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { URL_ConfirmPassword, URL_FacebookLogin, URL_login } from 'src/api/authentication';
 import { SocialAuthHelperService } from 'src/app/modules/authentication/services/social-auth-helper.service';
+import { BackendResponse } from '../model/backend-resp';
 import { ReadUserDetails, User } from '../model/user';
 import { RestApiService } from './rest-api.service';
 import { StorageService } from './storage.service';
@@ -33,7 +34,7 @@ export class AuthService {
 
   setCustomRadius(radius: number) {
     let user = { ...this.loggedUser };
-    user.customRadius = radius;
+    user.radius = radius;
     this.storeageService.store('user', user);
     this._loggedUser.next(user);
   }
@@ -50,6 +51,11 @@ export class AuthService {
     user.email = email;
     this.storeageService.store('user', user);
     this._loggedUser.next(user);
+  }
+
+  updateUser(u: User) {
+    this.storeageService.store('user', u)
+    this._loggedUser.next(u);
   }
 
   isLoggedIn$() {
@@ -100,7 +106,7 @@ export class AuthService {
 
   confirmPassword(password: string) {
     return this.restApiService.post(URL_ConfirmPassword, {
-      password: password
+      current_password: password
     });
   }
 
@@ -119,10 +125,10 @@ export class AuthService {
   socialSignIn(user: { email: string, token: string }, type: 'google' | 'facebook') {
     let data = {
       email: user.email,
-      social_auth_token: user.token,
-      social_login_type: type
+      token: user.token,
+      type: type
     }
-    return this.restApiService.post('api/customer/v1/social-auth', data).pipe(tap(
+    return this.restApiService.post('api/v1/social-auth', data).pipe(tap(
       (resp) => this.handleLoginResp(resp)
     ))
   }
@@ -138,15 +144,17 @@ export class AuthService {
     this.storeageService.remove('authTokenExpiry')
   }
 
-  handleLoginResp(data: any) {
-    let user = ReadUserDetails(data.user_details);
-    let token = 'Bearer ' + data.access_token;
+  handleLoginResp(r: BackendResponse<any>) {
+    let user = ReadUserDetails(r.data.user);
+    let token = 'Bearer ' + r.data.access_token;
     this._accessToken.next(token);
     this._loggedUser.next(user);
 
     //save into storage
     this.storeageService.store('authToken', token);
-    this.storeageService.store('authTokenExpiry', data.expires_at);
+    let expDt = new Date();
+    expDt.setSeconds(r.data.expires_in);
+    this.storeageService.store('authTokenExpiry', expDt);
     this.storeageService.store('user', user);
   }
 

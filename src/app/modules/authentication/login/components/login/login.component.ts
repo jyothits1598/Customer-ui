@@ -94,16 +94,15 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(data).pipe(finalize(() => this.loggingIn = false)).subscribe(
       (s) => { this.afterSignin() },
-      (e) => { this.handleErrors(e) }
+      (e) => { this.handleErrors(e); }
     )
   }
 
   afterSignin() {
-    if (!this.authService.loggedUser.firstName || !this.authService.loggedUser.lastName) { this.router.navigate(['/profile']); return; }
-    // this.route.snapshot.queryParams.redirect ?
-    //   this.router.navigateByUrl(this.route.snapshot.queryParams.redirect)
-    //   : this.router.navigate(['/'])
-    this.window.location.href = this.route.snapshot.queryParams.redirect || '/';
+    // if (!this.authService.loggedUser.firstName || !this.authService.loggedUser.lastName) { this.router.navigate(['/profile']); return; }
+    this.route.snapshot.queryParams.redirect ?
+      this.router.navigateByUrl(this.route.snapshot.queryParams.redirect)
+      : this.router.navigate(['/'])
   }
 
   handleErrors(error: any) {

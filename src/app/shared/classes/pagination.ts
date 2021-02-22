@@ -1,4 +1,4 @@
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError, finalize, map, tap } from 'rxjs/operators';
 import { ConfirmedOrderData, mapToOrderData, OrderDto } from 'src/app/core/model/cart';
 import { ReadStore, Store } from 'src/app/modules/stores/model/store';
@@ -45,7 +45,7 @@ export class StorePagination extends Pagination<Store>{
             return this.source(this.storeFilter).pipe(
                 finalize(() => this.isLoading = false),
                 tap(resp => { this.setPaginationData(resp) }),
-                catchError((error) => { this.hasErrors = true; return error }),
+                catchError((error) => { this.hasErrors = true; return throwError(error) }),
                 map((resp: any) => {
                     let newStores = [];
                     if (resp.data.stores) resp.data.stores.forEach(store => { newStores.push(ReadStore(store)) });

@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { Subject } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+import { BackendErrorResponse } from 'src/app/core/model/backend-resp';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { CustomValidators } from 'src/app/helpers/validators';
+import { CustomValidators, FormHelper } from 'src/app/helpers/validators';
 import { PasswordConfirmationGuard } from '../../../guards/password-confirmation.guard';
 
 @Component({
@@ -10,60 +13,54 @@ import { PasswordConfirmationGuard } from '../../../guards/password-confirmation
   templateUrl: './current-password.component.html',
   styleUrls: ['./current-password.component.scss']
 })
-export class CurrentPasswordComponent implements OnInit {
+export class CurrentPasswordComponent implements OnInit, OnDestroy {
   redirectUrl: string = null;
   errorRespMsg: string = null;
   loading: boolean = false;
-
-  isaddE: boolean = false;
+  unSub$ = new Subject<true>()
   ischangeE: boolean = false;
-  isaddM: boolean = false;
   ischangeM: boolean = false;
 
   isEmail: boolean = false;
   isMobiletext: boolean = false;
-  // current_url:string = "/current-password";
-  // current_url_status:boolean = false;
   passwordForm: FormGroup = new FormGroup({
-    password: new FormControl(null, CustomValidators.required('Password is required.'))
+    current_password: new FormControl(null, CustomValidators.required('Password is required.'))
   })
-  constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute, private passwordConfGuard: PasswordConfirmationGuard) {
-    // this.router.events.subscribe(
-    //   (event: any) => {
-    //     if (event instanceof NavigationEnd) {
-    //       this.current_url_status = false;
-    //       if(this.router.url && this.router.url.indexOf(this.current_url) > -1){
-    //         this.current_url_status = true;
-    //         console.log(this.current_url_status);
-    //       }
-    //     }
-    //   }
-    // );
-  }
+
+  setErrors = FormHelper.setErrors;
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private passwordConfGuard: PasswordConfirmationGuard) { }
 
   ngOnInit(): void {
-    // console.log(this.router.url);
-    this.isaddE = this.router.url.includes('add-email');
     this.ischangeE = this.router.url.includes('change-email');
-    this.isaddM = this.router.url.includes('add-mobile');
     this.ischangeM = this.router.url.includes('change-mobile');
     this.redirectUrl = this.activatedRoute.snapshot.queryParams.redirect;
   }
 
   confirmPassword() {
+    //error highlight on enter
+    this.passwordForm.markAllAsTouched();
     if (this.passwordForm.invalid) {
-      this.passwordForm.markAllAsTouched();
       return;
     }
 
     this.loading = true;
-    this.authService.confirmPassword(this.passwordForm.value.password).subscribe(
+    this.authService.confirmPassword(this.passwordForm.value.current_password).pipe(finalize(() => this.loading = false)).subscribe(
       () => {
         this.passwordConfGuard.passwordConfirmed = true;
         if (this.redirectUrl) this.router.navigateByUrl(this.redirectUrl)
       },
-      (errorResp) => { this.errorRespMsg = errorResp.error.error_msg[0]; this.loading = false; }
+      (errorResp: BackendErrorResponse) => { console.log(errorResp);this.setErrors(this.passwordForm, errorResp) }
     );
+  }
+
+  ngOnDestroy(): void {
+    this.unSub$.next(true);
+    this.unSub$.complete();
   }
 
 }

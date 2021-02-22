@@ -27,7 +27,7 @@ export class StoresDataService {
     return this.storeListCache.get(key);
   }
 
-  allStores(filter: StoreFilter): Observable<StorePagination> {
+  allStores(filter: StoreFilter): Observable<any> {
     console.log('try', filter);
     return this.restApiService.get(
       'api/stores/search' + this.filterToQuery(filter)
