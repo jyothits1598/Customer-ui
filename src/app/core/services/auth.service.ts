@@ -93,7 +93,7 @@ export class AuthService {
 
   login(data: { email?: string, mobile?: string, type: 'email' | 'mobile', password: string }) {
     let reqData: any = {
-      type: (data.type === 'email') ? 'email' : 'mobile_number',
+      type: (data.type === 'email') ? 'email' : 'mobile',
       password: data.password
     };
     if (data.type === 'email') reqData.email = data.email;

@@ -324,6 +324,12 @@ input.ng-invalid.ng-touched.error-highlight {
   cursor: pointer;
   text-align: center;
   color: var(--color-primary);
+  text-decoration: none;
+  outline: 0;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
 }
 .profile-save-text {
   font-size: 14px;
