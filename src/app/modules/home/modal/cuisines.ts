@@ -3,4 +3,5 @@ export interface Cuisines {
     name: string;
     hover: string,
     background: string
+   
 }

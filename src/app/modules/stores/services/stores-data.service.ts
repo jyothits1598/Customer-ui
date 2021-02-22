@@ -30,7 +30,7 @@ export class StoresDataService {
   allStores(filter: StoreFilter): Observable<any> {
     console.log('try', filter);
     return this.restApiService.get(
-      'api/stores/search' + this.filterToQuery(filter)
+      'api/v1/stores/search' + this.filterToQuery(filter)
     );
   }
 
@@ -67,22 +67,22 @@ export class StoresDataService {
     let result = '';
     let sort_by = '';
     if (filter) {
-      if (filter.name) result += 'name=' + filter.name;
+      if (filter.q) result += 'q=' + filter.q;
       if (filter.page) {
         if (result) {
           result += '&';
         }
         result += 'page=' + filter.page;
       }
-      if (filter.sort_by) {
-        sort_by = '&sort_by=' + filter.sort_by;
+      if (filter.sort_type) {
+        sort_by = '&sort_type=' + filter.sort_type;
       }
       if (filter.location) {
         if (result) {
           result += '&';
         }
         result +=
-          `lat=${filter.location.lat}&lng=${filter.location.lng}&distance=${
+          `lat=${filter.location.lat}&lon=${filter.location.lon}&distance=${
             filter.distance ? filter.distance : 5
           }` + sort_by;
       }

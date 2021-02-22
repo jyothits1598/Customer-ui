@@ -14,7 +14,7 @@ export interface StoreDetail {
     facebookUrl: string,
     isFavourite: boolean,
     categories: Array<StoreCategory>
-    latLng: { lat: number, lng: number }
+    latLng: { lat: number, lon: number }
     facebookLike: string,
     googleRating: string,
     typeOfCreation: 'Store shell' | string;
@@ -53,7 +53,7 @@ export function ReadStoreDetail(resp: any): StoreDetail {
         facebookUrl: data.facebook_url,
         isFavourite: data.is_favourite ? true : false,
         categories: categories,
-        latLng: { lat: data.latitude, lng: data.longitude },
+        latLng: { lat: data.latitude, lon: data.longitude },
         facebookLike: data.facebook_like ? FacebookCountConverstion(data.facebook_like) : 0,
         googleRating: data.google_rating ? data.google_rating : 0,
         typeOfCreation: data.type_of_creation
