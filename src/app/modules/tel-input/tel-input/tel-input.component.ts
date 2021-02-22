@@ -25,7 +25,7 @@ export class TelInputComponent implements OnInit, AfterViewInit, ControlValueAcc
 
   ngOnInit(): void {
     this.changeSubs = this.phoneControl.valueChanges.subscribe(() => {
-      this.onChange(this.phoneControl.value?.internationalNumber);
+      this.onChange(this.phoneControl.value?.internationalNumber.replaceAll(/\s/g, ''));
     })
 
     //updating validators
@@ -58,6 +58,6 @@ export class TelInputComponent implements OnInit, AfterViewInit, ControlValueAcc
     this.onTouched = fn;
   }
   setDisabledState?(isDisabled: boolean): void {
-    // throw new Error('Method not implemented.');
+    isDisabled ? this.phoneControl.disable() : this.phoneControl.enable();
   }
 }

@@ -30,7 +30,7 @@ export class CartService {
     private restApiService: RestApiService,
     private orderView: OrderViewControllerService
   ) {
-    this.authService.loggedUser$.subscribe((user) => {
+    this.authService.isLoggedIn$().subscribe((user) => {
       if (!this.presentCartData) {
         let savedData = this.storageService.get(this.storageIdentifier);
         if (savedData) this.addItem(savedData).subscribe();
@@ -151,7 +151,6 @@ export class CartService {
         }
       )
     }
-
     return result;
   }
 

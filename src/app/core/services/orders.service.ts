@@ -110,7 +110,7 @@ export class OrdersService {
     return this.restApiService.get('api/customer/orders?order_id=' + orderId).pipe(map((resp: any) => mapToOrderData(resp.data.orders[0])));
   }
 
-  getAllOrder(page: number): Observable<Pagination<OrderDto>> {
+  getAllOrder(page: number): Observable<any> {
     return this.restApiService.get('api/customer/orders/history?page=' + page);
   }
 

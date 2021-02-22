@@ -28,15 +28,14 @@ export class EnterPasswordComponent implements OnInit {
   }
 
   savePassword() {
+    this.passwordForm.markAllAsTouched();
     if (this.passwordForm.invalid) {
-      this.passwordForm.markAllAsTouched();
       return;
     }
     this.loading = true;
 
     let req: any = { ...this.verficationData };
     req.password = this.passwordForm.controls.password.value;
-    // req.value = this.verficationData.value;
 
     this.forgetPassServ.setPassword(req).pipe(finalize(() => { this.loading = false; })).subscribe(
       () => { this.passwordChanged.emit(null) },
@@ -44,7 +43,7 @@ export class EnterPasswordComponent implements OnInit {
     );
   }
 
-  handleError(resp){
+  handleError(resp) {
     this.errorMsg = Object.values(resp.error)[0][0];
   }
 

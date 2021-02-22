@@ -1,9 +1,9 @@
 <div class="edit-profile-page">
     <div class="profile-navbar">
         <div class="container">
-            <img src="assets/images/ico_arrow_left_white.png" class="arrow-back"  routerLink="/profile/security" >
-            <label class="text-heder" *ngIf="ischangeE" >
-                Change email 
+            <img src="assets/images/ico_arrow_left_white.png" class="arrow-back" routerLink="/profile/security">
+            <label class="text-heder" *ngIf="ischangeE">
+                Change email
             </label>
             <label class="text-heder" *ngIf="isaddE">
                 Add email
@@ -24,27 +24,23 @@
             </div>
             <div class="form-group form-group--margin">
                 <label class="label-inputs"> Email </label>
-                <input type="text" class="form-input error-highlight" placeholder="Email address" formControlName="email">
-                <div *ngIf="changeForm.controls.email.touched && changeForm.controls.email.errors" class="error-mez">
-                    <div> {{getErrors('email')}} </div>
-                </div>
+                <input type="text" class="form-input error-highlight" placeholder="Email address"
+                    formControlName="email">
+                <app-abs-control-error [control]="changeForm.controls.email"></app-abs-control-error>
             </div>
             <div class="row">
                 <div class="col-6 pad-ing-right">
-                    <input type="number" class="form-input error-highlight" placeholder="Enter code" formControlName="verificationCode"
-                    minlength="6" maxlength="6">
+                    <input type="number" class="form-input error-highlight" placeholder="Enter code"
+                        formControlName="email_token" minlength="6" maxlength="6">
                 </div>
                 <div class="col-6 pad-ing-left">
                     <send-code (click)="changeForm.controls.email.markAsTouched()"
-                    [data]="{purpose: 'change', type: 'email', value: (changeForm.controls.email.valid ? changeForm.controls.email.value : '')}"
-                    (error)="handleError($event)">
+                        [data]="changeForm.controls.email.valid ? {purpose: 'change', type: 'email', value: changeForm.controls.email.value} : null"
+                        (error)="setError(changeForm,$event)">
                     </send-code>
                 </div>
                 <div class="col-md-12">
-                    <div *ngIf="changeForm.controls.verificationCode.touched && changeForm.controls.verificationCode.errors"
-                    class="error-mez">
-                        <div> {{getErrors('verificationCode')}} </div>
-                    </div>
+                    <app-abs-control-error [control]="changeForm.controls.email_token"></app-abs-control-error>
                 </div>
             </div>
             <div class="row">
@@ -53,7 +49,7 @@
                         <button type="submit" class="std-button std-button--blue">
                             <p style="margin:0" *ngIf="!loading; else loadingTemp">Next</p>
                             <ng-template #loadingTemp>
-                                 <img src="assets/images/loader_white_24.gif" alt="" style="height: 24px;"> Submitting..
+                                <img src="assets/images/loader_white_24.gif" alt="" style="height: 24px;"> Submitting..
                             </ng-template>
                         </button>
                     </div>

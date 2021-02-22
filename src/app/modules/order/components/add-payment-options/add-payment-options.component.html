@@ -11,8 +11,8 @@
     <div class="cdk-overlay-container">
         <div class="cdk-overlay-backdrop cdk-overlay-dark-backdrop cdk-overlay-backdrop-showing"></div>
         <div class="cdk-global-overlay-wrapper" dir="ltr" style="justify-content: center; align-items: center;">
-            <div class="cdk-overlay-pane">
-                <div class="popup-window">
+            <div class="cdk-overlay-pane" >
+                <div class="popup-window max-width">
                     <app-add-card [parentEvent]="'order'" (messageEvent)="receiveMessage($event)"></app-add-card>
                 </div>
             </div>

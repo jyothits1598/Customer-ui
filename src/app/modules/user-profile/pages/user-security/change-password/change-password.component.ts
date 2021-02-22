@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BackendErrorResponse, BackendResponse } from 'src/app/core/model/backend-resp';
 import { SnackBarService } from 'src/app/core/services/snack-bar.service';
-import { CustomValidators } from 'src/app/helpers/validators';
+import { CustomValidators, FormHelper } from 'src/app/helpers/validators';
 import { UserProfileDataService } from '../../../services/user-profile-data.service';
 
 @Component({
@@ -15,14 +16,16 @@ export class ChangePasswordComponent implements OnInit {
   loading: boolean = false;
   changeErrorMsg: string = null;
 
+  setErrors = FormHelper.setErrors
+
   constructor(private userProfileDataService: UserProfileDataService,
     private snackBarService: SnackBarService,
     private router: Router,
     private activatedRoute: ActivatedRoute) { }
 
   passwordForm: FormGroup = new FormGroup({
-    currentPassword: new FormControl(null, CustomValidators.required('Current password is required')),
-    newPassword: new FormControl(null, CustomValidators.required('New password is required'))
+    current_password: new FormControl(null, CustomValidators.required('Current password is required')),
+    new_password: new FormControl(null, CustomValidators.required('New password is required'))
   })
 
   ngOnInit(): void {
@@ -41,17 +44,12 @@ export class ChangePasswordComponent implements OnInit {
     }
     this.loading = true;
 
-    this.userProfileDataService.changePassword(this.passwordForm.value.currentPassword, this.passwordForm.value.newPassword).subscribe(
-      () => {
-        this.snackBarService.success('Password changed successfully.'),
-          this.router.navigate(['../'], {relativeTo: this.activatedRoute})
+    this.userProfileDataService.changePassword(this.passwordForm.value.current_password, this.passwordForm.value.new_password).subscribe(
+      (r: BackendResponse<any>) => {
+        this.snackBarService.success(r.message),
+          this.router.navigate(['../'], { relativeTo: this.activatedRoute })
       },
-      // (error) => { this.changeErrorMsg = error.error_msg[0]; this.loading = false; }
-      (err) => { this.loading = false; this.handleError(err) }
+      (err: BackendErrorResponse) => { this.loading = false; this.setErrors(this.passwordForm, err) }
     )
-  }
-
-  handleError(errorResp) {
-    if (errorResp.error.error_msg) this.changeErrorMsg = errorResp.error.error_msg[0];
   }
 }

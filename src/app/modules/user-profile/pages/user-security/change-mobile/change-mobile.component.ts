@@ -1,8 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subject, Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { BackendErrorResponse } from 'src/app/core/model/backend-resp';
+import { ReadUserDetails } from 'src/app/core/model/user';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { CustomValidators } from 'src/app/helpers/validators';
+import { SnackBarService } from 'src/app/core/services/snack-bar.service';
+import { CustomValidators, FormHelper } from 'src/app/helpers/validators';
 import { UserProfileDataService } from '../../../services/user-profile-data.service';
 
 @Component({
@@ -10,17 +16,21 @@ import { UserProfileDataService } from '../../../services/user-profile-data.serv
   templateUrl: './change-mobile.component.html',
   styleUrls: ['./change-mobile.component.scss']
 })
-export class ChangeMobileComponent implements OnInit {
+export class ChangeMobileComponent implements OnInit, OnDestroy {
   errorMessage;
   loading: boolean = false;
   isaddM: boolean = false;
   ischangeM: boolean = false;
-  
+
+  unSub$ = new Subject<true>();
+  setError = FormHelper.setErrors;
+
   constructor(
     private userProfileDataService: UserProfileDataService,
     private router: Router,
     private route: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private sb: SnackBarService
   ) { }
 
   ngOnInit(): void {
@@ -29,10 +39,10 @@ export class ChangeMobileComponent implements OnInit {
   }
 
   changeForm: FormGroup = new FormGroup({
-    mobile: new FormControl(null, [
+    mobile_number: new FormControl(null, [
       CustomValidators.required('Mobile number is required.'),
     ]),
-    verificationCode: new FormControl(null, [
+    mobile_token: new FormControl(null, [
       CustomValidators.required('Please enter verification code'),
     ])
   })
@@ -42,21 +52,20 @@ export class ChangeMobileComponent implements OnInit {
   }
 
   changeMobile() {
+    //error highlight on enter
+    this.changeForm.markAllAsTouched();
     if (this.changeForm.invalid) {
-      this.changeForm.markAllAsTouched();
       return;
     }
     this.loading = true;
-    this.userProfileDataService.changeMobile(this.changeForm.value.mobile, this.changeForm.value.verificationCode).subscribe(
-      () => { this.authService.setPhoneNumber(this.changeForm.value.mobile); this.router.navigate(['../'], { relativeTo: this.route }) },
-      (err) => { this.loading = false; this.handleError(err) }
+    this.userProfileDataService.changeMobile(this.changeForm.value.mobile_number, this.changeForm.value.mobile_token).pipe(takeUntil(this.unSub$)).subscribe(
+      (u) => { this.authService.updateUser(ReadUserDetails(u.data)); this.sb.success(u.message); this.router.navigate(['../'], { relativeTo: this.route }) },
+      (err: BackendErrorResponse) => { this.loading = false; this.setError(this.changeForm, err) }
     )
   }
 
-  handleError(errorResp) {
-    if (errorResp.error.error_msg) this.errorMessage = errorResp.error.error_msg[0];
-    if (errorResp.error.mobile_number) this.errorMessage = errorResp.error.mobile_number[0];
-    if (errorResp.error.verificationCode) this.changeForm.controls.verificationCode.setErrors({ backend: errorResp.error.verificationCode[0] });
-    if (errorResp.error.mobile) this.changeForm.controls.mobile.setErrors({ backend: errorResp.error.mobile[0] })
+  ngOnDestroy(): void {
+    this.unSub$.next(true);
+    this.unSub$.complete();
   }
 }

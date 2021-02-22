@@ -2,15 +2,16 @@
     <div class="profile-navbar">
         <div class="container">
             <span class="profile-save-text">
-                <img src="assets/images/ico_arrow_left_white.png" routerLink="/profile/security" style="padding-right:16px;cursor: pointer;outline: 0;border:0;"> 
-                <label class="text-heder" *ngIf="ischangeM" >
+                <img src="assets/images/ico_arrow_left_white.png" routerLink="/profile/security"
+                    style="padding-right:16px;cursor: pointer;outline: 0;border:0;">
+                <label class="text-heder" *ngIf="ischangeM">
                     Change mobile number
                 </label>
                 <label class="text-heder" *ngIf="isaddM">
                     Add mobile number
                 </label>
             </span>
-            <div class="center-logo-profile only-big" routerLink="/" >
+            <div class="center-logo-profile only-big" routerLink="/">
                 <img src="assets/svg/logo_white.svg">
             </div>
         </div>
@@ -32,41 +33,36 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <tel-input formControlName="mobile"></tel-input>
+                        <tel-input formControlName="mobile_number"></tel-input>
                         <!-- <ngx-intl-tel-input [cssClass]="'form-input'" [enablePlaceholder]="true" [onlyCountries]="['in']" [preferredCountries]="['au']" [enableAutoCountrySelect]="true" [separateDialCode]="true" formControlName="mobile" [phoneValidation]="true" ></ngx-intl-tel-input> -->
                     </div>
                 </div>
-                <div *ngIf="changeForm.controls.mobile.touched && changeForm.controls.mobile.invalid" class="error-mez">
-                    <div> {{getErrors('mobile')}} </div>
-                </div>
+                <app-abs-control-error [control]="changeForm.controls.mobile_number"></app-abs-control-error>
             </div>
             <div class="row">
                 <div class="col-6 pad-ing-right">
-                    <input type="number" class="form-input error-highlight" placeholder="Enter code" formControlName="verificationCode"
-                    minlength="6" maxlength="6">
+                    <input type="number" class="form-input error-highlight" placeholder="Enter code"
+                        formControlName="mobile_token" minlength="6" maxlength="6">
                     <div class="row">
                         <div class="col-md-12">
-                            <div *ngIf="changeForm.controls.verificationCode.touched && changeForm.controls.verificationCode.errors"
-                            class="error-mez">
-                                <div> {{getErrors('verificationCode')}} </div>
-                            </div>
+                            <app-abs-control-error [control]="changeForm.controls.mobile_token"></app-abs-control-error>
                         </div>
                     </div>
                 </div>
                 <div class="col-6 pad-ing-left">
-                    <send-code (click)="changeForm.controls.mobile.markAsTouched()"
-                    [data]="{purpose: 'change', type: 'mobile', value: (changeForm.controls.mobile.valid ? changeForm.controls.mobile.value : '')}"
-                    (error)="handleError($event)">
+                    <send-code (click)="changeForm.controls.mobile_number.markAsTouched()"
+                        [data]="changeForm.controls.mobile_number.valid ? {purpose: 'change', type: 'mobile', value: changeForm.controls.mobile_number.value } : null"
+                        (error)=" setError(this.changeForm, $event)">
                     </send-code>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group" style="margin-top:24px;">
-                        <button type="submit" class="std-button std-button--blue">
+                        <button type="submit" class="std-button std-button--blue" [disabled]="loading">
                             <p style="margin:0" *ngIf="!loading; else loadingTemp"> Next </p>
                             <ng-template #loadingTemp>
-                                <img src="assets/images/loader_white_24.gif" alt="" style="height: 24px;"> Submitting..
+                                <img src="assets/images/loader_white_24.gif" alt="" style="height: 24px;">
                             </ng-template>
                         </button>
                     </div>

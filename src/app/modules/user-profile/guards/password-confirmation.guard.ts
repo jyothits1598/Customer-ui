@@ -10,8 +10,10 @@ export class PasswordConfirmationGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    // this.router.navigateByUrl('profile/security/current-password', { queryParams: { redirect: state.url } });
-    if (this.passwordConfirmed) return true;
+    if (this.passwordConfirmed) {
+      this.passwordConfirmed = false;
+      return true
+    }
     else { this.router.navigateByUrl('profile/security/current-password' + '?redirect=' + state.url); return false; }
   }
 

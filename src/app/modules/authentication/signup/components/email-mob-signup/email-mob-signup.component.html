@@ -1,9 +1,5 @@
 <div class="margins-center">
-    <form [formGroup]="registrationForm" (ngSubmit)="signup()">
-        <!-- <h3 class="std-heading-4"> Sign up with mobile </h3>
-        <div class="paragraph14" style="margin-bottom: 24px;">
-            We’ll send a verification code to your number
-        </div> -->
+    <!-- <form [formGroup]="registrationForm" (ngSubmit)="signup()">
         <ng-template #emailInput>
             <h3 class="std-heading-4 text-center"> Sign up with email </h3>
             <div class="paragraph14 text-center" style="margin-bottom: 24px;">
@@ -47,13 +43,10 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <!-- <ngx-intl-tel-input [cssClass]="'form-input'" [enablePlaceholder]="true" [onlyCountries]="['in']" [preferredCountries]="['au']" [enableAutoCountrySelect]="true" [separateDialCode]="true" formControlName="mobile" [phoneValidation]="true" ></ngx-intl-tel-input> -->
+                       
                         <tel-input formControlName="mobile"></tel-input>
                     </div>
                 </div>
-                <!-- <input type="number" class="form-input error-highlight" placeholder="Mobile number"
-                    formControlName="mobile" minlength="10" maxlength="10" > -->
-
                 <div *ngIf="controls.mobile.touched && controls.mobile.invalid" class="error-mez">
                     <div> {{getErrors('mobile')}} </div>
                 </div>
@@ -95,5 +88,100 @@
             By creating a menuzapp account you're agreeing to our <span class="mb-ctr"><br></span><b  style="color:#353FA8;cursor: pointer;">
                 Privacy Policy </b> and <b style="color:#353FA8;cursor: pointer;"> Terms of Service </b> 
         </div>
+    </form> -->
+    <form [formGroup]="emailForm" (ngSubmit)="validateEmail()" *ngIf="!verifiedEmail; else secondPage">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group form-group--margin">
+                    <div class="label-inputs"> First Name </div>
+                    <input formControlName="first_name" type="text" class="form-input error-highlight"
+                        placeholder="First Name">
+                    <app-abs-control-error [control]="emailControls.first_name"></app-abs-control-error>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group form-group--margin">
+                    <div class="label-inputs"> Last Name </div>
+                    <input type="text" formControlName="last_name" class="form-input error-highlight"
+                        placeholder="Last Name">
+                    <app-abs-control-error [control]="emailControls.last_name"></app-abs-control-error>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group form-group--margin">
+                    <div class="label-inputs"> Email </div>
+                    <input type="text" formControlName="email" class="form-input error-highlight"
+                        placeholder="Email address">
+                    <app-abs-control-error [control]="emailControls.email"></app-abs-control-error>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 pad-ing-right" style="margin-bottom: 24px;">
+                <input type="number" formControlName="email_token" class="form-input error-highlight"
+                    placeholder="Enter code" minlength="6" maxlength="6">
+                <app-abs-control-error [control]="emailControls.email_token"></app-abs-control-error>
+            </div>
+            <div class=" col-6 pad-ing-left" style="margin-bottom: 24px;">
+                <send-code (error)="setErrors(emailForm,$event)"
+                    [data]="emailControls.email.valid ? {type: 'email', purpose: 'signup', value: emailControls.email.value} : null">
+                </send-code>
+            </div>
+        </div>
+        <div class="form-group" style="margin-bottom: 24px;">
+            <button type="submit" class="btn std-button std-button--blue" [disabled]="loading">
+                <span *ngIf="!loading; else ldr">Next</span>
+            </button>
+        </div>
     </form>
+    <ng-template #secondPage>
+        <form [formGroup]="mobForm" (ngSubmit)="signup()">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group form-group--margin">
+                        <div class="label-inputs"> Mobile </div>
+                        <tel-input formControlName="mobile_number"></tel-input>
+                        <app-abs-control-error [control]="mobControls.mobile_number"></app-abs-control-error>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-6 pad-ing-right" style="margin-bottom: 24px;">
+                    <input type="number" formControlName="mobile_token" class="form-input error-highlight"
+                        placeholder="Enter code" minlength="6" maxlength="6">
+                    <app-abs-control-error [control]="mobControls.mobile_token"></app-abs-control-error>
+                </div>
+                <div class="col-6 pad-ing-left" style="margin-bottom: 24px;">
+                    <send-code (error)="setErrors(mobForm,$event)"
+                        [data]="mobControls.mobile_number.valid ? {type: 'mobile', purpose: 'signup', value: mobControls.mobile_number.value} : null">
+                    </send-code>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group form-group--margin">
+                        <div class="label-inputs"> Password </div>
+                        <input type="text" class="form-input error-highlight" formControlName="password"
+                            placeholder="Password">
+                        <app-abs-control-error [control]="mobControls.password"></app-abs-control-error>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" style="margin-bottom: 24px;">
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn std-button std-button--transparency" (click)="back()">
+                        Back
+                    </button>
+                    <button type="submit" class="btn std-button std-button--blue" [disabled]="loading">
+                        <span *ngIf="!loading; else ldr">Continue</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </ng-template>
 </div>
+<ng-template #ldr><img src="assets/images/loader_white_24.gif"></ng-template>
+<!-- <ngx-intl-tel-input [cssClass]="'form-input'" [enablePlaceholder]="true" [onlyCountries]="['in']" [preferredCountries]="['au']" [enableAutoCountrySelect]="true" [separateDialCode]="true" formControlName="mobile" [phoneValidation]="true" ></ngx-intl-tel-input> -->

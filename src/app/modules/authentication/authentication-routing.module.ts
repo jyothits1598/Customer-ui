@@ -11,7 +11,7 @@ const routes: Routes = [
     children: [
       {
         path: 'forgot-password',
-        canActivate: [NotSignedInGuard],
+        // canActivate: [NotSignedInGuard],
         loadChildren: () => import('src/app/modules/authentication/forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule)
       },
       {
