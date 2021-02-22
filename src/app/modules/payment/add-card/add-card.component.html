@@ -1,0 +1,102 @@
+<div  *ngIf="parentEvent == 'profile'"  class="profile-navbar-setting">
+    <div class="container">
+        <div class="d-flex justify-content-between">
+            <div class="pic-header">
+                <img src="assets/svg/ico_arrow_left.svg" (click)="backToPaymentMethod()"
+                    style="padding-right:16px;cursor: pointer;outline:0">Add Card
+            </div>
+            <div  id="sq-creditcard" class="pic-header1" style="cursor: pointer;" (click)="this.requestCardNonce($event)" >
+                <img src="assets/svg/ico_check_right.svg" style="padding-right:8px;"> Save &nbsp;<img
+                    *ngIf="saving" src="assets/images/loader_white_24.gif">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="parentEvent == 'order'" >
+    <div class="popup-header">
+        <svg   (click)="backToPaymentMethod()" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 6L6 18" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M6 6L18 18" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <label class="f-16 f-b ml-16">Add Card</label>
+        
+    </div>
+    <hr>
+</div>
+
+ <div class="add-card-body">
+    <form [formGroup]="addCardForm">
+        <div class="mct-16">
+            <label class="label-inputs">Name on card</label>
+            <input formControlName="nameOnCard" type="text" class="form-input">
+            <span class="error-mez" *ngIf="addCardForm.controls.nameOnCard.touched && addCardForm.controls.nameOnCard.invalid">
+                Name on card is required.
+            </span>
+        </div>
+        <!-- <div class="mct-16">
+            <label class="label-inputs">Billing address</label>
+            <input formControlName="billingAddress" type="text" class="form-input">
+            <span class="error-mez" *ngIf="addCardForm.controls.billingAddress.touched && addCardForm.controls.billingAddress.invalid">
+                Billing address is required.
+            </span>
+        </div> -->
+        <div class="mct-16">
+            <label class="label-inputs">Billing country</label>
+            <select formControlName="billingCountry" class="form-input error-highlight">
+                <option value="AU">Australia</option>
+            </select>
+            <span class="error-mez" *ngIf="addCardForm.controls.billingCountry.touched && addCardForm.controls.billingCountry.invalid">
+                Billing address is required.
+            </span>
+        </div>
+    </form>  
+    <div class="mct-16">
+        <label  class="label-inputs" for="sq-card-number">Card Number</label>
+        <div id="sq-card-number"></div>
+        <span class="error-mez" id="cardNumber">
+        </span>
+    </div>
+    <div style="margin-top:8px;">
+        <div class="d-flex justify-content-between">
+            <div class="pr-2 date-width">  
+                <label class="label-inputs" for="sq-expiration-date">Expiry date</label>
+                <div id="sq-expiration-date"></div>
+                <span class="error-mez" id="expirationDate">
+                 </span>
+            </div>
+            <div class="pr-2 date-width">
+                <label  class="label-inputs" for="sq-cvv">CVV/CID</label>
+                <div id="sq-cvv"></div>
+                <span class="error-mez" id="cvv">
+                </span>
+            </div>
+            <div class="date-width">
+                <label class="label-inputs" for="sq-postal-code">Postal Code</label>
+                <div id="sq-postal-code"></div>
+                <span class="error-mez" id="postalCode">
+                </span>
+            </div>
+        </div>      
+    </div>    
+    
+    <input type="hidden" id="sq-id" name="sq-id">
+    <input type="hidden" id="card-nonce" name="nonce">
+    <input type="hidden" id="postal-code" name="postal-code">
+    <input type="hidden" id="nonce-form" (click)="addPaymentCard()"> 
+</div>
+<div *ngIf="parentEvent == 'order'" class="cart-card cart-anim continue-button-index card-button-size" >
+    <div class="cart-button">
+        <div class="row">
+            <div class="col-sm-12 col-12 text-center" id="sq-creditcard" (click)="this.requestCardNonce($event)">
+                <span class="cart-text cart-count">
+                    <span *ngIf="!saving">Add card </span>
+                    <img *ngIf="saving" src="assets/images/loader_white_24.gif">
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -78,6 +78,7 @@ input::-webkit-input-placeholder {
   .profile-radius {
     padding: 16px;
     margin-top:48px;
+    
   }
   .security-card-pwd {
     margin-top: 24px;
@@ -193,7 +194,8 @@ input::-webkit-input-placeholder {
   }
   .profile-radius {
     padding: 16px;
-    margin-top:48px;
+    margin: 48px auto 25px;
+    max-width: 432px;
   }
   .security-card-pwd {
     margin: 72px auto 25px;
@@ -309,7 +311,8 @@ input::-webkit-input-placeholder {
   }
   .profile-radius {
     padding: 16px;
-    margin-top:48px;
+    margin: 48px auto 25px;
+    max-width: 432px;
   }
   .security-card-pwd {
     margin: 72px auto 25px;
@@ -751,6 +754,19 @@ input[class="cb"]:checked + p:before {
   width:40px;
   height:40px;
 }
+.menu-icon-mobile-active {
+  background-image: url("assets/svg/mobile/ico_menu_m_active.svg");
+  width:40px;
+  height:40px;
+}
 .errorText {
   color:red;
+}
+.sq-input{
+  border:2px solid #F2F2F2;
+  border-radius: 8px;
+}
+
+.sq-input:hover{
+  border:2px solid var(--color-primary);
 }

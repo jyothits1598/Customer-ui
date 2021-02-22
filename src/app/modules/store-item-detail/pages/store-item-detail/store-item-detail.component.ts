@@ -1,19 +1,18 @@
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { Location } from '@angular/common';
-import { templateVisitAll } from '@angular/compiler';
-import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, ViewChild, ElementRef, TemplateRef } from '@angular/core';
-import { AbstractControl, FormArray, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component, Input, OnChanges, OnDestroy, OnInit, ViewChild, ElementRef, TemplateRef, ViewChildren, QueryList } from '@angular/core';
+import { FormArray, FormControl } from '@angular/forms';
 import { merge, Subject } from 'rxjs';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { finalize, takeUntil } from 'rxjs/operators';
 import { CartData } from 'src/app/core/model/cart';
 import { CartService } from 'src/app/core/services/cart.service';
-import { LayoutService } from 'src/app/core/services/layout.service';
 import { ModalService } from 'src/app/core/services/modal.service';
 import { OrderPages, OrderViewControllerService } from 'src/app/core/services/order-view-controller.service';
 import { OrdersService } from 'src/app/core/services/orders.service';
+import { ScrollService } from 'src/app/core/services/scroll.service';
 import { SnackBarService } from 'src/app/core/services/snack-bar.service';
+import { ItemModifierFormControlComponent } from '../../components/item-modifier-form-control.component';
 import { ItemModifier, StoreItemDetail } from '../../model/store-item-detail';
 import { StoreItemDataService } from '../../services/store-item-data.service';
 
@@ -41,6 +40,7 @@ import { StoreItemDataService } from '../../services/store-item-data.service';
 export class StoreItemDetailComponent implements OnInit, OnChanges, OnDestroy {
   reqSubs: Subscription;
   selectedvalueChangeSubs: Subscription;
+  @ViewChildren('mod') mods: QueryList<ItemModifierFormControlComponent>
   @ViewChild('observationElement', { read: ElementRef }) obsElement: ElementRef;
   @ViewChild('orderExistsTemp', { read: TemplateRef }) oETemp: TemplateRef<any>;
 
@@ -58,6 +58,8 @@ export class StoreItemDetailComponent implements OnInit, OnChanges, OnDestroy {
 
   unSubscribe$: Subject<boolean> = new Subject<boolean>();
 
+  static_image_width = '?w=700,q=50,f=webp';
+
   show = true;
 
   constructor(private storeItemData: StoreItemDataService,
@@ -66,7 +68,8 @@ export class StoreItemDetailComponent implements OnInit, OnChanges, OnDestroy {
     private ov: OrderViewControllerService,
     private sBSrv: SnackBarService,
     private ordSrv: OrdersService,
-    private mdlSrv: ModalService) {
+    private mdlSrv: ModalService,
+    private scroll: ScrollService) {
     this.makeCalculations = this.cartService.makeCalculations;
   }
   ngOnInit(): void {
@@ -102,12 +105,17 @@ export class StoreItemDetailComponent implements OnInit, OnChanges, OnDestroy {
 
   addToCart() {
     if (!this.isStoreOpen) {
-      this.mdlSrv.openTemplateModal(this.oETemp, { data: { heading: 'Store is closed.', message: 'Sorry, no orders are being accepted now.' } })
+      this.mdlSrv.openTemplateModal(this.oETemp, { data: { heading: 'Store is closed.', message: 'Sorry, no orders are being accepted now.' } });
       return;
     }
 
     if (this.selectedOptions.invalid) {
       this.selectedOptions.markAllAsTouched();
+      
+      //find the first invalid modifier
+      const inval = this.mods.find(m => !m.isValid());
+      this.scroll.scrollTo(inval.elem.nativeElement);
+
       return;
     }
 

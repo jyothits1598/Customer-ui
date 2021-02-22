@@ -10,11 +10,12 @@ import { ItemCountComponent } from './components/item-count/item-count.component
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ShareModule } from '../share/share.module';
 import { StoreHeartModule } from '../store-heart/store-heart.module';
+import { ItemModifierFormControlComponent } from './components/item-modifier-form-control.component';
 
 
 
 @NgModule({
-  declarations: [StoreItemDetailComponent, StoreItemModifierComponent, ItemModiferSelectorRadioComponent, ModifierSelectionStatusComponent, ItemCountComponent],
+  declarations: [StoreItemDetailComponent, StoreItemModifierComponent, ItemModiferSelectorRadioComponent, ModifierSelectionStatusComponent, ItemCountComponent, ItemModifierFormControlComponent],
   imports: [
     CommonModule,
     SharedModule,

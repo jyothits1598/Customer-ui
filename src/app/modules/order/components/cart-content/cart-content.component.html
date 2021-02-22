@@ -1,6 +1,9 @@
 <div class="order-cart" *ngIf="cartData$ | async; let cartData; else emptyTemplate">
     <h4 class="f-20 f-b mc-4">Your Order</h4>
-    <p class="f-14-blue text-capitalize">{{cartData.storeName}}</p>
+    <a [routerLink]="'/restaurants/'+cartData.storeId" (click)="close()">
+        <p class="f-14-blue text-capitalize" >{{cartData.storeName}}</p>
+    </a>
+    <!-- [routerLink]="'/resturants/'+cartData.storeId" -->
     <!--
                 Select order type
             -->
@@ -30,7 +33,7 @@
             -->
     <div>
         <div *ngIf="itemDelInProg" class="right-content content-opacity"></div>
-        <div class="cart-items mct-16" *ngFor="let item of cartData.items">
+        <div class="cart-items mct-16" *ngFor="let item of cartData.items" >
             <div class="d-flex justify-content-between">
                 <div class="d-flex">
                     <label class="f-16 f-b pr-4">{{item.quantity}}x</label>
@@ -43,7 +46,7 @@
                         <label class="f-14 mr-15">${{makeCalculations(item.item.basePrice, item.item.modifiers,
                             item.quantity)}}
                         </label>
-                        <img (click)="deleteItem(item.item.id)" src="assets/images/cart/exclude.svg">
+                        <img (click)="deleteItem(item.item.id)" src="assets/images/cart/exclude.svg" style="cursor: pointer;">
                     </div>
                 </div>
             </div>
@@ -60,14 +63,6 @@
         Surcharge
     -->
     <ng-container *ngIf="orderSummary$ | async; let summary">
-
-        <div class="order-surcharge">
-            <div class="d-flex justify-content-between">
-                <label class="f-16-blur">Surcharge</label>
-                <span class="f-14 f-b">${{summary.surcharge}}</span>
-            </div>
-        </div>
-        <hr class="m14px">
         <!--
             Surcharge
         -->
@@ -75,6 +70,16 @@
             <div class="d-flex justify-content-between">
                 <label class="f-16-blur">Sub total</label>
                 <span class="f-14 f-b">${{summary.subtotal}}</span>
+            </div>
+        </div>
+        <hr class="m14px">
+          <!--
+            Sub total
+        -->
+        <div class="order-surcharge">
+            <div class="d-flex justify-content-between">
+                <label class="f-16-blur">Surcharge</label>
+                <span class="f-14 f-b">${{summary.surcharge}}</span>
             </div>
         </div>
         <hr class="m14px">

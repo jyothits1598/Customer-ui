@@ -4,6 +4,7 @@ import { Observable, Subject } from 'rxjs';
 import { finalize, takeUntil } from 'rxjs/operators';
 import { CartData, OrderSummary } from 'src/app/core/model/cart';
 import { CartService } from 'src/app/core/services/cart.service';
+import { OrderViewControllerService } from 'src/app/core/services/order-view-controller.service';
 import { ItemModifier } from 'src/app/modules/store-item-detail/model/store-item-detail';
 
 @Component({
@@ -14,7 +15,8 @@ import { ItemModifier } from 'src/app/modules/store-item-detail/model/store-item
 export class CartContentComponent implements OnInit, OnDestroy {
   constructor(
     private cartService: CartService,
-    private router: Router
+    private router: Router,
+    private orderView: OrderViewControllerService
   ) { }
   cartData$: Observable<CartData>;
   orderSummary$: Observable<OrderSummary>;
@@ -46,6 +48,10 @@ export class CartContentComponent implements OnInit, OnDestroy {
   modifiersToOptionNameArr(mods: Array<ItemModifier>) {
     let m = mods.map(mod => mod.options.map(op => op.name));
     return Array.prototype.concat.apply([], m);
+  }
+  
+  close() {
+    this.orderView.showPage(null);
   }
 
 }

@@ -12,9 +12,10 @@ import { RouterModule } from '@angular/router';
 import { GoogleRatingModule } from '../google-rating/google-rating.module';
 import { FacebookLikeCountModule } from '../facebook-like-count/facebook-like-count.module';
 import { ShareModule } from '../share/share.module';
+import { GoogleRatingComponent } from './components/google-rating/google-rating.component';
 
 @NgModule({
-  declarations: [StoreListComponent, StoreCardComponent, NearbyStoresComponent, StoreFavouritesComponent],
+  declarations: [StoreListComponent, StoreCardComponent, NearbyStoresComponent, StoreFavouritesComponent, GoogleRatingComponent],
   imports: [
     CommonModule,
     SharedModule,

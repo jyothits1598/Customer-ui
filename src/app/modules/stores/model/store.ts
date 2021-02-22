@@ -15,7 +15,7 @@ export interface Store {
     isFavourite: boolean,
     latLng: { lat: number, lng: number }
     facebookLike:string,
-    googleRating:string
+    googleRating:number
 }
 
 export function ReadStore(data: any): Store {
@@ -25,7 +25,7 @@ export function ReadStore(data: any): Store {
         cuisine: data.cuisine_name,
         openingHours: ReadAvailability(data.opening_hours),
         logo: data.store_logo,
-        storeImage:data.store_image,
+        storeImage: data.store_image,
         address: data.store_address,
         distance: data.distance,
         description: data.description,
@@ -34,6 +34,6 @@ export function ReadStore(data: any): Store {
         latLng: { lat: data.latitude, lng: data.longitude },
         isFavourite: data.is_favourite ? true : false,
         facebookLike:data.facebook_like ? FacebookCountConverstion(data.facebook_like) : 0,
-        googleRating:data.google_rating ? data.google_rating : 0
+        googleRating:parseFloat(data.google_rating) ? parseFloat(data.google_rating) : 0
     };
 }

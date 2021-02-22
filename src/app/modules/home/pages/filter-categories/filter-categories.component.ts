@@ -14,7 +14,7 @@ export class FilterCategoriesComponent implements OnInit, OnDestroy, AfterViewIn
   cuisines = new Array<Cuisines>();
   unSub$ = new Subject<true>();
   interObs = new IntersectionObserver(this.handleInterSection.bind(this));
-
+  static_image_width = '?w=100,q=50,f=webp';
   leftActive: boolean = true;
   rightActive: boolean = true;
 
