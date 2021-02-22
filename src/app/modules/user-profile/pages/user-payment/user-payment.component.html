@@ -1,0 +1,10 @@
+<ng-template appNavbarHeadingContent>
+    <div class="title-content profile-save-text" style="cursor: text;"> Payment </div>
+</ng-template>
+<div class="profile-radius">
+    <app-payment-method *ngIf="!editMode; else editTemplate" (messageEvent)="receiveMessage($event)" ></app-payment-method>
+
+    <ng-template #editTemplate>
+        <app-add-card  [parentEvent]="'profile'" (messageEvent)="receiveMessage($event)"></app-add-card>
+    </ng-template>
+</div>
