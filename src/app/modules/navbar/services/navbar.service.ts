@@ -1,8 +1,5 @@
 import { Injectable, TemplateRef } from '@angular/core';
-import { BehaviorSubject, combineLatest, merge } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
-import { ScrollService } from 'src/app/core/services/scroll.service';
-import { fileURLToPath } from 'url';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -13,17 +10,10 @@ export class NavbarService {
     null
   );
 
-  private lastPinnedYPos = 0;
-
   headingTemplate$ = this.headingTemplate.asObservable();
-  constructor(private scollService: ScrollService) {}
+  constructor() {}
 
   setTemplate(temp: TemplateRef<any>) {
     this.headingTemplate.next(temp);
   }
-}
-
-enum Direction {
-  UP,
-  DOWN,
 }

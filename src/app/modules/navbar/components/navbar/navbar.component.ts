@@ -17,6 +17,7 @@ import { NavbarService } from '../../services/navbar.service';
 import { ScrollService } from 'src/app/core/services/scroll.service';
 import { map, takeUntil } from 'rxjs/operators';
 import { Direction } from 'src/app/core/model/direction.enum';
+import { SearchDataService } from 'src/app/modules/search/services/search-data.service';
 
 @Component({
   selector: 'app-navbar',
@@ -57,7 +58,8 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     private layoutService: LayoutService,
     private navbarService: NavbarService,
     private cdr: ChangeDetectorRef,
-    private scrollService: ScrollService
+    private scrollService: ScrollService,
+    private searchDataService: SearchDataService
   ) {}
 
   ngOnInit(): void {
@@ -79,22 +81,21 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
             this.scrolledDistance += newYPos - this.prevYPos;
           }
 
-          if (this.isShowing && this.scrolledDistance > this.limit) {
-            this.isShowing = false;
-            console.log('hiding...');
-            this.navbarStyle$.next({
-              top: '-8em',
-              position: 'fixed',
-              transition: 'top 0.3s',
-            });
-          } else if (
+          if (
+            this.searchDataService.overlayOpen ||
             newYPos < this.limit ||
             (!this.isShowing && this.scrolledDistance < -this.limit)
           ) {
-            console.log('showing!');
             this.isShowing = true;
             this.navbarStyle$.next({
               top: '0em',
+              position: 'fixed',
+              transition: 'top 0.3s',
+            });
+          } else if (this.isShowing && this.scrolledDistance > this.limit) {
+            this.isShowing = false;
+            this.navbarStyle$.next({
+              top: '-8em',
               position: 'fixed',
               transition: 'top 0.3s',
             });
