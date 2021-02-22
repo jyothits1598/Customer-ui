@@ -13,7 +13,7 @@ export interface Store {
     googleUrl: string,
     // facebookUrl: string,
     isFavourite: boolean,
-    latLng: { lat: number, lng: number }
+    latLng: { lat: number, lon: number }
     facebookLike:string,
     googleRating:number
 }
@@ -31,7 +31,7 @@ export function ReadStore(data: any): Store {
         description: data.description,
         googleUrl: data.google_business_url,
         // facebookUrl: data.facebook_url,
-        latLng: { lat: data.latitude, lng: data.longitude },
+        latLng: { lat: data.latitude, lon: data.longitude },
         isFavourite: data.is_favourite ? true : false,
         facebookLike:data.facebook_like ? FacebookCountConverstion(data.facebook_like) : 0,
         googleRating:parseFloat(data.google_rating) ? parseFloat(data.google_rating) : 0

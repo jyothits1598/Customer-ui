@@ -65,7 +65,7 @@ export class FilterCategoriesComponent implements OnInit, OnDestroy, AfterViewIn
 
   ngOnInit(): void {
     this.homeService.getCuisineData().subscribe((response) => {
-      this.cuisines = response['data']['cuisines'];
+      this.cuisines = response['cuisines'];
     }
     )
   }

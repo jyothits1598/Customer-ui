@@ -32,9 +32,7 @@ export class NearbyStoresComponent implements OnInit, OnDestroy {
           distance: this.authService.loggedUser?.radius
             ? this.authService.loggedUser.radius
             : 5,
-          sort_by: this.route.snapshot.queryParams['type']
-            ? this.route.snapshot.queryParams['type']
-            : '',
+          sort_type: 'distance',
         };
       });
   }

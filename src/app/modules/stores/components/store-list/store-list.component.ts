@@ -49,7 +49,7 @@ export class StoreListComponent implements OnInit, OnDestroy, AfterViewInit {
     private router: Router,
     private scrollPosService: ScrollPositionService
   ) {
-    this.isActive = 'nearBy';
+    this.isActive = 'distance';
     console.log('StoreListComponent.constructor()... ', this.parentKey);
   }
 
@@ -131,7 +131,7 @@ export class StoreListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   navigateToPath(type) {
     this.isActive = type;
-    this._filter['sort_by'] = type;
+    this._filter['sort_type'] = type;
     this.stores$.next([]);
     this.pagination = new StorePagination(
       this.storeData.allStores.bind(this.storeData),
