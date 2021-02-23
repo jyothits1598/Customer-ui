@@ -68,41 +68,12 @@
                 <hr class="hr">
                 </div>
                 <div class="facebook-google-contain">
-                    <table>
-                        <tr>
-                            <td>
-                                <div class="rating-size">
-                                    <table>
-                                        <tr>
-                                            <td valign="middle"><img
-                                                    src="assets/svg/cards/ico_social_facebook_small.svg"
-                                                    style="padding-right:4px"></td>
-                                            <td valign="bottom" class="rating-text">
-                                                &nbsp;{{storeDetail.facebookLike}} </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </td>
-                            <td align="top">
-                                <div class="rating-size">
-                                    <table>
-                                        <tr>
-                                            <td valign="middle" style="padding-left:10px;"><img
-                                                    src="assets/svg/cards/ico_social_google_small.svg"><img
-                                                    src="assets/svg/cards/ico_star_half_small.svg"></td>
-                                            <td valign="bottom">&nbsp;{{storeDetail.googleRating}}</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
+                    <app-g-rating-stars [rating]="storeDetail.googleRating"></app-g-rating-stars>
                 </div>
                 <hr class="hr">
                 <div class="address-content">
                     {{storeDetail.address}}
                 </div>
-
                 <!-- 
                     Claim Store bar
                  -->

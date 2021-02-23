@@ -39,6 +39,10 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
   @ViewChild('observationElement', { read: ElementRef }) obsElement: ElementRef;
   @ViewChild('fbParent', { read: ElementRef }) fbParent: ElementRef;
 
+  // fullStars: Array<any>;
+  // emptyStars: Array<any>;
+  // halfStar: boolean;
+
   constructor(private storeDetailServ: StoreDetailDataService,
     private route: ActivatedRoute,
     private location: Location,
@@ -57,6 +61,11 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+   
+    // this.fullStars = new Array(Math.floor(this.storeDetail.googleRating));
+    // this.halfStar = !!(this.storeDetail.googleRating % 1);
+    // this.emptyStars = new Array(5 - Math.ceil(this.storeDetail.googleRating));
+   
     this.route.queryParams.subscribe((qParams) => {
       this.selecteditemId = +qParams.i;
     })
@@ -68,6 +77,7 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
       this.storeId = id;
       this.loadStore(id, this.geoLoc.getUserLocation());
     })
+
   }
 
   loadStore(storeId: number, location?: UserLocation) {
