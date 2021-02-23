@@ -1,9 +1,18 @@
 <div class="container card-container-padding bg-white">
     <label class="order-status"> 
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20 6L9 17L4 12" stroke="#36A900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Accepting online orders
+        <span *ngIf="storeStatus == 'trading'; else notAccept">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 6L9 17L4 12" stroke="#36A900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+         Accepting online orders
+        </span>
+        <ng-template #notAccept>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.86 2H16.14L22 7.86V16.14L16.14 22H7.86L2 16.14V7.86L7.86 2Z" stroke="#FF1212" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9 12H15" stroke="#FF1212" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span style="font-size:14px;font-weight: normal;">&nbsp;Not accepting online orders</span>  
+        </ng-template>
         <svg class="ml-3 mr-3" width="1" height="24" viewBox="0 0 1 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_i)">
             <rect width="1" height="24" fill="white"/>
@@ -21,20 +30,57 @@
             </defs>
         </svg>
             
-        <label> <b> {{currentMenu}} </b> 10:00AM - 2:00PM  </label>
-            <label class="bl-text" class="dropdown-toggle" data-toggle="dropdown" title="options" style="cursor:pointer;padding:2px 6px;"> More menu 
+        <label> <b class="mr-2"> {{currentMenu}} </b> 10:00AM - 2:00PM  </label>
+            <label  *ngIf="storeMenus?.menus?.length > 1" class="dropdown-toggle  ml-3 bl-text cursor-pointer" data-toggle="dropdown" title="options"> More menu 
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M8 10L12 14L16 10" stroke="#353FA8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </label>
             <ul class="dropdown-menu dropdown-edit dropdown-menu-right">
-                <li class="herf-class"  *ngFor="let menus of storeMenus.menus">
+                <li class="herf-class"  *ngFor="let menus of storeMenus.menus"  (click)="getMenuClickedId(menus)">
                     {{menus.name}}
-                    </li>
+                </li>
             </ul>
-     </label>
+    </label>
 </div>
 
-    <ng-container >
-        {{menus.name}}
-    </ng-container>
+
+<!---For mobiles--->
+
+<div class="card-container-padding">
+    <div class="store-details-tab-mobile-card pb-3">
+        <hr class="hr">
+        <label *ngIf="storeStatus == 'trading'; else notAccept" class="f-14">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 6L9 17L4 12" stroke="#36A900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+         Accepting online orders
+        </label>
+        <ng-template #notAccept>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.86 2H16.14L22 7.86V16.14L16.14 22H7.86L2 16.14V7.86L7.86 2Z" stroke="#FF1212" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9 12H15" stroke="#FF1212" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span style="font-size:14px;font-weight: normal;">&nbsp;Not accepting online orders</span>  
+        </ng-template>
+        <hr>
+        <div class="d-flex justify-content-between">
+            <label>
+                <b class="mr-2"> {{currentMenu}} </b> 10:00AM - 2:00PM  
+            </label>
+            <label style="cursor: pointer;" *ngIf="storeMenus?.menus?.length > 1">
+                <label class="dropdown-toggle  ml-3 bl-text cursor-pointer" data-toggle="dropdown" title="options"> More menu 
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 10L12 14L16 10" stroke="#353FA8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </label>
+                <ul class="dropdown-menu dropdown-edit dropdown-menu-right">
+                    <li class="herf-class"  *ngFor="let menus of storeMenus.menus" (click)="getMenuClickedId(menus)">
+                        {{menus.name}}
+                    </li>
+                </ul>
+            </label>
+        </div>
+    </div>
+</div>
+
