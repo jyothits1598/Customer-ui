@@ -21,7 +21,7 @@ export class GeoLocationService {
 
     let currentLocation = this.storage.get(currentlocationIdentifier) || {
       address: { locality: "Brisbane", fullAddress: "Brisbane QLD, Australia" },
-      latLng: { lat: -27.4697707, lon: 153.0251235 }
+      latLng: { lat: -27.4697707, lng: 153.0251235 }
     };
     this.userLocation$ = new BehaviorSubject<any>(currentLocation);
   }
