@@ -29,7 +29,7 @@ export class GoogleLocationService {
           }
           this.geocoder.geocode(req, (res) => {
             this.ngZone.run(() => {
-              observer.next({ latLng: { lat: location.coords.latitude, lng: location.coords.longitude }, address: { locality: res[0].formatted_address, fullAddress: res[0].formatted_address } })
+              observer.next({ latLng: { lat: location.coords.latitude, lon: location.coords.longitude }, address: { locality: res[0].formatted_address, fullAddress: res[0].formatted_address } })
             })
           })
         },
@@ -68,7 +68,7 @@ export class GoogleLocationService {
           this.ngZone.run(() => {
             observer.next(
               {
-                latLng: { lat: res[0].geometry.location.lat(), lng: res[0].geometry.location.lng() },
+                latLng: { lat: res[0].geometry.location.lat(), lon: res[0].geometry.location.lng() },
                 address: { locality: data.structured_formatting.main_text, fullAddress: res[0].formatted_address }
               })
             observer.complete();

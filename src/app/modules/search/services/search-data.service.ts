@@ -29,7 +29,7 @@ export class SearchDataService {
       this.isLoading$.next(true);
       return this.restApiService
         .get(
-          `api/stores/search?${this.constructQuery(
+          `api/v1/stores/search?${this.constructQuery(
             searchTerm,
             this.geoLoactionServ.getUserLocation()?.latLng,
             this.authService.loggedUser?.radius
@@ -75,13 +75,13 @@ export class SearchDataService {
   }
 
   constructQuery(
-    name: string,
-    latLng: { lat: number; lng: number },
+    q: string,
+    latLng: { lat: number; lon: number },
     distance: number
   ) {
-    let result = 'name=' + name;
+    let result = 'name=' + q;
     if (latLng)
-      result += `&lat=${latLng.lat}&lng=${latLng.lng}&distance=${
+      result += `&lat=${latLng.lat}&lon=${latLng.lon}&distance=${
         distance ? distance : 5
       }&suggestion=true`;
     return result;
