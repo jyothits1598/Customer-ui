@@ -3,6 +3,7 @@ import { ReadAvailability, TimeAvailability, FacebookCountConverstion } from '..
 export interface Store {
     id: number,
     name: string,
+    creationType: string;
     cuisine: string,
     openingHours: Array<TimeAvailability>
     logo: string,
@@ -20,8 +21,9 @@ export interface Store {
 
 export function ReadStore(data: any): Store {
     return {
-        id: data.store_id,
-        name: data.store_name,
+        id: data.id,
+        name: data.name,
+        creationType: data.creation_type,
         cuisine: data.cuisine_name,
         openingHours: ReadAvailability(data.opening_hours),
         logo: data.store_logo,

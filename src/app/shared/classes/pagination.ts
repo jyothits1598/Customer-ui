@@ -20,10 +20,10 @@ export class Pagination<T>{
     totalCount: number;
 
     setPaginationData(resp) {
-        console.log('set page', resp, resp.data.next_page_url);
+        console.log('set page', resp);
         this.currentPage += 1;
-        this.totalCount = resp.data.total;
-        if (!resp.data.next_page_url) this.hasEnded = true;
+        this.totalCount = resp.total;
+        if (resp.total <= this.data.length) this.hasEnded = true;
     }
     constructor(source) {
         this.source = source;
@@ -48,7 +48,7 @@ export class StorePagination extends Pagination<Store>{
                 catchError((error) => { this.hasErrors = true; return throwError(error) }),
                 map((resp: any) => {
                     let newStores = [];
-                    if (resp.data.stores) resp.data.stores.forEach(store => { newStores.push(ReadStore(store)) });
+                    if (resp.stores) resp.stores.forEach(store => { newStores.push(ReadStore(store)) });
                     return newStores;
                 })
             );
