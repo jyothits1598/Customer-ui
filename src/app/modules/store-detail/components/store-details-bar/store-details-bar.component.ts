@@ -17,7 +17,6 @@ export class StoreDetailsBarComponent implements OnInit {
   ngOnInit(): void {
     this.storeMenus = this.menus;
     this.currentMenu = this.menus['menus'][0].name;
-    console.log(this.menus);
     this.storeStatus = this.menus['status'];
   }
 
