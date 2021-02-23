@@ -17,7 +17,8 @@ export interface StoreDetail {
     latLng: { lat: number, lon: number }
     facebookLike: string,
     googleRating: string,
-    typeOfCreation: 'Store shell' | string;
+    typeOfCreation: 'Shell' | string,
+    menus: Array<StoreMenus>
 
 }
 
@@ -27,55 +28,118 @@ export interface StoreCategory {
     items: Array<StoreItem>
 }
 
+export interface StoreMenus {
+    id: number,
+    isCustomAvailability: boolean,
+    name: string
+}
+
 export interface StoreItem {
     id: number,
     name: string,
     basePrice: number,
     image: string,
     storeId: number
+    itemModifiers : Array<ItemModifier>
 }
 
+export interface ItemModifier {
+    id: number;
+    name: string;
+    minSelection: number;
+    maxSelection: number;
+    freeSelection: number;
+    storeId: number;
+    options: Array<ModifierOption>;
+}
+export interface ModifierOption {
+    id: number;
+    name: string;
+    price: number;
+    storeId: number;
+}
 export function ReadStoreDetail(resp: any): StoreDetail {
-    let data = resp.data;
-    let categories = ReadStoreCategories(resp.store_id, data.category_details);
+    let data = resp;
+    let categories = ReadStoreCategories(resp.id, data.categories);
+    let menus = ReadStoreMenus(resp.id, data.menus);
 
     return {
-        id: data.store_id,
-        name: data.store_name,
+        id: data.id,
+        name: data.name,
         // cuisine: data.cuisine_name,
         openingHours: ReadAvailability(data.opening_hours),
-        logo: data.store_logo,
-        storeImage: data.store_image,
-        address: data.store_address,
+        logo: data.logo,
+        storeImage: data.picture,
+        address: data.address,
         distance: data.distance,
         // description: data.description,
         googleUrl: data.google_business_url,
         facebookUrl: data.facebook_url,
         isFavourite: data.is_favourite ? true : false,
         categories: categories,
-        latLng: { lat: data.latitude, lon: data.longitude },
+        latLng: { lat: data.location.lat, lon: data.location.lon },
         facebookLike: data.facebook_like ? FacebookCountConverstion(data.facebook_like) : 0,
         googleRating: data.google_rating ? data.google_rating : 0,
-        typeOfCreation: data.type_of_creation
+        typeOfCreation: data.creation_type,
+        menus: menus
     };
 }
 
 export function ReadStoreCategories(storeId: number, catData: any): Array<StoreCategory> {
     let cats: Array<StoreCategory> = [];
     catData.forEach((c) => {
-        cats.push({ id: c.category_id, name: c.category_name, items: ReadStoreItems(storeId, c.item_details) })
+        cats.push({ id: c.id, name: c.name, items: ReadStoreItems(storeId, c.items) })
     })
     return cats;
+}
+
+export function ReadStoreMenus(storeId: number, menuData: any): Array<StoreMenus>{
+    let menus: Array<StoreMenus> = [];
+    menuData.forEach((m) => {
+        menus.push({ id: m.id, name: m.name, isCustomAvailability: m.is_custom_availability})
+    })
+    return menus;
 }
 
 export function ReadStoreItems(storeId: number, data: any): Array<StoreItem> {
     let items: Array<StoreItem> = [];
     data.forEach((i) => {
-        items.push({ id: i.item_id, 
-            name: i.item_name, 
-            basePrice: i.item_base_price, 
-            image: i.item_image, 
-            storeId: storeId })
+        items.push({ id: i.id, 
+            name: i.name, 
+            basePrice: i.price, 
+            image: i.picture, 
+            storeId: storeId,
+            itemModifiers: ReadItemModifiers(storeId,i.modifiers)
+        })
     })
     return items;
+}
+
+export function ReadItemModifiers(storeId: number,data: any): Array<ItemModifier> {
+    let result: Array<ItemModifier> = [];
+    data.forEach(m => {
+        result.push({
+            id: m.id,
+            name: m.name,
+            minSelection: m.minimum,
+            maxSelection: m.maximum,
+            freeSelection: m.free,
+            storeId: storeId,
+            options: ReadModifierOptions(storeId,m.options)
+        })
+    });
+    return result;
+}
+
+export function ReadModifierOptions(storeId: number,data: any): Array<ModifierOption> {
+    let result: Array<ModifierOption> = [];
+    data.forEach(o => {
+        result.push({
+            id: o.modifier_option_id,
+            name: o.name,
+            price: parseFloat(o.price),
+            storeId: storeId,
+        })
+    })
+    return result;
 }
