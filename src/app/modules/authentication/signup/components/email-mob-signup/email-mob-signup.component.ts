@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -7,6 +7,7 @@ import { BackendErrorResponse } from 'src/app/core/model/backend-resp';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { SnackBarService } from 'src/app/core/services/snack-bar.service';
 import { CustomValidators } from 'src/app/helpers/validators';
+import { SocialAuthHelperService } from '../../../services/social-auth-helper.service';
 import { SignupData, SignupService } from '../../services/signup.service';
 
 @Component({
@@ -14,33 +15,13 @@ import { SignupData, SignupService } from '../../services/signup.service';
   templateUrl: './email-mob-signup.component.html',
   styleUrls: ['./email-mob-signup.component.scss']
 })
-export class EmailMobSignupComponent implements OnInit {
+export class EmailMobSignupComponent implements OnInit, OnDestroy {
   errorMessage;
   loading: boolean = false;
   unSub$ = new Subject<true>();
   verifiedEmail: boolean = false;
+  socialSignupData: { email: string, token: string, firstName: string, lastName: string, type: 'facebook' | 'google' };
   type: 'google' | 'facebook' | 'menuzapp';
-
-  registrationForm: FormGroup = new FormGroup({
-    first_name: new FormControl(null, [CustomValidators.required('First name is required.')]),
-    last_name: new FormControl(null, [CustomValidators.required('Last name is required.')]),
-    email: new FormControl(null, [
-      CustomValidators.required('Email is required.'),
-      CustomValidators.email('Email is invalid.')
-    ]),
-    email_token: new FormControl(null, [
-      CustomValidators.required('Please enter verification code'),
-    ]),
-    mobile_number: new FormControl(null, [
-      CustomValidators.required('Mobile number is required.')
-    ]),
-    password: new FormControl(null, [
-      CustomValidators.required('Password is required.'),
-      CustomValidators.pattern(/^.*(?=.{6,}).*$/, 'Please enter a valid password of 6+ characters')
-      // CustomValidators.pattern(/^.*(?=.{6,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/, 'Please enter a valid password of 6+ characters and atleast one digit, one capital & special character')
-      // CustomValidators.pattern(/^.*(?=.{6,})(?=.*[a-z])(?=.*[A-Z]).*$/, 'Please enter a valid password of 6+ characters and atleast one digit, one capital')
-    ]),
-  })
 
   emailForm: FormGroup = new FormGroup({
     first_name: new FormControl(null, [CustomValidators.required('First name is required.')]),
@@ -70,17 +51,21 @@ export class EmailMobSignupComponent implements OnInit {
   constructor(private signupService: SignupService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private sAuth: SocialAuthHelperService) {
+    this.socialSignupData = router.getCurrentNavigation().extras.state as { email: string, token: string, firstName: string, lastName: string, type: 'google' | 'facebook' };
+  }
 
   ngOnInit(): void {
-    this.type = this.activatedRoute.snapshot.queryParams.authType || 'menuzapp';
-    this.router.navigate([], { queryParams: {} });
-    this.activatedRoute.queryParams.pipe().subscribe((q) => this.verifiedEmail = !!q.verifiedEmail)
+    this.type = this.socialSignupData?.type || 'menuzapp';
+    if (!this.socialSignupData) this.router.navigate([], { queryParams: {} });
+    if (this.socialSignupData) {
+      this.emailForm.patchValue({ first_name: this.socialSignupData.firstName, last_name: this.socialSignupData.lastName, email_token: this.socialSignupData.token, email: this.socialSignupData.email })
+      this.mobForm.controls.password.disable();
+    }
+    this.activatedRoute.queryParams.pipe().subscribe((q) => this.verifiedEmail = !!q.verifiedEmail);
   }
 
-  get controls(): { [key: string]: AbstractControl; } {
-    return this.registrationForm.controls;
-  }
   get emailControls(): { [key: string]: AbstractControl; } {
     return this.emailForm.controls;
   }
@@ -108,24 +93,6 @@ export class EmailMobSignupComponent implements OnInit {
       )
   }
 
-  get activeType() {
-    return this.registrationForm.controls.mobile.disabled ? 'email' : 'mobile';
-  }
-
-  get activeIdControl(): AbstractControl {
-    return this.activeType === 'email' ? this.registrationForm.controls.email : this.registrationForm.controls.mobile;
-  }
-
-  toggleType() {
-    if (this.controls.email.disabled) {
-      this.controls.email.enable();
-      this.controls.mobile.disable();
-    } else {
-      this.controls.email.disable();
-      this.controls.mobile.enable();
-    }
-  }
-
   signup() {
     this.mobForm.markAllAsTouched();
     if (this.mobForm.invalid) { return; }
@@ -139,7 +106,6 @@ export class EmailMobSignupComponent implements OnInit {
       (r) => { this.authService.handleLoginResp(r); this.router.navigate(['/']) },
       (e) => this.setErrors(this.mobForm, e)
     )
-
   }
 
   next() { this.router.navigate([], { queryParams: { verifiedEmail: true } }) }
@@ -153,6 +119,12 @@ export class EmailMobSignupComponent implements OnInit {
         if (c) c.setErrors({ backend: (eResp.errors[key])[0] })
       }
     }
+  }
+
+  ngOnDestroy(): void {
+    this.unSub$.next(true);
+    this.unSub$.complete();
+    if (this.socialSignupData) this.sAuth.logout();
   }
 
 

@@ -1,8 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { applySourceSpanToExpressionIfNeeded } from '@angular/compiler/src/output/output_ast';
 import { Component, EventEmitter, OnDestroy, OnInit, Output, ɵConsole } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { ActivatedRoute, NavigationEnd, Route, Router } from '@angular/router';
+import { Subject, Subscription } from 'rxjs';
 import { finalize, switchMap, take } from 'rxjs/operators';
+import { BackendErrorResponse } from 'src/app/core/model/backend-resp';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ExternalLibraries, LibraryLoaderService } from 'src/app/core/services/library-loader.service';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
@@ -21,7 +23,7 @@ export class SocialAuthComponent implements OnInit, OnDestroy {
   facebookLoading: boolean = false;
   googleLoading: boolean = false;
   appleLoading: boolean = false;
-
+  
   reqSubs: Subscription;
 
   signin_url: string = "/auth/signin";
@@ -34,13 +36,14 @@ export class SocialAuthComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private snackBar: SnackBarService,
     private router: Router,
+    private route: ActivatedRoute,
     private libraryLoaderService: LibraryLoaderService) {
   }
 
   ngOnInit(): void {
     // this.loadLibraries();
     if (this.router.url && this.router.url.indexOf(this.signin_url) > -1) this.isLogin = true;
-    this.socialAuthHelper.hasLoaded.pipe(take(1)).subscribe(loaded => {this.loading = false; console.log('reading init state of ngx login', loaded)}, (err)=>{console.log('error inside ngx init', err)});
+    this.socialAuthHelper.hasLoaded.pipe(take(1)).subscribe(loaded => { this.loading = false; console.log('reading init state of ngx login', loaded) }, (err) => { console.log('error inside ngx init', err) });
 
   }
 
@@ -49,6 +52,7 @@ export class SocialAuthComponent implements OnInit, OnDestroy {
   }
 
   facebookSignin() {
+    let data: { email: string, token: string, firstName: string, lastName: string };
     this.reqSubs = this.socialAuthHelper.facebookSignIn().pipe(
       switchMap((fbResp) => {
         this.facebookLoading = true;
@@ -56,21 +60,23 @@ export class SocialAuthComponent implements OnInit, OnDestroy {
       }),
       finalize(() => this.facebookLoading = false)
     ).subscribe(
-      () => { this.signedIn.emit(true) },
-      (err) => this.handleError(err)
+      () => { this.signedIn.emit(true); this.socialAuthHelper.logout(); },
+      (err) => this.handleError(err, data)
     )
   }
 
   googleSignin() {
+    let data: { email: string, token: string, firstName: string, lastName: string, type: string };
     this.reqSubs = this.socialAuthHelper.googleSignIn().pipe(
       switchMap((fbResp) => {
         this.googleLoading = true;
+        data = fbResp;
         return this.authService.socialSignIn(fbResp, 'google');
       }),
       finalize(() => this.googleLoading = false)
     ).subscribe(
-      () => { this.signedIn.emit(true) },
-      (err) => this.handleError(err)
+      () => { this.signedIn.emit(true); this.socialAuthHelper.logout(); },
+      (err) => this.handleError(err, data)
     )
     // this.googleLoading = true;
     // this.libraryLoaderService.loadLibrary(ExternalLibraries.GoogleLogin).subscribe(
@@ -117,9 +123,12 @@ export class SocialAuthComponent implements OnInit, OnDestroy {
     // )
   }
 
-  handleError(err) {
-    this.error = <string>(Object.values(err.error)[0]);
-
+  handleError(err: BackendErrorResponse, data) {
+    if (err.status === 422 && (err.errors?.email[0] === 'The email does not exist.')) {
+      this.router.navigate(['./create'], { relativeTo: this.route, state: data, queryParams: { verifiedEmail: true } })
+    } else {
+      this.socialAuthHelper.logout();
+    }
   }
 
   ngOnDestroy(): void {
