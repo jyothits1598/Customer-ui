@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { filter, finalize, map, mergeMap, takeUntil, tap } from 'rxjs/operators';
 import { ModalService } from 'src/app/core/services/modal.service';
-import { StoreDetail, StoreItem } from 'src/app/modules/store-detail/model/store-detail';
+import { StoreCategory, StoreDetail, StoreItem } from 'src/app/modules/store-detail/model/store-detail';
 import { StoreDetailDataService } from '../../services/store-detail-data.service';
 import { GeoLocationService } from 'src/app/core/services/geo-location.service';
 import { UserLocation } from 'src/app/core/model/user-location';
@@ -13,6 +13,7 @@ import { LayoutService } from 'src/app/core/services/layout.service';
 import { CartService } from 'src/app/core/services/cart.service';
 import { PARTNER_APP_LINK } from 'src/environments/environment';
 import { PresentAvailabilityComponent } from 'src/app/modules/time-availability/present-availability/present-availability.component';
+import { StoreItemDetail } from 'src/app/modules/store-item-detail/model/store-item-detail';
 
 @Component({
   selector: 'app-store-detail',
@@ -21,7 +22,7 @@ import { PresentAvailabilityComponent } from 'src/app/modules/time-availability/
 })
 export class StoreDetailComponent implements OnInit, OnDestroy {
   storeId: number;
-  selecteditemId: number;
+  selectedItem: StoreItemDetail & { storeName: string, storeId: number, isFavourite: boolean };
   scrolledDown: boolean;
   userLocation: boolean;
   interObserver: IntersectionObserver;
@@ -45,8 +46,7 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
     private orderView: OrderViewControllerService,
     private cartSrv: CartService,
     private layoutService: LayoutService,
-    private geoLoc: GeoLocationService,
-    private window: Window) { }
+    private geoLoc: GeoLocationService) { }
 
   observeIntersection() {
     this.interObserver = new IntersectionObserver((entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
@@ -58,7 +58,22 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((qParams) => {
-      this.selecteditemId = +qParams.i;
+      let itemId = +qParams.i;
+      // this.selectedItem = this.storeDetail.categories[]
+      // this.storeDetail.categories.find((c: StoreCategory) => {
+      //   let a = c.items.find(i => i.id === this.selecteditemId)
+      //   return !!a;
+      // })
+      if (itemId) {
+        for (const a of this.storeDetail.categories) {
+          let i = a.items.find(i => i.id === itemId)
+          if (i) {
+            this.selectedItem = { ...i, storeName: this.storeDetail.name, storeId: this.storeId, isFavourite: this.storeDetail.isFavourite };
+            break;
+          }
+        }
+      } else this.selectedItem = null;
+
     })
 
     if (!this.layoutService.isMobile && !this.orderView.getCurrentPage()) this.orderView.showPage(OrderPages.Cart);
@@ -83,7 +98,7 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
         this.observeIntersection();
       }, 0);
     });
-    
+
   }
 
   reset() {
@@ -101,7 +116,7 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
     this.location.back();
   }
 
-  getMenuClickedDetails(menuId){
+  getMenuClickedDetails(menuId) {
     this.loading = true;
     this.storeDetail.categories = null;
     this.strDtlSub = this.storeDetailServ.getCateoryDetail(this.storeId, menuId).pipe(takeUntil(this.unSub$), finalize(() => this.loading = false)).subscribe(categoryDetail => {
