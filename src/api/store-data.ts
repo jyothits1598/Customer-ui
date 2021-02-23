@@ -1,13 +1,14 @@
-export const URL_AllFavourites = 'api/stores/customer/favourites';
+export const URL_AllFavourites = 'api/v1/favourites/stores';
 
-export const URL_SetFavourite = 'api/stores/customer/favourite/add';
-export const URL_DeleteFavourite = 'api/stores/customer/favourite/delete';
+export function URL_SetFavourite(id: number) {
+    return `api/v1/favourites/stores/${id}`;
+} 
 
 export function URL_StoreDetails(id: number) {
     return `api/v1/stores/${id}`;
 }
 
-export function URL_StoreCategoryDetails(store_id: number,menu_id: number){
+export function URL_StoreCategoryDetails(store_id: number, menu_id: number) {
     return `api/v1/stores/${store_id}/menus/${menu_id}/overview`;
 }
 

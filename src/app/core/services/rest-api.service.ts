@@ -49,11 +49,11 @@ export class RestApiService {
     );
   }
 
-  delete(url) {
-    return this.http.delete(API_URL_LINK + url).pipe(
+  delete<T = any>(url, showError = true) {
+    return this.http.delete<BackendResponse<T>>((API_URL_LINK + url)).pipe(
       take(1),
-      catchError((httpError) => throwError(httpError.error))
-    )
+      catchError((httpError) => this.handleError(httpError, showError))
+    );
   }
 
   readError(e: BackendErrorResponse): string {

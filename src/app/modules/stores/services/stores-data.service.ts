@@ -3,7 +3,6 @@ import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
 import {
   URL_AllFavourites,
-  URL_DeleteFavourite,
   URL_SetFavourite,
 } from 'src/api/store-data';
 import { RestApiService } from 'src/app/core/services/rest-api.service';
@@ -35,16 +34,8 @@ export class StoresDataService {
   }
 
   setFavourite(storeId: number, isFavourite: boolean) {
-    if (isFavourite)
-      return this.restApiService.post(URL_SetFavourite, {
-        store_id: storeId,
-        is_favourite: 1,
-      });
-    else
-      return this.restApiService.patch(URL_DeleteFavourite, {
-        store_id: storeId,
-        is_favourite: 0,
-      });
+    if (isFavourite) return this.restApiService.post(URL_SetFavourite(storeId),{});
+    else return this.restApiService.delete(URL_SetFavourite(storeId));
   }
 
   allFavourites(filter: StoreFilter): Observable<Array<Store>> {
@@ -64,7 +55,6 @@ export class StoresDataService {
   }
 
   filterToQuery(filter: StoreFilter): string {
-    console.log('filter to queery', filter);
     let result = '';
     let sort_by = '';
     if (filter) {

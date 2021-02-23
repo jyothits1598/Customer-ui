@@ -14,6 +14,7 @@ import { FacebookLikeCountModule } from '../facebook-like-count/facebook-like-co
 import { GoogleRatingModule } from '../google-rating/google-rating.module';
 import { OrderModule } from '../order/order.module';
 import { StoreDetailsBarComponent } from './components/store-details-bar/store-details-bar.component';
+import { GRatingStarsComponent } from './pages/g-rating-stars/g-rating-stars.component';
 
 const routes: Routes = [
   {
@@ -23,7 +24,7 @@ const routes: Routes = [
 ]
 
 @NgModule({
-  declarations: [StoreDetailComponent, StoreCategoryComponent, StoreItemCardComponent, LazyImageDirective, StoreDetailsBarComponent],
+  declarations: [StoreDetailComponent, StoreCategoryComponent, StoreItemCardComponent, LazyImageDirective, StoreDetailsBarComponent, GRatingStarsComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

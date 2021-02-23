@@ -18,11 +18,6 @@ export class StoreCardComponent implements OnInit {
   static_image_width_logo ='?w=100,q=50,f=webp';
 
 
-    empty: 'assets/svg/cards/ico_star_empty.svg';
-    half: 'assets/svg/cards/ico_star_half.svg';
-    full: 'assets/svg/cards/ico_star_full.svg';
-
-
   ngOnInit(): void {}
 
   select(id: number) {

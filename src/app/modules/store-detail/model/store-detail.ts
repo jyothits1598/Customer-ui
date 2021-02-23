@@ -16,7 +16,7 @@ export interface StoreDetail {
     categories: Array<StoreCategory>
     latLng: { lat: number, lon: number }
     facebookLike: string,
-    googleRating: string,
+    googleRating: number,
     typeOfCreation: 'Shell' | string,
     menus: Array<StoreMenus>
     status: string,
@@ -81,7 +81,7 @@ export function ReadStoreDetail(resp: any): StoreDetail {
         categories: categories,
         latLng: { lat: data.location.lat, lon: data.location.lon },
         facebookLike: data.facebook_like ? FacebookCountConverstion(data.facebook_like) : 0,
-        googleRating: data.google_rating ? data.google_rating : 0,
+        googleRating:parseFloat(data.google_rating) ? parseFloat(data.google_rating) : 0,
         typeOfCreation: data.creation_type,
         menus: menus,
         status: data.status,

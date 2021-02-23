@@ -91,7 +91,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
             newYPos < this.limit ||
             (!this.isShowing && this.scrolledDistance < -this.limit)
           ) {
-            console.log('showing!');
+            // console.log('showing!');
             this.isShowing = true;
             this.navbarStyle$.next({
               top: '0em',
