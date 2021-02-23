@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { StoreMenus } from 'src/app/modules/store-detail/model/store-detail';
 
 @Component({
@@ -8,13 +8,22 @@ import { StoreMenus } from 'src/app/modules/store-detail/model/store-detail';
 })
 export class StoreDetailsBarComponent implements OnInit {
   @Input() menus: Array<StoreMenus>;
+  @Output() menuClicked = new EventEmitter<any>();
   currentMenu: StoreMenus;
+  storeStatus: string;
   storeMenus :any;
   constructor() { }
 
   ngOnInit(): void {
     this.storeMenus = this.menus;
     this.currentMenu = this.menus['menus'][0].name;
+    console.log(this.menus);
+    this.storeStatus = this.menus['status'];
+  }
+
+  getMenuClickedId(menu){
+    this.currentMenu = menu.name;
+    this.menuClicked.emit(menu.id);
   }
 
 }

@@ -19,6 +19,8 @@ export interface StoreDetail {
     googleRating: string,
     typeOfCreation: 'Shell' | string,
     menus: Array<StoreMenus>
+    status: string,
+    phoneNumber: string
 
 }
 
@@ -39,8 +41,8 @@ export interface StoreItem {
     name: string,
     basePrice: number,
     image: string,
-    storeId: number
-    itemModifiers : Array<ItemModifier>
+    storeId: number,
+   // modifiers : Array<ItemModifier>
 }
 
 export interface ItemModifier {
@@ -81,7 +83,9 @@ export function ReadStoreDetail(resp: any): StoreDetail {
         facebookLike: data.facebook_like ? FacebookCountConverstion(data.facebook_like) : 0,
         googleRating: data.google_rating ? data.google_rating : 0,
         typeOfCreation: data.creation_type,
-        menus: menus
+        menus: menus,
+        status: data.status,
+        phoneNumber: data.phone_number
     };
 }
 
@@ -109,7 +113,7 @@ export function ReadStoreItems(storeId: number, data: any): Array<StoreItem> {
             basePrice: i.price, 
             image: i.picture, 
             storeId: storeId,
-            itemModifiers: ReadItemModifiers(storeId,i.modifiers)
+            //modifiers: ReadItemModifiers(storeId,i.modifiers)
         })
     })
     return items;
