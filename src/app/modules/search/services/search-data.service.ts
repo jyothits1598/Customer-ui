@@ -76,12 +76,12 @@ export class SearchDataService {
 
   constructQuery(
     q: string,
-    latLng: { lat: number; lon: number },
+    latLng: { lat: number; lng: number },
     distance: number
   ) {
     let result = 'name=' + q;
     if (latLng)
-      result += `&lat=${latLng.lat}&lon=${latLng.lon}&distance=${
+      result += `&lat=${latLng.lat}&lon=${latLng.lng}&distance=${
         distance ? distance : 5
       }&suggestion=true`;
     return result;

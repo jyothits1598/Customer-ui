@@ -67,7 +67,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
       .pipe(
         takeUntil(this.finalise$),
         map((newYPos) => {
-          console.log('newYPos: ', newYPos);
+          // console.log('newYPos: ', newYPos);
           const newScrollDir =
             newYPos > this.prevYPos ? Direction.DOWN : Direction.UP;
 
@@ -81,7 +81,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
           if (this.isShowing && this.scrolledDistance > this.limit) {
             this.isShowing = false;
-            console.log('hiding...');
+            // console.log('hiding...');
             this.navbarStyle$.next({
               top: '-8em',
               position: 'fixed',

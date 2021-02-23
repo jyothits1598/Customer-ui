@@ -64,6 +64,7 @@ export class StoresDataService {
   }
 
   filterToQuery(filter: StoreFilter): string {
+    console.log('filter to queery', filter);
     let result = '';
     let sort_by = '';
     if (filter) {
@@ -82,7 +83,7 @@ export class StoresDataService {
           result += '&';
         }
         result +=
-          `lat=${filter.location.lat}&lon=${filter.location.lon}&distance=${
+          `lat=${filter.location.lat}&lon=${filter.location.lng}&distance=${
             filter.distance ? filter.distance : 5
           }` + sort_by;
       }

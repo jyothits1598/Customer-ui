@@ -19,10 +19,8 @@ export class NearbyStoresComponent implements OnInit, OnDestroy {
   filter: StoreFilter = {};
 
   constructor(
-    private route: ActivatedRoute,
     private geoLocation: GeoLocationService,
-    private authService: AuthService,
-    private router: Router
+    private authService: AuthService
   ) {
     this.locationSubs = this.geoLocation
       .userLocation()
@@ -37,7 +35,7 @@ export class NearbyStoresComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   ngOnDestroy(): void {
     this.locationSubs.unsubscribe();

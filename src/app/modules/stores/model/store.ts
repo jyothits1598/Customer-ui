@@ -20,18 +20,18 @@ export interface Store {
 
 export function ReadStore(data: any): Store {
     return {
-        id: data.store_id,
-        name: data.store_name,
-        cuisine: data.cuisine_name,
+        id: data.id,
+        name: data.name,
+        cuisine: data.name,
         openingHours: ReadAvailability(data.opening_hours),
-        logo: data.store_logo,
-        storeImage: data.store_image,
-        address: data.store_address,
+        logo: data.logo,
+        storeImage: data.picture,
+        address: data.address,
         distance: data.distance,
         description: data.description,
         googleUrl: data.google_business_url,
         // facebookUrl: data.facebook_url,
-        latLng: { lat: data.latitude, lon: data.longitude },
+        latLng: { lat: data.location.lat, lon: data.location.lon },
         isFavourite: data.is_favourite ? true : false,
         facebookLike:data.facebook_like ? FacebookCountConverstion(data.facebook_like) : 0,
         googleRating:parseFloat(data.google_rating) ? parseFloat(data.google_rating) : 0

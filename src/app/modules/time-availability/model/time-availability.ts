@@ -37,20 +37,22 @@ export function TimeAvailabilityComp(first: TimeAvailability, second: TimeAvaila
 
 export function ReadAvailability(availabilityBackend: any): Array<TimeAvailability> {
     let result: Array<TimeAvailability> = []
-    for (let i = 0; i < availabilityBackend.length; i++) {
-        // if (availabilityBackend[i].marked_as_closed) continue;
-        let a = availabilityBackend[i];
-        let newAvai = <TimeAvailability>{
-            id: a.menu_timings_id,
-            day: a.days,
-            //padding if time is not in format
-            startTime: a.start_time.length === 6 ? ('0' + a.start_time) : a.start_time,
-            endTime: a.end_time.length === 6 ? ('0' + a.end_time) : a.end_time,
-            markedAsClose: (a.marked_as_closed ? true : false)
-        };
-        result.push(newAvai)
+    if (availabilityBackend) {
+        for (let i = 0; i < availabilityBackend.length; i++) {
+            // if (availabilityBackend[i].marked_as_closed) continue;
+            let a = availabilityBackend[i];
+            let newAvai = <TimeAvailability>{
+                id: a.menu_timings_id,
+                day: a.days,
+                //padding if time is not in format
+                startTime: a.start_time.length === 6 ? ('0' + a.start_time) : a.start_time,
+                endTime: a.end_time.length === 6 ? ('0' + a.end_time) : a.end_time,
+                markedAsClose: (a.marked_as_closed ? true : false)
+            };
+            result.push(newAvai)
+        }
+        result.sort(TimeAvailabilityComp);
     }
-    result.sort(TimeAvailabilityComp);
     return result;
 }
 
@@ -68,16 +70,16 @@ export function AvailabilityToBackend(availability: Array<TimeAvailability>): Ar
     return data;
 }
 
-export function FacebookCountConverstion(count){
+export function FacebookCountConverstion(count) {
     if (count >= 1000000000) {
         return (count / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
-     }
-     if (count >= 1000000) {
+    }
+    if (count >= 1000000) {
         return (count / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
-     }
-     if (count >= 1000) {
+    }
+    if (count >= 1000) {
         return (count / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
-     }
-     return count;
+    }
+    return count;
 }
 
