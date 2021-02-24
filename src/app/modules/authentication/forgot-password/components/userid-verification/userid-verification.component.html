@@ -36,7 +36,7 @@
             </div>
             <div class="col-6 pad-ing-left" style="margin-bottom: 34px;">
                 <send-code (click)="form.controls.email.markAsTouched(); form.controls.mobile_number.markAsTouched();"
-                    [data]="activeIdControl.valid ? {purpose: loggedUser? 'change' : 'forgotPassword', type: isEmailActive? 'email' : 'mobile', value:isEmailActive ? form.value.email : form.value.mobile_number}: null"
+                    [data]="activeIdControl.valid ? {purpose:loggedUser? 'change' : 'forgotPassword', type: isEmailActive? 'email' : 'mobile', value:isEmailActive ? form.value.email : form.value.mobile_number}: null"
                     [data]="getSendCodeData()"
                     (error)="setErrors(form, $event)">
                 </send-code>

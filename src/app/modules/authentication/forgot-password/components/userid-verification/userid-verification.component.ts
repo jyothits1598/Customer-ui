@@ -48,13 +48,13 @@ export class UseridVerificationComponent implements OnInit {
 
   ngOnInit(): void {
     this.loggedUser = this.authSrv.loggedUser;
-
+ 
     this.form = new FormGroup({
       email: new FormControl({ value: this.loggedUser?.email, disabled: !!this.loggedUser }, [
         CustomValidators.required('Email is required.'),
         CustomValidators.email('Please enter a valid email.')
       ]),
-      mobile_number: new FormControl({ value: this.loggedUser?.phoneNumber, disabled: true }, [
+      mobile_number: new FormControl({ value: this.loggedUser?.phoneNumber, disabled: !!this.loggedUser}, [
         CustomValidators.required('Mobile number is required.')
       ]),
       token: new FormControl('', [
@@ -80,7 +80,7 @@ export class UseridVerificationComponent implements OnInit {
       if (this.activeIdControl.invalid) return null;
       else return {
         type: this.isEmailActive ? 'email' : 'mobile',
-        value: this.activeIdControl.valid,
+        value: this.activeIdControl.value,
         purpose: 'forgotPassword'
       }
     }

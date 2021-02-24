@@ -1,96 +1,6 @@
 <div class="margins-center">
-    <!-- <form [formGroup]="registrationForm" (ngSubmit)="signup()">
-        <ng-template #emailInput>
-            <h3 class="std-heading-4 text-center"> Sign up with email </h3>
-            <div class="paragraph14 text-center" style="margin-bottom: 24px;">
-                We’ll send a verification code to your email
-            </div>
-
-            <div *ngIf="errorMessage" class="error-mez">
-                {{errorMessage}}
-            </div>
-
-            <div class="form-group form-group--margin">
-                <div class="float-left label-inputs"> Email </div>
-                <div class="float-right ch-me" (click)="toggleType()">
-                    Use mobile 
-                </div>
-                <input type="text" class="form-input error-highlight" placeholder="Email address"
-                    formControlName="email">
-                <div *ngIf="controls.email.touched && controls.email.errors" class="error-mez">
-                    <div> {{getErrors('email')}} </div>
-                </div>
-            </div>
-        </ng-template>
-
-        <ng-container *ngIf="activeType === 'mobile'; else emailInput">
-            <h3 class="std-heading-4 text-center"> Sign up with mobile </h3>
-            <div class="paragraph14 text-center" style="margin-bottom: 24px;">
-                We’ll send a verification code to your number
-            </div>
-
-            <div *ngIf="errorMessage" class="error-mez">
-                {{errorMessage}}
-            </div>
-            <div class="form-group form-group--margin">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="float-left label-inputs"> Mobile </div>
-                        <div class="float-right ch-me" (click)="toggleType()">
-                            Use email
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                       
-                        <tel-input formControlName="mobile"></tel-input>
-                    </div>
-                </div>
-                <div *ngIf="controls.mobile.touched && controls.mobile.invalid" class="error-mez">
-                    <div> {{getErrors('mobile')}} </div>
-                </div>
-
-            </div>
-        </ng-container>
-
-        <div class="form-group form-group--margin">
-            <div class="label-inputs"> Password </div>
-            <app-password [showHint]="false">
-                <input passwordInput type="password" class="form-input error-highlight custom-padd"
-                    placeholder="Password" formControlName="password">
-            </app-password>
-            <div *ngIf="controls.password.touched && controls.password.errors" class="error-mez">
-                <div> {{getErrors('password')}} </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-6 pad-ing-right" style="margin-bottom: 24px;">
-                <input type="number" class="form-input error-highlight" placeholder="Enter code"
-                    formControlName="verificationCode" minlength="6" maxlength="6">
-                <div *ngIf="controls.verificationCode.touched && controls.verificationCode.errors" class="error-mez">
-                    <div> {{getErrors('verificationCode')}} </div>
-                </div>
-            </div>
-            <div class="col-6 pad-ing-left" style="margin-bottom: 24px;">
-                <send-code
-                    (click)="activeType === 'email' ? controls.email.markAsTouched() : controls.mobile.markAsTouched()"
-                    [data]="activeIdControl.valid ? {purpose: 'signup', type: activeType, value: activeIdControl.value}: null"
-                    (error)="handleError($event)">
-                </send-code>
-            </div>
-        </div>
-        <div class="form-group" style="margin-bottom: 24px;">
-            <button type="submit" class="btn std-button std-button--blue" [disabled]="loading">{{loading? 'Sigining
-                up...' : 'Next'}}</button>
-        </div>
-        <div class="paragraph14 paragraph14__f12 text-center l18" >
-            By creating a menuzapp account you're agreeing to our <span class="mb-ctr"><br></span><b  style="color:#353FA8;cursor: pointer;">
-                Privacy Policy </b> and <b style="color:#353FA8;cursor: pointer;"> Terms of Service </b> 
-        </div>
-    </form> -->
     <form [formGroup]="emailForm" (ngSubmit)="validateEmail()" *ngIf="!verifiedEmail; else secondPage">
-        <div class="row">
+        <div class="row newClassMargin">
             <div class="col-6">
                 <div class="form-group form-group--margin">
                     <div class="label-inputs"> First Name </div>
@@ -138,7 +48,7 @@
     </form>
     <ng-template #secondPage>
         <form [formGroup]="mobForm" (ngSubmit)="signup()">
-            <div class="row">
+            <div class="row newClassMargin">
                 <div class="col-md-12">
                     <div class="form-group form-group--margin">
                         <div class="label-inputs"> Mobile </div>
