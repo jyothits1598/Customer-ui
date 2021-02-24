@@ -27,7 +27,7 @@
   <ng-container *ngIf="stores$ | async as stores;">
     <div class="container">
       <div class="row">
-        <div [ngClass]="displaySingleCol ? 'col-sm-12' : 'col-lg-4 col-md-6 col-sm-12 col-xs-12 col-xl-4 spacing'"
+        <div [ngClass]="displaySingleCol ? 'col-md-6 offset-md-3 col-lg-4 offset-lg-4' : 'col-lg-4 col-md-6 col-sm-12 col-xs-12 col-xl-4 spacing'"
           *ngFor="let store of stores">
           <app-store-card (selected)="storeSelected($event)" [store]="store" [showItems]="showItems"></app-store-card>
         </div>
@@ -39,12 +39,14 @@
       <div *ngIf="!pagination.hasEnded" [ngStyle]="{'display':  pagination.isLoading? 'none' : 'block' }" infiniteScroll
         #infiniteScroll="infiniteScroll" (scrolled)="handleScrolled()">
       </div>
-    </div>
-    <div *ngIf="pagination.hasEnded && stores.length == 0" class="text-center align">
-      <!-- <div class="not-found">
-        <img src="assets/svg/ico_search_scale.svg">
+      <div *ngIf="pagination.hasEnded && stores.length == 0" class="text-center">
+        <svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M25.0963 50.1926C38.9567 50.1926 50.1927 38.9566 50.1927 25.0963C50.1927 11.236 38.9567 0 25.0963 0C11.236 0 0 11.236 0 25.0963C0 38.9566 11.236 50.1926 25.0963 50.1926ZM25.0963 42.4707C34.6919 42.4707 42.4707 34.6919 42.4707 25.0963C42.4707 15.5007 34.6919 7.72194 25.0963 7.72194C15.5007 7.72194 7.72195 15.5007 7.72195 25.0963C7.72195 34.6919 15.5007 42.4707 25.0963 42.4707Z" fill="#FFFFFF"/>
+          <path d="M42.5009 36.7697L67.4766 61.7454L61.7453 67.4766L36.7696 42.5009L42.5009 36.7697Z" fill="#FFFFFF"/>
+        </svg>
         <div class="no-result"> No stores found </div>
-      </div> -->
+      </div>
+      <br><br><br><br>
     </div>
   </ng-container>
   <br><br><br><br>

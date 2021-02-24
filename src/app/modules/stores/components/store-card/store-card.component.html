@@ -1,18 +1,16 @@
-<div class="store-cards store-cards--shadow">
+<div class="store-cards store-cards--shadow" [ngStyle]="{'margin-bottom': showItems ? '16px':'0'}">
   <div (click)="select(store.id);" style="cursor:pointer;outline:0;">
     <div class="store-cards store-cards--header">
       <table>
         <tr>
           <td valign="middle">
             <img [src]="store.logo ? store.logo + static_image_width_logo : 'assets/svg/null_logo.svg'" class="profile-image">
-            <!-- <img src="assets/images/Rectangle 4.png" class="profile-image" /> -->
           </td>
           <td style="padding-left: 8px;width:100%">
             <table style="margin-bottom: 4px;">
               <tr>
                 <td>
                   <div class="store-name">
-                    <!-- {{ store.name | slice:0:30 }}{{store.name.length > 30 ? '. . .' : ''}} -->
                     {{ store.name }}
                   </div>
                 </td>
@@ -27,7 +25,7 @@
       </table>
     </div>
     <div class="well main-form">
-      <div class="store-image">
+      <div [ngStyle]="{'height': showItems ? '202px':'314px'}" class="store-image">
         <img [src]="store.storeImage ? store.storeImage + static_image_width : 'assets/images/Area.png' ">
       </div>
     </div>
@@ -88,7 +86,37 @@
       </span>
     </div>
   </div>
-  <ul *ngIf="showItems">
-    <li *ngFor="let i of store.items">{{i | json}}</li>
-  </ul>
+  <div class="search-card-item" *ngIf="showItems">
+    <div appExpandable #e="appExpadable" style="transition: max-height .25s;" [collapsedSize]="200">  
+      <div class="col-md-12 card small-cat-cards" *ngFor="let i of store.items">
+        <div class="row" (click)="select(store.id);" >
+              <div class="col p16" style="height:80px;">
+                  <div class="card-block ">
+                      <div class="flexbox-container">
+                          <div class="wrapper">
+                              <div class="paragraph card-content-div">
+                                  <p class="item-name"> 
+                                    {{ i.name | slice:0:20 }}{{i.name.length > 20 ? '...' : ''}}
+                                  </p>
+                              </div>
+                              <div class="std-heading-5"> 
+                                  <span *ngIf="i.price">$</span>{{i.price? showDecimal(i.price) : '$0.00' }}
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-auto col-img" style="padding: 0;">
+                  <img [src]="i.picture ? i.picture + static_image_width_item : 'assets/svg/details/modifier_null.svg'" class="img-fluid img-custom">
+              </div>
+          </div>
+      </div>
+      </div>
+      <div class="text-center"> 
+        <label *ngIf="store.items.length > 2" (click)="e.toggle()" class="s-more"> 
+          {{e.isExpanded ? 'Hide' : 'Show'}} {{store.items.length - 2 }}
+          <span *ngIf="!e.isExpanded"> more </span>
+        </label>
+      </div>
+  </div>
 </div>
