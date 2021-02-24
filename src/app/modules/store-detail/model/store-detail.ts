@@ -141,7 +141,7 @@ export function ReadModifierOptions(storeId: number, data: any): Array<ModifierO
     let result: Array<ModifierOption> = [];
     data.forEach(o => {
         result.push({
-            id: o.modifier_option_id,
+            id: o.id,
             name: o.name,
             price: parseFloat(o.price),
             storeId: storeId,

@@ -131,6 +131,7 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
     this.storeDetail.categories = null;
     this.strDtlSub = this.storeDetailServ.getCateoryDetail(this.storeId, menuId).pipe(takeUntil(this.unSub$), finalize(() => this.loading = false)).subscribe(categoryDetail => {
       categoryDetail = categoryDetail.sort((c1, c2) => c1.id - c2.id);
+      console.log('this is category details', categoryDetail);
       this.storeDetail.categories = categoryDetail;
       // setTimeout(() => {
       //   this.observeIntersection();
