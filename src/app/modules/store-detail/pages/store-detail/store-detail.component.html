@@ -1,5 +1,5 @@
-<div *ngIf="selecteditemId && storeDetail">
-  <store-item-detail [isStoreOpen]="isStoreOpen" [item]="{itemId: selecteditemId, storeName: storeDetail.name ,storeId: storeId,isFavourite:storeDetail.isFavourite}"></store-item-detail>
+<div *ngIf="selectedItem && storeDetail">
+  <store-item-detail [isStoreOpen]="isStoreOpen" [item]="selectedItem"></store-item-detail>
 </div>
 <div class="main-panel">
   <ng-container *ngIf="storeDetail">
@@ -99,15 +99,17 @@
                     </div>
                 </div>
                 
-                <div style="width: 100%; height: 0px; position: absolute; background: pink" #observationElement>
+                <div style="width: 100%; height: 0px; position: absolute; background: pink" #observationElement inViewPort>
                 </div>
             </div>
             <app-store-details-bar *ngIf="storeDetail.typeOfCreation != 'Shell'" (menuClicked)="getMenuClickedDetails($event)" [menus]="{storeId: storeId,status:storeDetail.status,menus:storeDetail.menus}">
             </app-store-details-bar>
            
             <!----------------------------- items cards -------------------------->
-            <store-category *ngIf="storeDetail.typeOfCreation !== 'Shell'; else claim"
-                [categories]="storeDetail.categories" [scrolledDown]="scrolledDown"></store-category>
+            <ng-container *ngIf="storeDetail.categories">
+                <store-category *ngIf="storeDetail.typeOfCreation !== 'Shell'; else claim"
+                    [categories]="storeDetail.categories" [scrolledDown]="scrolledDown"></store-category>
+            </ng-container>
             <!-- 
                 Claim Store body
             -->    

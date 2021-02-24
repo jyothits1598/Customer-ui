@@ -44,11 +44,10 @@ export class StoreItemDetailComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild('observationElement', { read: ElementRef }) obsElement: ElementRef;
   @ViewChild('orderExistsTemp', { read: TemplateRef }) oETemp: TemplateRef<any>;
 
-  @Input() item: { storeId: number, storeName: string, itemId: number, isFavourite: boolean };
+  @Input() item: StoreItemDetail & { storeId: number, storeName: string, isFavourite: boolean };
   @Input() isStoreOpen: boolean;
 
   itemDetail: StoreItemDetail
-  loading: boolean = true;
   selectedOptions: FormArray;
   itemCount: FormControl = new FormControl(1);
   addingToCart: boolean = false;
@@ -80,14 +79,14 @@ export class StoreItemDetailComponent implements OnInit, OnChanges, OnDestroy {
     if (this.selectedvalueChangeSubs) this.selectedvalueChangeSubs.unsubscribe();
     if (this.reqSubs) this.reqSubs.unsubscribe();
 
-    this.reqSubs = this.storeItemData.itemDetail(this.item.storeId, this.item.itemId).pipe(takeUntil(this.unSubscribe$), finalize(() => this.loading = false)).subscribe(detail => {
-      this.itemDetail = detail;
-      let control = this.itemDetail.modifiers.map((mod) => new FormControl());
-      this.selectedOptions = new FormArray(control);
-      this.selectedvalueChangeSubs = this.setUpSubscription();
-      //initialise total amount
-      this.totalAmount = this.makeCalculations(this.itemDetail.basePrice, [], 1)
-    });
+    // this.reqSubs = this.storeItemData.itemDetail(this.item.storeId, this.item.id).pipe(takeUntil(this.unSubscribe$), finalize(() => this.loading = false)).subscribe(detail => {
+    this.itemDetail = this.item;
+    let control = this.itemDetail.modifiers.map((mod) => new FormControl());
+    this.selectedOptions = new FormArray(control);
+    this.selectedvalueChangeSubs = this.setUpSubscription();
+    //initialise total amount
+    this.totalAmount = this.makeCalculations(this.itemDetail.basePrice, [], 1)
+    // });
   }
 
   setUpSubscription() {
@@ -111,7 +110,7 @@ export class StoreItemDetailComponent implements OnInit, OnChanges, OnDestroy {
 
     if (this.selectedOptions.invalid) {
       this.selectedOptions.markAllAsTouched();
-      
+
       //find the first invalid modifier
       const inval = this.mods.find(m => !m.isValid());
       this.scroll.scrollTo(inval.elem.nativeElement);

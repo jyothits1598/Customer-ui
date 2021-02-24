@@ -1,3 +1,4 @@
+import { StoreItemDetail } from '../../store-item-detail/model/store-item-detail';
 import { ReadAvailability, TimeAvailability, FacebookCountConverstion } from '../../time-availability/model/time-availability';
 
 export interface StoreDetail {
@@ -27,7 +28,7 @@ export interface StoreDetail {
 export interface StoreCategory {
     id: number,
     name: string,
-    items: Array<StoreItem>
+    items: Array<StoreItemDetail>
 }
 
 export interface StoreMenus {
@@ -42,7 +43,7 @@ export interface StoreItem {
     basePrice: number,
     image: string,
     storeId: number,
-   // modifiers : Array<ItemModifier>
+    // modifiers : Array<ItemModifier>
 }
 
 export interface ItemModifier {
@@ -97,29 +98,30 @@ export function ReadStoreCategories(storeId: number, catData: any): Array<StoreC
     return cats;
 }
 
-export function ReadStoreMenus(storeId: number, menuData: any): Array<StoreMenus>{
+export function ReadStoreMenus(storeId: number, menuData: any): Array<StoreMenus> {
     let menus: Array<StoreMenus> = [];
     menuData.forEach((m) => {
-        menus.push({ id: m.id, name: m.name, isCustomAvailability: m.is_custom_availability})
+        menus.push({ id: m.id, name: m.name, isCustomAvailability: m.is_custom_availability })
     })
     return menus;
 }
 
-export function ReadStoreItems(storeId: number, data: any): Array<StoreItem> {
-    let items: Array<StoreItem> = [];
+export function ReadStoreItems(storeId: number, data: any): Array<StoreItemDetail> {
+    let items: Array<StoreItemDetail> = [];
     data.forEach((i) => {
-        items.push({ id: i.id, 
-            name: i.name, 
-            basePrice: i.price, 
-            image: i.picture, 
+        items.push({
+            id: i.id,
+            name: i.name,
+            basePrice: i.price,
+            image: i.picture,
             storeId: storeId,
-            //modifiers: ReadItemModifiers(storeId,i.modifiers)
+            modifiers: ReadItemModifiers(storeId, i.modifiers)
         })
     })
     return items;
 }
 
-export function ReadItemModifiers(storeId: number,data: any): Array<ItemModifier> {
+export function ReadItemModifiers(storeId: number, data: any): Array<ItemModifier> {
     let result: Array<ItemModifier> = [];
     data.forEach(m => {
         result.push({
@@ -129,13 +131,13 @@ export function ReadItemModifiers(storeId: number,data: any): Array<ItemModifier
             maxSelection: m.maximum,
             freeSelection: m.free,
             storeId: storeId,
-            options: ReadModifierOptions(storeId,m.options)
+            options: ReadModifierOptions(storeId, m.options)
         })
     });
     return result;
 }
 
-export function ReadModifierOptions(storeId: number,data: any): Array<ModifierOption> {
+export function ReadModifierOptions(storeId: number, data: any): Array<ModifierOption> {
     let result: Array<ModifierOption> = [];
     data.forEach(o => {
         result.push({
