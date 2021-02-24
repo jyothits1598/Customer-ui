@@ -8,7 +8,7 @@ import { Store } from '../../model/store';
 })
 export class StoreCardComponent implements OnInit {
   @Input() store: Store;
-
+  @Input() showItems: boolean;
   @Output() selected = new EventEmitter<number>();
 
   constructor() {}

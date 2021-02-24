@@ -4,8 +4,10 @@
 <div class="cuisine-list-images">
   <div #widgetsContent class="order-overflow">
     <div #left class="slider-images slide-pddr-left" data-side="left"></div>
-    <div class="slider-images" *ngFor="let cuisine of cuisines">
-      <img loading="lazy" class="inactive-cuisine" [src]="cuisine?.background ? cuisine?.background : 'assets/svg/null_logo.svg'" />
+    <div class="slider-images" *ngFor="let cuisine of cuisines"
+      (click)="r.addQuery('cuisine', cuisine.name === 'All foods'? '' : cuisine.name)">
+      <img loading="lazy" class="inactive-cuisine"
+        [src]="cuisine?.background ? cuisine?.background : 'assets/svg/null_logo.svg'" />
       <img loading="lazy" class="active-cuisine" [src]="cuisine?.hover ? cuisine?.hover: 'assets/svg/null_logo.svg'" />
       <div class="name-cuisine"> {{ cuisine.name}} </div>
     </div>

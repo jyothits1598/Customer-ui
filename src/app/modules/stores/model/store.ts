@@ -6,7 +6,7 @@ export interface Store {
     cuisine: string,
     openingHours: Array<TimeAvailability>
     logo: string,
-    storeImage:string,
+    storeImage: string,
     address: string,
     distance: string;
     description: string,
@@ -14,8 +14,9 @@ export interface Store {
     // facebookUrl: string,
     isFavourite: boolean,
     latLng: { lat: number, lon: number }
-    facebookLike:string,
-    googleRating:number
+    facebookLike: string,
+    googleRating: number,
+    items: Array<{ id: number, name: string, image: string, price: number }>
 }
 
 export function ReadStore(data: any): Store {
@@ -33,7 +34,8 @@ export function ReadStore(data: any): Store {
         // facebookUrl: data.facebook_url,
         latLng: { lat: data.location.lat, lon: data.location.lon },
         isFavourite: data.is_favourite ? true : false,
-        facebookLike:data.facebook_like ? FacebookCountConverstion(data.facebook_like) : 0,
-        googleRating:parseFloat(data.google_rating) ? parseFloat(data.google_rating) : 0
+        facebookLike: data.facebook_like ? FacebookCountConverstion(data.facebook_like) : 0,
+        googleRating: parseFloat(data.google_rating) ? parseFloat(data.google_rating) : 0,
+        items: data.items
     };
 }

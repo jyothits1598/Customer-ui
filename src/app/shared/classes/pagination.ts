@@ -18,12 +18,15 @@ export class Pagination<T>{
     //to fix repeated loading in the home screen upon errors
     hasErrors: boolean = false;
     totalCount: number;
+    currentCount: number = 0;
+
 
     setPaginationData(resp) {
-        console.log('set page', resp);
         this.currentPage += 1;
         this.totalCount = resp.total;
-        if (resp.total <= this.data.length) this.hasEnded = true;
+        // if (resp.total <= this.data.length) this.hasEnded = true;
+        this.currentCount += resp.results.length;
+        this.hasEnded = resp.total <= this.currentCount
     }
     constructor(source) {
         this.source = source;
@@ -44,11 +47,11 @@ export class StorePagination extends Pagination<Store>{
             this.isLoading = true;
             return this.source(this.storeFilter).pipe(
                 finalize(() => this.isLoading = false),
-                tap(resp => { this.setPaginationData(resp) }),
+                tap(resp => { this.setPaginationData(resp); }),
                 catchError((error) => { this.hasErrors = true; return throwError(error) }),
                 map((resp: any) => {
                     let newStores = [];
-                    if (resp.stores) resp.stores.forEach(store => { newStores.push(ReadStore(store)) });
+                    if (resp.results) { resp.results.forEach(store => { newStores.push(ReadStore(store)) }); }
                     return newStores;
                 })
             );

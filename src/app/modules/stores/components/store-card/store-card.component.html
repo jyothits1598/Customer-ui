@@ -88,4 +88,7 @@
       </span>
     </div>
   </div>
+  <ul *ngIf="showItems">
+    <li *ngFor="let i of store.items">{{i | json}}</li>
+  </ul>
 </div>

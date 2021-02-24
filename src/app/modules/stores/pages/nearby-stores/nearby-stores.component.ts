@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { combineLatest, Subscription } from 'rxjs';
 import { Constants } from 'src/app/core/model/constants';
 import { UserLocation } from 'src/app/core/model/user-location';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -20,19 +20,18 @@ export class NearbyStoresComponent implements OnInit, OnDestroy {
 
   constructor(
     private geoLocation: GeoLocationService,
-    private authService: AuthService
+    private authService: AuthService,
+    private route: ActivatedRoute
   ) {
-    this.locationSubs = this.geoLocation
-      .userLocation()
-      .subscribe((value: UserLocation) => {
-        this.filter = {
-          location: value.latLng,
-          distance: this.authService.loggedUser?.radius
-            ? this.authService.loggedUser.radius
-            : 5,
-          sort_type: 'distance',
-        };
-      });
+    this.locationSubs = combineLatest([this.geoLocation.userLocation(), this.route.queryParams]).subscribe(([u, q]) => {
+      this.filter = {
+        location: u.latLng,
+        distance: this.authService.loggedUser?.radius
+          ? this.authService.loggedUser.radius
+          : 5,
+        ...q
+      };
+    });
   }
 
   ngOnInit(): void { }

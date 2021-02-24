@@ -16,7 +16,7 @@ import { StoreFilter } from '../model/StoreFilter';
 export class StoresDataService {
   private storeListCache = new Map<string, StoreListCacheItem>();
 
-  constructor(private restApiService: RestApiService) {}
+  constructor(private restApiService: RestApiService) { }
 
   cacheStoreList(key: string, storeListCacheItem: StoreListCacheItem) {
     this.storeListCache.set(key, storeListCacheItem);
@@ -27,7 +27,6 @@ export class StoresDataService {
   }
 
   allStores(filter: StoreFilter): Observable<any> {
-    console.log('try', filter);
     return this.restApiService.get(
       'api/v1/stores/search' + this.filterToQuery(filter)
     );
@@ -73,9 +72,14 @@ export class StoresDataService {
           result += '&';
         }
         result +=
-          `lat=${filter.location.lat}&lon=${filter.location.lng}&distance=${
-            filter.distance ? filter.distance : 5
+          `lat=${filter.location.lat}&lon=${filter.location.lng}&distance=${filter.distance ? filter.distance : 5
           }` + sort_by;
+      }
+      if (filter.cuisine) {
+        if (result) {
+          result += '&';
+        }
+        result += 'cuisine=' + filter.cuisine;
       }
     }
     return result ? '?' + result : result;

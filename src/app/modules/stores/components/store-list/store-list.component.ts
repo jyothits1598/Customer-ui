@@ -9,7 +9,8 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { take, takeUntil } from 'rxjs/operators';
+import { RoutingHelperService } from 'src/app/core/services/routing-helper.service';
 import { ScrollPositionService } from 'src/app/core/services/scroll-position.service';
 import { StorePagination } from 'src/app/shared/classes/pagination';
 import { InfiniteScrollDirective } from 'src/app/shared/directives/infinite-scroll.directive';
@@ -24,17 +25,19 @@ import { StoresDataService } from '../../services/stores-data.service';
 })
 export class StoreListComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() parentKey: string = undefined;
-
+  @Input() showItems: boolean;
+  @Input() displaySingleCol: boolean;
   stores$ = new BehaviorSubject<Store[]>([]);
 
   pagination: StorePagination;
   unSubscribe$ = new Subject<void>();
   @Output() totalCount = new EventEmitter<number>();
-  isActive: string = '';
+  isActive: string;
   private _filter: StoreFilter;
   @Input() set filter(val) {
+    //set default for sort_type if not available
+    val.sort_type = val.sort_type || 'distance'
     this._filter = val;
-    console.log('Filter changed: ', val);
     this.initPagination();
   }
 
@@ -46,12 +49,10 @@ export class StoreListComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private storeData: StoresDataService,
     private route: ActivatedRoute,
+    public rH: RoutingHelperService,
     private router: Router,
     private scrollPosService: ScrollPositionService
-  ) {
-    this.isActive = 'distance';
-    console.log('StoreListComponent.constructor()... ', this.parentKey);
-  }
+  ) { }
 
   ngOnInit(): void {
     const cachedStoreListItem = this.storeData.retrieveStoreList(
@@ -60,6 +61,9 @@ export class StoreListComponent implements OnInit, OnDestroy, AfterViewInit {
     if (cachedStoreListItem) {
       this.restorePagination(cachedStoreListItem);
     }
+
+    //setting isactive
+    this.route.queryParams.pipe(takeUntil(this.unSubscribe$)).subscribe(q => this.isActive = q.sort_type || 'distance')
   }
 
   restorePagination(cachedStoreListItem) {
@@ -105,6 +109,9 @@ export class StoreListComponent implements OnInit, OnDestroy, AfterViewInit {
       filter: undefined,
       currentPage: undefined,
     });
+    this.unSubscribe$.next();
+    this.unSubscribe$.complete();
+    this.paginationSub.unsubscribe();
   }
 
   appendStores(stores) {

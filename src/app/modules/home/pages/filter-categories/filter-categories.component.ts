@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy, AfterViewInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { LayoutService } from 'src/app/core/services/layout.service';
+import { RoutingHelperService } from 'src/app/core/services/routing-helper.service';
 import { HomeService } from '../../home.service';
 import { Cuisines } from '../../modal/cuisines';
 
@@ -20,17 +23,21 @@ export class FilterCategoriesComponent implements OnInit, OnDestroy, AfterViewIn
 
   constructor(
     private layoutService: LayoutService,
-    private homeService: HomeService
+    private homeService: HomeService,
+    private routingHelpr: RoutingHelperService,
+    private route: ActivatedRoute
   ) { }
 
   ngAfterViewInit(): void {
     this.interObs.observe(this.leftLimit.nativeElement);
-      this.interObs.observe(this.rightLimit.nativeElement);
+    this.interObs.observe(this.rightLimit.nativeElement);
   }
 
-  ngOnDestroy(): void {
-    this.unSub$.next(true);
+
+  get r(): RoutingHelperService {
+    return this.routingHelpr;
   }
+
   @ViewChild('widgetsContent') widgetsContent: ElementRef;
   @ViewChild('left') leftLimit: ElementRef;
   @ViewChild('right') rightLimit: ElementRef;
@@ -64,18 +71,15 @@ export class FilterCategoriesComponent implements OnInit, OnDestroy, AfterViewIn
   }
 
   ngOnInit(): void {
-    this.homeService.getCuisineData().subscribe((response) => {
-      this.cuisines = response.cuisines;
-    }
-    )
+    this.homeService.getCuisineData().pipe(takeUntil(this.unSub$)).subscribe((response) => {
+      this.cuisines = response.results;
+    })
   }
 
-  onDestroy() {
-    if (this.leftLimit && this.rightLimit) {
-      this.interObs.unobserve(this.leftLimit.nativeElement);
-      this.interObs.unobserve(this.rightLimit.nativeElement);
-
-    }
+  ngOnDestroy() {
+    this.interObs.disconnect()
+    this.unSub$.next()
+    this.unSub$.complete();
   }
 
 }
