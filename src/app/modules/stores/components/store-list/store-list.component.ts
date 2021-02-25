@@ -75,10 +75,10 @@ export class StoreListComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   restorePagination(cachedStoreListItem) {
-    console.log(
-      'StoreListComponent.ngOnInit(): Restoring pagination: ',
-      this.parentKey
-    );
+    // console.log(
+    //   'StoreListComponent.ngOnInit(): Restoring pagination: ',
+    //   this.parentKey
+    // );
     this.paginationSub.unsubscribe();
     this.stores$.next([]);
     this.pagination = cachedStoreListItem.pagination;
@@ -86,11 +86,11 @@ export class StoreListComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   initPagination() {
-    console.log(
-      'StoreListComponent.initPagination(): Creating new pagination: ',
-      this.parentKey,
-      this._filter
-    );
+    // console.log(
+    //   'StoreListComponent.initPagination(): Creating new pagination: ',
+    //   this.parentKey,
+    //   this._filter
+    // );
     this.stores$.next([]);
     this.pagination = new StorePagination(
       this.storeData.allStores.bind(this.storeData),
@@ -126,12 +126,12 @@ export class StoreListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   appendStores(stores) {
     this.totalCount.emit(this.pagination.totalCount);
-    console.log(
-      'current stores: ',
-      this.stores$.value,
-      ', appending stores: ',
-      stores
-    );
+    // console.log(
+    //   'current stores: ',
+    //   this.stores$.value,
+    //   ', appending stores: ',
+    //   stores
+    // );
     this.stores$.next([...this.stores$.value, ...stores]);
   }
 

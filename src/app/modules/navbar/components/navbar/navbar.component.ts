@@ -144,7 +144,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     // return !((this.router.url !== '/' || !this.router.url.includes('/search')) && this.layoutService.isMobile);
     return (
       !this.layoutService.isMobile ||
-      this.router.url === '/' ||
+      this.router.url.split('?')[0] === '/' ||
       this.router.url.includes('/search')
     );
   }

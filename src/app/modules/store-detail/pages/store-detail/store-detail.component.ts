@@ -65,7 +65,7 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
     // this.fullStars = new Array(Math.floor(this.storeDetail.googleRating));
     // this.halfStar = !!(this.storeDetail.googleRating % 1);
     // this.emptyStars = new Array(5 - Math.ceil(this.storeDetail.googleRating));
-   
+    
     this.route.queryParams.subscribe((qParams) => {
       let itemId = +qParams.i;
       // this.selectedItem = this.storeDetail.categories[]

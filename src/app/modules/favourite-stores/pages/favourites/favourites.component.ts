@@ -13,7 +13,7 @@ import { StoresDataService } from 'src/app/modules/stores/services/stores-data.s
   styleUrls: ['./favourites.component.scss']
 })
 export class FavouritesComponent implements OnInit, OnDestroy {
-
+  isActive: string = '';
   stores: Array<Store>;
   loading: boolean = false;
   error: boolean = false;
