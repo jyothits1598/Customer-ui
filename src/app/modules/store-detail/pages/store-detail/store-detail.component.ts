@@ -22,7 +22,7 @@ import { StoreItemDetail } from 'src/app/modules/store-item-detail/model/store-i
 })
 export class StoreDetailComponent implements OnInit, OnDestroy {
   storeId: number;
-  selectedItem: StoreItemDetail & { storeName: string, storeId: number, isFavourite: boolean };
+  selectedItem: StoreItemDetail & { storeName: string, storeId: number };
   scrolledDown: boolean;
   userLocation: boolean;
   interObserver: IntersectionObserver;
@@ -77,7 +77,7 @@ export class StoreDetailComponent implements OnInit, OnDestroy {
         for (const a of this.storeDetail.categories) {
           let i = a.items.find(i => i.id === itemId)
           if (i) {
-            this.selectedItem = { ...i, storeName: this.storeDetail.name, storeId: this.storeId, isFavourite: this.storeDetail.isFavourite };
+            this.selectedItem = { ...i, storeName: this.storeDetail.name, storeId: this.storeId };
             break;
           }
         }

@@ -43,6 +43,7 @@ export interface StoreItem {
     basePrice: number,
     image: string,
     storeId: number,
+    isFavourite?: boolean
     // modifiers : Array<ItemModifier>
 }
 
@@ -115,7 +116,8 @@ export function ReadStoreItems(storeId: number, data: any): Array<StoreItemDetai
             basePrice: i.price,
             image: i.picture,
             storeId: storeId,
-            modifiers: ReadItemModifiers(storeId, i.modifiers)
+            modifiers: ReadItemModifiers(storeId, i.modifiers),
+            isFavourite: i.is_favourite
         })
     })
     return items;
