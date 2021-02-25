@@ -89,7 +89,7 @@
   <div class="search-card-item" *ngIf="showItems">
     <div appExpandable #e="appExpadable" style="transition: max-height .25s;" [collapsedSize]="200">  
       <div class="col-md-12 card small-cat-cards" *ngFor="let i of store.items">
-        <div class="row" (click)="select(store.id);" >
+        <div class="row" (click)="select(store.id);" style="cursor: pointer;">
               <div class="col p16" style="height:80px;">
                   <div class="card-block ">
                       <div class="flexbox-container">
