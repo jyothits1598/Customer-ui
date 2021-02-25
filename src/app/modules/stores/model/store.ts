@@ -16,7 +16,7 @@ export interface Store {
     latLng: { lat: number, lon: number }
     facebookLike: string,
     googleRating: number,
-    items: Array<{ id: number, name: string, image: string, price: number }>
+    items: Array<{ id: number, name: string, picture: string, price: number }>
 }
 
 export function ReadStore(data: any): Store {

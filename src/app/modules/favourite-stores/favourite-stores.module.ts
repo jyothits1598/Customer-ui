@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FavouriteStoresComponent } from './pages/favourite-stores/favourite-stores.component';
 import { RouterModule, Routes } from '@angular/router';
 import { StoresModule } from '../stores/stores.module';
 import { NavbarModifierModule } from '../navbar-modifier/navbar-modifier.module';
+import { FavouritesComponent } from './pages/favourites/favourites.component';
 
 const routes: Routes = [
   {
-    path: '',
-    component: FavouriteStoresComponent
+    path: ':type',
+    component: FavouritesComponent,
   }
 ]
 
 @NgModule({
-  declarations: [FavouriteStoresComponent],
+  declarations: [FavouritesComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

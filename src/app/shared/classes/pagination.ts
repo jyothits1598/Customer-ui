@@ -35,17 +35,18 @@ export class Pagination<T>{
 
 export class StorePagination extends Pagination<Store>{
     storeFilter: StoreFilter;
-
-    constructor(source: (any) => Observable<any>, filter) {
+    type: 'favItems' | 'favStores' | 'search';
+    constructor(source: (any) => Observable<any>, filter, type) {
         super(source);
         this.storeFilter = filter;
+        this.type = type;
     }
 
     getNext(): Observable<Array<Store>> {
         this.storeFilter.page = this.currentPage;
         if (!this.hasEnded && !this.isLoading && !this.hasErrors) {
             this.isLoading = true;
-            return this.source(this.storeFilter).pipe(
+            return this.source(this.storeFilter, this.type).pipe(
                 finalize(() => this.isLoading = false),
                 tap(resp => { this.setPaginationData(resp); }),
                 catchError((error) => { this.hasErrors = true; return throwError(error) }),

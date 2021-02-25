@@ -26,14 +26,26 @@ export class StoresDataService {
     return this.storeListCache.get(key);
   }
 
-  allStores(filter: StoreFilter): Observable<any> {
+  allStores(filter: StoreFilter, type: 'favItems' | 'favStores' | 'search' = null): Observable<any> {
+    let url;
+    switch (type) {
+      case 'favItems':
+        url = 'api/v1/favourites/items'
+        break;
+      case 'favStores':
+        url = 'api/v1/favourites/stores'
+        break;
+      default:
+        url = 'api/v1/stores/search'
+        break;
+    }
     return this.restApiService.get(
-      'api/v1/stores/search' + this.filterToQuery(filter)
+      url + this.filterToQuery(filter)
     );
   }
 
   setFavourite(storeId: number, isFavourite: boolean) {
-    if (isFavourite) return this.restApiService.post(URL_SetFavourite(storeId),{});
+    if (isFavourite) return this.restApiService.post(URL_SetFavourite(storeId), {});
     else return this.restApiService.delete(URL_SetFavourite(storeId));
   }
 

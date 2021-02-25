@@ -76,6 +76,7 @@ export class StoreItemDetailComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnChanges(): void {
     //clear previous subscription
+    console.log('this is the changes', this.item)
     if (this.selectedvalueChangeSubs) this.selectedvalueChangeSubs.unsubscribe();
     if (this.reqSubs) this.reqSubs.unsubscribe();
 

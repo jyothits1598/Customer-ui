@@ -16,10 +16,11 @@
         <li class="auto-width"></li>
     </ng-template>
     <ng-container *ngIf="isLoggedin; else block">
-        <li class="auto-width cu-out" routerLink="/favourites" routerLinkActive="active" #rla="routerLinkActive">
-            <div class="fav-icon img-display-desktop" [ngClass]="rla.isActive ? 'fav-icon-active':''"></div>
+        <li style="display: none;" routerLink="/favourites" routerLinkActive="active" #rlaFav="routerLinkActive"></li>
+        <li class="auto-width cu-out" routerLink="/favourites/stores">
+            <div class="fav-icon img-display-desktop" [ngClass]="rlaFav.isActive ? 'fav-icon-active':''"></div>
             <div
-                [ngClass]="rla.isActive ? 'fav-icon-mobile-active img-display-mobile' : 'fav-icon-mobile img-display-mobile'">
+                [ngClass]="rlaFav.isActive ? 'fav-icon-mobile-active img-display-mobile' : 'fav-icon-mobile img-display-mobile'">
             </div>
         </li>
         <li class="auto-width cu-out" routerLink="/">

@@ -2,7 +2,11 @@ export const URL_AllFavourites = 'api/v1/favourites/stores';
 
 export function URL_SetFavourite(id: number) {
     return `api/v1/favourites/stores/${id}`;
-} 
+}
+
+export function URL_SetItemFavourite(id: number) {
+    return `api/v1/favourites/items/${id}`
+}
 
 export function URL_StoreDetails(id: number) {
     return `api/v1/stores/${id}`;

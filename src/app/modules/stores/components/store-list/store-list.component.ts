@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, OnDestroy } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import {
   Component,
   EventEmitter,
@@ -27,6 +27,9 @@ export class StoreListComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() parentKey: string = undefined;
   @Input() showItems: boolean;
   @Input() displaySingleCol: boolean;
+  @Input() type: 'favItems' | 'favStores' | 'search';
+  @Input() hideSorter: boolean;
+  
   stores$ = new BehaviorSubject<Store[]>([]);
 
   pagination: StorePagination;
@@ -34,12 +37,7 @@ export class StoreListComponent implements OnInit, OnDestroy, AfterViewInit {
   @Output() totalCount = new EventEmitter<number>();
   isActive: string;
   private _filter: StoreFilter;
-  @Input() set filter(val) {
-    //set default for sort_type if not available
-    val.sort_type = val.sort_type || 'distance'
-    this._filter = val;
-    this.initPagination();
-  }
+  @Input() filter;
 
   @ViewChild('infiniteScroll', { read: InfiniteScrollDirective })
   infiniteScroll: InfiniteScrollDirective;
@@ -53,6 +51,16 @@ export class StoreListComponent implements OnInit, OnDestroy, AfterViewInit {
     private router: Router,
     private scrollPosService: ScrollPositionService
   ) { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.filter || changes.type) {
+      let f = { ...this.filter }
+      f.sort_type = f.sort_type || 'distance';
+      this._filter = f;
+      this.initPagination();
+
+    }
+  }
 
   ngOnInit(): void {
     const cachedStoreListItem = this.storeData.retrieveStoreList(
@@ -80,12 +88,14 @@ export class StoreListComponent implements OnInit, OnDestroy, AfterViewInit {
   initPagination() {
     console.log(
       'StoreListComponent.initPagination(): Creating new pagination: ',
-      this.parentKey
+      this.parentKey,
+      this._filter
     );
     this.stores$.next([]);
     this.pagination = new StorePagination(
       this.storeData.allStores.bind(this.storeData),
-      this._filter
+      this._filter,
+      this.type || 'search'
     );
     this.paginationSub = this.pagination
       .getNext()
@@ -136,17 +146,18 @@ export class StoreListComponent implements OnInit, OnDestroy, AfterViewInit {
       .subscribe((stores) => this.appendStores(stores));
   }
 
-  navigateToPath(type) {
-    this.isActive = type;
-    this._filter['sort_type'] = type;
-    this.stores$.next([]);
-    this.pagination = new StorePagination(
-      this.storeData.allStores.bind(this.storeData),
-      this._filter
-    );
-    this.pagination
-      .getNext()
-      .pipe(take(1))
-      .subscribe((stores) => this.appendStores(stores));
-  }
+  // navigateToPath(type) {
+  //   this.isActive = type;
+  //   this._filter['sort_type'] = type;
+  //   this.stores$.next([]);
+  //   this.pagination = new StorePagination(
+  //     this.storeData.allStores.bind(this.storeData),
+  //     this._filter,
+
+  //   );
+  //   this.pagination
+  //     .getNext()
+  //     .pipe(take(1))
+  //     .subscribe((stores) => this.appendStores(stores));
+  // }
 }
